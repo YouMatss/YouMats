@@ -111,7 +111,6 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
       <path value="$PROJECT_DIR$/vendor/cakephp/chronos" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
-      <path value="$PROJECT_DIR$/vendor/intervention/image" />
       <path value="$PROJECT_DIR$/vendor/spatie/once" />
       <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
       <path value="$PROJECT_DIR$/vendor/laravel/nova" />
@@ -138,6 +137,10 @@
       <path value="$PROJECT_DIR$/vendor/paragonie/constant_time_encoding" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-translatable" />
       <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-translatable" />
+      <path value="$PROJECT_DIR$/vendor/david-griffiths/nova-dark-theme" />
+      <path value="$PROJECT_DIR$/vendor/whitecube/nova-flexible-content" />
+      <path value="$PROJECT_DIR$/vendor/nikaia/nova-rating-field" />
+      <path value="$PROJECT_DIR$/vendor/orlyapps/nova-belongsto-depend" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

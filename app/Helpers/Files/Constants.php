@@ -4,6 +4,7 @@
 define("LANGUAGE_PATH", 'language');
 define("CATEGORY_PATH", 'category');
 define("SUB_CATEGORY_PATH", 'subCategory');
+define("PRODUCT_PATH", 'product');
 
 
 // define validation

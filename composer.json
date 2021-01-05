@@ -15,15 +15,19 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
+        "david-griffiths/nova-dark-theme": "^1.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/nova": "*",
         "laravel/tinker": "^2.5",
+        "nikaia/nova-rating-field": "^1.0",
         "optimistdigital/nova-sortable": "^2.0",
         "optimistdigital/nova-translatable": "^1.6",
-        "spatie/laravel-translatable": "^4.6"
+        "orlyapps/nova-belongsto-depend": "^2.0",
+        "spatie/laravel-translatable": "^4.6",
+        "whitecube/nova-flexible-content": "^0.2.6"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

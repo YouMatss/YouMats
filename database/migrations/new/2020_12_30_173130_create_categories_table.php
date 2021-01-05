@@ -15,11 +15,19 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+
             $table->string('name');
+            $table->text('desc')->nullable();
+
             $table->string('img');
             $table->string('img_title')->nullable();
             $table->string('img_alt')->nullable();
+
             $table->string('slug')->unique();
+            $table->string('meta_title')->nullable();
+            $table->text('meta_desc')->nullable();
+            $table->text('meta_keywords')->nullable();
+
             $table->integer('sort');
             $table->logs('admins.id', true);
             $table->softDeletes();

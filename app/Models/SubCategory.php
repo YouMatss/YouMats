@@ -14,9 +14,13 @@ class SubCategory extends Model implements Sortable
 {
     use SoftDeletes, HasFactory, Loggable, SortableTrait, HasTranslations;
 
-    public $translatable = ['name'];
+    public $translatable = ['name', 'desc', 'meta_title', 'meta_keywords', 'meta_desc'];
 
     public function category() {
         return $this->belongsTo(Category::class);
+    }
+
+    public function products() {
+        return $this->hasMany(Product::class, 'subCategory_id');
     }
 }

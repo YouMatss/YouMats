@@ -4,20 +4,25 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Avatar;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Markdown;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
-use OptimistDigital\NovaSortable\Traits\HasSortableRows;
+use Nikaia\Rating\Rating;
+use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 
-class Category extends Resource
+class Product extends Resource
 {
-    use HasSortableRows;
-
-    public static $model = \App\Models\Category::class;
+    /**
+     * The model the resource corresponds to.
+     *
+     * @var string
+     */
+    public static $model = \App\Models\Product::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -32,7 +37,7 @@ class Category extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name'
+        'id', 'name', 'desc'
     ];
 
     /**
@@ -45,6 +50,26 @@ class Category extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
+            BelongsTo::make('Category')
+                ->withoutTrashed(),
+
+            BelongsTo::make('Sub Category', 'subCategory')
+                ->withoutTrashed(),
+
+            NovaBelongsToDepend::make('Category')
+                ->placeholder('Select Category')
+                ->options(\App\Models\Category::all()),
+            NovaBelongsToDepend::make('SubCategory')
+                ->placeholder('Select SubCategory')
+                ->optionsResolve(function ($category) {
+                    return $category->subCategories()->get(['id','name']);
+                })->dependsOn('Category'),
+
+
+            BelongsTo::make('Vendor')
+                ->hideFromIndex()
+                ->withoutTrashed(),
 
             Text::make('Name')
                 ->sortable()
@@ -59,12 +84,11 @@ class Category extends Resource
             Avatar::make('Image', 'img')
                 ->rules(REQUIRED_IMAGE_VALIDATION)
                 ->disk('public')
-                ->path(CATEGORY_PATH)
+                ->path(PRODUCT_PATH)
                 ->maxWidth(150)
                 ->storeAs(function (Request $request) {
                     return time() . $request->img->getClientOriginalName();
                 })->deletable(false),
-
 
             Text::make('Image Title', 'img_title')
                 ->hideFromIndex()
@@ -74,13 +98,30 @@ class Category extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
+            Text::make('SKU')
+                ->hideFromIndex()
+                ->rules(REQUIRED_STRING_VALIDATION)
+                ->creationRules('unique:products,SKU')
+                ->updateRules('unique:products,SKU,{{resourceId}}'),
+
+            Number::make('Stoke')
+                ->min(0)
+                ->hideFromIndex()
+                ->rules(REQUIRED_INTEGER_VALIDATION),
+
+            Rating::make('rate')
+                ->min(0)
+                ->max(5)
+                ->increment(0.5)
+                ->sortable()
+                ->rules(REQUIRED_NUMERIC_VALIDATION),
 
             (new Panel('SEO', [
                 Slug::make('Slug')
-                    ->sortable()
+                    ->hideFromIndex()
                     ->rules(REQUIRED_STRING_VALIDATION)
-                    ->creationRules('unique:categories,slug')
-                    ->updateRules('unique:categories,slug,{{resourceId}}'),
+                    ->creationRules('unique:products,slug')
+                    ->updateRules('unique:products,slug,{{resourceId}}'),
 
                 Text::make('Meta Title', 'meta_title')
                     ->hideFromIndex()
@@ -98,10 +139,6 @@ class Category extends Resource
                     ->translatable(),
 
             ])),
-
-
-            HasMany::make('SubCategories'),
-            HasMany::make('Products'),
 
         ];
     }

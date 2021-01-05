@@ -5,10 +5,14 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Panel;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 
 class SubCategory extends Resource
@@ -52,6 +56,11 @@ class SubCategory extends Resource
                 ->translatable()
                 ->rules(REQUIRED_STRING_VALIDATION),
 
+            Markdown::make('Description', 'desc')
+                ->hideFromIndex()
+                ->translatable()
+                ->rules(REQUIRED_TEXT_VALIDATION),
+
             Avatar::make('Image', 'img')
                 ->rules(REQUIRED_IMAGE_VALIDATION)
                 ->disk('public')
@@ -69,11 +78,31 @@ class SubCategory extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
-            Slug::make('Slug')
-                ->hideFromIndex()
-                ->rules(REQUIRED_STRING_VALIDATION)
-                ->creationRules('unique:sub_categories,slug')
-                ->updateRules('unique:sub_categories,slug,{{resourceId}}'),
+            (new Panel('SEO', [
+                Slug::make('Slug')
+                    ->hideFromIndex()
+                    ->rules(REQUIRED_STRING_VALIDATION)
+                    ->creationRules('unique:sub_categories,slug')
+                    ->updateRules('unique:sub_categories,slug,{{resourceId}}'),
+
+                Text::make('Meta Title', 'meta_title')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_STRING_VALIDATION)
+                    ->translatable(),
+
+                Text::make('Meta Keywords', 'meta_keywords')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->translatable(),
+
+                Textarea::make('Meta Description', 'meta_desc')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->translatable(),
+
+            ])),
+
+            HasMany::make('products'),
 
         ];
     }

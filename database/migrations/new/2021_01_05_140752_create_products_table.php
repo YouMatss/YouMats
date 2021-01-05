@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubCategoriesTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateSubCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sub_categories', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('category_id')->unsigned()->index();
-            $table->foreign('category_id')->references('id')->on('categories')
+            $table->bigInteger('subCategory_id')->unsigned()->index();
+            $table->foreign('subCategory_id')->references('id')->on('sub_categories')
+                ->onDelete('CASCADE')->onUpdate('CASCADE');
+
+            $table->bigInteger('vendor_id')->unsigned()->index();
+            $table->foreign('vendor_id')->references('id')->on('vendors')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->string('name');
@@ -26,6 +30,13 @@ class CreateSubCategoriesTable extends Migration
             $table->string('img');
             $table->string('img_title')->nullable();
             $table->string('img_alt')->nullable();
+
+            $table->decimal('rate', 10, 1);
+            $table->text('price');
+            $table->text('gallery');
+
+            $table->string('SKU')->unique();
+            $table->integer('stoke');
 
             $table->string('slug')->unique();
             $table->string('meta_title')->nullable();
@@ -46,6 +57,6 @@ class CreateSubCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_categories');
+        Schema::dropIfExists('products');
     }
 }
