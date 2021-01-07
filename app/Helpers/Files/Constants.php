@@ -22,8 +22,8 @@ define('REQUIRED_NUMERIC_VALIDATION', ['required', 'numeric']);
 define('NULLABLE_NUMERIC_VALIDATION', ['nullable', 'numeric']);
 
 // Image
-define('REQUIRED_IMAGE_VALIDATION', ['required', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:2048']);
-define('NULLABLE_IMAGE_VALIDATION', ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:2048']);
+define('REQUIRED_IMAGE_VALIDATION', ['required', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:1024']);
+define('NULLABLE_IMAGE_VALIDATION', ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:1024']);
 
 // Array
 define('ARRAY_VALIDATION', ['array']);

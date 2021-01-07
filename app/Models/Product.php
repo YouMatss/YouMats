@@ -8,13 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 
-class Product extends Model implements Sortable
+class Product extends Model implements Sortable, HasMedia
 {
-    use SoftDeletes, HasFactory, Loggable, SortableTrait, HasTranslations;
+    use SoftDeletes, HasFactory, Loggable, SortableTrait, HasTranslations, InteractsWithMedia;
 
-    public $translatable = ['name', 'desc', 'meta_title', 'meta_keywords', 'meta_desc'];
+    public $translatable = ['name', 'desc', 'short_desc', 'unit', 'meta_title', 'meta_keywords', 'meta_desc'];
+
+    public function registerAllMediaConversions(): void {
+        $this->addMediaConversion('thumb')
+            ->width(200)->height(200);
+
+        $this->addMediaConversion('cropper');
+    }
+
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection(PRODUCT_PATH);
+    }
+
 
     public function category() {
         return $this->belongsTo(Category::class, SubCategory::class, '', 'subCategory_id');

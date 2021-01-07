@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\HasMany;
@@ -12,6 +13,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
+use Waynestate\Nova\CKEditor;
 
 class Category extends Resource
 {
@@ -51,33 +53,35 @@ class Category extends Resource
                 ->translatable()
                 ->rules(REQUIRED_STRING_VALIDATION),
 
-            Markdown::make('Description', 'desc')
+            Textarea::make('Short Description', 'short_desc')
+                ->translatable()
+                ->rules(NULLABLE_TEXT_VALIDATION),
+
+            CKEditor::make('Description', 'desc')
                 ->hideFromIndex()
                 ->translatable()
                 ->rules(REQUIRED_TEXT_VALIDATION),
 
-            Avatar::make('Image', 'img')
-                ->rules(REQUIRED_IMAGE_VALIDATION)
-                ->disk('public')
-                ->path(CATEGORY_PATH)
-                ->maxWidth(150)
-                ->storeAs(function (Request $request) {
-                    return time() . $request->img->getClientOriginalName();
-                })->deletable(false),
 
+            Medialibrary::make('Image', CATEGORY_PATH)->fields(function () {
+                return [
+                    Text::make('File Name', 'file_name')
+                        ->rules('required', 'min:2'),
 
-            Text::make('Image Title', 'img_title')
+                    Text::make('Image Title', 'img_title')
+                        ->rules(NULLABLE_STRING_VALIDATION),
+
+                    Text::make('Image Alt', 'img_alt')
+                        ->rules(NULLABLE_STRING_VALIDATION)
+                ];
+            })->attachRules(REQUIRED_IMAGE_VALIDATION)
+                ->accept('image/*')
+                ->autouploading()->sortable()->attachOnDetails()->single()
                 ->hideFromIndex()
-                ->rules(NULLABLE_STRING_VALIDATION),
-
-            Text::make('Image Alt', 'img_alt')
-                ->hideFromIndex()
-                ->rules(NULLABLE_STRING_VALIDATION),
-
+                ->croppable('cropper'),
 
             (new Panel('SEO', [
                 Slug::make('Slug')
-                    ->sortable()
                     ->rules(REQUIRED_STRING_VALIDATION)
                     ->creationRules('unique:categories,slug')
                     ->updateRules('unique:categories,slug,{{resourceId}}'),

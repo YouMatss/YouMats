@@ -26,14 +26,12 @@ class CreateProductsTable extends Migration
 
             $table->string('name');
             $table->text('desc')->nullable();
-
-            $table->string('img');
-            $table->string('img_title')->nullable();
-            $table->string('img_alt')->nullable();
+            $table->text('short_desc')->nullable();
 
             $table->decimal('rate', 10, 1);
-            $table->text('price');
-            $table->text('gallery');
+            $table->enum('type', ['product', 'service']);
+            $table->decimal('price', 10, 2)->nullable();
+            $table->string('unit')->nullable();
 
             $table->string('SKU')->unique();
             $table->integer('stoke');
