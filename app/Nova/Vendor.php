@@ -2,60 +2,69 @@
 
 namespace App\Nova;
 
+use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Vendor extends Resource
 {
-    /**
-     * The model the resource corresponds to.
-     *
-     * @var string
-     */
     public static $model = \App\Models\Vendor::class;
 
-    /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
     public static $title = 'name';
 
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
     public static $search = [
-        'id', 'name', 'email',
+        'id', 'name', 'email', 'phone', 'phone2', 'address', 'address2'
     ];
 
-    /**
-     * Get the fields displayed by the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function fields(Request $request)
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Gravatar::make()->maxWidth(50),
-
             Text::make('Name')
                 ->sortable()
-                ->rules('required', 'max:255'),
+                ->rules(REQUIRED_STRING_VALIDATION),
 
             Text::make('Email')
                 ->sortable()
-                ->rules('required', 'email', 'max:254')
+                ->rules(REQUIRED_EMAIL_VALIDATION)
                 ->creationRules('unique:vendors,email')
                 ->updateRules('unique:vendors,email,{{resourceId}}'),
+
+            Text::make('Phone')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+
+            Text::make('Phone2')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+
+            Text::make('Address')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+
+            Text::make('Address2')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+
+            Medialibrary::make('Licenses', VENDOR_PATH)->fields(function () {
+                return [
+                    Text::make('File Name', 'file_name')
+                        ->rules('required', 'min:2'),
+                ];
+            })->rules('array', 'required')
+                ->creationRules('min:1')
+                ->attachRules(REQUIRED_IMAGE_VALIDATION)
+                ->accept('image/*')
+                ->autouploading()->attachOnDetails()
+                ->hideFromIndex(),
+
+            Boolean::make('Active')
+                ->trueValue('1')
+                ->falseValue('0'),
 
             Password::make('Password')
                 ->onlyOnForms()
@@ -64,45 +73,21 @@ class Vendor extends Resource
         ];
     }
 
-    /**
-     * Get the cards available for the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function cards(Request $request)
     {
         return [];
     }
 
-    /**
-     * Get the filters available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function filters(Request $request)
     {
         return [];
     }
 
-    /**
-     * Get the lenses available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function lenses(Request $request)
     {
         return [];
     }
 
-    /**
-     * Get the actions available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function actions(Request $request)
     {
         return [];

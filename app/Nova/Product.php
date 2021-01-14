@@ -2,17 +2,12 @@
 
 namespace App\Nova;
 
-use DmitryBubyakin\NovaMedialibraryField\Fields\GeneratedConversions;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
-use DmitryBubyakin\NovaMedialibraryField\TransientModel;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Slug;
@@ -20,37 +15,21 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Nikaia\Rating\Rating;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Waynestate\Nova\CKEditor;
 
 class Product extends Resource
 {
+    use HasSortableRows;
 
     public static $model = \App\Models\Product::class;
 
-    /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
     public static $title = 'name';
 
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
     public static $search = [
-        'id', 'name', 'desc'
+        'id', 'name', 'desc', 'short_desc'
     ];
 
-    /**
-     * Get the fields displayed by the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function fields(Request $request)
     {
         return [
@@ -60,7 +39,6 @@ class Product extends Resource
                 ->withoutTrashed(),
 
             BelongsTo::make('Vendor')
-                ->hideFromIndex()
                 ->withoutTrashed(),
 
             Text::make('Name')
@@ -82,7 +60,7 @@ class Product extends Resource
             Select::make('Type')->options([
                 'product' => 'Product',
                 'service' => 'Service'
-            ])->hideFromIndex()
+            ])
             ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:product,service'])),
 
             NovaDependencyContainer::make([
@@ -113,7 +91,7 @@ class Product extends Resource
                 ->min(0)
                 ->max(5)
                 ->increment(0.5)
-                ->sortable()
+                ->hideFromIndex()
                 ->rules(REQUIRED_NUMERIC_VALIDATION),
 
             (new Panel('Gallery', [
@@ -133,6 +111,7 @@ class Product extends Resource
                     ->attachRules(REQUIRED_IMAGE_VALIDATION)
                     ->accept('image/*')
                     ->autouploading()->sortable()->attachOnDetails()
+                    ->hideFromIndex()
                     ->croppable('cropper')
             ])),
 

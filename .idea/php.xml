@@ -151,6 +151,11 @@
       <path value="$PROJECT_DIR$/vendor/dmitrybubyakin/nova-medialibrary-field" />
       <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
       <path value="$PROJECT_DIR$/vendor/waynestate/nova-ckeditor4-field" />
+      <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-translations-loader" />
+      <path value="$PROJECT_DIR$/vendor/vyuldashev/nova-permission" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
+      <path value="$PROJECT_DIR$/vendor/digital-creative/collapsible-resource-manager" />
+      <path value="$PROJECT_DIR$/vendor/inspheric/nova-indicator-field" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

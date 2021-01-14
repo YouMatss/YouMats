@@ -16,10 +16,8 @@ class CreateLanguagesTable extends Migration
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('img');
-            $table->string('img_title')->nullable();
-            $table->string('img_alt')->nullable();
             $table->string('slug')->unique();
+            $table->integer('sort');
             $table->logs('admins.id', true);
             $table->softDeletes();
             $table->timestamps();

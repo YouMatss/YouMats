@@ -5,6 +5,8 @@ define("LANGUAGE_PATH", 'language');
 define("CATEGORY_PATH", 'category');
 define("SUB_CATEGORY_PATH", 'subCategory');
 define("PRODUCT_PATH", 'product');
+define("COMPANY_PATH", 'company');
+define("VENDOR_PATH", 'vendor');
 
 
 // define validation
@@ -25,8 +27,11 @@ define('NULLABLE_NUMERIC_VALIDATION', ['nullable', 'numeric']);
 define('REQUIRED_IMAGE_VALIDATION', ['required', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:1024']);
 define('NULLABLE_IMAGE_VALIDATION', ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:1024']);
 
+define('REQUIRED_PDF_VALIDATION', ['required', 'file', 'mimes:pdf', 'max:1024']);
+define('NULLABLE_PDF_VALIDATION', ['nullable', 'file', 'mimes:pdf', 'max:1024']);
 // Array
 define('ARRAY_VALIDATION', ['array']);
+define('REQUIRED_ARRAY_VALIDATION', ['required', 'array']);
 
 // Date
 define('REQUIRED_DATE_VALIDATION', ['required', 'date']);

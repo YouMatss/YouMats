@@ -1,23 +1,956 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4289314-1c9f-4fff-b144-fa42c901ac05" name="Default Changelist" comment="">
+    <list default="true" id="f4289314-1c9f-4fff-b144-fa42c901ac05" name="Default Changelist" comment="Maher - Init Structure 2">
       <change beforePath="$PROJECT_DIR$/.idea/YouMats.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/YouMats.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Helpers/Files/Constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Files/Constants.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/SubCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/SubCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Language.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Language.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Vendor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Vendor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Nova/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Admin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Nova/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Nova/FAQ.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/FAQ.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Nova/Language.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Language.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Nova/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Nova/SubCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/SubCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Nova/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Nova/Vendor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Vendor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/NovaServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/NovaServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/eloquent-sortable.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/eloquent-sortable.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/nova.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/nova.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/new/2020_12_30_173130_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_30_173130_create_categories_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/new/2020_12_30_173708_create_sub_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_30_173708_create_sub_categories_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/new/2021_01_05_140752_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_05_140752_create_products_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/AdminFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2013_12_30_155618_create_languages_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2013_12_30_155618_create_languages_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_30_155247_create_vendors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_30_155247_create_vendors_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/nova/.babelrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/nova/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/.env.dusk.example" beforeDir="false" afterPath="$PROJECT_DIR$/nova/.env.dusk.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/nova/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/.github/pull_request_template.md" beforeDir="false" afterPath="$PROJECT_DIR$/nova/.github/pull_request_template.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/.github/stale.yml" beforeDir="false" afterPath="$PROJECT_DIR$/nova/.github/stale.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/nova/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/.prettierrc" beforeDir="false" afterPath="$PROJECT_DIR$/nova/.prettierrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/.styleci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/nova/.styleci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/config/nova.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/config/nova.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/database/migrations/2018_01_01_000000_create_action_events_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/database/migrations/2018_01_01_000000_create_action_events_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/database/migrations/2019_05_10_000000_add_fields_to_action_events_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/database/migrations/2019_05_10_000000_add_fields_to_action_events_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/phpunit.dusk.xml.dist" beforeDir="false" afterPath="$PROJECT_DIR$/nova/phpunit.dusk.xml.dist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/phpunit.xml.dist" beforeDir="false" afterPath="$PROJECT_DIR$/nova/phpunit.xml.dist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/public/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/public/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/public/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/public/vendor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/nova/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/Nova.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/Nova.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/__tests__/ActionSelector.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/__tests__/ActionSelector.spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/__tests__/__snapshots__/ActionSelector.spec.js.snap" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/__tests__/__snapshots__/ActionSelector.spec.js.snap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/__tests__/fields/BelongsToField.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/__tests__/fields/BelongsToField.spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/__tests__/fields/MorphToField.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/__tests__/fields/MorphToField.spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/__tests__/views/ResourceIndex.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/__tests__/views/ResourceIndex.spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/__tests__/views/UpdateAttached.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/__tests__/views/UpdateAttached.spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/__tests__/views/__snapshots__/ResourceIndex.spec.js.snap" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/__tests__/views/__snapshots__/ResourceIndex.spec.js.snap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/__tests__/views/__snapshots__/UpdateAttached.spec.js.snap" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/__tests__/views/__snapshots__/UpdateAttached.spec.js.snap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/ActionSelector.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/ActionSelector.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Badge.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Badge.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/BooleanOption.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/BooleanOption.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Card.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Card.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CardWrapper.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CardWrapper.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Cards.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Cards.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Cards/HelpCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Cards/HelpCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CheckboxWithLabel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CheckboxWithLabel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Controls/SelectControl.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Controls/SelectControl.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CreateForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CreateForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CreateResourceButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CreateResourceButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CustomAttachHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CustomAttachHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CustomCreateHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CustomCreateHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CustomDashboardHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CustomDashboardHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CustomDetailHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CustomDetailHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CustomDetailToolbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CustomDetailToolbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CustomIndexHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CustomIndexHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CustomIndexToolbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CustomIndexToolbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CustomLensHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CustomLensHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CustomUpdateAttachedHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CustomUpdateAttachedHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/CustomUpdateHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/CustomUpdateHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/DateTimePicker.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/DateTimePicker.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/DeleteButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/DeleteButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/DeleteMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/DeleteMenu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/BadgeField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/BadgeField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/BelongsToField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/BelongsToField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/BelongsToManyField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/BelongsToManyField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/BooleanField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/BooleanField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/BooleanGroupField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/BooleanGroupField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/CodeField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/CodeField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/CurrencyField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/CurrencyField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/DateField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/DateField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/DateTimeField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/DateTimeField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/FileField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/FileField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/HasManyField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/HasManyField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/HasManyThroughField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/HasManyThroughField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/HasOneField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/HasOneField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/HasOneThroughField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/HasOneThroughField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/HeadingField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/HeadingField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/HiddenField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/HiddenField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/KeyValueField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/KeyValueField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/MarkdownField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/MarkdownField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/MorphToActionTargetField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/MorphToActionTargetField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/MorphToField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/MorphToField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/MorphToManyField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/MorphToManyField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/Panel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/Panel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/PasswordField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/PasswordField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/RelationshipPanel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/RelationshipPanel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/SparklineField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/SparklineField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/StackField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/StackField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/StatusField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/StatusField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/TextField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/TextField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/TextareaField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/TextareaField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Detail/TrixField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Detail/TrixField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Dropdown.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Dropdown.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/DropdownMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/DropdownMenu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/DropdownTrigger.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/DropdownTrigger.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Excerpt.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Excerpt.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/FadeTransition.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/FadeTransition.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/FilterMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/FilterMenu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Filters/BooleanFilter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Filters/BooleanFilter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Filters/DateFilter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Filters/DateFilter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Filters/SelectFilter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Filters/SelectFilter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/BelongsToField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/BelongsToField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/BooleanField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/BooleanField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/BooleanGroupField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/BooleanGroupField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/CancelButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/CancelButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/CodeField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/CodeField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/CreateRelationButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/CreateRelationButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/CurrencyField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/CurrencyField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/DateField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/DateField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/DateTimeField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/DateTimeField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/DefaultField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/DefaultField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/FieldWrapper.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/FieldWrapper.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/FileField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/FileField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/HeadingField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/HeadingField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/HelpText.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/HelpText.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/HiddenField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/HiddenField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/KeyValueField/KeyValueField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/KeyValueField/KeyValueField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/KeyValueField/KeyValueHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/KeyValueField/KeyValueHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/KeyValueField/KeyValueItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/KeyValueField/KeyValueItem.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/KeyValueField/KeyValueTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/KeyValueField/KeyValueTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/Label.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/Label.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/MarkdownField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/MarkdownField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/MorphToField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/MorphToField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/Panel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/Panel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/PasswordField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/PasswordField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/PlaceField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/PlaceField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/SelectField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/SelectField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/SlugField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/SlugField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/StatusField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/StatusField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/TextField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/TextField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/TextareaField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/TextareaField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Form/TrixField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Form/TrixField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/GlobalSearch.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/GlobalSearch.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Heading.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Heading.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Add.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Add.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/BooleanIcon.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/BooleanIcon.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/CheckCircle.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/CheckCircle.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Delete.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Delete.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Download.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Download.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Edit.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Editor/Bold.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Editor/Bold.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Editor/FullScreen.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Editor/FullScreen.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Editor/Image.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Editor/Image.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Editor/Italic.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Editor/Italic.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Editor/Link.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Editor/Link.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Filter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Filter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/ForceDelete.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/ForceDelete.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Help.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Help.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Icon.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Icon.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Loader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Loader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Menu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/More.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/More.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Play.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Play.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Refresh.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Refresh.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Restore.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Restore.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/Search.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/Search.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/View.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/View.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Icons/XCircle.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Icons/XCircle.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/ImageLoader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/ImageLoader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/BadgeField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/BadgeField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/BelongsToField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/BelongsToField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/BooleanField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/BooleanField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/BooleanGroupField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/BooleanGroupField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/Checkbox.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/Checkbox.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/CurrencyField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/CurrencyField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/DateField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/DateField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/DateTimeField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/DateTimeField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/FakeCheckbox.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/FakeCheckbox.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/FileField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/FileField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/HeadingField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/HeadingField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/HiddenField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/HiddenField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/IdField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/IdField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/InlineActionSelector.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/InlineActionSelector.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/LineField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/LineField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/MorphToActionTargetField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/MorphToActionTargetField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/MorphToField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/MorphToField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/PasswordField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/PasswordField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/ResourceTableRow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/ResourceTableRow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/SortableIcon.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/SortableIcon.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/SparklineField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/SparklineField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/StackField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/StackField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/StatusField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/StatusField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Index/TextField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Index/TextField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/LensSelector.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/LensSelector.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Loading.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Loading.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/LoadingCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/LoadingCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/LoadingView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/LoadingView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Metrics/Base/PartitionMetric.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Metrics/Base/PartitionMetric.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Metrics/Base/TrendMetric.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Metrics/Base/TrendMetric.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Metrics/Base/ValueMetric.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Metrics/Base/ValueMetric.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Metrics/MetricBehavior.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Metrics/MetricBehavior.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Metrics/PartitionMetric.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Metrics/PartitionMetric.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Metrics/TrendMetric.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Metrics/TrendMetric.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Metrics/ValueMetric.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Metrics/ValueMetric.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Modal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Modal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Modals/ConfirmActionModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Modals/ConfirmActionModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Modals/ConfirmUploadRemovalModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Modals/ConfirmUploadRemovalModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Modals/CreateRelationModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Modals/CreateRelationModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Modals/DeleteResourceModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Modals/DeleteResourceModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Modals/RestoreResourceModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Modals/RestoreResourceModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Pagination/PaginationLinks.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Pagination/PaginationLinks.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Pagination/PaginationLoadMore.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Pagination/PaginationLoadMore.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Pagination/PaginationSimple.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Pagination/PaginationSimple.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/PanelItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/PanelItem.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/ProgressButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/ProgressButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/ResourcePollingButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/ResourcePollingButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/ResourceTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/ResourceTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/ScrollWrap.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/ScrollWrap.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/SearchInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/SearchInput.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Tooltip.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Tooltip.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/TooltipContent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/TooltipContent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/Trix.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/Trix.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/components/ValidationErrors.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/components/ValidationErrors.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/fields.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/fields.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/mixins/HandlesActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/mixins/HandlesActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/mixins/HandlesUploads.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/mixins/HandlesUploads.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/mixins/HasActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/mixins/HasActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/mixins/Localization.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/mixins/Localization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/mixins/ThemingClasses.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/mixins/ThemingClasses.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/plugins/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/plugins/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/plugins/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/plugins/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/plugins/lodash.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/plugins/lodash.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/plugins/moment.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/plugins/moment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/polyfills/composedPath.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/polyfills/composedPath.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/router/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/storage/BelongsToFieldStorage.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/storage/BelongsToFieldStorage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/storage/MorphToFieldStorage.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/storage/MorphToFieldStorage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/storage/__mocks__/BelongsToFieldStorage.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/storage/__mocks__/BelongsToFieldStorage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/storage/__mocks__/MorphToFieldStorage.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/storage/__mocks__/MorphToFieldStorage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/store/resources.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/store/resources.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/test-setup/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/test-setup/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/util/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/util/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/util/empty.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/util/empty.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/util/escapeUnicode.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/util/escapeUnicode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/util/numbro.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/util/numbro.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/util/slugify.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/util/slugify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/403.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/403.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/404.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/404.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/Attach.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/Attach.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/Create.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/Dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/Detail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/Detail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/Error403.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/Error403.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/Error404.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/Error404.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/Lens.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/Lens.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/Update.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/Update.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/js/views/UpdateAttached.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/js/views/UpdateAttached.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/lang/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/lang/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/lang/en/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/lang/en/validation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/auth/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/auth/layout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/auth/partials/errors.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/auth/partials/errors.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/auth/partials/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/auth/partials/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/auth/partials/heading.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/auth/partials/heading.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/auth/partials/logo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/auth/partials/logo.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/auth/passwords/email.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/dashboard/navigation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/dashboard/navigation.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/layout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/partials/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/partials/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/partials/logo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/partials/logo.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/partials/meta.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/partials/meta.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/partials/user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/partials/user.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/resources/navigation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/resources/navigation.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/resources/views/router.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/resources/views/router.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Actions/Action.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/Action.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Actions/ActionEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/ActionEvent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Actions/ActionMethod.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/ActionMethod.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Actions/ActionModelCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/ActionModelCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Actions/ActionResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/ActionResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Actions/Actionable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/Actionable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Actions/CallQueuedAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/CallQueuedAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Actions/CallsQueuedActions.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/CallsQueuedActions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Actions/DestructiveAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/DestructiveAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Actions/DispatchAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/DispatchAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Actions/Transaction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/Transaction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Authorizable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Authorizable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/AuthorizedToSee.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/AuthorizedToSee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/AuthorizesRequests.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/AuthorizesRequests.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Card.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Card.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Cards/Help.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Cards/Help.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/ActionCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/ActionCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/AssetCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/AssetCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/BaseResourceCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/BaseResourceCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/CardCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/CardCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/Concerns/AcceptsNameAndVendor.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/Concerns/AcceptsNameAndVendor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/CustomFilterCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/CustomFilterCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/DashboardCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/DashboardCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/FieldCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/FieldCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/FilterCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/FilterCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/InstallCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/InstallCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/LensCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/LensCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/PartitionCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/PartitionCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/PublishCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/PublishCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/RenamesStubs.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/RenamesStubs.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/ResolvesStubPath.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/ResolvesStubPath.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/ResourceCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/ResourceCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/ResourceToolCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/ResourceToolCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/StubPublishCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/StubPublishCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/ThemeCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/ThemeCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/ToolCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/ToolCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/TranslateCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/TranslateCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/TrendCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/TrendCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/UserCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/UserCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/ValueCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/ValueCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/asset-stubs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/asset-stubs/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/asset-stubs/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/asset-stubs/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/asset-stubs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/asset-stubs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/asset-stubs/resources/js/asset.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/asset-stubs/resources/js/asset.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/asset-stubs/resources/sass/asset.scss" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/asset-stubs/resources/sass/asset.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/asset-stubs/src/AssetServiceProvider.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/asset-stubs/src/AssetServiceProvider.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/asset-stubs/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/asset-stubs/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/card-stubs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/card-stubs/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/card-stubs/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/card-stubs/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/card-stubs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/card-stubs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/card-stubs/resources/js/card.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/card-stubs/resources/js/card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/card-stubs/resources/js/components/Card.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/card-stubs/resources/js/components/Card.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/card-stubs/resources/sass/card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/card-stubs/resources/sass/card.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/card-stubs/routes/api.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/card-stubs/routes/api.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/card-stubs/src/Card.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/card-stubs/src/Card.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/card-stubs/src/CardServiceProvider.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/card-stubs/src/CardServiceProvider.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/card-stubs/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/card-stubs/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/field-stubs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/field-stubs/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/field-stubs/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/field-stubs/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/field-stubs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/field-stubs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/field-stubs/resources/js/components/DetailField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/field-stubs/resources/js/components/DetailField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/field-stubs/resources/js/components/FormField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/field-stubs/resources/js/components/FormField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/field-stubs/resources/js/components/IndexField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/field-stubs/resources/js/components/IndexField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/field-stubs/resources/js/field.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/field-stubs/resources/js/field.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/field-stubs/resources/sass/field.scss" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/field-stubs/resources/sass/field.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/field-stubs/src/Field.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/field-stubs/src/Field.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/field-stubs/src/FieldServiceProvider.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/field-stubs/src/FieldServiceProvider.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/field-stubs/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/field-stubs/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/filter-stubs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/filter-stubs/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/filter-stubs/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/filter-stubs/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/filter-stubs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/filter-stubs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/filter-stubs/resources/js/components/Filter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/filter-stubs/resources/js/components/Filter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/filter-stubs/resources/js/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/filter-stubs/resources/js/filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/filter-stubs/resources/sass/filter.scss" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/filter-stubs/resources/sass/filter.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/filter-stubs/src/Filter.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/filter-stubs/src/Filter.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/filter-stubs/src/FilterServiceProvider.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/filter-stubs/src/FilterServiceProvider.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/filter-stubs/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/filter-stubs/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/resources/js/components/Tool.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/resources/js/components/Tool.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/resources/js/tool.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/resources/js/tool.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/resources/sass/tool.scss" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/resources/sass/tool.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/routes/api.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/routes/api.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/src/Tool.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/src/Tool.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/src/ToolServiceProvider.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/src/ToolServiceProvider.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/resource-tool-stubs/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/NovaServiceProvider.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/NovaServiceProvider.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/action.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/action.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/base-resource.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/base-resource.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/boolean-filter.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/boolean-filter.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/dashboard.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/dashboard.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/date-filter.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/date-filter.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/destructive-action.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/destructive-action.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/filter.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/filter.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/lens.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/lens.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/partition.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/partition.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/resource.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/resource.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/trend.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/trend.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/user-resource.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/user-resource.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/stubs/value.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/stubs/value.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/theme-stubs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/theme-stubs/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/theme-stubs/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/theme-stubs/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/theme-stubs/resources/css/theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/theme-stubs/resources/css/theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/theme-stubs/src/ThemeServiceProvider.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/theme-stubs/src/ThemeServiceProvider.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/resources/js/components/Tool.vue" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/resources/js/components/Tool.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/resources/js/tool.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/resources/js/tool.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/resources/sass/tool.scss" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/resources/sass/tool.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/resources/views/navigation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/resources/views/navigation.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/routes/api.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/routes/api.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/src/Http/Middleware/Authorize.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/src/Http/Middleware/Authorize.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/src/Tool.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/src/Tool.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/src/ToolServiceProvider.stub" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/src/ToolServiceProvider.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Console/tool-stubs/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Console/tool-stubs/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Contracts/Cover.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Contracts/Cover.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Contracts/Deletable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Contracts/Deletable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Contracts/Filter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Contracts/Filter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Contracts/ListableField.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Contracts/ListableField.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Contracts/PivotableField.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Contracts/PivotableField.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Contracts/RelatableField.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Contracts/RelatableField.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Contracts/Resolvable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Contracts/Resolvable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Contracts/Storable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Contracts/Storable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/DeleteField.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/DeleteField.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Element.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Element.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Events/NovaServiceProviderRegistered.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Events/NovaServiceProviderRegistered.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Events/ServingNova.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Events/ServingNova.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Exceptions/AuthenticationException.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Exceptions/AuthenticationException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Exceptions/LensCountException.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Exceptions/LensCountException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Exceptions/MissingActionHandlerException.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Exceptions/MissingActionHandlerException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Exceptions/NovaExceptionHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Exceptions/NovaExceptionHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/AcceptsTypes.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/AcceptsTypes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/ActionFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/ActionFields.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Avatar.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Avatar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Badge.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Badge.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/BelongsTo.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/BelongsTo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/BelongsToMany.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/BelongsToMany.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Boolean.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Boolean.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/BooleanGroup.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/BooleanGroup.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Code.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Code.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Country.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Country.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Currency.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Currency.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Date.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Date.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/DateTime.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/DateTime.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Deletable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Deletable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/DetachesPivotModels.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/DetachesPivotModels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/DeterminesIfCreateRelationCanBeShown.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/DeterminesIfCreateRelationCanBeShown.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Downloadable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Downloadable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Expandable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Expandable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Field.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Field.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/FieldCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/FieldCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/FieldElement.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/FieldElement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/File.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/File.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/FormatsRelatableDisplayValues.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/FormatsRelatableDisplayValues.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Gravatar.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Gravatar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/HasDownload.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/HasDownload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/HasMany.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/HasMany.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/HasManyThrough.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/HasManyThrough.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/HasOne.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/HasOne.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/HasOneThrough.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/HasOneThrough.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/HasPreview.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/HasPreview.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/HasThumbnail.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/HasThumbnail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Heading.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Heading.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Hidden.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Hidden.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/ID.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/ID.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Image.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Image.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/KeyValue.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/KeyValue.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Line.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Line.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Markdown.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Markdown.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/MorphMany.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/MorphMany.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/MorphOne.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/MorphOne.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/MorphTo.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/MorphTo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/MorphToActionTarget.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/MorphToActionTarget.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/MorphToMany.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/MorphToMany.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/MorphedByMany.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/MorphedByMany.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Number.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Number.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Password.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Password.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/PasswordConfirmation.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/PasswordConfirmation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Place.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Place.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/PresentsImages.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/PresentsImages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/ResolvedFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/ResolvedFields.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/ResolvesReverseRelation.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/ResolvesReverseRelation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/ResourceRelationshipGuesser.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/ResourceRelationshipGuesser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Searchable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Searchable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Select.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Select.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Slug.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Slug.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Sparkline.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Sparkline.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Stack.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Stack.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Status.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Status.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Storable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Storable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Text.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Text.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Textarea.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Textarea.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Timezone.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Timezone.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/Trix.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/Trix.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/VaporFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/VaporFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Fields/VaporImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Fields/VaporImage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/FillsFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/FillsFields.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/FilterDecoder.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/FilterDecoder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Filters/BooleanFilter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Filters/BooleanFilter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Filters/DateFilter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Filters/DateFilter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Filters/Filter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Filters/Filter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/GlobalSearch.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/GlobalSearch.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/AssociatableController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/AssociatableController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/AttachableController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/AttachableController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/AttachedResourceUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/AttachedResourceUpdateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/CardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/CardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/CreationFieldController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/CreationFieldController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/CreationPivotFieldController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/CreationPivotFieldController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/DashboardCardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/DashboardCardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/DashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/DashboardMetricController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/DashboardMetricController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/DeletesFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/DeletesFields.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/DetailMetricController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/DetailMetricController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/FieldController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/FieldController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/FieldDestroyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/FieldDestroyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/FieldDownloadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/FieldDownloadController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/FilterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/FilterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ForgotPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/HandlesCustomRelationKeys.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/HandlesCustomRelationKeys.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/LensActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/LensActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/LensCardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/LensCardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/LensController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/LensController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/LensFilterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/LensFilterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/LensMetricController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/LensMetricController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/LensResourceCountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/LensResourceCountController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/LensResourceDestroyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/LensResourceDestroyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/LensResourceForceDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/LensResourceForceDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/LensResourceRestoreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/LensResourceRestoreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/MetricController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/MetricController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/MorphableController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/MorphableController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/MorphedResourceAttachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/MorphedResourceAttachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/PivotFieldDestroyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/PivotFieldDestroyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/RelatableAuthorizationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/RelatableAuthorizationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ResetPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceAttachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceAttachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceCountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceCountController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceDestroyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceDestroyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceDetachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceDetachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceForceDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceForceDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceIndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceIndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceRestoreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceRestoreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceShowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceShowController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceStoreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceStoreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ResourceUpdateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/RouterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/RouterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/ScriptController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/ScriptController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/SearchController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/SoftDeleteStatusController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/SoftDeleteStatusController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/StyleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/StyleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/TrixAttachmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/TrixAttachmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/UpdateFieldController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/UpdateFieldController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Controllers/UpdatePivotFieldController.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Controllers/UpdatePivotFieldController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Middleware/Authenticate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Middleware/Authorize.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Middleware/Authorize.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Middleware/BootTools.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Middleware/BootTools.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Middleware/DispatchServingNovaEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Middleware/DispatchServingNovaEvent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Middleware/ServeNova.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Middleware/ServeNova.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/ActionRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/ActionRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/CardRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/CardRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/CountsResources.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/CountsResources.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/CreateResourceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/CreateResourceRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/DashboardCardRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/DashboardCardRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/DashboardMetricRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/DashboardMetricRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/DashboardRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/DashboardRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/DecodesFilters.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/DecodesFilters.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/DeleteLensResourceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/DeleteLensResourceRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/DeleteResourceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/DeleteResourceRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/DeletionRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/DeletionRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/DetachResourceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/DetachResourceRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/ForceDeleteLensResourceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/ForceDeleteLensResourceRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/ForceDeleteResourceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/ForceDeleteResourceRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/InteractsWithLenses.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/InteractsWithLenses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/InteractsWithRelatedResources.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/InteractsWithRelatedResources.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/InteractsWithResources.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/InteractsWithResources.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/LensActionRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/LensActionRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/LensCardRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/LensCardRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/LensCountRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/LensCountRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/LensMetricRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/LensMetricRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/LensRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/LensRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/LensResourceDeletionRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/LensResourceDeletionRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/MetricRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/MetricRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/NovaRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/NovaRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/PivotFieldDestroyRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/PivotFieldDestroyRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/QueriesResources.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/QueriesResources.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/ResourceDetailRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/ResourceDetailRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/ResourceIndexRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/ResourceIndexRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/RestoreLensResourceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/RestoreLensResourceRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/RestoreResourceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/RestoreResourceRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Http/Requests/UpdateResourceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Http/Requests/UpdateResourceRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Lenses/Lens.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Lenses/Lens.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Macros/FirstDayOfPreviousQuarter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Macros/FirstDayOfPreviousQuarter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Macros/FirstDayOfQuarter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Macros/FirstDayOfQuarter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Makeable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Makeable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/MemoizesMethods.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/MemoizesMethods.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/HasHelpText.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/HasHelpText.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/Metric.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/Metric.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/MySqlTrendDateExpression.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/MySqlTrendDateExpression.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/Partition.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/Partition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/PartitionColors.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/PartitionColors.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/PartitionResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/PartitionResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/PostgresTrendDateExpression.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/PostgresTrendDateExpression.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/RangedMetric.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/RangedMetric.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/SqlSrvTrendDateExpression.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/SqlSrvTrendDateExpression.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/SqliteTrendDateExpression.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/SqliteTrendDateExpression.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/Trend.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/Trend.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/TrendDateExpression.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/TrendDateExpression.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/TrendDateExpressionFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/TrendDateExpressionFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/TrendResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/TrendResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/Value.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/Value.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Metrics/ValueResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Metrics/ValueResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Nova.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Nova.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/NovaApplicationServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/NovaApplicationServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/NovaCoreServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/NovaCoreServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/NovaServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/NovaServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Panel.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Panel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/PendingRouteRegistration.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/PendingRouteRegistration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/PerformsQueries.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/PerformsQueries.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/PerformsValidation.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/PerformsValidation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/ProxiesCanSeeToGate.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/ProxiesCanSeeToGate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Query/ApplyFilter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Query/ApplyFilter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Query/ApplySoftDeleteConstraint.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Query/ApplySoftDeleteConstraint.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/ResolvesActions.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/ResolvesActions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/ResolvesCards.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/ResolvesCards.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/ResolvesFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/ResolvesFields.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/ResolvesFilters.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/ResolvesFilters.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/ResolvesLenses.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/ResolvesLenses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Resource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Resource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/ResourceCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/ResourceCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/ResourceTool.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/ResourceTool.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/ResourceToolElement.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/ResourceToolElement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Rules/NotAttached.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Rules/NotAttached.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Rules/Relatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Rules/Relatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Rules/RelatableAttachment.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Rules/RelatableAttachment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Components/DetailComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Components/DetailComponent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Components/IndexComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Components/IndexComponent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Components/LensComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Components/LensComponent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Attach.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Attach.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Create.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Create.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Detail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/HasSearchableRelations.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/HasSearchableRelations.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/HomePage.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/HomePage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Lens.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Lens.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Update.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/Update.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/UpdateAttached.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/UpdateAttached.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/UserIndex.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Testing/Browser/Pages/UserIndex.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Tool.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Tool.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Tools/Dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Tools/Dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Tools/ResourceManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Tools/ResourceManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/TrashedStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/TrashedStatus.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Trix/Attachment.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Trix/Attachment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Trix/DeleteAttachments.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Trix/DeleteAttachments.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Trix/DetachAttachment.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Trix/DetachAttachment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Trix/DiscardPendingAttachments.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Trix/DiscardPendingAttachments.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Trix/PendingAttachment.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Trix/PendingAttachment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Trix/PruneStaleAttachments.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Trix/PruneStaleAttachments.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/src/Trix/StorePendingAttachment.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Trix/StorePendingAttachment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tailwind.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tailwind.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/testbench.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/nova/testbench.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/ActionFieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/ActionFieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/AttachPolymorphicTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/AttachPolymorphicTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/AttachSoftDeletingTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/AttachSoftDeletingTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/AttachTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/AttachTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/AuthenticatesUserTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/AuthenticatesUserTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/CreateTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/CreateTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/CreateWithBelongsToTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/CreateWithBelongsToTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/CreateWithHasOneTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/CreateWithHasOneTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/CreateWithInlineRelationButtonTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/CreateWithInlineRelationButtonTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/CreateWithMorphToTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/CreateWithMorphToTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/CreateWithSoftDeletingBelongsToTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/CreateWithSoftDeletingBelongsToTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/CreateWithSoftDeletingMorphToTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/CreateWithSoftDeletingMorphToTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/CustomFieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/CustomFieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/DashboardTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/DashboardTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/DetailAuthorizationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/DetailAuthorizationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/DetailBelongsToFieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/DetailBelongsToFieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/DetailMorphToFieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/DetailMorphToFieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/DetailTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/DetailTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/FileAttachTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/FileAttachTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/FileDeleteTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/FileDeleteTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/IndexAuthorizationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/IndexAuthorizationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/IndexBelongsToFieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/IndexBelongsToFieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/IndexMorphToFieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/IndexMorphToFieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/IndexTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/IndexTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/LensTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/LensTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/PanelTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/PanelTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/PivotActionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/PivotActionTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/PivotFileAttachTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/PivotFileAttachTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/PlaceFieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/PlaceFieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/QueuedActionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/QueuedActionTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/RelationshipAuthorizationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/RelationshipAuthorizationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/SoftDeletingDetailTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/SoftDeletingDetailTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/SoftDeletingIndexTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/SoftDeletingIndexTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/SoftDeletingLensTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/SoftDeletingLensTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/ToolAuthorizationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/ToolAuthorizationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/UpdateAttachedPolymorphicTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/UpdateAttachedPolymorphicTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/UpdateAttachedSoftDeletingTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/UpdateAttachedSoftDeletingTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/UpdateAttachedTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/UpdateAttachedTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/UpdateAuthorizationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/UpdateAuthorizationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/UpdateTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/UpdateTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/UpdateWithBelongsToTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/UpdateWithBelongsToTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/UpdateWithMorphToTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/UpdateWithMorphToTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/console/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/console/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Browser/screenshots/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Browser/screenshots/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ActionControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ActionControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/AssetServeTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/AssetServeTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/AssociatableControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/AssociatableControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/AttachableControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/AttachableControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/AuthenticationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/AuthenticationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/BooleanResourceTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/BooleanResourceTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/CreationControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/CreationControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/DashboardControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/DashboardControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/FieldControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/FieldControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/FileFieldControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/FileFieldControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/FilterControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/FilterControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/LensActionControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/LensActionControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/LensControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/LensControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/LensMetricControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/LensMetricControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/LensResourceCountTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/LensResourceCountTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/LensResourceDestroyTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/LensResourceDestroyTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/LensResourceForceDeleteTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/LensResourceForceDeleteTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/LensResourceRestoreTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/LensResourceRestoreTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/MetricControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/MetricControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/MorphableControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/MorphableControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/MorphableResourceAttachmentTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/MorphableResourceAttachmentTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/MorphableResourceAttachmentUpdateTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/MorphableResourceAttachmentUpdateTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/MorphableResourceCreationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/MorphableResourceCreationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/MorphableResourceUpdateTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/MorphableResourceUpdateTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/MySqlSearchControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/MySqlSearchControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/MySqlTrendMetricControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/MySqlTrendMetricControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/PartitionMetricControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/PartitionMetricControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/PivotActionControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/PivotActionControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/PostgresSearchControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/PostgresSearchControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/PostgresTrendMetricControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/PostgresTrendMetricControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceAttachTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceAttachTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceAttachmentTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceAttachmentTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceAttachmentUpdateTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceAttachmentUpdateTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceCountTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceCountTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceCreationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceCreationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceDestroyTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceDestroyTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceDetachTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceDetachTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceFilledCallbackTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceFilledCallbackTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceForceDeleteTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceForceDeleteTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceIndexTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceIndexTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceRestoreTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceRestoreTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceShowTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceShowTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/ResourceUpdateTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/ResourceUpdateTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/SearchControllerTests.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/SearchControllerTests.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/SoftDeleteStatusControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/SoftDeleteStatusControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/SqliteSearchControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/SqliteSearchControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/SqliteTrendMetricControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/SqliteTrendMetricControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/TrendDateTests.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/TrendDateTests.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/TrixAttachmentControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/TrixAttachmentControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Controller/VaporFileFieldControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Controller/VaporFileFieldControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/DuskTestCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/DuskTestCase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Factories/AddressFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Factories/AddressFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Factories/CategoryFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Factories/CategoryFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Factories/CommentFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Factories/CommentFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Factories/PostFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Factories/PostFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Factories/ProfileFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Factories/ProfileFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Factories/RoleFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Factories/RoleFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Factories/SnippetFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Factories/SnippetFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Factories/TagFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Factories/TagFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Factories/UserFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/ActionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/ActionTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/Actions/ActionEventTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/Actions/ActionEventTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/Actions/CallQueuedActionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/Actions/CallQueuedActionTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/AuthorizationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/AuthorizationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/BadgeTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/BadgeTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/BooleanGroupTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/BooleanGroupTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/CodeFieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/CodeFieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/Console/TranslateCommandTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/Console/TranslateCommandTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/CurrencyTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/CurrencyTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/DashboardTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/DashboardTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/DateTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/DateTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/DateTimeTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/DateTimeTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/FieldCollectionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/FieldCollectionTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/FieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/FieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/FileFieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/FileFieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/FilterTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/FilterTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/HasOneTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/HasOneTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/Http/Middleware/ServeNovaTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/Http/Middleware/ServeNovaTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/KeyValueTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/KeyValueTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/MetricTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/MetricTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/NovaRequestTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/NovaRequestTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/NovaTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/NovaTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/NullableTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/NullableTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/PanelTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/PanelTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/PartitionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/PartitionTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/RelationsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/RelationsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/ResourceAuthorizationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/ResourceAuthorizationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/ResourceFieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/ResourceFieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/ResourceRelationshipGuesserTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/ResourceRelationshipGuesserTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/SelectTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/SelectTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/SparklineTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/SparklineTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/StackTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/StackTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/TextTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/TextTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/TextareaTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/TextareaTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/ToolTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/ToolTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/TrixTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/TrixTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Feature/VaporFileFieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Feature/VaporFileFieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/AdditionalOptionsFilter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/AdditionalOptionsFilter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Address.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Address.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/AddressResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/AddressResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/AverageWordCount.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/AverageWordCount.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Boolean.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Boolean.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/BooleanResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/BooleanResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CallableDefault.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CallableDefault.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CallableDefaultResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CallableDefaultResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CategoryResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CategoryResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/ColumnFilter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/ColumnFilter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CommentPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CommentPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CommentResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CommentResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CreateDateFilter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CreateDateFilter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CustomConnectionActionEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CustomConnectionActionEvent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CustomConnectionActionResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CustomConnectionActionResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CustomFieldNameUserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CustomFieldNameUserResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CustomKey.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CustomKey.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CustomKeyFilter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CustomKeyFilter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CustomKeyResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CustomKeyResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/CustomerRevenue.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/CustomerRevenue.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/DeniedActionPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/DeniedActionPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/DestructiveAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/DestructiveAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Discussion.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Discussion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/DiscussionResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/DiscussionResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/EmptyAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/EmptyAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/ExceptionAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/ExceptionAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/FailingAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/FailingAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/FailingPivotAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/FailingPivotAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/File.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/File.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/FileResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/FileResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/ForbiddenUserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/ForbiddenUserResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/GitHubAvatar.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/GitHubAvatar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/GroupedUserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/GroupedUserResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/GroupingUserLens.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/GroupingUserLens.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/HandleResultAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/HandleResultAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/HavingUserLens.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/HavingUserLens.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/IdFilter.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/IdFilter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/LensFieldValidationAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/LensFieldValidationAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/MyResourceTool.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/MyResourceTool.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/NoopAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/NoopAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/NoopActionWithPivotHandle.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/NoopActionWithPivotHandle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/NoopActionWithoutActionable.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/NoopActionWithoutActionable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/NoopInlineAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/NoopInlineAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/NotAvailableForNavigationUserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/NotAvailableForNavigationUserResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/NotSearchableUserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/NotSearchableUserResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/OpensInNewTabAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/OpensInNewTabAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PaginatingUserLens.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PaginatingUserLens.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PanelResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PanelResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PostAverageTrend.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PostAverageTrend.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PostCountTrend.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PostCountTrend.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PostLens.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PostLens.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PostMaxTrend.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PostMaxTrend.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PostMinTrend.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PostMinTrend.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PostPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PostPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PostResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PostResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PostSumTrend.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PostSumTrend.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PostWithCustomCreatedAt.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PostWithCustomCreatedAt.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PostWordCount.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PostWordCount.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/PostsByUserPartition.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/PostsByUserPartition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/ProfileResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/ProfileResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/ProvidesActionFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/ProvidesActionFields.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/QueuedAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/QueuedAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/QueuedResourceAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/QueuedResourceAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/QueuedUpdateStatusAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/QueuedUpdateStatusAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Recipient.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Recipient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/RecipientResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/RecipientResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/RedirectAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/RedirectAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/RelationshipGuesserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/RelationshipGuesserResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/RequiredFieldAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/RequiredFieldAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Role.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/RoleAssignment.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/RoleAssignment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/RolePolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/RolePolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/RoleResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/RoleResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Snippet.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Snippet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/SnippetResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/SnippetResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/SoftDeletingFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/SoftDeletingFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/SoftDeletingFileResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/SoftDeletingFileResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/StandaloneAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/StandaloneAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Tag.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Tag.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/TagPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/TagPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/TagResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/TagResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/TotalUsers.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/TotalUsers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/UnauthorizedAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/UnauthorizedAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/UnrunnableAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/UnrunnableAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/UnrunnableDestructiveAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/UnrunnableDestructiveAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/UpdateStatusAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/UpdateStatusAction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/UserEmailRelationship.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/UserEmailRelationship.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/UserGrowth.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/UserGrowth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/UserLens.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/UserLens.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/UserPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/UserPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/UserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/UserResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/UserWithCustomFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/UserWithCustomFields.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/UserWithRedirectResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/UserWithRedirectResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/VaporFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/VaporFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/VaporFileResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/VaporFileResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Vehicle.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Vehicle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/VehicleResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/VehicleResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/Wheel.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/Wheel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/WheelResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/WheelResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/WordCountByUserPartition.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/WordCountByUserPartition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/assets/tool.css" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/assets/tool.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Fixtures/assets/tool.js" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Fixtures/assets/tool.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/IntegrationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/IntegrationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000001_create_posts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000001_create_posts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000002_create_roles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000002_create_roles_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000003_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000003_create_comments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000004_create_tags_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000004_create_tags_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000005_create_password_resets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000005_create_password_resets_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000006_create_action_events_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000006_create_action_events_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000007_create_addresses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000007_create_addresses_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000007_create_profiles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000007_create_profiles_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000008_create_files_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000008_create_files_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000009_create_soft_deleting_files_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000009_create_soft_deleting_files_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000010_create_booleans_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000010_create_booleans_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000011_create_custom_keys_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000011_create_custom_keys_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000011_create_posts_authors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000011_create_posts_authors_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000012_create_recipients_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000012_create_recipients_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000013_create_custom_xref_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000013_create_custom_xref_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000016_create_vapor_files_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2017_10_10_000016_create_vapor_files_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2019_05_10_000000_add_fields_to_action_events_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2019_05_10_000000_add_fields_to_action_events_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2020_02_28_000000_create_callable_defaults_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2020_02_28_000000_create_callable_defaults_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2020_02_28_000000_create_discussions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2020_02_28_000000_create_discussions_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2020_02_28_000000_create_vehicles_and_wheels_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2020_02_28_000000_create_vehicles_and_wheels_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2020_09_23_000000_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2020_09_23_000000_create_categories_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Migrations/2020_09_26_000000_create_snippets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Migrations/2020_09_26_000000_create_snippets_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/MySqlIntegrationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/MySqlIntegrationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/PostgresIntegrationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/PostgresIntegrationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/TestServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/TestServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Unit/DecodesFilterTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Unit/DecodesFilterTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/Unit/MakeableTraitTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/Unit/MakeableTraitTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/tests/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/nova/tests/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/webpack.mix.js.dist" beforeDir="false" afterPath="$PROJECT_DIR$/nova/webpack.mix.js.dist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nova/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/nova/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/nova/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/nova/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/nova/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/nova/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/nova/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/nova/vendor.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,6 +1115,11 @@
       <path value="$PROJECT_DIR$/vendor/dmitrybubyakin/nova-medialibrary-field" />
       <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
       <path value="$PROJECT_DIR$/vendor/waynestate/nova-ckeditor4-field" />
+      <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-translations-loader" />
+      <path value="$PROJECT_DIR$/vendor/vyuldashev/nova-permission" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
+      <path value="$PROJECT_DIR$/vendor/digital-creative/collapsible-resource-manager" />
+      <path value="$PROJECT_DIR$/vendor/inspheric/nova-indicator-field" />
     </include_path>
   </component>
   <component name="ProjectId" id="1m6HqnyvnFiR2XrdD8vBsnHOUux" />
@@ -192,7 +1130,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../travel-to-egypt" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../byet-el-hekma" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -212,11 +1150,11 @@
       <recent name="C:\xampp\htdocs\YouMats\app\Helpers\Classes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\SeoEra\youmats\database\migrations" />
       <recent name="C:\xampp\htdocs\SeoEra\youmats\database\migrations\new" />
+      <recent name="C:\xampp\htdocs\SeoEra\youmats\database\migrations" />
+      <recent name="C:\xampp\htdocs\SeoEra\youmats\database\seeders" />
       <recent name="C:\xampp\htdocs\YouMats\database\migrations\new" />
       <recent name="C:\xampp\htdocs\YouMats\app\Models" />
-      <recent name="C:\xampp\htdocs\YouMats\nova\resources\lang" />
     </key>
   </component>
   <component name="RunManager">
@@ -249,7 +1187,18 @@
       <workItem from="1609693150117" duration="1301000" />
       <workItem from="1609772310880" duration="1702000" />
       <workItem from="1609849870489" duration="20202000" />
-      <workItem from="1609932751196" duration="22343000" />
+      <workItem from="1609932751196" duration="22416000" />
+      <workItem from="1610036299424" duration="2419000" />
+      <workItem from="1610109437755" duration="12669000" />
+      <workItem from="1610193413461" duration="13392000" />
+      <workItem from="1610285534895" duration="6618000" />
+      <workItem from="1610311237891" duration="915000" />
+      <workItem from="1610370237693" duration="418000" />
+      <workItem from="1610371521848" duration="29046000" />
+      <workItem from="1610453384937" duration="1537000" />
+      <workItem from="1610467710961" duration="595000" />
+      <workItem from="1610539120954" duration="26205000" />
+      <workItem from="1610626376025" duration="15867000" />
     </task>
     <task id="LOCAL-00001" summary="Maher - Init Structure">
       <created>1609877522979</created>
@@ -258,7 +1207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609877522979</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Maher - Init Structure 2">
+      <created>1609981051501</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1609981051501</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,27 +1224,32 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Maher - Init Structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Maher - Init Structure" />
+    <MESSAGE value="Maher - Init Structure 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Maher - Init Structure 2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="464" y="230" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1609258356158">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="464" y="230" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1600.860@0.0.1600.860" timestamp="1609258356158" />
-    <state x="636" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1609980585496">
+    <state x="517" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610299943942">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="517" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1610299943942" />
+    <state x="636" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1610650305421">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="530" y="183" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1609350154832" />
-    <state x="636" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1609980585496" />
-    <state x="585" y="206" key="CommitChangelistDialog2" timestamp="1609877521006">
+    <state x="636" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1610650305421" />
+    <state x="585" y="206" key="CommitChangelistDialog2" timestamp="1610225843716">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="206" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1609877521006" />
-    <state x="696" y="221" key="FileChooserDialogImpl" timestamp="1609857106027">
+    <state x="585" y="206" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1610225843716" />
+    <state x="696" y="221" key="FileChooserDialogImpl" timestamp="1610550010982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="580" y="183" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1609409824130" />
-    <state x="696" y="221" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1609857106027" />
+    <state x="696" y="221" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1610550010982" />
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1609255042239">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -301,21 +1262,28 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="301" y="60" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1609242979147" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1609877524471">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1609981052884">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1609877524471" />
-    <state x="507" y="163" width="585" height="564" key="find.popup" timestamp="1609260558352">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1609981052884" />
+    <state x="629" y="185" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1610632463246">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="629" y="185" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1610632463246" />
+    <state x="608" y="197" width="702" height="683" key="find.popup" timestamp="1610632755092">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="507" y="163" width="585" height="564" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1609260558352" />
-    <state x="456" y="190" key="run.anything.popup" timestamp="1609316394368">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="608" y="197" width="702" height="683" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1610632755092" />
+    <state x="547" y="230" key="run.anything.popup" timestamp="1610649955326">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="456" y="190" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1609316394368" />
-    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1609347010681">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="547" y="230" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1610649955326" />
+    <state x="556" y="218" width="807" height="820" key="search.everywhere.popup" timestamp="1610404850338">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1609347010681" />
+    <state x="556" y="218" width="807" height="820" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1610404850338" />
   </component>
 </project>

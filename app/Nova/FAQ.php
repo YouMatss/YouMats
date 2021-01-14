@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
+use Waynestate\Nova\CKEditor;
 
 class FAQ extends Resource
 {
@@ -15,28 +16,12 @@ class FAQ extends Resource
 
     public static $model = \App\Models\FAQ::class;
 
-    /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
     public static $title = 'question';
 
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
     public static $search = [
         'id', 'question' , 'answer'
     ];
 
-    /**
-     * Get the fields displayed by the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function fields(Request $request)
     {
         return [
@@ -47,8 +32,7 @@ class FAQ extends Resource
                 ->translatable()
                 ->rules(REQUIRED_STRING_VALIDATION),
 
-            Textarea::make('Answer')
-                ->rows(3)
+            CKEditor::make('Answer')
                 ->hideFromIndex()
                 ->translatable()
                 ->rules(REQUIRED_TEXT_VALIDATION),

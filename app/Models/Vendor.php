@@ -7,16 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Vendor extends Authenticatable
+class Vendor extends Authenticatable implements HasMedia
 {
-    use SoftDeletes, HasFactory, Notifiable, Loggable;
+    use SoftDeletes, HasFactory, Notifiable, Loggable, InteractsWithMedia;
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = ['id'];
 
     protected $hidden = [
         'password',
