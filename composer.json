@@ -26,6 +26,7 @@
         "laravel/framework": "^8.12",
         "laravel/nova": "*",
         "laravel/tinker": "^2.5",
+        "mcamara/laravel-localization": "^1.6",
         "nikaia/nova-rating-field": "^1.0",
         "optimistdigital/nova-sortable": "^2.0",
         "optimistdigital/nova-translatable": "^1.6",
