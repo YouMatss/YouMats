@@ -13,61 +13,32 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
 
-class ActionResource extends Resource
-{
-    /**
-     * The model the resource corresponds to.
-     *
-     * @var string
-     */
+class ActionResource extends Resource {
+
     public static $model = ActionEvent::class;
+    public static $globallySearchable = false;
 
-    /**
-     * Indicates whether the resource should automatically poll for new resources.
-     *
-     * @var bool
-     */
+    public static $tableStyle = 'tight';
+
     public static $polling = true;
+    public static $pollingInterval = 30;
+    public static $showPollingToggle = true;
 
-    /**
-     * Determine if the current user can create new resources.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return bool
-     */
     public static function authorizedToCreate(Request $request)
     {
         return false;
     }
 
-    /**
-     * Determine if the current user can edit resources.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return bool
-     */
     public function authorizedToUpdate(Request $request)
     {
         return false;
     }
 
-    /**
-     * Determine if the current user can delete resources.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return bool
-     */
     public function authorizedToDelete(Request $request)
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the fields displayed by the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function fields(Request $request)
     {
         return [
@@ -100,64 +71,31 @@ class ActionResource extends Resource
         ];
     }
 
-    /**
-     * Build an "index" query for the given resource.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->with('user');
     }
 
-    /**
-     * Determine if this resource is available for navigation.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return bool
-     */
     public static function availableForNavigation(Request $request)
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Determine if this resource is searchable.
-     *
-     * @return bool
-     */
     public static function searchable()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the displayable label of the resource.
-     *
-     * @return string
-     */
     public static function label()
     {
         return __('Actions');
     }
 
-    /**
-     * Get the displayable singular label of the resource.
-     *
-     * @return string
-     */
     public static function singularLabel()
     {
         return __('Action');
     }
 
-    /**
-     * Get the URI key for the resource.
-     *
-     * @return string
-     */
     public static function uriKey()
     {
         return 'action-events';

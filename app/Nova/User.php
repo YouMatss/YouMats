@@ -8,6 +8,7 @@ use App\Nova\Metrics\NewUsers;
 use App\Nova\Metrics\UsersPerDay;
 use App\Nova\Metrics\UsersStatus;
 use App\Nova\Metrics\UsersType;
+use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
@@ -63,9 +64,9 @@ class User extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
-            Boolean::make('Active')
-                ->trueValue('1')
-                ->falseValue('0'),
+            Toggle::make('Active')
+                ->falseColor('#bacad6')
+                ->editableIndex(),
 
             Password::make('Password')
                 ->onlyOnForms()

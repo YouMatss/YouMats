@@ -15,7 +15,10 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
+        "ampeco/nova-date-range-filter": "^0.1.1",
+        "benjacho/belongs-to-many-field": "^1.8",
         "david-griffiths/nova-dark-theme": "^1.0",
+        "davidpiesse/nova-toggle": "^0.0.8",
         "digital-creative/collapsible-resource-manager": "^1.2",
         "dmitrybubyakin/nova-medialibrary-field": "^3.2",
         "epartment/nova-dependency-container": "^1.2",
@@ -23,6 +26,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "inspheric/nova-indicator-field": "^1.43",
+        "kabbouchi/nova-logs-tool": "^0.3.0",
         "laravel/framework": "^8.12",
         "laravel/nova": "*",
         "laravel/tinker": "^2.5",
@@ -30,11 +34,14 @@
         "nikaia/nova-rating-field": "^1.0",
         "optimistdigital/nova-sortable": "^2.0",
         "optimistdigital/nova-translatable": "^1.6",
+        "richardkeep/nova-timenow": "^1.0",
         "spatie/laravel-medialibrary": "^9.4",
         "spatie/laravel-translatable": "^4.6",
+        "spatie/nova-backup-tool": "^4.1",
         "vyuldashev/nova-permission": "^2.10",
         "waynestate/nova-ckeditor4-field": "^0.7.0",
-        "whitecube/nova-flexible-content": "^0.2.6"
+        "whitecube/nova-flexible-content": "^0.2.6",
+        "whitecube/nova-google-maps": "^0.0.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

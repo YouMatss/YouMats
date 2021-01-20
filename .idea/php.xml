@@ -76,7 +76,6 @@
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
       <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
       <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-highlighter" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
       <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
@@ -112,7 +111,6 @@
       <path value="$PROJECT_DIR$/vendor/cakephp/chronos" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
       <path value="$PROJECT_DIR$/vendor/spatie/once" />
-      <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
       <path value="$PROJECT_DIR$/vendor/laravel/nova" />
       <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-sortable" />
       <path value="$PROJECT_DIR$/vendor/spatie/eloquent-sortable" />
@@ -156,6 +154,18 @@
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
       <path value="$PROJECT_DIR$/vendor/digital-creative/collapsible-resource-manager" />
       <path value="$PROJECT_DIR$/vendor/inspheric/nova-indicator-field" />
+      <path value="$PROJECT_DIR$/vendor/davidpiesse/nova-toggle" />
+      <path value="$PROJECT_DIR$/vendor/benjacho/belongs-to-many-field" />
+      <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/vendor/richardkeep/nova-timenow" />
+      <path value="$PROJECT_DIR$/vendor/whitecube/nova-google-maps" />
+      <path value="$PROJECT_DIR$/vendor/ampeco/nova-date-range-filter" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-backup" />
+      <path value="$PROJECT_DIR$/vendor/spatie/nova-backup-tool" />
+      <path value="$PROJECT_DIR$/vendor/spatie/db-dumper" />
+      <path value="$PROJECT_DIR$/vendor/kabbouchi/laravel-ward" />
+      <path value="$PROJECT_DIR$/vendor/kabbouchi/nova-logs-tool" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

@@ -29,7 +29,6 @@ class Product extends Model implements Sortable, HasMedia
         $this->addMediaCollection(PRODUCT_PATH);
     }
 
-
     public function category() {
         return $this->belongsTo(Category::class, SubCategory::class, '', 'subCategory_id');
     }
@@ -40,6 +39,10 @@ class Product extends Model implements Sortable, HasMedia
 
     public function vendor() {
         return $this->belongsTo(Vendor::class);
+    }
+
+    public function tags() {
+        return $this->belongsToMany(Tag::class);
     }
 
 }

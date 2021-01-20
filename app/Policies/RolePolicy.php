@@ -2,7 +2,10 @@
 
 namespace App\Policies;
 
+use App\Models\Admin;
+use App\Models\OrderItem;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Spatie\Permission\Models\Role;
 
 class RolePolicy
 {
@@ -28,18 +31,17 @@ class RolePolicy
         return true;
     }
 
-    public function delete(): bool
-    {
+    public function delete(Admin $admin, Role $role): bool {
+        if($role->id == 1)
+            return false;
         return true;
     }
 
-    public function restore(): bool
-    {
+    public function restore(Admin $admin, Role $role): bool {
         return true;
     }
 
-    public function forceDelete(): bool
-    {
+    public function forceDelete(Admin $admin, Role $role): bool {
         return true;
     }
 }

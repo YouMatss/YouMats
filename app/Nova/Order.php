@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\Order\OrderDate;
 use App\Nova\Filters\Order\OrderStatus;
 use App\Nova\Filters\Order\PaymentMethod;
 use App\Nova\Filters\Order\PaymentStatus;
@@ -47,9 +48,10 @@ class Order extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make('order_id')->readonly()->default('ORD-'.strtoupper(uniqid())),
+            DateTime::make('Date', 'created_at')->format('LLLL')->hideWhenCreating()->hideWhenUpdating()->sortable(),
             BelongsTo::make('User')->withoutTrashed()->hideFromIndex(),
             Text::make('Name')->sortable()->rules(REQUIRED_STRING_VALIDATION),
-            Text::make('Email')->sortable()->rules(REQUIRED_EMAIL_VALIDATION),
+            Text::make('Email')->hideFromIndex()->rules(REQUIRED_EMAIL_VALIDATION),
             Text::make('Phone')->sortable()->rules(REQUIRED_STRING_VALIDATION),
             Text::make('Phone2')->hideFromIndex()->rules(NULLABLE_STRING_VALIDATION),
             Text::make('Address')->hideFromIndex()->rules(REQUIRED_STRING_VALIDATION),
@@ -133,6 +135,7 @@ class Order extends Resource
     public function filters(Request $request)
     {
         return [
+            new OrderDate,
             new PaymentStatus,
             new OrderStatus,
             new PaymentMethod

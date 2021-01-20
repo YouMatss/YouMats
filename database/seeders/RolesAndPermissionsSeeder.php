@@ -27,7 +27,16 @@ class RolesAndPermissionsSeeder extends Seeder
             'products',
             'languages',
             'faqs',
-            'orders'
+            'orders',
+            'quotes',
+            'countries',
+            'cities',
+            'contacts',
+            'subscribers',
+            'tags',
+            'currencies',
+            'memberships',
+            'pages'
         ]);
 
         $collection->each(function ($item, $key) {

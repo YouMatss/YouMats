@@ -4,43 +4,53 @@ namespace App\Providers;
 
 use App\Nova\Admin;
 use App\Nova\Category;
+use App\Nova\City;
+use App\Nova\Contact;
+use App\Nova\Country;
+use App\Nova\Currency;
 use App\Nova\FAQ;
 use App\Nova\Language;
+use App\Nova\Membership;
+use App\Nova\Metrics\OrdersPerDay;
+use App\Nova\Metrics\OrdersStatus;
+use App\Nova\Metrics\Quote\QuotePerDay;
+use App\Nova\Metrics\Quote\QuotesStatus;
+use App\Nova\Metrics\Revenue;
+use App\Nova\Metrics\UsersPerDay;
+use App\Nova\Metrics\UsersStatus;
+use App\Nova\Metrics\UsersType;
 use App\Nova\Order;
+use App\Nova\Page;
 use App\Nova\Product;
+use App\Nova\Quote;
 use App\Nova\SubCategory;
+use App\Nova\Subscriber;
+use App\Nova\Tag;
 use App\Nova\User;
 use App\Nova\Vendor;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
+use DigitalCreative\CollapsibleResourceManager\Resources\InternalLink;
 use DigitalCreative\CollapsibleResourceManager\Resources\NovaResource;
 use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Nova\Cards\Help;
+use KABBOUCHI\LogsTool\LogsTool;
+use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use Richardkeep\NovaTimenow\NovaTimenow;
+use Spatie\BackupTool\BackupTool;
 use Vyuldashev\NovaPermission\NovaPermissionTool;
-use function Symfony\Component\Translation\t;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function boot()
     {
         parent::boot();
     }
 
-    /**
-     * Register the Nova routes.
-     *
-     * @return void
-     */
     protected function routes()
     {
         Nova::routes()
@@ -49,13 +59,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ->register();
     }
 
-    /**
-     * Register the Nova gate.
-     *
-     * This gate determines who can access Nova in non-local environments.
-     *
-     * @return void
-     */
     protected function gate()
     {
         Gate::define('viewNova', function ($user) {
@@ -65,33 +68,34 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         });
     }
 
-    /**
-     * Get the cards that should be displayed on the default Nova dashboard.
-     *
-     * @return array
-     */
     protected function cards()
     {
         return [
-//            new Help(),
+            (new NovaTimenow)->timezones([
+                'Asia/Riyadh',
+                'Africa/Cairo',
+                'Asia/Dubai',
+                'America/New_York',
+                'Australia/Sydney',
+                'Europe/Paris',
+                'Europe/London',
+            ])->defaultTimezone('Asia/Riyadh'),
+            new UsersType,
+            new UsersPerDay,
+            new UsersStatus,
+            new Revenue,
+            new OrdersPerDay,
+            new OrdersStatus,
+            new QuotePerDay,
+            new QuotesStatus
         ];
     }
 
-    /**
-     * Get the extra dashboards that should be displayed on the Nova dashboard.
-     *
-     * @return array
-     */
     protected function dashboards()
     {
         return [];
     }
 
-    /**
-     * Get the tools that should be listed in the Nova sidebar.
-     *
-     * @return array
-     */
     public function tools()
     {
         return [
@@ -110,7 +114,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'expanded' => true,
                         'icon' => '',
                         'resources' => [
-                            Order::class
+                            Order::class,
+                            Quote::class,
                         ]
                     ]),
                     TopLevelResource::make([
@@ -124,18 +129,53 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         ]
                     ]),
                     TopLevelResource::make([
+                        'label' => 'Vendors',
+                        'expanded' => false,
+                        'resources' => [
+                            Vendor::class,
+                            Membership::class,
+                        ]
+                    ]),
+                    TopLevelResource::make([
+                        'label' => 'Users',
+                        'expanded' => false,
+                        'resources' => [
+                            User::class,
+                            Subscriber::class,
+                            Contact::class,
+                        ]
+                    ]),
+                    TopLevelResource::make([
                         'label' => 'Management',
                         'expanded' => true,
                         'resources' => [
                             Admin::class,
-                            User::class,
-                            Vendor::class,
+                            Tag::class,
                             Group::make([
                                 'label' => 'Settings',
                                 'expanded' => false,
                                 'resources' => [
                                     Language::class,
+                                    Currency::class,
+                                    InternalLink::make([
+                                        'label' => 'Site Content',
+                                        'target' => '_self',
+                                        'url' => '#'
+                                    ]),
+                                    Page::class,
                                     NovaResource::make(FAQ::class)->label('FAQs'),
+                                    NovaResource::make(ActionResource::class)->label('Activity Logs')
+                                    ->canSee(function ($request) {
+                                        return $request->user()->isSuperAdmin();
+                                    }),
+                                ]
+                            ]),
+                            Group::make([
+                                'label' => 'Countries',
+                                'expanded' => false,
+                                'resources' => [
+                                    Country::class,
+                                    City::class
                                 ]
                             ]),
                             Group::make([
@@ -149,19 +189,26 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         ]
                     ])
                 ]
-            ])
+            ]),
+            (new BackupTool())
+                ->canSee(function ($request) {
+                    return $request->user()->isSuperAdmin();
+                }),
+            (new LogsTool())
+                ->canSee(function ($request) {
+                    return $request->user()->isSuperAdmin();
+                })
+                ->canDownload(function ($request) {
+                    return $request->user()->isSuperAdmin();
+                })
+                ->canDelete(function ($request) {
+                    return $request->user()->isSuperAdmin();
+                }),
         ];
     }
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
     public function register()
     {
-        Nova::sortResourcesBy(function ($resource) {
-            return $resource::$priority ?? 99999;
-        });
+
     }
 }

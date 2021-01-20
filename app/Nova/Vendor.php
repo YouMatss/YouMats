@@ -2,12 +2,14 @@
 
 namespace App\Nova;
 
+use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
+use Whitecube\NovaGoogleMaps\GoogleMaps;
 
 class Vendor extends Resource
 {
@@ -23,6 +25,14 @@ class Vendor extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
+            BelongsTo::make('Membership')
+                ->showCreateRelationButton()
+                ->withoutTrashed(),
+
+            BelongsTo::make('City')
+                ->showCreateRelationButton()
+                ->withoutTrashed(),
 
             Text::make('Name')
                 ->sortable()
@@ -42,11 +52,38 @@ class Vendor extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
+            Text::make('Whatsapp Phone')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+
             Text::make('Address')
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
             Text::make('Address2')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+
+            GoogleMaps::make('Location')
+                ->zoom(6)
+                ->hideFromIndex(),
+
+            Text::make('Facebook', 'facebook_url')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+            Text::make('Twitter', 'twitter_url')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+            Text::make('Youtube', 'youtube_url')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+            Text::make('Instagram', 'instagram_url')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+            Text::make('Pinterest', 'pinterest_url')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+            Text::make('Website', 'website_url')
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
@@ -62,9 +99,9 @@ class Vendor extends Resource
                 ->autouploading()->attachOnDetails()
                 ->hideFromIndex(),
 
-            Boolean::make('Active')
-                ->trueValue('1')
-                ->falseValue('0'),
+            Toggle::make('Active')
+                ->falseColor('#bacad6')
+                ->editableIndex(),
 
             Password::make('Password')
                 ->onlyOnForms()

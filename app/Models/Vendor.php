@@ -30,4 +30,12 @@ class Vendor extends Authenticatable implements HasMedia
         return $this->hasMany(Product::class);
     }
 
+    public function membership() {
+        return $this->belongsTo(Membership::class);
+    }
+
+    public function city() {
+        return $this->belongsTo(City::class);
+    }
+
 }

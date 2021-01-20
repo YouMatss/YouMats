@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Actions\ActionResource;
 use Vyuldashev\NovaPermission\PermissionBooleanGroup;
 use Vyuldashev\NovaPermission\Role;
 use Vyuldashev\NovaPermission\Permission;

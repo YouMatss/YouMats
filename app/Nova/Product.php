@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use Benjacho\BelongsToManyField\BelongsToManyField;
+use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
@@ -16,6 +18,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Nikaia\Rating\Rating;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
+use Superlatif\NovaTagInput\Tags;
 use Waynestate\Nova\CKEditor;
 
 class Product extends Resource
@@ -35,11 +38,16 @@ class Product extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            BelongsTo::make('SubCategory', 'subCategory')
+            BelongsTo::make('SubCategory')
                 ->withoutTrashed(),
 
             BelongsTo::make('Vendor')
-                ->withoutTrashed(),
+                ->withoutTrashed()
+                ->hideFromIndex(),
+
+            BelongsToManyField::make('Tags')
+                ->optionsLabel('name.en')
+                ->hideFromIndex(),
 
             Text::make('Name')
                 ->sortable()
@@ -56,22 +64,23 @@ class Product extends Resource
                 ->translatable()
                 ->rules(REQUIRED_TEXT_VALIDATION),
 
-
             Select::make('Type')->options([
                 'product' => 'Product',
                 'service' => 'Service'
-            ])
+            ])->displayUsingLabels()
             ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:product,service'])),
 
             NovaDependencyContainer::make([
                 Currency::make('Price')
-                    ->hideFromIndex()
                     ->rules(REQUIRED_NUMERIC_VALIDATION)
                     ->min(1)
                     ->step(0.05),
 
+                Number::make('Stoke')
+                    ->min(0)
+                    ->rules(REQUIRED_INTEGER_VALIDATION),
+
                 Text::make('Unit')
-                    ->hideFromIndex()
                     ->translatable()
                     ->rules(REQUIRED_STRING_VALIDATION),
             ])->dependsOn('type', 'product'),
@@ -82,17 +91,20 @@ class Product extends Resource
                 ->creationRules('unique:products,SKU')
                 ->updateRules('unique:products,SKU,{{resourceId}}'),
 
-            Number::make('Stoke')
-                ->min(0)
-                ->hideFromIndex()
-                ->rules(REQUIRED_INTEGER_VALIDATION),
-
             Rating::make('Rate')
                 ->min(0)
                 ->max(5)
                 ->increment(0.5)
                 ->hideFromIndex()
                 ->rules(REQUIRED_NUMERIC_VALIDATION),
+
+            Toggle::make('Active')
+                ->falseColor('#bacad6')
+                ->editableIndex(),
+
+            Number::make('Views')
+                ->hideWhenUpdating()
+                ->hideWhenCreating(),
 
             (new Panel('Gallery', [
                 Medialibrary::make('Images', PRODUCT_PATH)->fields(function () {
@@ -138,6 +150,8 @@ class Product extends Resource
                     ->translatable(),
 
             ])),
+
+//            BelongsToMany::make('Tags'),
 
         ];
     }

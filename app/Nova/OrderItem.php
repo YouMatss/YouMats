@@ -31,9 +31,7 @@ class OrderItem extends Resource
                 ->readonly(),
 
             Text::make('SKU', 'SKU')
-                ->rules(REQUIRED_STRING_VALIDATION)
-                ->creationRules('unique:order_items,SKU')
-                ->updateRules('unique:order_items,SKU,{{resourceId}}'),
+                ->rules(REQUIRED_STRING_VALIDATION),
 
             Number::make('Quantity')
                 ->min(1),

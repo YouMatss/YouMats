@@ -7,6 +7,9 @@ define("SUB_CATEGORY_PATH", 'subCategory');
 define("PRODUCT_PATH", 'product');
 define("COMPANY_PATH", 'company');
 define("VENDOR_PATH", 'vendor');
+define("CURRENCY_PATH", 'currency');
+define("PAGE_PATH", 'page');
+define("CONTENT_PATH", 'content');
 
 
 // define validation

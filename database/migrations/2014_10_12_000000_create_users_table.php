@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('address2')->nullable();
             $table->rememberToken();
             $table->logs('admins.id', true);
-            $table->enum('active', [0, 1])->default(1);
+            $table->tinyInteger('active')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

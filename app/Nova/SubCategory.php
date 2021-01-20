@@ -90,7 +90,7 @@ class SubCategory extends Resource
 
             ])),
 
-            HasMany::make('products'),
+            HasMany::make('Products'),
 
         ];
     }
