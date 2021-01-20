@@ -10,4 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Subscriber extends Model
 {
     use SoftDeletes, HasFactory, Loggable;
+
+    protected $fillable = ['email'];
 }

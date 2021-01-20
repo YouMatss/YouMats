@@ -32,4 +32,8 @@ class Admin extends Authenticatable
         return $this->hasRole('Super Admin');
     }
 
+    public function receivesBroadcastNotificationsOn() {
+        return 'users.' . $this->id;
+    }
+
 }

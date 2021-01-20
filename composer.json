@@ -16,7 +16,9 @@
     "require": {
         "php": "^7.3|^8.0",
         "ampeco/nova-date-range-filter": "^0.1.1",
+        "anaseqal/nova-import": "^0.0.6",
         "benjacho/belongs-to-many-field": "^1.8",
+        "coreproc/nova-notification-feed": "^1.4",
         "david-griffiths/nova-dark-theme": "^1.0",
         "davidpiesse/nova-toggle": "^0.0.8",
         "digital-creative/collapsible-resource-manager": "^1.2",
@@ -30,6 +32,7 @@
         "laravel/framework": "^8.12",
         "laravel/nova": "*",
         "laravel/tinker": "^2.5",
+        "maatwebsite/laravel-nova-excel": "^1.2",
         "mcamara/laravel-localization": "^1.6",
         "nikaia/nova-rating-field": "^1.0",
         "optimistdigital/nova-sortable": "^2.0",

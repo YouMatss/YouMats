@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Anaseqal\NovaImport\NovaImport;
 use App\Nova\Admin;
 use App\Nova\Category;
 use App\Nova\City;
@@ -11,11 +12,16 @@ use App\Nova\Currency;
 use App\Nova\FAQ;
 use App\Nova\Language;
 use App\Nova\Membership;
+use App\Nova\Metrics\CategoryCount;
+use App\Nova\Metrics\ContactCount;
 use App\Nova\Metrics\OrdersPerDay;
 use App\Nova\Metrics\OrdersStatus;
+use App\Nova\Metrics\ProductCount;
 use App\Nova\Metrics\Quote\QuotePerDay;
 use App\Nova\Metrics\Quote\QuotesStatus;
 use App\Nova\Metrics\Revenue;
+use App\Nova\Metrics\SubCategoryCount;
+use App\Nova\Metrics\SubscribersCount;
 use App\Nova\Metrics\UsersPerDay;
 use App\Nova\Metrics\UsersStatus;
 use App\Nova\Metrics\UsersType;
@@ -87,7 +93,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new OrdersPerDay,
             new OrdersStatus,
             new QuotePerDay,
-            new QuotesStatus
+            new QuotesStatus,
+            new CategoryCount,
+            new SubCategoryCount,
+            new ProductCount,
+            new SubscribersCount,
+            new ContactCount
         ];
     }
 
@@ -204,6 +215,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ->canDelete(function ($request) {
                     return $request->user()->isSuperAdmin();
                 }),
+            new NovaImport,
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Nova\Filters\Contact\ContactDate;
+use App\Nova\Metrics\ContactCount;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -50,7 +51,9 @@ class Contact extends Resource
 
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new ContactCount
+        ];
     }
 
     public function filters(Request $request)

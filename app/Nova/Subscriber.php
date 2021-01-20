@@ -2,10 +2,12 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\ImportSubscribers;
+use App\Nova\Metrics\SubscribersCount;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
+use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 
 class Subscriber extends Resource
 {
@@ -32,7 +34,9 @@ class Subscriber extends Resource
 
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new SubscribersCount
+        ];
     }
 
     public function filters(Request $request)
@@ -47,6 +51,9 @@ class Subscriber extends Resource
 
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new DownloadExcel)->withHeadings()->askForFilename()->askForWriterType(),
+            new ImportSubscribers
+        ];
     }
 }

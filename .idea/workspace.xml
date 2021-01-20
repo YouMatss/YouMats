@@ -22,37 +22,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4289314-1c9f-4fff-b144-fa42c901ac05" name="Default Changelist" comment="">
+    <list default="true" id="f4289314-1c9f-4fff-b144-fa42c901ac05" name="Default Changelist" comment="Maher - Finish AdminPanel">
       <change beforePath="$PROJECT_DIR$/.idea/YouMats.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/YouMats.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/Files/Constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Files/Constants.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Vendor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Vendor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/Filters/Order/OrderStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Filters/Order/OrderStatus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/Metrics/OrdersPerDay.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Metrics/OrdersPerDay.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/Metrics/OrdersStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Metrics/OrdersStatus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/OrderItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/OrderItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/SubCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/SubCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Subscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Subscriber.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Nova/Contact.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Contact.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Nova/Subscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Subscriber.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Nova/Vendor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Vendor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Policies/RolePolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/RolePolicy.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Providers/NovaServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/NovaServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_30_155247_create_vendors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_30_155247_create_vendors_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_05_140752_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_05_140752_create_products_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/new/2021_01_13_152145_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_13_152145_create_orders_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/new/2021_01_13_154951_create_order_items_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_13_154951_create_order_items_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/RolesAndPermissionsSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/RolesAndPermissionsSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nova/src/Actions/ActionResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/nova/src/Actions/ActionResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/nova/partials/logo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/nova/partials/logo.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/channels.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/channels.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,6 +215,19 @@
       <path value="$PROJECT_DIR$/vendor/spatie/db-dumper" />
       <path value="$PROJECT_DIR$/vendor/kabbouchi/laravel-ward" />
       <path value="$PROJECT_DIR$/vendor/kabbouchi/nova-logs-tool" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/laravel-nova-excel" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/vendor/laravie/serialize-queries" />
+      <path value="$PROJECT_DIR$/vendor/anaseqal/nova-import" />
+      <path value="$PROJECT_DIR$/vendor/coreproc/nova-echo" />
+      <path value="$PROJECT_DIR$/vendor/coreproc/nova-notification-feed" />
+      <path value="$PROJECT_DIR$/vendor/pusher/pusher-php-server" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/sodium_compat" />
     </include_path>
   </component>
   <component name="ProjectId" id="1m6HqnyvnFiR2XrdD8vBsnHOUux" />
@@ -242,7 +238,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../travel-to-egypt" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -255,19 +251,19 @@
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\SeoEra\youmats\resources\views\front" />
-      <recent name="C:\xampp\htdocs\SeoEra\youmats" />
-      <recent name="C:\xampp\htdocs\YouMats\app\Helpers\Files" />
-      <recent name="C:\xampp\htdocs\YouMats\nova\resources\lang" />
-      <recent name="C:\xampp\htdocs\YouMats\app\Helpers\Classes" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\SeoEra\youmats\database\migrations" />
       <recent name="C:\xampp\htdocs\SeoEra\youmats\database\migrations\new" />
       <recent name="C:\xampp\htdocs\SeoEra\youmats\app\Nova\Filters\Order" />
       <recent name="C:\xampp\htdocs\SeoEra\youmats\database\seeders" />
       <recent name="C:\xampp\htdocs\YouMats\database\migrations\new" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\SeoEra\youmats\resources\views\front" />
+      <recent name="C:\xampp\htdocs\SeoEra\youmats" />
+      <recent name="C:\xampp\htdocs\YouMats\app\Helpers\Files" />
+      <recent name="C:\xampp\htdocs\YouMats\nova\resources\lang" />
+      <recent name="C:\xampp\htdocs\YouMats\app\Helpers\Classes" />
     </key>
   </component>
   <component name="RunManager">
@@ -317,7 +313,9 @@
       <workItem from="1610883554208" duration="16835000" />
       <workItem from="1610975176436" duration="21504000" />
       <workItem from="1611059758295" duration="28754000" />
-      <workItem from="1611144559459" duration="8399000" />
+      <workItem from="1611144559459" duration="8586000" />
+      <workItem from="1611154087361" duration="2205000" />
+      <workItem from="1611163912164" duration="11860000" />
     </task>
     <task id="LOCAL-00001" summary="Maher - Init Structure">
       <created>1609877522979</created>
@@ -361,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610657148164</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Maher - Finish AdminPanel">
+      <created>1611153939029</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1611153939029</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -386,9 +391,14 @@
     <MESSAGE value="Maher - Init Structure 2" />
     <MESSAGE value="Maher - Complete AdminPanel" />
     <MESSAGE value="Maher - Init Front" />
-    <option name="LAST_COMMIT_MESSAGE" value="Maher - Init Front" />
+    <MESSAGE value="Maher - Finish AdminPanel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Maher - Finish AdminPanel" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="178" key="#Deployment" timestamp="1611177304466">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="178" key="#Deployment/0.0.1920.1040@0.0.1920.1040" timestamp="1611177304466" />
     <state x="464" y="230" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1609258356158">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -397,24 +407,24 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="517" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1610299943942" />
-    <state x="636" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1611153660724">
+    <state x="636" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1611169909214">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="530" y="183" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1609350154832" />
-    <state x="636" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611153660724" />
-    <state x="585" y="206" key="CommitChangelistDialog2" timestamp="1610657147540">
+    <state x="636" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611169909214" />
+    <state x="585" y="206" key="CommitChangelistDialog2" timestamp="1611169381072">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="206" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1610657147540" />
-    <state x="204" y="85" key="DiffContextDialog" timestamp="1610651924630">
+    <state x="585" y="206" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1611169381072" />
+    <state x="204" y="85" key="DiffContextDialog" timestamp="1611153902042">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="204" y="85" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1610651924630" />
-    <state x="696" y="221" key="FileChooserDialogImpl" timestamp="1611150190064">
+    <state x="204" y="85" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611153902042" />
+    <state x="696" y="221" key="FileChooserDialogImpl" timestamp="1611177260650">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="580" y="183" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1609409824130" />
-    <state x="696" y="221" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1611150190064" />
+    <state x="696" y="221" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1611177260650" />
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1609255042239">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -427,10 +437,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="301" y="60" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1609242979147" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1610657149593">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1611153966264">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1610657149593" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1611153966264" />
     <state x="629" y="185" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1610932655614">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -444,6 +454,10 @@
     </state>
     <state x="507" y="163" width="585" height="564" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1609260558352" />
     <state x="608" y="197" width="702" height="683" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611083718586" />
+    <state x="845" y="250" key="ftp.server.browser" timestamp="1611177302894">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="845" y="250" key="ftp.server.browser/0.0.1920.1040@0.0.1920.1040" timestamp="1611177302894" />
     <state x="547" y="230" key="run.anything.popup" timestamp="1611061286980">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
