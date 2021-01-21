@@ -22,19 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4289314-1c9f-4fff-b144-fa42c901ac05" name="Default Changelist" comment="Maher - Finish AdminPanel">
-      <change beforePath="$PROJECT_DIR$/.idea/YouMats.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/YouMats.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="f4289314-1c9f-4fff-b144-fa42c901ac05" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/vendor/nova/layout.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Subscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Subscriber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/Contact.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Contact.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/Subscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Subscriber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nova/Vendor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nova/Vendor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/NovaServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/NovaServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/channels.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/channels.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -237,7 +227,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -315,7 +310,8 @@
       <workItem from="1611059758295" duration="28754000" />
       <workItem from="1611144559459" duration="8586000" />
       <workItem from="1611154087361" duration="2205000" />
-      <workItem from="1611163912164" duration="11860000" />
+      <workItem from="1611163912164" duration="12049000" />
+      <workItem from="1611237594031" duration="5726000" />
     </task>
     <task id="LOCAL-00001" summary="Maher - Init Structure">
       <created>1609877522979</created>
@@ -366,7 +362,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611153939029</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Maher - features">
+      <created>1611177445066</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1611177445066</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -392,7 +395,8 @@
     <MESSAGE value="Maher - Complete AdminPanel" />
     <MESSAGE value="Maher - Init Front" />
     <MESSAGE value="Maher - Finish AdminPanel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Maher - Finish AdminPanel" />
+    <MESSAGE value="Maher - features" />
+    <option name="LAST_COMMIT_MESSAGE" value="Maher - features" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Deployment" timestamp="1611177304466">
@@ -412,14 +416,14 @@
     </state>
     <state x="530" y="183" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1609350154832" />
     <state x="636" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611169909214" />
-    <state x="585" y="206" key="CommitChangelistDialog2" timestamp="1611169381072">
+    <state x="585" y="206" key="CommitChangelistDialog2" timestamp="1611177443329">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="206" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1611169381072" />
-    <state x="204" y="85" key="DiffContextDialog" timestamp="1611153902042">
+    <state x="585" y="206" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1611177443329" />
+    <state x="204" y="85" width="1536" height="860" key="DiffContextDialog" timestamp="1611245608698">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="204" y="85" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611153902042" />
+    <state x="204" y="85" width="1536" height="860" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611245608698" />
     <state x="696" y="221" key="FileChooserDialogImpl" timestamp="1611177260650">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -437,10 +441,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="301" y="60" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1609242979147" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1611153966264">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1611177451055">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1611153966264" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1611177451055" />
     <state x="629" y="185" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1610932655614">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -449,11 +453,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="795" y="253" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1610656597499" />
-    <state x="608" y="197" width="702" height="683" key="find.popup" timestamp="1611083718586">
+    <state x="608" y="197" width="702" height="683" key="find.popup" timestamp="1611245794060">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="507" y="163" width="585" height="564" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1609260558352" />
-    <state x="608" y="197" width="702" height="683" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611083718586" />
+    <state x="608" y="197" width="702" height="683" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611245794060" />
     <state x="845" y="250" key="ftp.server.browser" timestamp="1611177302894">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -463,10 +467,10 @@
     </state>
     <state x="456" y="190" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1609316394368" />
     <state x="547" y="230" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611061286980" />
-    <state x="556" y="218" width="807" height="820" key="search.everywhere.popup" timestamp="1611092448479">
+    <state x="556" y="218" width="807" height="820" key="search.everywhere.popup" timestamp="1611245778442">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1609347010681" />
-    <state x="556" y="218" width="807" height="820" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611092448479" />
+    <state x="556" y="218" width="807" height="820" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611245778442" />
   </component>
 </project>
