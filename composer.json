@@ -41,12 +41,14 @@
         "spatie/laravel-medialibrary": "^9.4",
         "spatie/laravel-translatable": "^4.6",
         "spatie/nova-backup-tool": "^4.1",
+        "torann/geoip": "^3.0",
         "vyuldashev/nova-permission": "^2.10",
         "waynestate/nova-ckeditor4-field": "^0.7.0",
         "whitecube/nova-flexible-content": "^0.2.6",
         "whitecube/nova-google-maps": "^0.0.1"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.5",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^0.0.5",
@@ -71,7 +73,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Helpers/Files/Constants.php"
+            "app/Helpers/Files/Constants.php",
+            "app/Helpers/Files/Currency.php"
         ]
     },
     "autoload-dev": {

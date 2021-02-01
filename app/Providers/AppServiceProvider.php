@@ -2,29 +2,19 @@
 
 namespace App\Providers;
 
+use App\Models\Currency;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
+    public function register() {
         Schema::defaultStringLength(191);
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
+    public function boot() {
         Blueprint::macro('logs', function ($referencing_column = 'users.id', $usesSoftDeletes = 0) {
             $ref_table = explode('.', $referencing_column)[0];
             $primary_key = explode('.', $referencing_column)[1];
@@ -40,5 +30,12 @@ class AppServiceProvider extends ServiceProvider
                 $this->foreign('deleted_by')->references($primary_key)->on($ref_table);
             }
         });
+
+        $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
+
+
+//        View::share($data);
+        Config::set($config);
+
     }
 }

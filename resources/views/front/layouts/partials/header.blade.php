@@ -20,24 +20,17 @@
                                 <div class="d-flex align-items-center">
                                     <!-- Language -->
                                     <div class="position-relative">
-                                        <a id="languageDropdownInvoker" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;"
-                                           aria-haspopup="true"
-                                           aria-expanded="false"
-                                           data-unfold-event="hover"
-                                           data-unfold-target="#languageDropdown"
-                                           data-unfold-type="css-animation"
-                                           data-unfold-duration="300"
-                                           data-unfold-delay="300"
-                                           data-unfold-hide-on-scroll="true"
-                                           data-unfold-animation-in="slideInUp"
-                                           data-unfold-animation-out="fadeOut">
-                                            <span class="d-inline-block d-sm-none">US</span>
-                                            <span class="d-none d-sm-inline-flex align-items-center"><i class="ec ec-dollar mr-1"></i> Dollar (US)</span>
+                                        <a id="languageDropdownInvoker" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                            <span class="d-inline-block d-sm-none">{{getCurrency('code')}}</span>
+                                            <span class="d-none d-sm-inline-flex align-items-center"><i class="ec ec-dollar mr-1"></i> {{getCurrency('code')}} ({{getCurrency('symbol')}})</span>
                                         </a>
                                         <div id="languageDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker">
-                                            <a class="dropdown-item active" href="#">SAR (KSA)</a>
-                                            <a class="dropdown-item" href="#">Deutsch</a>
-                                            <a class="dropdown-item" href="#">Español‎</a>
+                                            @foreach(\Config::get('currencies') as $currency)
+                                            <a class="dropdown-item active" href="#">
+                                                <img width="20px" src="{{$currency->media[0]->getUrl()}}" />&nbsp;
+                                                {{$currency->code}} ({{$currency->symbol}})
+                                            </a>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <!-- End Language -->
@@ -47,22 +40,16 @@
                                 <div class="d-flex align-items-center">
                                     <!-- Language -->
                                     <div class="position-relative">
-                                        <a id="languageDropdownInvoker2" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;"
-                                           aria-haspopup="true"
-                                           aria-expanded="false"
-                                           data-unfold-event="hover"
-                                           data-unfold-target="#languageDropdown1"
-                                           data-unfold-type="css-animation"
-                                           data-unfold-duration="300"
-                                           data-unfold-delay="300"
-                                           data-unfold-hide-on-scroll="true"
-                                           data-unfold-animation-in="slideInUp"
-                                           data-unfold-animation-out="fadeOut">
-                                            <span class="d-none d-sm-inline-flex align-items-center"><i class="fas fa-globe-americas mr-1 font-size-14"></i> English </span>
+                                        <a id="languageDropdownInvoker2" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                            <span class="d-none d-sm-inline-flex align-items-center">
+                                                <i class="fas fa-globe-americas mr-1 font-size-14"></i>
+                                                {{ LaravelLocalization::getCurrentLocaleNative() }}
+                                            </span>
                                         </a>
                                         <div id="languageDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker2">
-                                            <a class="dropdown-item active" href="#">English</a>
-                                            <a class="dropdown-item" href="#">Arabic</a>
+                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            <a class="dropdown-item {{$localeCode}}" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">{{ $properties['native'] }}</a>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <!-- End Language -->
