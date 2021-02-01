@@ -33,9 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
         $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
 
-
 //        View::share($data);
         Config::set($config);
-
     }
 }

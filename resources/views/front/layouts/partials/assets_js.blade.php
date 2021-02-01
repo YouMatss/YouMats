@@ -159,3 +159,4 @@
     })
 
 </script>
+@include('front.layouts.partials.ajax')

@@ -14,6 +14,5 @@
         </main>
         @include('front.layouts.partials.footer')
         @include('front.layouts.partials.assets_js')
-        @yield('js_section')
     </body>
 </html>

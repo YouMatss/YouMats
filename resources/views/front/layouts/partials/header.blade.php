@@ -26,7 +26,7 @@
                                         </a>
                                         <div id="languageDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker">
                                             @foreach(\Config::get('currencies') as $currency)
-                                            <a class="dropdown-item active" href="#">
+                                            <a class="dropdown-item active currency_button" data-code="{{$currency->code}}" href="#">
                                                 <img width="20px" src="{{$currency->media[0]->getUrl()}}" />&nbsp;
                                                 {{$currency->code}} ({{$currency->symbol}})
                                             </a>

@@ -33853,7 +33853,7 @@ blockquote:not(.blockquote) p {
 }
 
 .btn-primary-dark-w {
-  color: #333e48;
+  color: #fff;
   background-color: #003f91;
   border-color: #003f91;
 }
@@ -37848,6 +37848,21 @@ section {
 .icon-plus_team{
   border-radius: 5px;
 }
+
+.box_login_page{
+  border: 1px solid #ddd;
+  padding: 30px;
+}
+
+.cart-subtotal th ,.cart-subtotal td{
+  padding: 20px 0;
+  border-top:0;
+  border-bottom:1px solid #ecedf2;
+}
+
+
+
+
 
 @media (max-width: 767.98px) {
   .cat .container .box {
