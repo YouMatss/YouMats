@@ -1,42 +1,42 @@
 <!-- JS Global Compulsory -->
-<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
-<script src="assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
-<script src="assets/vendor/popper.js/dist/umd/popper.min.js"></script>
-<script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/popper.js/dist/umd/popper.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/bootstrap/bootstrap.min.js"></script>
 
 <!-- JS Implementing Plugins -->
-<script src="assets/vendor/appear.js"></script>
-<script src="assets/vendor/jquery.countdown.min.js"></script>
-<script src="assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
-<script src="assets/vendor/svg-injector/dist/svg-injector.min.js"></script>
-<script src="assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="assets/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="assets/vendor/fancybox/jquery.fancybox.min.js"></script>
-<script src="assets/vendor/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
-<script src="assets/vendor/typed.js/lib/typed.min.js"></script>
-<script src="assets/vendor/slick-carousel/slick/slick.js"></script>
-<script src="assets/vendor/appear.js"></script>
-<script src="assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/appear.js"></script>
+<script src="{{front_url()}}/assets/vendor/jquery.countdown.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
+<script src="{{front_url()}}/assets/vendor/svg-injector/dist/svg-injector.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/typed.js/lib/typed.min.js"></script>
+<script src="{{front_url()}}/assets/vendor/slick-carousel/slick/slick.js"></script>
+<script src="{{front_url()}}/assets/vendor/appear.js"></script>
+<script src="{{front_url()}}/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 
 <!-- JS Electro -->
-<script src="assets/js/hs.core.js"></script>
-<script src="assets/js/components/hs.countdown.js"></script>
-<script src="assets/js/components/hs.header.js"></script>
-<script src="assets/js/components/hs.hamburgers.js"></script>
-<script src="assets/js/components/hs.unfold.js"></script>
-<script src="assets/js/components/hs.focus-state.js"></script>
-<script src="assets/js/components/hs.malihu-scrollbar.js"></script>
-<script src="assets/js/components/hs.validation.js"></script>
-<script src="assets/js/components/hs.fancybox.js"></script>
-<script src="assets/js/components/hs.onscroll-animation.js"></script>
-<script src="assets/js/components/hs.slick-carousel.js"></script>
-<script src="assets/js/components/hs.quantity-counter.js"></script>
-<script src="assets/js/components/hs.range-slider.js"></script>
-<script src="assets/js/components/hs.show-animation.js"></script>
-<script src="assets/js/components/hs.svg-injector.js"></script>
-<script src="assets/js/components/hs.scroll-nav.js"></script>
-<script src="assets/js/components/hs.go-to.js"></script>
-<script src="assets/js/components/hs.selectpicker.js"></script>
+<script src="{{front_url()}}/assets/js/hs.core.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.countdown.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.header.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.hamburgers.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.unfold.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.focus-state.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.malihu-scrollbar.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.validation.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.fancybox.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.onscroll-animation.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.slick-carousel.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.quantity-counter.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.range-slider.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.show-animation.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.svg-injector.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.scroll-nav.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.go-to.js"></script>
+<script src="{{front_url()}}/assets/js/components/hs.selectpicker.js"></script>
 
 <!-- JS Plugins Init. -->
 <script>
@@ -158,5 +158,33 @@
         fileChosen.textContent = this.files[0].name
     })
 
+    ( function ( document, window, index ) {
+        var inputs = document.querySelectorAll( '.inputfile' );
+        Array.prototype.forEach.call( inputs, function( input )
+        {
+            var label	 = input.nextElementSibling,
+                labelVal = label.innerHTML;
+
+            input.addEventListener( 'change', function( e )
+            {
+                var fileName = '';
+                if( this.files && this.files.length > 1 )
+                    fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+                else
+                    fileName = e.target.value.split( '\\' ).pop();
+
+                if( fileName )
+                    label.querySelector( 'span' ).innerHTML = fileName;
+                else
+                    label.innerHTML = labelVal;
+            });
+
+            // Firefox bug fix
+            input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+            input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+        });
+    }( document, window, 0 ));
+
 </script>
+
 @include('front.layouts.partials.ajax')

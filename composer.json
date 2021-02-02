@@ -73,6 +73,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
+            "app/Helpers/Files/baseHelpers.php",
             "app/Helpers/Files/Constants.php",
             "app/Helpers/Files/Currency.php"
         ]

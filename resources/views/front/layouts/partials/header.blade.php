@@ -55,13 +55,37 @@
                                     <!-- End Language -->
                                 </div>
                             </li>
+
+                            @if(Auth::guard('web')->check())
+                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
+                                <div class="d-flex align-items-center">
+                                    <!-- Language -->
+                                    <div class="position-relative">
+                                        <a id="profileDropdownInvoker2" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#profileDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                            <span class="d-none d-sm-inline-flex align-items-center">
+                                                <i class="ec ec-user mr-1"></i> {{auth('web')->user()->name}}
+                                            </span>
+                                        </a>
+                                        <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
+                                            <a class="dropdown-item" href="{{route('front.user.profile')}}">Profile</a>
+                                            <form class="dropdown-item" style="cursor: pointer" action="{{route('logout')}}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="dropdown-item">Logout</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- End Language -->
+                                </div>
+                            </li>
+                            @else
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                <!-- Account Sidebar Toggle Button -->
-                                <a href="#" role="button" class="u-header-topbar__nav-link">
+                                <a href="{{route('login')}}" role="button" class="u-header-topbar__nav-link">
                                     <i class="ec ec-user mr-1"></i> Register <span class="text-gray-50">or</span> Sign in
                                 </a>
-                                <!-- End Account Sidebar Toggle Button -->
                             </li>
+                            @endif
+
+
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link"
                                    aria-controls="sidebarContent"
@@ -90,7 +114,7 @@
                     <div class="col-auto">
                         <nav class="navbar navbar-expand u-header__navbar py-0 justify-content-xl-between">
                             <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center" href="#" aria-label="">
-                                <img src="assets/img/logo.png">
+                                <img src="{{front_url()}}/assets/img/logo.png">
                             </a>
                             <button id="sidebarHeaderInvokerMenu" type="button" class="d-block d-md-none d-lg-none navbar-toggler d-block btn u-hamburger mr-3 mr-xl-0"
                                     aria-controls="sidebarHeader"
@@ -133,7 +157,7 @@
                                             <div id="headerSidebarContent" class="u-sidebar__content u-header-sidebar__content">
 
                                                 <a class="d-flex ml-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-vertical" href="#" aria-label="">
-                                                    <img src="assets/img/logo.png">
+                                                    <img src="{{front_url()}}/assets/img/logo.png">
                                                 </a>
 
                                                 <ul id="headerSidebarList" class="u-header-collapse__nav">
@@ -261,7 +285,7 @@
                                 <ul class="navbar-nav u-header__navbar-nav">
 
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="#">Home</a>
+                                        <a class="nav-link u-header__nav-link" href="{{route('home')}}">Home</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
                                         <a class="nav-link u-header__nav-link" href="#">All Products</a>
