@@ -41,7 +41,9 @@ if (!function_exists('setCurrency')) {
 
 if (!function_exists('getCurrency')) {
     function getCurrency($value) {
-        return Session::get('currency')[$value];
+        //Get the currency value only if the "currency" is set.
+        if(Session::get('currency'))
+            return Session::get('currency')[$value];
     }
 }
 
