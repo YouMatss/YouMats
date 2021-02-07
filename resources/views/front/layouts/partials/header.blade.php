@@ -16,26 +16,29 @@
                                 <a href="#" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> My Wishlist </a>
                             </li>
 
-                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
-                                <div class="d-flex align-items-center">
-                                    <!-- Language -->
-                                    <div class="position-relative">
-                                        <a id="languageDropdownInvoker" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-                                            <span class="d-inline-block d-sm-none">{{getCurrency('code')}}</span>
-                                            <span class="d-none d-sm-inline-flex align-items-center"><i class="ec ec-dollar mr-1"></i> {{getCurrency('code')}} ({{getCurrency('symbol')}})</span>
-                                        </a>
-                                        <div id="languageDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker">
-                                            @foreach(\Config::get('currencies') as $currency)
-                                            <a class="dropdown-item active currency_button" data-code="{{$currency->code}}" href="#">
-                                                <img width="20px" src="{{$currency->media[0]->getUrl()}}" />&nbsp;
-                                                {{$currency->code}} ({{$currency->symbol}})
+                            @if(count(\Config::get('currencies')) > 1)
+                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Language -->
+                                        <div class="position-relative">
+                                            <a id="languageDropdownInvoker" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                                <span class="d-inline-block d-sm-none">{{getCurrency('code')}}</span>
+                                                <span class="d-none d-sm-inline-flex align-items-center"><i class="ec ec-dollar mr-1"></i> {{getCurrency('code')}} ({{getCurrency('symbol')}})</span>
                                             </a>
-                                            @endforeach
+                                            <div id="languageDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker">
+                                                @foreach(\Config::get('currencies') as $currency)
+                                                <a class="dropdown-item active currency_button" data-code="{{$currency->code}}" href="#">
+                                                    <img width="20px" src="{{$currency->media[0]->getUrl()}}" />&nbsp;
+                                                    {{$currency->code}} ({{$currency->symbol}})
+                                                </a>
+                                                @endforeach
+                                            </div>
                                         </div>
+                                        <!-- End Language -->
                                     </div>
-                                    <!-- End Language -->
-                                </div>
-                            </li>
+                                </li>
+                            @endif
+
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                                 <div class="d-flex align-items-center">
                                     <!-- Language -->

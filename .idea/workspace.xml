@@ -23,12 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4289314-1c9f-4fff-b144-fa42c901ac05" name="Default Changelist" comment="Maher - Init Auth">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/Files/Currency.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Files/Currency.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_17_172730_create_product_tag_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_17_172730_create_product_tag_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,19 +252,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\YouMats\resources\views" />
-      <recent name="C:\xampp\htdocs\YouMats\resources\views\front" />
-      <recent name="C:\xampp\htdocs\YouMats\resources\views\front\users" />
-      <recent name="C:\xampp\htdocs\SeoEra\youmats\database\migrations" />
-      <recent name="C:\xampp\htdocs\SeoEra\youmats\database\migrations\new" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\YouMats\resources\views" />
       <recent name="C:\xampp\htdocs\YouMats\app\Helpers\Files" />
       <recent name="C:\xampp\htdocs\SeoEra\youmats\resources\views\front" />
       <recent name="C:\xampp\htdocs\SeoEra\youmats" />
       <recent name="C:\xampp\htdocs\YouMats\nova\resources\lang" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\YouMats\resources\views" />
+      <recent name="C:\xampp\htdocs\YouMats\resources\views\front" />
+      <recent name="C:\xampp\htdocs\YouMats\resources\views\front\users" />
+      <recent name="C:\xampp\htdocs\SeoEra\youmats\database\migrations" />
+      <recent name="C:\xampp\htdocs\SeoEra\youmats\database\migrations\new" />
     </key>
   </component>
   <component name="RunManager">
@@ -456,94 +453,5 @@
     <MESSAGE value="Maher - Init Auth" />
     <MESSAGE value="Maher - Auth Done 3" />
     <option name="LAST_COMMIT_MESSAGE" value="Maher - Auth Done 3" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#Deployment" timestamp="1611177304466">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="178" key="#Deployment/0.0.1920.1040@0.0.1920.1040" timestamp="1611177304466" />
-    <state x="464" y="230" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1609258356158">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="464" y="230" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1600.860@0.0.1600.860" timestamp="1609258356158" />
-    <state x="517" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610299943942">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="517" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1610299943942" />
-    <state x="530" y="183" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1612451838223">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="530" y="183" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1612451838223" />
-    <state x="636" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611169909214" />
-    <state x="488" y="170" key="CommitChangelistDialog2" timestamp="1612194207855">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="488" y="170" key="CommitChangelistDialog2/0.0.1600.860@0.0.1600.860" timestamp="1612194207855" />
-    <state x="585" y="206" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1611251172163" />
-    <state x="204" y="85" width="1536" height="860" key="DiffContextDialog" timestamp="1611245608698">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="204" y="85" width="1536" height="860" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611245608698" />
-    <state x="580" y="183" key="FileChooserDialogImpl" timestamp="1612443548548">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="580" y="183" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1612443548548" />
-    <state x="696" y="221" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1611177260650" />
-    <state x="0" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1609255042239">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="0" y="0" key="FileDocumentManager.FileCacheConflict/0.0.1600.860@0.0.1600.860" timestamp="1609255042239" />
-    <state x="610" y="151" key="NewPhpClassDialog" timestamp="1609344434368">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="610" y="151" key="NewPhpClassDialog/0.0.1600.860@0.0.1600.860" timestamp="1609344434368" />
-    <state x="635" y="352" key="NewPhpFileDialog" timestamp="1612256157706">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="635" y="352" key="NewPhpFileDialog/0.0.1600.860@0.0.1600.860" timestamp="1612256157706" />
-    <state x="640" y="131" key="RollbackChangesDialog" timestamp="1612182066404">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="640" y="131" key="RollbackChangesDialog/0.0.1600.860@0.0.1600.860" timestamp="1612182066404" />
-    <state x="301" y="60" key="SettingsEditor" timestamp="1612186384785">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="301" y="60" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1612186384785" />
-    <state x="460" y="208" key="Vcs.Push.Dialog.v2" timestamp="1612689423091">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="460" y="208" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1612689423091" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1611251178247" />
-    <state x="629" y="185" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1610932655614">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="629" y="185" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1610932655614" />
-    <state x="795" y="253" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1610656597499">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="795" y="253" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1610656597499" />
-    <state x="507" y="163" width="585" height="564" key="find.popup" timestamp="1612435461386">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="507" y="163" width="585" height="564" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1612435461386" />
-    <state x="608" y="197" width="702" height="683" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611245794060" />
-    <state x="845" y="250" key="ftp.server.browser" timestamp="1611177302894">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="845" y="250" key="ftp.server.browser/0.0.1920.1040@0.0.1920.1040" timestamp="1611177302894" />
-    <state x="670" y="333" key="publish.login" timestamp="1612449663516">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="670" y="333" key="publish.login/0.0.1600.860@0.0.1600.860" timestamp="1612449663516" />
-    <state x="456" y="190" key="run.anything.popup" timestamp="1612433927646">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="456" y="190" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1612433927646" />
-    <state x="547" y="230" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611061286980" />
-    <state x="465" y="115" width="672" height="678" key="search.everywhere.popup" timestamp="1612438943009">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="465" y="115" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1612438943009" />
-    <state x="556" y="218" width="807" height="820" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611245778442" />
   </component>
 </project>
