@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         //Temporary fix (You can't have direct connection to tables in AppServiceProvider.
         // Causes a problem when you freshly install the app.
         try {
+            $data['categories'] = Category::with('subCategories')->orderBy('sort')->get();
             $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
             $data['categories'] = Category::with('subCategories')->orderBy('sort')->get();
         } catch (\Exception $e)
