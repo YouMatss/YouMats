@@ -3,7 +3,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <link rel="shortcut icon" href="favicon.ico">
+
+        @include('front.layouts.partials.assets_js')
+
         @include('front.layouts.partials.assets')
         @yield('metaTags')
     </head>
@@ -13,6 +18,5 @@
             @yield('content')
         </main>
         @include('front.layouts.partials.footer')
-        @include('front.layouts.partials.assets_js')
     </body>
 </html>

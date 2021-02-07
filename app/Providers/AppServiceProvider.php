@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\Currency;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,12 +37,13 @@ class AppServiceProvider extends ServiceProvider
         // Causes a problem when you freshly install the app.
         try {
             $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
+            $data['categories'] = Category::with('subCategories')->orderBy('sort')->get();
         } catch (\Exception $e)
         {
             return $e->getMessage();
         }
 
-//        View::share($data);
+        View::share($data);
         Config::set($config);
     }
 }

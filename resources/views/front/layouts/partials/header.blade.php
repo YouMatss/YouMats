@@ -55,13 +55,37 @@
                                     <!-- End Language -->
                                 </div>
                             </li>
+
+                            @if(Auth::guard('web')->check())
+                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
+                                <div class="d-flex align-items-center">
+                                    <!-- Language -->
+                                    <div class="position-relative">
+                                        <a id="profileDropdownInvoker2" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#profileDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                            <span class="d-none d-sm-inline-flex align-items-center">
+                                                <i class="ec ec-user mr-1"></i> {{auth('web')->user()->name}}
+                                            </span>
+                                        </a>
+                                        <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
+                                            <a class="dropdown-item" href="{{route('front.user.profile')}}">Profile</a>
+                                            <form class="dropdown-item" style="cursor: pointer" action="{{route('logout')}}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="dropdown-item">Logout</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- End Language -->
+                                </div>
+                            </li>
+                            @else
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                <!-- Account Sidebar Toggle Button -->
-                                <a href="#" role="button" class="u-header-topbar__nav-link">
+                                <a href="{{route('login')}}" role="button" class="u-header-topbar__nav-link">
                                     <i class="ec ec-user mr-1"></i> Register <span class="text-gray-50">or</span> Sign in
                                 </a>
-                                <!-- End Account Sidebar Toggle Button -->
                             </li>
+                            @endif
+
+
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link"
                                    aria-controls="sidebarContent"
@@ -90,7 +114,7 @@
                     <div class="col-auto">
                         <nav class="navbar navbar-expand u-header__navbar py-0 justify-content-xl-between">
                             <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center" href="#" aria-label="">
-                                <img src="assets/img/logo.png">
+                                <img src="{{front_url()}}/assets/img/logo.png">
                             </a>
                             <button id="sidebarHeaderInvokerMenu" type="button" class="d-block d-md-none d-lg-none navbar-toggler d-block btn u-hamburger mr-3 mr-xl-0"
                                     aria-controls="sidebarHeader"
@@ -133,7 +157,7 @@
                                             <div id="headerSidebarContent" class="u-sidebar__content u-header-sidebar__content">
 
                                                 <a class="d-flex ml-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-vertical" href="#" aria-label="">
-                                                    <img src="assets/img/logo.png">
+                                                    <img src="{{front_url()}}/assets/img/logo.png">
                                                 </a>
 
                                                 <ul id="headerSidebarList" class="u-header-collapse__nav">
@@ -261,7 +285,7 @@
                                 <ul class="navbar-nav u-header__navbar-nav">
 
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="#">Home</a>
+                                        <a class="nav-link u-header__nav-link" href="{{route('home')}}">Home</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
                                         <a class="nav-link u-header__nav-link" href="#">All Products</a>
@@ -364,8 +388,8 @@
                                                 aria-controls="basicsCollapseOne">
                                             <span class="pl-1 text-gray-110">All Categories</span>
                                             <span class="text-gray-110 ml-3">
-                                                        <span class="ec ec-arrow-down-search"></span>
-                                                    </span>
+                                                <span class="ec ec-arrow-down-search"></span>
+                                            </span>
                                         </button>
                                     </div>
                                     <div id="basicsCollapseOne" class="collapse show vertical-menu v1"
@@ -375,594 +399,37 @@
                                             <nav class="js-mega-menu navbar navbar-expand-xl u-header__navbar u-header__navbar--no-space hs-menu-initialized">
                                                 <div id="navBar" class="collapse navbar-collapse u-header__navbar-collapse">
                                                     <ul class="navbar-nav u-header__navbar-nav border-primary border-top-0">
+                                                        @foreach($categories as $category)
                                                         <li class="nav-item hs-has-mega-menu u-header__nav-item"
                                                             data-event="hover"
                                                             data-position="left">
-                                                            <a id="basicMegaMenu1" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Building Material</a>
+                                                            <a id="{{$category->slug}}" class="nav-link u-header__nav-link u-header__nav-link-toggle"
+                                                               href="{{route('front.category', ['category_slug' => $category->slug])}}" aria-haspopup="true" aria-expanded="false">{{$category->name}}</a>
 
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu1">
+                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="{{$category->slug}}">
                                                                 <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_1.png" alt="Image Description">
+                                                                    <img class="img-fluid" src="{{$category->getFirstMediaUrl(CATEGORY_PATH)}}" alt="{{$category->getFirstMedia(CATEGORY_PATH)->img_alt}}" title="{{$category->getFirstMedia(CATEGORY_PATH)->img_title}}">
                                                                 </div>
                                                                 <div class="row u-header__mega-menu-wrapper">
                                                                     <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Building Material</span>
+                                                                        <span class="u-header__sub-menu-title">{{$category->name}}</span>
                                                                         <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">The Blocks</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Cement</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Coarse Aggregate and Ston</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Stainless Steel Products</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Fencing Products</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Construction Timber</a></li>
+                                                                            @foreach($category->subCategories as $subCategory)
+                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.subCategory', ['category_slug' => $category->slug, 'subCategory_slug' => $subCategory->slug])}}">{{$subCategory->name}}</a></li>
+                                                                            @endforeach
                                                                             <li>
-                                                                                <a class="nav-link u-header__sub-menu-nav-link u-nav-divider border-top pt-2 flex-column align-items-start" href="#">
+                                                                                <a class="nav-link u-header__sub-menu-nav-link u-nav-divider border-top pt-2 flex-column align-items-start"
+                                                                                   href="{{route('front.category', ['category_slug' => $category->slug])}}">
                                                                                     <div class="">ALL CATEGORIES</div>
                                                                                     <div class="u-nav-subtext font-size-11 text-gray-30">Discover more products</div>
                                                                                 </a>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Building Material</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Steel Structure</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Boundary Walls</a></li>
-                                                                        </ul>
-                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <!-- End Nav Item - Mega Menu -->
                                                         </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu2" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Plumbing</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu vmm-bg-extended" aria-labelledby="basicMegaMenu2">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_2.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Plumbing</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">All Mobile Phones</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Heat pipes</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Water Tanks</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-top pt-2" href="#">Manhole and Grating</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Solvents</a></li>
-                                                                            <li>
-                                                                                <a class="nav-link u-header__sub-menu-nav-link u-nav-divider border-top pt-2 flex-column align-items-start" href="#">
-                                                                                    <div class="">All Plumbing CATEGORIES</div>
-                                                                                    <div class="u-nav-subtext font-size-11 text-gray-30">Discover more products</div>
-                                                                                </a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Pipe and Fittings</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Pump Water</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu3" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Walls and Flooring</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu3">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_3.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Walls and Flooring</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Granite</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Marble</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-bottom pb-3" href="#">Natural Stones</a></li>
-                                                                        </ul>
-                                                                        <span class="u-header__sub-menu-title">Walls and Flooring</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Wooden Flooring</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Carpets</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Speciallized Flooring</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Walls and Flooring</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Flooring</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Desert Stones</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Tiles</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu4" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Kitchen</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu4">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_4.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Kitchen</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Chimneys and Hobs</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Chimneys and Hobs</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Chimneys and Hobs</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Chimneys and Hobs</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Chimneys and Hobs</a></li>
-                                                                            <li>
-                                                                                <a class="nav-link u-header__sub-menu-nav-link u-nav-divider border-top pt-2 flex-column align-items-start" href="#">
-                                                                                    <div class="">All Kitchen CATEGORIES</div>
-                                                                                    <div class="u-nav-subtext font-size-11 text-gray-30">Available in select cities</div>
-                                                                                </a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Kitchen</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Chimneys and Hobs</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Chimneys and Hobs</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu5" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Paints</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu5">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_5.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Paints</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Flooring Paints</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Flooring Paints</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Flooring Paints</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Flooring Paints</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Flooring Paints</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Paints</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Flooring Paints</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu6" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Bathroom</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu6">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_6.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Bathroom</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Bathroom Tiles</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Bathroom Tiles</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-bottom pb-3" href="#">Bathroom Tiles</a></li>
-                                                                        </ul>
-                                                                        <span class="u-header__sub-menu-title">Bathroom</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Bathroom Tiles</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Bathroom Tiles</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Bathroom</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Bathroom Tiles</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Bathroom Tiles</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu7" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Carpentry</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu7">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_7.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Carpentry</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Doors and Windows</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Doors and Windows</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-bottom pb-3" href="#">Doors and Windows</a></li>
-                                                                        </ul>
-                                                                        <span class="u-header__sub-menu-title">Carpentry</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Doors and Windows</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Doors and Windows</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Carpentry</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Doors and Windows</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Doors and Windows</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu5" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Hardware's</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu5">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_8.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Hardware's</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Hardware's</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Hardware's</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Hardware's</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Hardware's</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Hardware's</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Hardware's</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Hardware's</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu11" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Precast Concrete</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu11">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_9.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Precast Concrete</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Precast Concrete</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Precast Concrete</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-bottom pb-3" href="#">Precast Concrete</a></li>
-                                                                        </ul>
-                                                                        <span class="u-header__sub-menu-title">Precast Concrete</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Precast Concrete</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Precast Concrete</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Precast Concrete</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Precast Concrete</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Precast Concrete</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu6" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Electrical</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu6">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_10.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Electrical</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Electrical</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Electrical</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-bottom pb-3" href="#">Electrical</a></li>
-                                                                        </ul>
-                                                                        <span class="u-header__sub-menu-title">Electrical</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Electrical</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Electrical</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Electrical</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Electrical</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Electrical</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu6" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Glass and Facade</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu6">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_1.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Glass and Facade</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Glass and Facade</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">CGlass and Facade</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-bottom pb-3" href="#">Glass and Facade</a></li>
-                                                                        </ul>
-                                                                        <span class="u-header__sub-menu-title">Glass and Facade</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Glass and Facade</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Glass and Facade</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Glass and Facade</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Glass and Facade</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Glass and Facade</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu8" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Construction Equipment</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu8">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_12.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Construction Equipment</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Construction Equipment</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Construction Equipment</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-bottom pb-3" href="#">Construction Equipment</a></li>
-                                                                        </ul>
-                                                                        <span class="u-header__sub-menu-title">Construction Equipment</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Construction Equipment</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Construction Equipment</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Construction Equipment</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Construction Equipment</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Construction Equipment</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu9" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Living Room</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu9">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_13.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Living Room</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Living Room</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Living Room</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-bottom pb-3" href="#">Living Room</a></li>
-                                                                        </ul>
-                                                                        <span class="u-header__sub-menu-title">Living Room</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Living Room</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Living Room</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Living Room</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Living Room</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Living Room</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu10" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Safety Products</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu10">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_14.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Safety Products</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Safety Products</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Safety Products</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-bottom pb-3" href="#">Safety Products</a></li>
-                                                                        </ul>
-                                                                        <span class="u-header__sub-menu-title">Safety Products</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Safety Products</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Safety Products</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Safety Products</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Safety Products</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Safety Products</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu11" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Escalators and Elevators</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu11">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_15.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Escalators and Elevators</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Escalators and Elevators</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Escalators and Elevators</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-bottom pb-3" href="#">Escalators and Elevators</a></li>
-                                                                        </ul>
-                                                                        <span class="u-header__sub-menu-title">Escalators and Elevators</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Escalators and Elevators</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Escalators and Elevators</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Escalators and Elevators</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Escalators and Elevators</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Escalators and Elevators</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
-                                                            <a id="basicMegaMenu12" class="nav-link u-header__nav-link u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false">Adhesives</a>
-
-                                                            <!-- Nav Item - Mega Menu -->
-                                                            <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="basicMegaMenu12">
-                                                                <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="assets/img/menu_16.png" alt="Image Description">
-                                                                </div>
-                                                                <div class="row u-header__mega-menu-wrapper">
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Adhesives</span>
-                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Adhesives</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Adhesives</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link border-bottom pb-3" href="#">Adhesives</a></li>
-                                                                        </ul>
-                                                                        <span class="u-header__sub-menu-title">Adhesives</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Adhesives</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Adhesives</a></li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div class="col mb-3 mb-sm-0">
-                                                                        <span class="u-header__sub-menu-title">Adhesives</span>
-                                                                        <ul class="u-header__sub-menu-nav-group">
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Adhesives</a></li>
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="#">Adhesives</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End Nav Item - Mega Menu -->
-                                                        </li>
-                                                        <li class="nav-item hs-has-sub-menu u-header__nav-item"
-                                                            data-event="click"
-                                                            data-animation-in="slideInUp"
-                                                            data-animation-out="fadeOut"
-                                                            data-position="left">
-                                                            <a id="homeMegaMenu" class="nav-link u-header__nav-link u-header__nav-link-toggle u-header__nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false" aria-labelledby="homeSubMenu">Mechanical Parts & Fabrication Services</a>
-                                                        </li>
+                                                        @endforeach
                                                     </ul>
                                                 </div>
                                             </nav>
