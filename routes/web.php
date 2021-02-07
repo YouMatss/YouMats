@@ -10,6 +10,15 @@ Route::group([
 ], function(){
     Auth::routes(['verify' => true]);
 
+    Route::group(['prefix' => 'vendor'], function() {
+        Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showVendorLoginForm'])->name('vendor.loginForm');
+        Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'vendorLogin'])->name('vendor.login');
+        Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showVendorRegisterForm'])->name('vendor.registerForm');
+        Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'registerVendor'])->name('vendor.register');
+
+        Route::get('/', [App\Http\Controllers\Front\VendorController::class], 'index');
+    });
+
     Route::group([
         'middleware' => ['auth', 'verified']
     ], function () {

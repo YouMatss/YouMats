@@ -30,7 +30,10 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="mb-8">
-                    <form class="box_login_page" method="POST" action="{{ route('login') }}">
+                    @if($authType == 'vendor')
+                        <h4>Login as vendor</h4>
+                    @endif
+                    <form class="box_login_page" method="POST" action="{{ $authType == 'vendor' ? route('vendor.login') : route('login') }}">
                         @csrf
 
                         <div class="row">
@@ -85,7 +88,7 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
-                                <a class="btn btn-link" href="{{route('register')}}">
+                                <a class="btn btn-link" href="{{ $authType == 'vendor' ? route('vendor.registerForm') : route('register')}}">
                                     Register
                                 </a>
                             </div>
