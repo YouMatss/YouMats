@@ -22,7 +22,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4289314-1c9f-4fff-b144-fa42c901ac05" name="Default Changelist" comment="Maher - Init Auth" />
+    <list default="true" id="f4289314-1c9f-4fff-b144-fa42c901ac05" name="Default Changelist" comment="Maher - Init Auth">
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/Files/Currency.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Files/Currency.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_17_172730_create_product_tag_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_17_172730_create_product_tag_table.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -410,7 +417,13 @@
       <option name="presentableId" value="LOCAL؜٠٠٠١٢" />
       <updated>1612281736945</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL؜٠٠٠١٣" summary="Maher - Auth Done 3">
+      <created>1612689421134</created>
+      <option name="number" value="LOCAL؜٠٠٠١٣" />
+      <option name="presentableId" value="LOCAL؜٠٠٠١٣" />
+      <updated>1612689421134</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -441,7 +454,8 @@
     <MESSAGE value="Maher - commit for import on github" />
     <MESSAGE value="Maher - handle currency 2" />
     <MESSAGE value="Maher - Init Auth" />
-    <option name="LAST_COMMIT_MESSAGE" value="Maher - Init Auth" />
+    <MESSAGE value="Maher - Auth Done 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Maher - Auth Done 3" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Deployment" timestamp="1611177304466">
@@ -495,10 +509,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="301" y="60" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1612186384785" />
-    <state x="460" y="208" key="Vcs.Push.Dialog.v2" timestamp="1612281747469">
+    <state x="460" y="208" key="Vcs.Push.Dialog.v2" timestamp="1612689423091">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="460" y="208" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1612281747469" />
+    <state x="460" y="208" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1612689423091" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1611251178247" />
     <state x="629" y="185" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1610932655614">
       <screen x="0" y="0" width="1920" height="1040" />
