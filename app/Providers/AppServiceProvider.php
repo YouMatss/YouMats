@@ -33,8 +33,15 @@ class AppServiceProvider extends ServiceProvider
             }
         });
 
-        $data['categories'] = Category::with('subCategories')->orderBy('sort')->get();
-        $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
+        //Temporary fix (You can't have direct connection to tables in AppServiceProvider.
+        // Causes a problem when you freshly install the app.
+        try {
+            $data['categories'] = Category::with('subCategories')->orderBy('sort')->get();
+            $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
+        } catch (\Exception $e)
+        {
+            return $e->getMessage();
+        }
 
         View::share($data);
         Config::set($config);
