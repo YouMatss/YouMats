@@ -29,8 +29,12 @@ class Product extends Model implements Sortable, HasMedia
         $this->addMediaCollection(PRODUCT_PATH);
     }
 
+    public function getPriceAttribute($value) {
+        return round($value * getCurrency('rate'), 2);
+    }
+
     public function category() {
-        return $this->belongsTo(Category::class, SubCategory::class, '', 'subCategory_id');
+        return $this->hasOneThrough(Category::class, SubCategory::class, 'category_id', 'id');
     }
 
     public function subCategory() {

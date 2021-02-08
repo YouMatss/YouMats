@@ -47,9 +47,4 @@ if (!function_exists('getCurrency')) {
     }
 }
 
-if (!function_exists('getRate')) {
-    function getRate() {
-        return Session::get('currency')['rate'];
     }
-}
-

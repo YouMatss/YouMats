@@ -94,7 +94,7 @@ class Product extends Resource
             Rating::make('Rate')
                 ->min(0)
                 ->max(5)
-                ->increment(0.5)
+                ->increment(1)
                 ->hideFromIndex()
                 ->rules(REQUIRED_NUMERIC_VALIDATION),
 
