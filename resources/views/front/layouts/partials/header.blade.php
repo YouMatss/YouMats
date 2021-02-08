@@ -291,16 +291,16 @@
                                         <a class="nav-link u-header__nav-link" href="{{route('home')}}">Home</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="#">All Products</a>
+                                        <a class="nav-link u-header__nav-link" href="{{route('front.product.all')}}">All Products</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
                                         <a class="nav-link u-header__nav-link" href="#">Our Partners</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="#">FAQs</a>
+                                        <a class="nav-link u-header__nav-link" href="{{route('front.faqs.page')}}">FAQs</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="#">About us</a>
+                                        <a class="nav-link u-header__nav-link" href="{{route('front.about.page')}}">About us</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
                                         <a class="nav-link u-header__nav-link" href="#">Contact Us</a>
