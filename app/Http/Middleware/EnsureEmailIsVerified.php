@@ -4,16 +4,18 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-
 
 class EnsureEmailIsVerified
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
+     * @param null $redirectToRoute
+     * @param null $guard
      * @return mixed
      */
     public function handle($request, Closure $next, $redirectToRoute = null, $guard = null)
