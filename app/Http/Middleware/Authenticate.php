@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
-use Laravel\Nova\Exceptions\AuthenticationException;
 
 class Authenticate extends Middleware
 {
@@ -20,6 +20,8 @@ class Authenticate extends Middleware
             switch(current($guards)) {
                 case 'vendor':
                     return route('vendor.login');
+                case 'admin':
+                    return route('nova.login');
                 default:
                     return route('login');
             }
