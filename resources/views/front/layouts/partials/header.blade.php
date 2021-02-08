@@ -59,7 +59,7 @@
                                 </div>
                             </li>
 
-                            @if(Auth::guard('web')->check())
+                            @if(Auth::guard('web')->check() && !Auth::guard('vendor')->check())
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                                 <div class="d-flex align-items-center">
                                     <!-- Language -->
@@ -80,7 +80,7 @@
                                     <!-- End Language -->
                                 </div>
                             </li>
-                            @else
+                            @elseif(!Auth::guard('vendor')->check())
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <a href="{{route('login')}}" role="button" class="u-header-topbar__nav-link">
                                     <i class="ec ec-user mr-1"></i> Register <span class="text-gray-50">or</span> Sign in
@@ -88,11 +88,30 @@
                             </li>
                             @endif
 
-                            @if(Auth::guard('vendor')->check())
-                                {{-- He is logged in --}}
-                            @else
+                            @if(Auth::guard('vendor')->check() && !Auth::guard('web')->check())
+                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Language -->
+                                        <div class="position-relative">
+                                            <a id="profileDropdownInvoker2" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#profileDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                            <span class="d-none d-sm-inline-flex align-items-center">
+                                                <i class="ec ec-user mr-1"></i> {{auth('vendor')->user()->name}}
+                                            </span>
+                                            </a>
+                                            <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
+{{--                                                <a class="dropdown-item" href="{{route('front.user.profile')}}">Profile</a>--}}
+                                                <form class="dropdown-item" style="cursor: pointer" action="{{route('vendor.logout')}}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="dropdown-item">Logout</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- End Language -->
+                                    </div>
+                                </li>
+                            @elseif(!Auth::guard('web')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                    <a href="{{route('vendor.loginForm')}}" role="button" class="u-header-topbar__nav-link">
+                                    <a href="{{route('vendor.login')}}" role="button" class="u-header-topbar__nav-link">
                                         <i class="ec ec-user mr-1"></i> Register <span class="text-gray-50">or</span> Sign in as Vendor
                                     </a>
                                 </li>

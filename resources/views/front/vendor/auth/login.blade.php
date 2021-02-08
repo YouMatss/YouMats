@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="mb-8">
-                    <form class="box_login_page" method="POST" action="{{ route('login') }}">
+                    <form class="box_login_page" method="POST" action="{{ route('vendor.login') }}">
                         @csrf
 
                         <div class="row">
@@ -80,12 +80,12 @@
                             </div>
 
                             <div class="col-md-12">
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                @if (Route::has('vendor.password.request'))
+                                    <a class="btn btn-link" href="{{ route('vendor.password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
-                                <a class="btn btn-link" href="{{route('register')}}">
+                                <a class="btn btn-link" href="{{route('vendor.register')}}">
                                     Register
                                 </a>
                             </div>
