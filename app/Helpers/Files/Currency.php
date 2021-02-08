@@ -46,10 +46,3 @@ if (!function_exists('getCurrency')) {
         return Session::get('currency')[$value];
     }
 }
-
-if (!function_exists('getRate')) {
-    function getRate() {
-        return Session::get('currency')['rate'];
-    }
-}
-

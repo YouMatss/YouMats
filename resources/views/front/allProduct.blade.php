@@ -1,87 +1,38 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>{{$category->meta_title}}</title>
-    <meta name="description" content="{{$category->meta_desc}}">
-    <meta name="keywords" content="{{$category->meta_keywords}}">
+    <title>YouMats | All Products</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
     <meta property="og:url" content="{{url()->current()}}" />
-    <meta property="og:title" content="{{$category->meta_title}}" />
-    <meta property="og:description" content="{{$category->meta_desc}}" />
-    <meta property="og:image" content="{{$category->getFirstMediaUrl(CATEGORY_PATH)}}" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
-    <meta name="twitter:title" content="{{$category->meta_title}}">
-    <meta name="twitter:description" content="{{$category->meta_desc}}">
-    <meta name="twitter:image" content="{{$category->getFirstMediaUrl(CATEGORY_PATH)}}">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
         <div class="container">
-            <!-- breadcrumb -->
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">Home</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{$category->name}}</li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">All Products</li>
                     </ol>
                 </nav>
-            </div>
-            <!-- End breadcrumb -->
-        </div>
-    </div>
-    <div class="mb-6 bg-gray-7 py-6">
-        <div class="container">
-            <div class="row flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
-                @foreach($category->subCategories as $subCategory)
-                <div class="col-md-4 col-lg-3 col-xl-4 col-xl-2gdot4 mb-3 flex-shrink-0 flex-md-shrink-1">
-                    <div class="bg-white overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
-                        <a href="{{route('front.subCategory', [$category->slug, $subCategory->slug])}}" class="d-block pr-2 pr-wd-6">
-                            <div class="media align-items-center">
-                                <div class="pt-2">
-                                    <img class="img-fluid img_category_page" src="{{$subCategory->getFirstMediaUrl(SUB_CATEGORY_PATH)}}" alt="{{$subCategory->getFirstMedia(SUB_CATEGORY_PATH)->img_alt}}" title="{{$subCategory->getFirstMedia(SUB_CATEGORY_PATH)->img_title}}">
-                                </div>
-                                <div class="ml-3 media-body">
-                                    <h6 class="mb-0 text-gray-90">{{$subCategory->name}}</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                @endforeach
             </div>
         </div>
     </div>
     <div class="mb-6 bg-md-transparent py-6">
         <div class="container">
             <div class="row mb-8">
-                <div class="d-none d-xl-block col-xl-3 col-wd-2gdot5">
-                    <div class="mb-8">
-                        <div class="border-bottom border-color-1 mb-5">
-                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">All Categories</h3>
-                        </div>
-                        <ul class="list-unstyled li_side_bar">
-                            @foreach($category->subCategories as $subCategory)
-                            <li class="mb-3">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <a href="{{route('front.subCategory', [$category->slug, $subCategory->slug])}}" class="d-block width-75">
-                                            <img class="img-fluid" src="{{$subCategory->getFirstMediaUrl(SUB_CATEGORY_PATH)}}" alt="{{$subCategory->getFirstMedia(SUB_CATEGORY_PATH)->img_alt}}" title="{{$subCategory->getFirstMedia(SUB_CATEGORY_PATH)->img_title}}">
-                                        </a>
-                                    </div>
-                                    <div class="col p-0 mt-3">
-                                        <h3 class="text-lh-1dot2 font-size-14 mb-0">
-                                            <a href="{{route('front.subCategory', [$category->slug, $subCategory->slug])}}">{{$subCategory->name}}</a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-xl-9 col-wd-9gdot5">
+                <div class="col-xl-12">
 
                     <div class="d-block d-md-flex flex-center-between mb-3">
-                        <h3 class="font-size-25 mb-2 mb-md-0">{{$category->name}}</h3>
+                        <h3 class="font-size-25 mb-2 mb-md-0">All Products</h3>
                         <p class="font-size-14 text-gray-90 mb-0">Showing 1–25 of 56 results</p>
                     </div>
 
@@ -136,9 +87,9 @@
                         <div class="tab-pane fade pt-2 show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab" data-target-group="groups">
                             <ul class="row list-unstyled products-group no-gutters">
                                 @foreach($products as $product)
-                                <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
-                                    @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'grid'])
-                                </li>
+                                    <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
+                                        @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'grid'])
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -162,12 +113,7 @@
     </div>
     <div class="container mb-8">
         <div class="py-2 border-top border-bottom">
-            <div class="js-slick-carousel u-slick my-1"
-                 data-slides-show="5"
-                 data-slides-scroll="1"
-                 data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y"
-                 data-arrow-left-classes="fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9"
-                 data-arrow-right-classes="fa fa-angle-right u-slick__arrow-classic-inner--right"
+            <div class="js-slick-carousel u-slick my-1" data-slides-show="5" data-slides-scroll="1" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y" data-arrow-left-classes="fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9" data-arrow-right-classes="fa fa-angle-right u-slick__arrow-classic-inner--right"
                  data-responsive='[{
                                 "breakpoint": 992,
                                 "settings": {
