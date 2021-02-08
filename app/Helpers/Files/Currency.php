@@ -46,5 +46,3 @@ if (!function_exists('getCurrency')) {
         return Session::get('currency')[$value];
     }
 }
-
-    }
