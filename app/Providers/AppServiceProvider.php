@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
             $ref_table = explode('.', $referencing_column)[0];
             $primary_key = explode('.', $referencing_column)[1];
 
-            $this->bigInteger('created_by')->unsigned()->nullable()->index();
+            $this->bigInteger('created_by')->unsigned()->nullable()->index  ();
             $this->foreign('created_by')->references($primary_key)->on($ref_table);
 
             $this->bigInteger('updated_by')->unsigned()->nullable()->index();

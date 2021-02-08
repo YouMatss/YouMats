@@ -42,26 +42,12 @@
                             <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p class="text-gray-90 mb-4">Create new account today to reap the benefits of a personalized shopping experience.</p>
+                                        <p class="text-gray-90 mb-4">Register as a vendor</p>
                                     </div>
                                 </div>
-                                <form method="POST" action="{{ route('register') }}">
+                                <form method="POST" action="{{ route('vendor.register') }}">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="js-form-message form-group mb-5">
-                                                <label for="type" class="form-label">Type <span class="text-danger">*</span></label>
-                                                <select class="form-control @error('name') is-invalid @enderror" id="type" name="type" required>
-                                                    <option value="individual">Individual</option>
-                                                    <option value="company">Company</option>
-                                                </select>
-                                                @error('type')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="name" class="form-label">{{ __('Name') }} <span class="text-danger">*</span></label>
@@ -97,9 +83,57 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
+                                                <label for="phone2" class="form-label">Phone 2</label>
+                                                <input id="phone2" type="text" class="form-control @error('phone2') is-invalid @enderror" name="phone2" value="{{ old('phone2') }}" autocomplete="phone2">
+                                                @error('phone2')
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="js-form-message form-group mb-5">
+                                                <label for="type" class="form-label">City <span class="text-danger">*</span></label>
+                                                <select class="form-control @error('city_id') is-invalid @enderror" id="type" name="city_id" required>
+                                                    @foreach($cities as $city)
+                                                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('city_id')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="js-form-message form-group mb-5">
+                                                <label for="whatsapp_phone" class="form-label">WhatsApp</label>
+                                                <input id="whatsapp_phone" type="text" class="form-control @error('whatsapp_phone') is-invalid @enderror" name="whatsapp_phone" value="{{ old('whatsapp_phone') }}" autocomplete="whatsapp_phone">
+                                                @error('whatsapp_phone')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="js-form-message form-group mb-5">
                                                 <label for="address" class="form-label">Address</label>
                                                 <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" autocomplete="address">
                                                 @error('address')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="js-form-message form-group mb-5">
+                                                <label for="address2" class="form-label">Address 2</label>
+                                                <input id="address2" type="text" class="form-control @error('address2') is-invalid @enderror" name="address2" value="{{ old('address2') }}" autocomplete="address2">
+                                                @error('address2')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
