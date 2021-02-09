@@ -8,6 +8,7 @@ define("PRODUCT_PATH", 'product');
 define("COMPANY_PATH", 'company');
 define("VENDOR_PATH", 'vendor');
 define("VENDOR_LOGO", 'vendor_logo');
+define("VENDOR_COVER", 'vendor_cover');
 define("CURRENCY_PATH", 'currency');
 define("PAGE_PATH", 'page');
 define("CONTENT_PATH", 'content');
