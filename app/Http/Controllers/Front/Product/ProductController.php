@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front\Product;
 
+use App\Http\Controllers\Controller;
 use App\Models\FAQ;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -22,12 +22,12 @@ class ProductController extends Controller
                 ->orWhere('vendor_id', $data['product']->vendor_id);
         })->where('id', '!=', $data['product']->id)->orderby('sort')->get();
 
-        return view('front.product')->with($data);
+        return view('front.product.index')->with($data);
     }
 
     public function all() {
         $data['products'] = Product::where('active', 1)->orderBy('sort')->paginate(20);
 
-        return view('front.allProduct')->with($data);
+        return view('front.product.all')->with($data);
     }
 }

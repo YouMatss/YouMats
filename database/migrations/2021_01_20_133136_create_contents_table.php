@@ -14,7 +14,7 @@ class CreateContentsTable extends Migration
             $table->string('key')->unique();
             $table->text('value')->nullable();
 
-            $table->logs('admins.id', true);
+
             $table->timestamps();
         });
     }

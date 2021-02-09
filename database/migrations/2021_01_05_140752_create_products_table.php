@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->foreign('vendor_id')->references('id')->on('vendors')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
-            $table->string('name');
+            $table->text('name');
             $table->text('desc')->nullable();
             $table->text('short_desc')->nullable();
 
@@ -32,7 +32,7 @@ class CreateProductsTable extends Migration
             $table->enum('type', ['product', 'service']);
             $table->decimal('price', 10, 2)->nullable();
             $table->integer('stoke')->default(0);
-            $table->string('unit')->nullable();
+            $table->text('unit')->nullable();
 
             $table->string('SKU')->unique();
 
@@ -40,12 +40,12 @@ class CreateProductsTable extends Migration
             $table->integer('views')->default(0);
 
             $table->string('slug')->unique();
-            $table->string('meta_title')->nullable();
+            $table->text('meta_title')->nullable();
             $table->text('meta_desc')->nullable();
             $table->text('meta_keywords')->nullable();
 
             $table->integer('sort');
-            $table->logs('admins.id', true);
+
             $table->softDeletes();
             $table->timestamps();
         });
