@@ -88,7 +88,15 @@ class Vendor extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
-            Medialibrary::make('Logo', VENDOR_LOGO)
+        Medialibrary::make('Cover', VENDOR_COVER)
+                ->rules('required')
+                ->accept('image/*')
+                ->autouploading()
+                ->attachRules(REQUIRED_IMAGE_VALIDATION)
+                ->attachOnDetails()
+                ->hideFromIndex(),
+
+        Medialibrary::make('Logo', VENDOR_LOGO)
                 ->rules('required')
                 ->accept('image/*')
                 ->autouploading()
