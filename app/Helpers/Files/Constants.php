@@ -7,6 +7,7 @@ define("SUB_CATEGORY_PATH", 'subCategory');
 define("PRODUCT_PATH", 'product');
 define("COMPANY_PATH", 'company');
 define("VENDOR_PATH", 'vendor');
+define("VENDOR_LOGO", 'vendor_logo');
 define("CURRENCY_PATH", 'currency');
 define("PAGE_PATH", 'page');
 define("CONTENT_PATH", 'content');

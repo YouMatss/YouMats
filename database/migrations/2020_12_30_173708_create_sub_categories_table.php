@@ -20,7 +20,7 @@ class CreateSubCategoriesTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
-            $table->string('name');
+            $table->text('name');
             $table->text('desc')->nullable();
             $table->text('short_desc')->nullable();
 
