@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Controllers\Vendor;
+namespace App\Http\Controllers\Front\Vendor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;

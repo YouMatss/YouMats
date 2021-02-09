@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 {
-    use SoftDeletes, HasFactory, Notifiable, Loggable, HasRoles;
+    use SoftDeletes, HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [
         'name',

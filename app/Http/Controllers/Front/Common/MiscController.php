@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front\Common;
 
-use App\Models\FAQ;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class CommonController extends Controller
+class MiscController extends Controller
 {
     public function changeCurrency(Request $request) {
         try {
@@ -18,14 +18,5 @@ class CommonController extends Controller
         $output['status'] = 1;
         echo json_encode($output);
         return;
-    }
-
-    public function faqs() {
-        $faqs = FAQ::orderBy('sort')->get();
-        return view('front.faq')->with(compact('faqs'));
-    }
-
-    public function aboutUs() {
-        return view('front.about');
     }
 }

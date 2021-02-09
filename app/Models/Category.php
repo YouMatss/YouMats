@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,7 +13,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Category extends Model implements Sortable, HasMedia
 {
-    use SoftDeletes, HasFactory, Loggable, SortableTrait, HasTranslations, InteractsWithMedia;
+    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia;
 
     public $translatable = ['name', 'desc', 'short_desc', 'meta_title', 'meta_keywords', 'meta_desc'];
 

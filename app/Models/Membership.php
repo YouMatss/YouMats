@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,7 +11,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Membership extends Model implements Sortable
 {
-    use SoftDeletes, HasFactory, Loggable, SortableTrait, HasTranslations;
+    use SoftDeletes, HasFactory, SortableTrait, HasTranslations;
 
     public $translatable = ['name'];
 

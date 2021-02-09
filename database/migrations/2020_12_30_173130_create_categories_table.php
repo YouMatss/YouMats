@@ -21,12 +21,12 @@ class CreateCategoriesTable extends Migration
             $table->text('short_desc')->nullable();
 
             $table->string('slug')->unique();
-            $table->string('meta_title')->nullable();
+            $table->text('meta_title')->nullable();
             $table->text('meta_desc')->nullable();
             $table->text('meta_keywords')->nullable();
 
             $table->integer('sort');
-            $table->logs('admins.id', true);
+
             $table->softDeletes();
             $table->timestamps();
         });

@@ -21,7 +21,7 @@ class CreateContactsTable extends Migration
             $table->string('phone');
             $table->text('message')->nullable();
 
-            $table->logs('admins.id', true);
+
             $table->softDeletes();
             $table->timestamps();
         });
