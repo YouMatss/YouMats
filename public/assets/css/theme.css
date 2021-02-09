@@ -2886,7 +2886,6 @@ textarea.form-control {
 }
 
 .invalid-feedback {
-  display: none;
   width: 100%;
   margin-top: 0.25rem;
   font-size: 80%;
@@ -37876,16 +37875,16 @@ section {
   .block_img_cat a img{
     width: 100%;
   }
-  
+
   .cat .container .box .content .title{
 	  font-size: 18px;
   }
-  
+
   .product-item__outer{
 	  width: 100%;
   }
-  
-  .product-item__title {   
+
+  .product-item__title {
     height: 30px;
 	}
 

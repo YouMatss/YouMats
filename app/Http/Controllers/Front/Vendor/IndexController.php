@@ -8,7 +8,9 @@ use App\Models\Vendor;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
@@ -17,6 +19,7 @@ class IndexController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('auth:vendor')->except('index');
     }
 
@@ -44,5 +47,59 @@ class IndexController extends Controller
         $vendor = Vendor::findOrFail($id);
 
         return view('front.vendor.edit', ['vendor' => $vendor]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function update(Request $request, $id): RedirectResponse
+    {
+        $data = $request->validate([
+            'name' => REQUIRED_TEXT_VALIDATION,
+            'email' => REQUIRED_EMAIL_VALIDATION,
+            'logo' => NULLABLE_IMAGE_VALIDATION,
+            'cover' => NULLABLE_IMAGE_VALIDATION,
+            'phone' => NULLABLE_STRING_VALIDATION,
+            'phone2' => NULLABLE_STRING_VALIDATION,
+            'whatsapp_phone' => NULLABLE_STRING_VALIDATION,
+            'address' => NULLABLE_STRING_VALIDATION,
+            'address2' => NULLABLE_STRING_VALIDATION,
+            'location' => NULLABLE_TEXT_VALIDATION,
+            'facebook_url' => NULLABLE_STRING_VALIDATION,
+            'twitter_url' => NULLABLE_STRING_VALIDATION,
+            'youtube_url' => NULLABLE_STRING_VALIDATION,
+            'instagram_url' => NULLABLE_STRING_VALIDATION,
+            'pinterest_url' => NULLABLE_STRING_VALIDATION,
+            'website_url' => NULLABLE_STRING_VALIDATION,
+            'password' => NULLABLE_PASSWORD_VALIDATION
+        ]);
+
+        $vendor = Vendor::findOrFail($id);
+
+        if(isset($request->logo)) {
+            //Delete previously created logos
+            $vendor->clearMediaCollectionExcept(VENDOR_LOGO);
+            //Add new logo!
+            $vendor->addMedia($request->logo)->toMediaCollection(VENDOR_LOGO);
+        }
+        if(isset($request->cover)) {
+            //Delete previously created covers
+            $vendor->clearMediaCollectionExcept(VENDOR_COVER);
+            //Add new cover!
+            $vendor->addMedia($request->cover)->toMediaCollection(VENDOR_COVER);
+        }
+
+        //Tweak the system to create a new password for the vendor.
+        if(isset($request->password))
+            $data['password'] = Hash::make($request->password);
+        else
+            unset($data['password']);
+
+        $vendor->update($data);
+
+        return back()->with(['message' => __('Profile has been updated successfully')]);
+
     }
 }

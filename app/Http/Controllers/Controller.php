@@ -18,8 +18,8 @@ class Controller extends BaseController
 
     public function __construct() {
         $data['categories'] = Category::with('subCategories')->orderBy('sort')->get();
-        $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
         $data['featuredVendors'] = Vendor::where('isFeatured', 1)->get();
+        $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
 
         View::share($data);
         Config::set($config);
