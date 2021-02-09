@@ -16,7 +16,7 @@
                                 <a href="#" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> My Wishlist </a>
                             </li>
 
-                            @if(count(\Config::get('currencies')) > 1)
+                            @if(\Config::get('currencies'))
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                                     <div class="d-flex align-items-center">
                                         <!-- Language -->
@@ -323,7 +323,7 @@
                                         <a class="nav-link u-header__nav-link" href="{{route('front.product.all')}}">All Products</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="#">Our Partners</a>
+                                        <a class="nav-link u-header__nav-link" href="{{ route('vendor.index') }}">Our Partners</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
                                         <a class="nav-link u-header__nav-link" href="{{route('front.faqs.page')}}">FAQs</a>

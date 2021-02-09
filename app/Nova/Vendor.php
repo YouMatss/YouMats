@@ -88,6 +88,14 @@ class Vendor extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
+            Medialibrary::make('Logo', VENDOR_LOGO)
+                ->rules('required')
+                ->accept('image/*')
+                ->autouploading()
+                ->attachRules(REQUIRED_IMAGE_VALIDATION)
+                ->attachOnDetails()
+                ->hideFromIndex(),
+
             Medialibrary::make('Licenses', VENDOR_PATH)->fields(function () {
                 return [
                     Text::make('File Name', 'file_name')
@@ -101,6 +109,10 @@ class Vendor extends Resource
                 ->hideFromIndex(),
 
             Toggle::make('Active')
+                ->falseColor('#bacad6')
+                ->editableIndex(),
+
+            Toggle::make(__('Featured'), 'isFeatured')
                 ->falseColor('#bacad6')
                 ->editableIndex(),
 

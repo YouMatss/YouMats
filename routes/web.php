@@ -14,8 +14,11 @@ Route::group([
     ], function () {
         Route::get('/user/profile', [\App\Http\Controllers\User\ProfileController::class, 'index'])->name('front.user.profile');
     });
-    Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor', 'as' => 'vendor.'], function () {
-        Route::get('/', [\App\Http\Controllers\Vendor\IndexController::class, 'index']);
+
+
+    Route::resource('vendor', \Vendor\IndexController::class);
+
+    Route::group(['prefix' => 'auth/vendor', 'namespace' => 'Vendor', 'as' => 'vendor.'], function () {
 
         Auth::routes(['verify' => true]);
 

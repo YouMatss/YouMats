@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Currency;
+use App\Models\Vendor;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -38,12 +40,15 @@ class AppServiceProvider extends ServiceProvider
         try {
             $data['categories'] = Category::with('subCategories')->orderBy('sort')->get();
             $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
+            $data['featuredVendors'] = Vendor::where('isFeatured', 1)->get();
+
+            View::share($data);
+            Config::set($config);
         } catch (\Exception $e)
         {
             return $e->getMessage();
         }
 
-        View::share($data);
-        Config::set($config);
+        Paginator::useBootstrap();
     }
 }
