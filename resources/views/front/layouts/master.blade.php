@@ -56,5 +56,6 @@
             @endif
         </main>
         @include('front.layouts.partials.footer')
+        @yield('extraScripts')
     </body>
 </html>

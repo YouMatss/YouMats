@@ -21,7 +21,7 @@ class IndexController extends Controller
     {
         parent::__construct();
         $this->middleware('auth:vendor')->except('index');
-        
+
         //If you would like to add "vendor verification middleware":
         $this->middleware('verified:vendor.verification.notice')->except('index');
     }
@@ -48,9 +48,11 @@ class IndexController extends Controller
     public function edit(Request $request, $id)
     {
         $vendor = Vendor::findOrFail($id);
-        $vendorProducts = $vendor->products()->paginate(20);
+        $products = $vendor->products()->paginate(20);
+        $branches = $vendor->branches()->paginate(5);
+        $order_items = $vendor->order_items;
 
-        return view('front.vendor.edit', ['vendor' => $vendor, 'vendorProducts' => $vendorProducts]);
+        return view('front.vendor.edit', ['vendor' => $vendor, 'products' => $products, 'branches' => $branches, 'items' => $order_items]);
     }
 
     /**

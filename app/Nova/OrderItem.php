@@ -30,9 +30,6 @@ class OrderItem extends Resource
             BelongsTo::make('Product')
                 ->readonly(),
 
-            Text::make('SKU', 'SKU')
-                ->rules(REQUIRED_STRING_VALIDATION),
-
             Number::make('Quantity')
                 ->min(1),
 

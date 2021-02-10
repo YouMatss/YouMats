@@ -69,6 +69,7 @@
                     <div class="tab-content" id="Jpills-tabContent">
                         <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
                             <div class="block_info_vendor">
+                                @if(Session::has('message'))<div class="alert alert-success">{{ Session::get('message') }}</div>@endif
                                 <form method="POST" action="{{ route('vendor.update', ['vendor' => $vendor->id]) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PATCH')
@@ -297,7 +298,7 @@
                         </div>
                         <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
                             <ul class="row list-unstyled products-group no-gutters">
-                                @foreach($vendorProducts as $product)
+                                @foreach($products as $product)
                                 <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
                                     <div class="product-item__outer h-100">
                                         <div class="product-item__inner px-xl-2 p-3">
@@ -338,120 +339,76 @@
                                 </li>
                                 @endforeach
                             </ul>
-                            {{ $vendorProducts->links() }}
+                            {{ $products->links() }}
                         </div>
                         <div class="tab-pane fade" id="Jpills-three-example1" role="tabpanel" aria-labelledby="Jpills-three-example1-tab">
                             <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="border-bottom border-color-1 mb-5">
-                                            <h3 class="section-title mb-0 pb-2 font-size-25"> Riyadh Branch </h3>
+                                @if(count($branches) > 0)
+                                    @foreach($branches as $branch)
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="border-bottom border-color-1 mb-5">
+                                                <h3 class="section-title mb-0 pb-2 font-size-25"> {{ $branch->name }} </h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-xl-8">
+                                            <div class="map_branches">
+                                                <iframe src="https://maps.google.com/maps?q={{ $branch->latitude }},{{ $branch->longitude }}&hl=es&z=14&amp;output=embed" width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-xl-4">
+                                            <h5 class="font-size-14 font-weight-bold mb-3">{{ __('Main Information') }}</h5>
+                                            <div class="">
+                                                <ul class="list-unstyled-branches mb-6">
+                                                    <li class="row">
+                                                        <div class="col-md-2">
+                                                            <i class="fas fa-phone"></i>
+                                                        </div>
+                                                        <div class="col-md-10 mt-2">
+                                                            <b>{{ __('Phone') }}:</b>
+                                                            <span class=""> {{ $branch->phone_number }} </span>
+                                                        </div>
+                                                    </li>
+                                                    @if($branch->fax)
+                                                        <li class="row">
+                                                            <div class="col-md-2">
+                                                                <i class="fas fa-fax"></i>
+                                                            </div>
+                                                            <div class="col-md-10 mt-2">
+                                                                <b>{{ __('Fax') }}:</b>
+                                                                <span class=""> {{ $branch->fax }} </span>
+                                                            </div>
+                                                        </li>
+                                                    @endif
+                                                    @if($branch->website)
+                                                    <li class="row">
+                                                        <div class="col-md-2">
+                                                            <i class="fas fa-globe-americas"></i>
+                                                        </div>
+                                                        <div class="col-md-10 mt-2">
+                                                            <b>{{ __('Website') }}:</b>
+                                                            <span class=""> {{ $branch->website }} </span>
+                                                        </div>
+                                                    </li>
+                                                    @endif
+                                                    <li class="row">
+                                                        <div class="col-md-2">
+                                                            <i class="fas fa-map-marker-alt"></i>
+                                                        </div>
+                                                        <div class="col-md-10 mt-2">
+                                                            <b>{{ __('Address') }}:</b>
+                                                            <span class=""> {{ $branch->address }} </span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-8 col-xl-8">
-                                        <div class="map_branches">
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d27645.74309987584!2d31.273779199999996!3d29.987536599999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1612086102122!5m2!1sen!2seg" width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-xl-4">
-                                        <h5 class="font-size-14 font-weight-bold mb-3">Main Information</h5>
-                                        <div class="">
-                                            <ul class="list-unstyled-branches mb-6">
-                                                <li class="row">
-                                                    <div class="col-md-2">
-                                                        <i class="fas fa-phone"></i>
-                                                    </div>
-                                                    <div class="col-md-10 mt-2">
-                                                        <b>Phone:</b>
-                                                        <span class=""> 009665245241 </span>
-                                                    </div>
-                                                </li>
-                                                <li class="row">
-                                                    <div class="col-md-2">
-                                                        <i class="fas fa-fax"></i>
-                                                    </div>
-                                                    <div class="col-md-10 mt-2">
-                                                        <b>Fax:</b>
-                                                        <span class=""> 00965621542 </span>
-                                                    </div>
-                                                </li>
-                                                <li class="row">
-                                                    <div class="col-md-2">
-                                                        <i class="fas fa-globe-americas"></i>
-                                                    </div>
-                                                    <div class="col-md-10 mt-2">
-                                                        <b>WebSite:</b>
-                                                        <span class=""> www.seoera.net </span>
-                                                    </div>
-                                                </li>
-                                                <li class="row">
-                                                    <div class="col-md-2">
-                                                        <i class="fas fa-map-marker-alt"></i>
-                                                    </div>
-                                                    <div class="col-md-10 mt-2">
-                                                        <b>Adress:</b>
-                                                        <span class=""> 121 King Street, Melbourne VIC 3000, Australia </span>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="border-bottom border-color-1 mb-5">
-                                            <h3 class="section-title mb-0 pb-2 font-size-25"> Riyadh Jeddah </h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-xl-8">
-                                        <div class="map_branches">
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d27645.74309987584!2d31.273779199999996!3d29.987536599999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1612086102122!5m2!1sen!2seg" width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-xl-4">
-                                        <h5 class="font-size-14 font-weight-bold mb-3">Main Information</h5>
-                                        <div class="">
-                                            <ul class="list-unstyled-branches mb-6">
-                                                <li class="row">
-                                                    <div class="col-md-2">
-                                                        <i class="fas fa-phone"></i>
-                                                    </div>
-                                                    <div class="col-md-10 mt-2">
-                                                        <b>Phone:</b>
-                                                        <span class=""> 009665245241 </span>
-                                                    </div>
-                                                </li>
-                                                <li class="row">
-                                                    <div class="col-md-2">
-                                                        <i class="fas fa-fax"></i>
-                                                    </div>
-                                                    <div class="col-md-10 mt-2">
-                                                        <b>Fax:</b>
-                                                        <span class=""> 00965621542 </span>
-                                                    </div>
-                                                </li>
-                                                <li class="row">
-                                                    <div class="col-md-2">
-                                                        <i class="fas fa-globe-americas"></i>
-                                                    </div>
-                                                    <div class="col-md-10 mt-2">
-                                                        <b>WebSite:</b>
-                                                        <span class=""> www.seoera.net </span>
-                                                    </div>
-                                                </li>
-                                                <li class="row">
-                                                    <div class="col-md-2">
-                                                        <i class="fas fa-map-marker-alt"></i>
-                                                    </div>
-                                                    <div class="col-md-10 mt-2">
-                                                        <b>Adress:</b>
-                                                        <span class=""> 121 King Street, Melbourne VIC 3000, Australia </span>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                    @endforeach
+                                    {{ $branches->links() }}
+                                @else
+                                    <h4>{{ __('You do not have any branches') }}</h4>
+                                @endif
                             </div>
                         </div>
                         <div class="tab-pane fade" id="Jpills-four-example1" role="tabpanel" aria-labelledby="Jpills-four-example1-tab">
@@ -460,23 +417,23 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <th scope="col">order_id</th>
-                                            <th scope="col">User</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Total Price</th>
-                                            <th scope="col" class="text-center">Order Details</th>
+                                            <th scope="col">{{ __('ID') }}</th>
+                                            <th scope="col">{{ __('Name') }}</th>
+                                            <th scope="col">{{ __('Date') }}</th>
+                                            <th scope="col">{{ __('Total Price') }}</th>
+                                            <th scope="col" class="text-center">{{ __('Order Details') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <th scope="row">ORD-5FFF610CC554C</th>
-                                            <td>Nour</td>
-                                            <td>Thursday, January 14, 2021 2:03 AM</td>
-                                            <td>Nour Tarek</td>
-                                            <td>SAR 20.65</td>
-                                            <td class="text-center"><a href="#" data-toggle="modal" data-target="#exampleModal"> View <i class="far fa-eye"></i></a></td>
-                                        </tr>
+                                        @foreach($items as $item)
+                                            <tr>
+                                                <th scope="row">{{ $item->order->id }}</th>
+                                                <td>{{ $item->order->name }}</td>
+                                                <td>{{ $item->order->created_at }}</td>
+                                                <td>{{ $item->order->total_price }}</td>
+                                                <td class="text-center"><a class="toggleModal" data-url="{{ route('order.get', ['order' => $item->order->id]) }}" href="#" data-toggle="modal" data-target="#exampleModal"> View <i class="far fa-eye"></i></a></td>
+                                            </tr>
+                                        @endforeach
 
 
                                         </tbody>
@@ -493,171 +450,190 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
+                                                <div class="alert alert-danger d-none">{{ __('Could not find the order') }}</div>
                                                 <div class="row">
                                                     <div class="col-md-12 col-xl-12">
-                                                        <div class="">
-                                                            <ul class="list-unstyled-branches list_order_vendor mb-6">
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>ID:</b>
+                                                        <form method="POST" action="{{ route('vendor.order.update', ['vendor' => $vendor->id]) }}">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <input type="hidden" name="order_id" id="formOrder" value="" />
+                                                            <div class="">
+                                                                <ul class="list-unstyled-branches list_order_vendor mb-6">
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>ID:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="id"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>order_id:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="order_id"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Date:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="date"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>User:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="user"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Name:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="name"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Email:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="email"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Phone:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="phone"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Address:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="address"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Building Number:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="buildingNo"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Street:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="street"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>District:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="district"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>City:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="city"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Payment Status:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <select class="form-control" name="payment_status">
+                                                                                <option value="pending" selected>Pending</option>
+                                                                                <option value="refunded">Refunded</option>
+                                                                                <option value="completed">Completed</option>
+                                                                            </select>
+                                                                            @error('payment_status')
+                                                                                <span class="invalid-feedback" role="alert">
+                                                                                    <strong>{{ $message }}</strong>
+                                                                                </span>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Order Status:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <select class="form-control" name="order_status">
+                                                                                <option value="pending" selected>Pending</option>
+                                                                                <option value="shipping">Shipping</option>
+                                                                                <option value="completed">Completed</option>
+                                                                                <option value="refused">Refused</option>
+                                                                            </select>
+                                                                            @error('order_status')
+                                                                            <span class="invalid-feedback" role="alert">
+                                                                                    <strong>{{ $message }}</strong>
+                                                                                </span>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Notes:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="notes"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Refused Notes:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <textarea class="form-control" name="refusedNotes" id="refusedNotes" rows="3"></textarea>
+                                                                            @error('refused_notes')
+                                                                            <span class="invalid-feedback" role="alert">
+                                                                                    <strong>{{ $message }}</strong>
+                                                                                </span>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row">
+                                                                        <div class="col-md-4">
+                                                                            <b>Total Price:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="" id="total"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="row mt-5">
+                                                                        <div class="col-md-4">
+                                                                            <b>Payment Method:</b>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span id="paymentMethod"></span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <div class="col-md-12">
+                                                                        <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-paper-plane"></i>
+                                                                            {{ __('Submit') }} </button>
                                                                     </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> 2541 </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>order_id:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> ORD-5FFF610CC554C </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Date:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">  Thursday, January 14, 2021 2:03 AM </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>User:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> Nour </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Name:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> Nour Tarek </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Email:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> nour@gmail.com </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Phone:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> 01064323735 </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Address:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> 121 King Street, Melbourne VIC 3000, Australia </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Building Number:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> 2544651321 </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Street:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> King Street </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>District:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> — </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>City:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> Cairo </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Payment Status:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <select class="form-control">
-                                                                            <option value="one" selected>Pending</option>
-                                                                            <option value="two">Pending</option>
-                                                                            <option value="three">Pending</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Order Status:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <select class="form-control">
-                                                                            <option value="one" selected>Pending</option>
-                                                                            <option value="two">Pending</option>
-                                                                            <option value="three">Pending</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Notes:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> Building No 6249- Hamzah Ibn Abdul Muttalib, Dhahrat Al Badi'ah , Riyadh </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Refused Notes:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <textarea class="form-control" id="" rows="3" placeholder="Building No 6249- Hamzah Ibn Abdul Muttalib, Dhahrat Al Badi'ah , Riyadh "></textarea>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Total Price:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class=""> SAR 20.65 </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row mt-5">
-                                                                    <div class="col-md-4">
-                                                                        <b>Payment Method:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <select class="form-control">
-                                                                            <option value="one" selected>CASH</option>
-                                                                            <option value="two">VISA</option>
-                                                                            <option value="three">FAWRY</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </li>
-                                                                <div class="col-md-12">
-                                                                    <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-paper-plane"></i> Submit </button>
-                                                                </div>
-                                                            </ul>
-                                                        </div>
+                                                                </ul>
+                                                            </div>
+                                                        </form>
                                                     </div>
 
                                                 </div>
@@ -674,4 +650,60 @@
             </div>
         </div>
     </div>
+@endsection
+@section('extraScripts')
+    <script type="text/javascript">
+        $(".toggleModal").on('click', function() {
+            //Reset the fields
+            $("#id").html('');
+            $("#formOrder").val();
+            $("#order_id").html('');
+            $("#date").html('');
+            $("#user").html('');
+            $("#name").html('');
+            $("#email").html('');
+            $("#phone").html('');
+            $("#address").html('');
+            $("#buildingNo").html('');
+            $("#street").html('');
+            $("#district").html('');
+            $("#city").html('');
+            $("#notes").html('');
+            $("#total").html('');
+            $("#refusedNotes").html('');
+            $("#paymentMethod").html('');
+
+            //Get the URL
+            let url = $(this).data('url');
+
+            //Create the request
+            $.ajax({
+                url: url,
+                type: 'GET'
+            })
+            .done(function(response) {
+                $('.alert-danger').addClass('d-none');
+                $("#id").html(response.id);
+                $("#formOrder").val(response.id);
+                $("#order_id").html(response.order_id);
+                $("#date").html(response.created_at);
+                $("#user").html(response.name);
+                $("#name").html(response.name);
+                $("#email").html(response.email);
+                $("#phone").html(response.phone);
+                $("#address").html(response.address);
+                $("#buildingNo").html(response.building_number);
+                $("#street").html(response.street);
+                $("#district").html(response.distract);
+                $("#notes").html(response.notes);
+                $("#city").html(response.city);
+                $("#refusedNotes").html(response.refused_notes);
+                $("#total").html(response.total_price);
+                $("#paymentMethod").html(response.payment_method);
+            })
+            .fail(function() {
+                $('.alert-danger').removeClass('d-none');
+            });
+        });
+    </script>
 @endsection
