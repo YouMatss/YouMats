@@ -10,6 +10,10 @@ class Order extends Model
 {
     use SoftDeletes, HasFactory;
 
+    public function getTotalPriceAttribute($value) {
+        return round($value * getCurrency('rate'), 2);
+    }
+
     public function items() {
         return $this->hasMany(OrderItem::class);
     }

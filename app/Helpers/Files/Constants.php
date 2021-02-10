@@ -1,6 +1,8 @@
 <?php
 
 // define link for uploads folders
+define("USER_PROFILE", 'user_profile');
+define("USER_COVER", 'user_cover');
 define("LANGUAGE_PATH", 'language');
 define("CATEGORY_PATH", 'category');
 define("SUB_CATEGORY_PATH", 'subCategory');

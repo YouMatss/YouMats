@@ -14,6 +14,7 @@ Route::group([
             'middleware' => ['auth', 'verified']
         ], function () {
             Route::get('/user/profile', 'ProfileController@index')->name('front.user.profile');
+            Route::post('/user/profile', 'ProfileController@updateProfile')->name('front.user.updateProfile');
         });
     });
 
