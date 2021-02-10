@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Vendor\Auth;
+namespace App\Http\Controllers\Front\Vendor\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\PasswordBroker;

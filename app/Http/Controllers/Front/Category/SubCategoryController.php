@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front\Category;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
-use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
@@ -17,6 +17,6 @@ class SubCategoryController extends Controller
 
         $data['products'] = $data['subCategory']->products()->paginate(10);
 
-        return view('front.subCategory')->with($data);
+        return view('front.category.sub')->with($data);
     }
 }

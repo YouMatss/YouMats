@@ -15,10 +15,10 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->text('name');
             $table->tinyInteger('active')->default(1);
             $table->integer('sort');
-            $table->logs('admins.id', true);
+
             $table->softDeletes();
             $table->timestamps();
         });

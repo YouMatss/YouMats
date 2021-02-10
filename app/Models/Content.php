@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -11,7 +10,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Content extends Model implements HasMedia
 {
-    use HasFactory, Loggable, HasTranslations, InteractsWithMedia;
+    use HasFactory, HasTranslations, InteractsWithMedia;
 
     public $translatable = ['value'];
 

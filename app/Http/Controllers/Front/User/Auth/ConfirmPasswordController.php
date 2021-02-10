@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Vendor\Auth;
+namespace App\Http\Controllers\Front\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 
 class ConfirmPasswordController extends Controller
@@ -29,7 +26,7 @@ class ConfirmPasswordController extends Controller
      *
      * @var string
      */
-    protected string $redirectTo = RouteServiceProvider::VENDOR_HOME;
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -38,14 +35,6 @@ class ConfirmPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:vendor');
-    }
-
-    /**
-     * @return Application|Factory|View
-     */
-    public function showConfirmForm()
-    {
-        return view('front.vendor.auth.passwords.confirm');
+        $this->middleware('auth');
     }
 }
