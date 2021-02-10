@@ -201,7 +201,6 @@
                                         <div class="col-md-12">
                                             <div class="mb-6">
                                                 <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i> Save Change</button>
-                                                <button type="submit" class="btn btn-danger px-5 text-white"> <i class="fas fa-edit"></i> Edit Profile</button>
                                             </div>
                                         </div>
 
@@ -211,217 +210,48 @@
                         </div>
                         <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
                             <ul class="row list-unstyled products-group no-gutters">
+                                @foreach($vendorProducts as $product)
                                 <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
                                     <div class="product-item__outer h-100">
                                         <div class="product-item__inner px-xl-2 p-3">
                                             <div class="product-item__body pb-xl-2">
-                                                <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Category Name</a></div>
-                                                <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Next Step Industrial Degreaser Cleaner</a></h5>
+                                                <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">{{ $product->subCategory->category->name }}</a></div>
+                                                <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">{{ $product->name }}</a></h5>
                                                 <div class="mb-2">
-                                                    <a href="#" class="d-block text-center"><img class="img-fluid" src="assets/img/pro_2.jpg" alt="Image Description"></a>
+                                                    <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ $product->getFirstMediaUrl(PRODUCT_PATH) }}" alt="{{ $product->getFirstMediaUrl(PRODUCT_PATH)->image_alt ?? '' }}"></a>
                                                 </div>
                                                 <div class="mb-3">
                                                     <a class="d-inline-flex align-items-center small font-size-14" href="#">
                                                         <div class="text-warning mr-2">
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="far fa-star text-muted"></small>
+                                                            @for($i = 1; $i <= 5; $i++)
+                                                                @if($i <= $product->rate)
+                                                                    <small class="fas fa-star"></small>
+                                                                @else
+                                                                    <small class="far fa-star text-muted"></small>
+                                                                @endif
+                                                            @endfor
                                                         </div>
-                                                        <span class="text-secondary">(40)</span>
+                                                        @if($product->views > 0)
+                                                            <span class="text-secondary">({{ $product->views }})</span>
+                                                        @endif
                                                     </a>
                                                 </div>
                                                 <div class="font-size-12 p-0 text-gray-110 mb-4">
-                                                    <p class="mb-1">Brand new and high quality Brand new and high quality Brand new and high quality</p>
+                                                    <p class="mb-1">{{ Str::limit($product->short_desc, 100, '...') }}</p>
                                                 </div>
-                                                <div class="text-gray-20 mb-2 font-size-12">SKU: FW511948218</div>
+                                                <div class="text-gray-20 mb-2 font-size-12">{{ __('SKU:') . ' ' .$product->SKU }}</div>
                                                 <div class="flex-center-between mb-1">
                                                     <div class="prodcut-price">
-                                                        <div class="text-gray-100">SAR 100,00</div>
+                                                        <div class="text-gray-100">{{ getCurrency('code') .' '. $product->price }}</div>
                                                     </div>
-                                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                                        <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item__footer">
-                                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
-                                    <div class="product-item__outer h-100">
-                                        <div class="product-item__inner px-xl-2 p-3">
-                                            <div class="product-item__body pb-xl-2">
-                                                <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Category Name</a></div>
-                                                <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Next Step Industrial Degreaser Cleaner</a></h5>
-                                                <div class="mb-2">
-                                                    <a href="#" class="d-block text-center"><img class="img-fluid" src="assets/img/pro_2.jpg" alt="Image Description"></a>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <a class="d-inline-flex align-items-center small font-size-14" href="#">
-                                                        <div class="text-warning mr-2">
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                        </div>
-                                                        <span class="text-secondary">(40)</span>
-                                                    </a>
-                                                </div>
-                                                <div class="font-size-12 p-0 text-gray-110 mb-4">
-                                                    <p class="mb-1">Brand new and high quality Brand new and high quality Brand new and high quality</p>
-                                                </div>
-                                                <div class="text-gray-20 mb-2 font-size-12">SKU: FW511948218</div>
-                                                <div class="flex-center-between mb-1">
-                                                    <div class="prodcut-price">
-                                                        <div class="text-gray-100">SAR 100,00</div>
-                                                    </div>
-                                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                                        <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item__footer">
-                                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
-                                    <div class="product-item__outer h-100">
-                                        <div class="product-item__inner px-xl-2 p-3">
-                                            <div class="product-item__body pb-xl-2">
-                                                <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Category Name</a></div>
-                                                <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Next Step Industrial Degreaser Cleaner</a></h5>
-                                                <div class="mb-2">
-                                                    <a href="#" class="d-block text-center"><img class="img-fluid" src="assets/img/pro_2.jpg" alt="Image Description"></a>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <a class="d-inline-flex align-items-center small font-size-14" href="#">
-                                                        <div class="text-warning mr-2">
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                        </div>
-                                                        <span class="text-secondary">(40)</span>
-                                                    </a>
-                                                </div>
-                                                <div class="font-size-12 p-0 text-gray-110 mb-4">
-                                                    <p class="mb-1">Brand new and high quality Brand new and high quality Brand new and high quality</p>
-                                                </div>
-                                                <div class="text-gray-20 mb-2 font-size-12">SKU: FW511948218</div>
-                                                <div class="flex-center-between mb-1">
-                                                    <div class="prodcut-price">
-                                                        <div class="text-gray-100">SAR 100,00</div>
-                                                    </div>
-                                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                                        <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item__footer">
-                                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
-                                    <div class="product-item__outer h-100">
-                                        <div class="product-item__inner px-xl-2 p-3">
-                                            <div class="product-item__body pb-xl-2">
-                                                <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Category Name</a></div>
-                                                <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Next Step Industrial Degreaser Cleaner</a></h5>
-                                                <div class="mb-2">
-                                                    <a href="#" class="d-block text-center"><img class="img-fluid" src="assets/img/pro_2.jpg" alt="Image Description"></a>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <a class="d-inline-flex align-items-center small font-size-14" href="#">
-                                                        <div class="text-warning mr-2">
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                        </div>
-                                                        <span class="text-secondary">(40)</span>
-                                                    </a>
-                                                </div>
-                                                <div class="font-size-12 p-0 text-gray-110 mb-4">
-                                                    <p class="mb-1">Brand new and high quality Brand new and high quality Brand new and high quality</p>
-                                                </div>
-                                                <div class="text-gray-20 mb-2 font-size-12">SKU: FW511948218</div>
-                                                <div class="flex-center-between mb-1">
-                                                    <div class="prodcut-price">
-                                                        <div class="text-gray-100">SAR 100,00</div>
-                                                    </div>
-                                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                                        <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item__footer">
-                                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
-                                    <div class="product-item__outer h-100">
-                                        <div class="product-item__inner px-xl-2 p-3">
-                                            <div class="product-item__body pb-xl-2">
-                                                <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Category Name</a></div>
-                                                <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Next Step Industrial Degreaser Cleaner</a></h5>
-                                                <div class="mb-2">
-                                                    <a href="#" class="d-block text-center"><img class="img-fluid" src="assets/img/pro_2.jpg" alt="Image Description"></a>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <a class="d-inline-flex align-items-center small font-size-14" href="#">
-                                                        <div class="text-warning mr-2">
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                        </div>
-                                                        <span class="text-secondary">(40)</span>
-                                                    </a>
-                                                </div>
-                                                <div class="font-size-12 p-0 text-gray-110 mb-4">
-                                                    <p class="mb-1">Brand new and high quality Brand new and high quality Brand new and high quality</p>
-                                                </div>
-                                                <div class="text-gray-20 mb-2 font-size-12">SKU: FW511948218</div>
-                                                <div class="flex-center-between mb-1">
-                                                    <div class="prodcut-price">
-                                                        <div class="text-gray-100">SAR 100,00</div>
-                                                    </div>
-                                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                                        <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item__footer">
-                                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                @endforeach
                             </ul>
+                            {{ $vendorProducts->links() }}
                         </div>
                         <div class="tab-pane fade" id="Jpills-three-example1" role="tabpanel" aria-labelledby="Jpills-three-example1-tab">
                             <div class="container">

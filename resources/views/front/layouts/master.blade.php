@@ -18,7 +18,7 @@
             @yield('content')
 
             <!-- Featured Vendors -->
-            @if($featuredVendors)
+            @if(count($featuredVendors) > 1)
             <div class="container mb-8">
                 <div class="py-2 border-top border-bottom">
                     <div class="js-slick-carousel u-slick my-1"

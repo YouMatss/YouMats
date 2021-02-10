@@ -29,7 +29,7 @@
                                                 @foreach(\Config::get('currencies') as $currency)
                                                 <a class="dropdown-item active currency_button" data-code="{{$currency->code}}" href="#">
                                                     <img width="20px" src="{{$currency->media[0]->getUrl()}}" />&nbsp;
-                                                    {{$currency->code}} ({{$currency->symbol}})
+                                                    {{$currency->code}} @if($currency->symbol) ({{$currency->symbol}}) @endif
                                                 </a>
                                                 @endforeach
                                             </div>

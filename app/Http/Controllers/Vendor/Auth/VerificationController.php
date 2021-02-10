@@ -36,6 +36,7 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('auth:vendor');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
@@ -45,6 +46,6 @@ class VerificationController extends Controller
     {
         return $request->user('vendor')->hasVerifiedEmail()
             ? redirect($this->redirectPath())
-            : view('front.vendor.auth.verification.verify');
+            : view('front.vendor.auth.verify');
     }
 }
