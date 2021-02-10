@@ -16,17 +16,17 @@ class CreatePagesTable extends Migration
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
 
-            $table->text('title');
+            $table->string('title');
             $table->text('desc')->nullable();
             $table->text('short_desc')->nullable();
 
             $table->string('slug')->unique();
-            $table->text('meta_title')->nullable();
+            $table->string('meta_title')->nullable();
             $table->text('meta_desc')->nullable();
             $table->text('meta_keywords')->nullable();
 
             $table->integer('sort');
-
+            $table->logs('admins.id', true);
             $table->softDeletes();
             $table->timestamps();
         });

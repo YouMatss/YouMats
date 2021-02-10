@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Front\Category;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -13,6 +13,6 @@ class CategoryController extends Controller
 
         $data['products'] = $data['category']->products()->paginate(10);
 
-        return view('front.category.index')->with($data);
+        return view('front.category')->with($data);
     }
 }

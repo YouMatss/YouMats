@@ -24,7 +24,7 @@ class CreateCurrenciesTable extends Migration
             $table->tinyInteger('active')->default(0);
 
             $table->integer('sort');
-
+            $table->logs('admins.id', true);
             $table->softDeletes();
             $table->timestamps();
         });

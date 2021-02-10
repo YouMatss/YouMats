@@ -35,7 +35,7 @@ class CreateQuotesTable extends Migration
 
             $table->double('estimated_price')->nullable();
 
-
+            $table->logs('admins.id', true);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +12,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Country extends Model implements Sortable
 {
-    use SoftDeletes, HasFactory, SortableTrait, HasTranslations;
+    use SoftDeletes, HasFactory, Loggable, SortableTrait, HasTranslations;
 
     public $translatable = ['name'];
 

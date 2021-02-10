@@ -69,9 +69,7 @@
                     <div class="tab-content" id="Jpills-tabContent">
                         <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
                             <div class="block_info_vendor">
-                                <form method="POST" action="{{ route('vendor.update', ['vendor' => $vendor->id]) }}" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PATCH')
+                                <form>
                                     <div class="row">
 
                                         <div class="col-md-6">
@@ -89,34 +87,24 @@
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label"> Image Cover <span class="text-danger">*</span></label>
                                                 <div class="box">
-                                                    <input type="file" name="cover" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" />
+                                                    <input type="file" name="file-7[]" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" multiple />
                                                     <label for="file-7">
                                                         <span></span>
                                                         <strong>Choose a file&hellip;</strong>
                                                     </label>
                                                 </div>
-                                                @error('cover')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label"> Image Profile <span class="text-danger">*</span></label>
                                                 <div class="box">
-                                                    <input type="file" name="logo" id="file-8" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" />
+                                                    <input type="file" name="file-8[]" id="file-8" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" multiple />
                                                     <label for="file-8">
                                                         <span></span>
                                                         <strong>Choose a file&hellip;</strong>
                                                     </label>
                                                 </div>
-                                                @error('logo')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
 
@@ -124,165 +112,90 @@
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Full Name<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="name" value="{{ $vendor->name }}" placeholder="Enter your name" required="">
-                                                @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">E-Mail<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="email" value="{{ $vendor->email }}" placeholder="Enter your email" required="">
-                                                @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Phone Number </label>
-                                                <input type="text" class="form-control" name="phone" value="{{ $vendor->phone }}" placeholder="Enter your phone">
-                                                @error('phone')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <label class="form-label">Phone Number 1 </label>
+                                                <input type="text" class="form-control" name="phone1" value="{{ $vendor->phone1 }}" placeholder="Enter your phone">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Phone Number 2 </label>
                                                 <input type="text" class="form-control" name="phone2" value="{{ $vendor->phone2 }}" placeholder="Enter your second phone">
-                                                @error('phone2')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">WhatsApp</label>
-                                                <input type="text" class="form-control" name="whatsapp_phone" value="{{ $vendor->whatsapp_phone }}" placeholder="Enter WhatsApp phone">
-                                                @error('whatsapp_phone')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <input type="text" class="form-control" name="whatsapp_phone" {{ $vendor->whatsapp_phone }} placeholder="Enter WhatsApp phone">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Address</label>
                                                 <input type="text" class="form-control" name="address" value="{{ $vendor->address }}" placeholder="Enter your address">
-                                                @error('address')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Address 2</label>
                                                 <input type="text" class="form-control" name="address2" value="{{ $vendor->address2 }}" placeholder="Enter your second address">
-                                                @error('address2')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Facebook</label>
                                                 <input type="text" class="form-control" name="facebook_url" value="{{ $vendor->facebook_url }}" placeholder="Enter your facebook">
-                                                @error('facebook_url')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Twitter</label>
                                                 <input type="text" class="form-control" name="twitter_url" value="{{ $vendor->twitter_url }}" placeholder="Enter your twitter">
-                                                @error('twitter_url')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Youtube</label>
                                                 <input type="text" class="form-control" name="youtube_url" value="{{ $vendor->youtube_url }}" placeholder="Enter your youtube">
-                                                @error('youtube_url')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Instagram</label>
                                                 <input type="text" class="form-control" name="instagram_url" value="{{ $vendor->instagram_url }}" placeholder="Enter your instagram">
-                                                @error('instagram_url')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Pinterest</label>
                                                 <input type="text" class="form-control" name="pinterest_url" value="{{ $vendor->pinterest_url }}" placeholder="Enter your pinterest">
-                                                @error('pinterest_url')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Website</label>
                                                 <input type="text" class="form-control" name="website_url" value="{{ $vendor->website_url }}" placeholder="Enter your website">
-                                                @error('website_url')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Password<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="password" placeholder="Change the password">
-                                                @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Password Confirmation<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="password_confirmation" placeholder="Confirm your password">
-                                                @error('password_confirmation')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">

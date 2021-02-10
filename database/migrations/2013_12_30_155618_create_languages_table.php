@@ -15,10 +15,10 @@ class CreateLanguagesTable extends Migration
     {
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
+            $table->string('name');
             $table->string('slug')->unique();
             $table->integer('sort');
-
+            $table->logs('admins.id', true);
             $table->softDeletes();
             $table->timestamps();
         });

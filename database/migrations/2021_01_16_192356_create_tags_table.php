@@ -15,13 +15,13 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
+            $table->string('name');
             $table->text('desc');
             $table->string('slug')->unique();
-            $table->text('meta_title')->nullable();
+            $table->string('meta_title')->nullable();
             $table->text('meta_desc')->nullable();
             $table->text('meta_keywords')->nullable();
-
+            $table->logs('admins.id', true);
             $table->softDeletes();
             $table->timestamps();
         });

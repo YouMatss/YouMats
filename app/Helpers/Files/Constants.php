@@ -28,9 +28,6 @@ define('NULLABLE_INTEGER_VALIDATION', ['nullable', 'integer']);
 define('REQUIRED_NUMERIC_VALIDATION', ['required', 'numeric']);
 define('NULLABLE_NUMERIC_VALIDATION', ['nullable', 'numeric']);
 
-// Password
-define('NULLABLE_PASSWORD_VALIDATION', ['nullable', 'string', 'min:8', 'confirmed']);
-
 // Image
 define('REQUIRED_IMAGE_VALIDATION', ['required', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:1024']);
 define('NULLABLE_IMAGE_VALIDATION', ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:1024']);

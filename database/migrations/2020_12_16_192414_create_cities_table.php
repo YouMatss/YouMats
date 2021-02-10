@@ -20,8 +20,9 @@ class CreateCitiesTable extends Migration
             $table->foreign('country_id')->references('id')->on('countries')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
-            $table->text('name');
+            $table->string('name');
 
+            $table->logs('admins.id', true);
             $table->softDeletes();
             $table->timestamps();
         });

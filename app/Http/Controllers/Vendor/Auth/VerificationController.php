@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Front\User\Auth;
+namespace App\Http\Controllers\Vendor\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
@@ -26,7 +27,7 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = RouteServiceProvider::VENDOR_HOME;
 
     /**
      * Create a new controller instance.
@@ -35,8 +36,16 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        parent::__construct();
+        $this->middleware('auth:vendor');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
+    }
+
+    public function show(Request $request)
+    {
+        return $request->user('vendor')->hasVerifiedEmail()
+            ? redirect($this->redirectPath())
+            : view('front.vendor.auth.verify');
     }
 }

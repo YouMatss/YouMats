@@ -50,7 +50,7 @@ class CreateVendorsTable extends Migration
             $table->boolean('isFeatured')->default(0);
 
             $table->tinyInteger('active')->default(0);
-
+            $table->logs('admins.id', true);
             $table->softDeletes();
             $table->timestamps();
         });

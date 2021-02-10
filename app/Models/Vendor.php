@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
+use App\Traits\Loggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,9 +15,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 {
-    use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia;
+    use SoftDeletes, HasFactory, Notifiable, Loggable, InteractsWithMedia;
 
-    protected $fillable = ['name', 'city_id', 'email' , 'phone', 'phone2', 'address', 'address2', 'whatsapp_phone', 'membership_id', 'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url'];
+    protected $fillable = ['name', 'city_id', 'email' , 'phone', 'phone2', 'address', 'address2', 'whatsapp_phone', 'membership_id', 'password'];
 
     protected $guard = 'vendor';
 

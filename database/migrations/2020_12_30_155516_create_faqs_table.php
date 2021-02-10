@@ -15,10 +15,10 @@ class CreateFaqsTable extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->text('question');
+            $table->string('question');
             $table->text('answer');
             $table->integer('sort');
-
+            $table->logs('admins.id', true);
             $table->softDeletes();
             $table->timestamps();
         });

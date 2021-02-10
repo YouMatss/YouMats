@@ -41,20 +41,20 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $collection->each(function ($item, $key) {
             // create permissions for each collection item
-            Permission::create(['name' => 'viewAny ' . $item, 'guard_name' => 'admin']);
-            Permission::create(['name' => 'view ' . $item, 'guard_name' => 'admin']);
-            Permission::create(['name' => 'create ' . $item, 'guard_name' => 'admin']);
-            Permission::create(['name' => 'update ' . $item, 'guard_name' => 'admin']);
-            Permission::create(['name' => 'delete ' . $item, 'guard_name' => 'admin']);
-            Permission::create(['name' => 'restore ' . $item, 'guard_name' => 'admin']);
-            Permission::create(['name' => 'forceDelete ' . $item, 'guard_name' => 'admin']);
+            Permission::create(['name' => 'viewAny ' . $item]);
+            Permission::create(['name' => 'view ' . $item]);
+            Permission::create(['name' => 'create ' . $item]);
+            Permission::create(['name' => 'update ' . $item]);
+            Permission::create(['name' => 'delete ' . $item]);
+            Permission::create(['name' => 'restore ' . $item]);
+            Permission::create(['name' => 'forceDelete ' . $item]);
         });
 
-        // Create a Super Admin Role and assign all Permissions
-        $role = Role::create(['name' => 'Super Admin', 'guard_name' => 'admin']);
+        // Create a Super-Admin Role and assign all Permissions
+        $role = Role::create(['name' => 'Super Admin']);
         $role->givePermissionTo(Permission::all());
 
-        // Give User Super Admin Role
+        // Give User Super-Admin Role
         $admin = Admin::whereEmail('superAdmin@youmats.com')->first();
         $admin->assignRole('Super Admin');
     }
