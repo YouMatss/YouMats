@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +12,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Currency extends Model implements Sortable, HasMedia
 {
-    use SoftDeletes, HasFactory, Loggable, SortableTrait, InteractsWithMedia;
+    use SoftDeletes, HasFactory, SortableTrait, InteractsWithMedia;
 
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')

@@ -51,7 +51,7 @@ class CreateOrdersTable extends Migration
 
             $table->double('total_price');
 
-            $table->logs('admins.id', true);
+
             $table->softDeletes();
             $table->timestamps();
         });
