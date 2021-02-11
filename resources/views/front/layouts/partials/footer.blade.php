@@ -33,8 +33,8 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="mb-6">
-                        <a href="#" class="d-inline-block">
-                            <img src="assets/img/logo.png" height="50">
+                        <a href="{{route('home')}}" class="d-inline-block">
+                            <img src="{{front_url()}}/assets/img/logo.png" height="50">
                         </a>
                     </div>
                     <div class="mb-4">

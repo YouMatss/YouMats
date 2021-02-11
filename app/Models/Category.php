@@ -29,7 +29,7 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     public function subCategories() {
-        return $this->hasMany(SubCategory::class);
+        return $this->hasMany(SubCategory::class)->orderBy('sort');
     }
 
     public function products() {

@@ -15,7 +15,7 @@
 @endsection
 @section('content')
     <div class="mb-4">
-        <div class="bg-img-hero" style="background-image: url(assets/img/bg-2.png);">
+        <div class="bg-img-hero" style="background-image: url({{front_url()}}/assets/img/bg-2.png);">
             <div class="container min-height-438 overflow-hidden">
                 <div class="js-slick-carousel u-slick"
                      data-pagi-classes="text-center position-absolute right-0 bottom-0 left-0 u-slick__pagination u-slick__pagination--long justify-content-start mb-3 mb-md-4 offset-xl-2 pl-xl-16 pl-wd-13">

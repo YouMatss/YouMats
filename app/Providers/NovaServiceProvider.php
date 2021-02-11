@@ -138,6 +138,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Category::class,
                             SubCategory::class,
                             Product::class,
+                            Tag::class,
                         ]
                     ]),
                     TopLevelResource::make([
@@ -163,7 +164,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'expanded' => true,
                         'resources' => [
                             Admin::class,
-                            Tag::class,
                             Group::make([
                                 'label' => 'Settings',
                                 'expanded' => false,

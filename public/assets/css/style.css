@@ -339,9 +339,8 @@
 }
 
 .list_order_vendor li{
-    margin: 0 0 10px 0;
     border-bottom: 1px solid #eaeaea;
-    padding: 0 0 10px 0;
+    padding: 10px 0 10px 10px;
 }
 
 .tit_payment-vendor{
