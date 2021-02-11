@@ -7,8 +7,6 @@
 
         <link rel="shortcut icon" href="favicon.ico">
 
-        @include('front.layouts.partials.assets_js')
-
         @include('front.layouts.partials.assets')
         @yield('metaTags')
     </head>
@@ -56,6 +54,6 @@
             @endif
         </main>
         @include('front.layouts.partials.footer')
-        @yield('extraScripts')
+        @include('front.layouts.partials.assets_js')
     </body>
 </html>

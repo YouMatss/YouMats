@@ -64,10 +64,10 @@ class CartController extends Controller
      * @param Request $request
      * @param $rowId
      */
-    public function update(Request $request, $rowId)
+    public function update(Request $request)
     {
-        /**
-         * TODO: implement the update function
-         */
+        Cart::update($request->rowId, $request->qty);
+
+        return response()->json(['status' => true]);
     }
 }

@@ -38,11 +38,10 @@
                             </tr>
                             </thead>
                             <tbody>
-
                             @foreach($items as $item)
                                 <tr>
                                     <td class="text-center">
-                                        <a style="cursor: pointer" class="deleteCart" data-url="{{ route('cart.remove', ['cart' => $item->rowId]) }}" class="text-gray-32 font-size-26">×</a>
+                                        <a style="cursor: pointer" class="deleteCart" data-url="{{ route('cart.remove', ['rowId' => $item->rowId]) }}" class="text-gray-32 font-size-26">×</a>
                                     </td>
                                     <td class="d-none d-md-table-cell">
                                         <a href="#"><img class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrl(PRODUCT_PATH) }}" alt="{{ $item->name }}"></a>
@@ -62,13 +61,13 @@
                                         <div class="border rounded-pill py-1 width-122 w-xl-80 px-3 border-color-1">
                                             <div class="js-quantity row align-items-center">
                                                 <div class="col">
-                                                    <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" value="{{ $item->qty }}">
+                                                    <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" row_id="{{ $item->rowId }}" value="{{ $item->qty }}">
                                                 </div>
                                                 <div class="col-auto pr-1">
-                                                    <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
+                                                    <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
                                                         <small class="fas fa-minus btn-icon__inner"></small>
                                                     </a>
-                                                    <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
+                                                    <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
                                                         <small class="fas fa-plus btn-icon__inner"></small>
                                                     </a>
                                                 </div>
@@ -100,8 +99,8 @@
                                                 <!-- End Apply coupon Form -->
                                             </div>
                                             <div class="d-md-flex">
-                                                <button type="button" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5 w-100 w-md-auto">Update cart</button>
-                                                <a href="../shop/checkout.html" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block">Proceed to checkout</a>
+                                                <button type="button" id="updateCart" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5 w-100 w-md-auto">Update cart</button>
+                                                <a href="#" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block">Proceed to checkout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -145,8 +144,8 @@
 @section('extraScripts')
     <script>
         $('.deleteCart').on('click', function() {
-            let url = $(this).data('url');
-            let button = $(this);
+            let url = $(this).data('url'),
+                button = $(this);
 
             $.ajax({
                 type: 'DELETE',
@@ -170,5 +169,27 @@
                 console.log(response);
             })
         });
+
+        $('#updateCart').on('click', function() {
+            let url = '{{ route('cart.update') }}';
+
+            $(".js-result").each(function(i, el) {
+                let qty = $(this).val(),
+                    rowId = $(this).attr('row_id');
+
+                $.ajax({
+                    type: 'PATCH',
+                    url: url,
+                    data: {_token: "{{ csrf_token() }}", qty: qty, rowId: rowId }
+                })
+                .done(function(response) {
+                    console.log(response);
+                })
+            });
+
+            //Reload the page. instead of updating data of the whole page!
+            window.location.reload();
+        });
+
     </script>
 @endsection
