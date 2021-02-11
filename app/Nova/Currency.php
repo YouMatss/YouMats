@@ -46,6 +46,7 @@ class Currency extends Resource
                 ];
             })->attachRules(NULLABLE_IMAGE_VALIDATION)
                 ->accept('image/*')
+                ->rules('required')
                 ->autouploading()->attachOnDetails()->single(),
 
             Text::make('Code')

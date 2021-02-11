@@ -24,7 +24,6 @@ class CreateOrderItemsTable extends Migration
             $table->foreign('product_id')->references('id')->on('products')
                 ->onDelete('NO ACTION')->onUpdate('CASCADE');
 
-            $table->string('SKU');
             $table->tinyInteger('quantity');
             $table->double('price');
 

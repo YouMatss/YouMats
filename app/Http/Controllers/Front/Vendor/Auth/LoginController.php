@@ -19,6 +19,7 @@ class LoginController extends Controller
     protected string $redirectTo = RouteServiceProvider::HOME;
 
     public function __construct() {
+        parent::__construct();
         $this->middleware('guest:vendor')->except('logout');
     }
 

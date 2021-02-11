@@ -21,6 +21,9 @@ class IndexController extends Controller
     {
         parent::__construct();
         $this->middleware('auth:vendor')->except('index');
+
+        //If you would like to add "vendor verification middleware":
+        $this->middleware('verified:vendor.verification.notice')->except('index');
     }
 
     /**
@@ -45,8 +48,11 @@ class IndexController extends Controller
     public function edit(Request $request, $id)
     {
         $vendor = Vendor::findOrFail($id);
+        $products = $vendor->products()->paginate(20);
+        $branches = $vendor->branches()->paginate(5);
+        $order_items = $vendor->order_items;
 
-        return view('front.vendor.edit', ['vendor' => $vendor]);
+        return view('front.vendor.edit', ['vendor' => $vendor, 'products' => $products, 'branches' => $branches, 'items' => $order_items]);
     }
 
     /**
@@ -91,7 +97,7 @@ class IndexController extends Controller
             $vendor->addMedia($request->cover)->toMediaCollection(VENDOR_COVER);
         }
 
-        //Tweak the system to create a new password for the vendor.
+        //Tweak the system to create a new password for the vendor only if its set.
         if(isset($request->password))
             $data['password'] = Hash::make($request->password);
         else
