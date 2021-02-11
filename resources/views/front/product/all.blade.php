@@ -112,3 +112,24 @@
         </div>
     </div>
 @endsection
+
+@section('extraScripts')
+    <script type="text/javascript">
+        $(".btn-add-cart").on('click', function(){
+            let url = $(this).data('url');
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: { _token: '{{ csrf_token() }}' }
+            })
+            .done(function(response) {
+                $('#cartCount').html(response.count);
+                $('#cartTotal').html(response.total);
+            })
+            .fail(function(response) {
+                console.log(response);
+            })
+        })
+    </script>
+@endsection

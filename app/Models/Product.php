@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +12,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 
-class Product extends Model implements Sortable, HasMedia
+class Product extends Model implements Sortable, HasMedia, Buyable
 {
     use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia;
 
@@ -46,6 +47,33 @@ class Product extends Model implements Sortable, HasMedia
 
     public function tags() {
         return $this->belongsToMany(Tag::class);
+    }
+
+    /**
+     * @param null $options
+     * @return int|mixed|string
+     */
+    public function getBuyableIdentifier($options = null)
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param null $options
+     * @return string
+     */
+    public function getBuyableDescription($options = null): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param null $options
+     * @return float
+     */
+    public function getBuyablePrice($options = null): float
+    {
+        return $this->price;
     }
 
 }

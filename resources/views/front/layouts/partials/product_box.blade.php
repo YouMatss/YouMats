@@ -35,7 +35,7 @@
                     </div>
                 @endif
                 <div class="d-none d-xl-block prodcut-add-cart">
-                    <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                    <button data-url="{{ route('cart.add', ['product' => $product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div class="flex-horizontal-center justify-content-between justify-content-wd-center flex-wrap border-top pt-3">
-                    <a href="#" class="text-gray-6 font-size-13 mx-wd-3"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                    <a href="#" class="text-gray-6 font-size-13 mx-wd-3"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a href="#">
                 </div>
             </div>
         </div>

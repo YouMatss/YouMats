@@ -141,6 +141,9 @@
         $.HSCore.components.HSSelectPicker.init('.js-select');
     });
 
+    // initialization of quantity counter
+    $.HSCore.components.HSQantityCounter.init('.js-quantity');
+
     var nav = $('.nav_fixed');
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -188,4 +191,4 @@
 </script>
 
 @include('front.layouts.partials.ajax')
-@yield('additional_js')
+@yield('extraScripts')

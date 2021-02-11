@@ -27,6 +27,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "hardevine/shoppingcart": "^2.9",
         "inspheric/nova-indicator-field": "^1.43",
         "kabbouchi/nova-logs-tool": "^0.3.0",
         "laravel/framework": "^8.12",
