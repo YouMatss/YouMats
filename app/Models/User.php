@@ -27,6 +27,6 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
     ];
 
     public function orders() {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class)->with('items');
     }
 }

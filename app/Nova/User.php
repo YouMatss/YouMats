@@ -48,6 +48,26 @@ class User extends Resource
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
+            Medialibrary::make('Profile', USER_PROFILE)->fields(function () {
+                return [
+                    Text::make('File Name', 'file_name')
+                        ->rules('required', 'min:2'),
+                ];
+            })->attachRules(NULLABLE_IMAGE_VALIDATION)
+                ->accept('image/*')
+                ->autouploading()->attachOnDetails()->single()
+                ->croppable('cropper'),
+
+            Medialibrary::make('Cover', USER_COVER)->fields(function () {
+                return [
+                    Text::make('File Name', 'file_name')
+                        ->rules('required', 'min:2'),
+                ];
+            })->attachRules(NULLABLE_IMAGE_VALIDATION)
+                ->accept('image/*')
+                ->autouploading()->attachOnDetails()->single()
+                ->croppable('cropper'),
+
             Text::make('Phone')
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
