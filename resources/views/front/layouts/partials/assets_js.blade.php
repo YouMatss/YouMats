@@ -188,4 +188,3 @@
 </script>
 
 @include('front.layouts.partials.ajax')
-@yield('additional_js')

@@ -31,8 +31,9 @@ Route::group([
 
     //Cart Routes
     Route::group(['prefix' => 'cart', 'namespace' => 'Product'], function() {
-        Route::get('/', 'CartController@showCart')->name('cart.show');
-        Route::post('/add/{product}', 'CartController@addToCart')->name('cart.add');
+        Route::get('/', 'CartController@show')->name('cart.show');
+        Route::post('/add/{product}', 'CartController@add')->name('cart.add');
+        Route::delete('/delete/{cart}', 'CartController@deleteItem')->name('cart.remove');
     });
 
     //Pages routes
