@@ -24,17 +24,17 @@ class UserProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'cover' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:1024',
-            'profile' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:1024',
-            'licenses' => 'nullable|array',
-            'licenses.*' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:1024',
-            'name' => 'required|max:191|string',
+            'cover' => NULLABLE_IMAGE_VALIDATION,
+            'profile' => NULLABLE_IMAGE_VALIDATION,
+            'licenses' => ARRAY_VALIDATION,
+            'licenses.*' => NULLABLE_IMAGE_VALIDATION,
+            'name' => REQUIRED_STRING_VALIDATION,
             'email' => 'required|max:191|email|unique:users,email,' . auth()->user()->id,
-            'phone' => 'required|max:191|string',
-            'phone2' => 'nullable|max:191|string',
-            'address' => 'required|max:191|string',
-            'address2' => 'nullable|max:191|string',
-            'password' => 'nullable|min:8|string|confirmed',
+            'phone' => REQUIRED_STRING_VALIDATION,
+            'phone2' => NULLABLE_STRING_VALIDATION,
+            'address' => REQUIRED_STRING_VALIDATION,
+            'address2' => NULLABLE_STRING_VALIDATION,
+            'password' => NULLABLE_PASSWORD_VALIDATION,
         ];
     }
 }

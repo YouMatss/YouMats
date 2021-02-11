@@ -35,4 +35,8 @@ class SubCategory extends Model implements Sortable, HasMedia
     public function products() {
         return $this->hasMany(Product::class, 'subCategory_id');
     }
+
+    public function tags() {
+        return $this->hasManyThrough(ProductTag::class, Product::class, 'subCategory_id')->with('tag');
+    }
 }

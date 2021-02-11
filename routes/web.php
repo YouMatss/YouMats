@@ -48,6 +48,7 @@ Route::group([
         Route::patch('/vendor/{vendor}/update', 'OrderController@vendorUpdate')->name('vendor.order.update');
     });
 
+    Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
     Route::get('/product/{slug}', 'Product\ProductController@index')->name('front.product');
     Route::get('/category/{category_slug}', 'Category\CategoryController@index')->name('front.category');
     Route::get('/category/{category_slug}/{subCategory_slug}', 'Category\SubCategoryController@index')->name('front.subCategory');

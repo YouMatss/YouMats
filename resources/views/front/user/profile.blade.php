@@ -63,6 +63,11 @@
                     <div class="tab-content" id="Jpills-tabContent">
                         <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
                             <div class="block_info_vendor">
+                                @if(Session::has('message'))
+                                    <div class="alert alert-success">
+                                        {{ Session::get('message') }}
+                                    </div>
+                                @endif
                                 <form method="post" action="{{route('front.user.updateProfile')}}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -265,7 +270,7 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Order #{{$order->order_id}}</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Order #<b>{{$order->order_id}}</b></h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>

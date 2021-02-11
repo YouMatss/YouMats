@@ -1,6 +1,5 @@
 <header id="header" class="u-header u-header-left-aligned-nav">
     <div class="u-header__section shadow-none">
-
         <!-------- Top header -------->
         <div class="u-header-topbar bg-gray-2 border-0 py-2 d-none d-xl-block">
             <div class="container">
@@ -1016,6 +1015,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </header>

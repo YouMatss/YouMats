@@ -57,11 +57,27 @@
                             <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Categories</h3>
                         </div>
                         <div class="border-bottom pb-4 mb-4">
-                            @foreach($category->subCategories as $subCategory)
+                            @foreach($category->subCategories as $sub)
                             <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                 <div class="custom-control custom-checkbox">
-                                    <a href="{{route('front.subCategory', [$category->slug, $subCategory->slug])}}" class="custom-control-label">{{$subCategory->name}}
-                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($subCategory->products)}})</span>
+                                    <a @if($sub->id == $subCategory->id) style="font-weight: bold" @endif href="{{route('front.subCategory', [$category->slug, $sub->slug])}}" class="custom-control-label">{{$sub->name}}
+                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($sub->products)}})</span>
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="border-bottom border-color-1 mb-5">
+                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Tags</h3>
+                        </div>
+                        <div class="border-bottom pb-4 mb-4">
+                            @foreach($subCategory->tags as $tag)
+                            <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                                <div class="custom-control custom-checkbox">
+                                    <a href="{{route('front.tag', [$tag->tag->slug])}}" class="custom-control-label">{{$tag->tag->name}}
+                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($tag->tag->products)}})</span>
                                     </a>
                                 </div>
                             </div>

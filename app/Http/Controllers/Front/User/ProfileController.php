@@ -18,38 +18,30 @@ class ProfileController extends Controller
 
     public function updateProfile(UserProfileRequest $request) {
         $data = $request->validated();
+        $auth_user = User::findOrFail(auth()->user()->id);
 
-        $auth_user = User::find(auth()->user()->id);
-        abort_if(!$auth_user, 401);
-
-        if(isset($data['profile'])) {
+        if(isset($request->profile)) {
             $auth_user->clearMediaCollection(USER_PROFILE);
-            $auth_user->addMedia($data['profile'])->toMediaCollection(USER_PROFILE);
+            $auth_user->addMedia($request->profile)->toMediaCollection(USER_PROFILE);
         }
-        if(isset($data['cover'])) {
+        if(isset($request->cover)) {
             $auth_user->clearMediaCollection(USER_COVER);
-            $auth_user->addMedia($data['cover'])->toMediaCollection(USER_COVER);
+            $auth_user->addMedia($request->cover)->toMediaCollection(USER_COVER);
         }
-        if(isset($data['licenses']))
-            foreach ($data['licenses'] as $license)
+        if(isset($request->licenses))
+            foreach ($request->licenses as $license)
                 $auth_user->addMedia($license)->toMediaCollection(COMPANY_PATH);
 
-        if($data['email'] != $auth_user->email)
+        if($request->email != $auth_user->email)
             $data['email_verified_at'] = null;
+
+        if(isset($request->password))
+            $data['password'] = Hash::make($request->password);
         else
-            $data['email_verified_at'] = $auth_user->email_verified_at;
+            unset($data['password']);
 
-        $auth_user->update([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'email_verified_at' => $data['email_verified_at'],
-            'phone' => $data['phone'],
-            'phone2' => $data['phone2'],
-            'address' => $data['address'],
-            'address2' => $data['address2'],
-            'password' => Hash::make($request->password)
-        ]);
+        $auth_user->update($data);
 
-        return redirect()->back();
+        return back()->with(['message' => __('Profile has been updated successfully!')]);
     }
 }
