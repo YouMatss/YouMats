@@ -258,166 +258,166 @@
                                                 <td>{{$order->payment_status}}</td>
                                                 <td>{{$order->order_status}}</td>
                                                 <td class="text-center">
-                                                    <a href="#" data-toggle="modal" data-target="#exampleModal"> View <i class="far fa-eye"></i></a>
+                                                    <a href="#" data-toggle="modal" data-target="#order{{$order->id}}"> View <i class="far fa-eye"></i></a>
                                                 </td>
                                             </tr>
+                                            <div class="modal fade" id="order{{$order->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Order #<b>{{$order->order_id}}</b></h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-12 col-xl-12">
+                                                                    <div class="">
+                                                                        <ul class="list-unstyled-branches list_order_vendor mb-6">
+                                                                            <li class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <b>Date:</b>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <span class="">{{$order->created_at->format('l, F d, Y h:i A')}}</span>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <b>Name</b>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <span class="">{{$order->name}}</span>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <b>Email:</b>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <span class="">{{$order->email}}</span>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <b>Phone:</b>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <span class="">{{$order->phone}}</span>
+                                                                                </div>
+                                                                            </li>
+                                                                            @if(isset($order->phone2))
+                                                                                <li class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <b>phone2:</b>
+                                                                                    </div>
+                                                                                    <div class="col-md-8">
+                                                                                        <span class="">{{$order->phone2}}</span>
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endif
+                                                                            <li class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <b>Address:</b>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <span class="">{{$order->address}}</span>
+                                                                                </div>
+                                                                            </li>
+                                                                            @if(isset($order->building_number))
+                                                                                <li class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <b>Building Number:</b>
+                                                                                    </div>
+                                                                                    <div class="col-md-8">
+                                                                                        <span class="">{{$order->building_number}}</span>
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endif
+                                                                            @if(isset($order->street))
+                                                                                <li class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <b>Street:</b>
+                                                                                    </div>
+                                                                                    <div class="col-md-8">
+                                                                                        <span class="">{{$order->street}}</span>
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endif
+                                                                            @if(isset($order->district))
+                                                                                <li class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <b>District:</b>
+                                                                                    </div>
+                                                                                    <div class="col-md-8">
+                                                                                        <span class="">{{$order->district}}</span>
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endif
+                                                                            @if(isset($order->city))
+                                                                                <li class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <b>City:</b>
+                                                                                    </div>
+                                                                                    <div class="col-md-8">
+                                                                                        <span class="">{{$order->city}}</span>
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endif
+                                                                            <li class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <b>Payment Method:</b>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <span class="">{{$order->payment_method}}</span>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <b>Payment Status:</b>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <span>{{$order->payment_status}}</span>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <b>Order Status:</b>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <span>{{$order->order_status}}</span>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <b>Notes:</b>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <span class="">{{$order->notes}}</span>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <b>Total Price:</b>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <span class="">{{getCurrency('code')}} {{$order->total_price}}</span>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Order #<b>{{$order->order_id}}</b></h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-12 col-xl-12">
-                                                        <div class="">
-                                                            <ul class="list-unstyled-branches list_order_vendor mb-6">
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Date:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->created_at->format('l, F d, Y h:i A')}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Name</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->name}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Email:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->email}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Phone:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->phone}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                @if(isset($order->phone2))
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>phone2:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->phone2}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                @endif
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Address:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->address}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                @if(isset($order->building_number))
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Building Number:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->building_number}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                @endif
-                                                                @if(isset($order->street))
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Street:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->street}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                @endif
-                                                                @if(isset($order->district))
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>District:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->district}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                @endif
-                                                                @if(isset($order->city))
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>City:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->city}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                @endif
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Payment Method:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->payment_method}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Payment Status:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span>{{$order->payment_status}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Order Status:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span>{{$order->order_status}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Notes:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{$order->notes}}</span>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="row">
-                                                                    <div class="col-md-4">
-                                                                        <b>Total Price:</b>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <span class="">{{getCurrency('code')}} {{$order->total_price}}</span>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
