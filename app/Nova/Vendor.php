@@ -130,6 +130,8 @@ class Vendor extends Resource
                 ->updateRules('nullable', 'string', 'min:8'),
 
             HasMany::make('Products'),
+
+            HasMany::make('Branches'),
         ];
     }
 

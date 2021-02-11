@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+//Actions routes
 Route::post('changeCurrency', 'Common\MiscController@changeCurrency')->name('front.currencySwitch');
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function(){
+    //Auth (Verified/Authenticated) routes
     Route::group(['namespace' => 'User'], function () {
         Auth::routes(['verify' => true]);
         Route::group([
@@ -18,26 +20,33 @@ Route::group([
         });
     });
 
-    Route::resource('vendor', 'Vendor\IndexController');
-
-    Route::group(['prefix' => 'auth/vendor', 'namespace' => 'Vendor', 'as' => 'vendor.'], function () {
+    //Vendor Auth Routes
+    Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor', 'as' => 'vendor.'], function () {
 
         Auth::routes(['verify' => true]);
 
-        Route::get('/confirmed', function () {
-            return 'password confirmed';
-        })->middleware(['auth:vendor', 'password.confirm:vendor.password.confirm']);
-
-        Route::get('/verified', function () {
-            return 'email verified';
-        })->middleware('verified:vendor.verification.notice,vendor');
+        Route::get('{vendor}/edit', 'IndexController@edit')->name('edit');
+        Route::patch('{vendor}/update', 'IndexController@update')->name('update');
     });
 
+    //Cart Routes
+    Route::group(['prefix' => 'cart', 'namespace' => 'Product'], function() {
+        Route::get('/', 'CartController@showCart')->name('cart.show');
+        Route::post('/add/{product}', 'CartController@addToCart')->name('cart.add');
+    });
 
+    //Pages routes
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/allProducts', 'Product\ProductController@all')->name('front.product.all');
+    Route::get('/products', 'Product\ProductController@all')->name('front.product.all');
+    Route::get('/partners', 'Vendor\IndexController@index')->name('vendor.index');
     Route::get('/FAQs', 'Common\PageController@faqs')->name('front.faqs.page');
     Route::get('/about-us', 'Common\PageController@aboutUs')->name('front.about.page');
+
+    //Vendor Order Routes (Auth/Verified protected)
+    Route::group(['prefix' => 'order', 'namespace' => 'Product', 'middleware' => 'auth:vendor, verified:vendor.verification.notice'], function() {
+        Route::get('/{order}/get', 'OrderController@get')->name('order.get');
+        Route::patch('/vendor/{vendor}/update', 'OrderController@vendorUpdate')->name('vendor.order.update');
+    });
 
     Route::get('/product/{slug}', 'Product\ProductController@index')->name('front.product');
     Route::get('/category/{category_slug}', 'Category\CategoryController@index')->name('front.category');

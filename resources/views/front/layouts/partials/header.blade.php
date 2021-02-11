@@ -29,7 +29,7 @@
                                                 @foreach(\Config::get('currencies') as $currency)
                                                 <a class="dropdown-item active currency_button" data-code="{{$currency->code}}" href="#">
                                                     <img width="20px" src="{{$currency->media[0]->getUrl()}}" />&nbsp;
-                                                    {{$currency->code}} ({{$currency->symbol}})
+                                                    {{$currency->code}} @if($currency->symbol) ({{$currency->symbol}}) @endif
                                                 </a>
                                                 @endforeach
                                             </div>
@@ -99,7 +99,7 @@
                                             </span>
                                             </a>
                                             <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
-{{--                                                <a class="dropdown-item" href="{{route('front.user.profile')}}">Profile</a>--}}
+                                                <a class="dropdown-item" href="{{route('vendor.edit', ['vendor' => auth('vendor')->user()->id]) }}">Profile</a>
                                                 <form class="dropdown-item" style="cursor: pointer" action="{{route('vendor.logout')}}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="dropdown-item">Logout</button>
@@ -499,7 +499,7 @@
                         <div class="d-flex">
                             <ul class="d-flex list-unstyled mb-0">
                                 <li class="col pr-0">
-                                    <a href="#" class="text-gray-110 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
+                                    <a href="{{ route('cart.show') }}" class="text-gray-110 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12">2</span>
                                         <span class="font-weight-bold font-size-16 text-gray-110 ml-3">SAR 1785.00</span>
