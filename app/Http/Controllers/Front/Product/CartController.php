@@ -21,7 +21,7 @@ class CartController extends Controller
      */
     public function show(Request $request)
     {
-        $cart = Cart::content();
+        $cart = Cart::instance('cart')->content();
 
         return view('front.cart.index', ['items' => $cart]);
     }
@@ -33,9 +33,12 @@ class CartController extends Controller
      */
     public function add(Request $request, Product $product): JsonResponse
     {
-        Cart::add($product->id, $product->name, 1, $product->price, [], $product->rate)->associate($product);
+        Cart::instance('cart')->add($product->id, $product->name, 1, $product->price, [], $product->rate)->associate($product);
 
-        return response()->json(['cart' => Cart::content(), 'total' => getCurrency('code'). ' ' . Cart::total(), 'count' => Cart::count()]);
+        return response()->json(['message' => __('Product has been added to your cart'),
+            'cart' => Cart::content(),
+            'total' => getCurrency('code') . ' ' . Cart::total(),
+            'count' => Cart::count()]);
     }
 
     /**
@@ -45,7 +48,7 @@ class CartController extends Controller
      */
     public function deleteItem(Request $request, $rowId): JsonResponse
     {
-        Cart::remove($rowId);
+        Cart::instance('cart')->remove($rowId);
 
         return response()->json(['status' => true, 'total' => getCurrency('code'). ' ' . Cart::total(), 'count' => Cart::count(), 'subtotal' => Cart::subtotal(), 'tax' => Cart::tax()]);
     }
@@ -55,7 +58,7 @@ class CartController extends Controller
      */
     public function destroy(): JsonResponse
     {
-        Cart::destroy();
+        Cart::instance('cart')->destroy();
 
         return response()->json(['status' => true, 'message' => __('Cart has been destroyed')]);
     }
@@ -66,7 +69,7 @@ class CartController extends Controller
      */
     public function update(Request $request)
     {
-        Cart::update($request->rowId, $request->qty);
+        Cart::instance('cart')->update($request->rowId, $request->qty);
 
         return response()->json(['status' => true]);
     }

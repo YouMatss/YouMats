@@ -40,7 +40,7 @@
                     <div class="bg-gray-1 flex-center-between borders-radius-9 py-1">
                         <div class="d-xl-none">
                             <!-- Account Sidebar Toggle Button -->
-                            <a id="sidebarNavToggler1" class="btn btn-sm py-1 font-weight-normal" href="javascript:;" role="button"
+                            <a id="sidebarNavToggler1" class="btn btn-sm py-1 font-weight-normal" role="button"
                                aria-controls="sidebarContent1"
                                aria-haspopup="true"
                                aria-expanded="false"
@@ -126,9 +126,32 @@
             .done(function(response) {
                 $('#cartCount').html(response.count);
                 $('#cartTotal').html(response.total);
+                toastr.success(response.message);
             })
             .fail(function(response) {
+                toastr.error(response);
+            })
+        })
+
+        $(".btn-add-wishlist").on('click', function(){
+            let url = $(this).data('url');
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: { _token: '{{ csrf_token() }}' }
+            })
+            .done(function(response) {
+                if(response.status)
+                    toastr.success(response.message);
+                else
+                    toastr.warning(response.message)
+
+
                 console.log(response);
+            })
+            .fail(function(response) {
+                toastr.error(response.responseJSON.message ?? {{ __('Error') }});
             })
         })
     </script>
