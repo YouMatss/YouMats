@@ -98,7 +98,7 @@
                             <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                         @else
                             <div class="prodcut-add-cart">
-                                <button data-url="{{ route('wishlist.remove', ['rowId' => $rowId]) }}" class="btn-remove-wishlist btn-danger transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                <button data-url="{{ route('wishlist.remove', ['rowId' => $rowId]) }}" class="btn-remove-wishlist btn-danger transition-3d-hover"><i class="ec ec-close-remove"></i></button>
                             </div>
                         @endif
                     </div>
