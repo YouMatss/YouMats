@@ -37,6 +37,12 @@ Route::group([
         Route::patch('/update', 'CartController@update')->name('cart.update');
     });
 
+    Route::group(['prefix' => 'wishlist', 'namespace' => 'Product', 'middleware' => ['auth', 'verified']], function() {
+        Route::get('/', 'WishlistController@index')->name('wishlist.index');
+        Route::post('/add/{product}', 'WishlistController@add')->name('wishlist.add');
+        Route::delete('/delete/{rowId}', 'WishlistController@deleteItem')->name('wishlist.remove');
+    });
+
     //Pages routes
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/products', 'Product\ProductController@all')->name('front.product.all');

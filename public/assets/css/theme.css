@@ -33795,6 +33795,19 @@ blockquote:not(.blockquote) p {
       justify-content: center;
   border-radius: 6.1875rem;
 }
+.btn-remove-wishlist {
+    width: 2.188rem;
+    height: 2.188rem;
+    background-color: #e6e6e6;
+    color: #fff;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: 6.1875rem;
+}
 
 .btn-add-cart i {
   font-size: 1.25rem;

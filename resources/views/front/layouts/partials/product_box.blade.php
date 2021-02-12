@@ -41,7 +41,7 @@
         </div>
         <div class="product-item__footer">
             <div class="border-top pt-2 flex-center-between flex-wrap">
-                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
             </div>
         </div>
     </div>
@@ -90,12 +90,18 @@
                         <div class="text-gray-100">{{getCurrency('code')}} {{$product->price}}</div>
                     </div>
                     @endif
-                    <div class="prodcut-add-cart">
-                        <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                    <div class="flex-horizontal-center justify-content-between justify-content-wd-center flex-wrap border-top pt-3">
+                        <div class="prodcut-add-cart">
+                            <button data-url="{{ route('cart.add', ['product' => $product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                        </div>
+                        @if(Request::route()->getName() != 'wishlist.index')
+                            <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                        @else
+                            <div class="prodcut-add-cart">
+                                <button data-url="{{ route('wishlist.remove', ['rowId' => $rowId]) }}" class="btn-remove-wishlist btn-danger transition-3d-hover"><i class="ec ec-close-remove"></i></button>
+                            </div>
+                        @endif
                     </div>
-                </div>
-                <div class="flex-horizontal-center justify-content-between justify-content-wd-center flex-wrap border-top pt-3">
-                    <a href="#" class="text-gray-6 font-size-13 mx-wd-3"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a href="#">
                 </div>
             </div>
         </div>

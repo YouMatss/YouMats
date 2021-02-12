@@ -38,6 +38,9 @@
 <script src="{{front_url()}}/assets/js/components/hs.go-to.js"></script>
 <script src="{{front_url()}}/assets/js/components/hs.selectpicker.js"></script>
 
+<!-- Toastr JS -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
 <!-- JS Plugins Init. -->
 <script>
     $(window).on('load', function () {
