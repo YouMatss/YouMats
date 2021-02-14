@@ -111,7 +111,12 @@
                             @elseif(!Auth::guard('web')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                     <a href="{{route('vendor.login')}}" role="button" class="u-header-topbar__nav-link">
-                                        <i class="ec ec-user mr-1"></i> Register <span class="text-gray-50">or</span> Sign in as Vendor
+                                        <i class="ec ec-user mr-1"></i> {{ __('Vendor Login') }}
+                                    </a>
+                                </li>
+                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                    <a href="{{route('vendor.register')}}" role="button" class="u-header-topbar__nav-link">
+                                        <i class="ec ec-user mr-1"></i> {{ __('Sell') }}
                                     </a>
                                 </li>
                             @endif

@@ -59,7 +59,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Vendor::create([
+        $vendor = Vendor::create([
             'membership_id' => env('MEMBERSHIP_ID', 1),
             'city_id' => $data['city_id'],
             'name' => $data['name'],
@@ -71,6 +71,11 @@ class RegisterController extends Controller
             'address2' => $data['address2'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $vendor->addMedia('assets/img/default_cover.png')->toMediaCollection(VENDOR_COVER);
+        $vendor->addMedia('assets/img/default_logo.jpg')->toMediaCollection(VENDOR_LOGO);
+
+        return $vendor;
     }
 
     /**

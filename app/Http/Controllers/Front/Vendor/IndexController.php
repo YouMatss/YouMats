@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front\Vendor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
+use App\Models\VendorBranch;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -107,5 +108,24 @@ class IndexController extends Controller
 
         return back()->with(['message' => __('Profile has been updated successfully')]);
 
+    }
+
+    public function addBranch(Request $request, Vendor $vendor)
+    {
+        $data = $request->validate([
+            'name' => REQUIRED_STRING_VALIDATION,
+            'phone_number' => REQUIRED_STRING_VALIDATION,
+            'fax' => NULLABLE_STRING_VALIDATION,
+            'website' => NULLABLE_STRING_VALIDATION,
+            'address' => REQUIRED_STRING_VALIDATION,
+            'latitude' => REQUIRED_STRING_VALIDATION,
+            'longitude' => REQUIRED_STRING_VALIDATION
+        ]);
+
+        $data['vendor_id'] = $vendor->id;
+
+        VendorBranch::create($data);
+
+        return response()->json(['stats' => true, 'message' => __('Branch has been added successfuly')]);
     }
 }

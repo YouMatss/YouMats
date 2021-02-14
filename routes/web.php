@@ -27,6 +27,7 @@ Route::group([
 
         Route::get('{vendor}/edit', 'IndexController@edit')->name('edit');
         Route::patch('{vendor}/update', 'IndexController@update')->name('update');
+        Route::post('{vendor}/branch', 'IndexController@addBranch')->name('addBranch');
     });
 
     //Cart Routes

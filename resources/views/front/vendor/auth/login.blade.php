@@ -35,7 +35,10 @@
 
                         <div class="row">
                             <div class="mb-4">
-                                <h1 class="text-center col-md-12">{{ __('Login') }}</h1>
+                                <h1 class="text-center col-md-12">{{ __('Vendor Login') }}</h1>
+                                @error('active')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">

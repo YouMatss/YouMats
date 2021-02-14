@@ -74,7 +74,6 @@
                                     @csrf
                                     @method('PATCH')
                                     <div class="row">
-
                                         <div class="col-md-6">
                                             <div class="box_img_v">
                                                 <img src="{{ $vendor->getFirstMediaUrl(VENDOR_COVER) }}" class="photo_cover_vendor">
@@ -343,6 +342,74 @@
                         </div>
                         <div class="tab-pane fade" id="Jpills-three-example1" role="tabpanel" aria-labelledby="Jpills-three-example1-tab">
                             <div class="container">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#branchModal">
+                                    {{ __('Add Branch') }}
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="branchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('vendor.addBranch', ['vendor' => $vendor->id]) }}" method="POST" id="addBranchForm">
+                                            @csrf
+                                            <div class="row">
+                                            
+                                            <div class="col-md-6">
+                                                <div class="js-form-message form-group mb-5">
+                                                    <label for="name" class="form-label">{{ __('Name') }} <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="name" name="name" required autocomplete="name" autofocus>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="js-form-message form-group mb-5">
+                                                    <label for="phone_number" class="form-label">{{ __('Phone') }} <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="phone_number" name="phone_number" required autocomplete="phone_number" autofocus>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="js-form-message form-group mb-5">
+                                                    <label for="fax" class="form-label">{{ __('Fax') }}</label>
+                                                    <input type="text" class="form-control" id="fax" name="fax" autocomplete="fax" autofocus>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="js-form-message form-group mb-5">
+                                                    <label for="website" class="form-label">{{ __('Website') }}</label>
+                                                    <input type="text" class="form-control" id="website" name="website" autocomplete="website" autofocus>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="js-form-message form-group mb-5">
+                                                    <label for="address" class="form-label">{{ __('Address') }} <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="address" name="address" required autocomplete="address" autofocus>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="js-form-message form-group mb-5">
+                                                    <label for="latitude" class="form-label">{{ __('Latitude') }} <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="latitude" name="latitude" required autocomplete="latitude" autofocus>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="js-form-message form-group mb-5">
+                                                    <label for="longitude" class="form-label">{{ __('Longitude') }} <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="longitude" name="longitude" required autocomplete="longitude" autofocus>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <button id="addBranchBtn" class="btn btn-primary-dark-w px-5 text-white">{{ __('Save') }}</button>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
                                 @if(count($branches) > 0)
                                     @foreach($branches as $branch)
                                     <div class="row">
@@ -635,14 +702,11 @@
                                                             </div>
                                                         </form>
                                                     </div>
-
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -653,6 +717,31 @@
 @endsection
 @section('extraScripts')
     <script type="text/javascript">
+        $('#addBranchBtn').on('click', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: "{{ route('vendor.addBranch', ['vendor' => $vendor->id]) }}",
+                type: 'POST',
+                data: $("#addBranchForm").serialize()
+            })
+            .done(function(response) {
+                console.log(response);
+                if(response.status) {
+                    toastr.success(response.message);
+                    window.location.reload();
+                }
+            })
+            .fail(function(response) {
+                toastr.error(response.responseJSON.message);
+                let errors = response.responseJSON.errors;
+
+                $.each(errors, function(key, value) {
+                    toastr.error(value, key);
+                })
+            })
+        });
+
         $(".toggleModal").on('click', function() {
             //Reset the fields
             $("#id").html('');
