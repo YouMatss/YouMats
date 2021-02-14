@@ -64,8 +64,10 @@ class LoginController extends Controller
     {
         $user = Vendor::where($this->username(), $request->{$this->username()})->first();
 
-        if($user && !$user->active)
-            $inactiveMsg = [trans('auth.inactive')];
+        if($user && !$user->active && Hash::check($request->password, $user->password))
+            throw ValidationException::withMessages([
+                $this->username() => [trans('auth.inactive')]
+            ]);    
 
         throw ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],
