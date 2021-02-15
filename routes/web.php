@@ -52,6 +52,9 @@ Route::group([
     Route::get('/team', 'Team\IndexController@index')->name('front.team.index');
     Route::get('/FAQs', 'Common\PageController@faqs')->name('front.faqs.page');
     Route::get('/about-us', 'Common\PageController@aboutUs')->name('front.about.page');
+    Route::get('/contact-us', 'Common\PageController@contactUs')->name('front.contact.page');
+
+    Route::post('/contact-us', 'Common\PageController@contactUsRequest')->name('front.contact.request');
 
     //Vendor Order Routes (Auth/Verified protected)
     Route::group(['prefix' => 'order', 'namespace' => 'Product', 'middleware' => 'auth:vendor, verified:vendor.verification.notice'], function() {
