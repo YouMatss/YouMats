@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Front\User\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Vendor;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -32,5 +35,24 @@ class LoginController extends Controller
             'password' => $request->password,
             'active' => 1
         ];
+    }
+
+    /**
+     * @param Request $request
+     * @throws ValidationException
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $user = Vendor::where($this->username(), $request->{$this->username()})->first();
+
+        if($user && !$user->active && Hash::check($request->password, $user->password))
+            throw ValidationException::withMessages([
+                $this->username() => [trans('auth.inactive')]
+            ]);
+
+        throw ValidationException::withMessages([
+            $this->username() => [trans('auth.failed')],
+            'active' => $inactiveMsg ?? ''
+        ]);
     }
 }

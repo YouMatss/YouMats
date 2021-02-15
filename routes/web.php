@@ -25,16 +25,18 @@ Route::group([
 
         Auth::routes(['verify' => true]);
 
+        Route::get('show/{vendor}/{name}', 'IndexController@show')->name('show');
         Route::get('{vendor}/edit', 'IndexController@edit')->name('edit');
         Route::patch('{vendor}/update', 'IndexController@update')->name('update');
+        Route::post('{vendor}/branch', 'IndexController@addBranch')->name('addBranch');
     });
 
     //Cart Routes
     Route::group(['prefix' => 'cart', 'namespace' => 'Product'], function() {
         Route::get('/', 'CartController@show')->name('cart.show');
-        Route::post('/add/{product}', 'CartController@add')->name('cart.add');
+        Route::post('/add/{product}', 'CartController@add')->name('cart.add')->middleware('throttle:10,1');
         Route::delete('/delete/{rowId}', 'CartController@deleteItem')->name('cart.remove');
-        Route::patch('/update', 'CartController@update')->name('cart.update');
+        Route::patch('/update', 'CartController@update')->name('cart.update')->middleware('throttle:10,1');
     });
 
     Route::group(['prefix' => 'wishlist', 'namespace' => 'Product', 'middleware' => ['auth', 'verified']], function() {
