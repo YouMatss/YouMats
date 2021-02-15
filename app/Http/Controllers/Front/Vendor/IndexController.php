@@ -25,10 +25,10 @@ class IndexController extends Controller
     {
         parent::__construct();
 
-        $this->middleware('auth:vendor')->except('index');
+        $this->middleware('auth:vendor')->except('index', 'show');
 
         //If you would like to add "vendor verification middleware":
-        $this->middleware('verified:vendor.verification.notice')->except('index');
+        $this->middleware('verified:vendor.verification.notice')->except('index', 'show');
     }
 
     /**
