@@ -12,13 +12,13 @@
                 </div>
                 <div class="col-lg-5">
                     <!-- Subscribe Form -->
-                    <form class="js-validate js-form-message">
-                        <label class="sr-only" for="subscribeSrEmail">Email address</label>
+                    <form class="js-form-message" id="subscribeForm">
+                        @csrf
+                        <label class="sr-only">Email address</label>
                         <div class="input-group input-group-pill">
-                            <input type="email" class="form-control border-0 height-40" name="email" id="subscribeSrEmail" placeholder="Email address" aria-label="Email address" aria-describedby="subscribeButton" required
-                                   data-msg="Please enter a valid email address.">
+                            <input type="email" class="form-control border-0 height-40" name="email" placeholder="Email address" aria-label="Email address" required>
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-dark btn-sm-wide height-40 py-2" id="subscribeButton">Sign Up</button>
+                                <button type="submit" class="btn btn-dark btn-sm-wide height-40 py-2">Subscribe</button>
                             </div>
                         </div>
                     </form>

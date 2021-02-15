@@ -38,11 +38,10 @@ class PageController extends Controller
             }
         } catch (\Exception $e) {
             return response([
-                'status' => 0,
-                'msg' => $e->getMessage()
+                'status' => false,
+                'message' => $e->getMessage()
             ]);
         }
-
         return response()->json([
             'status' => true,
             'message' => $message

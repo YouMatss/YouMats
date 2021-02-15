@@ -17,6 +17,12 @@ class Contact extends Resource
 
     public static $title = 'email';
 
+    public static $tableStyle = 'tight';
+
+    public static $polling = true;
+    public static $pollingInterval = 30;
+    public static $showPollingToggle = true;
+
     public static $search = [
         'id', 'name', 'email', 'phone', 'message'
     ];

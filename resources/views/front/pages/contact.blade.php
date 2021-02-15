@@ -44,7 +44,7 @@
                         <h3 class="section-title mb-0 pb-2 font-size-25">Leave us a Message</h3>
                     </div>
                     <p class="max-width-830-xl text-gray-90">Maecenas dolor elit, semper a sem sed, pulvinar molestie lacus. Aliquam dignissim, elit non mattis ultrices, neque odio ultricies tellus, eu porttitor nisl ipsum eu massa.</p>
-                    <form class="js-validate" id="contactForm">
+                    <form id="contactForm">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
@@ -54,16 +54,10 @@
                                         Name
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
-                                    @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <input type="text" class="form-control" name="name">
                                 </div>
                                 <!-- End Input -->
                             </div>
-
                             <div class="col-md-6">
                                 <!-- Input -->
                                 <div class="js-form-message mb-4">
@@ -71,12 +65,7 @@
                                         Email
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control @error('email') is-invalid @enderror" name="email">
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <input type="text" class="form-control" name="email">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -87,12 +76,7 @@
                                         Phone
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone">
-                                    @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <input type="text" class="form-control" name="phone">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -102,12 +86,7 @@
                                         Your Message
                                     </label>
                                     <div class="input-group">
-                                        <textarea class="form-control p-5 @error('message') is-invalid @enderror" rows="4" name="message" placeholder=""></textarea>
-                                        @error('message')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
+                                        <textarea class="form-control p-5" rows="4" name="message"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -150,28 +129,40 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // contactForm Request
-            $("#contactForm").submit(function (e) {
+            var form = $("#contactForm"),
+                button = $("#contactForm button"),
+                buttonContent = button.text();
+            form.submit(function (e) {
                 e.preventDefault();
                 $.ajax({
                     type: 'POST',
                     url: "{{route('front.contact.request')}}",
                     data: $(this).serialize(),
                     dataType: 'json',
-                    success: function (data) {
-                        if (data.status === 1) {
-                            $('#contactFormMessage').html("{{site($site, 'contact_success_message')}}");
-                        } else if (data.status != 1) {
-                            $('#contactFormMessage').html(data.msg);
-                        }
+                    beforeSend: function () {
+                        button.attr('disabled', true);
+                        button.html('<i class="fa fa-spinner fa-spin"></i>');
                     },
-                    error: function (err) {
-                        if (err.status == 422) {
-                            var errors = err.responseJSON.errors;
-                            $('#contactFormMessage').html('');
-                            Object.keys(errors).forEach(function (error) {
-                                $('#contactFormMessage').append(errors[error] + '<br />');
-                            });
-                        }
+                    success: function (response) {
+                        if (response.status) {
+                            toastr.success(response.message);
+                            form.find("input, textarea").val("");
+                        } else
+                            toastr.warning(response.message)
+
+                        button.attr('disabled', false);
+                        button.text(buttonContent);
+                        // console.log(response);
+                    },
+                    error: function (response) {
+                        // toastr.error(response.responseJSON.message);
+                        let errors = response.responseJSON.errors;
+
+                        $.each(errors, function (key, value) {
+                            toastr.error(value, key);
+                        })
+                        button.attr('disabled', false);
+                        button.text(buttonContent);
                     }
                 });
             });

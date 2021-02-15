@@ -15,6 +15,8 @@ class Subscriber extends Resource
 
     public static $title = 'email';
 
+    public static $tableStyle = 'tight';
+
     public static $search = [
         'id', 'email'
     ];
