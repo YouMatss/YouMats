@@ -55,23 +55,7 @@ class LoginController extends Controller
     {
         return [
             'email' => $request->email,
-            'password' => $request->password,
-            'active' => 1
+            'password' => $request->password
         ];
-    }
-
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        $user = Vendor::where($this->username(), $request->{$this->username()})->first();
-
-        if($user && !$user->active && Hash::check($request->password, $user->password))
-            throw ValidationException::withMessages([
-                $this->username() => [trans('auth.inactive')]
-            ]);    
-
-        throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')],
-            'active' => $inactiveMsg ?? ''
-        ]);
     }
 }

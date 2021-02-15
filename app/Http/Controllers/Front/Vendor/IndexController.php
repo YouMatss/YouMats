@@ -7,10 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Vendor;
 use App\Models\VendorBranch;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
@@ -21,6 +24,7 @@ class IndexController extends Controller
     public function __construct()
     {
         parent::__construct();
+
         $this->middleware('auth:vendor')->except('index');
 
         //If you would like to add "vendor verification middleware":
@@ -39,6 +43,20 @@ class IndexController extends Controller
         // Return the vendors to the view.
         // So we can loop through
         return view('front.vendor.index', ['vendors' => $vendors]);
+    }
+
+    /**
+     * @param Vendor $vendor
+     * @return Application|Factory|View
+     */
+    public function show(Request $request, Vendor $vendor)
+    {
+        if($vendor->name != $request->name)
+            abort(404);
+
+        $products = $vendor->products()->paginate(20);
+        $branches = $vendor->branches()->paginate(5);
+        return view('front.vendor.show', ['vendor' => $vendor, 'products' => $products, 'branches' => $branches]);
     }
 
     /**
@@ -110,8 +128,16 @@ class IndexController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @param Vendor $vendor
+     * @return Application|ResponseFactory|JsonResponse|Response
+     */
     public function addBranch(Request $request, Vendor $vendor)
     {
+        if(!$vendor->active)
+            return response(['status' => false, 'message' => __('Your account is not activated')]);
+
         $data = $request->validate([
             'name' => REQUIRED_STRING_VALIDATION,
             'phone_number' => REQUIRED_STRING_VALIDATION,
@@ -126,6 +152,6 @@ class IndexController extends Controller
 
         VendorBranch::create($data);
 
-        return response()->json(['stats' => true, 'message' => __('Branch has been added successfuly')]);
+        return response()->json(['stats' => true, 'message' => __('Branch has been added successfully')]);
     }
 }

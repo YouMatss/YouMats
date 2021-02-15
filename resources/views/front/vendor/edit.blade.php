@@ -296,120 +296,170 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
-                            <ul class="row list-unstyled products-group no-gutters">
-                                @foreach($products as $product)
-                                <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
-                                    <div class="product-item__outer h-100">
-                                        <div class="product-item__inner px-xl-2 p-3">
-                                            <div class="product-item__body pb-xl-2">
-                                                <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">{{ $product->subCategory->category->name }}</a></div>
-                                                <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">{{ $product->name }}</a></h5>
-                                                <div class="mb-2">
-                                                    <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ $product->getFirstMediaUrl(PRODUCT_PATH) }}" alt="{{ $product->getFirstMediaUrl(PRODUCT_PATH)->image_alt ?? '' }}"></a>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <a class="d-inline-flex align-items-center small font-size-14" href="#">
-                                                        <div class="text-warning mr-2">
-                                                            @for($i = 1; $i <= 5; $i++)
-                                                                @if($i <= $product->rate)
-                                                                    <small class="fas fa-star"></small>
-                                                                @else
-                                                                    <small class="far fa-star text-muted"></small>
-                                                                @endif
-                                                            @endfor
+                            @if($vendor->active)
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProductModal">
+                                    {{ __('Add Product') }}
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">{{ __('Add Product') }}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="{{ route('vendor.addBranch', ['vendor' => $vendor->id]) }}" method="POST" id="addProductForm">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label>{{ __('Name (en)') }}</label>
+                                                            <input type="text" name="en_name" class="form-control" />
                                                         </div>
-                                                        @if($product->views > 0)
-                                                            <span class="text-secondary">({{ $product->views }})</span>
-                                                        @endif
-                                                    </a>
-                                                </div>
-                                                <div class="font-size-12 p-0 text-gray-110 mb-4">
-                                                    <p class="mb-1">{{ Str::limit($product->short_desc, 100, '...') }}</p>
-                                                </div>
-                                                <div class="text-gray-20 mb-2 font-size-12">{{ __('SKU:') . ' ' .$product->SKU }}</div>
-                                                <div class="flex-center-between mb-1">
-                                                    <div class="prodcut-price">
-                                                        <div class="text-gray-100">{{ getCurrency('code') .' '. $product->price }}</div>
+                                                        <div class="col-md-12">
+                                                            <label>{{ __('Name (ar)') }}</label>
+                                                            <input type="text" name="ar_name" class="form-control" />
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label>{{ __('Description') }}</label>
+                                                            <textarea name="desc"></textarea>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label>{{ __('Short Description') }}</label>
+                                                            <input type="text" name="short_desc" class="form-control" />
+                                                        </div>
+                                                        {{-- TODO: To be completed tomorrow--}}
+                                                    </div>
+                                                    <button id="addProductBtn" class="btn btn-primary-dark-w px-5 text-white">{{ __('Save') }}</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            @if(count($products) > 0)
+                                <ul class="row list-unstyled products-group no-gutters">
+                                    @foreach($products as $product)
+                                    <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
+                                        <div class="product-item__outer h-100">
+                                            <div class="product-item__inner px-xl-2 p-3">
+                                                <div class="product-item__body pb-xl-2">
+                                                    <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">{{ $product->subCategory->category->name }}</a></div>
+                                                    <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">{{ $product->name }}</a></h5>
+                                                    <div class="mb-2">
+                                                        <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ $product->getFirstMediaUrl(PRODUCT_PATH) }}" alt="{{ $product->getFirstMediaUrl(PRODUCT_PATH)->image_alt ?? '' }}"></a>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <a class="d-inline-flex align-items-center small font-size-14" href="#">
+                                                            <div class="text-warning mr-2">
+                                                                @for($i = 1; $i <= 5; $i++)
+                                                                    @if($i <= $product->rate)
+                                                                        <small class="fas fa-star"></small>
+                                                                    @else
+                                                                        <small class="far fa-star text-muted"></small>
+                                                                    @endif
+                                                                @endfor
+                                                            </div>
+                                                            @if($product->views > 0)
+                                                                <span class="text-secondary">({{ $product->views }})</span>
+                                                            @endif
+                                                        </a>
+                                                    </div>
+                                                    <div class="font-size-12 p-0 text-gray-110 mb-4">
+                                                        <p class="mb-1">{{ Str::limit($product->short_desc, 100, '...') }}</p>
+                                                    </div>
+                                                    <div class="text-gray-20 mb-2 font-size-12">{{ __('SKU:') . ' ' .$product->SKU }}</div>
+                                                    <div class="flex-center-between mb-1">
+                                                        <div class="prodcut-price">
+                                                            <div class="text-gray-100">{{ getCurrency('code') .' '. $product->price }}</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                @endforeach
-                            </ul>
+                                    </li>
+                                    @endforeach
+                                </ul>
                             {{ $products->links() }}
+                            @else
+                                <h4>{{ __('You do not have products') }}</h4>
+                            @endif
                         </div>
                         <div class="tab-pane fade" id="Jpills-three-example1" role="tabpanel" aria-labelledby="Jpills-three-example1-tab">
                             <div class="container">
+                                @if($vendor->active)
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#branchModal">
                                     {{ __('Add Branch') }}
                                 </button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="branchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="{{ route('vendor.addBranch', ['vendor' => $vendor->id]) }}" method="POST" id="addBranchForm">
-                                            @csrf
-                                            <div class="row">
-                                            
-                                            <div class="col-md-6">
-                                                <div class="js-form-message form-group mb-5">
-                                                    <label for="name" class="form-label">{{ __('Name') }} <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="name" name="name" required autocomplete="name" autofocus>
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">{{ __('Add Branch') }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('vendor.addBranch', ['vendor' => $vendor->id]) }}" method="POST" id="addBranchForm">
+                                                @csrf
+                                                <div class="row">
+
+                                                <div class="col-md-6">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label for="name" class="form-label">{{ __('Name') }} <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="name" name="name" required autocomplete="name" autofocus>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="js-form-message form-group mb-5">
-                                                    <label for="phone_number" class="form-label">{{ __('Phone') }} <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="phone_number" name="phone_number" required autocomplete="phone_number" autofocus>
+                                                <div class="col-md-6">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label for="phone_number" class="form-label">{{ __('Phone') }} <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="phone_number" name="phone_number" required autocomplete="phone_number" autofocus>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="js-form-message form-group mb-5">
-                                                    <label for="fax" class="form-label">{{ __('Fax') }}</label>
-                                                    <input type="text" class="form-control" id="fax" name="fax" autocomplete="fax" autofocus>
+                                                <div class="col-md-6">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label for="fax" class="form-label">{{ __('Fax') }}</label>
+                                                        <input type="text" class="form-control" id="fax" name="fax" autocomplete="fax" autofocus>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="js-form-message form-group mb-5">
-                                                    <label for="website" class="form-label">{{ __('Website') }}</label>
-                                                    <input type="text" class="form-control" id="website" name="website" autocomplete="website" autofocus>
+                                                <div class="col-md-6">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label for="website" class="form-label">{{ __('Website') }}</label>
+                                                        <input type="text" class="form-control" id="website" name="website" autocomplete="website" autofocus>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="js-form-message form-group mb-5">
-                                                    <label for="address" class="form-label">{{ __('Address') }} <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="address" name="address" required autocomplete="address" autofocus>
+                                                <div class="col-md-12">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label for="address" class="form-label">{{ __('Address') }} <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="address" name="address" required autocomplete="address" autofocus>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="js-form-message form-group mb-5">
-                                                    <label for="latitude" class="form-label">{{ __('Latitude') }} <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="latitude" name="latitude" required autocomplete="latitude" autofocus>
+                                                <div class="col-md-6">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label for="latitude" class="form-label">{{ __('Latitude') }} <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="latitude" name="latitude" required autocomplete="latitude" autofocus>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="js-form-message form-group mb-5">
-                                                    <label for="longitude" class="form-label">{{ __('Longitude') }} <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="longitude" name="longitude" required autocomplete="longitude" autofocus>
+                                                <div class="col-md-6">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label for="longitude" class="form-label">{{ __('Longitude') }} <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="longitude" name="longitude" required autocomplete="longitude" autofocus>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            </div>
-                                            <button id="addBranchBtn" class="btn btn-primary-dark-w px-5 text-white">{{ __('Save') }}</button>
-                                        </form>
-                                    </div>
+                                                </div>
+                                                <button id="addBranchBtn" class="btn btn-primary-dark-w px-5 text-white">{{ __('Save') }}</button>
+                                            </form>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
+                                @endif
                                 @if(count($branches) > 0)
                                     @foreach($branches as $branch)
                                     <div class="row">
@@ -480,6 +530,7 @@
                         </div>
                         <div class="tab-pane fade" id="Jpills-four-example1" role="tabpanel" aria-labelledby="Jpills-four-example1-tab">
                             <div class="container">
+                                @if(count($items) > 0)
                                 <div class="row">
                                     <table class="table table-bordered">
                                         <thead>
@@ -707,6 +758,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @else
+                                    <h4>{{ __('You do not have any orders') }}</h4>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -730,7 +784,8 @@
                 if(response.status) {
                     toastr.success(response.message);
                     window.location.reload();
-                }
+                } else
+                    toastr.warning(response.message);
             })
             .fail(function(response) {
                 toastr.error(response.responseJSON.message);
