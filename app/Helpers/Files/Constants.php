@@ -6,6 +6,7 @@ define("USER_COVER", 'user_cover');
 define("LANGUAGE_PATH", 'language');
 define("CATEGORY_PATH", 'category');
 define("SUB_CATEGORY_PATH", 'subCategory');
+define("TEAM_PATH", 'team');
 define("PRODUCT_PATH", 'product');
 define("COMPANY_PATH", 'company');
 define("VENDOR_PATH", 'vendor');

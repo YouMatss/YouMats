@@ -118,7 +118,7 @@
                                 <li><a class="list-group-item list-group-item-action" href="#">Customer Service</a></li>
                                 <li><a class="list-group-item list-group-item-action" href="#">Returns / Exchange</a></li>
                                 <li><a class="list-group-item list-group-item-action" href="#">FAQs</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Product Support</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="{{route('front.team.index')}}">Our Team</a></li>
                             </ul>
                             <!-- End List Group -->
                         </div>

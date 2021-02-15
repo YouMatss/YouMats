@@ -33,6 +33,7 @@ use App\Nova\Quote;
 use App\Nova\SubCategory;
 use App\Nova\Subscriber;
 use App\Nova\Tag;
+use App\Nova\Team;
 use App\Nova\User;
 use App\Nova\Vendor;
 use App\Policies\PermissionPolicy;
@@ -164,6 +165,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'expanded' => true,
                         'resources' => [
                             Admin::class,
+                            Team::class,
                             Group::make([
                                 'label' => 'Settings',
                                 'expanded' => false,
