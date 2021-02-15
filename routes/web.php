@@ -55,6 +55,7 @@ Route::group([
     Route::get('/contact-us', 'Common\PageController@contactUs')->name('front.contact.page');
 
     Route::post('/contact-us', 'Common\PageController@contactUsRequest')->name('front.contact.request');
+    Route::post('/subscribe', 'Common\MiscController@subscribeRequest')->name('front.subscribe.request');
 
     //Vendor Order Routes (Auth/Verified protected)
     Route::group(['prefix' => 'order', 'namespace' => 'Product', 'middleware' => 'auth:vendor, verified:vendor.verification.notice'], function() {
