@@ -47,6 +47,7 @@ Route::group([
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/products', 'Product\ProductController@all')->name('front.product.all');
     Route::get('/partners', 'Vendor\IndexController@index')->name('vendor.index');
+    Route::get('/team', 'Team\IndexController@index')->name('front.team.index');
     Route::get('/FAQs', 'Common\PageController@faqs')->name('front.faqs.page');
     Route::get('/about-us', 'Common\PageController@aboutUs')->name('front.about.page');
 

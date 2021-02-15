@@ -29,7 +29,7 @@ class CreateQuotesTable extends Migration
 
             $table->string('address');
 
-            $table->enum('order_status', ['pending', 'shipping', 'completed', 'refused']);
+            $table->enum('status', ['pending', 'shipping', 'completed', 'refused']);
 
             $table->text('notes')->nullable();
 
