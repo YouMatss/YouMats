@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use App\Models\Vendor;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -52,8 +55,7 @@ class LoginController extends Controller
     {
         return [
             'email' => $request->email,
-            'password' => $request->password,
-            'active' => 1
+            'password' => $request->password
         ];
     }
 }
