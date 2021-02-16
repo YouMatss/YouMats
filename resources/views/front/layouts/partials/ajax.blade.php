@@ -22,11 +22,11 @@
             return false;
         });
         // subscribeForm Request
-        var form = $("#subscribeForm"),
-            button = $("#subscribeForm button"),
-            buttonContent = button.text();
-        form.submit(function (e) {
+        $("#subscribeForm").submit(function (e) {
             e.preventDefault();
+            var form = $(this),
+                button = $("#subscribeForm button"),
+                buttonContent = button.text();
             $.ajax({
                 type: 'POST',
                 url: "{{route('front.subscribe.request')}}",
@@ -39,9 +39,50 @@
                 success: function (response) {
                     if (response.status) {
                         toastr.success(response.message);
+                        form.find("input").val("");
+                    } else
+                        toastr.warning(response.message);
+
+                    button.attr('disabled', false);
+                    button.text(buttonContent);
+                    // console.log(response);
+                },
+                error: function (response) {
+                    // toastr.error(response.responseJSON.message);
+                    let errors = response.responseJSON.errors;
+
+                    $.each(errors, function (key, value) {
+                        toastr.error(value, key);
+                    })
+                    button.attr('disabled', false);
+                    button.text(buttonContent);
+                }
+            });
+        });
+        // inquireForm Request
+        $("#inquireForm").submit(function (e) {
+            e.preventDefault();
+            var form = $(this),
+                button = $("#inquireForm button"),
+                buttonContent = button.text();
+            $.ajax({
+                type: 'POST',
+                url: "{{route('front.inquire.request')}}",
+                data: new FormData(this),
+                dataType: 'json',
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function () {
+                    button.attr('disabled', true);
+                    button.html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function (response) {
+                    if (response.status) {
+                        toastr.success(response.message);
                         form.find("input, textarea").val("");
                     } else
-                        toastr.warning(response.message)
+                        toastr.warning(response.message);
 
                     button.attr('disabled', false);
                     button.text(buttonContent);

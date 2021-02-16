@@ -170,12 +170,13 @@
                 <!-- Content -->
                 <div class="js-scrollbar u-sidebar__body">
                     <div class="u-sidebar__content u-header-sidebar__content">
-                        <form class="js-validate">
+                        <form id="inquireForm" enctype="multipart/form-data">
+                            @csrf
                             <!-- Login -->
                             <div id="login" data-target-group="idForm">
                                 <!-- Title -->
                                 <header class="text-center mb-7">
-                                    <h2 class="h4 mb-0">Register qoutation!</h2>
+                                    <h2 class="h4 mb-0">Register Quotation!</h2>
                                     <p>Login to manage your account.</p>
                                 </header>
                                 <!-- End Title -->
@@ -186,11 +187,11 @@
                                         <label class="sr-only">Company Name</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <span class="fas fa-user"></span>
-                                                        </span>
+                                                <span class="input-group-text">
+                                                    <span class="fas fa-building"></span>
+                                                </span>
                                             </div>
-                                            <input type="text" class="form-control" name="email" placeholder="Company Name">
+                                            <input type="text" class="form-control" name="company_name" placeholder="Company Name">
                                         </div>
                                     </div>
                                 </div>
@@ -202,11 +203,11 @@
                                         <label class="sr-only">Contact Person</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                        <span class="input-group-text" >
-                                                            <span class="fas fa-user"></span>
-                                                        </span>
+                                                <span class="input-group-text">
+                                                    <span class="fas fa-user"></span>
+                                                </span>
                                             </div>
-                                            <input type="text" class="form-control" name="email"  placeholder="Contact Person">
+                                            <input type="text" class="form-control" name="name" placeholder="Contact Person">
                                         </div>
                                     </div>
                                 </div>
@@ -218,9 +219,9 @@
                                         <label class="sr-only">Email</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                        <span class="input-group-text" >
-                                                            <span class="fas fa-envelope"></span>
-                                                        </span>
+                                                <span class="input-group-text" >
+                                                    <span class="fas fa-envelope"></span>
+                                                </span>
                                             </div>
                                             <input type="text" class="form-control" name="email"  placeholder="Email">
                                         </div>
@@ -231,14 +232,30 @@
                                 <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
-                                        <label class="sr-only">Mobile</label>
+                                        <label class="sr-only">Phone</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                        <span class="input-group-text" >
-                                                            <span class="fas fa-phone"></span>
-                                                        </span>
+                                                <span class="input-group-text">
+                                                    <span class="fas fa-phone"></span>
+                                                </span>
                                             </div>
-                                            <input type="text" class="form-control" name="email"  placeholder="Mobile">
+                                            <input type="text" class="form-control" name="phone" placeholder="Phone">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Form Group -->
+
+                                <!-- Form Group -->
+                                <div class="form-group">
+                                    <div class="js-form-message js-focus-state">
+                                        <label class="sr-only">Message</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <span class="fas fa-sticky-note"></span>
+                                                </span>
+                                            </div>
+                                            <textarea class="form-control" name="message" placeholder="Message"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -247,7 +264,7 @@
                                 <!-- Form Group -->
                                 <div class="form-group">
                                     <!-- actual upload which is hidden -->
-                                    <input type="file" id="actual-btn" hidden/>
+                                    <input type="file" name="file" id="actual-btn" hidden/>
 
                                     <!-- our custom upload button -->
                                     <label class="ub_file" for="actual-btn">Choose File</label>

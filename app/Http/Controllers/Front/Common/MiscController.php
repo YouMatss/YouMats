@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Front\Common;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
+use App\Models\Inquire;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -41,6 +43,37 @@ class MiscController extends Controller
             ]);
         }
         return response([
+            'status' => true,
+            'message' => $message
+        ]);
+    }
+
+    public function inquireRequest(Request $request) {
+        $data = $this->validate($request, [
+            'company_name' => REQUIRED_STRING_VALIDATION,
+            'name' => REQUIRED_STRING_VALIDATION,
+            'email' => REQUIRED_EMAIL_VALIDATION,
+            'phone' => REQUIRED_STRING_VALIDATION,
+            'message' => NULLABLE_TEXT_VALIDATION,
+            'file' => NULLABLE_FILE_VALIDATION
+        ]);
+
+        try {
+            $contact = Inquire::create($data);
+            if(isset($request->file)) {
+                $contact->addMedia($request->file)->toMediaCollection(INQUIRE_PATH);
+            }
+            if($contact) {
+                $message = 'You request submitted successfully.';
+//                Email::sendEmailForms($contact, $message);
+            }
+        } catch (\Exception $e) {
+            return response([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+        return response()->json([
             'status' => true,
             'message' => $message
         ]);

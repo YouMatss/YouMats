@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Front\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
@@ -27,4 +30,22 @@ class ResetPasswordController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    protected function resetPassword($user, $password)
+    {
+        $this->setUserPassword($user, $password);
+
+        $user->setRememberToken(Str::random(60));
+
+        $user->save();
+
+        event(new PasswordReset($user));
+
+        if($user->active) {
+            $this->guard()->login($user);
+        } else {
+            Session::flash('custom_success', __('Password changed successfully. but your account not activated yet!'));
+            return redirect()->route('home');
+        }
+    }
 }

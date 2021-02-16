@@ -11,6 +11,7 @@ use App\Nova\Contact;
 use App\Nova\Country;
 use App\Nova\Currency;
 use App\Nova\FAQ;
+use App\Nova\Inquire;
 use App\Nova\Language;
 use App\Nova\Membership;
 use App\Nova\Metrics\CategoryCount;
@@ -158,6 +159,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             User::class,
                             Subscriber::class,
                             Contact::class,
+                            NovaResource::make(Inquire::class)->label('Inquire (Fast Quote)'),
                         ]
                     ]),
                     TopLevelResource::make([
