@@ -40,6 +40,7 @@
 
 <!-- Toastr JS -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+@include('front.layouts.partials.alerts')
 
 <!-- JS Plugins Init. -->
 <script>

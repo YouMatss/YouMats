@@ -29,7 +29,7 @@ class UserProfileRequest extends FormRequest
             'licenses' => ARRAY_VALIDATION,
             'licenses.*' => NULLABLE_IMAGE_VALIDATION,
             'name' => REQUIRED_STRING_VALIDATION,
-            'email' => 'required|max:191|email|unique:users,email,' . auth()->user()->id,
+//            'email' => 'required|max:191|email|unique:users,email,' . auth()->user()->id,
             'phone' => REQUIRED_STRING_VALIDATION,
             'phone2' => NULLABLE_STRING_VALIDATION,
             'address' => REQUIRED_STRING_VALIDATION,

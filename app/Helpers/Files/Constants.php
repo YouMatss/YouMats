@@ -13,6 +13,7 @@ define("VENDOR_PATH", 'vendor');
 define("VENDOR_LOGO", 'vendor_logo');
 define("VENDOR_COVER", 'vendor_cover');
 define("CURRENCY_PATH", 'currency');
+define("INQUIRE_PATH", 'inquire');
 define("PAGE_PATH", 'page');
 define("CONTENT_PATH", 'content');
 
@@ -40,6 +41,8 @@ define('NULLABLE_IMAGE_VALIDATION', ['nullable', 'image', 'mimes:jpg,jpeg,png,gi
 
 define('REQUIRED_PDF_VALIDATION', ['required', 'file', 'mimes:pdf', 'max:1024']);
 define('NULLABLE_PDF_VALIDATION', ['nullable', 'file', 'mimes:pdf', 'max:1024']);
+
+define('NULLABLE_FILE_VALIDATION', ['nullable', 'file', 'mimes:png,jpg,jpeg,pdf,doc,docx,txt', 'max:1024']);
 // Array
 define('ARRAY_VALIDATION', ['array']);
 define('REQUIRED_ARRAY_VALIDATION', ['required', 'array']);

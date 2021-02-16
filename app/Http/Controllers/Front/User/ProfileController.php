@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserProfileRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -32,8 +33,8 @@ class ProfileController extends Controller
             foreach ($request->licenses as $license)
                 $auth_user->addMedia($license)->toMediaCollection(COMPANY_PATH);
 
-        if($request->email != $auth_user->email)
-            $data['email_verified_at'] = null;
+//        if($request->email != $auth_user->email)
+//            $data['email_verified_at'] = null;
 
         if(isset($request->password))
             $data['password'] = Hash::make($request->password);
@@ -42,6 +43,7 @@ class ProfileController extends Controller
 
         $auth_user->update($data);
 
-        return back()->with(['message' => __('Profile has been updated successfully!')]);
+        Session::flash('custom_success', __('Profile has been updated successfully!'));
+        return back();
     }
 }

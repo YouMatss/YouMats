@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Front\User\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Vendor;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -41,9 +41,8 @@ class LoginController extends Controller
      * @param Request $request
      * @throws ValidationException
      */
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        $user = Vendor::where($this->username(), $request->{$this->username()})->first();
+    protected function sendFailedLoginResponse(Request $request) {
+        $user = User::where($this->username(), $request->{$this->username()})->first();
 
         if($user && !$user->active && Hash::check($request->password, $user->password))
             throw ValidationException::withMessages([
