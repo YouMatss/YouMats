@@ -187,7 +187,7 @@
     </div>
 
     <div class="container mb-8">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Most Buy Company</h3>
         </div>
 
@@ -372,7 +372,7 @@
 
             <div class="container p-0">
 
-                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
                     <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">LATEST PRODUCTS</h3>
                 </div>
 
@@ -787,12 +787,12 @@
         <div class="mb-6">
             <!-- Nav nav-pills -->
             <div class="position-relative text-center z-index-2">
-                <div class=" d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0">
+                <div class=" d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 rtl">
                     <h3 class="section-title mb-0 pb-2 font-size-22">BUILDING MATERIALS AND CONSTRUCTION PRODUCTS</h3>
                 </div>
             </div>
             <!-- End Nav Pills -->
-            <div class="row">
+            <div class="row rtl">
 
                 <div class="col-md-3">
                     <div class="block_img_cat">
@@ -1031,7 +1031,7 @@
 
     <div class="container">
 
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">TOP CATEGORIES
             </h3>
             <a class="d-block text-gray-16" href="#">GO TO ALL TOP CATEGORIES                    <i class="ec ec-arrow-right-categproes"></i></a>
@@ -1131,13 +1131,13 @@
         </div>
     </div>
     <div class="container mb-8">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">BARRIERS</h3>
             <a class="d-block text-gray-16" href="#">Go to ALL PRODUCTS
                 <i class="ec ec-arrow-right-categproes"></i></a>
         </div>
 
-        <div class="row">
+        <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="#" class="d-block"><img class="img-fluid img_main_block" src="assets/img/BARRIERS_0.png" width="200" alt="Image Description"></a>
             </div>
@@ -1305,12 +1305,12 @@
         </div>
     </div>
     <div class="container mb-8">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">GLASS AND FACADE               </h3>
             <a class="d-block text-gray-16" href="#">GO TO ALL PRODUCTS<i class="ec ec-arrow-right-categproes"></i></a>
         </div>
 
-        <div class="row">
+        <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="#" class="d-block"><img class="img-fluid img_main_block" src="assets/img/se_8.jpg" width="200" alt="Image Description"></a>
             </div>
@@ -1478,12 +1478,12 @@
         </div>
     </div>
     <div class="container mb-8">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">MODERN KITCHENS</h3>
             <a class="d-block text-gray-16" href="#">GO TO ALL PRODUCTS<i class="ec ec-arrow-right-categproes"></i></a>
         </div>
 
-        <div class="row">
+        <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="#" class="d-block"><img class="img-fluid img_main_block" src="assets/img/se_3.jpg" width="200" alt="Image Description"></a>
             </div>
@@ -1654,7 +1654,7 @@
     <!-- Team -->
     <section id="team" class="pb-5">
         <div class="container">
-            <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+            <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
                 <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">OUR TEAM</h3>
                 <a class="d-block text-gray-16" href="#">GO TO ALL TEAM<i class="ec ec-arrow-right-categproes"></i></a>
             </div>

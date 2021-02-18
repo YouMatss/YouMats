@@ -357,3 +357,8 @@
     border-radius: 5px;
     color: #fff;
 }
+
+
+.product-item__outer{
+    width: 100%;
+}
