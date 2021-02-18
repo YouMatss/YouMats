@@ -35,7 +35,7 @@
 
                         <div class="row">
                             <div class="mb-4">
-                                <h1 class="text-center col-md-12">{{ __('Login') }}</h1>
+                                <h1 class="text-center col-md-12">{{ __('Vendor Login') }}</h1>
                             </div>
                         </div>
                         <div class="row">

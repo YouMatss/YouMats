@@ -25,6 +25,9 @@ class OrderController extends Controller
 
     public function vendorUpdate(Request $request, Vendor $vendor)
     {
+        if(!$vendor->active)
+            return response(['status' => false, 'message' => __('Your account is not activated')]);
+
         $request->validate([
             'payment_status' => 'required|in:pending,refunded,completed',
             'order_status' => 'required|in:pending,shipping,refused,completed',

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Slug;
@@ -76,7 +77,7 @@ class Product extends Resource
                     ->min(1)
                     ->step(0.05),
 
-                Number::make('Stoke')
+                Number::make(__('Stock'), 'stoke')
                     ->min(0)
                     ->rules(REQUIRED_INTEGER_VALIDATION),
 
@@ -99,6 +100,10 @@ class Product extends Resource
                 ->rules(REQUIRED_NUMERIC_VALIDATION),
 
             Toggle::make('Active')
+                ->falseColor('#bacad6')
+                ->editableIndex(),
+
+            Toggle::make(__('Best Seller'), 'best_seller')
                 ->falseColor('#bacad6')
                 ->editableIndex(),
 

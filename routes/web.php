@@ -25,16 +25,18 @@ Route::group([
 
         Auth::routes(['verify' => true]);
 
+        Route::get('show/{vendor}/{name}', 'IndexController@show')->name('show');
         Route::get('{vendor}/edit', 'IndexController@edit')->name('edit');
         Route::patch('{vendor}/update', 'IndexController@update')->name('update');
+        Route::post('{vendor}/branch', 'IndexController@addBranch')->name('addBranch');
     });
 
     //Cart Routes
     Route::group(['prefix' => 'cart', 'namespace' => 'Product'], function() {
         Route::get('/', 'CartController@show')->name('cart.show');
-        Route::post('/add/{product}', 'CartController@add')->name('cart.add');
+        Route::post('/add/{product}', 'CartController@add')->name('cart.add')->middleware('throttle:10,1');
         Route::delete('/delete/{rowId}', 'CartController@deleteItem')->name('cart.remove');
-        Route::patch('/update', 'CartController@update')->name('cart.update');
+        Route::patch('/update', 'CartController@update')->name('cart.update')->middleware('throttle:10,1');
     });
 
     Route::group(['prefix' => 'wishlist', 'namespace' => 'Product', 'middleware' => ['auth', 'verified']], function() {
@@ -47,8 +49,14 @@ Route::group([
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/products', 'Product\ProductController@all')->name('front.product.all');
     Route::get('/partners', 'Vendor\IndexController@index')->name('vendor.index');
+    Route::get('/team', 'Team\IndexController@index')->name('front.team.index');
     Route::get('/FAQs', 'Common\PageController@faqs')->name('front.faqs.page');
     Route::get('/about-us', 'Common\PageController@aboutUs')->name('front.about.page');
+    Route::get('/contact-us', 'Common\PageController@contactUs')->name('front.contact.page');
+
+    Route::post('/contact-us', 'Common\PageController@contactUsRequest')->name('front.contact.request');
+    Route::post('/subscribe', 'Common\MiscController@subscribeRequest')->name('front.subscribe.request');
+    Route::post('/inquire', 'Common\MiscController@inquireRequest')->name('front.inquire.request');
 
     //Vendor Order Routes (Auth/Verified protected)
     Route::group(['prefix' => 'order', 'namespace' => 'Product', 'middleware' => 'auth:vendor, verified:vendor.verification.notice'], function() {

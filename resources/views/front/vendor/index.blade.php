@@ -29,9 +29,9 @@
                                 <div class="product-item__inner px-xl-4 p-3">
                                     <div class="product-item__body pb-xl-2">
                                         <div class="mb-2">
-                                            <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ $vendor->getFirstMediaUrl(VENDOR_LOGO) }}" alt="{{ $vendor->name }}"></a>
+                                            <a href="{{ route('vendor.show', ['vendor' => $vendor->id, 'name' => $vendor->name]) }}" class="d-block text-center"><img class="img-fluid" src="{{ $vendor->getFirstMediaUrl(VENDOR_LOGO) }}" alt="{{ $vendor->name }}"></a>
                                         </div>
-                                        <h5 class="text-center mb-1 product-item__title"><a href="#" class="font-size-15 text-gray-90">{{ $vendor->name }}</a></h5>
+                                        <h5 class="text-center mb-1 product-item__title"><a href="{{ route('vendor.show', ['vendor' => $vendor->id, 'name' => $vendor->name]) }}" class="font-size-15 text-gray-90">{{ $vendor->name }}</a></h5>
                                     </div>
                                 </div>
                             </div>

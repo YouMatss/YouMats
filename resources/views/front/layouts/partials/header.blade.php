@@ -11,10 +11,11 @@
                     <div class="topbar-right ml-auto">
                         <ul class="list-inline mb-0">
 
-                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                <a href="{{ route('wishlist.index') }}" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> My Wishlist </a>
-                            </li>
-
+                            @if(!Auth::guard('vendor')->check())
+                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                    <a href="{{ route('wishlist.index') }}" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> My Wishlist </a>
+                                </li>
+                            @endif
                             @if(\Config::get('currencies'))
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                                     <div class="d-flex align-items-center">
@@ -111,24 +112,19 @@
                             @elseif(!Auth::guard('web')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                     <a href="{{route('vendor.login')}}" role="button" class="u-header-topbar__nav-link">
-                                        <i class="ec ec-user mr-1"></i> Register <span class="text-gray-50">or</span> Sign in as Vendor
+                                        <i class="ec ec-user mr-1"></i> {{ __('Vendor Login') }}
+                                    </a>
+                                </li>
+                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                    <a href="{{route('vendor.register')}}" role="button" class="u-header-topbar__nav-link">
+                                        <i class="ec ec-user mr-1"></i> {{ __('Sell') }}
                                     </a>
                                 </li>
                             @endif
 
 
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link"
-                                   aria-controls="sidebarContent"
-                                   aria-haspopup="true"
-                                   aria-expanded="false"
-                                   data-unfold-event="click"
-                                   data-unfold-hide-on-scroll="false"
-                                   data-unfold-target="#sidebarContent"
-                                   data-unfold-type="css-animation"
-                                   data-unfold-animation-in="fadeInRight"
-                                   data-unfold-animation-out="fadeOutRight"
-                                   data-unfold-duration="500">
+                                <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
                                     Get Quote
                                 </a>
                             </li>
@@ -144,23 +140,13 @@
                 <div class="row align-items-center">
                     <div class="col-auto">
                         <nav class="navbar navbar-expand u-header__navbar py-0 justify-content-xl-between">
-                            <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center" href="#" aria-label="">
+                            <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center" href="{{route('home')}}" aria-label="">
                                 <img src="{{front_url()}}/assets/img/logo.png">
                             </a>
-                            <button id="sidebarHeaderInvokerMenu" type="button" class="d-block d-md-none d-lg-none navbar-toggler d-block btn u-hamburger mr-3 mr-xl-0"
-                                    aria-controls="sidebarHeader"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    data-unfold-event="click"
-                                    data-unfold-hide-on-scroll="false"
-                                    data-unfold-target="#sidebarHeader1"
-                                    data-unfold-type="css-animation"
-                                    data-unfold-animation-in="fadeInLeft"
-                                    data-unfold-animation-out="fadeOutLeft"
-                                    data-unfold-duration="500">
-                                        <span id="hamburgerTriggerMenu" class="u-hamburger__box">
-                                            <span class="u-hamburger__inner"></span>
-                                        </span>
+                            <button id="sidebarHeaderInvokerMenu" type="button" class="d-block d-md-none d-lg-none navbar-toggler d-block btn u-hamburger mr-3 mr-xl-0" aria-controls="sidebarHeader" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarHeader1" data-unfold-type="css-animation" data-unfold-animation-in="fadeInLeft" data-unfold-animation-out="fadeOutLeft" data-unfold-duration="500">
+                                <span id="hamburgerTriggerMenu" class="u-hamburger__box">
+                                    <span class="u-hamburger__inner"></span>
+                                </span>
                             </button>
                         </nav>
                         <aside id="sidebarHeader1" class="u-sidebar u-sidebar--left" aria-labelledby="sidebarHeaderInvokerMenu">
@@ -331,7 +317,7 @@
                                         <a class="nav-link u-header__nav-link" href="{{route('front.about.page')}}">About us</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="#">Contact Us</a>
+                                        <a class="nav-link u-header__nav-link" href="{{route('front.contact.page')}}">Contact Us</a>
                                     </li>
 
                                 </ul>
@@ -423,7 +409,7 @@
                                             </span>
                                         </button>
                                     </div>
-                                    <div id="basicsCollapseOne" class="collapse vertical-menu v1"
+                                    <div id="basicsCollapseOne" class="collapse @if(\Request::route()->getName() == 'home') show @endif vertical-menu v1"
                                          aria-labelledby="basicsHeadingOne"
                                          data-parent="#basicsAccordion">
                                         <div class="card-body p-0">

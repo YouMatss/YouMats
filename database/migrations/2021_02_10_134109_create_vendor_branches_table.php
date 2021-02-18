@@ -18,8 +18,8 @@ class CreateVendorBranchesTable extends Migration
             $table->unsignedBigInteger('vendor_id');
             $table->string('name');
             $table->string('phone_number');
-            $table->string('fax');
-            $table->string('website');
+            $table->string('fax')->nullable();
+            $table->string('website')->nullable();
             $table->string('address');
             $table->string('latitude');
             $table->string('longitude');
