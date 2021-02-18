@@ -103,6 +103,10 @@ class Product extends Resource
                 ->falseColor('#bacad6')
                 ->editableIndex(),
 
+            Toggle::make(__('Best Seller'), 'best_seller')
+                ->falseColor('#bacad6')
+                ->editableIndex(),
+
             Number::make('Views')
                 ->hideWhenUpdating()
                 ->hideWhenCreating(),

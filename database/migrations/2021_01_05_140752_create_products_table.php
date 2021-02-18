@@ -37,6 +37,7 @@ class CreateProductsTable extends Migration
             $table->string('SKU')->unique();
 
             $table->tinyInteger('active')->default(1);
+            $table->boolean('best_seller')->default(0);
             $table->integer('views')->default(0);
 
             $table->string('slug')->unique();

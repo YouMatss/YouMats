@@ -5,6 +5,7 @@ define("USER_PROFILE", 'user_profile');
 define("USER_COVER", 'user_cover');
 define("LANGUAGE_PATH", 'language');
 define("CATEGORY_PATH", 'category');
+define("CATEGORY_COVER", 'category_cover');
 define("SUB_CATEGORY_PATH", 'subCategory');
 define("TEAM_PATH", 'team');
 define("PRODUCT_PATH", 'product');
