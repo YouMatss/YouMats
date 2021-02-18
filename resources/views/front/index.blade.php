@@ -416,7 +416,7 @@
 
     <!-- Section II Category -->
     <div class="container mb-8">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_ii_category->name}}</h3>
             <a class="d-block text-gray-16" href="{{route('front.category', [$section_ii_category->slug])}}">
                 Go to ALL PRODUCTS
@@ -424,7 +424,7 @@
             </a>
         </div>
 
-        <div class="row">
+        <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [$section_ii_category->slug])}}" class="d-block">
                     <img class="img-fluid img_main_block" width="200" src="{{$section_ii_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$section_ii_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$section_ii_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
@@ -473,7 +473,7 @@
     </div>
     <!-- Section III Category -->
     <div class="container mb-8">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iii_category->name}}</h3>
             <a class="d-block text-gray-16" href="{{route('front.category', [$section_iii_category->slug])}}">
                 Go to ALL PRODUCTS
@@ -481,7 +481,7 @@
             </a>
         </div>
 
-        <div class="row">
+        <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [$section_iii_category->slug])}}" class="d-block">
                     <img class="img-fluid img_main_block" width="200" src="{{$section_iii_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$section_iii_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$section_iii_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
@@ -531,7 +531,7 @@
 
     <!-- Section IV Category -->
     <div class="container mb-8">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iv_category->name}}</h3>
             <a class="d-block text-gray-16" href="{{route('front.category', [$section_iv_category->slug])}}">
                 Go to ALL PRODUCTS
@@ -539,7 +539,7 @@
             </a>
         </div>
 
-        <div class="row">
+        <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [$section_iv_category->slug])}}" class="d-block">
                     <img class="img-fluid img_main_block" width="200" src="{{$section_iv_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$section_iv_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$section_iv_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
