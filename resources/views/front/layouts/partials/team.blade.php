@@ -6,7 +6,7 @@
                 <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">OUR TEAM</h3>
                 <a class="d-block text-gray-16" href="{{route('front.team.index')}}">GO TO ALL TEAM<i class="ec ec-arrow-right-categproes"></i></a>
             </div>
-            <div class="row">
+            <div class="row rtl">
                 @foreach($team as $member)
                     <div class="col-xs-12 col-sm-6 col-md-3">
                         <div class="image-flip" >
