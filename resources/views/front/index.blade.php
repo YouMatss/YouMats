@@ -35,8 +35,7 @@
                                         data-scs-animation-delay="200">
                                         SHOP <stong class="font-weight-bold">PLUMBING</stong> APPLIANCES
                                     </h1>
-                                    <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
-                                    <a href="#" class="btn btn-primary transition-3d-hover rounded-lg  py-2 px-md-7 px-3 font-size-16"
+                                    <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16">
                                        data-scs-animation-in="fadeInUp"
                                        data-scs-animation-delay="300">
                                         Start Buying
@@ -66,8 +65,7 @@
                                         data-scs-animation-delay="200">
                                         SHOP <stong class="font-weight-bold">BUILDING MATERIAL</stong> IN SAUDI ARABIA
                                     </h1>
-                                    <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
-                                    <a href="#" class="btn btn-primary transition-3d-hover rounded-lg  py-2 px-md-7 px-3 font-size-16"
+                                    <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16">
                                        data-scs-animation-in="fadeInUp"
                                        data-scs-animation-delay="300">
                                         Start Buying
