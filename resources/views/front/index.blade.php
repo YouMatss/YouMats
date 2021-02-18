@@ -321,6 +321,7 @@
         </div>
     </div>
 
+    @if(isset($section_i_category))
     <!-- Section I Category -->
     <div class="container">
         <div class="mb-6">
@@ -384,7 +385,7 @@
             </div>
         </div>
     </div>
-
+    @endif
     <!-- Top Categories -->
     <div class="container">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
@@ -412,6 +413,7 @@
         </div>
     </div>
 
+    @if(isset($section_ii_category))
     <!-- Section II Category -->
     <div class="container mb-8">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
@@ -469,6 +471,9 @@
             </div>
         </div>
     </div>
+    @endif
+
+    @if(isset($section_iii_category))
     <!-- Section III Category -->
     <div class="container mb-8">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
@@ -526,7 +531,9 @@
             </div>
         </div>
     </div>
+    @endif
 
+    @if(isset($section_iv_category))
     <!-- Section IV Category -->
     <div class="container mb-8">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
@@ -584,5 +591,8 @@
             </div>
         </div>
     </div>
+    @endif
+
+
     @include('front.layouts.partials.team')
 @endsection
