@@ -19,7 +19,7 @@
     <div class="mb-6 bg-md-transparent py-6">
         <div class="container">
             <div class="mb-6">
-                <div class="d-flex justify-content-between align-items-center border-bottom border-color-1 flex-lg-nowrap flex-wrap mb-4">
+                <div class="d-flex justify-content-between align-items-center border-bottom border-color-1 flex-lg-nowrap flex-wrap mb-4 rtl">
                     <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Vendor Logo</h3>
                 </div>
                 <ul class="row list-unstyled products-group no-gutters mb-6">

@@ -31,13 +31,13 @@
             <div class="row mb-8">
                 <div class="col-xl-12">
 
-                    <div class="d-block d-md-flex flex-center-between mb-3">
+                    <div class="d-block d-md-flex flex-center-between mb-3 rtl">
                         <h3 class="font-size-25 mb-2 mb-md-0">All Products</h3>
                         <p class="font-size-14 text-gray-90 mb-0">Showing 1–25 of 56 results</p>
                     </div>
 
                     <!-- Shop-control-bar -->
-                    <div class="bg-gray-1 flex-center-between borders-radius-9 py-1">
+                    <div class="bg-gray-1 flex-center-between borders-radius-9 py-1 rtl">
                         <div class="d-xl-none">
                             <!-- Account Sidebar Toggle Button -->
                             <a id="sidebarNavToggler1" class="btn btn-sm py-1 font-weight-normal" role="button"
