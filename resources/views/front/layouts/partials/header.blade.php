@@ -392,7 +392,7 @@
         <!-------- search & cart -------->
         <div class="d-none d-xl-block bg-primary">
             <div class="container">
-                <div class="row align-items-stretch min-height-50">
+                <div class="row align-items-stretch min-height-50 rtl">
                     <div class="col-md-auto d-none d-xl-flex align-items-end">
                         <div class="max-width-270 min-width-270">
                             <div id="basicsAccordion">
