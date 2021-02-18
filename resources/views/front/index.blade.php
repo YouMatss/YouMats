@@ -187,7 +187,7 @@
     </div>
 
     <div class="container mb-8">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Most Buy Company</h3>
         </div>
 
@@ -248,7 +248,7 @@
 
             <div class="container p-0">
 
-                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
                     <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">LATEST PRODUCTS</h3>
                 </div>
 
@@ -328,12 +328,12 @@
         <div class="mb-6">
             <!-- Nav nav-pills -->
             <div class="position-relative text-center z-index-2">
-                <div class=" d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0">
+                <div class=" d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 rtl">
                     <h3 class="section-title mb-0 pb-2 font-size-22">{{$section_i_category->name}}</h3>
                 </div>
             </div>
             <!-- End Nav Pills -->
-            <div class="row">
+            <div class="row rtl">
                 <div class="col-md-3">
                     <div class="block_img_cat">
                         <a href="{{route('front.category', [$section_i_category->slug])}}" class="d-block">
@@ -471,7 +471,6 @@
             </div>
         </div>
     </div>
-
     <!-- Section III Category -->
     <div class="container mb-8">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
@@ -587,6 +586,5 @@
             </div>
         </div>
     </div>
-
     @include('front.layouts.partials.team')
 @endsection
