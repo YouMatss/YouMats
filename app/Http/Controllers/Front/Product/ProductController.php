@@ -16,9 +16,10 @@ class ProductController extends Controller
 
         abort_if(!$data['product'], 404);
 
+
         $data['FAQs'] = FAQ::orderBy('sort')->get();
         $data['related_products'] = Product::with('subCategory')->where(function ($q) use ($data) {
-            $q->where('subCategory_id', $data['product']->subCategory_id)
+                $q->where('subCategory_id', $data['product']->subCategory_id)
                 ->orWhere('vendor_id', $data['product']->vendor_id);
         })->where('id', '!=', $data['product']->id)->orderby('sort')->get();
 
