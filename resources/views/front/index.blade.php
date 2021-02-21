@@ -300,16 +300,20 @@
                                                 <div class="prodcut-price">
                                                     <div class="text-gray-100">{{getCurrency('code')}} {{$bs_product->price}}</div>
                                                 </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <button data-url="{{ route('cart.add', ['product' => $bs_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                @if(!Auth::guard('vendor')->check())
+                                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                                        <button data-url="{{ route('cart.add', ['product' => $bs_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        @if(!Auth::guard('vendor')->check())
+                                            <div class="product-item__footer">
+                                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                                    <a data-url="{{ route('wishlist.add', ['product' => $bs_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a data-url="{{ route('wishlist.add', ['product' => $bs_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -366,15 +370,19 @@
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$i_product->price}}</div>
                                             </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <button data-url="{{ route('cart.add', ['product' => $i_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
-                                            </div>
+                                            @if(!Auth::guard('vendor')->check())
+                                                <div class="d-none d-xl-block prodcut-add-cart">
+                                                    <button data-url="{{ route('cart.add', ['product' => $i_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a data-url="{{ route('wishlist.add', ['product' => $i_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
+                                        @if(!Auth::guard('vendor')->check())
+                                            <div class="border-top pt-2 flex-center-between flex-wrap">
+                                                <a data-url="{{ route('wishlist.add', ['product' => $i_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -453,16 +461,20 @@
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">{{getCurrency('code')}} {{$ii_product->price}}</div>
                                         </div>
-                                        <div class="d-none d-xl-block prodcut-add-cart">
-                                            <button data-url="{{ route('cart.add', ['product' => $ii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                        @if(!Auth::guard('vendor')->check())
+                                            <div class="d-none d-xl-block prodcut-add-cart">
+                                                <button data-url="{{ route('cart.add', ['product' => $ii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                @if(!Auth::guard('vendor')->check())
+                                    <div class="product-item__footer">
+                                        <div class="border-top pt-2 flex-center-between flex-wrap">
+                                            <a data-url="{{ route('wishlist.add', ['product' => $ii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="product-item__footer">
-                                    <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a data-url="{{ route('wishlist.add', ['product' => $ii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                    </div>
-                                </div>
+                                @endif
                             </div>
                         </div>
                     </li>
@@ -513,16 +525,20 @@
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$iii_product->price}}</div>
                                             </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <button data-url="{{ route('cart.add', ['product' => $iii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                @if(!Auth::guard('vendor')->check())
+                                                <div class="d-none d-xl-block prodcut-add-cart">
+                                                    <button data-url="{{ route('cart.add', ['product' => $iii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    @if(!Auth::guard('vendor')->check())
+                                        <div class="product-item__footer">
+                                            <div class="border-top pt-2 flex-center-between flex-wrap">
+                                                <a data-url="{{ route('wishlist.add', ['product' => $iii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a data-url="{{ route('wishlist.add', ['product' => $iii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </li>
@@ -573,16 +589,20 @@
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$iv_product->price}}</div>
                                             </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <button data-url="{{ route('cart.add', ['product' => $iv_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                            @if(!Auth::guard('vendor')->check())
+                                                <div class="d-none d-xl-block prodcut-add-cart">
+                                                    <button data-url="{{ route('cart.add', ['product' => $iv_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    @if(!Auth::guard('vendor')->check())
+                                        <div class="product-item__footer">
+                                            <div class="border-top pt-2 flex-center-between flex-wrap">
+                                                <a data-url="{{ route('wishlist.add', ['product' => $iv_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a data-url="{{ route('wishlist.add', ['product' => $iv_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </li>

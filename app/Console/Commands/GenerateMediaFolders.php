@@ -49,7 +49,7 @@ class GenerateMediaFolders extends Command
                 mkdir(storage_path("app/public/" . $row->id));
 
             copy(storage_path('app/public/61/product_4984_1.png'), storage_path('app/public/'. $row->id .'/product_4984_1.png'));
-            Log::info(`Generating a folder for ${$row->id}`);
+            Log::info("Generating folders for $row->id");
         }
 
         Log::info('Done...');

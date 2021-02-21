@@ -40,6 +40,7 @@
 
 <!-- Toastr JS -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
 @include('front.layouts.partials.alerts')
 
 <!-- JS Plugins Init. -->
@@ -143,6 +144,43 @@
 
         // initialization of select picker
         $.HSCore.components.HSSelectPicker.init('.js-select');
+
+        $(".btn-add-cart").on('click', function(){
+            let url = $(this).data('url');
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: { _token: '{{ csrf_token() }}' }
+            })
+                .done(function(response) {
+                    $('#cartCount').html(response.count);
+                    $('#cartTotal').html(response.total);
+                    toastr.success(response.message);
+                })
+                .fail(function(response) {
+                    toastr.error(response);
+                })
+        });
+
+        $(".btn-add-wishlist").on('click', function(){
+            let url = $(this).data('url');
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: { _token: '{{ csrf_token() }}' }
+            })
+                .done(function(response) {
+                    if(response.status)
+                        toastr.success(response.message);
+                    else
+                        toastr.warning(response.message)
+                })
+                .fail(function(response) {
+                    toastr.error(response.responseJSON.message ?? {{ __('Error') }});
+                })
+        });
     });
 
     // initialization of quantity counter
@@ -191,7 +229,6 @@
             input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
         });
     }( document, window, 0 ));
-
 </script>
 
 @include('front.layouts.partials.ajax')
