@@ -131,7 +131,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" required value="{{$user->email}}">
+                                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" disabled value="{{$user->email}}">
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
