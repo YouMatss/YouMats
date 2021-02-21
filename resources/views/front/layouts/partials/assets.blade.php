@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="{{front_url()}}/assets/css/theme.css">
 <link rel="stylesheet" href="{{front_url()}}/assets/css/style.css">
 <link rel="stylesheet" href="{{ front_url() }}/assets/css/custom.css">
-<link rel="stylesheet" href="{{ front_url() }}/assets/css/rtl.css">
 
+@if(\LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+<link rel="stylesheet" href="{{ front_url() }}/assets/css/rtl.css">
+@endif
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">

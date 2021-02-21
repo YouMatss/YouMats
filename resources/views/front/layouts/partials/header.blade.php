@@ -11,10 +11,11 @@
                     <div class="topbar-right ml-auto">
                         <ul class="list-inline mb-0">
 
-                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                <a href="{{ route('wishlist.index') }}" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> My Wishlist </a>
-                            </li>
-
+                            @if(!Auth::guard('vendor')->check())
+                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                    <a href="{{ route('wishlist.index') }}" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> My Wishlist </a>
+                                </li>
+                            @endif
                             @if(\Config::get('currencies'))
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                                     <div class="d-flex align-items-center">

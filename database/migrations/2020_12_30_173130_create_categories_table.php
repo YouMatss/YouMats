@@ -25,6 +25,14 @@ class CreateCategoriesTable extends Migration
             $table->text('meta_desc')->nullable();
             $table->text('meta_keywords')->nullable();
 
+            $table->boolean('isFeatured')->default(0);
+            $table->boolean('topCategory')->default(0);
+
+            $table->boolean('section_i')->default(0);
+            $table->boolean('section_ii')->default(0);
+            $table->boolean('section_iii')->default(0);
+            $table->boolean('section_iv')->default(0);
+
             $table->integer('sort');
 
             $table->softDeletes();
