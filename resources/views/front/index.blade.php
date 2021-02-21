@@ -388,18 +388,18 @@
     @endif
     <!-- Top Categories -->
     <div class="container">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">TOP CATEGORIES</h3>
         </div>
         <div class="mb-6">
-            <div class="row flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
+            <div class="row rtl flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
                 @foreach($top_categories as $t_category)
                 <div class="col-md-6 col-xl-4 mb-5 flex-shrink-0 flex-md-shrink-1">
                     <div class="bg-gray-1 overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
                         <a href="{{route('front.category', [$t_category->slug])}}" class="d-block  pr-2 pr-wd-6">
                             <div class="media align-items-center">
                                 <div class="max-width-148 img_cat_home">
-                                    <img class="img-fluid" src="{{$f_category->getFirstMediaUrl(CATEGORY_PATH)}}" alt="{{$f_category->getFirstMedia(CATEGORY_PATH)->img_alt}}" title="{{$f_category->getFirstMedia(CATEGORY_PATH)->img_title}}" />
+                                    <img class="img-fluid" src="{{$t_category->getFirstMediaUrl(CATEGORY_PATH)}}" alt="{{$t_category->getFirstMedia(CATEGORY_PATH)->img_alt}}" title="{{$t_category->getFirstMedia(CATEGORY_PATH)->img_title}}" />
                                 </div>
                                 <div class="ml-4 media-body">
                                     <h4 class="mb-0 text-gray-90">{{$t_category->name}}</h4>

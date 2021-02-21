@@ -16,6 +16,8 @@ class SubCategoryController extends Controller
         abort_if(!$data['category'], 404);
         abort_if(!$data['subCategory'], 404);
 
+//        dd($data['subCategory']);
+
         $data['products'] = $data['subCategory']->products()->paginate(10);
 
         return view('front.category.sub')->with($data);

@@ -113,12 +113,12 @@
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
                                 <li><a class="list-group-item list-group-item-action" href="#">My Account</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Order Tracking</a></li>
                                 <li><a class="list-group-item list-group-item-action" href="#">Wish List</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Customer Service</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Returns / Exchange</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">FAQs</a></li>
                                 <li><a class="list-group-item list-group-item-action" href="{{route('front.team.index')}}">Our Team</a></li>
+                                @foreach($pages as $page)
+                                <li><a class="list-group-item list-group-item-action" href="{{route('front.page.index', [$page->slug])}}">{{$page->title}}</a></li>
+                                @endforeach
+                                <li><a class="list-group-item list-group-item-action" href="{{route('front.faqs.page')}}">FAQs</a></li>
                             </ul>
                             <!-- End List Group -->
                         </div>

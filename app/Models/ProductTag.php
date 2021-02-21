@@ -12,7 +12,7 @@ class ProductTag extends Model
     protected $table = 'product_tag';
 
     public function tag() {
-        return $this->belongsTo(Tag::class)->distinct();
+        return $this->belongsTo(Tag::class);
     }
 
 }

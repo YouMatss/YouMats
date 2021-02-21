@@ -314,9 +314,6 @@
                                         <a class="nav-link u-header__nav-link" href="{{route('front.faqs.page')}}">FAQs</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{route('front.about.page')}}">About us</a>
-                                    </li>
-                                    <li class="nav-item u-header__nav-item">
                                         <a class="nav-link u-header__nav-link" href="{{route('front.contact.page')}}">Contact Us</a>
                                     </li>
 
