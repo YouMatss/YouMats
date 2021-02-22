@@ -18,6 +18,7 @@
         "ampeco/nova-date-range-filter": "^0.1.1",
         "anaseqal/nova-import": "^0.0.6",
         "benjacho/belongs-to-many-field": "^1.8",
+        "binary-cats/laravel-sku": "^0.4.0",
         "coreproc/nova-notification-feed": "^1.4",
         "david-griffiths/nova-dark-theme": "^1.0",
         "davidpiesse/nova-toggle": "^0.0.8",

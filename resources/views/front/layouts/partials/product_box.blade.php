@@ -21,7 +21,7 @@
                             <small class="far fa-star text-muted"></small>
                         @endfor
                     </div>
-{{--                    <span class="text-secondary">(40)</span>--}}
+                    {{--<span class="text-secondary">(40)</span>--}}
                 </a>
             </div>
             <div class="font-size-12 p-0 text-gray-110 mb-4">

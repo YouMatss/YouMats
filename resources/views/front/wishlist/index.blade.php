@@ -52,29 +52,6 @@
 
 @section('extraScripts')
     <script>
-        $('.btn-remove-wishlist').on('click', function() {
-            let url = $(this).data('url'),
-                button = $(this);
 
-            $.ajax({
-                type: 'DELETE',
-                url: url,
-                data: { _token: '{{ csrf_token() }}'}
-            })
-            .done(function(response) {
-                if(response.status) {
-                    if(response.count === 0)
-                        window.location.reload();
-
-                    toastr.success(response.message);
-                    button.closest('li').remove();
-                }
-
-                console.log(response);
-            })
-            .fail(function(response) {
-                toastr.error(response.responseJSON.message);
-            })
-        })
     </script>
 @endsection
