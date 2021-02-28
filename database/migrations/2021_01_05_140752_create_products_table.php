@@ -31,7 +31,7 @@ class CreateProductsTable extends Migration
             $table->decimal('rate', 10, 1);
             $table->enum('type', ['product', 'service']);
             $table->decimal('price', 10, 2)->nullable();
-            $table->integer('stoke')->default(0);
+            $table->integer('stock')->default(0);
             $table->text('unit')->nullable();
 
             $table->string('SKU')->unique();

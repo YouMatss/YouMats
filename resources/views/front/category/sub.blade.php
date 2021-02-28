@@ -6,12 +6,12 @@
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:title" content="{{$subCategory->meta_title}}" />
     <meta property="og:description" content="{{$subCategory->meta_desc}}" />
-    <meta property="og:image" content="{{$subCategory->getFirstMediaUrl(SUB_CATEGORY_PATH)}}" />
+    <meta property="og:image" content="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
     <meta name="twitter:title" content="{{$subCategory->meta_title}}">
     <meta name="twitter:description" content="{{$subCategory->meta_desc}}">
-    <meta name="twitter:image" content="{{$subCategory->getFirstMediaUrl(SUB_CATEGORY_PATH)}}">
+    <meta name="twitter:image" content="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}">
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
@@ -163,58 +163,6 @@
                             {{$products->links()}}
                         </ul>
                     </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container mb-8">
-        <div class="py-2 border-top border-bottom">
-            <div class="js-slick-carousel u-slick my-1" data-slides-show="5" data-slides-scroll="1" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y" data-arrow-left-classes="fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9" data-arrow-right-classes="fa fa-angle-right u-slick__arrow-classic-inner--right"
-                 data-responsive='[{
-                                "breakpoint": 992,
-                                "settings": {
-                                    "slidesToShow": 2
-                                }
-                            }, {
-                                "breakpoint": 768,
-                                "settings": {
-                                    "slidesToShow": 1
-                                }
-                            }, {
-                                "breakpoint": 554,
-                                "settings": {
-                                    "slidesToShow": 1
-                                }
-                            }]'>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_1.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_2.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_3.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_4.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_5.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_6.png" alt="Image Description">
-                    </a>
                 </div>
             </div>
         </div>

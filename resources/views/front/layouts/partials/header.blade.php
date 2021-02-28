@@ -413,7 +413,7 @@
                                             <nav class="js-mega-menu navbar navbar-expand-xl u-header__navbar u-header__navbar--no-space hs-menu-initialized">
                                                 <div id="navBar" class="collapse navbar-collapse u-header__navbar-collapse">
                                                     <ul class="navbar-nav u-header__navbar-nav border-primary border-top-0">
-                                                        @foreach($categories as $category)
+                                                        @foreach($categories->take(17) as $category)
                                                         <li class="nav-item hs-has-mega-menu u-header__nav-item"
                                                             data-event="hover"
                                                             data-position="left">
@@ -422,7 +422,7 @@
 
                                                             <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="{{$category->slug}}">
                                                                 <div class="vmm-bg">
-                                                                    <img class="img-fluid" src="{{$category->getFirstMediaUrl(CATEGORY_PATH)}}" alt="{{$category->getFirstMedia(CATEGORY_PATH)->img_alt}}" title="{{$category->getFirstMedia(CATEGORY_PATH)->img_title}}">
+                                                                    <img class="img-fluid" src="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt'] }}" title="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title'] }}">
                                                                 </div>
                                                                 <div class="row u-header__mega-menu-wrapper">
                                                                     <div class="col mb-3 mb-sm-0">

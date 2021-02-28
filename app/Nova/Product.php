@@ -40,11 +40,13 @@ class Product extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             BelongsTo::make('SubCategory')
-                ->withoutTrashed(),
+                ->withoutTrashed()
+                ->searchable(),
 
             BelongsTo::make('Vendor')
                 ->withoutTrashed()
-                ->hideFromIndex(),
+                ->hideFromIndex()
+                ->searchable(),
 
             BelongsToManyField::make('Tags')
                 ->optionsLabel('name.en')
@@ -77,7 +79,7 @@ class Product extends Resource
                     ->min(1)
                     ->step(0.05),
 
-                Number::make(__('Stock'), 'stoke')
+                Number::make(__('Stock'), 'stock')
                     ->min(0)
                     ->rules(REQUIRED_INTEGER_VALIDATION),
 

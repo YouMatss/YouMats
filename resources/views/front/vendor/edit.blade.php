@@ -32,9 +32,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <img src="{{ $vendor->getFirstMediaUrl(VENDOR_COVER) }}" class="photo_cover_vendor">
+                    <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER)['url'] }}" class="photo_cover_vendor">
                 </div>
-                <img src="{{ $vendor->getFirstMediaUrl(VENDOR_LOGO) }}" class="photo_profile_vendor">
+                <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" class="photo_profile_vendor">
             </div>
         </div>
         <div class="row">
@@ -79,12 +79,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="box_img_v">
-                                                <img src="{{ $vendor->getFirstMediaUrl(VENDOR_COVER) }}" class="photo_cover_vendor">
+                                                <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER)['url'] }}" class="photo_cover_vendor">
                                             </div>
                                         </div>
                                         <div class="col-md-3 ml-auto">
                                             <div class="box_img_profile">
-                                                <img src="{{ $vendor->getFirstMediaUrl(VENDOR_LOGO) }}" class="photo_cover_vendor">
+                                                <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" class="photo_cover_vendor">
                                             </div>
                                         </div>
 
@@ -314,7 +314,7 @@
                                                     <div class="mb-2"><a href="{{ route('front.category', ['category_slug' => $product->subCategory->category->slug]) }}" class="font-size-12 text-gray-5">{{ $product->subCategory->category->name }}</a></div>
                                                     <h5 class="mb-1 product-item__title"><a href="{{ route('front.product', ['slug' => $product->slug]) }}" class="text-blue font-weight-bold">{{ $product->name }}</a></h5>
                                                     <div class="mb-2">
-                                                        <a href="{{ route('front.product', ['slug' => $product->slug]) }}" class="d-block text-center"><img class="img-fluid" src="{{ $product->getFirstMediaUrl(PRODUCT_PATH) }}" alt="{{ $product->getFirstMediaUrl(PRODUCT_PATH)->image_alt ?? '' }}"></a>
+                                                        <a href="{{ route('front.product', ['slug' => $product->slug]) }}" class="d-block text-center"><img class="img-fluid" src="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
                                                     </div>
                                                     <div class="mb-3">
                                                         <div class="text-warning mr-2">

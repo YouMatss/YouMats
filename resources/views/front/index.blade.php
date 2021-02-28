@@ -209,7 +209,7 @@
             @foreach($featuredVendors as $f_vendor)
             <div class="js-slide img_vend">
                 <a href="{{ route('vendor.show', ['vendor' => $f_vendor->id, 'name' => $f_vendor->name]) }}" class="link-hover__brand">
-                    <img class="img-fluid m-auto max-height-50" style="width: 70px" src="{{ $f_vendor->getFirstMediaUrl(VENDOR_LOGO) }}" alt="{{$f_vendor->getFirstMedia(VENDOR_LOGO)->img_alt}}" title="{{$f_vendor->getFirstMedia(VENDOR_LOGO)->img_title}}">
+                    <img class="img-fluid m-auto max-height-50" style="width: 70px" src="{{ $f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" alt="{{$f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                 </a>
             </div>
             @endforeach
@@ -226,7 +226,7 @@
                 @foreach($featured_categories as $f_category)
                 <div class="box">
                     <a href="{{route('front.category', [$f_category->slug])}}" class="st_block">
-                        <img src="{{$f_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$f_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$f_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
+                        <img src="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                         <div class="content d-flex">
                             <h3 class="title">{{$f_category->name}}</h3>
                             <span class="text-blue">
@@ -293,7 +293,7 @@
                                             </h5>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [$bs_product->slug])}}" class="d-block text-center">
-                                                    <img class="img-fluid" src="{{$bs_product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$bs_product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$bs_product->getFirstMedia(PRODUCT_PATH)->img_title}}" />
+                                                    <img class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                                 </a>
                                             </div>
                                             <div class="flex-center-between mb-1">
@@ -340,7 +340,7 @@
                 <div class="col-md-3">
                     <div class="block_img_cat">
                         <a href="{{route('front.category', [$section_i_category->slug])}}" class="d-block">
-                            <img class="img-fluid" src="{{$section_i_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$section_i_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$section_i_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
+                            <img class="img-fluid" src="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                         </a>
                         <div class="des_block_cat_new">
                             <h3>{{$section_i_category->name}}</h3>
@@ -363,7 +363,7 @@
                                         </h5>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [$i_product->slug])}}" class="d-block text-center">
-                                                <img class="img-fluid" src="{{$i_product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$i_product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$i_product->getFirstMedia(PRODUCT_PATH)->img_title}}" />
+                                                <img class="img-fluid" src="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
                                         <div class="flex-center-between mb-1">
@@ -407,7 +407,7 @@
                         <a href="{{route('front.category', [$t_category->slug])}}" class="d-block  pr-2 pr-wd-6">
                             <div class="media align-items-center">
                                 <div class="max-width-148 img_cat_home">
-                                    <img class="img-fluid" src="{{$t_category->getFirstMediaUrl(CATEGORY_PATH)}}" alt="{{$t_category->getFirstMedia(CATEGORY_PATH)->img_alt}}" title="{{$t_category->getFirstMedia(CATEGORY_PATH)->img_title}}" />
+                                    <img class="img-fluid" src="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                                 </div>
                                 <div class="ml-4 media-body">
                                     <h4 class="mb-0 text-gray-90">{{$t_category->name}}</h4>
@@ -435,7 +435,7 @@
         <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [$section_ii_category->slug])}}" class="d-block">
-                    <img class="img-fluid img_main_block" width="200" src="{{$section_ii_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$section_ii_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$section_ii_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
+                    <img class="img-fluid img_main_block" width="200" src="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
@@ -454,7 +454,7 @@
                                     </h5>
                                     <div class="mb-2">
                                         <a href="{{route('front.product', [$ii_product->slug])}}" class="d-block text-center">
-                                            <img class="img-fluid" src="{{$ii_product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$ii_product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$ii_product->getFirstMedia(PRODUCT_PATH)->img_title}}" />
+                                            <img class="img-fluid" src="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                         </a>
                                     </div>
                                     <div class="flex-center-between mb-1">
@@ -499,7 +499,7 @@
         <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [$section_iii_category->slug])}}" class="d-block">
-                    <img class="img-fluid img_main_block" width="200" src="{{$section_iii_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$section_iii_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$section_iii_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
+                    <img class="img-fluid img_main_block" width="200" src="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
@@ -518,7 +518,7 @@
                                         </h5>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [$iii_product->slug])}}" class="d-block text-center">
-                                                <img class="img-fluid" src="{{$iii_product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$iii_product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$iii_product->getFirstMedia(PRODUCT_PATH)->img_title}}" />
+                                                <img class="img-fluid" src="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
                                         <div class="flex-center-between mb-1">
@@ -563,7 +563,7 @@
         <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [$section_iv_category->slug])}}" class="d-block">
-                    <img class="img-fluid img_main_block" width="200" src="{{$section_iv_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$section_iv_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$section_iv_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
+                    <img class="img-fluid img_main_block" width="200" src="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
@@ -582,7 +582,7 @@
                                         </h5>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [$iv_product->slug])}}" class="d-block text-center">
-                                                <img class="img-fluid" src="{{$iv_product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$iv_product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$iv_product->getFirstMedia(PRODUCT_PATH)->img_title}}" />
+                                                <img class="img-fluid" src="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
                                         <div class="flex-center-between mb-1">

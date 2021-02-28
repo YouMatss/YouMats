@@ -44,7 +44,7 @@
                                         <a style="cursor: pointer" class="deleteCart" data-url="{{ route('cart.remove', ['rowId' => $item->rowId]) }}" class="text-gray-32 font-size-26">×</a>
                                     </td>
                                     <td class="d-none d-md-table-cell">
-                                        <a href="#"><img class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrl(PRODUCT_PATH) }}" alt="{{ $item->name }}"></a>
+                                        <a href="#"><img class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
                                     </td>
 
                                     <td data-title="Product">

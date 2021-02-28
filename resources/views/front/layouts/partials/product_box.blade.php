@@ -8,7 +8,7 @@
             </h5>
             <div class="mb-2">
                 <a href="{{route('front.product', [$product->slug])}}" class="d-block text-center">
-                    <img class="img-fluid" src="{{$product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$product->getFirstMedia(PRODUCT_PATH)->img_title}}">
+                    <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}">
                 </a>
             </div>
             <div class="mb-3">
@@ -57,7 +57,7 @@
             <div class="product-item__header col-6 col-md-2">
                 <div class="mb-2">
                     <a href="{{route('front.product', [$product->slug])}}" class="d-block text-center">
-                        <img class="img-fluid" src="{{$product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$product->getFirstMedia(PRODUCT_PATH)->img_title}}">
+                        <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}">
                     </a>
                 </div>
             </div>

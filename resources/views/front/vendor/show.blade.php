@@ -32,9 +32,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <img src="{{ $vendor->getFirstMediaUrl(VENDOR_COVER) }}" class="photo_cover_vendor">
+                    <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER)['cover'] }}" class="photo_cover_vendor">
                 </div>
-                <img src="{{ $vendor->getFirstMediaUrl(VENDOR_LOGO) }}" class="photo_profile_vendor">
+                <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" class="photo_profile_vendor">
             </div>
         </div>
         <div class="row">

@@ -50,7 +50,7 @@ class ProductController extends Controller
             'subCategory_id' => REQUIRED_NUMERIC_VALIDATION,
             'type' => 'required|in:product,service',
             'price' => 'required_if:type,product|numeric',
-            'stoke' => 'required_if:type,product|numeric',
+            'stock' => 'required_if:type,product|numeric',
             'unit' => 'required_if:type,product|string|max:191',
             'rate' => REQUIRED_NUMERIC_VALIDATION,
             'short_desc_en' => NULLABLE_TEXT_VALIDATION,
@@ -92,7 +92,7 @@ class ProductController extends Controller
         //If it's a product let's set the price/stock/unit!
         if($request->type == 'product') {
             $product->price = $request->price;
-            $product->stoke = $request->stoke;
+            $product->stock = $request->stock;
             $product->unit = $request->unit;
         }
     }

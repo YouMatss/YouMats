@@ -32,9 +32,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <img src="{{ $user->getFirstMediaUrl(USER_COVER) }}" class="photo_cover_vendor">
+                    <img src="{{ $user->getFirstMediaUrlOrDefault(USER_COVER)['url'] }}" class="photo_cover_vendor">
                 </div>
-                <img src="{{ $user->getFirstMediaUrl(USER_PROFILE) }}" class="photo_profile_vendor">
+                <img src="{{ $user->getFirstMediaUrlOrDefault(USER_PROFILE)['url'] }}" class="photo_profile_vendor">
             </div>
         </div>
         <div class="row">
@@ -73,12 +73,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="box_img_v">
-                                                <img src="{{ $user->getFirstMediaUrl(USER_COVER) }}" class="photo_cover_vendor">
+                                                <img src="{{ $user->getFirstMediaUrlOrDefault(USER_COVER)['url'] }}" class="photo_cover_vendor">
                                             </div>
                                         </div>
                                         <div class="col-md-3 ml-auto">
                                             <div class="box_img_profile">
-                                                <img src="{{ $user->getFirstMediaUrl(USER_PROFILE) }}" class="photo_cover_vendor">
+                                                <img src="{{ $user->getFirstMediaUrlOrDefault(USER_PROFILE)['url'] }}" class="photo_cover_vendor">
                                             </div>
                                         </div>
 
