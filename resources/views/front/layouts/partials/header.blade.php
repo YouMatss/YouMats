@@ -178,112 +178,21 @@
                                                 </a>
 
                                                 <ul id="headerSidebarList" class="u-header-collapse__nav">
-
+                                                    @foreach($categories->take(20) as $category)
                                                     <li class="u-has-submenu u-header-collapse__submenu">
-                                                        <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="headerSidebarHomeCollapse" data-target="#headerSidebarHomeCollapse">
-                                                            Building Material
+                                                        <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="headerSidebarHomeCollapse" data-target="#{{$category->slug}}">
+                                                            {{$category->name}}
                                                         </a>
 
-                                                        <div id="headerSidebarHomeCollapse" class="collapse" data-parent="#headerSidebarContent">
+                                                        <div id="{{$category->slug}}" class="collapse" data-parent="#headerSidebarContent">
                                                             <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">The Blocks</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Steel Structure</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Steel Structure</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Boundary Walls</a></li>
+                                                                @foreach($category->subCategories->take(4) as $subCategory)
+                                                                <li><a class="u-header-collapse__submenu-nav-link" href="{{route('front.subCategory', ['category_slug' => $category->slug, 'subCategory_slug' => $subCategory->slug])}}">{{$subCategory->name}}</a></li>
+                                                                @endforeach
                                                             </ul>
                                                         </div>
                                                     </li>
-
-                                                    <li class="u-has-submenu u-header-collapse__submenu">
-                                                        <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer" href="javascript:;" data-target="#headerSidebarPagesCollapse" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="headerSidebarPagesCollapse">
-                                                            Plumbing
-                                                        </a>
-
-                                                        <div id="headerSidebarPagesCollapse" class="collapse" data-parent="#headerSidebarContent">
-                                                            <ul id="headerSidebarPagesMenu" class="u-header-collapse__nav-list">
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Heat pipes</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Water Tanks</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Manhole and Grating</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Solvents</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="u-has-submenu u-header-collapse__submenu">
-                                                        <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer" href="javascript:;" data-target="#headerSidebarBlogCollapse" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="headerSidebarBlogCollapse">
-                                                            Kitchen
-                                                        </a>
-
-                                                        <div id="headerSidebarBlogCollapse" class="collapse" data-parent="#headerSidebarContent">
-                                                            <ul id="headerSidebarBlogMenu" class="u-header-collapse__nav-list">
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Chimneys and Hobs</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Chimneys and Hobs</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Chimneys and Hobs</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Chimneys and Hobs</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="u-has-submenu u-header-collapse__submenu">
-                                                        <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer" href="javascript:;" data-target="#headerSidebarShopCollapse" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="headerSidebarShopCollapse">
-                                                            Hardware's
-                                                        </a>
-
-                                                        <div id="headerSidebarShopCollapse" class="collapse" data-parent="#headerSidebarContent">
-                                                            <ul id="headerSidebarShopMenu" class="u-header-collapse__nav-list">
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Hardware's</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Hardware's</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Hardware's</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Hardware's</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="u-has-submenu u-header-collapse__submenu">
-                                                        <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer" href="javascript:;" data-target="#headerSidebarDemosCollapse" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="headerSidebarDemosCollapse">
-                                                            Glass and Facade
-                                                        </a>
-
-                                                        <div id="headerSidebarDemosCollapse" class="collapse" data-parent="#headerSidebarContent">
-                                                            <ul id="headerSidebarDemosMenu" class="u-header-collapse__nav-list">
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Glass and Facade</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Glass and Facade</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Glass and Facade</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Glass and Facade</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="u-has-submenu u-header-collapse__submenu">
-                                                        <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer" href="javascript:;" data-target="#headerSidebardocsCollapse" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="headerSidebardocsCollapse">
-                                                            Living Room
-                                                        </a>
-
-                                                        <div id="headerSidebardocsCollapse" class="collapse" data-parent="#headerSidebarContent">
-                                                            <ul id="headerSidebardocsMenu" class="u-header-collapse__nav-list">
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Living Room</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Living Room</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Living Room</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Living Room</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="u-has-submenu u-header-collapse__submenu">
-                                                        <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer" href="javascript:;" data-target="#headerSidebarblogsCollapse" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="headerSidebarblogsCollapse">
-                                                            Safety Products
-                                                        </a>
-
-                                                        <div id="headerSidebarblogsCollapse" class="collapse" data-parent="#headerSidebarContent">
-                                                            <ul id="headerSidebarblogsMenu" class="u-header-collapse__nav-list">
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Safety Products</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Safety Products</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Safety Products</a></li>
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Safety Products</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-
+                                                    @endforeach
                                                 </ul>
                                                 <!-- End List -->
                                             </div>
@@ -341,20 +250,7 @@
                             <ul class="d-flex list-unstyled mb-0 align-items-center">
                                 <!-- Search -->
                                 <li class="col d-xl-none px-2 px-sm-3 position-static">
-                                    <a id="searchClassicInvoker" class="font-size-22 text-gray-90 text-lh-1 btn-text-secondary" href="javascript:;" role="button"
-                                       data-toggle="tooltip"
-                                       data-placement="top"
-                                       title="Search"
-                                       aria-controls="searchClassic"
-                                       aria-haspopup="true"
-                                       aria-expanded="false"
-                                       data-unfold-target="#searchClassic"
-                                       data-unfold-type="css-animation"
-                                       data-unfold-duration="300"
-                                       data-unfold-delay="300"
-                                       data-unfold-hide-on-scroll="true"
-                                       data-unfold-animation-in="slideInUp"
-                                       data-unfold-animation-out="fadeOut">
+                                    <a id="searchClassicInvoker" class="font-size-22 text-gray-90 text-lh-1 btn-text-secondary" href="javascript:;" role="button" data-toggle="tooltip" data-placement="top" title="Search" aria-controls="searchClassic" aria-haspopup="true" aria-expanded="false" data-unfold-target="#searchClassic" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                         <span class="ec ec-search"></span>
                                     </a>
 
@@ -370,13 +266,27 @@
                                     <!-- End Input -->
                                 </li>
                                 <!-- End Search -->
-                                <li class="col d-none d-xl-block"><a href="#" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Favorites"><i class="font-size-22 ec ec-favorites"></i></a></li>
-                                <li class="col d-xl-none px-2 px-sm-3"><a href="#" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="My Account"><i class="font-size-22 ec ec-user"></i></a></li>
+                                <li class="col d-none d-xl-block">
+                                    <a href="#" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Favorites">
+                                        <i class="font-size-22 ec ec-favorites"></i>
+                                    </a>
+                                </li>
+                                <li class="col d-xl-none px-2 px-sm-3">
+                                    @if(Auth::guard('web')->check() && !Auth::guard('vendor')->check())
+                                        <a href="{{route('front.user.profile')}}" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="My Account">
+                                            <i class="font-size-22 ec ec-user"></i>
+                                        </a>
+                                    @elseif(!Auth::guard('vendor')->check())
+                                        <a href="{{route('login')}}" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Login">
+                                            <i class="font-size-22 ec ec-user"></i>
+                                        </a>
+                                    @endif
+                                </li>
                                 <li class="col pr-xl-0 px-2 px-sm-3">
-                                    <a href="#" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
+                                    <a href="{{ route('cart.show') }}" class="text-gray-90 position-relative d-flex" data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
-                                        <span class="width-22 height-22 bg-dark position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12 text-white">2</span>
-                                        <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3">SAR 1785.00</span>
+                                        <span class="width-22 height-22 bg-dark position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12 text-white" id="cartCount">{{ Cart::instance('cart')->count() }}</span>
+                                        <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3" id="cartTotal">{{ getCurrency('code'). ' ' . Cart::instance('cart')->total() }}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -414,9 +324,7 @@
                                                 <div id="navBar" class="collapse navbar-collapse u-header__navbar-collapse">
                                                     <ul class="navbar-nav u-header__navbar-nav border-primary border-top-0">
                                                         @foreach($categories->take(17) as $category)
-                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                                                            data-event="hover"
-                                                            data-position="left">
+                                                        <li class="nav-item hs-has-mega-menu u-header__nav-item" data-event="hover" data-position="left">
                                                             <a id="{{$category->slug}}" class="nav-link u-header__nav-link u-header__nav-link-toggle"
                                                                href="{{route('front.category', ['category_slug' => $category->slug])}}" aria-haspopup="true" aria-expanded="false">{{$category->name}}</a>
 
@@ -444,6 +352,28 @@
                                                             </div>
                                                         </li>
                                                         @endforeach
+                                                        @if(count($categories) > 17)
+                                                            <li class="nav-item hs-has-mega-menu u-header__nav-item" data-event="hover" data-position="left">
+                                                                <a id="otherCategories" class="nav-link u-header__nav-link u-header__nav-link-toggle"
+                                                                   href="#" aria-haspopup="true" aria-expanded="false">Other Categories</a>
+
+                                                                <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="otherCategories">
+                                                                    <div class="vmm-bg">
+                                                                        <img class="img-fluid" src="{{front_url()}}/assets/img/logo.png" alt="YouMats" title="YouMats">
+                                                                    </div>
+                                                                    <div class="row u-header__mega-menu-wrapper">
+                                                                        <div class="col mb-3 mb-sm-0">
+                                                                            <span class="u-header__sub-menu-title">Other Categories</span>
+                                                                            <ul class="u-header__sub-menu-nav-group mb-3">
+                                                                                @foreach($categories->skip(17) as $category)
+                                                                                    <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [$category->slug])}}">{{$category->name}}</a></li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        @endif
                                                     </ul>
                                                 </div>
                                             </nav>
