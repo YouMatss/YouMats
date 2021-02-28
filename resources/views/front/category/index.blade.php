@@ -64,7 +64,7 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <a href="{{route('front.subCategory', [$category->slug, $subCategory->slug])}}" class="d-block width-75">
-                                            <img class="img-fluid" src="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" alt="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['title']}}">
+                                            <img class="img-fluid" src="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" alt="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$subCategory->getFirstMedia(SUB_CATEGORY_PATH)['title']}}">
                                         </a>
                                     </div>
                                     <div class="col p-0 mt-3">
