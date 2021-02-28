@@ -37,7 +37,8 @@ class Vendor extends Resource
 
             Text::make('Name')
                 ->sortable()
-                ->rules(REQUIRED_STRING_VALIDATION),
+                ->rules(REQUIRED_STRING_VALIDATION)
+                ->translatable(),
 
             Text::make('Email')
                 ->sortable()
@@ -68,10 +69,6 @@ class Vendor extends Resource
             GoogleMaps::make('Location')
                 ->zoom(6)
                 ->hideFromIndex(),
-
-            Text::make('Auto generated password', 'keep_password')
-                ->hideFromIndex()
-                ->readonly(),
 
             Text::make('Facebook', 'facebook_url')
                 ->hideFromIndex()

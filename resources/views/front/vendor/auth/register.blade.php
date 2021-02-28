@@ -50,9 +50,20 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label for="name" class="form-label">{{ __('Name') }} <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                                @error('name')
+                                                <label for="name" class="form-label">{{ __('Name') }} <span class="text-danger">(English)*</span></label>
+                                                <input type="text" class="form-control @error('name_en') is-invalid @enderror" id="name" name="name_en" value="{{ old('name_en') }}" required autocomplete="name_en" autofocus>
+                                                @error('name_en')
+                                                <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="js-form-message form-group mb-5">
+                                                <label for="name" class="form-label">{{ __('Name') }} <span class="text-danger">(Arabic)*</span></label>
+                                                <input type="text" class="form-control @error('name_ar') is-invalid @enderror" id="name" name="name_ar" value="{{ old('name_ar') }}" required autocomplete="name_ar" autofocus>
+                                                @error('name_ar')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -92,7 +103,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="type" class="form-label">City <span class="text-danger">*</span></label>
                                                 <select class="form-control @error('city_id') is-invalid @enderror" id="type" name="city_id" required>

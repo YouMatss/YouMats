@@ -14,14 +14,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Translatable\HasTranslations;
 
 class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 {
-    use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage;
+    use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, HasTranslations;
 
     protected $fillable = ['name', 'city_id', 'email' , 'phone', 'phone2', 'address', 'address2', 'whatsapp_phone', 'membership_id', 'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url'];
 
     protected $guard = 'vendor';
+
+    protected $translatable = ['name'];
 
     protected $hidden = [
         'password',
