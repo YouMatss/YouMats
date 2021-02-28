@@ -6,12 +6,12 @@
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:title" content="{{$page->meta_title}}" />
     <meta property="og:description" content="{{$page->meta_desc}}" />
-    <meta property="og:image" content="{{$page->getFirstMediaUrl(PAGE_PATH)}}" />
+    <meta property="og:image" content="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['url']}}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
     <meta name="twitter:title" content="{{$page->meta_title}}">
     <meta name="twitter:description" content="{{$page->meta_desc}}">
-    <meta name="twitter:image" content="{{$page->getFirstMediaUrl(PAGE_PATH)}}">
+    <meta name="twitter:image" content="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['url']}}">
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <img src="{{$page->getFirstMediaUrl(PAGE_PATH)}}" alt="{{$page->getFirstMedia(PAGE_PATH)->img_alt}}" title="{{$page->getFirstMedia(PAGE_PATH)->img_title}}">
+                    <img src="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['url']}}" alt="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['alt']}}" title="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['title']}}">
                 </div>
             </div>
         </div>

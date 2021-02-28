@@ -6,12 +6,12 @@
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:title" content="{{$category->meta_title}}" />
     <meta property="og:description" content="{{$category->meta_desc}}" />
-    <meta property="og:image" content="{{$category->getFirstMediaUrl(CATEGORY_PATH)}}" />
+    <meta property="og:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
     <meta name="twitter:title" content="{{$category->meta_title}}">
     <meta name="twitter:description" content="{{$category->meta_desc}}">
-    <meta name="twitter:image" content="{{$category->getFirstMediaUrl(CATEGORY_PATH)}}">
+    <meta name="twitter:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}">
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
@@ -37,7 +37,7 @@
                         <a href="{{route('front.subCategory', [$category->slug, $subCategory->slug])}}" class="d-block pr-2 pr-wd-6">
                             <div class="media align-items-center">
                                 <div class="pt-2">
-                                    <img class="img-fluid img_category_page" src="{{$subCategory->getFirstMediaUrl(SUB_CATEGORY_PATH)}}" alt="{{$subCategory->getFirstMedia(SUB_CATEGORY_PATH)->img_alt}}" title="{{$subCategory->getFirstMedia(SUB_CATEGORY_PATH)->img_title}}">
+                                    <img class="img-fluid img_category_page" src="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" alt="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['title']}}">
                                 </div>
                                 <div class="ml-3 media-body">
                                     <h6 class="mb-0 text-gray-90">{{$subCategory->name}}</h6>
@@ -64,7 +64,7 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <a href="{{route('front.subCategory', [$category->slug, $subCategory->slug])}}" class="d-block width-75">
-                                            <img class="img-fluid" src="{{$subCategory->getFirstMediaUrl(SUB_CATEGORY_PATH)}}" alt="{{$subCategory->getFirstMedia(SUB_CATEGORY_PATH)->img_alt}}" title="{{$subCategory->getFirstMedia(SUB_CATEGORY_PATH)->img_title}}">
+                                            <img class="img-fluid" src="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" alt="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$subCategory->getFirstMedia(SUB_CATEGORY_PATH)['title']}}">
                                         </a>
                                     </div>
                                     <div class="col p-0 mt-3">

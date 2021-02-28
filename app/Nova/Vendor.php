@@ -69,6 +69,10 @@ class Vendor extends Resource
                 ->zoom(6)
                 ->hideFromIndex(),
 
+            Text::make('Auto generated password', 'keep_password')
+                ->hideFromIndex()
+                ->readonly(),
+
             Text::make('Facebook', 'facebook_url')
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),

@@ -118,8 +118,8 @@
                                 <div class="col-md-4">
                                     <div class="js-form-message mb-6">
                                         <label class="form-label"> {{ __('Stock') }} </label>
-                                        <input type="number" class="form-control st_input @error('stoke') is-invalid @enderror" value="{{ old('stoke') }}" name="stoke" placeholder="">
-                                        @error('stoke')
+                                        <input type="number" class="form-control st_input @error('stock') is-invalid @enderror" value="{{ old('stock') }}" name="stock" placeholder="">
+                                        @error('stock')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -320,8 +320,8 @@
                                 <div class="col-md-4">
                                     <div class="js-form-message mb-6">
                                         <label class="form-label"> {{ __('Stock') }} </label>
-                                        <input type="number" class="form-control st_input @error('stoke') is-invalid @enderror" name="stoke" placeholder="">
-                                        @error('stoke')
+                                        <input type="number" class="form-control st_input @error('stock') is-invalid @enderror" name="stock" placeholder="">
+                                        @error('stock')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
