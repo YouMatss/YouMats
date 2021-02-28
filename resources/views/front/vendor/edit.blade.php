@@ -125,9 +125,20 @@
 
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Full Name<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="name" value="{{ $vendor->name }}" placeholder="Enter your name" required="">
-                                                @error('name')
+                                                <label class="form-label">Full Name<span class="text-danger"> (English)*</span></label>
+                                                <input type="text" class="form-control" name="name_en" value="{{ $vendor->getTranslation('name','en') }}" placeholder="Enter your name in english" required="">
+                                                @error('name_en')
+                                                <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="js-form-message form-group mb-5">
+                                                <label class="form-label">Full Name<span class="text-danger">(Arabic)*</span></label>
+                                                <input type="text" class="form-control" name="name_ar" value="{{ $vendor->getTranslation('name','ar') }}" placeholder="Enter your name in arabic" required="">
+                                                @error('name_ar')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>

@@ -13,7 +13,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -125,6 +124,8 @@ class ProductController extends Controller
         $this->checkPermissions($vendor);
 
         $this->validateRequest($request);
+
+        $slug = Str::slug($request->name_en, '-');
 
         $request->validate([
             'gallery' => 'required|array',
