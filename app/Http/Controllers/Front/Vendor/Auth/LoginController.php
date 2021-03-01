@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -57,5 +58,26 @@ class LoginController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ];
+    }
+
+    /**
+     * @param Request $request
+     * @return Application|JsonResponse|RedirectResponse|Response|Redirector
+     */
+    protected function logout(Request $request)
+    {
+        $sessionKey = $this->guard()->getName();
+
+        $this->guard()->logout();
+
+        $request->session()->forget($sessionKey);
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('/');
     }
 }

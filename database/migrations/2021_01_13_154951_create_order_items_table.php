@@ -24,6 +24,14 @@ class CreateOrderItemsTable extends Migration
             $table->foreign('product_id')->references('id')->on('products')
                 ->onDelete('NO ACTION')->onUpdate('CASCADE');
 
+            $table->bigInteger('vendor_id')->unsigned()->index();
+            $table->foreign('vendor_id')->references('id')->on('vendors')
+                ->onDelete('NO ACTION')->onUpdate('CASCADE');
+
+            $table->string('vendor_name');
+
+            $table->string('status');
+
             $table->tinyInteger('quantity');
             $table->double('price');
 
