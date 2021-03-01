@@ -50,6 +50,11 @@ Route::group([
         Route::delete('/delete/{rowId}', 'WishlistController@deleteItem')->name('wishlist.remove');
     });
 
+    Route::group(['prefix' => 'checkout', 'namespace' => 'Product'], function() {
+        Route::get('/', 'CheckoutController@index')->name('checkout.index');
+        Route::post('/', 'CheckoutController@checkout')->name('checkout');
+    });
+
     //Pages routes
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/products', 'Product\ProductController@all')->name('front.product.all');

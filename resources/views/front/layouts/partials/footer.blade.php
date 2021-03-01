@@ -85,25 +85,23 @@
                             <h6 class="mb-3 font-weight-bold">Find it Fast</h6>
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
-                                <li><a class="list-group-item list-group-item-action" href="#">Landscaping</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Office & School Supplies</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Shade and Screen</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Tools and Spares</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Safety Products</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Construction Equipment</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Precast Concrete</a></li>
+                                @foreach($footer_sub_categories->take(7)->get() as $sub_category)
+                                    <li>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('front.subCategory', ['category_slug' => $sub_category->category->slug, 'subCategory_slug' => $sub_category->slug]) }}">{{ $sub_category->name }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                             <!-- End List Group -->
                         </div>
 
                         <div class="col-12 col-md mb-4 mb-md-0">
                             <!-- List Group -->
-                            <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent mt-md-6">
-                                <li><a class="list-group-item list-group-item-action" href="#">Door Windows Hardware</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Hardware Supplies</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Planting Basins</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Glass and Mirrors</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Bathroom Glass Show</a></li>
+                            <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
+                                @foreach($footer_sub_categories->skip(7)->take(7)->get() as $sub_category)
+                                    <li>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('front.subCategory', ['category_slug' => $sub_category->category->slug, 'subCategory_slug' => $sub_category->slug]) }}">{{ $sub_category->name }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                             <!-- End List Group -->
                         </div>

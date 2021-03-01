@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Avatar;
@@ -60,12 +61,17 @@ class SubCategory extends Resource
                         ->rules(NULLABLE_STRING_VALIDATION),
 
                     Text::make('Image Alt', 'img_alt')
-                        ->rules(NULLABLE_STRING_VALIDATION)
+                        ->rules(NULLABLE_STRING_VALIDAbTION)
                 ];
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
                 ->croppable('cropper'),
+
+            Toggle::make('Show In Footer')
+                    ->trueValue(1)
+                    ->falseValue(0)
+                    ->editableIndex(),
 
             (new Panel('SEO', [
                 Slug::make('Slug')

@@ -34,7 +34,7 @@ class CreateOrdersTable extends Migration
             $table->string('district')->nullable();
             $table->string('city')->nullable();
 
-            $table->enum('payment_method', ['cash', 'credit card', 'paypal']);
+            $table->string('payment_method');
 
             $table->string('reference_number')->nullable();
             $table->string('card_number')->nullable();
@@ -49,8 +49,9 @@ class CreateOrdersTable extends Migration
             $table->text('notes')->nullable();
             $table->text('refused_notes')->nullable();
 
-            $table->double('total_price');
+            $table->string('coupon_code');
 
+            $table->double('total_price');
 
             $table->softDeletes();
             $table->timestamps();

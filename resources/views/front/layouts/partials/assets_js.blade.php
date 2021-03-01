@@ -154,8 +154,8 @@
                 data: { _token: '{{ csrf_token() }}' }
             })
                 .done(function(response) {
-                    $('#cartCount').html(response.count);
-                    $('#cartTotal').html(response.total);
+                    $('.cartCount').html(response.count);
+                    $('.cartTotal').html(response.total);
                     toastr.success(response.message);
                 })
                 .fail(function(response) {
