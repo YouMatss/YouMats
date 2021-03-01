@@ -35,11 +35,17 @@
             <div class="row">
                 <div class="col-md-6 col-lg-4 col-xl-5 mb-4 mb-md-0">
                     <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2" data-infinite="true" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4" data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4" data-nav-for="#sliderSyncingThumb">
+                        @if(count($product->getMedia(PRODUCT_PATH)))
                         @foreach($product->getMedia(PRODUCT_PATH) as $image)
                             <div class="js-slide">
                                 <img class="img-fluid" src="{{$image->getFullUrl()}}" alt="{{$image->img_alt ?? ''}}" title="{{$image->img_title ?? ''}}">
                             </div>
                         @endforeach
+                        @else
+                            <div class="js-slide">
+                                <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                            </div>
+                        @endif
                     </div>
 
                     <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off" data-infinite="true" data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav">
@@ -64,20 +70,19 @@
                                         <small class="far fa-star text-muted"></small>
                                     @endfor
                                 </div>
-                                <span class="text-secondary font-size-13">(3 customer reviews)</span>
+                                <span class="text-secondary font-size-13">({{$product->views}} customer views)</span>
                             </a>
                         </div>
-                        <a href="{{route('home')}}" class="d-inline-block max-width-150 ml-n2 mb-2">
-                            <img class="img-fluid" src="{{front_url()}}/assets/img/logo.png">
+                        <a href="{{ route('vendor.show', ['vendor' => $product->vendor->id, 'name' => $product->vendor->name]) }}" class="d-inline-block max-width-150 ml-n2 mb-2">
+                            <img class="img-fluid" src="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                         </a>
-{{--                        <div class="mb-2">--}}
-{{--                            <ul class="font-size-14 pl-3 ml-1 text-gray-9">--}}
-{{--                                <li>Ordinary Protland Cement</li>--}}
-{{--                                <li>Ordinary Protland Cement</li>--}}
-{{--                                <li>Ordinary Protland Cement</li>--}}
-{{--                                <li>2Ordinary Protland Cement</li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
+                        <div class="mb-2">
+                            <ul class="font-size-14 pl-3 ml-1 text-gray-9">
+                                @foreach($product->tags as $tag)
+                                <li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
                         <p>{!! $product->short_desc !!}</p>
                         <p><strong>SKU</strong>: {{$product->SKU}}</p>
                     </div>
@@ -98,9 +103,9 @@
 
                             <div class="mb-3">
                                 <div class="left-page-single">
-                                    <a href="#"> <i class="fa fa-user"></i> YouMats </a>
-                                    <a href="tel:+966502111754" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> +966502111754 </a>
-                                    <a href="mailto:info@youmats.com"> <i class="fa fa-envelope"></i> info@youmats.com </a>
+                                    <a href="{{route('vendor.show', [$product->vendor->id, $product->vendor->name])}}"> <i class="fa fa-user"></i> {{$product->vendor->name}} </a>
+                                    <a href="tel:{{$product->vendor->phone}}" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> {{$product->vendor->phone}} </a>
+                                    <a href="mailto:{{$product->vendor->email}}"> <i class="fa fa-envelope"></i> {{$product->vendor->email}} </a>
                                     <h3> How to Pay</h3>
                                     <p>Youmats Support pay on Delivery for That Product</p>
                                 </div>

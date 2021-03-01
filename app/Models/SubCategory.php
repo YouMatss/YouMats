@@ -6,6 +6,7 @@ use App\Helpers\Traits\DefaultImage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
@@ -34,10 +35,14 @@ class SubCategory extends Model implements Sortable, HasMedia
     }
 
     public function products() {
-        return $this->hasMany(Product::class, 'subCategory_id');
+        return $this->hasMany(Product::class, 'subCategory_id')
+            ->where('active', 1);
     }
 
     public function tags() {
-        return $this->hasManyThrough(ProductTag::class, Product::class, 'subCategory_id')->with('tag');
+        return Tag::select('tags.*')->join('product_tag AS pt', 'pt.tag_id', '=', 'tags.id')
+            ->join('products as p', 'p.id', '=', 'pt.product_id')
+            ->join('sub_categories as sub', 'sub.id', '=', 'p.subCategory_id')
+            ->where('sub.id', '=', $this->id)->distinct()->get();
     }
 }

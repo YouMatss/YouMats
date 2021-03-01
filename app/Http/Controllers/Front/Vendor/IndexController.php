@@ -38,7 +38,7 @@ class IndexController extends Controller
     public function index(Request $request)
     {
         // Get all vendors
-        $vendors = Vendor::paginate(20);
+        $vendors = Vendor::paginate(21);
 
         // Return the vendors to the view.
         // So we can loop through

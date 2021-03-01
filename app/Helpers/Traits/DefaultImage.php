@@ -20,8 +20,8 @@ trait DefaultImage
 
         return [
             'url' => strlen($url) > 1 ? $url : $image,
-            'title' => $this->getFirstMediaUrl($collectionName, $conversionName)->img_title ?? $this->name, //Default image
-            'alt' => $this->getFirstMediaUrl($collectionName, $conversionName)->img_alt ?? $this->name // Default alt
+            'title' => $this->getFirstMedia($collectionName)->img_title ?? $this->name, //Default image
+            'alt' => $this->getFirstMedia($collectionName)->img_alt ?? $this->name // Default alt
         ];
     }
 }
