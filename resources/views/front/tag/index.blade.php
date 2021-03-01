@@ -40,7 +40,8 @@
                             @foreach($tags as $row)
                                 <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                     <div class="custom-control custom-checkbox">
-                                        <a href="{{route('front.tag', [$row->slug])}}" class="custom-control-label">{{$row->name}}
+                                        <a @if($row->id == $tag->id) style="font-weight: bold" @endif
+                                        href="{{route('front.tag', [$row->slug])}}" class="custom-control-label">{{$row->name}}
                                             <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($row->products)}})</span>
                                         </a>
                                     </div>
