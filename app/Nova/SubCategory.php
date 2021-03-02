@@ -27,7 +27,7 @@ class SubCategory extends Resource
     public static $title = 'name';
 
     public static $search = [
-        'id', 'name', 'desc', 'short_desc'
+        'id', 'name', 'desc', 'short_desc', 'slug'
     ];
 
     public function fields(Request $request)

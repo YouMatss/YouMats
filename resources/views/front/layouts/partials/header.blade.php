@@ -336,7 +336,7 @@
                                                                     <div class="col mb-3 mb-sm-0">
                                                                         <span class="u-header__sub-menu-title">{{$category->name}}</span>
                                                                         <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            @foreach($category->subCategories as $subCategory)
+                                                                            @foreach($category->subCategories->take(7) as $subCategory)
                                                                             <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.subCategory', ['category_slug' => $category->slug, 'subCategory_slug' => $subCategory->slug])}}">{{$subCategory->name}}</a></li>
                                                                             @endforeach
                                                                             <li>
@@ -348,6 +348,16 @@
                                                                             </li>
                                                                         </ul>
                                                                     </div>
+                                                                    @if(count($category->subCategories) > 7)
+                                                                    <div class="col mb-3 mb-sm-0">
+                                                                        <span class="u-header__sub-menu-title">{{$category->name}}</span>
+                                                                        <ul class="u-header__sub-menu-nav-group mb-3">
+                                                                            @foreach($category->subCategories->skip(7)->take(7) as $subCategory)
+                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.subCategory', ['category_slug' => $category->slug, 'subCategory_slug' => $subCategory->slug])}}">{{$subCategory->name}}</a></li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -365,11 +375,21 @@
                                                                         <div class="col mb-3 mb-sm-0">
                                                                             <span class="u-header__sub-menu-title">Other Categories</span>
                                                                             <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                                @foreach($categories->skip(17) as $category)
+                                                                                @foreach($categories->skip(17)->take(10) as $category)
                                                                                     <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [$category->slug])}}">{{$category->name}}</a></li>
                                                                                 @endforeach
                                                                             </ul>
                                                                         </div>
+                                                                        @if(count($categories) > 27)
+                                                                        <div class="col mb-3 mb-sm-0">
+                                                                            <span class="u-header__sub-menu-title">Other Categories</span>
+                                                                            <ul class="u-header__sub-menu-nav-group mb-3">
+                                                                                @foreach($categories->skip(27) as $category)
+                                                                                    <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [$category->slug])}}">{{$category->name}}</a></li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        </div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </li>

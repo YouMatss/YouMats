@@ -13,7 +13,7 @@ class Tag extends Model {
     public $translatable = ['name', 'desc', 'meta_title', 'meta_desc', 'meta_keywords'];
 
     public function products() {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->where('active', 1);
     }
 
 }

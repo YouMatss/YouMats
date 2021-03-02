@@ -57,7 +57,7 @@ class Product extends Resource
                 ->translatable()
                 ->rules(REQUIRED_STRING_VALIDATION),
 
-            Textarea::make('Short Description', 'short_desc')
+            CKEditor::make('Short Description', 'short_desc')
                 ->hideFromIndex()
                 ->translatable()
                 ->rules(NULLABLE_TEXT_VALIDATION),
