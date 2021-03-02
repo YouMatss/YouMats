@@ -68,8 +68,8 @@
                     <div class="prodcut-price d-md-none">
                         <div class="text-gray-100">{{getCurrency('code')}} {{$product->price}}</div>
                     </div>
-                    <div class="font-size-12 p-0 text-gray-110 mb-4 d-none d-md-block">
-                        <p class="mb-1">{!! $product->short_desc !!}</p>
+                    <div class="font-size-12 p-0 mb-4 d-none d-md-block">
+                        {!! $product->short_desc !!}
                     </div>
                     <div class="text-gray-20 mb-2 font-size-12">SKU: {{$product->SKU}}</div>
                     <div class="mb-3 d-none d-md-block">

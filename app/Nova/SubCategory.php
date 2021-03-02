@@ -69,9 +69,8 @@ class SubCategory extends Resource
                 ->croppable('cropper'),
 
             Toggle::make('Show In Footer')
-                    ->trueValue(1)
-                    ->falseValue(0)
-                    ->editableIndex(),
+                ->falseColor('#bacad6')
+                ->editableIndex(),
 
             (new Panel('SEO', [
                 Slug::make('Slug')

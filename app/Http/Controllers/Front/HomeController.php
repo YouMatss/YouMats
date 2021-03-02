@@ -10,7 +10,7 @@ use App\Models\Team;
 class HomeController extends Controller
 {
     public function index() {
-        $data['team'] = Team::where('active', 1)->orderBy('sort')->get();
+        $data['team'] = Team::where('active', 1)->orderBy('sort')->take(4)->get();
         $data['featured_categories'] = Category::where('isFeatured', 1)->orderBy('sort')->take(9)->get();
         $data['top_categories'] = Category::where('topCategory', 1)->orderBy('sort')->take(6)->get();
         $data['section_i_category'] = Category::where('section_i', 1)->first();
