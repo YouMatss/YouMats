@@ -37,7 +37,6 @@ class CreateProductsTable extends Migration
             $table->string('SKU')->unique();
 
             $table->tinyInteger('active')->default(1);
-            $table->boolean('best_seller')->default(0);
             $table->integer('views')->default(0);
 
             $table->string('slug')->unique();
@@ -46,6 +45,7 @@ class CreateProductsTable extends Migration
             $table->text('meta_keywords')->nullable();
 
             $table->integer('sort');
+            $table->boolean('best_seller');
 
             $table->softDeletes();
             $table->timestamps();
