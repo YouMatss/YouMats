@@ -39,8 +39,8 @@ class DatabaseWork extends Command
      */
     public function handle()
     {
-        //$this->CopyArabicProducts();
-        $this->CopyEnglishProducts();
+//        $this->CopyArabicProducts();
+//        $this->CopyEnglishProducts();
     }
 
     private function CopyArabicProducts()
@@ -80,7 +80,6 @@ class DatabaseWork extends Command
         foreach($englishProducts as $product)
         {
             $this->line("Copied english product name. ID: $product->pro_id");
-
             $newEnglishProduct = Product::find($product->pro_id);
 
             if($newEnglishProduct)

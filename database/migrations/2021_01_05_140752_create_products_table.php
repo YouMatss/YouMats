@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->text('name');
-            $table->text('desc')->nullable();
+            $table->longText('desc')->nullable();
             $table->text('short_desc')->nullable();
 
             $table->decimal('rate', 10, 1);
