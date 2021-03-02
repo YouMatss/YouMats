@@ -38,7 +38,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'memberships',
             'pages',
             'teams',
-            'inquires'
+            'inquires',
+            'coupons'
         ]);
 
         $collection->each(function ($item, $key) {
