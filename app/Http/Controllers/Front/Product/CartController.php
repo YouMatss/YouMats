@@ -4,12 +4,14 @@
 namespace App\Http\Controllers\Front\Product;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -33,7 +35,7 @@ class CartController extends Controller
      */
     public function add(Request $request, Product $product): JsonResponse
     {
-        Cart::instance('cart')->add($product->id, $product->name, 1, $product->price, [], $product->rate)->associate($product);
+        Cart::instance('cart')->add($product->id, $product->name, 1, $product->price, [], 0)->associate($product);
 
         return response()->json(['message' => __('Product has been added to your cart'),
             'cart' => Cart::content(),
@@ -65,12 +67,59 @@ class CartController extends Controller
 
     /**
      * @param Request $request
-     * @param $rowId
+     * @return JsonResponse
      */
-    public function update(Request $request)
+    public function update(Request $request): JsonResponse
     {
         Cart::instance('cart')->update($request->rowId, $request->qty);
 
         return response()->json(['status' => true]);
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function applyCoupon(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'code' => 'required|max:50|string'
+        ]);
+        $coupon = Coupon::whereCode($request->code)
+                    ->whereStatus(1)
+                    ->first();
+
+        $total = Cart::instance('cart')->total();
+
+        //Coupon doesn't exist. Lets return an error!
+        if(!$coupon)
+            return back()->with(['custom_error' => __('Coupon code doesn\'t exist') ]);
+
+        //The total of the cart is less than the coupon starting price
+        if($total < $coupon->price)
+            return back()->with(['custom_error' => __('Your cart total is less than the coupon starting price') ]);
+
+        //The coupon code has been added already.
+        if(Cart::instance('cart')->search(function($cartItem, $rowId) {
+                return $cartItem->id == 'discount';
+            })->count() > 0)
+            return back()->with(['custom_error' => __('You already added the coupon') ]);
+
+        //Coupon discount more than the cart total. So let's make the cart 0!
+        if($coupon->value > $total)
+            $discount = ($coupon->value + $total) - $coupon->value;
+        else
+            $discount = $coupon->value;
+
+        //Apply the discount.
+        Cart::instance('cart')
+            ->add('discount', $coupon->code, 1, -$discount, [], 0);
+
+        if($coupon->singleUse) {
+            $coupon->status = 0;
+            $coupon->save();
+        }
+
+        return back()->with(['custom_success' => __('Coupon code has been activated') ]);
     }
 }

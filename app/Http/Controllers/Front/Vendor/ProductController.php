@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\SubCategory;
 use App\Models\Vendor;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -30,8 +31,9 @@ class ProductController extends Controller
 
     /**
      * @param $vendor
+     * @return RedirectResponse
      */
-    protected function checkPermissions($vendor)
+    protected function checkPermissions($vendor): RedirectResponse
     {
         if(!$vendor->active)
             return back()->with(['custom_warning' => __('You do not have permissions to access this page')]);
@@ -62,8 +64,6 @@ class ProductController extends Controller
     /**
      * @param Request $request
      * @param Product $product
-     * @throws FileDoesNotExist
-     * @throws FileIsTooBig
      */
     protected function setProduct(Request $request, Product $product)
     {
@@ -219,7 +219,7 @@ class ProductController extends Controller
      * @param Product $product
      * @param Media $media
      * @return JsonResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function deleteImage(Product $product, Media $media): JsonResponse
     {
