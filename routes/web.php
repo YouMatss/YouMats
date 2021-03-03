@@ -42,6 +42,7 @@ Route::group([
         Route::post('/add/{product}', 'CartController@add')->name('cart.add')->middleware('throttle:10,1');
         Route::delete('/delete/{rowId}', 'CartController@deleteItem')->name('cart.remove');
         Route::patch('/update', 'CartController@update')->name('cart.update')->middleware('throttle:10,1');
+        Route::post('/coupon', 'CartController@applyCoupon')->name('apply.coupon');
     });
 
     Route::group(['prefix' => 'wishlist', 'namespace' => 'Product', 'middleware' => ['auth', 'verified']], function() {

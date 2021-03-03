@@ -760,7 +760,6 @@
                 data: $("#addBranchForm").serialize()
             })
             .done(function(response) {
-                console.log(response);
                 if(response.status) {
                     toastr.success(response.message);
                     window.location.reload();

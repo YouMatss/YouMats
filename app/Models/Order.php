@@ -10,6 +10,8 @@ class Order extends Model
 {
     use SoftDeletes, HasFactory;
 
+    protected $guarded = [];
+
     public function getTotalPriceAttribute($value) {
         return round($value * getCurrency('rate'), 2);
     }

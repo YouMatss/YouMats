@@ -38,7 +38,6 @@
             </div>
             <div class="row">
                 <div class="col-md-12 cart-table">
-                    <form class="mb-4" action="#" method="post">
                         <table class="table" cellspacing="0">
                             <thead>
                             <tr>
@@ -57,7 +56,11 @@
                                         <a style="cursor: pointer" class="deleteCart" data-url="{{ route('cart.remove', ['rowId' => $item->rowId]) }}" class="text-gray-32 font-size-26">×</a>
                                     </td>
                                     <td class="d-none d-md-table-cell">
-                                        <a href="#"><img class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
+                                        @if($item->model)
+                                            <a href="#"><img class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
+                                        @else
+                                            <img class="img-fluid max-width-100 p-1 border border-color-1" src="/assets/img/default_logo.jpg" />
+                                        @endif
                                     </td>
 
                                     <td data-title="Product">
@@ -68,6 +71,7 @@
                                         <span class="">{{ $item->price }}</span>
                                     </td>
 
+                                    @if($item->model)
                                     <td data-title="Quantity">
                                         <span class="sr-only">Quantity</span>
                                         <!-- Quantity -->
@@ -88,6 +92,9 @@
                                         </div>
                                         <!-- End Quantity -->
                                     </td>
+                                    @else
+                                        <td>-</td>
+                                    @endif
 
                                     <td data-title="Total">
                                         <span class="">{{ $item->subtotal }}</span>
@@ -100,12 +107,13 @@
                                         <div class="d-block d-md-flex flex-center-between">
                                             <div class="mb-3 mb-md-0 w-xl-40">
                                                 <!-- Apply coupon Form -->
-                                                <form class="js-focus-state">
-                                                    <label class="sr-only" for="subscribeSrEmailExample1">Coupon code</label>
+                                                <form class="js-focus-state" action="{{ route('apply.coupon') }}" method="POST">
+                                                    @csrf
+                                                    <label class="sr-only">{{ __('Coupon code') }}</label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="text" id="subscribeSrEmailExample1" placeholder="Coupon code" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
+                                                        <input type="text" class="form-control" name="code" placeholder="Coupon code" id="couponCode" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-block btn-dark px-4" type="button" id="subscribeButtonExample2"><i class="fas fa-tags d-md-none"></i><span class="d-none d-md-inline">Apply coupon</span></button>
+                                                            <input type="submit" class="btn btn-block btn-dark px-4" value="Apply coupon" />
                                                         </div>
                                                     </div>
                                                 </form>
@@ -121,7 +129,6 @@
                             </tr>
                             </tbody>
                         </table>
-                    </form>
                 </div>
             </div>
 
@@ -169,8 +176,8 @@
                     if(response.count === 0)
                         window.location.reload();
 
-                    $('#cartCount').html(response.count);
-                    $('#cartTotal').html(response.total);
+                    $('.cartCount').html(response.count);
+                    $('.cartTotal').html(response.total);
                     $('#total').html(response.total);
                     $('#tax').html(response.tax);
                     $('#subtotal').html(response.subtotal);

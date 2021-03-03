@@ -23,12 +23,13 @@
             <div id="shopCartAccordion" class="accordion rounded mb-5">
                 <!-- Card -->
                 <div class="card border-0">
-                    <div id="shopCartHeadingOne" class="alert alert-primary mb-0" role="alert">
-                        {{ __('Returning customer?') }} <a href="#" class="alert-link collapsed" data-toggle="collapse" data-target="#shopCartOne" aria-expanded="false" aria-controls="shopCartOne">Click here to login</a>
+                    <div id="shopCartHeadingOne" class="alert alert-primary mb-0 text-white" role="alert">
+                        {{ __('Returning customer?') }} <a href="#" class="alert-link collapsed text-white" data-toggle="collapse" data-target="#shopCartOne" aria-expanded="false" aria-controls="shopCartOne">Click here to login</a>
                     </div>
                     <div id="shopCartOne" class="border border-top-0 collapse" aria-labelledby="shopCartHeadingOne" data-parent="#shopCartAccordion" style="">
                         <!-- Form -->
-                        <form class="js-validate p-5" novalidate="novalidate">
+                        <form class="box_login_page" method="POST" action="{{ route('login') }}">
+                            @csrf
                             <!-- Title -->
                             <div class="mb-5">
                                 <p class="text-gray-90 mb-2">Welcome back! Sign in to your account.</p>
@@ -40,16 +41,26 @@
                                 <div class="col-lg-6">
                                     <!-- Form Group -->
                                     <div class="js-form-message form-group">
-                                        <label class="form-label" for="signinSrEmailExample3">Email address</label>
-                                        <input type="email" class="form-control" name="email" id="signinSrEmailExample3" placeholder="Email address" aria-label="Email address" required="" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <label class="form-label" for="email">{{ __('E-Mail Address') }}</label>
+                                        <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <!-- End Form Group -->
                                 </div>
                                 <div class="col-lg-6">
                                     <!-- Form Group -->
                                     <div class="js-form-message form-group">
-                                        <label class="form-label" for="signinSrPasswordExample2">Password</label>
-                                        <input type="password" class="form-control" name="password" id="signinSrPasswordExample2" placeholder="********" aria-label="********" required="" data-msg="Your password is invalid. Please try again." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <label class="form-label" for="password">{{ __('Password') }}</label>
+                                        <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <!-- End Form Group -->
                                 </div>
@@ -58,9 +69,9 @@
                             <!-- Checkbox -->
                             <div class="js-form-message mb-3">
                                 <div class="custom-control custom-checkbox d-flex align-items-center">
-                                    <input type="checkbox" class="custom-control-input" id="rememberCheckbox" name="rememberCheckbox" required="" data-error-class="u-has-error" data-success-class="u-has-success">
-                                    <label class="custom-control-label form-label" for="rememberCheckbox">
-                                        Remember me
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Remember Me') }}
                                     </label>
                                 </div>
                             </div>
@@ -69,10 +80,17 @@
                             <!-- Button -->
                             <div class="mb-1">
                                 <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary-dark-w px-5">Login</button>
+                                    <button type="submit" class="btn btn-primary-dark-w px-5 text-white">{{ __('Login') }}</button>
                                 </div>
                                 <div class="mb-2">
-                                    <a class="text-blue" href="#">Lost your password?</a>
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
+                                    @endif
+                                    <a class="btn btn-link" href="{{route('register')}}">
+                                        Register
+                                    </a>
                                 </div>
                             </div>
                             <!-- End Button -->
@@ -89,22 +107,22 @@
         <div id="shopCartAccordion1" class="accordion rounded mb-6">
             <!-- Card -->
             <div class="card border-0">
-                <div id="shopCartHeadingTwo" class="alert alert-primary mb-0" role="alert">
-                    Have a coupon? <a href="#" class="alert-link" data-toggle="collapse" data-target="#shopCartTwo" aria-expanded="false" aria-controls="shopCartTwo">Click here to enter your code</a>
+                <div id="shopCartHeadingTwo" class="alert alert-primary mb-0 text-white" role="alert">
+                    Have a coupon? <a href="#" class="alert-link text-white" data-toggle="collapse" data-target="#shopCartTwo" aria-expanded="false" aria-controls="shopCartTwo">Click here to enter your code</a>
                 </div>
                 <div id="shopCartTwo" class="collapse border border-top-0" aria-labelledby="shopCartHeadingTwo" data-parent="#shopCartAccordion1" style="">
-                    <form class="js-validate p-5" novalidate="novalidate">
-                        <p class="w-100 text-gray-90">If you have a coupon code, please apply it below.</p>
-                        <div class="input-group input-group-pill max-width-660-xl">
-                            <input type="text" class="form-control" name="name" placeholder="Coupon code" aria-label="Promo code">
+                    <!-- Apply coupon Form -->
+                    <form class="js-focus-state" action="{{ route('apply.coupon') }}" method="POST">
+                        @csrf
+                        <label class="sr-only">{{ __('Coupon code') }}</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" @if($coupon) disabled @endif name="code" value="@if($coupon) {{ $coupon->name }} @else {{ old('code') }} @endif" placeholder="Coupon code" id="couponCode" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-block btn-dark font-weight-normal btn-pill px-4">
-                                    <i class="fas fa-tags d-md-none"></i>
-                                    <span class="d-none d-md-inline">Apply coupon</span>
-                                </button>
+                                <input type="submit" class="btn btn-block btn-dark px-4" @if($coupon) disabled @endif value="Apply coupon" />
                             </div>
                         </div>
                     </form>
+                    <!-- End Apply coupon Form -->
                 </div>
             </div>
             <!-- End Card -->
@@ -185,7 +203,7 @@
                                 </div>
                                 <div class="form-group d-flex align-items-center justify-content-between px-3 mb-5">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="agree" value="true" id="defaultCheck10" required="" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <input class="form-check-input" type="checkbox" name="terms" value="true" id="defaultCheck10" required="" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
                                         <label class="form-check-label form-label" for="defaultCheck10">
                                             I have read and agree to the website <a href="#" class="text-blue">terms and conditions </a>
                                             <span class="text-danger">*</span>
@@ -346,7 +364,7 @@
                             </label>
 
                             <div class="input-group">
-                                <textarea class="form-control p-5" rows="4" name=products"notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                <textarea class="form-control p-5" rows="4" name=notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                             </div>
                         </div>
                         <!-- End Input -->

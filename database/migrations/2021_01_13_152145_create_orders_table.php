@@ -50,7 +50,7 @@ class CreateOrdersTable extends Migration
             $table->text('notes')->nullable();
             $table->text('refused_notes')->nullable();
 
-            $table->string('coupon_code');
+            $table->string('coupon_code')->nullable();
 
             $table->double('total_price');
 
