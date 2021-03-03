@@ -61,7 +61,7 @@ class SubCategory extends Resource
                         ->rules(NULLABLE_STRING_VALIDATION),
 
                     Text::make('Image Alt', 'img_alt')
-                        ->rules(NULLABLE_STRING_VALIDAbTION)
+                        ->rules(NULLABLE_STRING_VALIDATION)
                 ];
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
