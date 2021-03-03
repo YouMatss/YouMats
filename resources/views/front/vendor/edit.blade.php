@@ -32,9 +32,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <img src="{{ $vendor->getFirstMediaUrl(VENDOR_COVER) }}" class="photo_cover_vendor">
+                    <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER)['url'] }}" class="photo_cover_vendor">
                 </div>
-                <img src="{{ $vendor->getFirstMediaUrl(VENDOR_LOGO) }}" class="photo_profile_vendor">
+                <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" class="photo_profile_vendor">
             </div>
         </div>
         <div class="row">
@@ -67,6 +67,9 @@
             <div class="col-md-12">
                 <div class="borders-radius-17 border p-4 mt-4 mt-md-0 px-lg-10 py-lg-9 mb-5">
                     <div class="tab-content" id="Jpills-tabContent">
+                        @if(!$vendor->active)
+                            <div class="alert alert-warning">{{ __('Your account is not active yet. Please contact the administrators of this site.') }}</div>
+                        @endif
                         <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
                             <div class="block_info_vendor">
                                 @if(Session::has('message'))<div class="alert alert-success">{{ Session::get('message') }}</div>@endif
@@ -76,12 +79,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="box_img_v">
-                                                <img src="{{ $vendor->getFirstMediaUrl(VENDOR_COVER) }}" class="photo_cover_vendor">
+                                                <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER)['url'] }}" class="photo_cover_vendor">
                                             </div>
                                         </div>
                                         <div class="col-md-3 ml-auto">
                                             <div class="box_img_profile">
-                                                <img src="{{ $vendor->getFirstMediaUrl(VENDOR_LOGO) }}" class="photo_cover_vendor">
+                                                <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" class="photo_cover_vendor">
                                             </div>
                                         </div>
 
@@ -122,9 +125,20 @@
 
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Full Name<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="name" value="{{ $vendor->name }}" placeholder="Enter your name" required="">
-                                                @error('name')
+                                                <label class="form-label">Full Name<span class="text-danger"> (English)*</span></label>
+                                                <input type="text" class="form-control" name="name_en" value="{{ $vendor->getTranslation('name','en') }}" placeholder="Enter your name in english" required="">
+                                                @error('name_en')
+                                                <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="js-form-message form-group mb-5">
+                                                <label class="form-label">Full Name<span class="text-danger">(Arabic)*</span></label>
+                                                <input type="text" class="form-control" name="name_ar" value="{{ $vendor->getTranslation('name','ar') }}" placeholder="Enter your name in arabic" required="">
+                                                @error('name_ar')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -297,48 +311,9 @@
                         </div>
                         <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
                             @if($vendor->active)
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProductModal">
+                                <a href="{{ route('vendor.addProduct', ['vendor' => $vendor]) }}" class="btn btn-primary-dark-w px-5 text-white mr-2">
                                     {{ __('Add Product') }}
-                                </button>
-                                <!-- Modal -->
-                                <div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">{{ __('Add Product') }}</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="{{ route('vendor.addBranch', ['vendor' => $vendor->id]) }}" method="POST" id="addProductForm">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <label>{{ __('Name (en)') }}</label>
-                                                            <input type="text" name="en_name" class="form-control" />
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <label>{{ __('Name (ar)') }}</label>
-                                                            <input type="text" name="ar_name" class="form-control" />
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <label>{{ __('Description') }}</label>
-                                                            <textarea name="desc"></textarea>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <label>{{ __('Short Description') }}</label>
-                                                            <input type="text" name="short_desc" class="form-control" />
-                                                        </div>
-                                                        {{-- TODO: To be completed tomorrow--}}
-                                                    </div>
-                                                    <button id="addProductBtn" class="btn btn-primary-dark-w px-5 text-white">{{ __('Save') }}</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </a>
                             @endif
                             @if(count($products) > 0)
                                 <ul class="row list-unstyled products-group no-gutters">
@@ -347,36 +322,41 @@
                                         <div class="product-item__outer h-100">
                                             <div class="product-item__inner px-xl-2 p-3">
                                                 <div class="product-item__body pb-xl-2">
-                                                    <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">{{ $product->subCategory->category->name }}</a></div>
-                                                    <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">{{ $product->name }}</a></h5>
+                                                    <div class="mb-2"><a href="{{ route('front.category', ['category_slug' => $product->subCategory->category->slug]) }}" class="font-size-12 text-gray-5">{{ $product->subCategory->category->name }}</a></div>
+                                                    <h5 class="mb-1 product-item__title"><a href="{{ route('front.product', ['slug' => $product->slug]) }}" class="text-blue font-weight-bold">{{ $product->name }}</a></h5>
                                                     <div class="mb-2">
-                                                        <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ $product->getFirstMediaUrl(PRODUCT_PATH) }}" alt="{{ $product->getFirstMediaUrl(PRODUCT_PATH)->image_alt ?? '' }}"></a>
+                                                        <a href="{{ route('front.product', ['slug' => $product->slug]) }}" class="d-block text-center"><img class="img-fluid" src="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <a class="d-inline-flex align-items-center small font-size-14" href="#">
-                                                            <div class="text-warning mr-2">
-                                                                @for($i = 1; $i <= 5; $i++)
-                                                                    @if($i <= $product->rate)
-                                                                        <small class="fas fa-star"></small>
-                                                                    @else
-                                                                        <small class="far fa-star text-muted"></small>
-                                                                    @endif
-                                                                @endfor
-                                                            </div>
-                                                            @if($product->views > 0)
-                                                                <span class="text-secondary">({{ $product->views }})</span>
-                                                            @endif
-                                                        </a>
+                                                        <div class="text-warning mr-2">
+                                                            @for($i = 1; $i <= 5; $i++)
+                                                                @if($i <= $product->rate)
+                                                                    <small class="fas fa-star"></small>
+                                                                @else
+                                                                    <small class="far fa-star text-muted"></small>
+                                                                @endif
+                                                            @endfor
+                                                        </div>
+                                                        @if($product->views > 0)
+                                                            <span class="text-secondary">({{ $product->views }})</span>
+                                                        @endif
                                                     </div>
                                                     <div class="font-size-12 p-0 text-gray-110 mb-4">
                                                         <p class="mb-1">{{ Str::limit($product->short_desc, 100, '...') }}</p>
                                                     </div>
                                                     <div class="text-gray-20 mb-2 font-size-12">{{ __('SKU:') . ' ' .$product->SKU }}</div>
-                                                    <div class="flex-center-between mb-1">
-                                                        <div class="prodcut-price">
-                                                            <div class="text-gray-100">{{ getCurrency('code') .' '. $product->price }}</div>
+                                                    @if($product->type === 'product')
+                                                        <div class="flex-center-between mb-1">
+                                                            <div class="prodcut-price">
+                                                                <div class="text-gray-100">{{ getCurrency('code') .' '. $product->price }}</div>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    @endif
+                                                    @if($vendor->active)
+                                                        <a href="{{ route('vendor.editProduct', ['vendor' => $vendor, 'product' => $product]) }}" class="btn btn-primary-dark-w px-5 text-white mr-2">
+                                                            {{ __('Edit Product') }}
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -392,7 +372,7 @@
                             <div class="container">
                                 @if($vendor->active)
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#branchModal">
+                                <button type="button" class="btn btn-primary-dark-w px-5 text-white mr-2" data-toggle="modal" data-target="#branchModal">
                                     {{ __('Add Branch') }}
                                 </button>
                                 <!-- Modal -->

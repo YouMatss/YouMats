@@ -6,12 +6,12 @@
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:title" content="{{$subCategory->meta_title}}" />
     <meta property="og:description" content="{{$subCategory->meta_desc}}" />
-    <meta property="og:image" content="{{$subCategory->getFirstMediaUrl(SUB_CATEGORY_PATH)}}" />
+    <meta property="og:image" content="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
     <meta name="twitter:title" content="{{$subCategory->meta_title}}">
     <meta name="twitter:description" content="{{$subCategory->meta_desc}}">
-    <meta name="twitter:image" content="{{$subCategory->getFirstMediaUrl(SUB_CATEGORY_PATH)}}">
+    <meta name="twitter:image" content="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}">
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
@@ -68,28 +68,30 @@
                             @endforeach
                         </div>
                     </div>
+                    @if(count($tags))
                     <div class="mb-6">
                         <div class="border-bottom border-color-1 mb-5">
                             <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Tags</h3>
                         </div>
                         <div class="border-bottom pb-4 mb-4">
-                            @foreach($subCategory->tags as $tag)
+                            @foreach($tags as $tag)
                             <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                 <div class="custom-control custom-checkbox">
-                                    <a href="{{route('front.tag', [$tag->tag->slug])}}" class="custom-control-label">{{$tag->tag->name}}
-                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($tag->tag->products)}})</span>
+                                    <a href="{{route('front.tag', [$tag->slug])}}" class="custom-control-label">{{$tag->name}}
+                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($tag->products)}})</span>
                                     </a>
                                 </div>
                             </div>
                             @endforeach
                         </div>
                     </div>
+                    @endif
                 </div>
                 <div class="col-xl-9 col-wd-9gdot5">
 
                     <div class="d-block d-md-flex flex-center-between mb-3">
                         <h3 class="font-size-25 mb-2 mb-md-0">{{$subCategory->name}}</h3>
-                        <p class="font-size-14 text-gray-90 mb-0">Showing 1–25 of 56 results</p>
+                        <p class="font-size-14 text-gray-90 mb-0">Showing {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}} of {{$products->total()}} results</p>
                     </div>
 
                     <!-- Shop-control-bar -->
@@ -130,10 +132,9 @@
                             </ul>
                         </div>
                         <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
-                            <form method="post" class="min-width-50 mr-1">
-                                <input size="2" min="1" max="3" step="1" type="number" class="form-control text-center px-2 height-35" value="1">
-                            </form> of 3
-                            <a class="text-gray-30 font-size-20 ml-2" href="#">→</a>
+                            <a class="text-gray-30 font-size-20 mr-2" href="{{$products->previousPageUrl()}}">←</a>
+                            <b>{{$products->currentPage()}} </b> &nbsp; of {{$products->lastPage()}}
+                            <a class="text-gray-30 font-size-20 ml-2" href="{{$products->nextPageUrl()}}">→</a>
                         </nav>
                     </div>
                     <!-- End Shop-control-bar -->
@@ -163,58 +164,6 @@
                             {{$products->links()}}
                         </ul>
                     </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container mb-8">
-        <div class="py-2 border-top border-bottom">
-            <div class="js-slick-carousel u-slick my-1" data-slides-show="5" data-slides-scroll="1" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y" data-arrow-left-classes="fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9" data-arrow-right-classes="fa fa-angle-right u-slick__arrow-classic-inner--right"
-                 data-responsive='[{
-                                "breakpoint": 992,
-                                "settings": {
-                                    "slidesToShow": 2
-                                }
-                            }, {
-                                "breakpoint": 768,
-                                "settings": {
-                                    "slidesToShow": 1
-                                }
-                            }, {
-                                "breakpoint": 554,
-                                "settings": {
-                                    "slidesToShow": 1
-                                }
-                            }]'>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_1.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_2.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_3.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_4.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_5.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_6.png" alt="Image Description">
-                    </a>
                 </div>
             </div>
         </div>

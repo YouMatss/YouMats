@@ -37,7 +37,8 @@ class Vendor extends Resource
 
             Text::make('Name')
                 ->sortable()
-                ->rules(REQUIRED_STRING_VALIDATION),
+                ->rules(REQUIRED_STRING_VALIDATION)
+                ->translatable(),
 
             Text::make('Email')
                 ->sortable()

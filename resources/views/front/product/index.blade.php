@@ -6,12 +6,12 @@
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:title" content="{{$product->meta_title}}" />
     <meta property="og:description" content="{{$product->meta_desc}}" />
-    <meta property="og:image" content="{{$product->getFirstMediaUrl(PRODUCT_PATH)}}" />
+    <meta property="og:image" content="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
     <meta name="twitter:title" content="{{$product->meta_title}}">
     <meta name="twitter:description" content="{{$product->meta_desc}}">
-    <meta name="twitter:image" content="{{$product->getFirstMediaUrl(PRODUCT_PATH)}}">
+    <meta name="twitter:image" content="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}">
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
@@ -35,17 +35,23 @@
             <div class="row">
                 <div class="col-md-6 col-lg-4 col-xl-5 mb-4 mb-md-0">
                     <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2" data-infinite="true" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4" data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4" data-nav-for="#sliderSyncingThumb">
+                        @if(count($product->getMedia(PRODUCT_PATH)))
                         @foreach($product->getMedia(PRODUCT_PATH) as $image)
                             <div class="js-slide">
-                                <img class="img-fluid" src="{{$image->getFullUrl()}}" alt="{{$image->img_alt}}" title="{{$image->img_title}}">
+                                <img class="img-fluid" src="{{$image->getFullUrl()}}" alt="{{$image->img_alt ?? ''}}" title="{{$image->img_title ?? ''}}">
                             </div>
                         @endforeach
+                        @else
+                            <div class="js-slide">
+                                <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                            </div>
+                        @endif
                     </div>
 
                     <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off" data-infinite="true" data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav">
                         @foreach($product->getMedia(PRODUCT_PATH) as $thumb)
                         <div class="js-slide" style="cursor: pointer;">
-                            <img class="img-fluid" src="{{$thumb->getFullUrl('thumb')}}" alt="{{$thumb->img_alt}}" title="{{$thumb->img_title}}">
+                            <img class="img-fluid" src="{{$thumb->getFullUrl('thumb')}}" alt="{{$thumb->img_alt ?? ''}}" title="{{$thumb->img_title ?? ''}}">
                         </div>
                         @endforeach
                     </div>
@@ -64,20 +70,19 @@
                                         <small class="far fa-star text-muted"></small>
                                     @endfor
                                 </div>
-                                <span class="text-secondary font-size-13">(3 customer reviews)</span>
+                                <span class="text-secondary font-size-13">({{$product->views}} customer views)</span>
                             </a>
                         </div>
-                        <a href="{{route('home')}}" class="d-inline-block max-width-150 ml-n2 mb-2">
-                            <img class="img-fluid" src="{{front_url()}}/assets/img/logo.png">
+                        <a href="{{ route('vendor.show', ['vendor' => $product->vendor->id, 'name' => $product->vendor->name]) }}" class="d-inline-block max-width-150 ml-n2 mb-2">
+                            <img class="img-fluid" src="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                         </a>
-{{--                        <div class="mb-2">--}}
-{{--                            <ul class="font-size-14 pl-3 ml-1 text-gray-9">--}}
-{{--                                <li>Ordinary Protland Cement</li>--}}
-{{--                                <li>Ordinary Protland Cement</li>--}}
-{{--                                <li>Ordinary Protland Cement</li>--}}
-{{--                                <li>2Ordinary Protland Cement</li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
+                        <div class="mb-2">
+                            <ul class="font-size-14 pl-3 ml-1 text-gray-9">
+                                @foreach($product->tags as $tag)
+                                <li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
                         <p>{!! $product->short_desc !!}</p>
                         <p><strong>SKU</strong>: {{$product->SKU}}</p>
                     </div>
@@ -86,8 +91,8 @@
                     <div class="mb-2">
                         <div class="card p-5 border-width-2 border-color-1 borders-radius-17">
                             <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">Availability:
-                                @if($product->stoke)
-                                <span class="text-green font-weight-bold">{{$product->stoke}} in stock</span>
+                                @if($product->stock)
+                                <span class="text-green font-weight-bold">{{$product->stock}} in stock</span>
                                 @else
                                 <span class="text-red font-weight-bold">Out of stock</span>
                                 @endif
@@ -98,22 +103,23 @@
 
                             <div class="mb-3">
                                 <div class="left-page-single">
-                                    <a href="#"> <i class="fa fa-user"></i> YouMats </a>
-                                    <a href="tel:+966502111754" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> +966502111754 </a>
-                                    <a href="mailto:info@youmats.com"> <i class="fa fa-envelope"></i> info@youmats.com </a>
+                                    <a href="{{route('vendor.show', [$product->vendor->id, $product->vendor->name])}}"> <i class="fa fa-user"></i> {{$product->vendor->name}} </a>
+                                    <a href="tel:{{$product->vendor->phone}}" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> {{$product->vendor->phone}} </a>
+                                    <a href="mailto:{{$product->vendor->email}}"> <i class="fa fa-envelope"></i> {{$product->vendor->email}} </a>
                                     <h3> How to Pay</h3>
                                     <p>Youmats Support pay on Delivery for That Product</p>
                                 </div>
                             </div>
 
 
-
-                            <div class="mb-2 pb-0dot5">
-                                <a href="#" class="btn btn-block btn-primary-dark"><i class="ec ec-add-to-cart mr-2 font-size-20"></i> Add to Cart</a>
-                            </div>
-                            <div class="flex-content-center flex-wrap">
-                                <a href="#" class="text-gray-6 font-size-13 mr-2"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                            </div>
+                            @if(!Auth::guard('vendor')->check())
+                                <div class="mb-2 pb-0dot5">
+                                    <button data-url="{{ route('cart.add', ['product' => $product]) }}" class="btn-add-cart btn-block btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                </div>
+                                <div class="flex-content-center flex-wrap">
+                                    <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -141,7 +147,7 @@
                             {!! $product->desc !!}
                             <div class="row">
                                 <div class="col-md-6 text-right">
-                                    <img class="img-fluid mr-n4 mr-md-n10 mr-xl-n15" src="{{$product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$product->getFirstMedia(PRODUCT_PATH)->img_title}}">
+                                    <img class="img-fluid mr-n4 mr-md-n10 mr-xl-n15" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                                 </div>
                             </div>
                         </div>
@@ -226,81 +232,33 @@
                                             <h5 class="mb-1 product-item__title"><a href="{{route('front.product', [$r_product->slug])}}" class="text-blue font-weight-bold">{{$r_product->name}}</a></h5>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [$r_product->slug])}}" class="a_img_pro d-block text-center">
-                                                    <img class="img-fluid" src="{{$r_product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$r_product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$r_product->getFirstMedia(PRODUCT_PATH)->img_title}}">
+                                                    <img class="img-fluid" src="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                                                 </a>
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
                                                     <div class="text-gray-100">{{getCurrency('code')}} {{$r_product->price}}</div>
                                                 </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                                                @if(!Auth::guard('vendor')->check())
+                                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                                        <button data-url="{{ route('cart.add', ['product' => $product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        @if(!Auth::guard('vendor')->check())
+                                            <div class="product-item__footer">
+                                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                                    <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                         @endforeach
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container mb-8">
-        <div class="py-2 border-top border-bottom">
-            <div class="js-slick-carousel u-slick my-1" data-slides-show="5" data-slides-scroll="1" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y" data-arrow-left-classes="fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9" data-arrow-right-classes="fa fa-angle-right u-slick__arrow-classic-inner--right"
-                 data-responsive='[{
-                                "breakpoint": 992,
-                                "settings": {
-                                    "slidesToShow": 2
-                                }
-                            }, {
-                                "breakpoint": 768,
-                                "settings": {
-                                    "slidesToShow": 1
-                                }
-                            }, {
-                                "breakpoint": 554,
-                                "settings": {
-                                    "slidesToShow": 1
-                                }
-                            }]'>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_1.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_2.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_3.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_4.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_5.png" alt="Image Description">
-                    </a>
-                </div>
-                <div class="js-slide img_vend">
-                    <a href="#" class="link-hover__brand">
-                        <img class="img-fluid m-auto max-height-50" src="assets/img/vendor_6.png" alt="Image Description">
-                    </a>
                 </div>
             </div>
         </div>

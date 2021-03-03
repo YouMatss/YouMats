@@ -42,7 +42,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'city_id' => ['required', 'numeric'],
-            'name' => ['required', 'string', 'max:191'],
+            'name_en' => ['required', 'string', 'max:191'],
+            'name_ar' => ['required', 'string', 'max:191'],
             'email' => ['required', 'email', 'unique:vendors'],
             'phone' => ['nullable', 'string', 'max:30'],
             'phone2' => ['nullable', 'string', 'max:30'],
@@ -62,7 +63,7 @@ class RegisterController extends Controller
         $vendor = Vendor::create([
             'membership_id' => env('MEMBERSHIP_ID', 1),
             'city_id' => $data['city_id'],
-            'name' => $data['name'],
+            'name' => $data['name_en'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'phone2' => $data['phone2'],
@@ -71,6 +72,11 @@ class RegisterController extends Controller
             'address2' => $data['address2'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $vendor->setTranslation('name', 'en', $data['name_en']);
+        $vendor->setTranslation('name', 'ar', $data['name_ar']);
+
+        $vendor->save();
 
         $vendor->addMedia('assets/img/default_cover.png')->toMediaCollection(VENDOR_COVER);
         $vendor->addMedia('assets/img/default_logo.jpg')->toMediaCollection(VENDOR_LOGO);

@@ -209,7 +209,7 @@
             @foreach($featuredVendors as $f_vendor)
             <div class="js-slide img_vend">
                 <a href="{{ route('vendor.show', ['vendor' => $f_vendor->id, 'name' => $f_vendor->name]) }}" class="link-hover__brand">
-                    <img class="img-fluid m-auto max-height-50" style="width: 70px" src="{{ $f_vendor->getFirstMediaUrl(VENDOR_LOGO) }}" alt="{{$f_vendor->getFirstMedia(VENDOR_LOGO)->img_alt}}" title="{{$f_vendor->getFirstMedia(VENDOR_LOGO)->img_title}}">
+                    <img class="img-fluid m-auto max-height-50" style="width: 70px" src="{{ $f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" alt="{{$f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                 </a>
             </div>
             @endforeach
@@ -226,7 +226,7 @@
                 @foreach($featured_categories as $f_category)
                 <div class="box">
                     <a href="{{route('front.category', [$f_category->slug])}}" class="st_block">
-                        <img src="{{$f_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$f_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$f_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
+                        <img src="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['url']}}" alt="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['alt']}}" title="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['title']}}" />
                         <div class="content d-flex">
                             <h3 class="title">{{$f_category->name}}</h3>
                             <span class="text-blue">
@@ -293,23 +293,27 @@
                                             </h5>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [$bs_product->slug])}}" class="d-block text-center">
-                                                    <img class="img-fluid" src="{{$bs_product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$bs_product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$bs_product->getFirstMedia(PRODUCT_PATH)->img_title}}" />
+                                                    <img class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                                 </a>
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
                                                     <div class="text-gray-100">{{getCurrency('code')}} {{$bs_product->price}}</div>
                                                 </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <button data-url="{{ route('cart.add', ['product' => $bs_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                @if(!Auth::guard('vendor')->check())
+                                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                                        <button data-url="{{ route('cart.add', ['product' => $bs_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        @if(!Auth::guard('vendor')->check())
+                                            <div class="product-item__footer">
+                                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                                    <a data-url="{{ route('wishlist.add', ['product' => $bs_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a data-url="{{ route('wishlist.add', ['product' => $bs_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -336,7 +340,7 @@
                 <div class="col-md-3">
                     <div class="block_img_cat">
                         <a href="{{route('front.category', [$section_i_category->slug])}}" class="d-block">
-                            <img class="img-fluid" src="{{$section_i_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$section_i_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$section_i_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
+                            <img class="img-fluid" src="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                         </a>
                         <div class="des_block_cat_new">
                             <h3>{{$section_i_category->name}}</h3>
@@ -359,22 +363,26 @@
                                         </h5>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [$i_product->slug])}}" class="d-block text-center">
-                                                <img class="img-fluid" src="{{$i_product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$i_product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$i_product->getFirstMedia(PRODUCT_PATH)->img_title}}" />
+                                                <img class="img-fluid" src="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
                                         <div class="flex-center-between mb-1">
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$i_product->price}}</div>
                                             </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <button data-url="{{ route('cart.add', ['product' => $i_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
-                                            </div>
+                                            @if(!Auth::guard('vendor')->check())
+                                                <div class="d-none d-xl-block prodcut-add-cart">
+                                                    <button data-url="{{ route('cart.add', ['product' => $i_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a data-url="{{ route('wishlist.add', ['product' => $i_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
+                                        @if(!Auth::guard('vendor')->check())
+                                            <div class="border-top pt-2 flex-center-between flex-wrap">
+                                                <a data-url="{{ route('wishlist.add', ['product' => $i_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -388,18 +396,18 @@
     @endif
     <!-- Top Categories -->
     <div class="container">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">TOP CATEGORIES</h3>
         </div>
         <div class="mb-6">
-            <div class="row flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
+            <div class="row rtl flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
                 @foreach($top_categories as $t_category)
                 <div class="col-md-6 col-xl-4 mb-5 flex-shrink-0 flex-md-shrink-1">
                     <div class="bg-gray-1 overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
                         <a href="{{route('front.category', [$t_category->slug])}}" class="d-block  pr-2 pr-wd-6">
                             <div class="media align-items-center">
                                 <div class="max-width-148 img_cat_home">
-                                    <img class="img-fluid" src="{{$f_category->getFirstMediaUrl(CATEGORY_PATH)}}" alt="{{$f_category->getFirstMedia(CATEGORY_PATH)->img_alt}}" title="{{$f_category->getFirstMedia(CATEGORY_PATH)->img_title}}" />
+                                    <img class="img-fluid" src="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                                 </div>
                                 <div class="ml-4 media-body">
                                     <h4 class="mb-0 text-gray-90">{{$t_category->name}}</h4>
@@ -427,7 +435,7 @@
         <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [$section_ii_category->slug])}}" class="d-block">
-                    <img class="img-fluid img_main_block" width="200" src="{{$section_ii_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$section_ii_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$section_ii_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
+                    <img class="img-fluid img_main_block" width="200" src="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
@@ -446,23 +454,27 @@
                                     </h5>
                                     <div class="mb-2">
                                         <a href="{{route('front.product', [$ii_product->slug])}}" class="d-block text-center">
-                                            <img class="img-fluid" src="{{$ii_product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$ii_product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$ii_product->getFirstMedia(PRODUCT_PATH)->img_title}}" />
+                                            <img class="img-fluid" src="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                         </a>
                                     </div>
                                     <div class="flex-center-between mb-1">
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">{{getCurrency('code')}} {{$ii_product->price}}</div>
                                         </div>
-                                        <div class="d-none d-xl-block prodcut-add-cart">
-                                            <button data-url="{{ route('cart.add', ['product' => $ii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                        @if(!Auth::guard('vendor')->check())
+                                            <div class="d-none d-xl-block prodcut-add-cart">
+                                                <button data-url="{{ route('cart.add', ['product' => $ii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                @if(!Auth::guard('vendor')->check())
+                                    <div class="product-item__footer">
+                                        <div class="border-top pt-2 flex-center-between flex-wrap">
+                                            <a data-url="{{ route('wishlist.add', ['product' => $ii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="product-item__footer">
-                                    <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a data-url="{{ route('wishlist.add', ['product' => $ii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                    </div>
-                                </div>
+                                @endif
                             </div>
                         </div>
                     </li>
@@ -487,7 +499,7 @@
         <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [$section_iii_category->slug])}}" class="d-block">
-                    <img class="img-fluid img_main_block" width="200" src="{{$section_iii_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$section_iii_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$section_iii_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
+                    <img class="img-fluid img_main_block" width="200" src="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
@@ -506,23 +518,27 @@
                                         </h5>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [$iii_product->slug])}}" class="d-block text-center">
-                                                <img class="img-fluid" src="{{$iii_product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$iii_product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$iii_product->getFirstMedia(PRODUCT_PATH)->img_title}}" />
+                                                <img class="img-fluid" src="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
                                         <div class="flex-center-between mb-1">
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$iii_product->price}}</div>
                                             </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <button data-url="{{ route('cart.add', ['product' => $iii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                @if(!Auth::guard('vendor')->check())
+                                                <div class="d-none d-xl-block prodcut-add-cart">
+                                                    <button data-url="{{ route('cart.add', ['product' => $iii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    @if(!Auth::guard('vendor')->check())
+                                        <div class="product-item__footer">
+                                            <div class="border-top pt-2 flex-center-between flex-wrap">
+                                                <a data-url="{{ route('wishlist.add', ['product' => $iii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a data-url="{{ route('wishlist.add', ['product' => $iii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </li>
@@ -547,7 +563,7 @@
         <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [$section_iv_category->slug])}}" class="d-block">
-                    <img class="img-fluid img_main_block" width="200" src="{{$section_iv_category->getFirstMediaUrl(CATEGORY_COVER)}}" alt="{{$section_iv_category->getFirstMedia(CATEGORY_COVER)->img_alt}}" title="{{$section_iv_category->getFirstMedia(CATEGORY_COVER)->img_title}}" />
+                    <img class="img-fluid img_main_block" width="200" src="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
@@ -566,23 +582,27 @@
                                         </h5>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [$iv_product->slug])}}" class="d-block text-center">
-                                                <img class="img-fluid" src="{{$iv_product->getFirstMediaUrl(PRODUCT_PATH)}}" alt="{{$iv_product->getFirstMedia(PRODUCT_PATH)->img_alt}}" title="{{$iv_product->getFirstMedia(PRODUCT_PATH)->img_title}}" />
+                                                <img class="img-fluid" src="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
                                         <div class="flex-center-between mb-1">
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$iv_product->price}}</div>
                                             </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <button data-url="{{ route('cart.add', ['product' => $iv_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                            @if(!Auth::guard('vendor')->check())
+                                                <div class="d-none d-xl-block prodcut-add-cart">
+                                                    <button data-url="{{ route('cart.add', ['product' => $iv_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    @if(!Auth::guard('vendor')->check())
+                                        <div class="product-item__footer">
+                                            <div class="border-top pt-2 flex-center-between flex-wrap">
+                                                <a data-url="{{ route('wishlist.add', ['product' => $iv_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a data-url="{{ route('wishlist.add', ['product' => $iv_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </li>

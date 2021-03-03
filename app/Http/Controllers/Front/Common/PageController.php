@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front\Common;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\FAQ;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -14,8 +15,10 @@ class PageController extends Controller
         return view('front.pages.faq')->with(compact('faqs'));
     }
 
-    public function aboutUs() {
-        return view('front.pages.about');
+    public function page($slug) {
+        $page = Page::where('slug', $slug)->first();
+
+        return view('front.pages.index')->with(compact('page'));
     }
 
     public function contactUs() {

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Helpers\Traits\DefaultImage;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,9 +15,13 @@ use Spatie\Translatable\HasTranslations;
 
 class Category extends Model implements Sortable, HasMedia
 {
-    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia;
+    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, CascadeSoftDeletes;
 
     public $translatable = ['name', 'desc', 'short_desc', 'meta_title', 'meta_keywords', 'meta_desc'];
+
+    protected $dates = ['deleted_at'];
+
+    protected $cascadeDeletes = ['subCategories', 'products'];
 
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')
@@ -33,7 +39,8 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     public function products() {
-        return $this->hasManyThrough(Product::class, SubCategory::class, '', 'subCategory_id');
+        return $this->hasManyThrough(Product::class, SubCategory::class, '', 'subCategory_id')
+            ->where('active', 1);
     }
 
 }

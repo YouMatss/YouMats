@@ -21,8 +21,6 @@ class RedirectIfAuthenticated
     {
         if(Auth::guard('vendor')->check())
             return redirect(RouteServiceProvider::VENDOR_HOME);
-        elseif(Auth::guard('admin')->check())
-            return redirect('/admin_panel');
         elseif(Auth::guard('web')->check())
             return redirect(RouteServiceProvider::HOME);
 

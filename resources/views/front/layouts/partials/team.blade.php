@@ -14,7 +14,7 @@
                                 <div class="frontside">
                                     <div class="card">
                                         <div class="card-body text-center">
-                                            <p><img class="img-fluid" src="{{$member->getFirstMediaUrl(TEAM_PATH)}}" alt="{{$member->getFirstMedia(TEAM_PATH)->img_alt}}" title="{{$member->getFirstMedia(TEAM_PATH)->img_title}}"></p>
+                                            <p><img class="img-fluid" src="{{$member->getFirstMediaUrlOrDefault(TEAM_PATH)['url']}}" alt="{{$member->getFirstMediaUrlOrDefault(TEAM_PATH)['alt']}}" title="{{$member->getFirstMediaUrlOrDefault(TEAM_PATH)['title']}}"></p>
                                             <h4 class="card-title">{{$member->name}}</h4>
                                             <p class="card-text">{{$member->position}}</p>
                                             <a href="#" class="btn btn-primary btn-sm icon-plus_team"><i class="fa fa-plus"></i></a>

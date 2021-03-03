@@ -25,19 +25,18 @@ class CreateProductsTable extends Migration
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->text('name');
-            $table->text('desc')->nullable();
+            $table->longText('desc')->nullable();
             $table->text('short_desc')->nullable();
 
             $table->decimal('rate', 10, 1);
             $table->enum('type', ['product', 'service']);
             $table->decimal('price', 10, 2)->nullable();
-            $table->integer('stoke')->default(0);
+            $table->integer('stock')->default(0);
             $table->text('unit')->nullable();
 
             $table->string('SKU')->unique();
 
             $table->tinyInteger('active')->default(1);
-            $table->boolean('best_seller')->default(0);
             $table->integer('views')->default(0);
 
             $table->string('slug')->unique();
@@ -46,6 +45,7 @@ class CreateProductsTable extends Migration
             $table->text('meta_keywords')->nullable();
 
             $table->integer('sort');
+            $table->boolean('best_seller');
 
             $table->softDeletes();
             $table->timestamps();

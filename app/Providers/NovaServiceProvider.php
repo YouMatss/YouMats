@@ -9,6 +9,7 @@ use App\Nova\Category;
 use App\Nova\City;
 use App\Nova\Contact;
 use App\Nova\Country;
+use App\Nova\Coupon;
 use App\Nova\Currency;
 use App\Nova\FAQ;
 use App\Nova\Inquire;
@@ -29,6 +30,7 @@ use App\Nova\Metrics\UsersStatus;
 use App\Nova\Metrics\UsersType;
 use App\Nova\Order;
 use App\Nova\Page;
+use App\Nova\PaymentGateway;
 use App\Nova\Product;
 use App\Nova\Quote;
 use App\Nova\SubCategory;
@@ -174,6 +176,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                 'resources' => [
                                     Language::class,
                                     Currency::class,
+                                    PaymentGateway::class,
+                                    Coupon::class,
                                     InternalLink::make([
                                         'label' => 'Site Content',
                                         'target' => '_self',

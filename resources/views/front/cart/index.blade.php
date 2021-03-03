@@ -1,5 +1,18 @@
 @extends('front.layouts.master')
-
+@section('metaTags')
+    <title>YouMats | Cart</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta property="og:url" content="{{url()->current()}}" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@YouMats">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
+@endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
         <div class="container">
@@ -44,7 +57,7 @@
                                         <a style="cursor: pointer" class="deleteCart" data-url="{{ route('cart.remove', ['rowId' => $item->rowId]) }}" class="text-gray-32 font-size-26">×</a>
                                     </td>
                                     <td class="d-none d-md-table-cell">
-                                        <a href="#"><img class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrl(PRODUCT_PATH) }}" alt="{{ $item->name }}"></a>
+                                        <a href="#"><img class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
                                     </td>
 
                                     <td data-title="Product">
@@ -100,7 +113,7 @@
                                             </div>
                                             <div class="d-md-flex">
                                                 <button type="button" id="updateCart" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5 w-100 w-md-auto">Update cart</button>
-                                                <a href="#" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block">Proceed to checkout</a>
+                                                <a href="{{ route('checkout.index') }}" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block">Proceed to checkout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -133,7 +146,6 @@
                         </tr>
                         </tbody>
                     </table>
-                    <button type="button" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-md-none">Proceed to checkout</button>
                 </div>
             </div>
         @else

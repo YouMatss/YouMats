@@ -18,7 +18,6 @@ class CreatePagesTable extends Migration
 
             $table->text('title');
             $table->text('desc')->nullable();
-            $table->text('short_desc')->nullable();
 
             $table->string('slug')->unique();
             $table->text('meta_title')->nullable();

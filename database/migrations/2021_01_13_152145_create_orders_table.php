@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateOrdersTable extends Migration
@@ -34,7 +35,7 @@ class CreateOrdersTable extends Migration
             $table->string('district')->nullable();
             $table->string('city')->nullable();
 
-            $table->enum('payment_method', ['cash', 'credit card', 'paypal']);
+            $table->string('payment_method');
 
             $table->string('reference_number')->nullable();
             $table->string('card_number')->nullable();
@@ -49,8 +50,9 @@ class CreateOrdersTable extends Migration
             $table->text('notes')->nullable();
             $table->text('refused_notes')->nullable();
 
-            $table->double('total_price');
+            $table->string('coupon_code');
 
+            $table->double('total_price');
 
             $table->softDeletes();
             $table->timestamps();
@@ -64,6 +66,8 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('orders');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

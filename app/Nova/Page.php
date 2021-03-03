@@ -51,12 +51,6 @@ class Page extends Resource
                 ->autouploading()->attachOnDetails()->single()
                 ->croppable('cropper'),
 
-            Textarea::make('Short Description', 'short_desc')
-                ->hideFromIndex()
-                ->alwaysShow()
-                ->translatable()
-                ->rules(NULLABLE_TEXT_VALIDATION),
-
             CKEditor::make('Description', 'desc')
                 ->hideFromIndex()
                 ->translatable()

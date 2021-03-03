@@ -24,7 +24,7 @@ class CreateVendorsTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities')
                 ->onDelete('NO ACTION')->onUpdate('CASCADE');
 
-            $table->string('name');
+            $table->text('name');
             $table->string('email')->unique();
 
             $table->string('phone')->nullable();

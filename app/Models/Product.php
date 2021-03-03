@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Helpers\Traits\DefaultImage;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,9 +16,10 @@ use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements Sortable, HasMedia, Buyable
 {
-    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia;
+    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage;
 
     public $translatable = ['name', 'desc', 'short_desc', 'unit', 'meta_title', 'meta_keywords', 'meta_desc'];
+
 
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')

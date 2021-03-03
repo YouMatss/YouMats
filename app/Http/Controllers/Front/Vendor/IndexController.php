@@ -38,7 +38,7 @@ class IndexController extends Controller
     public function index(Request $request)
     {
         // Get all vendors
-        $vendors = Vendor::paginate(20);
+        $vendors = Vendor::paginate(21);
 
         // Return the vendors to the view.
         // So we can loop through
@@ -82,7 +82,8 @@ class IndexController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $data = $request->validate([
-            'name' => REQUIRED_TEXT_VALIDATION,
+            'name_en' => REQUIRED_TEXT_VALIDATION,
+            'name_ar' => REQUIRED_TEXT_VALIDATION,
             'email' => REQUIRED_EMAIL_VALIDATION,
             'logo' => NULLABLE_IMAGE_VALIDATION,
             'cover' => NULLABLE_IMAGE_VALIDATION,
@@ -122,7 +123,10 @@ class IndexController extends Controller
         else
             unset($data['password']);
 
-        $vendor->update($data);
+        $vendor->setTranslation('name', 'en', $request->name_en);
+        $vendor->setTranslation('name', 'ar', $request->name_ar);
+
+        $vendor->update($request->except('name_en', 'name_ar', '_token', 'password'));
 
         return back()->with(['message' => __('Profile has been updated successfully')]);
 

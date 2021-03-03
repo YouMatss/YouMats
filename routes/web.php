@@ -29,6 +29,11 @@ Route::group([
         Route::get('{vendor}/edit', 'IndexController@edit')->name('edit');
         Route::patch('{vendor}/update', 'IndexController@update')->name('update');
         Route::post('{vendor}/branch', 'IndexController@addBranch')->name('addBranch');
+        Route::get('/{vendor}/product', 'ProductController@create')->name('addProduct');
+        Route::post('/{vendor}/product', 'ProductController@store')->name('storeProduct');
+        Route::get('/{vendor}/product/{product}/edit', 'ProductController@edit')->name('editProduct');
+        Route::patch('/{vendor}/product/{product}/update', 'ProductController@update')->name('updateProduct');
+        Route::delete('/product/{product}/media/{media}', 'ProductController@deleteImage')->name('deleteImage');
     });
 
     //Cart Routes
@@ -45,13 +50,17 @@ Route::group([
         Route::delete('/delete/{rowId}', 'WishlistController@deleteItem')->name('wishlist.remove');
     });
 
+    Route::group(['prefix' => 'checkout', 'namespace' => 'Product'], function() {
+        Route::get('/', 'CheckoutController@index')->name('checkout.index');
+        Route::post('/', 'CheckoutController@checkout')->name('checkout');
+    });
+
     //Pages routes
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/products', 'Product\ProductController@all')->name('front.product.all');
     Route::get('/partners', 'Vendor\IndexController@index')->name('vendor.index');
     Route::get('/team', 'Team\IndexController@index')->name('front.team.index');
     Route::get('/FAQs', 'Common\PageController@faqs')->name('front.faqs.page');
-    Route::get('/about-us', 'Common\PageController@aboutUs')->name('front.about.page');
     Route::get('/contact-us', 'Common\PageController@contactUs')->name('front.contact.page');
 
     Route::post('/contact-us', 'Common\PageController@contactUsRequest')->name('front.contact.request');
@@ -64,6 +73,7 @@ Route::group([
         Route::patch('/vendor/{vendor}/update', 'OrderController@vendorUpdate')->name('vendor.order.update');
     });
 
+    Route::get('/page/{slug}', 'Common\PageController@page')->name('front.page.index');
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
     Route::get('/product/{slug}', 'Product\ProductController@index')->name('front.product');
     Route::get('/category/{category_slug}', 'Category\CategoryController@index')->name('front.category');
