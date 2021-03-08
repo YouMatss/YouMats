@@ -26,14 +26,14 @@ Route::group([
         Auth::routes(['verify' => true]);
 
         Route::get('show/{vendor}/{name}', 'IndexController@show')->name('show');
-        Route::get('{vendor}/edit', 'IndexController@edit')->name('edit');
-        Route::patch('{vendor}/update', 'IndexController@update')->name('update');
-        Route::post('{vendor}/branch', 'IndexController@addBranch')->name('addBranch');
+        Route::get('edit', 'IndexController@edit')->name('edit');
+        Route::patch('update', 'IndexController@update')->name('update');
+        Route::post('branch', 'IndexController@addBranch')->name('addBranch');
         Route::delete('{branch}/branch', 'IndexController@deleteBranch')->name('deleteBranch');
-        Route::get('/{vendor}/product', 'ProductController@create')->name('addProduct');
-        Route::post('/{vendor}/product', 'ProductController@store')->name('storeProduct');
-        Route::get('/{vendor}/product/{product}/edit', 'ProductController@edit')->name('editProduct');
-        Route::patch('/{vendor}/product/{product}/update', 'ProductController@update')->name('updateProduct');
+        Route::get('product', 'ProductController@create')->name('addProduct');
+        Route::post('product', 'ProductController@store')->name('storeProduct');
+        Route::get('product/{product}/edit', 'ProductController@edit')->name('editProduct');
+        Route::patch('product/{product}/update', 'ProductController@update')->name('updateProduct');
         Route::delete('/product/{product}/media/{media}', 'ProductController@deleteImage')->name('deleteImage');
     });
 

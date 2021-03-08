@@ -30,17 +30,6 @@ class ProductController extends Controller
         $this->middleware('verified:vendor.verification.notice');
     }
 
-
-    /**
-     * @param $vendor
-     *
-     */
-    protected function checkPermissions($vendor)
-    {
-        if(!$vendor->active)
-            return back()->with(['custom_warning' => __('You do not have permissions to access this page')]);
-    }
-
     /**
      * @param Request $request
      * @return array
@@ -103,9 +92,12 @@ class ProductController extends Controller
      * @param Vendor $vendor
      * @return Application|Factory|View|RedirectResponse
      */
-    public function create(Vendor $vendor)
+    public function create()
     {
-        $this->checkPermissions($vendor);
+        $vendor = Auth::guard('vendor')->user();
+
+        if(!$vendor->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
 
         $subCategories = SubCategory::all();
         $units = Unit::orderby('sort')->get();
@@ -124,9 +116,12 @@ class ProductController extends Controller
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function store(Request $request, Vendor $vendor): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $this->checkPermissions($vendor);
+        $vendor = Auth::guard('vendor')->user();
+
+        if(!$vendor->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
 
         $this->validateRequest($request);
 
@@ -156,9 +151,7 @@ class ProductController extends Controller
         //Save the product
         $product->save();
 
-        return redirect()->route('vendor.edit', [
-            'vendor' => $vendor
-        ])
+        return redirect()->route('vendor.edit')
         ->with([
             'custom_success' => __('Product has been added.')
         ]);
@@ -169,15 +162,20 @@ class ProductController extends Controller
      * @param Product $product
      * @return Application|Factory|View
      */
-    public function edit(Vendor $vendor, Product $product)
+    public function edit(Product $product)
     {
-        $this->checkPermissions($vendor);
+        $vendor = Auth::guard('vendor')->user();
+
+        if(!$vendor->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
+
+        if($product->vendor_id !== $vendor->id)
+            return back()->with(['custom_warning' => __('You do not have permissions to edit this product.')]);
 
         $subCategories = SubCategory::all();
         $units = Unit::orderBy('sort')->get();
 
         return view('front.vendor.product.edit', [
-            'vendor' => $vendor,
             'product' => $product,
             'subCategories' => $subCategories,
             'units' => $units
@@ -190,9 +188,15 @@ class ProductController extends Controller
      * @param Product $product
      * @return RedirectResponse
      */
-    public function update(Request $request, Vendor $vendor, Product $product): RedirectResponse
+    public function update(Request $request, Product $product): RedirectResponse
     {
-        $this->checkPermissions($vendor);
+        $vendor = Auth::guard('vendor')->user();
+
+        if(!$vendor->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
+
+        if($product->vendor_id !== $vendor->id)
+            return back()->with(['custom_warning' => __('You do not have permissions to edit this product.')]);
 
         $this->validateRequest($request);
 
@@ -226,12 +230,13 @@ class ProductController extends Controller
     /**
      * @param Product $product
      * @param Media $media
-     * @return JsonResponse
+     * @return JsonResponse|RedirectResponse
      * @throws Exception
      */
-    public function deleteImage(Product $product, Media $media): JsonResponse
+    public function deleteImage(Product $product, Media $media)
     {
-        $this->checkPermissions(Auth::guard('vendor')->user());
+        if(!Auth::guard('vendor')->user()->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
 
         if(count($product->getMedia(PRODUCT_PATH)) === 1)
             return response()->json(['status' => false, 'message' => __('You cannot delete the only image of this product.')]);
