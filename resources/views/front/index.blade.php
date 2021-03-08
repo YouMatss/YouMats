@@ -226,7 +226,9 @@
                 @foreach($featured_categories as $f_category)
                 <div class="box">
                     <a href="{{route('front.category', [$f_category->slug])}}" class="st_block">
-                        <img src="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['url']}}" alt="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['alt']}}" title="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['title']}}" />
+                        <img src="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['url']}}"
+                             alt="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['alt']}}"
+                             title="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['title']}}" />
                         <div class="content d-flex">
                             <h3 class="title">{{$f_category->name}}</h3>
                             <span class="text-blue">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front\Vendor;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Models\Unit;
 use App\Models\Vendor;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -33,7 +34,7 @@ class ProductController extends Controller
      * @param $vendor
      * @return RedirectResponse
      */
-    protected function checkPermissions($vendor): RedirectResponse
+    protected function checkPermissions($vendor)
     {
         if(!$vendor->active)
             return back()->with(['custom_warning' => __('You do not have permissions to access this page')]);
@@ -52,7 +53,7 @@ class ProductController extends Controller
             'type' => 'required|in:product,service',
             'price' => 'required_if:type,product|numeric',
             'stock' => 'required_if:type,product|numeric',
-            'unit' => 'required_if:type,product|string|max:191',
+            'unit_id' => 'integer|exists:units,id',
             'rate' => REQUIRED_NUMERIC_VALIDATION,
             'short_desc_en' => NULLABLE_TEXT_VALIDATION,
             'short_desc_ar' => NULLABLE_TEXT_VALIDATION,
@@ -72,6 +73,7 @@ class ProductController extends Controller
         $product->slug = $slug;
         $product->type = $request->type;
         $product->rate = $request->rate;
+        $product->unit_id = $request->unit_id;
 
         //Generate translations
         $product->setTranslation('name', 'en', $request->name_en);
@@ -90,9 +92,9 @@ class ProductController extends Controller
 
         //If it's a product let's set the price/stock/unit!
         if($request->type == 'product') {
+            $product->cost = $request->cost;
             $product->price = $request->price;
             $product->stock = $request->stock;
-            $product->unit = $request->unit;
         }
     }
 
@@ -105,10 +107,12 @@ class ProductController extends Controller
         $this->checkPermissions($vendor);
 
         $subCategories = SubCategory::all();
+        $units = Unit::orderby('sort')->get();
 
         return view('front.vendor.product.create', [
             'vendor' => $vendor,
-            'subCategories' => $subCategories
+            'subCategories' => $subCategories,
+            'units' => $units
         ]);
     }
 
@@ -168,11 +172,13 @@ class ProductController extends Controller
         $this->checkPermissions($vendor);
 
         $subCategories = SubCategory::all();
+        $units = Unit::orderBy('sort')->get();
 
         return view('front.vendor.product.edit', [
             'vendor' => $vendor,
             'product' => $product,
-            'subCategories' => $subCategories
+            'subCategories' => $subCategories,
+            'units' => $units
         ]);
     }
 

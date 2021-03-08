@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Slug;
@@ -74,19 +73,23 @@ class Product extends Resource
             ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:product,service'])),
 
             NovaDependencyContainer::make([
+                Currency::make('Cost')
+                    ->rules(REQUIRED_NUMERIC_VALIDATION)
+                    ->min(0)
+                    ->step(0.05),
+
                 Currency::make('Price')
                     ->rules(REQUIRED_NUMERIC_VALIDATION)
-                    ->min(1)
+                    ->min(0)
                     ->step(0.05),
 
                 Number::make(__('Stock'), 'stock')
                     ->min(0)
                     ->rules(REQUIRED_INTEGER_VALIDATION),
-
-                Text::make('Unit')
-                    ->translatable()
-                    ->rules(REQUIRED_STRING_VALIDATION),
             ])->dependsOn('type', 'product'),
+
+            BelongsTo::make('Unit')
+                ->nullable(),
 
             Text::make('SKU', 'SKU')
                 ->hideFromIndex()
@@ -120,9 +123,11 @@ class Product extends Resource
                             ->rules('required', 'min:2'),
 
                         Text::make('Image Title', 'img_title')
+                            ->translatable()
                             ->rules(NULLABLE_STRING_VALIDATION),
 
                         Text::make('Image Alt', 'img_alt')
+                            ->translatable()
                             ->rules(NULLABLE_STRING_VALIDATION)
                     ];
                 })->rules('array', 'required')
