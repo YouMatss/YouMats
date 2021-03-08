@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Helpers\Traits\DefaultImage;
-use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,8 +17,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
 {
     use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage;
 
-    public $translatable = ['name', 'desc', 'short_desc', 'unit', 'meta_title', 'meta_keywords', 'meta_desc'];
-
+    public $translatable = ['name', 'desc', 'short_desc', 'meta_title', 'meta_keywords', 'meta_desc'];
 
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')
@@ -36,12 +34,20 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return round($value * getCurrency('rate'), 2);
     }
 
+    public function getCostAttribute($value) {
+        return round($value * getCurrency('rate'), 2);
+    }
+
     public function category() {
         return $this->hasOneThrough(Category::class, SubCategory::class, 'category_id', 'id');
     }
 
     public function subCategory() {
         return $this->belongsTo(SubCategory::class, 'subCategory_id');
+    }
+
+    public function unit() {
+        return $this->belongsTo(Unit::class);
     }
 
     public function vendor() {

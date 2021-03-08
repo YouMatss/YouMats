@@ -118,8 +118,20 @@
                                 <div class="w-100"></div>
                                 <div class="col-md-4">
                                     <div class="js-form-message mb-6">
+                                        <label class="form-label"> {{ __('Cost') }} </label>
+                                        <input type="number" class="form-control st_input @error('cost') is-invalid @enderror" value="{{ $product->cost }}" name="cost">
+                                        @error('cost')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-md-4">
+                                    <div class="js-form-message mb-6">
                                         <label class="form-label"> {{ __('Price') }} </label>
-                                        <input type="number" class="form-control st_input @error('price') is-invalid @enderror" value="{{ $product->price }}" name="price" placeholder="">
+                                        <input type="number" class="form-control st_input @error('price') is-invalid @enderror" value="{{ $product->price }}" name="price">
                                         @error('price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -139,20 +151,26 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="w-100"></div>
-                                <div class="col-md-4">
-                                    <div class="js-form-message mb-6">
-                                        <label class="form-label"> {{ __('Unit') }} </label>
-                                        <input type="text" class="form-control st_input @error('unit') is-invalid @enderror" value="{{ $product->unit }}" name="unit" placeholder="">
-                                        @error('unit')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
                             </div>
 
+                            <div class="w-100"></div>
+                            <div class="col-md-4">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">{{ __('Unit') }}</label>
+                                    <select class="form-control js-select selectpicker dropdown-select st_input @error('unit_id') is-invalid @enderror" name="unit_id" data-live-search="true" data-style="form-control border-color-1 font-weight-normal">
+                                        @foreach($units as $unit)
+                                            <option value="{{ $unit->id }}" {{ $product->unit_id == $unit->id ? 'selected' : '' }}>{{ $unit->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('unit_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <!-- End Input -->
+                            </div>
                             <div class="w-100"></div>
                             <div class="col-md-12 mb-5 pt-4">
                                 <hr>
@@ -332,6 +350,18 @@
                 $('#productRegion').html(`<div class="w-100"></div>
                                 <div class="col-md-4">
                                     <div class="js-form-message mb-6">
+                                        <label class="form-label"> {{ __('Cost') }} </label>
+                                        <input type="number" class="form-control st_input @error('cost') is-invalid @enderror" name="cost" placeholder="">
+                                        @error('cost')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                </div>
+             </div>
+            <div class="w-100"></div>
+                                <div class="col-md-4">
+                                    <div class="js-form-message mb-6">
                                         <label class="form-label"> {{ __('Price') }} </label>
                                         <input type="number" class="form-control st_input @error('price') is-invalid @enderror" name="price" placeholder="">
                                         @error('price')
@@ -350,18 +380,6 @@
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                                             </span>
-                                        @enderror
-                </div>
-            </div>
-            <div class="w-100"></div>
-            <div class="col-md-4">
-                <div class="js-form-message mb-6">
-                    <label class="form-label"> {{ __('Unit') }} </label>
-                                        <input type="text" class="form-control st_input @error('unit') is-invalid @enderror" name="unit" placeholder="">
-                                        @error('unit')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                                        </span>
                                         @enderror
                 </div>
             </div>`);

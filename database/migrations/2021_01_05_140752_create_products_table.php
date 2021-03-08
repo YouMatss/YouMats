@@ -30,9 +30,13 @@ class CreateProductsTable extends Migration
 
             $table->decimal('rate', 10, 1);
             $table->enum('type', ['product', 'service']);
+            $table->decimal('cost', 10, 2)->nullable();
             $table->decimal('price', 10, 2)->nullable();
             $table->integer('stock')->default(0);
-            $table->text('unit')->nullable();
+
+            $table->bigInteger('unit_id')->unsigned()->index()->nullable();
+            $table->foreign('unit_id')->references('id')->on('units')
+                ->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->string('SKU')->unique();
 
