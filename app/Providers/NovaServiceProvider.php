@@ -37,6 +37,7 @@ use App\Nova\SubCategory;
 use App\Nova\Subscriber;
 use App\Nova\Tag;
 use App\Nova\Team;
+use App\Nova\Unit;
 use App\Nova\User;
 use App\Nova\Vendor;
 use App\Policies\PermissionPolicy;
@@ -185,6 +186,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                     ]),
                                     Page::class,
                                     NovaResource::make(FAQ::class)->label('FAQs'),
+                                    Unit::class,
                                     NovaResource::make(ActionResource::class)->label('Activity Logs')
                                     ->canSee(function ($request) {
                                         return $request->user()->isSuperAdmin();
