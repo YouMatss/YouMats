@@ -12,9 +12,13 @@ class ProfileController extends Controller
 {
     public function index() {
         $user = auth()->user();
-        $orders = $user->orders;
 
-        return view('front.user.profile')->with(compact('user', 'orders'));
+        if($user->type == 'company')
+            $data = $user->quotes;
+        else
+            $data = $user->orders;
+
+        return view('front.user.profile')->with(compact('user', 'data'));
     }
 
     public function updateProfile(UserProfileRequest $request) {

@@ -30,9 +30,10 @@ class ProductController extends Controller
         $this->middleware('verified:vendor.verification.notice');
     }
 
+
     /**
      * @param $vendor
-     * @return RedirectResponse
+     *
      */
     protected function checkPermissions($vendor)
     {
@@ -143,6 +144,7 @@ class ProductController extends Controller
         //Generate SKU
         $product->sku = Str::sku($request->name_en, '-');
         $product->vendor_id = $vendor->id;
+        $product->best_seller = 0;
 
         $this->setProduct($request, $product);
 

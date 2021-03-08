@@ -302,7 +302,7 @@
                                                 <div class="prodcut-price">
                                                     <div class="text-gray-100">{{getCurrency('code')}} {{$bs_product->price}}</div>
                                                 </div>
-                                                @if(!Auth::guard('vendor')->check())
+                                                @if(!Auth::guard('vendor')->check() && $bs_product->type != 'service' && $bs_product->price > 0)
                                                     <div class="d-none d-xl-block prodcut-add-cart">
                                                         <button data-url="{{ route('cart.add', ['product' => $bs_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
                                                     </div>
@@ -372,7 +372,7 @@
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$i_product->price}}</div>
                                             </div>
-                                            @if(!Auth::guard('vendor')->check())
+                                            @if(!Auth::guard('vendor')->check() && $i_product->type != 'service' && $i_product->price > 0)
                                                 <div class="d-none d-xl-block prodcut-add-cart">
                                                     <button data-url="{{ route('cart.add', ['product' => $i_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
                                                 </div>
@@ -463,7 +463,7 @@
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">{{getCurrency('code')}} {{$ii_product->price}}</div>
                                         </div>
-                                        @if(!Auth::guard('vendor')->check())
+                                        @if(!Auth::guard('vendor')->check() && $ii_product->type != 'service' && $ii_product->price > 0)
                                             <div class="d-none d-xl-block prodcut-add-cart">
                                                 <button data-url="{{ route('cart.add', ['product' => $ii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
                                             </div>
@@ -527,7 +527,7 @@
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$iii_product->price}}</div>
                                             </div>
-                                                @if(!Auth::guard('vendor')->check())
+                                            @if(!Auth::guard('vendor')->check() && $iii_product->type != 'service' && $iii_product->price > 0)
                                                 <div class="d-none d-xl-block prodcut-add-cart">
                                                     <button data-url="{{ route('cart.add', ['product' => $iii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
                                                 </div>
@@ -591,7 +591,7 @@
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$iv_product->price}}</div>
                                             </div>
-                                            @if(!Auth::guard('vendor')->check())
+                                            @if(!Auth::guard('vendor')->check() && $iv_product->type != 'service' && $iv_product->price > 0)
                                                 <div class="d-none d-xl-block prodcut-add-cart">
                                                     <button data-url="{{ route('cart.add', ['product' => $iv_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
                                                 </div>

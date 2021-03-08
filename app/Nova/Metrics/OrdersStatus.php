@@ -10,7 +10,7 @@ class OrdersStatus extends Partition
 {
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Order::class, 'order_status')->colors([
+        return $this->count($request, Order::class, 'status')->colors([
             'pending' => '#ffed4a',
             'shipping' => '#f6993f',
             'completed' => '#21b978',

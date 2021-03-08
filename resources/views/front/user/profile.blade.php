@@ -53,7 +53,7 @@
                             <a class="nav-link active" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">Main Info</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link" id="Jpills-four-example1-tab" data-toggle="pill" href="#Jpills-four-example1" role="tab" aria-controls="Jpills-four-example1" aria-selected="false"> My Order </a>
+                            <a class="nav-link" id="Jpills-four-example1-tab" data-toggle="pill" href="#Jpills-four-example1" role="tab" aria-controls="Jpills-four-example1" aria-selected="false"> {{ $user->type == 'company' ? __('Quotes') : __('Orders') }} </a>
                         </li>
                     </ul>
                 </div>
@@ -241,22 +241,26 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Order #</th>
+                                                <th scope="col">{{ $user->type == 'company' ? __('Quote #') : __('Order #') }}</th>
                                                 <th scope="col">Date</th>
-                                                <th scope="col">Total Price</th>
-                                                <th scope="col">Payment Status</th>
-                                                <th scope="col">Order Status</th>
+                                                @if($user->type != 'company')
+                                                    <th scope="col">Total Price</th>
+                                                    <th scope="col">Payment Status</th>
+                                                @endif
+                                                <th scope="col">Status</th>
                                                 <th scope="col">Details</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($orders as $order)
+                                            @foreach($data as $order)
                                             <tr>
-                                                <th scope="row">{{$order->order_id}}</th>
+                                                <th scope="row">{{ $user->type == 'company' ? $order->quote_no : $order->order_id }}</th>
                                                 <td>{{$order->created_at->format('l, F d, Y h:i A')}}</td>
-                                                <td>{{getCurrency('code')}} {{$order->total_price}}</td>
-                                                <td>{{$order->payment_status}}</td>
-                                                <td>{{$order->order_status}}</td>
+                                                @if($user->type != 'company')
+                                                    <td>{{getCurrency('code')}} {{$order->total_price}}</td>
+                                                    <td>{{$order->payment_status}}</td>
+                                                @endif
+                                                <td>{{$order->status}}</td>
                                                 <td class="text-center">
                                                     <a href="#" data-toggle="modal" data-target="#order{{$order->id}}"> View <i class="far fa-eye"></i></a>
                                                 </td>
@@ -365,6 +369,7 @@
                                                                                     </div>
                                                                                 </li>
                                                                             @endif
+                                                                            @if($user->type != 'company')
                                                                             <li class="row">
                                                                                 <div class="col-md-4">
                                                                                     <b>Payment Method:</b>
@@ -381,12 +386,13 @@
                                                                                     <span>{{$order->payment_status}}</span>
                                                                                 </div>
                                                                             </li>
+                                                                            @endif
                                                                             <li class="row">
                                                                                 <div class="col-md-4">
-                                                                                    <b>Order Status:</b>
+                                                                                    <b>{{ __('Status') }}</b>
                                                                                 </div>
                                                                                 <div class="col-md-8">
-                                                                                    <span>{{$order->order_status}}</span>
+                                                                                    <span>{{$order->status}}</span>
                                                                                 </div>
                                                                             </li>
                                                                             <li class="row">
@@ -397,14 +403,74 @@
                                                                                     <span class="">{{$order->notes}}</span>
                                                                                 </div>
                                                                             </li>
-                                                                            <li class="row">
-                                                                                <div class="col-md-4">
-                                                                                    <b>Total Price:</b>
-                                                                                </div>
-                                                                                <div class="col-md-8">
-                                                                                    <span class="">{{getCurrency('code')}} {{$order->total_price}}</span>
-                                                                                </div>
-                                                                            </li>
+                                                                            @if($user->type != 'company')
+                                                                                <li class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <b>Total Price:</b>
+                                                                                    </div>
+                                                                                    <div class="col-md-8">
+                                                                                        <span class="">{{getCurrency('code')}} {{$order->total_price}}</span>
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endif
+                                                                            @if(count($order->items) > 0)
+                                                                                <h4>{{ __('Order Items') }}</h4>
+                                                                                @foreach($order->items as $item)
+                                                                                    <li class="row">
+                                                                                        <div class="col-md-4">
+                                                                                            <b>Item Name</b>
+                                                                                        </div>
+                                                                                        <div class="col-md-8">
+                                                                                            <span class="">{{ $item->product->name }}</span>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                    <li class="row">
+                                                                                        <div class="col-md-4">
+                                                                                            <b>Quantity</b>
+                                                                                        </div>
+                                                                                        <div class="col-md-8">
+                                                                                            <span class="">{{ $item->quantity }}</span>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                @if($user->type != 'company')
+                                                                                    <li class="row">
+                                                                                        <div class="col-md-4">
+                                                                                            <b>Price</b>
+                                                                                        </div>
+                                                                                        <div class="col-md-8">
+                                                                                            <span class="">{{ $item->price }}</span>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                    <li class="row">
+                                                                                        <div class="col-md-4">
+                                                                                            <b>Status</b>
+                                                                                        </div>
+                                                                                        <div class="col-md-8">
+                                                                                            <span class="">{{ $item->status }}</span>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                    @if($item->status == 'refused')
+                                                                                        <li class="row">
+                                                                                            <div class="col-md-4">
+                                                                                                <b>{{ __('Refused note') }}:</b>
+                                                                                            </div>
+                                                                                            <div class="col-md-8">
+                                                                                                <span class="">{{$item->refused_note}}</span>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    @endif
+                                                                                    <li class="row">
+                                                                                        <div class="col-md-4">
+                                                                                            <b>Payment Status</b>
+                                                                                        </div>
+                                                                                        <div class="col-md-8">
+                                                                                            <span class="">{{ $item->payment_status }}</span>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                    @endif
+                                                                                    <hr />
+                                                                                    @endforeach
+                                                                            @endif
                                                                         </ul>
                                                                     </div>
                                                                 </div>

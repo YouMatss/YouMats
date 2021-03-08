@@ -71,11 +71,11 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     }
 
     /**
-     * @return HasManyThrough
+     * @return HasMany
      */
-    public function order_items(): HasManyThrough
+    public function order_items(): HasMany
     {
-        return $this->hasManyThrough(OrderItem::class, Product::class, 'vendor_id', 'product_id');
+        return $this->hasMany(OrderItem::class);
     }
 
 }

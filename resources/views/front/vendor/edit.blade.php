@@ -342,7 +342,7 @@
                                                         @endif
                                                     </div>
                                                     <div class="font-size-12 p-0 text-gray-110 mb-4">
-                                                        <p class="mb-1">{{ Str::limit($product->short_desc, 100, '...') }}</p>
+                                                        {!! Str::limit($product->short_desc, 100, '...') !!}
                                                     </div>
                                                     <div class="text-gray-20 mb-2 font-size-12">{{ __('SKU:') . ' ' .$product->SKU }}</div>
                                                     @if($product->type === 'product')
@@ -497,6 +497,18 @@
                                                             <span class=""> {{ $branch->address }} </span>
                                                         </div>
                                                     </li>
+                                                    <li class="row">
+                                                        <a class="btn btn-primary btn-block" href="{{ route('vendor.deleteBranch', ['branch' => $branch]) }}"
+                                                           onclick="event.preventDefault();
+                                                            document.getElementById('delete-branch-{{ $branch->id }}').submit();">
+                                                            {{ __('Delete') }}
+                                                        </a>
+
+                                                        <form id="delete-branch-{{ $branch->id }}" action="{{ route('vendor.deleteBranch', ['branch' => $branch]) }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -517,19 +529,23 @@
                                         <tr>
                                             <th scope="col">{{ __('ID') }}</th>
                                             <th scope="col">{{ __('Name') }}</th>
+                                            <th scope="col">{{ __('Price') }}</th>
+                                            <th scope="col">{{ __('Order Status') }}</th>
+                                            <th scope="col">{{ __('Payment Status') }}</th>
                                             <th scope="col">{{ __('Date') }}</th>
-                                            <th scope="col">{{ __('Total Price') }}</th>
                                             <th scope="col" class="text-center">{{ __('Order Details') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($items as $item)
                                             <tr>
-                                                <th scope="row">{{ $item->order->id }}</th>
+                                                <th scope="row">{{ $item->order->order_id }}</th>
                                                 <td>{{ $item->order->name }}</td>
+                                                <td>{{ $item->price }}</td>
+                                                <td>{{ $item->status }}</td>
+                                                <td>{{ $item->payment_status }}</td>
                                                 <td>{{ $item->order->created_at }}</td>
-                                                <td>{{ $item->order->total_price }}</td>
-                                                <td class="text-center"><a class="toggleModal" data-url="{{ route('order.get', ['order' => $item->order->id]) }}" href="#" data-toggle="modal" data-target="#exampleModal"> View <i class="far fa-eye"></i></a></td>
+                                                <td class="text-center"><a class="toggleModal" data-url="{{ route('order.get', ['order' => $item->id]) }}" href="#" data-toggle="modal" data-target="#exampleModal"> View <i class="far fa-eye"></i></a></td>
                                             </tr>
                                         @endforeach
 
@@ -542,7 +558,7 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Order Details: ORD-5FFF610CC554C</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -554,7 +570,7 @@
                                                         <form method="POST" action="{{ route('vendor.order.update', ['vendor' => $vendor->id]) }}">
                                                             @csrf
                                                             @method('PATCH')
-                                                            <input type="hidden" name="order_id" id="formOrder" value="" />
+                                                            <input type="hidden" name="id" id="formOrder" value="" />
                                                             <div class="">
                                                                 <ul class="list-unstyled-branches list_order_vendor mb-6">
                                                                     <li class="row">
@@ -658,7 +674,7 @@
                                                                             <b>Payment Status:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <select class="form-control" name="payment_status">
+                                                                            <select class="form-control" name="payment_status" id="paymentStatus">
                                                                                 <option value="pending" selected>Pending</option>
                                                                                 <option value="refunded">Refunded</option>
                                                                                 <option value="completed">Completed</option>
@@ -675,13 +691,13 @@
                                                                             <b>Order Status:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <select class="form-control" name="order_status">
+                                                                            <select class="form-control" name="status" id="orderStatus">
                                                                                 <option value="pending" selected>Pending</option>
                                                                                 <option value="shipping">Shipping</option>
                                                                                 <option value="completed">Completed</option>
                                                                                 <option value="refused">Refused</option>
                                                                             </select>
-                                                                            @error('order_status')
+                                                                            @error('status')
                                                                             <span class="invalid-feedback" role="alert">
                                                                                     <strong>{{ $message }}</strong>
                                                                                 </span>
@@ -701,7 +717,7 @@
                                                                             <b>Refused Notes:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <textarea class="form-control" name="refusedNotes" id="refusedNotes" rows="3"></textarea>
+                                                                            <textarea class="form-control" name="refused_note" id="refusedNotes" rows="3"></textarea>
                                                                             @error('refused_notes')
                                                                             <span class="invalid-feedback" role="alert">
                                                                                     <strong>{{ $message }}</strong>
@@ -805,24 +821,27 @@
                 type: 'GET'
             })
             .done(function(response) {
+                console.log(response.order);
                 $('.alert-danger').addClass('d-none');
-                $("#id").html(response.id);
-                $("#formOrder").val(response.id);
-                $("#order_id").html(response.order_id);
-                $("#date").html(response.created_at);
-                $("#user").html(response.name);
-                $("#name").html(response.name);
-                $("#email").html(response.email);
-                $("#phone").html(response.phone);
-                $("#address").html(response.address);
-                $("#buildingNo").html(response.building_number);
-                $("#street").html(response.street);
-                $("#district").html(response.distract);
-                $("#notes").html(response.notes);
-                $("#city").html(response.city);
-                $("#refusedNotes").html(response.refused_notes);
-                $("#total").html(response.total_price);
-                $("#paymentMethod").html(response.payment_method);
+                $("#id").html(response.order.id);
+                $("#formOrder").val(response.item.id);
+                $("#order_id").html(response.order.order_id);
+                $("#date").html(response.item.created_at);
+                $("#user").html(response.order.name);
+                $("#name").html(response.order.name);
+                $("#email").html(response.order.email);
+                $("#phone").html(response.order.phone);
+                $("#address").html(response.order.address);
+                $("#buildingNo").html(response.order.building_number);
+                $("#street").html(response.order.street);
+                $("#district").html(response.order.distract);
+                $("#notes").html(response.order.notes);
+                $("#city").html(response.order.city);
+                $("#refusedNotes").html(response.item.refused_note);
+                $("#total").html(response.item.price);
+                $("#paymentMethod").html(response.order.payment_method);
+                $("#orderStatus").val(response.item.status);
+                $("#paymentStatus").val(response.item.payment_status);
             })
             .fail(function() {
                 $('.alert-danger').removeClass('d-none');

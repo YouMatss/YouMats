@@ -22,4 +22,12 @@ class OrderItem extends Model {
     {
         return $this->belongsTo(Order::class);
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

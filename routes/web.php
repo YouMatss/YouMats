@@ -29,6 +29,7 @@ Route::group([
         Route::get('{vendor}/edit', 'IndexController@edit')->name('edit');
         Route::patch('{vendor}/update', 'IndexController@update')->name('update');
         Route::post('{vendor}/branch', 'IndexController@addBranch')->name('addBranch');
+        Route::delete('{branch}/branch', 'IndexController@deleteBranch')->name('deleteBranch');
         Route::get('/{vendor}/product', 'ProductController@create')->name('addProduct');
         Route::post('/{vendor}/product', 'ProductController@store')->name('storeProduct');
         Route::get('/{vendor}/product/{product}/edit', 'ProductController@edit')->name('editProduct');
