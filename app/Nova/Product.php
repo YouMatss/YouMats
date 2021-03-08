@@ -49,7 +49,6 @@ class Product extends Resource
                 ->searchable(),
 
             BelongsToManyField::make('Tags')
-                ->optionsLabel('name.en')
                 ->hideFromIndex(),
 
             Text::make('Name')
@@ -90,6 +89,7 @@ class Product extends Resource
             ])->dependsOn('type', 'product'),
 
             BelongsTo::make('Unit')
+                ->hideFromIndex()
                 ->nullable(),
 
             Text::make('SKU', 'SKU')
