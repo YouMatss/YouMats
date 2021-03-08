@@ -11,7 +11,7 @@ class OrderStatus extends Filter
 
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('order_status', $value);
+        return $query->where('status', $value);
     }
 
     /**

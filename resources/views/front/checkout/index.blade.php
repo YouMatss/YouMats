@@ -203,11 +203,16 @@
                                 </div>
                                 <div class="form-group d-flex align-items-center justify-content-between px-3 mb-5">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="terms" value="true" id="defaultCheck10" required="" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <input class="form-check-input" type="checkbox" name="terms" value="true" id="defaultCheck10" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
                                         <label class="form-check-label form-label" for="defaultCheck10">
                                             I have read and agree to the website <a href="#" class="text-blue">terms and conditions </a>
                                             <span class="text-danger">*</span>
                                         </label>
+                                        @error('terms')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary-dark-w btn-block btn-pill font-size-20 mb-3 py-3">Place order</button>
@@ -234,7 +239,12 @@
                                             Name
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->name ?? old('name') }}" name="name" placeholder="Jack" aria-label="Jack" required="" data-msg="Please enter your frist name." data-error-class="u-has-error" data-success-class="u-has-success" autocomplete="off">
+                                        <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->name ?? old('name') }}" name="name" required="" data-msg="Please enter your frist name." data-error-class="u-has-error" data-success-class="u-has-success" autocomplete="off">
+                                        @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <!-- End Input -->
                                 </div>
@@ -245,7 +255,12 @@
                                         <label class="form-label">
                                             Phone
                                         </label>
-                                        <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->phone ?? old('phone') }}" name="phone" placeholder="Company Name" aria-label="Company Name" data-msg="Please enter a company name." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->phone ?? old('phone') }}" name="phone" aria-label="Phone Number" data-msg="Please enter a phone number." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <!-- End Input -->
                                 </div>
@@ -256,7 +271,12 @@
                                         Address
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->address ?? old('address') }}" name="address" placeholder="470 Lucy Forks" aria-label="470 Lucy Forks" required="" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->address ?? old('address') }}" name="address" aria-label="470 Lucy Forks" required="" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -268,7 +288,12 @@
                                         Building No.
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" value="{{ old('building_number') }}" name="building_number" placeholder="470 Lucy Forks" aria-label="470 Lucy Forks" required="" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    <input type="number" class="form-control" value="{{ old('building_number') }}" name="building_number" aria-label="470 Lucy Forks" required="" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    @error('building_number')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -279,7 +304,12 @@
                                     <label class="form-label">
                                         Street
                                     </label>
-                                    <input type="text" class="form-control" value="{{ old('street') }}" name="street" placeholder="470 Lucy Forks" aria-label="470 Lucy Forks" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    <input type="text" class="form-control" value="{{ old('street') }}" name="street" aria-label="470 Lucy Forks" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    @error('street')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -290,7 +320,12 @@
                                     <label class="form-label">
                                         District
                                     </label>
-                                    <input type="text" class="form-control" value="{{ old('district') }}" name="district" placeholder="470 Lucy Forks" aria-label="470 Lucy Forks" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    <input type="text" class="form-control" value="{{ old('district') }}" name="district" aria-label="470 Lucy Forks" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    @error('district')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -309,6 +344,11 @@
                                                 <option value="{{ $city->name }}">{{ $city->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('city')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- End Input -->
@@ -321,7 +361,12 @@
                                         Email address
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="email" class="form-control" value="{{ Auth::guard('web')->user()->email ?? old('email') }}" name="email" placeholder="jackwayley@gmail.com" aria-label="jackwayley@gmail.com" required="" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    <input type="email" class="form-control" value="{{ Auth::guard('web')->user()->email ?? old('email') }}" name="email" aria-label="jackwayley@gmail.com" required="" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -335,13 +380,7 @@
                         <div id="shopCartAccordion2" class="accordion rounded mb-6">
                             <!-- Card -->
                             <div class="card border-0">
-                                <div id="shopCartHeadingThree" class="custom-control custom-checkbox d-flex align-items-center">
-                                    <input type="checkbox" class="custom-control-input" id="createAnaccount" name="createAnaccount">
-                                    <label class="custom-control-label form-label" for="createAnaccount" data-toggle="collapse" data-target="#shopCartThree" aria-expanded="false" aria-controls="shopCartThree">
-                                        Create an account?
-                                    </label>
-                                </div>
-                                <div id="shopCartThree" class="collapse" aria-labelledby="shopCartHeadingThree" data-parent="#shopCartAccordion2" style="">
+                                <div aria-labelledby="shopCartHeadingThree" style="">
                                     <!-- Form Group -->
                                     <div class="js-form-message form-group py-5">
                                         <label class="form-label" for="signinSrPasswordExample1">
@@ -349,8 +388,39 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="password" class="form-control" name="password" id="signinSrPasswordExample1" placeholder="********" aria-label="********" required="" data-msg="Enter password." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <!-- End Form Group -->
+                                    <!-- Form Group -->
+                                    <div class="js-form-message form-group py-5">
+                                        <label class="form-label" for="signinSrPasswordExample1">
+                                            Confirm account password
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="password" class="form-control" name="password_confirmation" id="signinSrPasswordExample2" placeholder="********" aria-label="********" required="" data-msg="Enter password." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        @error('password_confirmation')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <!-- End Form Group -->
+                                    <div class="js-form-message form-group mb-5">
+                                        <label for="type" class="form-label">Type <span class="text-danger">*</span></label>
+                                        <select class="form-control @error('name') is-invalid @enderror" id="type" name="type" required>
+                                            <option value="individual">Individual</option>
+                                            <option value="company">Company</option>
+                                        </select>
+                                        @error('type')
+                                        <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                             <!-- End Card -->
@@ -364,7 +434,7 @@
                             </label>
 
                             <div class="input-group">
-                                <textarea class="form-control p-5" rows="4" name=notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                <textarea class="form-control p-5" rows="4" name="notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                             </div>
                         </div>
                         <!-- End Input -->

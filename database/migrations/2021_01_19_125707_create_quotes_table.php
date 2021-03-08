@@ -28,13 +28,16 @@ class CreateQuotesTable extends Migration
             $table->string('phone2')->nullable();
 
             $table->string('address');
+            $table->string('building_number')->nullable();
+            $table->string('street')->nullable();
+            $table->string('district')->nullable();
+            $table->string('city')->nullable();
 
             $table->enum('status', ['pending', 'shipping', 'completed', 'refused']);
 
             $table->text('notes')->nullable();
 
             $table->double('estimated_price')->nullable();
-
 
             $table->softDeletes();
             $table->timestamps();
@@ -48,6 +51,8 @@ class CreateQuotesTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('quotes');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

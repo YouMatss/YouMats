@@ -29,11 +29,7 @@ class ProductController extends Controller
         $this->middleware('verified:vendor.verification.notice');
     }
 
-    /**
-     * @param $vendor
-     * @return RedirectResponse
-     */
-    protected function checkPermissions($vendor): RedirectResponse
+    protected function checkPermissions($vendor)
     {
         if(!$vendor->active)
             return back()->with(['custom_warning' => __('You do not have permissions to access this page')]);
@@ -139,6 +135,7 @@ class ProductController extends Controller
         //Generate SKU
         $product->sku = Str::sku($request->name_en, '-');
         $product->vendor_id = $vendor->id;
+        $product->best_seller = 0;
 
         $this->setProduct($request, $product);
 

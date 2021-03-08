@@ -45,7 +45,7 @@ class CreateOrdersTable extends Migration
             $table->timestamp('transaction_date')->nullable();
 
             $table->enum('payment_status', ['pending', 'refunded', 'completed']);
-            $table->enum('order_status', ['pending', 'shipping', 'completed', 'refused']);
+            $table->enum('status', ['pending', 'shipping', 'completed', 'refused']);
 
             $table->text('notes')->nullable();
             $table->text('refused_notes')->nullable();
