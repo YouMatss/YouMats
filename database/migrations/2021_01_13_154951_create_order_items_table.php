@@ -30,7 +30,9 @@ class CreateOrderItemsTable extends Migration
 
             $table->string('vendor_name');
 
-            $table->string('status');
+            $table->string('status')->default('pending');
+            $table->string('payment_status')->default('pending');
+            $table->string('refused_note')->nullable();
 
             $table->tinyInteger('quantity');
             $table->double('price');

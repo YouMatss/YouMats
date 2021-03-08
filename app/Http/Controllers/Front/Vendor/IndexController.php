@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Front\Vendor;
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
 use App\Models\VendorBranch;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
@@ -128,7 +129,7 @@ class IndexController extends Controller
 
         $vendor->update($request->except('name_en', 'name_ar', '_token', 'password'));
 
-        return back()->with(['message' => __('Profile has been updated successfully')]);
+        return back()->with(['custom_success' => __('Profile has been updated successfully')]);
 
     }
 
@@ -140,7 +141,7 @@ class IndexController extends Controller
     public function addBranch(Request $request, Vendor $vendor)
     {
         if(!$vendor->active)
-            return response(['status' => false, 'message' => __('Your account is not activated')]);
+            return response(['status' => false, 'custom_warning' => __('Your account is not activated')]);
 
         $data = $request->validate([
             'name' => REQUIRED_STRING_VALIDATION,
@@ -156,6 +157,18 @@ class IndexController extends Controller
 
         VendorBranch::create($data);
 
-        return response()->json(['stats' => true, 'message' => __('Branch has been added successfully')]);
+        return response()->json(['status' => true, 'message' => __('Branch has been added successfully')]);
+    }
+
+    /**
+     * @param VendorBranch $branch
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function deleteBranch(VendorBranch $branch): RedirectResponse
+    {
+        $branch->delete();
+
+        return back()->with(['custom_success' => __('Branch has been deleted successfully')]);
     }
 }

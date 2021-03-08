@@ -19,6 +19,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Nikaia\Rating\Rating;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
+use Psy\Util\Str;
 use Superlatif\NovaTagInput\Tags;
 use Waynestate\Nova\CKEditor;
 
@@ -90,7 +91,8 @@ class Product extends Resource
 
             Text::make('SKU', 'SKU')
                 ->hideFromIndex()
-                ->rules(REQUIRED_STRING_VALIDATION)
+                ->rules(NULLABLE_STRING_VALIDATION)
+                ->default(\Illuminate\Support\Str::sku('yt', '-'))
                 ->creationRules('unique:products,SKU')
                 ->updateRules('unique:products,SKU,{{resourceId}}'),
 

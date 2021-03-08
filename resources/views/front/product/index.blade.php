@@ -113,9 +113,11 @@
 
 
                             @if(!Auth::guard('vendor')->check())
-                                <div class="mb-2 pb-0dot5">
-                                    <button data-url="{{ route('cart.add', ['product' => $product]) }}" class="btn-add-cart btn-block btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
-                                </div>
+                                @if($product->type != 'service' && $product->price > 0)
+                                    <div class="mb-2 pb-0dot5">
+                                        <button data-url="{{ route('cart.add', ['product' => $product]) }}" class="btn-add-cart btn-block btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                    </div>
+                                @endif
                                 <div class="flex-content-center flex-wrap">
                                     <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                 </div>
@@ -239,7 +241,7 @@
                                                 <div class="prodcut-price">
                                                     <div class="text-gray-100">{{getCurrency('code')}} {{$r_product->price}}</div>
                                                 </div>
-                                                @if(!Auth::guard('vendor')->check())
+                                                @if(!Auth::guard('vendor')->check() && $r_product->type != 'service' && $r_product->price > 0)
                                                     <div class="d-none d-xl-block prodcut-add-cart">
                                                         <button data-url="{{ route('cart.add', ['product' => $product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
                                                     </div>
