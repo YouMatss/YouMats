@@ -15,6 +15,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
@@ -50,8 +51,10 @@ class IndexController extends Controller
      * @param Vendor $vendor
      * @return Application|Factory|View
      */
-    public function show(Request $request, Vendor $vendor)
+    public function show(Request $request)
     {
+        $vendor = Auth::guard('vendor')->user();
+
         if($vendor->name != $request->name)
             abort(404);
 
@@ -65,9 +68,10 @@ class IndexController extends Controller
      * @param $id
      * @return Application|Factory|View
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request)
     {
-        $vendor = Vendor::findOrFail($id);
+        $vendor = Auth::guard('vendor')->user();
+
         $products = $vendor->products()->paginate(20);
         $branches = $vendor->branches()->paginate(5);
         $order_items = $vendor->order_items;
@@ -138,8 +142,10 @@ class IndexController extends Controller
      * @param Vendor $vendor
      * @return Application|ResponseFactory|JsonResponse|Response
      */
-    public function addBranch(Request $request, Vendor $vendor)
+    public function addBranch(Request $request)
     {
+        $vendor = Auth::guard('vendor')->user();
+
         if(!$vendor->active)
             return response(['status' => false, 'custom_warning' => __('Your account is not activated')]);
 

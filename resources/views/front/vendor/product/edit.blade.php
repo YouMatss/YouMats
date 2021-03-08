@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('vendor.updateProduct', ['vendor' => $vendor, 'product' => $product]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('vendor.updateProduct', ['product' => $product]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="col-lg-12">
@@ -245,7 +245,7 @@
                                 <hr>
                                 <div class="js-form-message mb-3">
                                     <label class="form-label mb-3">
-                                        Add Gallery
+                                        Add Gallery*
                                     </label>
 
                                     <div class="row">

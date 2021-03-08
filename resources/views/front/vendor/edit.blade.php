@@ -311,7 +311,7 @@
                         </div>
                         <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
                             @if($vendor->active)
-                                <a href="{{ route('vendor.addProduct', ['vendor' => $vendor]) }}" class="btn btn-primary-dark-w px-5 text-white mr-2">
+                                <a href="{{ route('vendor.addProduct') }}" class="btn btn-primary-dark-w px-5 text-white mr-2">
                                     {{ __('Add Product') }}
                                 </a>
                             @endif
@@ -353,7 +353,7 @@
                                                         </div>
                                                     @endif
                                                     @if($vendor->active)
-                                                        <a href="{{ route('vendor.editProduct', ['vendor' => $vendor, 'product' => $product]) }}" class="btn btn-primary-dark-w px-5 text-white mr-2">
+                                                        <a href="{{ route('vendor.editProduct', ['product' => $product]) }}" class="btn btn-primary-dark-w px-5 text-white mr-2">
                                                             {{ __('Edit Product') }}
                                                         </a>
                                                     @endif
@@ -386,7 +386,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('vendor.addBranch', ['vendor' => $vendor->id]) }}" method="POST" id="addBranchForm">
+                                            <form action="{{ route('vendor.addBranch') }}" method="POST" id="addBranchForm">
                                                 @csrf
                                                 <div class="row">
 
@@ -771,7 +771,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: "{{ route('vendor.addBranch', ['vendor' => $vendor->id]) }}",
+                url: "{{ route('vendor.addBranch') }}",
                 type: 'POST',
                 data: $("#addBranchForm").serialize()
             })

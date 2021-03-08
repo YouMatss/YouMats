@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('vendor.storeProduct', ['vendor' => $vendor]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('vendor.storeProduct') }}" method="POST" enctype="multipart/form-data">
             @csrf
                 <div class="col-lg-12">
                     <div class="block_add_products">
@@ -232,7 +232,7 @@
                                 <hr>
                                 <div class="js-form-message mb-3">
                                     <label class="form-label mb-3">
-                                        Add Gallery
+                                        Add Gallery*
                                     </label>
 
                                     <div class="row">
@@ -243,6 +243,12 @@
                                             </label>
                                         </div><!-- col-2 -->
                                         <i class="fa fa-plus imgAdd"></i>
+
+                                        @if ($errors->has('gallery'))
+                                            <div class="help-block">
+                                                <ul role="alert"><li>{{ $errors->first('gallery') }}</li></ul>
+                                            </div>
+                                        @endif
 
                                         @if ($errors->has('gallery.*'))
                                             <div class="help-block">
