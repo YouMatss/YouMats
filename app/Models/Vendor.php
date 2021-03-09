@@ -38,6 +38,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'shipping_prices' => 'array'
     ];
 
     public function sendPasswordResetNotification($token)
@@ -58,8 +59,13 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->belongsTo(Membership::class);
     }
 
-    public function city() {
-        return $this->belongsTo(City::class);
+    public function country() {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function cities() {
+        return $this->hasManyThrough(City::class, Country::class, 'id', 'country_id',
+            'country_id', 'id');
     }
 
     /**
@@ -67,7 +73,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
      */
     public function branches(): HasMany
     {
-        return $this->hasMany(VendorBranch::class);
+        return $this->hasMany(VendorBranch::class)->with('city');
     }
 
     /**
