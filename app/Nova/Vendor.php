@@ -6,10 +6,14 @@ use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Panel;
+use Whitecube\NovaFlexibleContent\Flexible;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 
 class Vendor extends Resource
@@ -31,7 +35,7 @@ class Vendor extends Resource
                 ->showCreateRelationButton()
                 ->withoutTrashed(),
 
-            BelongsTo::make('City')
+            BelongsTo::make('Country')
                 ->showCreateRelationButton()
                 ->withoutTrashed(),
 
@@ -129,6 +133,17 @@ class Vendor extends Resource
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
+
+            (new Panel('Shipping Prices', [
+                Flexible::make('Shipping Prices')
+                    ->addLayout('Shipping Prices', 'shipping_prices', [
+                        Select::make('Cities')->options(function () {
+                            return $this->cities->pluck('name', 'id');
+                        })->rules(['required', 'integer']),
+                        Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+                        Text::make('Time')->placeholder('2 Days, 1 Week'),
+                    ])->button('Add')
+            ])),
 
             HasMany::make('Products'),
 

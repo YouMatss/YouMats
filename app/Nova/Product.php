@@ -18,9 +18,9 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Nikaia\Rating\Rating;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
-use Psy\Util\Str;
 use Superlatif\NovaTagInput\Tags;
 use Waynestate\Nova\CKEditor;
+use Whitecube\NovaFlexibleContent\Flexible;
 
 class Product extends Resource
 {
@@ -140,6 +140,17 @@ class Product extends Resource
                     ->hideFromIndex()
                     ->croppable('cropper')
             ])),
+
+//            (new Panel('Shipping Prices', [
+//                Flexible::make('Shipping Prices')
+//                    ->addLayout('Shipping Prices', 'shipping_prices', [
+//                        Select::make('Cities')->options(function () {
+//                            return $this->cities->pluck('name', 'id');
+//                        })->rules(['required', 'integer']),
+//                        Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+//                        Text::make('Time')->placeholder('2 Days, 1 Week'),
+//                    ])->button('Add')
+//            ])),
 
             (new Panel('SEO', [
                 Slug::make('Slug')
