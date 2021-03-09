@@ -20,8 +20,8 @@ class CreateVendorsTable extends Migration
             $table->foreign('membership_id')->references('id')->on('memberships')
                 ->onDelete('NO ACTION')->onUpdate('CASCADE');
 
-            $table->bigInteger('city_id')->unsigned()->index();
-            $table->foreign('city_id')->references('id')->on('cities')
+            $table->bigInteger('country_id')->unsigned()->index();
+            $table->foreign('country_id')->references('id')->on('countries')
                 ->onDelete('NO ACTION')->onUpdate('CASCADE');
 
             $table->text('name');
@@ -35,6 +35,8 @@ class CreateVendorsTable extends Migration
             $table->string('address2')->nullable();
 
             $table->text('location')->nullable();
+
+            $table->json('shipping_prices')->nullable();
 
             $table->string('facebook_url')->nullable();
             $table->string('twitter_url')->nullable();

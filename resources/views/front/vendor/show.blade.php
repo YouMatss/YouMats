@@ -71,10 +71,6 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                         <tr>
-                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('Full Name') }}</th>
-                                            <td class="pt-3 pb-3 pl-3">{{ $vendor->name }}</td>
-                                        </tr>
-                                        <tr>
                                             <th class="pt-3 pb-3 pl-3 w-25">{{ __('EMail') }}</th>
                                             <td class="pt-3 pb-3 pl-3">{{ $vendor->email }}</td>
                                         </tr>
@@ -140,10 +136,6 @@
                                             <th class="pt-3 pb-3 pl-3 w-25">{{ __('Verified') }}</th>
                                             <td class="pt-3 pb-3 pl-3">@if($vendor->active) <i class="fas fa-check-circle"></i> @else <i class="fas fa-times-circle"></i> @endif</td>
                                         </tr>
-                                        <tr>
-                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('Featured') }}</th>
-                                            <td class="pt-3 pb-3 pl-3">@if($vendor->isFeatured) <i class="fas fa-check-circle"></i> @else <i class="fas fa-times-circle"></i> @endif</td>
-                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -170,7 +162,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="border-bottom border-color-1 mb-5">
-                                            <h3 class="section-title mb-0 pb-2 font-size-25"> {{ $branch->name }} </h3>
+                                            <h3 class="section-title mb-0 pb-2 font-size-25"> {{ $branch->name }} ( {{ $branch->city->name }} ) </h3>
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-xl-8">

@@ -42,6 +42,7 @@ use App\Nova\User;
 use App\Nova\Vendor;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
+use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 use DigitalCreative\CollapsibleResourceManager\Resources\InternalLink;
@@ -116,6 +117,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
+            NovaBreadcrumbs::make(),
             (NovaPermissionTool::make()
                 ->rolePolicy(RolePolicy::class)
                 ->permissionPolicy(PermissionPolicy::class)
@@ -151,8 +153,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'expanded' => false,
                         'resources' => [
                             Vendor::class,
-                            Membership::class,
-                            Branch::class
+                            Membership::class
                         ]
                     ]),
                     TopLevelResource::make([
