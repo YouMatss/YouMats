@@ -23,4 +23,8 @@ class Country extends Model implements Sortable
     public function cities() {
         return $this->hasMany(City::class);
     }
+
+    public function vendors() {
+        return $this->hasMany(Vendor::class);
+    }
 }

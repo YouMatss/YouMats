@@ -51,13 +51,10 @@ class IndexController extends Controller
      * @param Vendor $vendor
      * @return Application|Factory|View
      */
-    public function show(Request $request)
+    public function show(Request $request, Vendor $vendor)
     {
-        $vendor = Auth::guard('vendor')->user();
-
         if($vendor->name != $request->name)
             abort(404);
-
         $products = $vendor->products()->paginate(20);
         $branches = $vendor->branches()->paginate(5);
         return view('front.vendor.show', ['vendor' => $vendor, 'products' => $products, 'branches' => $branches]);
