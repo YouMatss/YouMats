@@ -76,6 +76,7 @@ Route::group([
     });
 
     Route::get('/page/{slug}', 'Common\PageController@page')->name('front.page.index');
+    Route::get('/search', 'Product\ProductController@search')->name('products.search');
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
     Route::get('/product/{slug}', 'Product\ProductController@index')->name('front.product');
     Route::get('/category/{category_slug}', 'Category\CategoryController@index')->name('front.category');
