@@ -370,6 +370,16 @@
                                                                                 </li>
                                                                             @endif
                                                                             @if($user->type != 'company')
+                                                                            @if($order->coupon_code)
+                                                                                <li class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        <b>{{ __('Coupon Code') }}</b>
+                                                                                    </div>
+                                                                                    <div class="col-md-8">
+                                                                                        <span class="">{{$order->coupon_code}}</span>
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endif
                                                                             <li class="row">
                                                                                 <div class="col-md-4">
                                                                                     <b>Payment Method:</b>
