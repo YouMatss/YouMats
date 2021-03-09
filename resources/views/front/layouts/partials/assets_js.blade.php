@@ -141,7 +141,7 @@
                     </li>
                 `);
                 })
-                if(tags[0].length > 0) {
+                if(tags.length > 0 && tags[0].length > 0) {
                     attributesRegion.html(`<div class="border-bottom pb-4 mb-4">
                                     <h4 class="font-size-14 mb-3 font-weight-bold">Tags</h4>`);
 
