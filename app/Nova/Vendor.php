@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -141,7 +142,11 @@ class Vendor extends Resource
                             return $this->cities->pluck('name', 'id');
                         })->rules(['required', 'integer']),
                         Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
-                        Text::make('Time')->placeholder('2 Days, 1 Week'),
+                        Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
+                        Select::make('Format')->options([
+                            'hour' => 'Hour',
+                            'day' => 'Day'
+                        ])->rules(['required','in:hour,day']),
                     ])->button('Add')
             ])),
 

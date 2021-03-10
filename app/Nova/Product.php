@@ -141,16 +141,17 @@ class Product extends Resource
                     ->croppable('cropper')
             ])),
 
-//            (new Panel('Shipping Prices', [
-//                Flexible::make('Shipping Prices')
-//                    ->addLayout('Shipping Prices', 'shipping_prices', [
-//                        Select::make('Cities')->options(function () {
-//                            return $this->cities->pluck('name', 'id');
-//                        })->rules(['required', 'integer']),
-//                        Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
-//                        Text::make('Time')->placeholder('2 Days, 1 Week'),
-//                    ])->button('Add')
-//            ])),
+            (new Panel('Shipping Prices', [
+                Flexible::make('Shipping Prices')
+                    ->addLayout('Shipping Prices', 'shipping_prices', [
+                        Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+                        Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
+                        Select::make('Format')->options([
+                            'hour' => 'Hour',
+                            'day' => 'Day'
+                        ])->rules(['required','in:hour,day']),
+                    ])->button('Add')->limit(1)
+            ])),
 
             (new Panel('SEO', [
                 Slug::make('Slug')
