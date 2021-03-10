@@ -40,9 +40,12 @@ class ProductController extends Controller
                             'name',
                             AllowedFilter::scope('price_from'),
                             AllowedFilter::scope('price_to'),
-                            AllowedFilter::callback('has_tags', fn($query, $value) => $query->whereHas('tags', fn($query) => $query->whereIn('tags.id', $value)))
+                            AllowedFilter::callback('has_tags', fn($query, $value) => $query->whereHas('tags', fn($query) => $query->whereIn('tags.id', $value))),
+                            AllowedFilter::callback('has_subcategories', fn($query, $value) => $query->whereHas('subCategory', fn($query) => $query->whereIn('sub_categories.id', $value)))
                         ])
-                        ->with(['subCategory', 'subCategory.category', 'tags'])
+                        ->allowedIncludes(['tags', 'subCategory', 'subCategory.category'])
+                        ->where('active', 1)
+                        ->limit(30)
                         ->get();
 
         return response()->json(['products' => $products, 'maxPrice' => $products->max('price')], 200);

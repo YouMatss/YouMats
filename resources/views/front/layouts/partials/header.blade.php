@@ -253,17 +253,6 @@
                                     <a id="searchClassicInvoker" class="font-size-22 text-gray-90 text-lh-1 btn-text-secondary" href="javascript:;" role="button" data-toggle="tooltip" data-placement="top" title="Search" aria-controls="searchClassic" aria-haspopup="true" aria-expanded="false" data-unfold-target="#searchClassic" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                         <span class="ec ec-search"></span>
                                     </a>
-
-                                    <!-- Input -->
-                                    <div id="searchClassic" class="dropdown-menu dropdown-unfold dropdown-menu-right left-0 mx-2" aria-labelledby="searchClassicInvoker">
-                                        <form class="js-focus-state input-group px-3">
-                                            <input class="form-control" type="search" placeholder="Search Product">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary px-3" type="button"><i class="font-size-18 ec ec-search"></i></button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- End Input -->
                                 </li>
                                 <!-- End Search -->
                                 <li class="col d-none d-xl-block">
@@ -297,7 +286,7 @@
         </div>
 
         <!-------- search & cart -------->
-        <div class="d-none d-xl-block bg-primary">
+        <div class="d-none d-xl-block bg-primary" id="searchAndCartDiv">
             <div class="container">
                 <div class="row align-items-stretch min-height-50 rtl">
                     <div class="col-md-auto d-none d-xl-flex align-items-end">
@@ -405,6 +394,20 @@
                     </div>
                     <div class="col align-self-center">
                         <!-- Search-Form -->
+                        <label class="sr-only" for="searchProduct">Search</label>
+                        <div class="input-group">
+                            <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="Search for Products" aria-label="Search for Products" aria-describedby="searchProduct1" required>
+                            <div class="input-group-append">
+                                <!-- End Select -->
+                                <button class="btn btn-dark height-40 py-2 px-3 rounded-right-pill" type="button" id="searchProductBtn">
+                                    <span class="ec ec-search font-size-24" id="searchButtonSpan"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- End Search-Form -->
+                    </div>
+                    <div class="col align-self-center d-none" id="searchClassic">
+                        <!-- Search-Form -->
                             <label class="sr-only" for="searchProduct">Search</label>
                             <div class="input-group">
                                 <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="Search for Products" aria-label="Search for Products" aria-describedby="searchProduct1" required>
@@ -435,6 +438,7 @@
         </div>
 
         <div class="container d-none" id="searchDiv" style="position: relative">
+            <div class="close_search"><i class="fa fa-times"></i></div>
             <div class="h_scroll">
                 <div class="container p-0">
                     <div class="row">
