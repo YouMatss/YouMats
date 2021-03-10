@@ -16,6 +16,9 @@ class Tag extends Model {
         return $this->belongsToMany(Product::class)->where('active', 1);
     }
 
+    /**
+     * @return mixed
+     */
     public function getNameAttribute() {
         return $this->getTranslations('name')[app()->getLocale()];
     }

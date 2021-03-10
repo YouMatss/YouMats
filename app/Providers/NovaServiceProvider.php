@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Anaseqal\NovaImport\NovaImport;
 use App\Nova\Admin;
-use App\Nova\Branch;
 use App\Nova\Category;
 use App\Nova\City;
 use App\Nova\Contact;
