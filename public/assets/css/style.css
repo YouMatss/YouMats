@@ -586,6 +586,24 @@
     border: 1px solid #808080 !important;
     border-radius: 0px;
 }
+.select_reg{
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    color: #000;
+    border: 1px solid #003f91;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+.select_reg.active ,.select_reg:hover {
+    background: #003f91;
+    color: #fff;
+}
+.select_reg input[type="radio"]{
+    opacity: 0;
+}
 .close_search{
     position: absolute;
     top: -15px;

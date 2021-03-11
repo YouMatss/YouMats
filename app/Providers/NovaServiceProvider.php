@@ -126,6 +126,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new CollapsibleResourceManager([
                 'disable_default_resource_manager' => true,
                 'remember_menu_state' => true,
+
                 'navigation' => [
                     TopLevelResource::make([
                         'label' => 'Orders',

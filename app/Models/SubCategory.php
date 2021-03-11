@@ -50,4 +50,8 @@ class SubCategory extends Model implements Sortable, HasMedia
             ->join('sub_categories as sub', 'sub.id', '=', 'p.subCategory_id')
             ->where('sub.id', '=', $this->id)->distinct()->get();
     }
+
+    public function attributes() {
+        return $this->hasMany(Attribute::class, 'subCategory_id');
+    }
 }
