@@ -28,7 +28,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-9 offset-md-3">
+            <div class="col-md-10 offset-md-1">
                 <div class="mb-8">
                     <div class="position-relative position-md-static px-md-6">
                         <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0" id="pills-tab-8" role="tablist">
@@ -50,11 +50,20 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="js-form-message form-group mb-5">
-                                                <label for="type" class="form-label">Type <span class="text-danger">*</span></label>
-                                                <select class="form-control @error('name') is-invalid @enderror" id="type" name="type" required>
-                                                    <option value="individual">Individual</option>
-                                                    <option value="company">Company</option>
-                                                </select>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="select_reg" for="registerAsIndividual">
+                                                            <input type="radio" name="type" value="individual" id="registerAsIndividual">
+                                                            Register As Individual
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="select_reg" for="registerAsCompany">
+                                                            <input type="radio" name="type" value="company" id="registerAsCompany">
+                                                            Register As Company
+                                                        </label>
+                                                    </div>
+                                                </div>
                                                 @error('type')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -145,4 +154,12 @@
             </div>
         </div>
     </div>
+@endsection
+@section('extraScripts')
+    <script>
+        $('.select_reg').on('click', function () {
+            $('.select_reg').removeClass('active');
+            $(this).addClass('active');
+        });
+    </script>
 @endsection

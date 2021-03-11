@@ -82,8 +82,13 @@
                             </li>
                             @elseif(!Auth::guard('vendor')->check())
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                <a href="{{route('register')}}" role="button" class="u-header-topbar__nav-link">
+                                    <i class="ec ec-user mr-1"></i> User Register
+                                </a>
+                            </li>
+                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <a href="{{route('login')}}" role="button" class="u-header-topbar__nav-link">
-                                    <i class="ec ec-user mr-1"></i> Register <span class="text-gray-50">or</span> Sign in
+                                    <i class="ec ec-user mr-1"></i> User Login
                                 </a>
                             </li>
                             @endif

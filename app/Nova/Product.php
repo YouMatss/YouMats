@@ -17,6 +17,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Nikaia\Rating\Rating;
+use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Superlatif\NovaTagInput\Tags;
 use Waynestate\Nova\CKEditor;
@@ -142,15 +143,17 @@ class Product extends Resource
             ])),
 
             (new Panel('Shipping Prices', [
-                Flexible::make('Shipping Prices')
-                    ->addLayout('Shipping Prices', 'shipping_prices', [
-                        Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
-                        Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
-                        Select::make('Format')->options([
-                            'hour' => 'Hour',
-                            'day' => 'Day'
-                        ])->rules(['required','in:hour,day']),
-                    ])->button('Add')->limit(1)
+                SimpleRepeatable::make('Shipping Prices', 'shipping_prices', [
+                    Select::make('Cities')->options(function () {
+                        return $this->vendor->cities->pluck('name', 'id');
+                    })->rules(['required', 'integer']),
+                    Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+                    Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
+                    Select::make('Format')->options([
+                        'hour' => 'Hour',
+                        'day' => 'Day'
+                    ])->rules(['required','in:hour,day']),
+                ])
             ])),
 
             (new Panel('SEO', [

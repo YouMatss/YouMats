@@ -14,7 +14,7 @@ use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Panel;
-use Whitecube\NovaFlexibleContent\Flexible;
+use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use Whitecube\NovaGoogleMaps\GoogleMaps;
 
 class Vendor extends Resource
@@ -136,22 +136,20 @@ class Vendor extends Resource
                 ->updateRules('nullable', 'string', 'min:8'),
 
             (new Panel('Shipping Prices', [
-                Flexible::make('Shipping Prices')
-                    ->addLayout('Shipping Prices', 'shipping_prices', [
-                        Select::make('Cities')->options(function () {
-                            return $this->cities->pluck('name', 'id');
-                        })->rules(['required', 'integer']),
-                        Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
-                        Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
-                        Select::make('Format')->options([
-                            'hour' => 'Hour',
-                            'day' => 'Day'
-                        ])->rules(['required','in:hour,day']),
-                    ])->button('Add')
+                SimpleRepeatable::make('Shipping Prices', 'shipping_prices', [
+                    Select::make('Cities')->options(function () {
+                        return $this->cities->pluck('name', 'id');
+                    })->rules(['required', 'integer']),
+                    Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+                    Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
+                    Select::make('Format')->options([
+                        'hour' => 'Hour',
+                        'day' => 'Day'
+                    ])->rules(['required','in:hour,day']),
+                ]),
             ])),
 
             HasMany::make('Products'),
-
             HasMany::make('Branches'),
         ];
     }

@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Anaseqal\NovaImport\NovaImport;
 use App\Nova\Admin;
+use App\Nova\Attribute;
+use App\Nova\AttributeValue;
 use App\Nova\Branch;
 use App\Nova\Category;
 use App\Nova\City;
@@ -127,6 +129,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new CollapsibleResourceManager([
                 'disable_default_resource_manager' => true,
                 'remember_menu_state' => true,
+
                 'navigation' => [
                     TopLevelResource::make([
                         'label' => 'Orders',

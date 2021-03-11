@@ -5,18 +5,16 @@ namespace App\Nova;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Waynestate\Nova\CKEditor;
+use Yassi\NestedForm\NestedForm;
 
 class SubCategory extends Resource
 {
@@ -94,10 +92,13 @@ class SubCategory extends Resource
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
                     ->translatable(),
-
             ])),
 
             HasMany::make('Products'),
+
+            (new Panel('Attributes (For Product Filtration)', [
+                NestedForm::make('Attributes')->open(false),
+            ])),
 
         ];
     }
