@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
+use Spatie\Translatable\HasTranslations;
+
+class Attribute extends Model implements Sortable
+{
+    use HasFactory, SortableTrait, HasTranslations;
+
+    public $translatable = ['key'];
+
+    public function subCategory() {
+        return $this->belongsTo(SubCategory::class, 'subCategory_id');
+    }
+
+    public function values() {
+        return $this->hasMany(AttributeValue::class, 'attribute_id');
+    }
+}
