@@ -34,7 +34,8 @@ class CreateVendorsTable extends Migration
             $table->string('address')->nullable();
             $table->string('address2')->nullable();
 
-            $table->text('location')->nullable();
+            $table->text('latitude')->nullable();
+            $table->text('longitude')->nullable();
 
             $table->json('shipping_prices')->nullable();
 

@@ -7,7 +7,6 @@ use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\Builder;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
@@ -45,12 +44,21 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return round($value * getCurrency('rate'), 2);
     }
 
+    public function getLocationAttribute() {
+        return $this->vendor->select('latitude', 'longitude')->first();
+    }
+
     public function category() {
         return $this->hasOneThrough(Category::class, SubCategory::class, 'category_id', 'id');
     }
 
     public function subCategory() {
         return $this->belongsTo(SubCategory::class, 'subCategory_id');
+    }
+
+    public function attributes() {
+        return $this->hasManyThrough(Attribute::class, SubCategory::class, 'id', 'subCategory_id',
+            'subCategory_id', 'id');
     }
 
     public function unit() {

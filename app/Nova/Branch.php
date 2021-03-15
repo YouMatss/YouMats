@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use GeneaLabs\NovaMapMarkerField\MapMarker;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
@@ -67,12 +68,10 @@ class Branch extends Resource
             Text::make(__('Address'), 'address')
                 ->rules(REQUIRED_STRING_VALIDATION),
 
-            Text::make(__('Latitude'), 'latitude')
-                ->rules(REQUIRED_STRING_VALIDATION)
-                ->hideFromIndex(),
-
-            Text::make(__('Longitude'), 'longitude')
-                ->rules(REQUIRED_STRING_VALIDATION)
+            MapMarker::make('Location')
+                ->defaultZoom(8)
+                ->defaultLatitude(24.7136)
+                ->defaultLongitude(46.6753)
                 ->hideFromIndex(),
         ];
     }

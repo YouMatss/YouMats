@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
+use GeneaLabs\NovaMapMarkerField\MapMarker;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
@@ -15,7 +16,6 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
-use Whitecube\NovaGoogleMaps\GoogleMaps;
 
 class Vendor extends Resource
 {
@@ -34,10 +34,12 @@ class Vendor extends Resource
 
             BelongsTo::make('Membership')
                 ->showCreateRelationButton()
+                ->hideFromIndex()
                 ->withoutTrashed(),
 
             BelongsTo::make('Country')
                 ->showCreateRelationButton()
+                ->hideFromIndex()
                 ->withoutTrashed(),
 
             Text::make('Name')
@@ -71,8 +73,10 @@ class Vendor extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
-            GoogleMaps::make('Location')
-                ->zoom(6)
+            MapMarker::make('Location')
+                ->defaultZoom(8)
+                ->defaultLatitude(24.7136)
+                ->defaultLongitude(46.6753)
                 ->hideFromIndex(),
 
             Text::make('Facebook', 'facebook_url')
