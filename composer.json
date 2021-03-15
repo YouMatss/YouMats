@@ -28,7 +28,9 @@
         "dyrynda/laravel-cascade-soft-deletes": "^4.1",
         "epartment/nova-dependency-container": "^1.2",
         "fideloper/proxy": "^4.4",
+        "fourstacks/nova-checkboxes": "^0.1.7",
         "fruitcake/laravel-cors": "^2.0",
+        "genealabs/nova-map-marker-field": "^0.3.1",
         "guzzlehttp/guzzle": "^7.0.1",
         "hardevine/shoppingcart": "^2.9",
         "inspheric/nova-indicator-field": "^1.43",
@@ -40,6 +42,7 @@
         "maatwebsite/laravel-nova-excel": "^1.2",
         "mcamara/laravel-localization": "^1.6",
         "nikaia/nova-rating-field": "^1.0",
+        "optimistdigital/nova-multiselect-field": "^2.0",
         "optimistdigital/nova-simple-repeatable": "^1.2",
         "optimistdigital/nova-sortable": "^2.0",
         "optimistdigital/nova-translatable": "^1.6",
@@ -51,8 +54,6 @@
         "torann/geoip": "^3.0",
         "vyuldashev/nova-permission": "^2.10",
         "waynestate/nova-ckeditor4-field": "^0.7.0",
-        "whitecube/nova-flexible-content": "^0.2.7",
-        "whitecube/nova-google-maps": "^0.0.1",
         "yassi/nova-nested-form": "^3.0"
     },
     "require-dev": {

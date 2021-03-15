@@ -8,7 +8,9 @@ use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\HasManyThrough;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -17,11 +19,11 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Nikaia\Rating\Rating;
+use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
-use Superlatif\NovaTagInput\Tags;
 use Waynestate\Nova\CKEditor;
-use Whitecube\NovaFlexibleContent\Flexible;
+use ZiffMedia\NovaSelectPlus\SelectPlus;
 
 class Product extends Resource
 {
@@ -145,7 +147,10 @@ class Product extends Resource
             (new Panel('Shipping Prices', [
                 SimpleRepeatable::make('Shipping Prices', 'shipping_prices', [
                     Select::make('Cities')->options(function () {
-                        return $this->vendor->cities->pluck('name', 'id');
+                        if(isset($this->vendor->cities))
+                            return $this->vendor->cities->pluck('name', 'id');
+                        else
+                            return '';
                     })->rules(['required', 'integer']),
                     Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
                     Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
@@ -154,6 +159,10 @@ class Product extends Resource
                         'day' => 'Day'
                     ])->rules(['required','in:hour,day']),
                 ])
+            ])),
+
+            (new Panel('Attributes (For Product Filtration)', [
+                Multiselect::make('Attributes')
             ])),
 
             (new Panel('SEO', [
@@ -180,7 +189,7 @@ class Product extends Resource
 
             ])),
 
-//            BelongsToMany::make('Tags'),
+            BelongsToMany::make('Tags'),
 
         ];
     }

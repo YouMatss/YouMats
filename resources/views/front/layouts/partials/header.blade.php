@@ -4,13 +4,14 @@
         <div class="u-header-topbar bg-gray-2 border-0 py-2 d-none d-xl-block">
             <div class="container">
                 <div class="d-flex align-items-center">
+                    @if(is_company())
                     <div class="topbar-left">
                         <a href="tel:0096665432120" class="text-gray-110 font-size-13 hover-on-dark mr-3"><i class="fa fa-phone"></i> 0096665432165 </a>
                         <a href="mailto:info@youmats.com" class="text-gray-110 font-size-13 hover-on-dark"><i class="fa fa-envelope"></i> info@youmats.com </a>
                     </div>
+                    @endif
                     <div class="topbar-right ml-auto">
                         <ul class="list-inline mb-0">
-
                             @if(!Auth::guard('vendor')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                     <a href="{{ route('wishlist.index') }}" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> My Wishlist </a>
@@ -83,12 +84,12 @@
                             @elseif(!Auth::guard('vendor')->check())
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <a href="{{route('register')}}" role="button" class="u-header-topbar__nav-link">
-                                    <i class="ec ec-user mr-1"></i> User Register
+                                    <i class="ec ec-user mr-1"></i> Register
                                 </a>
                             </li>
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <a href="{{route('login')}}" role="button" class="u-header-topbar__nav-link">
-                                    <i class="ec ec-user mr-1"></i> User Login
+                                    <i class="ec ec-user mr-1"></i> Login
                                 </a>
                             </li>
                             @endif
@@ -126,7 +127,6 @@
                                     </a>
                                 </li>
                             @endif
-
 
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
@@ -237,6 +237,7 @@
                         </nav>
                         <!-- End Nav -->
                     </div>
+                    @if(is_company())
                     <div class="d-none d-xl-block col-md-auto">
                         <div class="d-flex">
                             <i class="ec ec-support font-size-50 text-primary"></i>
@@ -250,6 +251,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="d-xl-none col col-xl-auto text-right text-xl-left pl-0 pl-xl-3 position-static">
                         <div class="d-inline-flex">
                             <ul class="d-flex list-unstyled mb-0 align-items-center">

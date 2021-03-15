@@ -37,6 +37,7 @@
                             <img src="{{front_url()}}/assets/img/logo.png" height="50">
                         </a>
                     </div>
+                    @if(is_company())
                     <div class="mb-4">
                         <div class="row no-gutters">
                             <div class="col-auto">
@@ -78,6 +79,7 @@
                             </li>
                         </ul>
                     </div>
+                    @endif
                 </div>
                 <div class="col-lg-7">
                     <div class="row">
