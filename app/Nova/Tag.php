@@ -2,16 +2,12 @@
 
 namespace App\Nova;
 
-use Benjacho\BelongsToManyField\BelongsToManyField;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\HasManyThrough;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use Waynestate\Nova\CKEditor;
 
@@ -45,23 +41,32 @@ class Tag extends Resource
                     ->hideFromIndex()
                     ->rules(REQUIRED_STRING_VALIDATION)
                     ->creationRules('unique:tags,slug')
-                    ->updateRules('unique:tags,slug,{{resourceId}}'),
+                    ->updateRules('unique:tags,slug,{{resourceId}}')
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Title', 'meta_title')
                     ->hideFromIndex()
                     ->rules(NULLABLE_STRING_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Keywords', 'meta_keywords')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Textarea::make('Meta Description', 'meta_desc')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
                     ->alwaysShow()
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
+
+                Textarea::make('Schema')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
             ])),
 
             BelongsToMany::make('Products'),

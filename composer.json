@@ -28,7 +28,6 @@
         "dyrynda/laravel-cascade-soft-deletes": "^4.1",
         "epartment/nova-dependency-container": "^1.2",
         "fideloper/proxy": "^4.4",
-        "fourstacks/nova-checkboxes": "^0.1.7",
         "fruitcake/laravel-cors": "^2.0",
         "genealabs/nova-map-marker-field": "^0.3.1",
         "guzzlehttp/guzzle": "^7.0.1",

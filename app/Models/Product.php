@@ -11,6 +11,7 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements Sortable, HasMedia, Buyable
@@ -54,11 +55,6 @@ class Product extends Model implements Sortable, HasMedia, Buyable
 
     public function subCategory() {
         return $this->belongsTo(SubCategory::class, 'subCategory_id');
-    }
-
-    public function attributes() {
-        return $this->hasManyThrough(Attribute::class, SubCategory::class, 'id', 'subCategory_id',
-            'subCategory_id', 'id');
     }
 
     public function unit() {

@@ -50,6 +50,11 @@ class CreateVendorsTable extends Migration
             $table->string('password');
             $table->rememberToken();
 
+            $table->string('slug')->unique();
+            $table->text('meta_title')->nullable();
+            $table->text('meta_desc')->nullable();
+            $table->text('meta_keywords')->nullable();
+
             $table->boolean('isFeatured')->default(0);
 
             $table->tinyInteger('active')->default(0);

@@ -4,13 +4,12 @@ namespace App\Nova;
 
 use Benjacho\BelongsToManyField\BelongsToManyField;
 use Davidpiesse\NovaToggle\Toggle;
+use DmitryBubyakin\NovaMedialibraryField\Fields\GeneratedConversions;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Currency;
-use Laravel\Nova\Fields\HasManyThrough;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -23,7 +22,6 @@ use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Waynestate\Nova\CKEditor;
-use ZiffMedia\NovaSelectPlus\SelectPlus;
 
 class Product extends Resource
 {
@@ -34,7 +32,7 @@ class Product extends Resource
     public static $title = 'name';
 
     public static $search = [
-        'id', 'name', 'desc', 'short_desc'
+        'id', 'name', 'desc', 'short_desc', 'slug'
     ];
 
     public function fields(Request $request)
@@ -163,6 +161,19 @@ class Product extends Resource
 
             (new Panel('Attributes (For Product Filtration)', [
                 Multiselect::make('Attributes')
+                    ->options(function () {
+                        $collection = [];
+                        $data = \App\Models\Attribute::with('values')->where('subCategory_id', $this->subCategory_id)->get();
+                        foreach ($data as $row) {
+                            foreach ($row->values as $value) {
+                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key];
+                            }
+                        }
+                        return $collection;
+                    })
+                    ->placeholder('Choose Attributes Values')
+                    ->saveAsJSON()
+                    ->hideFromIndex(),
             ])),
 
             (new Panel('SEO', [
@@ -170,26 +181,33 @@ class Product extends Resource
                     ->hideFromIndex()
                     ->rules(REQUIRED_STRING_VALIDATION)
                     ->creationRules('unique:products,slug')
-                    ->updateRules('unique:products,slug,{{resourceId}}'),
+                    ->updateRules('unique:products,slug,{{resourceId}}')
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Title', 'meta_title')
                     ->hideFromIndex()
                     ->rules(NULLABLE_STRING_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Keywords', 'meta_keywords')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Textarea::make('Meta Description', 'meta_desc')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
+                Textarea::make('Schema')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
             ])),
 
-            BelongsToMany::make('Tags'),
 
         ];
     }

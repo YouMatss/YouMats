@@ -25,7 +25,7 @@ Route::group([
 
         Auth::routes(['verify' => true]);
 
-        Route::get('show/{vendor}/{name}', 'IndexController@show')->name('show');
+        Route::get('{vendor_slug}', 'IndexController@show')->name('show');
         Route::get('edit', 'IndexController@edit')->name('edit');
         Route::patch('update', 'IndexController@update')->name('update');
         Route::post('branch', 'IndexController@addBranch')->name('addBranch');
@@ -69,7 +69,7 @@ Route::group([
     Route::post('/subscribe', 'Common\MiscController@subscribeRequest')->name('front.subscribe.request');
     Route::post('/inquire', 'Common\MiscController@inquireRequest')->name('front.inquire.request');
 
-    //Vendor Order Routes (Auth/Verified protected)
+    // Vendor Order Routes (Auth/Verified protected)
     Route::group(['prefix' => 'order', 'namespace' => 'Product', 'middleware' => 'auth:vendor, verified:vendor.verification.notice'], function() {
         Route::get('/{order}/get', 'OrderController@get')->name('order.get');
         Route::patch('/vendor/{vendor}/update', 'OrderController@vendorUpdate')->name('vendor.order.update');
@@ -78,9 +78,9 @@ Route::group([
     Route::get('/page/{slug}', 'Common\PageController@page')->name('front.page.index');
     Route::get('/search', 'Product\ProductController@search')->name('products.search');
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
-    Route::get('/product/{slug}', 'Product\ProductController@index')->name('front.product');
-    Route::get('/category/{category_slug}', 'Category\CategoryController@index')->name('front.category');
-    Route::get('/category/{category_slug}/{subCategory_slug}', 'Category\SubCategoryController@index')->name('front.subCategory');
+    Route::get('/{slug}/i', 'Product\ProductController@index')->name('front.product');
+    Route::get('/{category_slug}', 'Category\CategoryController@index')->name('front.category');
+    Route::get('/{category_slug}/{subCategory_slug}/dp', 'Category\SubCategoryController@index')->name('front.subCategory');
 });
 
 

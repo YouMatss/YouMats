@@ -13,7 +13,9 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 
@@ -151,6 +153,42 @@ class Vendor extends Resource
                         'day' => 'Day'
                     ])->rules(['required','in:hour,day']),
                 ]),
+            ])),
+
+            (new Panel('SEO', [
+                Slug::make('Slug')
+                    ->hideFromIndex()
+                    ->rules(REQUIRED_STRING_VALIDATION)
+                    ->creationRules('unique:vendors,slug')
+                    ->updateRules('unique:vendors,slug,{{resourceId}}')
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
+
+                Text::make('Meta Title', 'meta_title')
+                    ->hideFromIndex()
+                    ->displayUsing(function ($value) {
+                        if($value == '')
+                            return $this->name;
+                    })
+                    ->rules(NULLABLE_STRING_VALIDATION)
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
+
+                Text::make('Meta Keywords', 'meta_keywords')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
+
+                Textarea::make('Meta Description', 'meta_desc')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
+
+                Textarea::make('Schema')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
             ])),
 
             HasMany::make('Products'),
