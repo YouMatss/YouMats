@@ -48,13 +48,11 @@ class IndexController extends Controller
     }
 
     /**
-     * @param Vendor $vendor
+     * @param $vendor_slug
      * @return Application|Factory|View
      */
-    public function show(Request $request, Vendor $vendor)
-    {
-        if($vendor->name != $request->name)
-            abort(404);
+    public function show($vendor_slug) {
+        $vendor = Vendor::where('slug', $vendor_slug)->firstorfail();
         $products = $vendor->products()->paginate(20);
         $branches = $vendor->branches()->paginate(5);
         return view('front.vendor.show', ['vendor' => $vendor, 'products' => $products, 'branches' => $branches]);

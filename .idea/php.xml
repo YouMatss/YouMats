@@ -188,7 +188,6 @@
       <path value="$PROJECT_DIR$/vendor/yassi/nova-nested-form" />
       <path value="$PROJECT_DIR$/vendor/genealabs/nova-map-marker-field" />
       <path value="$PROJECT_DIR$/vendor/symfony/thanks" />
-      <path value="$PROJECT_DIR$/vendor/fourstacks/nova-checkboxes" />
       <path value="$PROJECT_DIR$/vendor/acme/Attribute" />
       <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-multiselect-field" />
     </include_path>

@@ -9,7 +9,7 @@ trait DefaultImage {
     protected static string $defaultImage = '/assets/img/default_logo.jpg';
     protected static string $defaultCover = '/assets/img/default_cover.jpg';
 
-    public function getFirstMediaUrlOrDefault(string $collectionName = '', string $conversionName = '')
+    public function getFirstMediaUrlOrDefault(string $collectionName = '', string $conversionName = 'cropper')
     {
         $locale = LaravelLocalization::getCurrentLocale();
         $url = $this->getFirstMediaUrl($collectionName, $conversionName);

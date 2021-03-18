@@ -20,7 +20,7 @@ class PermissionPolicy
 
     public function create(): bool
     {
-        return false;
+        return true;
     }
 
     public function update(): bool
