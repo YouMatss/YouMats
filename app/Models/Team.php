@@ -22,10 +22,7 @@ class Team extends Model implements Sortable, HasMedia
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);
 
-        $this->addMediaConversion('cropper');
-    }
-
-    public function registerMediaCollections(): void {
-        $this->addMediaCollection(TEAM_PATH);
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(TEAM_PATH);
     }
 }

@@ -41,6 +41,17 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         'shipping_prices' => 'array'
     ];
 
+    public function registerAllMediaConversions(): void {
+        $this->addMediaConversion('thumb')
+            ->width(200)->height(200);
+
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(VENDOR_COVER);
+
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(VENDOR_LOGO);
+    }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token, 'vendor.password.reset', 'vendors'));

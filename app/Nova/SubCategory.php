@@ -66,7 +66,8 @@ class SubCategory extends Resource
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+                ->croppable('cropper')
+                ->previewUsing('cropper'),
 
             Toggle::make('Show In Footer')
                 ->falseColor('#bacad6')

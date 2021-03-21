@@ -100,20 +100,44 @@ class Vendor extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
-        Medialibrary::make('Cover', VENDOR_COVER)
-                ->rules('required')
+            Medialibrary::make('Cover', VENDOR_COVER)->fields(function () {
+                return [
+                    Text::make('File Name', 'file_name')
+                        ->rules('required', 'min:2'),
+
+                    Text::make('Image Title', 'img_title')
+                        ->translatable()
+                        ->rules(NULLABLE_STRING_VALIDATION),
+
+                    Text::make('Image Alt', 'img_alt')
+                        ->translatable()
+                        ->rules(NULLABLE_STRING_VALIDATION)
+                ];
+            })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
-                ->autouploading()
-                ->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->attachOnDetails()
+                ->autouploading()->attachOnDetails()->single()
+                ->croppable('cropper')
+                ->previewUsing('cropper')
                 ->hideFromIndex(),
 
-        Medialibrary::make('Logo', VENDOR_LOGO)
-                ->rules('required')
+            Medialibrary::make('Logo', VENDOR_LOGO)->fields(function () {
+                return [
+                    Text::make('File Name', 'file_name')
+                        ->rules('required', 'min:2'),
+
+                    Text::make('Image Title', 'img_title')
+                        ->translatable()
+                        ->rules(NULLABLE_STRING_VALIDATION),
+
+                    Text::make('Image Alt', 'img_alt')
+                        ->translatable()
+                        ->rules(NULLABLE_STRING_VALIDATION)
+                ];
+            })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
-                ->autouploading()
-                ->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->attachOnDetails()
+                ->autouploading()->attachOnDetails()->single()
+                ->croppable('cropper')
+                ->previewUsing('cropper')
                 ->hideFromIndex(),
 
             Medialibrary::make('Licenses', VENDOR_PATH)->fields(function () {
@@ -152,7 +176,7 @@ class Vendor extends Resource
                         'hour' => 'Hour',
                         'day' => 'Day'
                     ])->rules(['required','in:hour,day']),
-                ]),
+                ])->hideWhenCreating(),
             ])),
 
             (new Panel('SEO', [

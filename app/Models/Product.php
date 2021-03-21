@@ -11,7 +11,6 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements Sortable, HasMedia, Buyable
@@ -30,11 +29,8 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);
 
-        $this->addMediaConversion('cropper');
-    }
-
-    public function registerMediaCollections(): void {
-        $this->addMediaCollection(PRODUCT_PATH);
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(PRODUCT_PATH);
     }
 
     public function getPriceAttribute($value) {

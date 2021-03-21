@@ -56,7 +56,8 @@ class User extends Resource
             })->attachRules(NULLABLE_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+                ->croppable('cropper')
+                ->previewUsing('cropper'),
 
             Medialibrary::make('Cover', USER_COVER)->fields(function () {
                 return [
@@ -66,7 +67,8 @@ class User extends Resource
             })->attachRules(NULLABLE_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+                ->croppable('cropper')
+                ->previewUsing('cropper'),
 
             Text::make('Phone')
                 ->hideFromIndex()

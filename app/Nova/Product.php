@@ -140,6 +140,7 @@ class Product extends Resource
                     ->autouploading()->sortable()->attachOnDetails()
                     ->hideFromIndex()
                     ->croppable('cropper')
+                    ->previewUsing('cropper'),
             ])),
 
             (new Panel('Shipping Prices', [
@@ -156,7 +157,7 @@ class Product extends Resource
                         'hour' => 'Hour',
                         'day' => 'Day'
                     ])->rules(['required','in:hour,day']),
-                ])
+                ])->hideWhenCreating()
             ])),
 
             (new Panel('Attributes (For Product Filtration)', [
@@ -173,7 +174,8 @@ class Product extends Resource
                     })
                     ->placeholder('Choose Attributes Values')
                     ->saveAsJSON()
-                    ->hideFromIndex(),
+                    ->hideFromIndex()
+                    ->hideWhenCreating(),
             ])),
 
             (new Panel('SEO', [

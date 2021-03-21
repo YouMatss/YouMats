@@ -28,11 +28,8 @@ class SubCategory extends Model implements Sortable, HasMedia
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);
 
-        $this->addMediaConversion('cropper');
-    }
-
-    public function registerMediaCollections(): void {
-        $this->addMediaCollection(SUB_CATEGORY_PATH);
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(SUB_CATEGORY_PATH);
     }
 
     public function category() {

@@ -27,11 +27,11 @@ class Category extends Model implements Sortable, HasMedia
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);
 
-        $this->addMediaConversion('cropper');
-    }
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(CATEGORY_PATH);
 
-    public function registerMediaCollections(): void {
-        $this->addMediaCollection(CATEGORY_PATH);
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(CATEGORY_COVER);
     }
 
     public function subCategories() {
