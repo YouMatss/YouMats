@@ -18,8 +18,4 @@ class Currency extends Model implements Sortable, HasMedia
         $this->addMediaConversion('thumb')
             ->width(50)->height(50);
     }
-
-    public function registerMediaCollections(): void {
-        $this->addMediaCollection(CURRENCY_PATH);
-    }
 }

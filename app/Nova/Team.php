@@ -65,7 +65,8 @@ class Team extends Resource
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->single()->attachOnDetails()
-                ->croppable('cropper'),
+                ->croppable('cropper')
+                ->previewUsing('cropper'),
 
             Text::make('Name')
                 ->sortable()

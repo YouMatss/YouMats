@@ -61,7 +61,8 @@ class Category extends Resource
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+                ->croppable('cropper')
+                ->previewUsing('cropper'),
 
             Medialibrary::make('Cover', CATEGORY_COVER)->fields(function () {
                 return [
@@ -80,6 +81,7 @@ class Category extends Resource
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
                 ->croppable('cropper')
+                ->previewUsing('cropper')
                 ->hideFromIndex(),
 
             Toggle::make(__('Featured'), 'isFeatured')

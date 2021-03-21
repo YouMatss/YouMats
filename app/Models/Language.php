@@ -21,11 +21,7 @@ class Language extends Model implements Sortable, HasMedia
         $this->addMediaConversion('thumb')
             ->width(50)->height(50);
 
-        $this->addMediaConversion('cropper');
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(LANGUAGE_PATH);
     }
-
-    public function registerMediaCollections(): void {
-        $this->addMediaCollection(LANGUAGE_PATH);
-    }
-
 }

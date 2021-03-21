@@ -29,6 +29,17 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
         'email_verified_at' => 'datetime',
     ];
 
+    public function registerAllMediaConversions(): void {
+        $this->addMediaConversion('thumb')
+            ->width(200)->height(200);
+
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(USER_PROFILE);
+
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(USER_COVER);
+    }
+
     public function orders() {
         return $this->hasMany(Order::class)->with('items');
     }

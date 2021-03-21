@@ -18,10 +18,7 @@ class Content extends Model implements HasMedia
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);
 
-        $this->addMediaConversion('cropper');
-    }
-
-    public function registerMediaCollections(): void {
-        $this->addMediaCollection(CONTENT_PATH);
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(CONTENT_PATH);
     }
 }
