@@ -52,6 +52,23 @@
                             <button type="submit" class="btn px-4 btn-primary-dark-w py-2 rounded-lg text-white">Filter</button>
                         </div>
                     </div>
+                    @foreach($subCategory->attributes as $attribute)
+                    <div class="mb-6">
+                        <div class="border-bottom border-color-1 mb-5">
+                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">{{$attribute->key}}</h3>
+                        </div>
+                        <div class="border-bottom pb-4 mb-4">
+                            @foreach($attribute->values as $value)
+                            <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input filter-checkboxes" value="{{$value->id}}" id="{{$attribute->key . '_' . $value->value}}">
+                                    <label class="custom-control-label" for="{{$attribute->key . '_' . $value->value}}">{{$value->value}}</label>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endforeach
                     <div class="mb-6">
                         <div class="border-bottom border-color-1 mb-5">
                             <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Categories</h3>
@@ -168,4 +185,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('extraScripts')
+    @include('front.layouts.partials.filter')
 @endsection

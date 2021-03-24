@@ -106,7 +106,7 @@ class Category extends Resource
             (new Panel('SEO', [
                 Slug::make('Slug')
                     ->hideFromIndex()
-                    ->rules(REQUIRED_STRING_VALIDATION)
+                    ->rules(NULLABLE_STRING_VALIDATION)
                     ->creationRules('unique:categories,slug')
                     ->updateRules('unique:categories,slug,{{resourceId}}')
                     ->canSee(fn() => auth('admin')->user()->can('seo')),

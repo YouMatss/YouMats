@@ -39,6 +39,7 @@ use App\Nova\Team;
 use App\Nova\Unit;
 use App\Nova\User;
 use App\Nova\Vendor;
+use App\Observers\CategoryObserver;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
 use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
@@ -61,6 +62,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
+//        Nova::serving(function () {
+//            \App\Models\Category::observe(CategoryObserver::class);
+//        });
     }
 
     protected function routes()
