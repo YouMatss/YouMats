@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
-use App\Models\Tag;
+use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -23,24 +23,28 @@ class SubCategoryController extends Controller
         $data['products'] = $data['subCategory']->products()->paginate(15);
         $data['tags'] = $data['subCategory']->tags();
         $data['subCategory']->load('attributes', 'attributes.values');
+        $data['minPrice'] = $data['products']->min('price');
+        $data['maxPrice'] = $data['products']->max('price');
 
         return view('front.category.sub')->with($data);
     }
 
-    public function filter() {
-//        $products = QueryBuilder::for(Product::class)
-//            ->allowedFilters([
-//                AllowedFilter::custom('name', new FiltersJsonField),
-//                AllowedFilter::scope('price_from'),
-//                AllowedFilter::scope('price_to'),
-//                AllowedFilter::callback('has_tags', fn($query, $value) => $query->whereHas('tags', fn($query) => $query->whereIn('tags.id', $value))),
-//                AllowedFilter::callback('has_subcategories', fn($query, $value) => $query->whereHas('subCategory', fn($query) => $query->whereIn('sub_categories.id', $value)))
-//            ])
-//            ->allowedIncludes(['tags', 'subCategory', 'subCategory.category'])
-//            ->where('active', 1)
-//            ->limit(30)
-//            ->get();
-//
-//        return response()->json(['products' => $products, 'maxPrice' => $products->max('price')], 200);
+    public function filter($subCategory_id) {
+        $data['subCategory'] = SubCategory::findorfail($subCategory_id);
+
+        $data['products'] = QueryBuilder::for(Product::class)
+            ->allowedFilters([
+                'attributes',
+                AllowedFilter::scope('price_from'),
+                AllowedFilter::scope('price_to')
+            ])
+            ->where([
+                'active' => 1,
+                'subCategory_id' => $subCategory_id
+            ])
+            ->with('subCategory', 'subCategory.category')
+            ->paginate(15);
+
+        return view('front.category.productsContainer')->with($data)->render();
     }
 }

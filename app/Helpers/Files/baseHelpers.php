@@ -8,7 +8,7 @@ if (!function_exists('front_url')) {
 
 if (!function_exists('is_guest')) {
     function is_guest() {
-        return (auth('web')->user()) ? false : true;
+        return (auth('web')->user() || auth('vendor')->user()) ? false : true;
     }
 }
 

@@ -105,13 +105,13 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label for="type" class="form-label">City <span class="text-danger">*</span></label>
-                                                <select class="form-control @error('city_id') is-invalid @enderror" id="type" name="city_id" required>
-                                                    @foreach($cities as $city)
-                                                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                                <label for="type" class="form-label">Country <span class="text-danger">*</span></label>
+                                                <select class="form-control @error('country_id') is-invalid @enderror" id="type" name="country_id" required>
+                                                    @foreach($countries as $country)
+                                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('city_id')
+                                                @error('country_id')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

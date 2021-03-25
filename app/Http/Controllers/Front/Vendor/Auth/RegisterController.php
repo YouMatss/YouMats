@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Front\Vendor\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\City;
+use App\Models\Country;
 use App\Providers\RouteServiceProvider;
 use App\Models\Vendor;
 use Illuminate\Contracts\Auth\Guard;
@@ -41,7 +41,7 @@ class RegisterController extends Controller
     protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
         return Validator::make($data, [
-            'city_id' => ['required', 'numeric'],
+            'country_id' => ['required', 'numeric'],
             'name_en' => ['required', 'string', 'max:191'],
             'name_ar' => ['required', 'string', 'max:191'],
             'email' => ['required', 'email', 'unique:vendors'],
@@ -62,7 +62,7 @@ class RegisterController extends Controller
     {
         $vendor = Vendor::create([
             'membership_id' => env('MEMBERSHIP_ID', 1),
-            'city_id' => $data['city_id'],
+            'country_id' => $data['country_id'],
             'name' => $data['name_en'],
             'email' => $data['email'],
             'phone' => $data['phone'],
@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'address2' => $data['address2'],
             'password' => Hash::make($data['password']),
+            'slug' => $data['name_en']
         ]);
 
         $vendor->setTranslation('name', 'en', $data['name_en']);
@@ -78,8 +79,8 @@ class RegisterController extends Controller
 
         $vendor->save();
 
-        $vendor->addMedia('assets/img/default_cover.png')->toMediaCollection(VENDOR_COVER);
-        $vendor->addMedia('assets/img/default_logo.jpg')->toMediaCollection(VENDOR_LOGO);
+//        $vendor->addMedia('assets/img/default_cover.png')->toMediaCollection(VENDOR_COVER);
+//        $vendor->addMedia('assets/img/default_logo.jpg')->toMediaCollection(VENDOR_LOGO);
 
         return $vendor;
     }
@@ -89,8 +90,8 @@ class RegisterController extends Controller
      */
     protected function showRegistrationForm()
     {
-        $cities = City::all();
-        return view('front.vendor.auth.register', ['cities' => $cities]);
+        $countries = Country::all();
+        return view('front.vendor.auth.register', ['countries' => $countries]);
     }
 
     /**
