@@ -79,7 +79,7 @@ class IndexController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'name_en' => REQUIRED_TEXT_VALIDATION,
@@ -102,7 +102,7 @@ class IndexController extends Controller
             'password' => NULLABLE_PASSWORD_VALIDATION
         ]);
 
-        $vendor = Vendor::findOrFail($id);
+        $vendor = Vendor::findOrFail($request->id);
 
         if(isset($request->logo)) {
             //Delete previously created logos

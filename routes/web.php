@@ -26,7 +26,6 @@ Route::group([
 
         Auth::routes(['verify' => true]);
 
-        Route::get('{vendor_slug}', 'IndexController@show')->name('show');
         Route::get('edit', 'IndexController@edit')->name('edit');
         Route::patch('update', 'IndexController@update')->name('update');
         Route::post('branch', 'IndexController@addBranch')->name('addBranch');
@@ -36,6 +35,7 @@ Route::group([
         Route::get('product/{product}/edit', 'ProductController@edit')->name('editProduct');
         Route::patch('product/{product}/update', 'ProductController@update')->name('updateProduct');
         Route::delete('/product/{product}/media/{media}', 'ProductController@deleteImage')->name('deleteImage');
+        Route::get('{vendor_slug}', 'IndexController@show')->name('show');
     });
 
     //Cart Routes
@@ -78,7 +78,7 @@ Route::group([
 
     Route::get('/page/{slug}', 'Common\PageController@page')->name('front.page.index');
     Route::get('/search', 'Product\ProductController@search')->name('products.search');
-    Route::get('/filter', 'Category\SubCategoryController@filter')->name('subCategory.filter');
+    Route::get('/filter/{subCategory_id}', 'Category\SubCategoryController@filter')->name('subCategory.filter');
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
     Route::get('/{slug}/i', 'Product\ProductController@index')->name('front.product');
     Route::get('/{category_slug}/dp', 'Category\CategoryController@index')->name('front.category');
