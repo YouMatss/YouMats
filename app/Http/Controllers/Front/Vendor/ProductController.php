@@ -140,6 +140,7 @@ class ProductController extends Controller
         $product->sku = Str::sku($request->name_en, '-');
         $product->vendor_id = $vendor->id;
         $product->best_seller = 0;
+        $product->active = 0;
 
         $this->setProduct($request, $product);
 

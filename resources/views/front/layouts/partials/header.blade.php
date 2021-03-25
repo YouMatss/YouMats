@@ -4,12 +4,6 @@
         <div class="u-header-topbar bg-gray-2 border-0 py-2 d-none d-xl-block">
             <div class="container">
                 <div class="d-flex align-items-center">
-                    @if(is_company())
-                    <div class="topbar-left">
-                        <a href="tel:0096665432120" class="text-gray-110 font-size-13 hover-on-dark mr-3"><i class="fa fa-phone"></i> 0096665432165 </a>
-                        <a href="mailto:info@youmats.com" class="text-gray-110 font-size-13 hover-on-dark"><i class="fa fa-envelope"></i> info@youmats.com </a>
-                    </div>
-                    @endif
                     <div class="topbar-right ml-auto">
                         <ul class="list-inline mb-0">
                             @if(!Auth::guard('vendor')->check())
