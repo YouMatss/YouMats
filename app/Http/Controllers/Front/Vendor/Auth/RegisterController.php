@@ -41,15 +41,12 @@ class RegisterController extends Controller
     protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
         return Validator::make($data, [
-            'country_id' => ['required', 'numeric'],
+            'country_id' => ['required', 'numeric', 'exists:countries,id'],
             'name_en' => ['required', 'string', 'max:191'],
             'name_ar' => ['required', 'string', 'max:191'],
             'email' => ['required', 'email', 'unique:vendors'],
-            'phone' => ['nullable', 'string', 'max:30'],
-            'phone2' => ['nullable', 'string', 'max:30'],
-            'whatsapp_phone' => ['nullable', 'string', 'max:30'],
-            'address' => ['nullable', 'string', 'max:191'],
-            'address2' => ['nullable', 'string', 'max:191'],
+            'phone' => ['required', 'string', 'max:30'],
+            'address' => ['required', 'string', 'max:191'],
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
     }
@@ -65,11 +62,8 @@ class RegisterController extends Controller
             'country_id' => $data['country_id'],
             'name' => $data['name_en'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
-            'phone2' => $data['phone2'],
-            'whatsapp_phone' => $data['whatsapp_phone'],
+            'phone' => '+966' . $data['phone'],
             'address' => $data['address'],
-            'address2' => $data['address2'],
             'password' => Hash::make($data['password']),
             'slug' => $data['name_en']
         ]);
@@ -78,9 +72,6 @@ class RegisterController extends Controller
         $vendor->setTranslation('name', 'ar', $data['name_ar']);
 
         $vendor->save();
-
-//        $vendor->addMedia('assets/img/default_cover.png')->toMediaCollection(VENDOR_COVER);
-//        $vendor->addMedia('assets/img/default_logo.jpg')->toMediaCollection(VENDOR_LOGO);
 
         return $vendor;
     }

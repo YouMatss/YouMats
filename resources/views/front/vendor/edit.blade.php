@@ -127,7 +127,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Full Name<span class="text-danger"> (English)*</span></label>
-                                                <input type="text" class="form-control" name="name_en" value="{{ $vendor->getTranslation('name','en') }}" placeholder="Enter your name in english" required="">
+                                                <input type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{ $vendor->getTranslation('name','en') }}" placeholder="Enter your name in english" required="">
                                                 @error('name_en')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -138,7 +138,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Full Name<span class="text-danger">(Arabic)*</span></label>
-                                                <input type="text" class="form-control" name="name_ar" value="{{ $vendor->getTranslation('name','ar') }}" placeholder="Enter your name in arabic" required="">
+                                                <input type="text" class="form-control @error('name_ar') is-invalid @enderror" name="name_ar" value="{{ $vendor->getTranslation('name','ar') }}" placeholder="Enter your name in arabic" required="">
                                                 @error('name_ar')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -148,8 +148,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">E-Mail<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="email" value="{{ $vendor->email }}" placeholder="Enter your email" required="">
+                                                <label class="form-label">E-Mail <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $vendor->email }}" placeholder="Enter your email" required="">
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -159,8 +159,11 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Phone Number </label>
-                                                <input type="text" class="form-control" name="phone" value="{{ $vendor->phone }}" placeholder="Enter your phone">
+                                                <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1" style="border-radius: 1.4rem 0 0 1.4rem">+966</span>
+                                                    <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ trim($vendor->phone, '+966') }}" placeholder="Enter your phone" required>
+                                                </div>
                                                 @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -171,7 +174,10 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Phone Number 2 </label>
-                                                <input type="text" class="form-control" name="phone2" value="{{ $vendor->phone2 }}" placeholder="Enter your second phone">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1" style="border-radius: 1.4rem 0 0 1.4rem">+966</span>
+                                                    <input type="text" class="form-control @error('phone2') is-invalid @enderror" name="phone2" value="{{ trim($vendor->phone2, '+966') }}" placeholder="Enter your second phone">
+                                                </div>
                                                 @error('phone2')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -182,7 +188,10 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">WhatsApp</label>
-                                                <input type="text" class="form-control" name="whatsapp_phone" value="{{ $vendor->whatsapp_phone }}" placeholder="Enter WhatsApp phone">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1" style="border-radius: 1.4rem 0 0 1.4rem">+966</span>
+                                                    <input type="text" class="form-control @error('whatsapp_phone') is-invalid @enderror" name="whatsapp_phone" value="{{ trim($vendor->whatsapp_phone, '+966') }}" placeholder="Enter WhatsApp phone">
+                                                </div>
                                                 @error('whatsapp_phone')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -192,8 +201,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Address</label>
-                                                <input type="text" class="form-control" name="address" value="{{ $vendor->address }}" placeholder="Enter your address">
+                                                <label class="form-label">Address <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ $vendor->address }}" placeholder="Enter your address" required>
                                                 @error('address')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -204,7 +213,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Address 2</label>
-                                                <input type="text" class="form-control" name="address2" value="{{ $vendor->address2 }}" placeholder="Enter your second address">
+                                                <input type="text" class="form-control @error('address2') is-invalid @enderror" name="address2" value="{{ $vendor->address2 }}" placeholder="Enter your second address">
                                                 @error('address2')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -212,10 +221,50 @@
                                                 @enderror
                                             </div>
                                         </div>
+
+                                        <div class="col-md-12">
+                                            <hr>
+                                            <div class="js-form-message mb-3">
+                                                <label class="form-label mb-3">
+                                                    Add Licenses*
+                                                </label>
+
+                                                <div class="row">
+                                                    @if(!count($vendor->getMedia(VENDOR_PATH)))
+                                                        <div class="col-sm-2 imgUp">
+                                                            <div class="imagePreview"></div>
+                                                            <label class="btn btn-primary">
+                                                                Upload <input type="file" name="licenses[]" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                                                            </label>
+                                                        </div><!-- col-2 -->
+                                                    @endif
+
+                                                    @foreach($vendor->getMedia(VENDOR_PATH) as $license)
+                                                        <div class="col-sm-2 imgUp">
+                                                            <div class="imagePreview" style="background-image: url('{{ $license->getFullUrl() }}')"></div>
+                                                            <i class="fa fa-times deleteImg" style="position: absolute;top: 0px;right: 15px;width: 30px; height: 30px;text-align: center;line-height: 30px;background-color: rgba(255,255,255,0.6);cursor: pointer;" data-url="{{route('vendor.deleteLicense', ['vendor' => $vendor, 'media' => $license])}}"></i>
+                                                        </div>
+                                                    @endforeach
+                                                    <i class="fa fa-plus imgAdd"></i>
+                                                </div><!-- row -->
+                                                @if ($errors->has('licenses.*') || $errors->has('licenses'))
+                                                    <div class="alert alert-danger">
+                                                        <ul role="alert" style="list-style: list-unstyled">
+                                                            @if($errors->has('licenses.*'))
+                                                                <li>{{ $errors->first('licenses.*') }}</li>
+                                                            @else
+                                                                <li>{{ $errors->first('licenses') }}</li>
+                                                            @endif
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Facebook</label>
-                                                <input type="text" class="form-control" name="facebook_url" value="{{ $vendor->facebook_url }}" placeholder="Enter your facebook">
+                                                <input type="text" class="form-control @error('facebook_url') is-invalid @enderror" name="facebook_url" value="{{ $vendor->facebook_url }}" placeholder="Enter your facebook">
                                                 @error('facebook_url')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -226,7 +275,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Twitter</label>
-                                                <input type="text" class="form-control" name="twitter_url" value="{{ $vendor->twitter_url }}" placeholder="Enter your twitter">
+                                                <input type="text" class="form-control @error('twitter_url') is-invalid @enderror" name="twitter_url" value="{{ $vendor->twitter_url }}" placeholder="Enter your twitter">
                                                 @error('twitter_url')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -237,7 +286,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Youtube</label>
-                                                <input type="text" class="form-control" name="youtube_url" value="{{ $vendor->youtube_url }}" placeholder="Enter your youtube">
+                                                <input type="text" class="form-control @error('youtube_url') is-invalid @enderror" name="youtube_url" value="{{ $vendor->youtube_url }}" placeholder="Enter your youtube">
                                                 @error('youtube_url')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -248,7 +297,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Instagram</label>
-                                                <input type="text" class="form-control" name="instagram_url" value="{{ $vendor->instagram_url }}" placeholder="Enter your instagram">
+                                                <input type="text" class="form-control @error('instagram_url') is-invalid @enderror" name="instagram_url" value="{{ $vendor->instagram_url }}" placeholder="Enter your instagram">
                                                 @error('instagram_url')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -259,7 +308,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Pinterest</label>
-                                                <input type="text" class="form-control" name="pinterest_url" value="{{ $vendor->pinterest_url }}" placeholder="Enter your pinterest">
+                                                <input type="text" class="form-control @error('pinterest_url') is-invalid @enderror" name="pinterest_url" value="{{ $vendor->pinterest_url }}" placeholder="Enter your pinterest">
                                                 @error('pinterest_url')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -267,10 +316,10 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Website</label>
-                                                <input type="text" class="form-control" name="website_url" value="{{ $vendor->website_url }}" placeholder="Enter your website">
+                                                <input type="text" class="form-control @error('website_url') is-invalid @enderror" name="website_url" value="{{ $vendor->website_url }}" placeholder="Enter your website">
                                                 @error('website_url')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -281,7 +330,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Password<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="password" placeholder="Change the password">
+                                                <input type="text" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Change the password">
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -292,7 +341,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Password Confirmation<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="password_confirmation" placeholder="Confirm your password">
+                                                <input type="text" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" placeholder="Confirm your password">
                                                 @error('password_confirmation')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -305,7 +354,6 @@
                                                 <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i> Save Change</button>
                                             </div>
                                         </div>
-
                                     </div>
                                 </form>
                             </div>
@@ -848,5 +896,54 @@
                 $('.alert-danger').removeClass('d-none');
             });
         });
+
+        // upload Licenses
+        $(".imgAdd").click(function(){
+            $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-2 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input name="licenses[]" type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
+        });
+        $(document).on("click", "i.del" , function() {
+            $(this).parent().remove();
+        });
+        $(function() {
+            $(document).on("change",".uploadFile", function()
+            {
+                var uploadFile = $(this);
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+                if (/^image/.test( files[0].type)){ // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+
+                    reader.onloadend = function(){ // set image data as background of div
+                        //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                        uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+                    }
+                }
+            });
+        });
+        $('.deleteImg').on('click', function() {
+            let url = $(this).data('url'),
+                btn = $(this);
+
+            $.ajax({
+                type: 'DELETE',
+                url: url,
+                data: { _token: '{{ csrf_token() }}' }
+            })
+                .done(function(response) {
+                    if(response.status) {
+                        toastr.success(response.message);
+                        btn.parent().remove();
+                    }
+                    else
+                        toastr.error(response.message)
+                })
+                .fail(function(response) {
+                    toastr.error(response.responseJSON.message);
+                })
+        })
+        // upload Licenses
+
     </script>
 @endsection

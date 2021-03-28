@@ -14,7 +14,6 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Waynestate\Nova\CKEditor;
-use Yassi\NestedForm\NestedForm;
 
 class SubCategory extends Resource
 {
@@ -106,11 +105,6 @@ class SubCategory extends Resource
             ])),
 
             HasMany::make('Products'),
-
-            (new Panel('Attributes (For Product Filtration)', [
-                NestedForm::make('Attributes')->open(false),
-            ])),
-
         ];
     }
 
