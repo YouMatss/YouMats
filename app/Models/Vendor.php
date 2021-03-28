@@ -21,7 +21,9 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, HasTranslations, CascadeSoftDeletes;
 
-    protected $fillable = ['name', 'city_id', 'email' , 'phone', 'phone2', 'address', 'address2', 'whatsapp_phone', 'membership_id', 'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url'];
+    protected $fillable = ['name', 'country_id', 'email' , 'phone', 'phone2', 'address', 'address2', 'whatsapp_phone',
+        'membership_id', 'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url',
+        'slug'];
 
     protected $guard = 'vendor';
 
@@ -40,6 +42,17 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         'email_verified_at' => 'datetime',
         'shipping_prices' => 'array'
     ];
+
+    public function registerAllMediaConversions(): void {
+        $this->addMediaConversion('thumb')
+            ->width(200)->height(200);
+
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(VENDOR_COVER);
+
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(VENDOR_LOGO);
+    }
 
     public function sendPasswordResetNotification($token)
     {

@@ -61,7 +61,8 @@ class Category extends Resource
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+                ->croppable('cropper')
+                ->previewUsing('cropper'),
 
             Medialibrary::make('Cover', CATEGORY_COVER)->fields(function () {
                 return [
@@ -80,6 +81,7 @@ class Category extends Resource
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
                 ->croppable('cropper')
+                ->previewUsing('cropper')
                 ->hideFromIndex(),
 
             Toggle::make(__('Featured'), 'isFeatured')
@@ -103,25 +105,34 @@ class Category extends Resource
 
             (new Panel('SEO', [
                 Slug::make('Slug')
-                    ->rules(REQUIRED_STRING_VALIDATION)
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_STRING_VALIDATION)
                     ->creationRules('unique:categories,slug')
                     ->updateRules('unique:categories,slug,{{resourceId}}')
-                    ->hideFromIndex(),
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Title', 'meta_title')
                     ->hideFromIndex()
                     ->rules(NULLABLE_STRING_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Keywords', 'meta_keywords')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Textarea::make('Meta Description', 'meta_desc')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
+
+                Textarea::make('Schema')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
             ])),
 

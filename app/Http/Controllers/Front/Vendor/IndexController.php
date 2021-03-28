@@ -48,13 +48,11 @@ class IndexController extends Controller
     }
 
     /**
-     * @param Vendor $vendor
+     * @param $vendor_slug
      * @return Application|Factory|View
      */
-    public function show(Request $request, Vendor $vendor)
-    {
-        if($vendor->name != $request->name)
-            abort(404);
+    public function show($vendor_slug) {
+        $vendor = Vendor::where('slug', $vendor_slug)->firstorfail();
         $products = $vendor->products()->paginate(20);
         $branches = $vendor->branches()->paginate(5);
         return view('front.vendor.show', ['vendor' => $vendor, 'products' => $products, 'branches' => $branches]);
@@ -81,7 +79,7 @@ class IndexController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'name_en' => REQUIRED_TEXT_VALIDATION,
@@ -104,7 +102,7 @@ class IndexController extends Controller
             'password' => NULLABLE_PASSWORD_VALIDATION
         ]);
 
-        $vendor = Vendor::findOrFail($id);
+        $vendor = Vendor::findOrFail($request->id);
 
         if(isset($request->logo)) {
             //Delete previously created logos

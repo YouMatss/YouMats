@@ -41,6 +41,7 @@ class CreateProductsTable extends Migration
             $table->string('SKU')->unique();
 
             $table->json('shipping_prices')->nullable();
+            $table->json('attributes')->nullable();
 
             $table->tinyInteger('active')->default(1);
             $table->integer('views')->default(0);

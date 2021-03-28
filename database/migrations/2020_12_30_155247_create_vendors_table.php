@@ -34,7 +34,8 @@ class CreateVendorsTable extends Migration
             $table->string('address')->nullable();
             $table->string('address2')->nullable();
 
-            $table->text('location')->nullable();
+            $table->text('latitude')->nullable();
+            $table->text('longitude')->nullable();
 
             $table->json('shipping_prices')->nullable();
 
@@ -48,6 +49,11 @@ class CreateVendorsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+
+            $table->string('slug')->unique();
+            $table->text('meta_title')->nullable();
+            $table->text('meta_desc')->nullable();
+            $table->text('meta_keywords')->nullable();
 
             $table->boolean('isFeatured')->default(0);
 

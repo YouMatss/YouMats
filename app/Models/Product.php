@@ -7,7 +7,6 @@ use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\Builder;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
@@ -30,11 +29,8 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);
 
-        $this->addMediaConversion('cropper');
-    }
-
-    public function registerMediaCollections(): void {
-        $this->addMediaCollection(PRODUCT_PATH);
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(PRODUCT_PATH);
     }
 
     public function getPriceAttribute($value) {
@@ -43,6 +39,10 @@ class Product extends Model implements Sortable, HasMedia, Buyable
 
     public function getCostAttribute($value) {
         return round($value * getCurrency('rate'), 2);
+    }
+
+    public function getLocationAttribute() {
+        return $this->vendor->select('latitude', 'longitude')->first();
     }
 
     public function category() {

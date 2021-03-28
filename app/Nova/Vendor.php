@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
+use GeneaLabs\NovaMapMarkerField\MapMarker;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
@@ -12,10 +13,11 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
-use Whitecube\NovaGoogleMaps\GoogleMaps;
 
 class Vendor extends Resource
 {
@@ -34,10 +36,12 @@ class Vendor extends Resource
 
             BelongsTo::make('Membership')
                 ->showCreateRelationButton()
+                ->hideFromIndex()
                 ->withoutTrashed(),
 
             BelongsTo::make('Country')
                 ->showCreateRelationButton()
+                ->hideFromIndex()
                 ->withoutTrashed(),
 
             Text::make('Name')
@@ -71,8 +75,10 @@ class Vendor extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
-            GoogleMaps::make('Location')
-                ->zoom(6)
+            MapMarker::make('Location')
+                ->defaultZoom(8)
+                ->defaultLatitude(24.7136)
+                ->defaultLongitude(46.6753)
                 ->hideFromIndex(),
 
             Text::make('Facebook', 'facebook_url')
@@ -94,20 +100,44 @@ class Vendor extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
-        Medialibrary::make('Cover', VENDOR_COVER)
-                ->rules('required')
+            Medialibrary::make('Cover', VENDOR_COVER)->fields(function () {
+                return [
+                    Text::make('File Name', 'file_name')
+                        ->rules('required', 'min:2'),
+
+                    Text::make('Image Title', 'img_title')
+                        ->translatable()
+                        ->rules(NULLABLE_STRING_VALIDATION),
+
+                    Text::make('Image Alt', 'img_alt')
+                        ->translatable()
+                        ->rules(NULLABLE_STRING_VALIDATION)
+                ];
+            })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
-                ->autouploading()
-                ->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->attachOnDetails()
+                ->autouploading()->attachOnDetails()->single()
+                ->croppable('cropper')
+                ->previewUsing('cropper')
                 ->hideFromIndex(),
 
-        Medialibrary::make('Logo', VENDOR_LOGO)
-                ->rules('required')
+            Medialibrary::make('Logo', VENDOR_LOGO)->fields(function () {
+                return [
+                    Text::make('File Name', 'file_name')
+                        ->rules('required', 'min:2'),
+
+                    Text::make('Image Title', 'img_title')
+                        ->translatable()
+                        ->rules(NULLABLE_STRING_VALIDATION),
+
+                    Text::make('Image Alt', 'img_alt')
+                        ->translatable()
+                        ->rules(NULLABLE_STRING_VALIDATION)
+                ];
+            })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
-                ->autouploading()
-                ->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->attachOnDetails()
+                ->autouploading()->attachOnDetails()->single()
+                ->croppable('cropper')
+                ->previewUsing('cropper')
                 ->hideFromIndex(),
 
             Medialibrary::make('Licenses', VENDOR_PATH)->fields(function () {
@@ -146,7 +176,43 @@ class Vendor extends Resource
                         'hour' => 'Hour',
                         'day' => 'Day'
                     ])->rules(['required','in:hour,day']),
-                ]),
+                ])->hideWhenCreating(),
+            ])),
+
+            (new Panel('SEO', [
+                Slug::make('Slug')
+                    ->hideFromIndex()
+                    ->rules(REQUIRED_STRING_VALIDATION)
+                    ->creationRules('unique:vendors,slug')
+                    ->updateRules('unique:vendors,slug,{{resourceId}}')
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
+
+                Text::make('Meta Title', 'meta_title')
+                    ->hideFromIndex()
+                    ->displayUsing(function ($value) {
+                        if($value == '')
+                            return $this->name;
+                    })
+                    ->rules(NULLABLE_STRING_VALIDATION)
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
+
+                Text::make('Meta Keywords', 'meta_keywords')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
+
+                Textarea::make('Meta Description', 'meta_desc')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
+
+                Textarea::make('Schema')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
             ])),
 
             HasMany::make('Products'),

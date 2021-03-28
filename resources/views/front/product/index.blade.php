@@ -73,8 +73,8 @@
                                 <span class="text-secondary font-size-13">({{$product->views}} customer views)</span>
                             </a>
                         </div>
-                        <a href="{{ route('vendor.show', ['vendor' => $product->vendor->id, 'name' => $product->vendor->name]) }}" class="d-inline-block max-width-150 ml-n2 mb-2">
-                            <img class="img-fluid" src="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
+                        <a href="{{ route('home') }}" class="d-inline-block max-width-150 ml-n2 mb-2">
+                            <img class="img-fluid" src="{{front_url()}}/assets/img/logo.png">
                         </a>
                         <div class="mb-2">
                             <ul class="font-size-14 pl-3 ml-1 text-gray-9">
@@ -103,9 +103,11 @@
 
                             <div class="mb-3">
                                 <div class="left-page-single">
-                                    <a href="{{route('vendor.show', [$product->vendor->id, $product->vendor->name])}}"> <i class="fa fa-user"></i> {{$product->vendor->name}} </a>
-                                    <a href="tel:{{$product->vendor->phone}}" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> {{$product->vendor->phone}} </a>
-                                    <a href="mailto:{{$product->vendor->email}}"> <i class="fa fa-envelope"></i> {{$product->vendor->email}} </a>
+                                    @if(is_company())
+                                    <a href="{{ route('home') }}"> <i class="fa fa-user"></i> YouMats </a>
+                                    <a href="tel:+966502111754" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> (+966) 502111754 </a>
+                                    <a href="mailto:info@youmats.com"> <i class="fa fa-envelope"></i> info@youmats.com </a>
+                                    @endif
                                     <h3> How to Pay</h3>
                                     <p>Youmats Support pay on Delivery for That Product</p>
                                 </div>

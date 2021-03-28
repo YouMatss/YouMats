@@ -21,6 +21,7 @@ class ProductController extends Controller
         $data['related_products'] = Product::with('subCategory')
             ->where('subCategory_id', $data['product']->subCategory_id)
             ->where('id', '!=', $data['product']->id)
+            ->where('active', 1)
             ->orderby('sort')->take(10)->get();
 
         return view('front.product.index')->with($data);

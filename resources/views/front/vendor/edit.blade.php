@@ -73,7 +73,8 @@
                         <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
                             <div class="block_info_vendor">
                                 @if(Session::has('message'))<div class="alert alert-success">{{ Session::get('message') }}</div>@endif
-                                <form method="POST" action="{{ route('vendor.update', ['vendor' => $vendor->id]) }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('vendor.update') }}" enctype="multipart/form-data">
+                                    <input name="id" type="hidden" value="{{$vendor->id}}">
                                     @csrf
                                     @method('PATCH')
                                     <div class="row">

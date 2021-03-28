@@ -51,7 +51,8 @@ class Page extends Resource
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+                ->croppable('cropper')
+                ->previewUsing('cropper'),
 
             CKEditor::make('Description', 'desc')
                 ->hideFromIndex()
@@ -64,22 +65,31 @@ class Page extends Resource
                     ->sortable()
                     ->rules(REQUIRED_STRING_VALIDATION)
                     ->creationRules('unique:pages,slug')
-                    ->updateRules('unique:pages,slug,{{resourceId}}'),
+                    ->updateRules('unique:pages,slug,{{resourceId}}')
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Title', 'meta_title')
                     ->hideFromIndex()
                     ->rules(NULLABLE_STRING_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Keywords', 'meta_keywords')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Textarea::make('Meta Description', 'meta_desc')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
+
+                Textarea::make('Schema')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
             ])),
 
