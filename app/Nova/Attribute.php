@@ -4,15 +4,8 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\KeyValue;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
-use Shivanshrajpoot\NovaCreateOrAdd\NovaCreateOrAdd;
-use Whitecube\NovaFlexibleContent\Flexible;
 use Yassi\NestedForm\NestedForm;
 
 class Attribute extends Resource
@@ -50,7 +43,7 @@ class Attribute extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make('SubCategory')->withoutTrashed(),
+            BelongsTo::make('SubCategory')->withoutTrashed()->searchable(),
             Text::make('Key')->translatable()->rules(REQUIRED_STRING_VALIDATION),
             NestedForm::make('Values', 'values', AttributeValue::class)->open(false),
         ];

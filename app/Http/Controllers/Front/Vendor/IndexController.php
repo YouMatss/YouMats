@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class IndexController extends Controller
 {
@@ -87,19 +88,21 @@ class IndexController extends Controller
             'email' => REQUIRED_EMAIL_VALIDATION,
             'logo' => NULLABLE_IMAGE_VALIDATION,
             'cover' => NULLABLE_IMAGE_VALIDATION,
-            'phone' => NULLABLE_STRING_VALIDATION,
+            'phone' => REQUIRED_STRING_VALIDATION,
             'phone2' => NULLABLE_STRING_VALIDATION,
             'whatsapp_phone' => NULLABLE_STRING_VALIDATION,
-            'address' => NULLABLE_STRING_VALIDATION,
+            'address' => REQUIRED_STRING_VALIDATION,
             'address2' => NULLABLE_STRING_VALIDATION,
             'location' => NULLABLE_TEXT_VALIDATION,
-            'facebook_url' => NULLABLE_STRING_VALIDATION,
-            'twitter_url' => NULLABLE_STRING_VALIDATION,
-            'youtube_url' => NULLABLE_STRING_VALIDATION,
-            'instagram_url' => NULLABLE_STRING_VALIDATION,
-            'pinterest_url' => NULLABLE_STRING_VALIDATION,
-            'website_url' => NULLABLE_STRING_VALIDATION,
-            'password' => NULLABLE_PASSWORD_VALIDATION
+            'facebook_url' => NULLABLE_URL_VALIDATION,
+            'twitter_url' => NULLABLE_URL_VALIDATION,
+            'youtube_url' => NULLABLE_URL_VALIDATION,
+            'instagram_url' => NULLABLE_URL_VALIDATION,
+            'pinterest_url' => NULLABLE_URL_VALIDATION,
+            'website_url' => NULLABLE_URL_VALIDATION,
+            'password' => NULLABLE_PASSWORD_VALIDATION,
+            'licenses' => REQUIRED_ARRAY_VALIDATION,
+            'licenses.*' => REQUIRED_IMAGE_VALIDATION
         ]);
 
         $vendor = Vendor::findOrFail($request->id);
@@ -127,6 +130,12 @@ class IndexController extends Controller
         $vendor->setTranslation('name', 'ar', $request->name_ar);
 
         $vendor->update($request->except('name_en', 'name_ar', '_token', 'password'));
+
+        // Add licenses to the vendor
+        if(isset($request->licenses))
+            foreach($request->licenses as $license) {
+                $vendor->addMedia($license)->toMediaCollection(VENDOR_PATH);
+            }
 
         return back()->with(['custom_success' => __('Profile has been updated successfully')]);
 
@@ -171,5 +180,21 @@ class IndexController extends Controller
         $branch->delete();
 
         return back()->with(['custom_success' => __('Branch has been deleted successfully')]);
+    }
+
+    public function deleteLicense(Vendor $vendor, Media $media)
+    {
+        if(!Auth::guard('vendor')->user()->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
+
+        if(count($vendor->getMedia(VENDOR_PATH)) === 1)
+            return response()->json(['status' => false, 'message' => __('You cannot delete the only license of this vendor.')]);
+
+        $media::where('model_id', $vendor->id)
+            ->where('model_type', 'App\Models\Vendor')
+            ->where('id', $media->id)
+            ->delete();
+
+        return response()->json(['status' => true, 'message' => __('Image has been removed.')]);
     }
 }
