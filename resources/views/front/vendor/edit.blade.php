@@ -53,6 +53,9 @@
                             <a class="nav-link active" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">Main Info</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
+                            <a class="nav-link" id="Jpills-shipping-example1-tab" data-toggle="pill" href="#Jpills-shipping-example1" role="tab" aria-controls="Jpills-shipping-example1" aria-selected="false">Shipping Prices</a>
+                        </li>
+                        <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
                             <a class="nav-link" id="Jpills-two-example1-tab" data-toggle="pill" href="#Jpills-two-example1" role="tab" aria-controls="Jpills-two-example1" aria-selected="false">My Products</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
@@ -221,9 +224,16 @@
                                                 @enderror
                                             </div>
                                         </div>
-
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 mb-3">
                                             <hr>
+                                            <div class="js-form-message form-group mb-5">
+                                                <label class="form-label">Location</label>
+                                                {!! generate_map() !!}
+                                                <input type="hidden" class="lat" value="{{$vendor->latitude}}" readonly name="latitude" required>
+                                                <input type="hidden" class="lng" value="{{$vendor->longitude}}" readonly name="longitude" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
                                             <div class="js-form-message mb-3">
                                                 <label class="form-label mb-3">
                                                     Add Licenses*
@@ -260,7 +270,6 @@
                                                 @endif
                                             </div>
                                         </div>
-
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Facebook</label>
@@ -358,6 +367,89 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="Jpills-shipping-example1" role="tabpanel" aria-labelledby="Jpills-shipping-example1-tab">
+                            <div class="container">
+                                @if($vendor->active)
+                                    <form method="POST" action="{{ route('vendor.updateShippingPrices') }}">
+                                        <input name="id" type="hidden" value="{{$vendor->id}}">
+                                        @csrf
+                                        @method('PATCH')
+                                        <div class="clone_container">
+                                            @foreach($shipping_prices as $shipping_price)
+                                            <div class="row clone_item">
+                                                <div class="col-md-3">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label class="form-label">Cities <span class="text-danger">*</span></label>
+                                                        <select name="cities[]" class="form-control @error("cities[]") is-invalid @enderror" required>
+                                                            @foreach($cities as $city)
+                                                                <option value="{{$city->id}}" @if($shipping_price['cities'] == $city->id) selected @endif>{{$city->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error("cities[]")
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label class="form-label">Price <span class="text-danger">*</span></label>
+                                                        <input type="number" class="form-control @error("price[]") is-invalid @enderror" name="price[]" value="{{$shipping_price['price']}}" required>
+                                                        @error("price[]")
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label class="form-label">Time <span class="text-danger">*</span></label>
+                                                        <input type="number" class="form-control @error("time[]") is-invalid @enderror" name="time[]" value="{{$shipping_price['time']}}" required>
+                                                        @error("time[]")
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label class="form-label">Format <span class="text-danger">*</span></label>
+                                                        <select name="format[]" class="form-control @error("format[]") is-invalid @enderror" required>
+                                                            <option value="hour" @if($shipping_price['format'] == 'hour') selected @endif>Hour</option>
+                                                            <option value="day" @if($shipping_price['format'] == 'day') selected @endif>Day</option>
+                                                        </select>
+                                                        @error("format[]")
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="mt-4">
+                                                        <button type="button" class="btn btn-danger px-5 text-white mr-2 btn_clone_remove">Delete</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-6">
+                                                <button type="button" class="btn btn-primary-dark-w px-5 text-white mr-2 btn_clone_add"> <i class="fas fa-plus"></i> Add Price</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-6">
+                                                <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i> Save Change</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                @endif
+                            </div>
+                        </div>
                         <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
                             @if($vendor->active)
                                 <a href="{{ route('vendor.addProduct') }}" class="btn btn-primary-dark-w px-5 text-white mr-2">
@@ -426,7 +518,7 @@
                                 </button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="branchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog" style="max-width: 700px;" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">{{ __('Add Branch') }}</h5>
@@ -437,8 +529,7 @@
                                         <div class="modal-body">
                                             <form action="{{ route('vendor.addBranch') }}" method="POST" id="addBranchForm">
                                                 @csrf
-                                                <div class="row">
-
+                                                <div class="row mb-5">
                                                 <div class="col-md-6">
                                                     <div class="js-form-message form-group mb-5">
                                                         <label for="name" class="form-label">{{ __('Name') }} <span class="text-danger">*</span></label>
@@ -447,42 +538,46 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="js-form-message form-group mb-5">
+                                                        <label for="city" class="form-label">{{ __('City') }} <span class="text-danger">*</span></label>
+                                                        <select class="form-control" id="city" name="city_id" required>
+                                                            @foreach($cities as $city)
+                                                                <option value="{{$city->id}}">{{$city->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="js-form-message form-group mb-5">
                                                         <label for="phone_number" class="form-label">{{ __('Phone') }} <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="phone_number" name="phone_number" required autocomplete="phone_number" autofocus>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1" style="border-radius: 1.4rem 0 0 1.4rem">+966</span>
+                                                            <input type="text" class="form-control" id="phone_number" name="phone_number" required autocomplete="phone_number">
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="js-form-message form-group mb-5">
                                                         <label for="fax" class="form-label">{{ __('Fax') }}</label>
-                                                        <input type="text" class="form-control" id="fax" name="fax" autocomplete="fax" autofocus>
+                                                        <input type="text" class="form-control" id="fax" name="fax" autocomplete="fax">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="js-form-message form-group mb-5">
                                                         <label for="website" class="form-label">{{ __('Website') }}</label>
-                                                        <input type="text" class="form-control" id="website" name="website" autocomplete="website" autofocus>
+                                                        <input type="text" class="form-control" id="website" name="website" autocomplete="website">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="js-form-message form-group mb-5">
                                                         <label for="address" class="form-label">{{ __('Address') }} <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="address" name="address" required autocomplete="address" autofocus>
+                                                        <input type="text" class="form-control" id="address" name="address" required autocomplete="address">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="js-form-message form-group mb-5">
-                                                        <label for="latitude" class="form-label">{{ __('Latitude') }} <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="latitude" name="latitude" required autocomplete="latitude" autofocus>
-                                                    </div>
+                                                {!! generate_map_branch() !!}
+                                                <input type="hidden" class="lat" readonly name="latitude" required>
+                                                <input type="hidden" class="lng" readonly name="longitude" required>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="js-form-message form-group mb-5">
-                                                        <label for="longitude" class="form-label">{{ __('Longitude') }} <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="longitude" name="longitude" required autocomplete="longitude" autofocus>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                                <button id="addBranchBtn" class="btn btn-primary-dark-w px-5 text-white">{{ __('Save') }}</button>
+                                                <button id="addBranchBtn" class="btn btn-primary-dark-w px-5 text-white" style="cursor:pointer;">{{ __('Save') }}</button>
                                             </form>
                                         </div>
                                         </div>
@@ -494,7 +589,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="border-bottom border-color-1 mb-5">
-                                                <h3 class="section-title mb-0 pb-2 font-size-25"> {{ $branch->name }} </h3>
+                                                <h3 class="section-title mb-0 pb-2 font-size-25"> {{ $branch->name }} ( {{$branch->city->name}} ) </h3>
                                             </div>
                                         </div>
                                         <div class="col-md-8 col-xl-8">
@@ -546,7 +641,7 @@
                                                             <span class=""> {{ $branch->address }} </span>
                                                         </div>
                                                     </li>
-                                                    <li class="row">
+                                                    <li class="row mt-5">
                                                         <a class="btn btn-primary btn-block" href="{{ route('vendor.deleteBranch', ['branch' => $branch]) }}"
                                                            onclick="event.preventDefault();
                                                             document.getElementById('delete-branch-{{ $branch->id }}').submit();">
@@ -945,5 +1040,20 @@
         })
         // upload Licenses
 
+    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
+    <script src="{{front_url()}}/assets/js/map.js"></script>
+    <script src="{{front_url()}}/assets/js/map-branch.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".btn_clone_add").click(function(){
+                var new_item = $(".clone_item").first().clone();
+                $(".clone_container").append(new_item);
+                return false;
+            });
+            $(document).on('click', '.btn_clone_remove', function () {
+                $(this).closest('.clone_item').remove();
+            });
+        });
     </script>
 @endsection

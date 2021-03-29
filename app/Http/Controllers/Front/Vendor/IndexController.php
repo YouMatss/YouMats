@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Front\Vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Vendor;
 use App\Models\VendorBranch;
 use Exception;
@@ -66,13 +67,15 @@ class IndexController extends Controller
      */
     public function edit(Request $request)
     {
-        $vendor = Auth::guard('vendor')->user();
+        $data['vendor'] = Auth::guard('vendor')->user();
 
-        $products = $vendor->products()->paginate(20);
-        $branches = $vendor->branches()->paginate(5);
-        $order_items = $vendor->order_items;
+        $data['products'] = $data['vendor']->products()->paginate(20);
+        $data['branches'] = $data['vendor']->branches()->paginate(5);
+        $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
+        $data['items'] = $data['vendor']->order_items;
+        $data['shipping_prices'] = $data['vendor']->shipping_prices;
 
-        return view('front.vendor.edit', ['vendor' => $vendor, 'products' => $products, 'branches' => $branches, 'items' => $order_items]);
+        return view('front.vendor.edit')->with($data);
     }
 
     /**
@@ -93,7 +96,8 @@ class IndexController extends Controller
             'whatsapp_phone' => NULLABLE_STRING_VALIDATION,
             'address' => REQUIRED_STRING_VALIDATION,
             'address2' => NULLABLE_STRING_VALIDATION,
-            'location' => NULLABLE_TEXT_VALIDATION,
+            'latitude' => REQUIRED_STRING_VALIDATION,
+            'longitude' => REQUIRED_STRING_VALIDATION,
             'facebook_url' => NULLABLE_URL_VALIDATION,
             'twitter_url' => NULLABLE_URL_VALIDATION,
             'youtube_url' => NULLABLE_URL_VALIDATION,
@@ -101,7 +105,7 @@ class IndexController extends Controller
             'pinterest_url' => NULLABLE_URL_VALIDATION,
             'website_url' => NULLABLE_URL_VALIDATION,
             'password' => NULLABLE_PASSWORD_VALIDATION,
-            'licenses' => REQUIRED_ARRAY_VALIDATION,
+            'licenses' => ARRAY_VALIDATION,
             'licenses.*' => REQUIRED_IMAGE_VALIDATION
         ]);
 
@@ -155,15 +159,18 @@ class IndexController extends Controller
 
         $data = $request->validate([
             'name' => REQUIRED_STRING_VALIDATION,
+            'city_id' => 'required|integer|exists:cities,id',
             'phone_number' => REQUIRED_STRING_VALIDATION,
             'fax' => NULLABLE_STRING_VALIDATION,
-            'website' => NULLABLE_STRING_VALIDATION,
+            'website' => REQUIRED_URL_VALIDATION,
             'address' => REQUIRED_STRING_VALIDATION,
             'latitude' => REQUIRED_STRING_VALIDATION,
             'longitude' => REQUIRED_STRING_VALIDATION
         ]);
 
         $data['vendor_id'] = $vendor->id;
+        if(isset($data['phone_number']))
+            $data['phone_number'] = '+966' . $data['phone_number'];
 
         VendorBranch::create($data);
 
@@ -196,5 +203,35 @@ class IndexController extends Controller
             ->delete();
 
         return response()->json(['status' => true, 'message' => __('Image has been removed.')]);
+    }
+
+    public function updateShippingPrices(Request $request) {
+        $data = $this->validate($request, [
+            'id' => 'required|integer|exists:vendors,id',
+            'cities' => ARRAY_VALIDATION,
+            'cities.*' => 'required|integer|exists:cities,id',
+            'price' => ARRAY_VALIDATION,
+            'price.*' => REQUIRED_INTEGER_VALIDATION,
+            'time' => ARRAY_VALIDATION,
+            'time.*' => REQUIRED_INTEGER_VALIDATION,
+            'format' => ARRAY_VALIDATION,
+            'format.*' => 'required|string|In:hour,day',
+        ]);
+
+        $vendor = Vendor::findorfail($data['id']);
+
+        $shippingPrices = [];
+
+        for ($i=0;$i<count($data['cities']);$i++) {
+            $shippingPrices[$i]['cities'] = $data['cities'][$i];
+            $shippingPrices[$i]['price'] = $data['price'][$i];
+            $shippingPrices[$i]['time'] = $data['time'][$i];
+            $shippingPrices[$i]['format'] = $data['format'][$i];
+        }
+
+        $vendor->update([
+            'shipping_prices' => $shippingPrices
+        ]);
+        return back()->with(['custom_success' => __('Shipping Prices has been updated successfully')]);
     }
 }
