@@ -29,6 +29,7 @@ define('NULLABLE_TEXT_VALIDATION', ['nullable', 'string']);
 
 //url
 define('NULLABLE_URL_VALIDATION', ['nullable', 'string', 'max:191', 'url']);
+define('REQUIRED_URL_VALIDATION', ['required', 'string', 'max:191', 'url']);
 
 // Integer
 define('REQUIRED_INTEGER_VALIDATION', ['required', 'integer']);
