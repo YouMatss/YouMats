@@ -154,7 +154,7 @@
                                         @foreach($cartItems as $item)
                                             <tr class="cart_item">
                                                 <td>{{ $item->name }}</td>
-                                                <td>{{ $item->price }}</td>
+                                                <td>{{ getCurrency('code') . ' ' . $item->price }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -215,7 +215,13 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary-dark-w btn-block btn-pill font-size-20 mb-3 py-3">Place order</button>
+                                <button type="submit" class="btn btn-primary-dark-w btn-block btn-pill font-size-20 mb-3 py-3">
+                                    @if(is_company())
+                                        Get Qoute
+                                    @else
+                                        Place order
+                                    @endif
+                                </button>
                             </div>
                             <!-- End Order Summary -->
                         </div>
@@ -341,7 +347,7 @@
                                         <select class="form-control js-select selectpicker dropdown-select" name="city" required="" data-msg="Please select state." data-error-class="u-has-error" data-success-class="u-has-success" data-live-search="true" data-style="form-control border-color-1 font-weight-normal" tabindex="-98">
                                             <option value="">Select city</option>
                                             @foreach($cities as $city)
-                                                <option value="{{ $city->name }}">{{ $city->name }}</option>
+                                                <option value="{{ $city->name }}" @if($city->name == old('city')) selected @endif>{{ $city->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('city')
@@ -434,7 +440,7 @@
                             </label>
 
                             <div class="input-group">
-                                <textarea class="form-control p-5" rows="4" name="notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                <textarea class="form-control p-5" rows="4" name="notes" placeholder="Notes about your order, e.g. special notes for delivery.">{{old('notes')}}</textarea>
                             </div>
                         </div>
                         <!-- End Input -->

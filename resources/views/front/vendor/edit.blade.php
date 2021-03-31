@@ -375,6 +375,7 @@
                                         @csrf
                                         @method('PATCH')
                                         <div class="clone_container">
+                                            @if(isset($shipping_prices))
                                             @foreach($shipping_prices as $shipping_price)
                                             <div class="row clone_item">
                                                 <div class="col-md-3">
@@ -435,6 +436,9 @@
                                                 </div>
                                             </div>
                                             @endforeach
+                                            @else
+                                                <h4>{{ __('You do not have any prices') }}</h4>
+                                            @endif
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-6">
@@ -1047,8 +1051,66 @@
     <script>
         $(document).ready(function () {
             $(".btn_clone_add").click(function(){
-                var new_item = $(".clone_item").first().clone();
-                $(".clone_container").append(new_item);
+                var clone_item = `<div class="row clone_item">
+                                                <div class="col-md-3">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label class="form-label">Cities <span class="text-danger">*</span></label>
+                                                        <select name="cities[]" class="form-control @error("cities[]") is-invalid @enderror" required>
+                                                            @foreach($cities as $city)
+                <option value="{{$city->id}}">{{$city->name}}</option>
+                                                            @endforeach
+                </select>
+@error("cities[]")
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="js-form-message form-group mb-5">
+                    <label class="form-label">Price <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control @error("price[]") is-invalid @enderror" name="price[]" required>
+                                                        @error("price[]")
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="js-form-message form-group mb-5">
+                    <label class="form-label">Time <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control @error("time[]") is-invalid @enderror" name="time[]" required>
+                                                        @error("time[]")
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="js-form-message form-group mb-5">
+                    <label class="form-label">Format <span class="text-danger">*</span></label>
+                    <select name="format[]" class="form-control @error("format[]") is-invalid @enderror" required>
+                                                            <option value="hour">Hour</option>
+                                                            <option value="day">Day</option>
+                                                        </select>
+                                                        @error("format[]")
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mt-4">
+                    <button type="button" class="btn btn-danger px-5 text-white mr-2 btn_clone_remove">Delete</button>
+                </div>
+            </div>
+        </div>`;
+                // var new_item = $(".clone_item").first().clone();
+                $(".clone_container").append(clone_item);
                 return false;
             });
             $(document).on('click', '.btn_clone_remove', function () {
