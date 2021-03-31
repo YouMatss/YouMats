@@ -94,14 +94,14 @@ class Order extends Resource
                 'completed' => 'Completed'
             ]),
 
-            Select::make('Order Status')->options([
+            Select::make('Order Status', 'status')->options([
                 'pending' => 'Pending',
                 'shipping' => 'Shipping',
                 'completed' => 'Completed',
                 'refused' => 'Refused'
             ])->default('pending')->hideFromIndex()->hideFromDetail()
                 ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:pending,shipping,completed,refused'])),
-            Indicator::make('Order Status')->colors([
+            Indicator::make('Order Status', 'status')->colors([
                 'pending' => 'yellow',
                 'shipping' => 'orange',
                 'completed' => 'green',
