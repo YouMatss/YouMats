@@ -39,8 +39,8 @@ class DatabaseWork extends Command
      */
     public function handle()
     {
-//        $this->CopyArabicProducts();
-//        $this->CopyEnglishProducts();
+        $this->CopyArabicProducts();
+        $this->CopyEnglishProducts();
     }
 
     private function CopyArabicProducts()
@@ -52,7 +52,6 @@ class DatabaseWork extends Command
         foreach($products as $product)
         {
             $currentProduct = Product::find($product->pro_id);
-
 
             if($currentProduct)
             {

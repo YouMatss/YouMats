@@ -136,7 +136,6 @@
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-translatable" />
       <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-translatable" />
       <path value="$PROJECT_DIR$/vendor/david-griffiths/nova-dark-theme" />
-      <path value="$PROJECT_DIR$/vendor/whitecube/nova-flexible-content" />
       <path value="$PROJECT_DIR$/vendor/nikaia/nova-rating-field" />
       <path value="$PROJECT_DIR$/vendor/epartment/nova-dependency-container" />
       <path value="$PROJECT_DIR$/vendor/league/glide" />
@@ -159,7 +158,6 @@
       <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
       <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
       <path value="$PROJECT_DIR$/vendor/richardkeep/nova-timenow" />
-      <path value="$PROJECT_DIR$/vendor/whitecube/nova-google-maps" />
       <path value="$PROJECT_DIR$/vendor/ampeco/nova-date-range-filter" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-backup" />
       <path value="$PROJECT_DIR$/vendor/spatie/nova-backup-tool" />
@@ -183,6 +181,15 @@
       <path value="$PROJECT_DIR$/vendor/hardevine/shoppingcart" />
       <path value="$PROJECT_DIR$/vendor/binary-cats/laravel-sku" />
       <path value="$PROJECT_DIR$/vendor/dyrynda/laravel-cascade-soft-deletes" />
+      <path value="$PROJECT_DIR$/vendor/chris-ware/nova-breadcrumbs" />
+      <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-simple-repeatable" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-query-builder" />
+      <path value="$PROJECT_DIR$/vendor/kirschbaum-development/nova-inline-relationship" />
+      <path value="$PROJECT_DIR$/vendor/yassi/nova-nested-form" />
+      <path value="$PROJECT_DIR$/vendor/genealabs/nova-map-marker-field" />
+      <path value="$PROJECT_DIR$/vendor/symfony/thanks" />
+      <path value="$PROJECT_DIR$/vendor/acme/Attribute" />
+      <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-multiselect-field" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

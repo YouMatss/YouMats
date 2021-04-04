@@ -28,11 +28,8 @@ class SubCategory extends Model implements Sortable, HasMedia
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);
 
-        $this->addMediaConversion('cropper');
-    }
-
-    public function registerMediaCollections(): void {
-        $this->addMediaCollection(SUB_CATEGORY_PATH);
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(SUB_CATEGORY_PATH);
     }
 
     public function category() {
@@ -49,5 +46,9 @@ class SubCategory extends Model implements Sortable, HasMedia
             ->join('products as p', 'p.id', '=', 'pt.product_id')
             ->join('sub_categories as sub', 'sub.id', '=', 'p.subCategory_id')
             ->where('sub.id', '=', $this->id)->distinct()->get();
+    }
+
+    public function attributes() {
+        return $this->hasMany(Attribute::class, 'subCategory_id');
     }
 }

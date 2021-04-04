@@ -145,7 +145,8 @@
         // initialization of select picker
         $.HSCore.components.HSSelectPicker.init('.js-select');
 
-        $(".btn-add-cart").on('click', function(){
+        //HANDLE CART
+        $(document).on('click', '.btn-add-cart', function(){
             let url = $(this).data('url');
 
             $.ajax({
@@ -163,6 +164,7 @@
                 })
         });
 
+        //WISHLIST
         $(".btn-add-wishlist").on('click', function(){
             let url = $(this).data('url');
 

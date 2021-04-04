@@ -24,7 +24,14 @@ class CreateQuoteItemsTable extends Migration
             $table->foreign('product_id')->references('id')->on('products')
                 ->onDelete('NO ACTION')->onUpdate('CASCADE');
 
-            $table->string('SKU');
+            $table->string('product_name');
+
+            $table->bigInteger('vendor_id')->unsigned()->index()->nullable();
+            $table->foreign('vendor_id')->references('id')->on('vendors')
+                ->onDelete('NO ACTION')->onUpdate('CASCADE');
+
+            $table->string('vendor_name')->nullable();
+
             $table->tinyInteger('quantity');
 
             $table->timestamps();

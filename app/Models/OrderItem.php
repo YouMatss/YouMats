@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class OrderItem extends Model {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function product() {
         return $this->belongsTo(Product::class);
     }
@@ -19,5 +21,13 @@ class OrderItem extends Model {
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

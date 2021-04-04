@@ -55,15 +55,18 @@ class Team extends Resource
                         ->rules('required', 'min:2'),
 
                     Text::make('Image Title', 'img_title')
+                        ->translatable()
                         ->rules(NULLABLE_STRING_VALIDATION),
 
                     Text::make('Image Alt', 'img_alt')
+                        ->translatable()
                         ->rules(NULLABLE_STRING_VALIDATION)
                 ];
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->single()->attachOnDetails()
-                ->croppable('cropper'),
+                ->croppable('cropper')
+                ->previewUsing('cropper'),
 
             Text::make('Name')
                 ->sortable()

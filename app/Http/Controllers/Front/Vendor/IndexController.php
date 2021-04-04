@@ -4,8 +4,10 @@
 namespace App\Http\Controllers\Front\Vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Vendor;
 use App\Models\VendorBranch;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
@@ -14,7 +16,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class IndexController extends Controller
 {
@@ -46,14 +50,11 @@ class IndexController extends Controller
     }
 
     /**
-     * @param Vendor $vendor
+     * @param $vendor_slug
      * @return Application|Factory|View
      */
-    public function show(Request $request, Vendor $vendor)
-    {
-        if($vendor->name != $request->name)
-            abort(404);
-
+    public function show($vendor_slug) {
+        $vendor = Vendor::where('slug', $vendor_slug)->firstorfail();
         $products = $vendor->products()->paginate(20);
         $branches = $vendor->branches()->paginate(5);
         return view('front.vendor.show', ['vendor' => $vendor, 'products' => $products, 'branches' => $branches]);
@@ -64,14 +65,17 @@ class IndexController extends Controller
      * @param $id
      * @return Application|Factory|View
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request)
     {
-        $vendor = Vendor::findOrFail($id);
-        $products = $vendor->products()->paginate(20);
-        $branches = $vendor->branches()->paginate(5);
-        $order_items = $vendor->order_items;
+        $data['vendor'] = Auth::guard('vendor')->user();
 
-        return view('front.vendor.edit', ['vendor' => $vendor, 'products' => $products, 'branches' => $branches, 'items' => $order_items]);
+        $data['products'] = $data['vendor']->products()->paginate(20);
+        $data['branches'] = $data['vendor']->branches()->paginate(5);
+        $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
+        $data['items'] = $data['vendor']->order_items;
+        $data['shipping_prices'] = $data['vendor']->shipping_prices;
+
+        return view('front.vendor.edit')->with($data);
     }
 
     /**
@@ -79,7 +83,7 @@ class IndexController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'name_en' => REQUIRED_TEXT_VALIDATION,
@@ -87,22 +91,25 @@ class IndexController extends Controller
             'email' => REQUIRED_EMAIL_VALIDATION,
             'logo' => NULLABLE_IMAGE_VALIDATION,
             'cover' => NULLABLE_IMAGE_VALIDATION,
-            'phone' => NULLABLE_STRING_VALIDATION,
+            'phone' => REQUIRED_STRING_VALIDATION,
             'phone2' => NULLABLE_STRING_VALIDATION,
             'whatsapp_phone' => NULLABLE_STRING_VALIDATION,
-            'address' => NULLABLE_STRING_VALIDATION,
+            'address' => REQUIRED_STRING_VALIDATION,
             'address2' => NULLABLE_STRING_VALIDATION,
-            'location' => NULLABLE_TEXT_VALIDATION,
-            'facebook_url' => NULLABLE_STRING_VALIDATION,
-            'twitter_url' => NULLABLE_STRING_VALIDATION,
-            'youtube_url' => NULLABLE_STRING_VALIDATION,
-            'instagram_url' => NULLABLE_STRING_VALIDATION,
-            'pinterest_url' => NULLABLE_STRING_VALIDATION,
-            'website_url' => NULLABLE_STRING_VALIDATION,
-            'password' => NULLABLE_PASSWORD_VALIDATION
+            'latitude' => REQUIRED_STRING_VALIDATION,
+            'longitude' => REQUIRED_STRING_VALIDATION,
+            'facebook_url' => NULLABLE_URL_VALIDATION,
+            'twitter_url' => NULLABLE_URL_VALIDATION,
+            'youtube_url' => NULLABLE_URL_VALIDATION,
+            'instagram_url' => NULLABLE_URL_VALIDATION,
+            'pinterest_url' => NULLABLE_URL_VALIDATION,
+            'website_url' => NULLABLE_URL_VALIDATION,
+            'password' => NULLABLE_PASSWORD_VALIDATION,
+            'licenses' => ARRAY_VALIDATION,
+            'licenses.*' => REQUIRED_IMAGE_VALIDATION
         ]);
 
-        $vendor = Vendor::findOrFail($id);
+        $vendor = Vendor::findOrFail($request->id);
 
         if(isset($request->logo)) {
             //Delete previously created logos
@@ -128,7 +135,13 @@ class IndexController extends Controller
 
         $vendor->update($request->except('name_en', 'name_ar', '_token', 'password'));
 
-        return back()->with(['message' => __('Profile has been updated successfully')]);
+        // Add licenses to the vendor
+        if(isset($request->licenses))
+            foreach($request->licenses as $license) {
+                $vendor->addMedia($license)->toMediaCollection(VENDOR_PATH);
+            }
+
+        return back()->with(['custom_success' => __('Profile has been updated successfully')]);
 
     }
 
@@ -137,25 +150,88 @@ class IndexController extends Controller
      * @param Vendor $vendor
      * @return Application|ResponseFactory|JsonResponse|Response
      */
-    public function addBranch(Request $request, Vendor $vendor)
+    public function addBranch(Request $request)
     {
+        $vendor = Auth::guard('vendor')->user();
+
         if(!$vendor->active)
-            return response(['status' => false, 'message' => __('Your account is not activated')]);
+            return response(['status' => false, 'custom_warning' => __('Your account is not activated')]);
 
         $data = $request->validate([
             'name' => REQUIRED_STRING_VALIDATION,
+            'city_id' => 'required|integer|exists:cities,id',
             'phone_number' => REQUIRED_STRING_VALIDATION,
             'fax' => NULLABLE_STRING_VALIDATION,
-            'website' => NULLABLE_STRING_VALIDATION,
+            'website' => REQUIRED_URL_VALIDATION,
             'address' => REQUIRED_STRING_VALIDATION,
             'latitude' => REQUIRED_STRING_VALIDATION,
             'longitude' => REQUIRED_STRING_VALIDATION
         ]);
 
         $data['vendor_id'] = $vendor->id;
+        if(isset($data['phone_number']))
+            $data['phone_number'] = '+966' . $data['phone_number'];
 
         VendorBranch::create($data);
 
-        return response()->json(['stats' => true, 'message' => __('Branch has been added successfully')]);
+        return response()->json(['status' => true, 'message' => __('Branch has been added successfully')]);
+    }
+
+    /**
+     * @param VendorBranch $branch
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function deleteBranch(VendorBranch $branch): RedirectResponse
+    {
+        $branch->delete();
+
+        return back()->with(['custom_success' => __('Branch has been deleted successfully')]);
+    }
+
+    public function deleteLicense(Vendor $vendor, Media $media)
+    {
+        if(!Auth::guard('vendor')->user()->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
+
+        if(count($vendor->getMedia(VENDOR_PATH)) === 1)
+            return response()->json(['status' => false, 'message' => __('You cannot delete the only license of this vendor.')]);
+
+        $media::where('model_id', $vendor->id)
+            ->where('model_type', 'App\Models\Vendor')
+            ->where('id', $media->id)
+            ->delete();
+
+        return response()->json(['status' => true, 'message' => __('Image has been removed.')]);
+    }
+
+    public function updateShippingPrices(Request $request) {
+        $data = $this->validate($request, [
+            'id' => 'required|integer|exists:vendors,id',
+            'cities' => ARRAY_VALIDATION,
+            'cities.*' => 'required|integer|exists:cities,id',
+            'price' => ARRAY_VALIDATION,
+            'price.*' => REQUIRED_INTEGER_VALIDATION,
+            'time' => ARRAY_VALIDATION,
+            'time.*' => REQUIRED_INTEGER_VALIDATION,
+            'format' => ARRAY_VALIDATION,
+            'format.*' => 'required|string|In:hour,day',
+        ]);
+
+        $vendor = Vendor::findorfail($data['id']);
+
+        $shippingPrices = [];
+
+        for ($i=0;$i<count($data['cities']);$i++) {
+            $shippingPrices[$i]['cities'] = $data['cities'][$i];
+            $shippingPrices[$i]['price'] = $data['price'][$i];
+            $shippingPrices[$i]['time'] = $data['time'][$i];
+            $shippingPrices[$i]['format'] = $data['format'][$i];
+        }
+
+        $vendor->update([
+            'shipping_prices' => $shippingPrices
+        ]);
+        return back()->with(['custom_success' => __('Shipping Prices has been updated successfully')]);
     }
 }

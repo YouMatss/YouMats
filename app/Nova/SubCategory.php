@@ -5,15 +5,12 @@ namespace App\Nova;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Waynestate\Nova\CKEditor;
@@ -58,15 +55,18 @@ class SubCategory extends Resource
                         ->rules('required', 'min:2'),
 
                     Text::make('Image Title', 'img_title')
+                        ->translatable()
                         ->rules(NULLABLE_STRING_VALIDATION),
 
                     Text::make('Image Alt', 'img_alt')
-                        ->rules(NULLABLE_STRING_VALIDAbTION)
+                        ->translatable()
+                        ->rules(NULLABLE_STRING_VALIDATION)
                 ];
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+                ->croppable('cropper')
+                ->previewUsing('cropper'),
 
             Toggle::make('Show In Footer')
                 ->falseColor('#bacad6')
@@ -74,29 +74,37 @@ class SubCategory extends Resource
 
             (new Panel('SEO', [
                 Slug::make('Slug')
+                    ->hideFromIndex()
                     ->rules(REQUIRED_STRING_VALIDATION)
                     ->creationRules('unique:sub_categories,slug')
-                    ->updateRules('unique:sub_categories,slug,{{resourceId}}'),
+                    ->updateRules('unique:sub_categories,slug,{{resourceId}}')
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Title', 'meta_title')
                     ->hideFromIndex()
                     ->rules(NULLABLE_STRING_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Keywords', 'meta_keywords')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Textarea::make('Meta Description', 'meta_desc')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
+                Textarea::make('Schema')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
             ])),
 
             HasMany::make('Products'),
-
         ];
     }
 

@@ -37,15 +37,18 @@ class Language extends Resource
                         ->rules('required', 'min:2'),
 
                     Text::make('Image Title', 'img_title')
+                        ->translatable()
                         ->rules(NULLABLE_STRING_VALIDATION),
 
                     Text::make('Image Alt', 'img_alt')
+                        ->translatable()
                         ->rules(NULLABLE_STRING_VALIDATION)
                 ];
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+                ->croppable('cropper')
+                ->previewUsing('cropper'),
 
             Slug::make('Slug')
                 ->sortable()

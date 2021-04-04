@@ -208,7 +208,7 @@
                         }]'>
             @foreach($featuredVendors as $f_vendor)
             <div class="js-slide img_vend">
-                <a href="{{ route('vendor.show', ['vendor' => $f_vendor->id, 'name' => $f_vendor->name]) }}" class="link-hover__brand">
+                <a href="{{ route('vendor.show', [$f_vendor->slug]) }}" class="link-hover__brand">
                     <img class="img-fluid m-auto max-height-50" style="width: 70px" src="{{ $f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" alt="{{$f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                 </a>
             </div>
@@ -226,7 +226,9 @@
                 @foreach($featured_categories as $f_category)
                 <div class="box">
                     <a href="{{route('front.category', [$f_category->slug])}}" class="st_block">
-                        <img src="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['url']}}" alt="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['alt']}}" title="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['title']}}" />
+                        <img src="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['url']}}"
+                             alt="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['alt']}}"
+                             title="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['title']}}" />
                         <div class="content d-flex">
                             <h3 class="title">{{$f_category->name}}</h3>
                             <span class="text-blue">
@@ -300,11 +302,7 @@
                                                 <div class="prodcut-price">
                                                     <div class="text-gray-100">{{getCurrency('code')}} {{$bs_product->price}}</div>
                                                 </div>
-                                                @if(!Auth::guard('vendor')->check())
-                                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                                        <button data-url="{{ route('cart.add', ['product' => $bs_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
-                                                    </div>
-                                                @endif
+                                                {!! cartOrChat($bs_product) !!}
                                             </div>
                                         </div>
                                         @if(!Auth::guard('vendor')->check())
@@ -370,11 +368,7 @@
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$i_product->price}}</div>
                                             </div>
-                                            @if(!Auth::guard('vendor')->check())
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <button data-url="{{ route('cart.add', ['product' => $i_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
-                                                </div>
-                                            @endif
+                                            {!! cartOrChat($i_product) !!}
                                         </div>
                                     </div>
                                     <div class="product-item__footer">
@@ -461,11 +455,7 @@
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">{{getCurrency('code')}} {{$ii_product->price}}</div>
                                         </div>
-                                        @if(!Auth::guard('vendor')->check())
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <button data-url="{{ route('cart.add', ['product' => $ii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
-                                            </div>
-                                        @endif
+                                        {!! cartOrChat($ii_product) !!}
                                     </div>
                                 </div>
                                 @if(!Auth::guard('vendor')->check())
@@ -525,11 +515,7 @@
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$iii_product->price}}</div>
                                             </div>
-                                                @if(!Auth::guard('vendor')->check())
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <button data-url="{{ route('cart.add', ['product' => $iii_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
-                                                </div>
-                                            @endif
+                                            {!! cartOrChat($iii_product) !!}
                                         </div>
                                     </div>
                                     @if(!Auth::guard('vendor')->check())
@@ -589,11 +575,7 @@
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">{{getCurrency('code')}} {{$iv_product->price}}</div>
                                             </div>
-                                            @if(!Auth::guard('vendor')->check())
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <button data-url="{{ route('cart.add', ['product' => $iv_product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
-                                                </div>
-                                            @endif
+                                            {!! cartOrChat($iv_product) !!}
                                         </div>
                                     </div>
                                     @if(!Auth::guard('vendor')->check())
@@ -613,6 +595,6 @@
     </div>
     @endif
 
-
     @include('front.layouts.partials.team')
+    @include('front.layouts.partials.welcome-popup')
 @endsection

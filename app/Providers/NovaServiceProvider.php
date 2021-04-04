@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Anaseqal\NovaImport\NovaImport;
 use App\Nova\Admin;
-use App\Nova\Branch;
+use App\Nova\Attribute;
 use App\Nova\Category;
 use App\Nova\City;
 use App\Nova\Contact;
@@ -37,10 +37,13 @@ use App\Nova\SubCategory;
 use App\Nova\Subscriber;
 use App\Nova\Tag;
 use App\Nova\Team;
+use App\Nova\Unit;
 use App\Nova\User;
 use App\Nova\Vendor;
+use App\Observers\CategoryObserver;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
+use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 use DigitalCreative\CollapsibleResourceManager\Resources\InternalLink;
@@ -60,6 +63,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
+//        Nova::serving(function () {
+//            \App\Models\Category::observe(CategoryObserver::class);
+//        });
     }
 
     protected function routes()
@@ -115,6 +121,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
+            NovaBreadcrumbs::make(),
             (NovaPermissionTool::make()
                 ->rolePolicy(RolePolicy::class)
                 ->permissionPolicy(PermissionPolicy::class)
@@ -124,6 +131,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new CollapsibleResourceManager([
                 'disable_default_resource_manager' => true,
                 'remember_menu_state' => true,
+
                 'navigation' => [
                     TopLevelResource::make([
                         'label' => 'Orders',
@@ -143,6 +151,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             SubCategory::class,
                             Product::class,
                             Tag::class,
+                            Attribute::class,
                         ]
                     ]),
                     TopLevelResource::make([
@@ -150,8 +159,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'expanded' => false,
                         'resources' => [
                             Vendor::class,
-                            Membership::class,
-                            Branch::class
+                            Membership::class
                         ]
                     ]),
                     TopLevelResource::make([
@@ -185,6 +193,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                     ]),
                                     Page::class,
                                     NovaResource::make(FAQ::class)->label('FAQs'),
+                                    Unit::class,
                                     NovaResource::make(ActionResource::class)->label('Activity Logs')
                                     ->canSee(function ($request) {
                                         return $request->user()->isSuperAdmin();

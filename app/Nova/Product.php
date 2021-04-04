@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Slug;
@@ -18,8 +17,9 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Nikaia\Rating\Rating;
+use OptimistDigital\MultiselectField\Multiselect;
+use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
-use Superlatif\NovaTagInput\Tags;
 use Waynestate\Nova\CKEditor;
 
 class Product extends Resource
@@ -31,7 +31,7 @@ class Product extends Resource
     public static $title = 'name';
 
     public static $search = [
-        'id', 'name', 'desc', 'short_desc'
+        'id', 'name', 'desc', 'short_desc', 'slug'
     ];
 
     public function fields(Request $request)
@@ -49,7 +49,6 @@ class Product extends Resource
                 ->searchable(),
 
             BelongsToManyField::make('Tags')
-                ->optionsLabel('name.en')
                 ->hideFromIndex(),
 
             Text::make('Name')
@@ -74,23 +73,29 @@ class Product extends Resource
             ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:product,service'])),
 
             NovaDependencyContainer::make([
+                Currency::make('Cost')
+                    ->rules(REQUIRED_NUMERIC_VALIDATION)
+                    ->min(0)
+                    ->step(0.05),
+
                 Currency::make('Price')
                     ->rules(REQUIRED_NUMERIC_VALIDATION)
-                    ->min(1)
+                    ->min(0)
                     ->step(0.05),
 
                 Number::make(__('Stock'), 'stock')
                     ->min(0)
                     ->rules(REQUIRED_INTEGER_VALIDATION),
-
-                Text::make('Unit')
-                    ->translatable()
-                    ->rules(REQUIRED_STRING_VALIDATION),
             ])->dependsOn('type', 'product'),
+
+            BelongsTo::make('Unit')
+                ->hideFromIndex()
+                ->nullable(),
 
             Text::make('SKU', 'SKU')
                 ->hideFromIndex()
-                ->rules(REQUIRED_STRING_VALIDATION)
+                ->rules(NULLABLE_STRING_VALIDATION)
+                ->default(\Illuminate\Support\Str::sku('yt', '-'))
                 ->creationRules('unique:products,SKU')
                 ->updateRules('unique:products,SKU,{{resourceId}}'),
 
@@ -120,9 +125,11 @@ class Product extends Resource
                             ->rules('required', 'min:2'),
 
                         Text::make('Image Title', 'img_title')
+                            ->translatable()
                             ->rules(NULLABLE_STRING_VALIDATION),
 
                         Text::make('Image Alt', 'img_alt')
+                            ->translatable()
                             ->rules(NULLABLE_STRING_VALIDATION)
                     ];
                 })->rules('array', 'required')
@@ -132,6 +139,42 @@ class Product extends Resource
                     ->autouploading()->sortable()->attachOnDetails()
                     ->hideFromIndex()
                     ->croppable('cropper')
+                    ->previewUsing('cropper'),
+            ])),
+
+            (new Panel('Shipping Prices', [
+                SimpleRepeatable::make('Shipping Prices', 'shipping_prices', [
+                    Select::make('Cities')->options(function () {
+                        if(isset($this->vendor->cities))
+                            return $this->vendor->cities->pluck('name', 'id');
+                        else
+                            return '';
+                    })->rules(['required', 'integer']),
+                    Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+                    Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
+                    Select::make('Format')->options([
+                        'hour' => 'Hour',
+                        'day' => 'Day'
+                    ])->rules(['required','in:hour,day']),
+                ])->hideWhenCreating()
+            ])),
+
+            (new Panel('Attributes (For Product Filtration)', [
+                Multiselect::make('Attributes')
+                    ->options(function () {
+                        $collection = [];
+                        $data = \App\Models\Attribute::with('values')->where('subCategory_id', $this->subCategory_id)->get();
+                        foreach ($data as $row) {
+                            foreach ($row->values as $value) {
+                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key];
+                            }
+                        }
+                        return $collection;
+                    })
+                    ->placeholder('Choose Attributes Values')
+                    ->saveAsJSON()
+                    ->hideFromIndex()
+                    ->hideWhenCreating(),
             ])),
 
             (new Panel('SEO', [
@@ -139,26 +182,33 @@ class Product extends Resource
                     ->hideFromIndex()
                     ->rules(REQUIRED_STRING_VALIDATION)
                     ->creationRules('unique:products,slug')
-                    ->updateRules('unique:products,slug,{{resourceId}}'),
+                    ->updateRules('unique:products,slug,{{resourceId}}')
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Title', 'meta_title')
                     ->hideFromIndex()
                     ->rules(NULLABLE_STRING_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Text::make('Meta Keywords', 'meta_keywords')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
                 Textarea::make('Meta Description', 'meta_desc')
                     ->hideFromIndex()
                     ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable(),
+                    ->translatable()
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
 
+                Textarea::make('Schema')
+                    ->hideFromIndex()
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->canSee(fn() => auth('admin')->user()->can('seo')),
             ])),
 
-//            BelongsToMany::make('Tags'),
 
         ];
     }

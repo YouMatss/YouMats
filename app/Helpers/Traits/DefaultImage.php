@@ -1,15 +1,17 @@
 <?php
 
-
 namespace App\Helpers\Traits;
 
-trait DefaultImage
-{
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+trait DefaultImage {
+
     protected static string $defaultImage = '/assets/img/default_logo.jpg';
     protected static string $defaultCover = '/assets/img/default_cover.jpg';
 
-    public function getFirstMediaUrlOrDefault(string $collectionName = '', string $conversionName = '')
+    public function getFirstMediaUrlOrDefault(string $collectionName = '', string $conversionName = 'cropper')
     {
+        $locale = LaravelLocalization::getCurrentLocale();
         $url = $this->getFirstMediaUrl($collectionName, $conversionName);
         $image = '';
 
@@ -18,10 +20,20 @@ trait DefaultImage
         else
             $image = $this::$defaultImage;
 
+        $collection = $this->getFirstMedia($collectionName);
+
+        if($collection) {
+            $title = json_decode($collection->img_title, true)[$locale] ?? $this->name;
+            $alt = json_decode($collection->img_alt, true)[$locale] ?? $this->name;
+        } else {
+            $title = $this->name;
+            $alt = $this->name;
+        }
+
         return [
             'url' => strlen($url) > 1 ? $url : $image,
-            'title' => $this->getFirstMedia($collectionName)->img_title ?? $this->name, //Default image
-            'alt' => $this->getFirstMedia($collectionName)->img_alt ?? $this->name // Default alt
+            'title' => $title,
+            'alt' => $alt
         ];
     }
 }

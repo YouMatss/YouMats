@@ -78,4 +78,11 @@ class MiscController extends Controller
             'message' => $message
         ]);
     }
+
+    public function introduce($type) {
+        if($type == 'individual' || $type == 'company')
+            Session::put('userType', $type);
+
+        return redirect()->route('home');
+    }
 }

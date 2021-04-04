@@ -47,18 +47,17 @@ class Coupon extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             Text::make('Promotion code', 'code')
-                ->rules('unique:coupons', 'required'),
-
-            Select::make('Operator')
-                ->options([
-                    '-' => 'Amount minus the total cost',
-                    '%' => 'Percentage minus the total cost'
-                ])
-                ->displayUsingLabels()
-                ->rules('required'),
+                ->rules('unique:coupons,code,{{resourceId}}', 'required', 'max:50'),
 
             Number::make('Value')
                 ->rules('required'),
+
+            Number::make('Start price', 'price')
+                ->rules('required'),
+
+            Toggle::make('Single Use', 'singleUse')
+                ->trueValue(1)
+                ->falseValue(0),
 
             Toggle::make('Status')
                 ->trueValue(1)

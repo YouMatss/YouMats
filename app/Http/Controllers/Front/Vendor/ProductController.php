@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Front\Vendor;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Models\Unit;
 use App\Models\Vendor;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -29,15 +31,6 @@ class ProductController extends Controller
     }
 
     /**
-     * @param $vendor
-     */
-    protected function checkPermissions($vendor)
-    {
-        if(!$vendor->active)
-            return back()->with(['custom_warning' => __('You do not have permissions to access this page')]);
-    }
-
-    /**
      * @param Request $request
      * @return array
      */
@@ -50,7 +43,7 @@ class ProductController extends Controller
             'type' => 'required|in:product,service',
             'price' => 'required_if:type,product|numeric',
             'stock' => 'required_if:type,product|numeric',
-            'unit' => 'required_if:type,product|string|max:191',
+            'unit_id' => 'integer|exists:units,id',
             'rate' => REQUIRED_NUMERIC_VALIDATION,
             'short_desc_en' => NULLABLE_TEXT_VALIDATION,
             'short_desc_ar' => NULLABLE_TEXT_VALIDATION,
@@ -62,8 +55,6 @@ class ProductController extends Controller
     /**
      * @param Request $request
      * @param Product $product
-     * @throws FileDoesNotExist
-     * @throws FileIsTooBig
      */
     protected function setProduct(Request $request, Product $product)
     {
@@ -72,6 +63,7 @@ class ProductController extends Controller
         $product->slug = $slug;
         $product->type = $request->type;
         $product->rate = $request->rate;
+        $product->unit_id = $request->unit_id;
 
         //Generate translations
         $product->setTranslation('name', 'en', $request->name_en);
@@ -90,9 +82,9 @@ class ProductController extends Controller
 
         //If it's a product let's set the price/stock/unit!
         if($request->type == 'product') {
+            $product->cost = $request->cost;
             $product->price = $request->price;
             $product->stock = $request->stock;
-            $product->unit = $request->unit;
         }
     }
 
@@ -100,15 +92,20 @@ class ProductController extends Controller
      * @param Vendor $vendor
      * @return Application|Factory|View|RedirectResponse
      */
-    public function create(Vendor $vendor)
+    public function create()
     {
-        $this->checkPermissions($vendor);
+        $vendor = Auth::guard('vendor')->user();
+
+        if(!$vendor->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
 
         $subCategories = SubCategory::all();
+        $units = Unit::orderby('sort')->get();
 
         return view('front.vendor.product.create', [
             'vendor' => $vendor,
-            'subCategories' => $subCategories
+            'subCategories' => $subCategories,
+            'units' => $units
         ]);
     }
 
@@ -119,9 +116,12 @@ class ProductController extends Controller
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function store(Request $request, Vendor $vendor): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $this->checkPermissions($vendor);
+        $vendor = Auth::guard('vendor')->user();
+
+        if(!$vendor->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
 
         $this->validateRequest($request);
 
@@ -139,6 +139,8 @@ class ProductController extends Controller
         //Generate SKU
         $product->sku = Str::sku($request->name_en, '-');
         $product->vendor_id = $vendor->id;
+        $product->best_seller = 0;
+        $product->active = 0;
 
         $this->setProduct($request, $product);
 
@@ -150,9 +152,7 @@ class ProductController extends Controller
         //Save the product
         $product->save();
 
-        return redirect()->route('vendor.edit', [
-            'vendor' => $vendor
-        ])
+        return redirect()->route('vendor.edit')
         ->with([
             'custom_success' => __('Product has been added.')
         ]);
@@ -163,16 +163,23 @@ class ProductController extends Controller
      * @param Product $product
      * @return Application|Factory|View
      */
-    public function edit(Vendor $vendor, Product $product)
+    public function edit(Product $product)
     {
-        $this->checkPermissions($vendor);
+        $vendor = Auth::guard('vendor')->user();
+
+        if(!$vendor->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
+
+        if($product->vendor_id !== $vendor->id)
+            return back()->with(['custom_warning' => __('You do not have permissions to edit this product.')]);
 
         $subCategories = SubCategory::all();
+        $units = Unit::orderBy('sort')->get();
 
         return view('front.vendor.product.edit', [
-            'vendor' => $vendor,
             'product' => $product,
-            'subCategories' => $subCategories
+            'subCategories' => $subCategories,
+            'units' => $units
         ]);
     }
 
@@ -182,9 +189,15 @@ class ProductController extends Controller
      * @param Product $product
      * @return RedirectResponse
      */
-    public function update(Request $request, Vendor $vendor, Product $product): RedirectResponse
+    public function update(Request $request, Product $product): RedirectResponse
     {
-        $this->checkPermissions($vendor);
+        $vendor = Auth::guard('vendor')->user();
+
+        if(!$vendor->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
+
+        if($product->vendor_id !== $vendor->id)
+            return back()->with(['custom_warning' => __('You do not have permissions to edit this product.')]);
 
         $this->validateRequest($request);
 
@@ -218,12 +231,13 @@ class ProductController extends Controller
     /**
      * @param Product $product
      * @param Media $media
-     * @return JsonResponse
-     * @throws \Exception
+     * @return JsonResponse|RedirectResponse
+     * @throws Exception
      */
-    public function deleteImage(Product $product, Media $media): JsonResponse
+    public function deleteImage(Product $product, Media $media)
     {
-        $this->checkPermissions(Auth::guard('vendor')->user());
+        if(!Auth::guard('vendor')->user()->active)
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
 
         if(count($product->getMedia(PRODUCT_PATH)) === 1)
             return response()->json(['status' => false, 'message' => __('You cannot delete the only image of this product.')]);

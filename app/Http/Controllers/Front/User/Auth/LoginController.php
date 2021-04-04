@@ -26,6 +26,9 @@ class LoginController extends Controller
 
     public function __construct() {
         Parent::__construct();
+
+        //Redirect to the previous page.
+        $this->redirectTo = url()->previous();
         $this->middleware('guest')->except('logout');
     }
 

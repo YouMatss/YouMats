@@ -73,8 +73,8 @@
                                 <span class="text-secondary font-size-13">({{$product->views}} customer views)</span>
                             </a>
                         </div>
-                        <a href="{{ route('vendor.show', ['vendor' => $product->vendor->id, 'name' => $product->vendor->name]) }}" class="d-inline-block max-width-150 ml-n2 mb-2">
-                            <img class="img-fluid" src="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$product->vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
+                        <a href="{{ route('home') }}" class="d-inline-block max-width-150 ml-n2 mb-2">
+                            <img class="img-fluid" src="{{front_url()}}/assets/img/logo.png">
                         </a>
                         <div class="mb-2">
                             <ul class="font-size-14 pl-3 ml-1 text-gray-9">
@@ -103,9 +103,11 @@
 
                             <div class="mb-3">
                                 <div class="left-page-single">
-                                    <a href="{{route('vendor.show', [$product->vendor->id, $product->vendor->name])}}"> <i class="fa fa-user"></i> {{$product->vendor->name}} </a>
-                                    <a href="tel:{{$product->vendor->phone}}" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> {{$product->vendor->phone}} </a>
-                                    <a href="mailto:{{$product->vendor->email}}"> <i class="fa fa-envelope"></i> {{$product->vendor->email}} </a>
+                                    @if(is_company())
+                                    <a href="{{ route('home') }}"> <i class="fa fa-user"></i> YouMats </a>
+                                    <a href="tel:+966502111754" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> (+966) 502111754 </a>
+                                    <a href="mailto:info@youmats.com"> <i class="fa fa-envelope"></i> info@youmats.com </a>
+                                    @endif
                                     <h3> How to Pay</h3>
                                     <p>Youmats Support pay on Delivery for That Product</p>
                                 </div>
@@ -113,9 +115,7 @@
 
 
                             @if(!Auth::guard('vendor')->check())
-                                <div class="mb-2 pb-0dot5">
-                                    <button data-url="{{ route('cart.add', ['product' => $product]) }}" class="btn-add-cart btn-block btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
-                                </div>
+                                {!! cartOrChat($product) !!}
                                 <div class="flex-content-center flex-wrap">
                                     <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                 </div>
@@ -239,11 +239,7 @@
                                                 <div class="prodcut-price">
                                                     <div class="text-gray-100">{{getCurrency('code')}} {{$r_product->price}}</div>
                                                 </div>
-                                                @if(!Auth::guard('vendor')->check())
-                                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                                        <button data-url="{{ route('cart.add', ['product' => $product]) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
-                                                    </div>
-                                                @endif
+                                                {!! cartOrChat($product) !!}
                                             </div>
                                         </div>
                                         @if(!Auth::guard('vendor')->check())
