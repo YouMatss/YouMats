@@ -54,10 +54,8 @@
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
-      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
       <path value="$PROJECT_DIR$/vendor/league/commonmark" />
       <path value="$PROJECT_DIR$/vendor/league/flysystem" />
-      <path value="$PROJECT_DIR$/vendor/facade/ignition" />
       <path value="$PROJECT_DIR$/vendor/facade/ignition-contracts" />
       <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
       <path value="$PROJECT_DIR$/vendor/scrivo/highlight.php" />
@@ -156,7 +154,6 @@
       <path value="$PROJECT_DIR$/vendor/davidpiesse/nova-toggle" />
       <path value="$PROJECT_DIR$/vendor/benjacho/belongs-to-many-field" />
       <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
-      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
       <path value="$PROJECT_DIR$/vendor/richardkeep/nova-timenow" />
       <path value="$PROJECT_DIR$/vendor/ampeco/nova-date-range-filter" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-backup" />
@@ -182,14 +179,19 @@
       <path value="$PROJECT_DIR$/vendor/binary-cats/laravel-sku" />
       <path value="$PROJECT_DIR$/vendor/dyrynda/laravel-cascade-soft-deletes" />
       <path value="$PROJECT_DIR$/vendor/chris-ware/nova-breadcrumbs" />
-      <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-simple-repeatable" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-query-builder" />
       <path value="$PROJECT_DIR$/vendor/kirschbaum-development/nova-inline-relationship" />
       <path value="$PROJECT_DIR$/vendor/yassi/nova-nested-form" />
       <path value="$PROJECT_DIR$/vendor/genealabs/nova-map-marker-field" />
       <path value="$PROJECT_DIR$/vendor/symfony/thanks" />
       <path value="$PROJECT_DIR$/vendor/acme/Attribute" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
       <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-multiselect-field" />
+      <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-simple-repeatable" />
+      <path value="$PROJECT_DIR$/vendor/predis/predis" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
