@@ -1,6 +1,6 @@
 <div class="modal fade" id="myModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog" role="document" style="max-width: 600px">
+        <div class="modal-content st_model_new">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Welcome to YouMats</h5>
             </div>

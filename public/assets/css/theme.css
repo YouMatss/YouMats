@@ -33793,7 +33793,9 @@ blockquote:not(.blockquote) p {
       align-items: center;
   -ms-flex-pack: center;
       justify-content: center;
-  border-radius: 6.1875rem;
+  border-radius: 6.1875rem !important;
+  margin-top: 0 !important;
+  box-shadow: 0 0 0 !important;
 }
 .btn-remove-wishlist {
     width: 2.188rem;
@@ -37904,3 +37906,7 @@ section {
 
 }
 
+
+.block_img_cat a img{
+  width: 100%;
+}

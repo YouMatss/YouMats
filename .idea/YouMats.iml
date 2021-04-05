@@ -206,6 +206,7 @@
           <root url="file://$MODULE_DIR$/vendor/asm89/stack-cors" />
           <root url="file://$MODULE_DIR$/vendor/barryvdh/laravel-debugbar" />
           <root url="file://$MODULE_DIR$/vendor/benjacho/belongs-to-many-field" />
+          <root url="file://$MODULE_DIR$/vendor/binary-cats/laravel-sku" />
           <root url="file://$MODULE_DIR$/vendor/brick/math" />
           <root url="file://$MODULE_DIR$/vendor/brick/money" />
           <root url="file://$MODULE_DIR$/vendor/cakephp/chronos" />
@@ -224,6 +225,7 @@
           <root url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
           <root url="file://$MODULE_DIR$/vendor/dragonmantank/cron-expression" />
+          <root url="file://$MODULE_DIR$/vendor/dyrynda/laravel-cascade-soft-deletes" />
           <root url="file://$MODULE_DIR$/vendor/egulias/email-validator" />
           <root url="file://$MODULE_DIR$/vendor/epartment/nova-dependency-container" />
           <root url="file://$MODULE_DIR$/vendor/ezyang/htmlpurifier" />
@@ -239,6 +241,7 @@
           <root url="file://$MODULE_DIR$/vendor/guzzlehttp/promises" />
           <root url="file://$MODULE_DIR$/vendor/guzzlehttp/psr7" />
           <root url="file://$MODULE_DIR$/vendor/hamcrest/hamcrest-php" />
+          <root url="file://$MODULE_DIR$/vendor/hardevine/shoppingcart" />
           <root url="file://$MODULE_DIR$/vendor/inspheric/nova-indicator-field" />
           <root url="file://$MODULE_DIR$/vendor/intervention/image" />
           <root url="file://$MODULE_DIR$/vendor/kabbouchi/laravel-ward" />
@@ -370,8 +373,6 @@
           <root url="file://$MODULE_DIR$/vendor/vyuldashev/nova-permission" />
           <root url="file://$MODULE_DIR$/vendor/waynestate/nova-ckeditor4-field" />
           <root url="file://$MODULE_DIR$/vendor/webmozart/assert" />
-          <root url="file://$MODULE_DIR$/vendor/whitecube/nova-flexible-content" />
-          <root url="file://$MODULE_DIR$/vendor/whitecube/nova-google-maps" />
         </CLASSES>
         <SOURCES>
           <root url="file://$MODULE_DIR$/vendor/ampeco/nova-date-range-filter" />
@@ -379,6 +380,7 @@
           <root url="file://$MODULE_DIR$/vendor/asm89/stack-cors" />
           <root url="file://$MODULE_DIR$/vendor/barryvdh/laravel-debugbar" />
           <root url="file://$MODULE_DIR$/vendor/benjacho/belongs-to-many-field" />
+          <root url="file://$MODULE_DIR$/vendor/binary-cats/laravel-sku" />
           <root url="file://$MODULE_DIR$/vendor/brick/math" />
           <root url="file://$MODULE_DIR$/vendor/brick/money" />
           <root url="file://$MODULE_DIR$/vendor/cakephp/chronos" />
@@ -397,6 +399,7 @@
           <root url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
           <root url="file://$MODULE_DIR$/vendor/dragonmantank/cron-expression" />
+          <root url="file://$MODULE_DIR$/vendor/dyrynda/laravel-cascade-soft-deletes" />
           <root url="file://$MODULE_DIR$/vendor/egulias/email-validator" />
           <root url="file://$MODULE_DIR$/vendor/epartment/nova-dependency-container" />
           <root url="file://$MODULE_DIR$/vendor/ezyang/htmlpurifier" />
@@ -412,6 +415,7 @@
           <root url="file://$MODULE_DIR$/vendor/guzzlehttp/promises" />
           <root url="file://$MODULE_DIR$/vendor/guzzlehttp/psr7" />
           <root url="file://$MODULE_DIR$/vendor/hamcrest/hamcrest-php" />
+          <root url="file://$MODULE_DIR$/vendor/hardevine/shoppingcart" />
           <root url="file://$MODULE_DIR$/vendor/inspheric/nova-indicator-field" />
           <root url="file://$MODULE_DIR$/vendor/intervention/image" />
           <root url="file://$MODULE_DIR$/vendor/kabbouchi/laravel-ward" />
@@ -543,8 +547,6 @@
           <root url="file://$MODULE_DIR$/vendor/vyuldashev/nova-permission" />
           <root url="file://$MODULE_DIR$/vendor/waynestate/nova-ckeditor4-field" />
           <root url="file://$MODULE_DIR$/vendor/webmozart/assert" />
-          <root url="file://$MODULE_DIR$/vendor/whitecube/nova-flexible-content" />
-          <root url="file://$MODULE_DIR$/vendor/whitecube/nova-google-maps" />
         </SOURCES>
       </library>
     </orderEntry>
