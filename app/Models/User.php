@@ -51,4 +51,12 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
     {
         return $this->hasMany(Quote::class)->with('items');
     }
+
+    public function vendor_conversations() {
+        return ($this->belongsToMany(Vendor::class, 'user_messages',
+            'sender_id','receiver_id', 'id', 'id')
+            ->get()->collect())->merge($this->belongsToMany(Vendor::class, 'user_messages',
+            'receiver_id','sender_id', 'id', 'id')
+            ->get()->collect())->unique();
+    }
 }

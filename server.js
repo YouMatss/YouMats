@@ -17,12 +17,19 @@ http.listen(8005, () => {
 
 redis.subscribe('private-channel', function () {
     console.log('Subscribed to Private channel');
-})
+});
 
-redis.on('message', function (channel, message) {
-    console.log(channel);
+redis.on('message', function(channel, message) {
+    message = JSON.parse(message);
     console.log(message);
-})
+    if (channel == 'private-channel') {
+        let data = message.data.data;
+        let receiver_id = data.receiver_id;
+        let event = message.event;
+
+        io.to(`${users[receiver_id]}`).emit(channel + ':' + message.event, data);
+    }
+});
 
 io.on('connection', function (socket) {
     socket.on("user_connected", function (user_id) {

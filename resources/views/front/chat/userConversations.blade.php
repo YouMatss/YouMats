@@ -8,14 +8,14 @@
                         <input type="text" placeholder="search">
                     </header>
                     <ul>
-                        @if(count($users))
-                        @foreach($users as $user)
-                        <li @if($user->id == $vendor->id) class="active" @endif>
-                            <a href="{{route('chat.user.conversations', [$user->id])}}">
-                                <div class="online_sdtu user-status-icon user-icon-{{$user->id}}" id="userStatusHead{{$user->id}}"></div>
-                                <img width="55px" height="55px" src="{{$user->getFirstMediaUrlOrDefault(USER_PROFILE)['url']}}" alt="{{$user->getFirstMediaUrlOrDefault(USER_PROFILE)['alt']}}" title="{{$user->getFirstMediaUrlOrDefault(USER_PROFILE)['title']}}">
+                        @if(count($vendors))
+                        @foreach($vendors as $loop_vendor)
+                        <li @if($loop_vendor->id == $vendor->id) class="active" @endif>
+                            <a href="{{route('chat.user.conversations', [$loop_vendor->id])}}">
+                                <div class="online_sdtu user-status-icon user-icon-{{$loop_vendor->id}}" id="userStatusHead{{$loop_vendor->id}}"></div>
+                                <img width="55px" height="55px" src="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                                 <div>
-                                    <h2>{{$user->name}}</h2>
+                                    <h2>{{$loop_vendor->name}}</h2>
                                     <span class="time_send">
                                         <b>11:00 AM</b>
                                         <small>10</small>
@@ -44,32 +44,7 @@
                             <h3>already 1902 messages</h3>
                         </div>
                     </header>
-                    <ul id="chat">
-                        <li class="you">
-                            <div class="entete">
-                                <span class="status status_peaple">
-                                    <img width="30px" height="30px" src="{{$vendor->getFirstMediaUrlOrDefault(USER_PROFILE)['url']}}" alt="{{$vendor->getFirstMediaUrlOrDefault(USER_PROFILE)['alt']}}" title="{{$vendor->getFirstMediaUrlOrDefault(USER_PROFILE)['title']}}">
-                                </span>
-                                <h2 class="ml-3">{{$vendor->name}}</h2>
-                                <h3 title="2020-05-06 10:12 AM">10:12AM, Today</h3>
-                            </div>
-                            <div class="triangle"></div>
-                            <div class="message">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                            </div>
-                        </li>
-                        <li class="me">
-                            <div class="entete">
-                                <h3>10:12AM, Today</h3>
-                                <h2>Vincent</h2>
-                                <span class="status status_peaple"><img src="{{front_url()}}/assets/img/chat_avatar_01.jpg" alt=""></span>
-                            </div>
-                            <div class="triangle"></div>
-                            <div class="message">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                            </div>
-                        </li>
-                    </ul>
+                    <ul id="chat"></ul>
                     <footer>
                         <textarea placeholder="Type your message" class="chat-input"></textarea>
                         <a href="#">Send</a>
@@ -83,10 +58,10 @@
 @push('chat')
     <script>
         $(function () {
-
             let chatInput = $(".chat-input");
             let chatInputToolbar = $(".chat-input-toolbar");
             let chatBody = $(".chat-body");
+            let chatContainer = $("#chat");
 
             let user_id = "{{$auth_user->id}}";
             let ip_address = '127.0.0.1';
@@ -130,6 +105,8 @@
                 formData.append('_token', token);
                 formData.append('receiver_id', vendor);
 
+                appendMessageToSender(message);
+
                 $.ajax({
                     url: url,
                     type: 'POST',
@@ -144,6 +121,45 @@
                     }
                 });
             }
+
+            function appendMessageToSender(message) {
+                let name = '{{ $auth_user->name }}';
+                let image = '{!! $auth_user->getFirstMediaUrlOrDefault(USER_PROFILE)['url'] !!}';
+                let newMessage =
+                    `<li class="me">
+                            <div class="entete">
+                                <h3 title="`+ getCurrentDateTime() +`">` + getCurrentTime() + `</h3>
+                                <h2>` + name + `</h2>
+                                <span class="status status_peaple">
+                                    <img src="` + image + `">
+                                </span>
+                            </div>
+                            <div class="triangle"></div>
+                            <div class="message">` + message + `</div>
+                        </li>`;
+                chatContainer.append(newMessage);
+            }
+            function appendMessageToReceiver(message) {
+                let name = '{{ $vendor->name }}';
+                let image = '{!! $vendor->getFirstMediaUrlOrDefault(USER_PROFILE)['url'] !!}';
+                let newMessage =
+                    `<li class="you">
+                        <div class="entete">
+                            <span class="status status_peaple">
+                                <img width="30px" height="30px" src="` + image + `">
+                            </span>
+                            <h2 class="ml-3">` + name + `</h2>
+                            <h3 title="` + dateFormat(message.created_at) + `">` + timeFormat(message.created_at) + `</h3>
+                        </div>
+                        <div class="triangle"></div>
+                        <div class="message">` + message.content + `</div>
+                    </li>`;
+                chatContainer.append(newMessage);
+            }
+
+            socket.on("private-channel:App\\Events\\PrivateMessageEvent", function (message) {
+                appendMessageToReceiver(message);
+            });
         });
     </script>
 @endpush

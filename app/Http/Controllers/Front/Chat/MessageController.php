@@ -20,9 +20,9 @@ class MessageController extends Controller
     }
 
     public function userConversations($vendor_id) {
-        $data['users'] = User::where('id', '!=', auth('web')->id())->get();
-        $data['vendor'] = User::findorfail($vendor_id); // user here temp
         $data['auth_user'] = User::findorfail(auth('web')->id());
+        $data['vendors'] = $data['auth_user']->vendor_conversations();
+        $data['vendor'] = Vendor::findorfail($vendor_id);
 
         if($data['auth_user']->type != 'individual') {
             abort(401);
@@ -58,7 +58,7 @@ class MessageController extends Controller
                 $data = [];
                 $data['sender_id'] = $sender_id;
                 $data['sender_name'] = $sender->name;
-                $data['recevier_id'] = $receiver_id;
+                $data['receiver_id'] = $receiver_id;
                 $data['content'] = $message->message;
                 $data['created_at'] = $message->created_at;
                 $data['message_id'] = $message->id;
