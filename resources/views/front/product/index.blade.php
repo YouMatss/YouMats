@@ -147,7 +147,7 @@
                             {!! $product->desc !!}
                             <div class="row">
                                 <div class="col-md-6 text-right">
-                                    <img class="img-fluid mr-n4 mr-md-n10 mr-xl-n15" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                                    <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                                 </div>
                             </div>
                         </div>
