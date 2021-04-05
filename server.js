@@ -9,7 +9,7 @@ var io = require('socket.io')(http, {
 });
 var Redis = require('ioredis');
 var redis = new Redis();
-var users = [];
+var users = {};
 
 http.listen(8005, () => {
     console.log('listening on *:8005');
@@ -34,14 +34,19 @@ redis.on('message', function(channel, message) {
 io.on('connection', function (socket) {
     socket.on("user_connected", function (user_id) {
         users[user_id] = socket.id;
+        console.log(users);
         io.emit('updateUserStatus', users);
         console.log("user connected " + user_id);
     });
 
     socket.on('disconnect', function () {
-        var i = users.indexOf(socket.id);
-        users.splice(i, 1, 0);
+        var i = getKeyByValue(users, socket.id);
+        delete users[i];
         io.emit('updateUserStatus', users);
         console.log(users);
     });
 });
+
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+}
