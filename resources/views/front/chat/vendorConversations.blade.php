@@ -93,7 +93,7 @@
             let chatContainer = $("#chat");
 
             let user_id = "vendor_{{$auth_vendor->id}}";
-            let ip_address = '127.0.0.1';
+            let ip_address = "{{env('SOCKET_HOST')}}";
             let socket_port = '8005';
             let socket = io(ip_address + ':' + socket_port);
             let receiver_id = "{{ $user->id }}";
