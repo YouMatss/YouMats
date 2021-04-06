@@ -15,7 +15,7 @@
     text-align: right;
 }
 
-bodey,p,h1,h2,h3,h4,h5,h6{
+bodey,p,h1,h2,h3,h4,h5,h6,a{
     font-family: 'Cairo', sans-serif;
 }
 
@@ -227,6 +227,7 @@ h3.font-size-24 {
 .section-title {
     font-weight: 700;
     font-size: 24px;
+    text-align: right;
 }
 
 .u-header .vertical-menu .u-header__nav-link-toggle::after, .u-header + main .vertical-menu .u-header__nav-link-toggle::after{
@@ -239,10 +240,62 @@ h3.font-size-24 {
     font-family: 'Cairo', sans-serif;
 }
 
-.product-item__body{
+.product-item__body,
+.breadcrumb-item + .breadcrumb-item a,
+.breadcrumb-item + .breadcrumb-item{
     font-family: 'Cairo', sans-serif;
 }
 
 .product-item__body .mb-2 a{
     font-size: 16px;
+}
+
+.range-slider{
+    direction: rtl;
+    text-align: right;
+}
+
+.custom-control {
+    position: relative;
+    display: block;
+    min-height: 1.3125rem;
+    padding-left: 0;
+    padding-right: 1.4rem;
+    text-align: right;
+    width: 100%;
+}
+
+.custom-control-label::before {
+    position: absolute;
+    top: 0.20625rem;
+    left: auto;
+    right: -1.4rem;
+    display: block;
+    width: 0.9rem;
+    height: 0.9rem;
+    pointer-events: none;
+    content: "";
+    background-color: #fff;
+    border: #dfdfdf solid 2px;
+}
+
+.custom-control-label::after {
+    position: absolute;
+    top: 0.20625rem;
+    right: -1.4rem;
+    left: auto;
+    display: block;
+    width: 0.9rem;
+    height: 0.9rem;
+    content: "";
+    background: no-repeat 50% / 50% 50%;
+}
+
+
+.rtl{
+    direction: rtl;
+}
+
+.ltr{
+    direction: ltr;
 }
