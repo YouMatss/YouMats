@@ -21,7 +21,6 @@ redis.subscribe('private-channel', function () {
 
 redis.on('message', function(channel, message) {
     message = JSON.parse(message);
-    console.log(message);
     if (channel == 'private-channel') {
         let data = message.data.data;
         let receiver_id = data.receiver_id;
@@ -34,16 +33,16 @@ redis.on('message', function(channel, message) {
 io.on('connection', function (socket) {
     socket.on("user_connected", function (user_id) {
         users[user_id] = socket.id;
-        console.log(users);
+        // console.log(users);
         io.emit('updateUserStatus', users);
-        console.log("user connected " + user_id);
+        // console.log("user connected " + user_id);
     });
 
     socket.on('disconnect', function () {
         var i = getKeyByValue(users, socket.id);
         delete users[i];
         io.emit('updateUserStatus', users);
-        console.log(users);
+        // console.log(users);
     });
 });
 

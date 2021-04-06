@@ -3,11 +3,11 @@ function getCurrentTime() {
 }
 
 function getCurrentDateTime() {
-    return moment().format('MM/DD/YY h:mm A');
+    return moment().format('DD/MM/YY h:mm A');
 }
 
 function dateFormat(datetime) {
-    return moment(datetime, 'YYYY-MM-DD HH:mm:ss').format('MM/DD/YY h:mm A');
+    return moment(datetime, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YY h:mm A');
 }
 
 function timeFormat(datetime) {

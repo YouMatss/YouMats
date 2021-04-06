@@ -11,21 +11,21 @@
                         @if(count($users))
                             @foreach($users as $loop_user)
                                 <li @if($loop_user->id == $user->id) class="active" @endif>
-                                    <a href="{{route('chat.user.conversations', [$loop_user->id])}}">
+                                    <a href="{{route('chat.vendor.conversations', [$loop_user->id])}}">
                                         <div class="online_sdtu user-status-icon user-icon-user_{{$loop_user->id}}" id="userStatusHead{{$loop_user->id}}"></div>
                                         <img width="55px" height="55px" src="{{$loop_user->getFirstMediaUrlOrDefault(USER_PROFILE)['url']}}" alt="{{$loop_user->getFirstMediaUrlOrDefault(USER_PROFILE)['alt']}}" title="{{$loop_user->getFirstMediaUrlOrDefault(USER_PROFILE)['title']}}">
                                         <div>
                                             <h2>{{$loop_user->name}}</h2>
-                                            <span class="time_send">
-                                                <b>11:00 AM</b>
-                                                <small>10</small>
-                                            </span>
-                                            <h3>
-                                        <span class="status">
-                                            <i class="fa fa-check color_seen" aria-hidden="true"></i>
-                                        </span>
-                                                Lorem ipsum, or lipsum as it is sometimes known
-                                            </h3>
+{{--                                            <span class="time_send">--}}
+{{--                                                <b>11:00 AM</b>--}}
+{{--                                                <small>10</small>--}}
+{{--                                            </span>--}}
+{{--                                            <h3>--}}
+{{--                                                <span class="status">--}}
+{{--                                                    <i class="fa fa-check color_seen" aria-hidden="true"></i>--}}
+{{--                                                </span>--}}
+{{--                                                Lorem ipsum, or lipsum as it is sometimes known--}}
+{{--                                            </h3>--}}
                                         </div>
                                     </a>
                                 </li>
@@ -43,10 +43,40 @@
                             <h2>{{$user->name}}</h2>
                         </div>
                     </header>
-                    <ul id="chat"></ul>
+                    <ul id="chat">
+                        @if(count($history))
+                            @foreach($history as $message)
+                                @if($message->sender_type == 'vendor')
+                                    <li class="me">
+                                        <div class="entete">
+                                            <h3 title="{{date('d/m/Y h:i A', strtotime($message->created_at))}}">{{date('h:i A', strtotime($message->created_at))}}</h3>
+                                            <h2>{{$auth_vendor->name}}</h2>
+                                            <span class="status status_peaple">
+                                            <img src="{{$auth_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}">
+                                        </span>
+                                        </div>
+                                        <div class="triangle"></div>
+                                        <div class="message">{{$message->message->message}}</div>
+                                    </li>
+                                @elseif($message->sender_type == 'user')
+                                    <li class="you">
+                                        <div class="entete">
+                                        <span class="status status_peaple">
+                                            <img src="{{$user->getFirstMediaUrlOrDefault(USER_PROFILE)['url']}}">
+                                        </span>
+                                            <h2 class="ml-3">{{$user->name}}</h2>
+                                            <h3 title="{{date('d/m/Y h:i A', strtotime($message->created_at))}}">{{date('h:i A', strtotime($message->created_at))}}</h3>
+                                        </div>
+                                        <div class="triangle"></div>
+                                        <div class="message">{{$message->message->message}}</div>
+                                    </li>
+                                @endif
+                            @endforeach
+                        @endif
+                    </ul>
                     <footer>
                         <textarea placeholder="Type your message" class="chat-input"></textarea>
-                        <a href="#">Send</a>
+{{--                        <a>Send</a>--}}
                     </footer>
                 </div>
             </div>
@@ -101,8 +131,9 @@
                 formData.append('message', message);
                 formData.append('_token', token);
                 formData.append('receiver_id', receiver_id);
-                formData.append('sender_type', 'user');
-                formData.append('receiver_type', 'vendor');
+                formData.append('sender_type', 'vendor');
+                formData.append('receiver_type', 'user');
+                formData.append('guardName', 'vendor');
 
                 appendMessageToSender(message);
 
@@ -159,6 +190,12 @@
             socket.on("private-channel:App\\Events\\PrivateMessageEvent", function (message) {
                 appendMessageToReceiver(message);
             });
+
+            function updateScroll(){
+                var element = document.getElementById("chat");
+                element.scrollTop = element.scrollHeight;
+            }
+            updateScroll();
         });
     </script>
 @endpush

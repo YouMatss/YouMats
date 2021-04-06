@@ -6,6 +6,7 @@ use App\Events\PrivateMessageEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
 use App\Models\User;
+use App\Models\UserMessage;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +25,22 @@ class MessageController extends Controller
         $data['vendors'] = $data['auth_user']->vendors_conversations();
         $data['vendor'] = Vendor::findorfail($vendor_id);
 
-        if($data['auth_user']->type != 'individual') {
+        if($data['auth_user']->type != 'individual')
             abort(401);
-        }
+
+        $data['history'] = UserMessage::with('message')->where(function ($q) use ($vendor_id) {
+            $q->where([
+                'sender_id' => auth('web')->id(),
+                'sender_type' => 'user',
+                'receiver_id' => $vendor_id,
+                'receiver_type' => 'vendor'
+            ])->orWhere([
+                'sender_id' => $vendor_id,
+                'sender_type' => 'vendor',
+                'receiver_id' => auth('web')->id(),
+                'receiver_type' => 'user'
+            ]);
+        })->orderBy('created_at', 'asc')->get();
 
         return view('front.chat.userConversations')->with($data);
     }
@@ -36,9 +50,22 @@ class MessageController extends Controller
         $data['users'] = $data['auth_vendor']->users_conversations();
         $data['user'] = User::findorfail($user_id);
 
-        if($data['user']->type != 'individual') {
+        if($data['user']->type != 'individual')
             abort(401);
-        }
+
+        $data['history'] = UserMessage::with('message')->where(function ($q) use ($user_id) {
+            $q->where([
+                'sender_id' => auth('vendor')->id(),
+                'sender_type' => 'vendor',
+                'receiver_id' => $user_id,
+                'receiver_type' => 'user'
+            ])->orWhere([
+                'sender_id' => $user_id,
+                'sender_type' => 'user',
+                'receiver_id' => auth('vendor')->id(),
+                'receiver_type' => 'vendor'
+            ]);
+        })->orderBy('created_at', 'asc')->get();
 
         return view('front.chat.vendorConversations')->with($data);
     }
@@ -48,10 +75,12 @@ class MessageController extends Controller
             'message' => 'required',
             'receiver_id' => 'required',
             'sender_type' => 'required|In:user,vendor',
-            'receiver_type' => 'required|In:user,vendor'
+            'receiver_type' => 'required|In:user,vendor',
+            'guardName' => 'required|In:web,vendor'
         ]);
 
-        $sender_id = Auth::id();
+        $guardName = $request->guardName;
+        $sender_id = Auth::guard($guardName)->id();
         $receiver_id = $request->receiver_id;
         $sender_type = $request->sender_type;
         $receiver_type = $request->receiver_type;
@@ -66,12 +95,15 @@ class MessageController extends Controller
                     'sender_type' => $sender_type,
                     'receiver_type' => $receiver_type
                 ]);
-                $sender = User::where('id', $sender_id)->first();
+                if($guardName == 'web')
+                    $sender = User::where('id', $sender_id)->first();
+                elseif($guardName == 'vendor')
+                    $sender = Vendor::where('id', $sender_id)->first();
 
                 $data = [];
-                $data['sender_id'] = $sender_id;
+                $data['sender_id'] = $sender_type. '_' .$sender_id;
                 $data['sender_name'] = $sender->name;
-                $data['receiver_id'] = $receiver_id;
+                $data['receiver_id'] = $receiver_type. '_' .$receiver_id;
                 $data['content'] = $message->message;
                 $data['created_at'] = $message->created_at;
                 $data['message_id'] = $message->id;
