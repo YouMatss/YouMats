@@ -34394,6 +34394,7 @@ blockquote:not(.blockquote) p {
 @media (min-width: 1200px) {
   .u-slick--slider-syncing-size .slick-slide {
     width: 5rem !important;
+    height: 60px !important;
   }
 }
 
@@ -37890,6 +37891,7 @@ section {
 
   .block_img_cat a img{
     width: 100%;
+
   }
 
   .cat .container .box .content .title{
@@ -37909,4 +37911,5 @@ section {
 
 .block_img_cat a img{
   width: 100%;
+  height: 570px;
 }
