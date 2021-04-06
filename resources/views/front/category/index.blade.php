@@ -50,7 +50,7 @@
             </div>
         </div>
     </div>
-    <div class="mb-6 bg-md-transparent py-6">
+    <div class="mb-6 bg-md-transparent py-0">
         <div class="container">
             <div class="row mb-8">
                 <div class="d-none col-xl-3 col-wd-2gdot5">

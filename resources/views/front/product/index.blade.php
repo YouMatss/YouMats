@@ -32,8 +32,8 @@
     </div>
     <div class="container">
         <div class="mb-14">
-            <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-5 mb-4 mb-md-0">
+            <div class="row rtl">
+                <div class="col-md-6 col-lg-4 col-xl-5 mb-4 mb-md-0 ltr">
                     <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2" data-infinite="true" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4" data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4" data-nav-for="#sliderSyncingThumb">
                         @if(count($product->getMedia(PRODUCT_PATH)))
                         @foreach($product->getMedia(PRODUCT_PATH) as $image)
@@ -147,7 +147,7 @@
                             {!! $product->desc !!}
                             <div class="row">
                                 <div class="col-md-6 text-right">
-                                    <img class="img-fluid mr-n4 mr-md-n10 mr-xl-n15" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                                    <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                                 </div>
                             </div>
                         </div>

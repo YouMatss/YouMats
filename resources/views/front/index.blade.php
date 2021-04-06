@@ -398,7 +398,7 @@
                 @foreach($top_subCategories as $t_category)
                 <div class="col-md-6 col-xl-4 mb-5 flex-shrink-0 flex-md-shrink-1">
                     <div class="bg-gray-1 overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
-                        <a href="{{route('front.subCategory', [$t_category->category->slug, $t_category->slug])}}" class="d-block  pr-2 pr-wd-6">
+                        <a href="{{route('front.subCategory', [$t_category->category->slug, $t_category->slug])}}" class="d-block">
                             <div class="media align-items-center">
                                 <div class="max-width-148 img_cat_home">
                                     <img class="img-fluid" src="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" alt="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['title']}}" />
