@@ -21,6 +21,12 @@ Route::group([
         });
     });
 
+    Route::group(['prefix' => 'chat', 'namespace' => 'Chat', 'as' => 'chat.'], function () {
+        Route::get('user/conversations/{vendor_id}', 'MessageController@userConversations')->name('user.conversations');
+        Route::get('vendor/conversations/{user_id}', 'MessageController@vendorConversations')->name('vendor.conversations');
+        Route::post('send_message', 'MessageController@sendMessage')->name('send_message');
+    });
+
     //Vendor Auth Routes
     Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor', 'as' => 'vendor.'], function () {
 

@@ -45,6 +45,7 @@
         "optimistdigital/nova-simple-repeatable": "^1.2",
         "optimistdigital/nova-sortable": "^2.0",
         "optimistdigital/nova-translatable": "^1.6",
+        "predis/predis": "^1.1",
         "richardkeep/nova-timenow": "^1.0",
         "spatie/laravel-medialibrary": "^9.4",
         "spatie/laravel-query-builder": "^3.3",

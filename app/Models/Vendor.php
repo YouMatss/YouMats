@@ -116,4 +116,13 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     public function setWhatsappPhoneAttribute($value) {
         $this->attributes['whatsapp_phone'] = '+966' . ltrim($value, '+966');
     }
+
+    public function users_conversations() {
+        return ($this->belongsToMany(User::class, 'user_messages',
+            'sender_id','receiver_id')->where('sender_type', 'vendor')->get()->collect()->unique())
+            ->merge($this->belongsToMany(User::class, 'user_messages',
+                'receiver_id','sender_id')->where('receiver_type', 'vendor')->get()->collect()->unique())
+            ->unique('id');
+    }
+
 }
