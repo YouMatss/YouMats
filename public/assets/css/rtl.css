@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap');
 .col-md-1,
 .col-md-2,
 .col-md-3,
@@ -12,6 +13,10 @@
 .col-md-12{
     direction: rtl;
     text-align: right;
+}
+
+bodey,p,h1,h2,h3,h4,h5,h6{
+    font-family: 'Cairo', sans-serif;
 }
 
 
@@ -213,4 +218,31 @@ footer{
 
 h3.font-size-24 {
     text-align: right;
+}
+
+.product-item__inner{
+    direction: rtl;
+}
+
+.section-title {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.u-header .vertical-menu .u-header__nav-link-toggle::after, .u-header + main .vertical-menu .u-header__nav-link-toggle::after{
+    transform: rotate(180deg);
+}
+
+.vertical-menu .navbar-expand-xl .u-header__navbar-nav .u-header__nav-link,
+.u-header__sub-menu-title,
+.navbar-expand-xl .u-header__navbar-nav .u-header__sub-menu-nav-group .u-header__sub-menu-nav-link{
+    font-family: 'Cairo', sans-serif;
+}
+
+.product-item__body{
+    font-family: 'Cairo', sans-serif;
+}
+
+.product-item__body .mb-2 a{
+    font-size: 16px;
 }
