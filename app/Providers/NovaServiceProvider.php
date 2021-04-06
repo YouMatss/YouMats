@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Anaseqal\NovaImport\NovaImport;
 use App\Nova\Admin;
+use App\Nova\Attribute;
 use App\Nova\Category;
 use App\Nova\City;
 use App\Nova\Contact;
@@ -150,6 +151,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             SubCategory::class,
                             Product::class,
                             Tag::class,
+                            Attribute::class,
                         ]
                     ]),
                     TopLevelResource::make([

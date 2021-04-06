@@ -28,6 +28,8 @@ Route::group([
 
         Route::get('edit', 'IndexController@edit')->name('edit');
         Route::patch('update', 'IndexController@update')->name('update');
+        Route::patch('update-shipping-prices', 'IndexController@updateShippingPrices')->name('updateShippingPrices');
+        Route::delete('license/{vendor}/media/{media}', 'IndexController@deleteLicense')->name('deleteLicense');
         Route::post('branch', 'IndexController@addBranch')->name('addBranch');
         Route::delete('{branch}/branch', 'IndexController@deleteBranch')->name('deleteBranch');
         Route::get('product', 'ProductController@create')->name('addProduct');

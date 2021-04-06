@@ -44,3 +44,50 @@ if (!function_exists('is_company')) {
     }
 }
 
+if (!function_exists('getCityNameById')) {
+    function getCityNameById($id) {
+        $city = \App\Models\City::find($id);
+
+        if($city)
+            return $city->name;
+        else
+            return 'City Not Found.';
+    }
+}
+
+if (!function_exists('cartOrChat')) {
+    function cartOrChat($product) {
+        $chat = '<div><button data-url="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="fa fa-comments"></i></button></div>';
+        $cart = '<div class="prodcut-add-cart"><button data-url="' . route('cart.add', ['product' => $product]) . '" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button></div>';
+        if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
+            if (is_company() || ($product->type == 'product' && $product->price > 0))
+                return $cart;
+            else
+                return $chat;
+        }
+        return;
+    }
+}
+
+if (!function_exists('generate_map')) {
+    function generate_map() {
+        $html_tag = "";
+        $html_tag .= '<div class="col-md-12">';
+        $html_tag .= '<input id="pac-input" class="controls form-control" style="width: 60%;margin-top: 8px;" type="text" placeholder="Search Box">';
+        $html_tag .= '<div id="element_map" class="col-md-12" style="height:400px;"></div>';
+        $html_tag .= '</div>';
+        $html_tag .= '<hr>';
+        return $html_tag;
+    }
+}
+if (!function_exists('generate_map_branch')) {
+    function generate_map_branch() {
+        $html_tag = "";
+        $html_tag .= '<div class="col-md-12">';
+        $html_tag .= '<input id="pac-input-branch" class="controls form-control" style="width: 60%;margin-top: 8px;" type="text" placeholder="Search Box">';
+        $html_tag .= '<div id="element_map_branch" class="col-md-12" style="height:400px;"></div>';
+        $html_tag .= '</div>';
+        $html_tag .= '<hr>';
+        return $html_tag;
+    }
+}

@@ -623,3 +623,29 @@
     line-height: 38px;
     cursor: pointer;
 }
+
+
+.st_model_new{
+    text-align: center;
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0 0 25px rgb(0 0 0 / 36%);
+    margin: 100px 0 0 0;
+}
+
+.st_model_new h5.modal-title{
+    width: 100%;
+    font-weight: bold;
+    padding: 20px 0;
+    font-size: 28px;
+}
+
+.st_model_new .select_reg{
+    border-radius: 5px;
+    margin: 30px 10px;
+    width: auto;
+    padding: 15px 0;
+    display: block;
+    border: 2px solid #003f91;
+    font-weight: bold;
+}

@@ -22,6 +22,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, HasTranslations, CascadeSoftDeletes;
 
     protected $fillable = ['name', 'country_id', 'email' , 'phone', 'phone2', 'address', 'address2', 'whatsapp_phone',
+        'latitude', 'longitude', 'shipping_prices',
         'membership_id', 'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url',
         'slug'];
 
@@ -97,4 +98,22 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->hasMany(OrderItem::class);
     }
 
+    public function getPhoneAttribute($value) {
+        return '+966' . trim($value, '+966');
+    }
+    public function getPhone2Attribute($value) {
+        return '+966' . trim($value, '+966');
+    }
+    public function getWhatsappPhoneAttribute($value) {
+        return '+966' . trim($value, '+966');
+    }
+    public function setPhoneAttribute($value) {
+        $this->attributes['phone'] = '+966' . ltrim($value, '+966');
+    }
+    public function setPhone2Attribute($value) {
+        $this->attributes['phone2'] = '+966' . ltrim($value, '+966');
+    }
+    public function setWhatsappPhoneAttribute($value) {
+        $this->attributes['whatsapp_phone'] = '+966' . ltrim($value, '+966');
+    }
 }
