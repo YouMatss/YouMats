@@ -28,19 +28,15 @@ class MessageController extends Controller
         if($data['auth_user']->type != 'individual')
             abort(401);
 
-        $data['history'] = UserMessage::with('message')->where(function ($q) use ($vendor_id) {
-            $q->where([
-                'sender_id' => auth('web')->id(),
-                'sender_type' => 'user',
-                'receiver_id' => $vendor_id,
-                'receiver_type' => 'vendor'
-            ])->orWhere([
-                'sender_id' => $vendor_id,
-                'sender_type' => 'vendor',
-                'receiver_id' => auth('web')->id(),
-                'receiver_type' => 'user'
-            ]);
-        })->orderBy('created_at', 'asc')->get();
+        $sendHistory = UserMessage::with('message')->where([
+            'sender_id' => auth('web')->id(), 'sender_type' => 'user', 'receiver_id' => $vendor_id, 'receiver_type' => 'vendor'
+        ])->get()->collect();
+
+        $receiveHistory = UserMessage::with('message')->where([
+            'sender_id' => $vendor_id, 'sender_type' => 'vendor', 'receiver_id' => auth('web')->id(), 'receiver_type' => 'user'
+        ])->get()->collect();
+
+        $data['history'] = $sendHistory->merge($receiveHistory)->sortBy('created_at');
 
         return view('front.chat.userConversations')->with($data);
     }
@@ -53,19 +49,15 @@ class MessageController extends Controller
         if($data['user']->type != 'individual')
             abort(401);
 
-        $data['history'] = UserMessage::with('message')->where(function ($q) use ($user_id) {
-            $q->where([
-                'sender_id' => auth('vendor')->id(),
-                'sender_type' => 'vendor',
-                'receiver_id' => $user_id,
-                'receiver_type' => 'user'
-            ])->orWhere([
-                'sender_id' => $user_id,
-                'sender_type' => 'user',
-                'receiver_id' => auth('vendor')->id(),
-                'receiver_type' => 'vendor'
-            ]);
-        })->orderBy('created_at', 'asc')->get();
+        $sendHistory = UserMessage::with('message')->where([
+            'sender_id' => auth('vendor')->id(), 'sender_type' => 'vendor', 'receiver_id' => $user_id, 'receiver_type' => 'user'
+        ])->get()->collect();
+
+        $receiveHistory = UserMessage::with('message')->where([
+            'sender_id' => $user_id, 'sender_type' => 'user', 'receiver_id' => auth('vendor')->id(), 'receiver_type' => 'vendor'
+        ])->get()->collect();
+
+        $data['history'] = $sendHistory->merge($receiveHistory)->sortBy('created_at');
 
         return view('front.chat.vendorConversations')->with($data);
     }

@@ -33788,7 +33788,7 @@ blockquote:not(.blockquote) p {
   background-color: #e6e6e6;
   color: #fff;
   display: -ms-flexbox;
-  display: flex;
+  display: flex !important;
   -ms-flex-align: center;
       align-items: center;
   -ms-flex-pack: center;
