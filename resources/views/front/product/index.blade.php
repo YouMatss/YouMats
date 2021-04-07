@@ -200,7 +200,7 @@
 
             <div class="container p-0">
 
-                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
                     <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">RELATED PRODUCTS</h3>
                 </div>
 
