@@ -29,7 +29,7 @@
     </div>
     <div class="mb-6 bg-md-transparent py-6">
         <div class="container">
-            <div class="row mb-8">
+            <div class="row mb-8 rtl">
                 <div class="d-none d-xl-block col-xl-3 col-wd-2gdot5">
                     <div class="mb-6">
                         <div class="range-slider bg-gray-3 p-3">
