@@ -125,4 +125,23 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
             ->unique('id');
     }
 
+    private function messages($user_id) {
+        return ($this->hasMany(UserMessage::class, 'sender_id')
+            ->with('message')->where([
+                'receiver_id' => $user_id, 'receiver_type' => 'user', 'sender_type' => 'vendor'
+            ])->get()->collect())
+            ->merge($this->hasMany(UserMessage::class, 'receiver_id')
+            ->with('message')->where([
+                'sender_id' => $user_id, 'receiver_type' => 'vendor', 'sender_type' => 'user'
+            ])->get()->collect());
+    }
+
+    public function last_message($user_id) {
+        return $this->messages($user_id)->sortBy('created_at')->last()->message;
+    }
+
+    public function count_messages($user_id) {
+        return count($this->messages($user_id));
+    }
+
 }

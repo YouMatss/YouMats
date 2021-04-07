@@ -16,15 +16,15 @@
                                 <img width="55px" height="55px" src="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                                 <div>
                                     <h2>{{$loop_vendor->name}}</h2>
-{{--                                    <span class="time_send">--}}
-{{--                                        <b>11:00 AM</b>--}}
-{{--                                        <small>10</small>--}}
-{{--                                    </span>--}}
+                                    <span class="time_send">
+                                        <b>{{date('h:i A', strtotime($loop_vendor->last_message($auth_user->id)->created_at))}}</b>
+                                        <small>{{$loop_vendor->count_messages($auth_user->id)}}</small>
+                                    </span>
                                     <h3>
                                         <span class="status">
                                             <i class="fa fa-check color_seen" aria-hidden="true"></i>
                                         </span>
-                                        {{$history->last()->message->message}}
+                                        {{$loop_vendor->last_message($auth_user->id)->message}}
                                     </h3>
                                 </div>
                             </a>
@@ -41,6 +41,7 @@
                         <img width="55px" height="55px" src="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                         <div>
                             <h2>{{$vendor->name}}</h2>
+                            <h3>already {{$vendor->count_messages($auth_user->id)}} messages</h3>
                         </div>
                     </header>
                     <ul id="chat">

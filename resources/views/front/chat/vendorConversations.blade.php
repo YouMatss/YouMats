@@ -16,16 +16,16 @@
                                         <img width="55px" height="55px" src="{{$loop_user->getFirstMediaUrlOrDefault(USER_PROFILE)['url']}}" alt="{{$loop_user->getFirstMediaUrlOrDefault(USER_PROFILE)['alt']}}" title="{{$loop_user->getFirstMediaUrlOrDefault(USER_PROFILE)['title']}}">
                                         <div>
                                             <h2>{{$loop_user->name}}</h2>
-{{--                                            <span class="time_send">--}}
-{{--                                                <b>11:00 AM</b>--}}
-{{--                                                <small>10</small>--}}
-{{--                                            </span>--}}
-{{--                                            <h3>--}}
-{{--                                                <span class="status">--}}
-{{--                                                    <i class="fa fa-check color_seen" aria-hidden="true"></i>--}}
-{{--                                                </span>--}}
-{{--                                                Lorem ipsum, or lipsum as it is sometimes known--}}
-{{--                                            </h3>--}}
+                                            <span class="time_send">
+                                                <b>{{date('h:i A', strtotime($loop_user->last_message($auth_vendor->id)->created_at))}}</b>
+                                                <small>{{$loop_user->count_messages($auth_vendor->id)}}</small>
+                                            </span>
+                                            <h3>
+                                                <span class="status">
+                                                    <i class="fa fa-check color_seen" aria-hidden="true"></i>
+                                                </span>
+                                                {{$loop_user->last_message($auth_vendor->id)->message}}
+                                            </h3>
                                         </div>
                                     </a>
                                 </li>
@@ -41,6 +41,7 @@
                         <img width="55px" height="55px" src="{{$user->getFirstMediaUrlOrDefault(USER_PROFILE)['url']}}" alt="{{$user->getFirstMediaUrlOrDefault(USER_PROFILE)['alt']}}" title="{{$user->getFirstMediaUrlOrDefault(USER_PROFILE)['title']}}">
                         <div>
                             <h2>{{$user->name}}</h2>
+                            <h3>already {{$user->count_messages($auth_vendor->id)}} messages</h3>
                         </div>
                     </header>
                     <ul id="chat">

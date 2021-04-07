@@ -40,7 +40,7 @@ class Category extends Model implements Sortable, HasMedia
 
     public function products() {
         return $this->hasManyThrough(Product::class, SubCategory::class, '', 'subCategory_id')
-            ->where('active', 1)->orderBy('id', 'desc');
+            ->where('active', 1)->orderBy('updated_at', 'desc');
     }
 
 }
