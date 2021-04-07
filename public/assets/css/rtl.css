@@ -299,3 +299,7 @@ h3.font-size-24 {
 .ltr{
     direction: ltr;
 }
+
+.pagination {
+    padding: 0 !important;
+}

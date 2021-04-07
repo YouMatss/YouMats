@@ -76,13 +76,16 @@
                         <a href="{{ route('home') }}" class="d-inline-block max-width-150 ml-n2 mb-2">
                             <img class="img-fluid" src="{{front_url()}}/assets/img/logo.png">
                         </a>
-                        <div class="mb-2">
-                            <ul class="font-size-14 pl-3 ml-1 text-gray-9">
-                                @foreach($product->tags as $tag)
-                                <li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
+                        {{--<div class="mb-2">--}}
+                            {{--<ul class="font-size-14 pl-3 ml-1 text-gray-9">--}}
+                                {{--@foreach($product->tags as $tag)--}}
+                                {{--<li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}</a></li>--}}
+                                {{--@endforeach--}}
+                            {{--</ul>--}}
+                        {{--</div>--}}
+
+
+
                         <p>{!! $product->short_desc !!}</p>
                         <p><strong>SKU</strong>: {{$product->SKU}}</p>
                     </div>
@@ -122,6 +125,14 @@
                             @endif
                         </div>
                     </div>
+                    <div class="mb-2">
+                        <ul class="font-size-14 pl-3 ml-1 text-gray-9 style_tags">
+                            @foreach($product->tags as $tag)
+                                <li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}  </a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -189,7 +200,7 @@
 
             <div class="container p-0">
 
-                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
                     <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">RELATED PRODUCTS</h3>
                 </div>
 
