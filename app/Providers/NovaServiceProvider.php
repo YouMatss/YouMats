@@ -43,6 +43,7 @@ use App\Nova\Vendor;
 use App\Observers\CategoryObserver;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
+use Bernhardh\NovaTranslationEditor\NovaTranslationEditor;
 use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
@@ -186,11 +187,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                     Currency::class,
                                     PaymentGateway::class,
                                     Coupon::class,
-                                    InternalLink::make([
-                                        'label' => 'Site Content',
-                                        'target' => '_self',
-                                        'url' => '#'
-                                    ]),
                                     Page::class,
                                     NovaResource::make(FAQ::class)->label('FAQs'),
                                     Unit::class,
@@ -220,6 +216,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ])
                 ]
             ]),
+            NovaTranslationEditor::make(),
             (new BackupTool())
                 ->canSee(function ($request) {
                     return $request->user()->isSuperAdmin();
