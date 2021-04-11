@@ -295,7 +295,7 @@
                                             </h5>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [$bs_product->slug])}}" class="d-block text-center">
-                                                    <img class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
+                                                    <img class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, '')['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                                 </a>
                                             </div>
                                             <div class="flex-center-between mb-1">
@@ -401,7 +401,7 @@
                         <a href="{{route('front.subCategory', [$t_category->category->slug, $t_category->slug])}}" class="d-block">
                             <div class="media align-items-center">
                                 <div class="max-width-148 img_cat_home">
-                                    <img class="img-fluid" src="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" alt="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['title']}}" />
+                                    <img class="img-fluid" src="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH, '')['url']}}" alt="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['title']}}" />
                                 </div>
                                 <div class="ml-4 media-body">
                                     <h4 class="mb-0 text-gray-90">{{$t_category->name}}</h4>
