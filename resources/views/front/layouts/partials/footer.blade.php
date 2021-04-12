@@ -16,7 +16,7 @@
                         @csrf
                         <label class="sr-only">{{__('general.subscribe_input')}}</label>
                         <div class="input-group input-group-pill">
-                            <input type="email" class="form-control border-0 height-40" name="email" placeholder="Email address" aria-label="Email address" required>
+                            <input type="email" class="form-control border-0 height-40" name="email" placeholder="{{__('general.subscribe_input')}}" aria-label="Email address" required>
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-dark btn-sm-wide height-40 py-2">{{__('general.subscribe_button')}}</button>
                             </div>

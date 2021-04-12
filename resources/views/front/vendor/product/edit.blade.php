@@ -297,11 +297,95 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="col-md-12">
+                                <div class="js-form-message mb-3">
+                                    <hr />
+                                    <label class="form-label"> Shipping Prices: </label>
+                                    <hr />
+                                    <div class="clone_container">
+                                        @if(isset($product->shipping_prices))
+                                            @foreach(json_decode($product->shipping_prices, true) as $shipping_price)
+                                                <div class="row clone_item">
+                                                    <div class="col-md-3">
+                                                        <div class="js-form-message form-group mb-5">
+                                                            <label class="form-label">Cities <span class="text-danger">*</span></label>
+                                                            <select name="cities[]" class="form-control @error("cities[]") is-invalid @enderror" required>
+                                                                @foreach($product->vendor->cities as $city)
+                                                                    <option value="{{$city->id}}" @if($shipping_price['cities'] == $city->id) selected @endif>{{$city->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error("cities[]")
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="js-form-message form-group mb-5">
+                                                            <label class="form-label">Price <span class="text-danger">*</span></label>
+                                                            <input type="number" class="form-control @error("price_shipping[]") is-invalid @enderror" name="price_shipping[]" value="{{$shipping_price['price']}}" required>
+                                                            @error("price_shipping[]")
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="js-form-message form-group mb-5">
+                                                            <label class="form-label">Time <span class="text-danger">*</span></label>
+                                                            <input type="number" class="form-control @error("time[]") is-invalid @enderror" name="time[]" value="{{$shipping_price['time']}}" required>
+                                                            @error("time[]")
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="js-form-message form-group mb-5">
+                                                            <label class="form-label">Format <span class="text-danger">*</span></label>
+                                                            <select name="format[]" class="form-control @error("format[]") is-invalid @enderror" required>
+                                                                <option value="hour" @if($shipping_price['format'] == 'hour') selected @endif>Hour</option>
+                                                                <option value="day" @if($shipping_price['format'] == 'day') selected @endif>Day</option>
+                                                            </select>
+                                                            @error("format[]")
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="mt-4">
+                                                            <button type="button" class="btn btn-danger px-5 text-white mr-2 btn_clone_remove">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <h4>{{ __('You do not have any prices') }}</h4>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-6">
+                                            <button type="button" class="btn btn-primary-dark-w px-5 text-white mr-2 btn_clone_add"> <i class="fas fa-plus"></i> Add Price</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-6">
+                                            <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i> Save Change</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-md-12 ml-auto">
                                 <hr>
                                 <button type="submit" class="btn btn-primary-dark-w btn-block btn-pill font-size-20 mb-3 py-3 w-25 ml-auto">Submit</button>
                             </div>
-
                         </div>
                         <!-- End Billing Form -->
                     </div>
@@ -412,5 +496,75 @@
                 toastr.error(response.responseJSON.message);
             })
         })
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".btn_clone_add").click(function(){
+                var clone_item = `<div class="row clone_item">
+                                                <div class="col-md-3">
+                                                    <div class="js-form-message form-group mb-5">
+                                                        <label class="form-label">Cities <span class="text-danger">*</span></label>
+                                                        <select name="cities[]" class="form-control @error("cities[]") is-invalid @enderror" required>
+                                                            @foreach($product->vendor->cities as $city)
+                <option value="{{$city->id}}">{{$city->name}}</option>
+                                                            @endforeach
+                </select>
+@error("cities[]")
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="js-form-message form-group mb-5">
+                    <label class="form-label">Price <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control @error("price_shipping[]") is-invalid @enderror" name="price_shipping[]" required>
+                                                        @error("price_shipping[]")
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="js-form-message form-group mb-5">
+                    <label class="form-label">Time <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control @error("time[]") is-invalid @enderror" name="time[]" required>
+                                                        @error("time[]")
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="js-form-message form-group mb-5">
+                    <label class="form-label">Format <span class="text-danger">*</span></label>
+                    <select name="format[]" class="form-control @error("format[]") is-invalid @enderror" required>
+                                                            <option value="hour">Hour</option>
+                                                            <option value="day">Day</option>
+                                                        </select>
+                                                        @error("format[]")
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mt-4">
+                    <button type="button" class="btn btn-danger px-5 text-white mr-2 btn_clone_remove">Delete</button>
+                </div>
+            </div>
+        </div>`;
+                // var new_item = $(".clone_item").first().clone();
+                $(".clone_container").append(clone_item);
+                return false;
+            });
+            $(document).on('click', '.btn_clone_remove', function () {
+                $(this).closest('.clone_item').remove();
+            });
+        });
     </script>
 @endsection
