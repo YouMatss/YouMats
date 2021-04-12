@@ -134,12 +134,12 @@
                             @elseif(!Auth::guard('web')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                     <a href="{{route('vendor.login')}}" role="button" class="u-header-topbar__nav-link">
-                                        <i class="ec ec-user mr-1"></i> {{ __('general.vendor_register') }}
+                                        <i class="ec ec-user mr-1"></i> {{ __('general.vendor_login') }}
                                     </a>
                                 </li>
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                     <a href="{{route('vendor.register')}}" role="button" class="u-header-topbar__nav-link">
-                                        <i class="ec ec-user mr-1"></i> {{ __('general.vendor_login') }}
+                                        <i class="ec ec-user mr-1"></i> {{ __('general.vendor_register') }}
                                     </a>
                                 </li>
                             @endif

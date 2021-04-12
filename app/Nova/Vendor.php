@@ -136,8 +136,6 @@ class Vendor extends Resource
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper')
-                ->previewUsing('cropper')
                 ->hideFromIndex(),
 
             Medialibrary::make('Licenses', VENDOR_PATH)->fields(function () {

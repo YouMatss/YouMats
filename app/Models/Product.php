@@ -17,6 +17,8 @@ class Product extends Model implements Sortable, HasMedia, Buyable
 {
     use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage;
 
+    protected $fillable = ['shipping_prices'];
+
     public $translatable = ['name', 'desc', 'short_desc', 'meta_title', 'meta_keywords', 'meta_desc'];
     /**
      * The accessors to append to the model's array form.
