@@ -17,8 +17,8 @@
     <div class="mb-4">
         <div class="bg-img-hero" style="background-image: url({{front_url()}}/assets/img/bg-2.png);">
             <div class="container min-height-438 overflow-hidden">
-                <div class="js-slick-carousel u-slick"
-                     data-pagi-classes="text-center position-absolute right-0 bottom-0 left-0 u-slick__pagination u-slick__pagination--long justify-content-start mb-3 mb-md-4 offset-xl-2 pl-xl-16 pl-wd-13">
+                <div class="js-slick-carousel u-slick" data-pagi-classes="text-center position-absolute right-0 bottom-0 left-0 u-slick__pagination u-slick__pagination--long justify-content-start mb-3 mb-md-4 offset-xl-2 pl-xl-16 pl-wd-13">
+                    @foreach($sliders as $slider)
                     <div class="js-slide">
                         <div class="row min-height-438 pt-7 py-md-0">
                             <div class="d-none d-xl-block col-auto">
@@ -28,87 +28,28 @@
                                 <div class="ml-xl-4">
                                     <h6 class="font-size-15 font-weight-bold mb-2 text-cyan"
                                         data-scs-animation-in="fadeInUp">
-                                        BIGGEST BUILDING MATERIALS SUPPLIERS IN KSA
+                                        {{$slider->quote}}
                                     </h6>
                                     <h1 class="font-size-46 text-lh-50 font-weight-light mb-6"
                                         data-scs-animation-in="fadeInUp"
                                         data-scs-animation-delay="200">
-                                        SHOP <stong class="font-weight-bold">PLUMBING</stong> APPLIANCES
+                                        <stong class="font-weight-bold">{{$slider->title}}</stong>
                                     </h1>
-                                    <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                    <a href="{{$slider->button_link}}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
                                        data-scs-animation-in="fadeInUp"
                                        data-scs-animation-delay="300">
-                                        Start Buying
+                                        {{$slider->button_title}}
                                     </a>
                                 </div>
                             </div>
                             <div class="col-xl-5 col-6 d-flex align-items-end ml-auto ml-md-0"
                                  data-scs-animation-in="fadeInUp"
                                  data-scs-animation-delay="500">
-                                <img class="img-fluid ml-auto mr-5" src="assets/img/slider_3.png" alt="Image Description">
+                                <img class="img-fluid ml-auto mr-5" src="{{ $slider->getFirstMediaUrlOrDefault(SLIDER_PATH)['url'] }}" alt="{{$slider->getFirstMediaUrlOrDefault(SLIDER_PATH)['alt']}}" title="{{$slider->getFirstMediaUrlOrDefault(SLIDER_PATH)['title']}}">
                             </div>
                         </div>
                     </div>
-                    <div class="js-slide">
-                        <div class="row min-height-438 pt-7 py-md-0">
-                            <div class="d-none d-xl-block col-auto">
-                                <div class="max-width-270 min-width-270"></div>
-                            </div>
-                            <div class="col-xl col col-md-6 mt-md-8 mt-lg-10">
-                                <div class="ml-xl-4">
-                                    <h6 class="font-size-15 font-weight-bold mb-2 text-cyan"
-                                        data-scs-animation-in="fadeInUp">
-                                        BIGGEST BUILDING MATERIALS SUPPLIERS IN KSA
-                                    </h6>
-                                    <h1 class="font-size-46 text-lh-50 font-weight-light mb-6"
-                                        data-scs-animation-in="fadeInUp"
-                                        data-scs-animation-delay="200">
-                                        SHOP <stong class="font-weight-bold">BUILDING MATERIAL</stong> IN SAUDI ARABIA
-                                    </h1>
-                                    <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
-                                       data-scs-animation-in="fadeInUp"
-                                       data-scs-animation-delay="300">
-                                        Start Buying
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-xl-5 col-6 flex-horizontal-center ml-auto ml-md-0"
-                                 data-scs-animation-in="fadeInRight"
-                                 data-scs-animation-delay="500">
-                                <img class="img-fluid ml-auto mr-5" src="assets/img/slider_2.png" alt="Image Description">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="js-slide">
-                        <div class="row min-height-438 pt-7 py-md-0">
-                            <div class="d-none d-xl-block col-auto">
-                                <div class="max-width-270 min-width-270"></div>
-                            </div>
-                            <div class="col-xl col col-md-6 mt-md-8 mt-lg-10">
-                                <div class="ml-xl-4">
-                                    <h6 class="font-size-15 font-weight-bold mb-2 text-cyan"
-                                        data-scs-animation-in="fadeInUp">
-                                        BIGGEST BUILDING MATERIALS SUPPLIERS IN KSA
-                                    </h6>
-                                    <h1 class="font-size-46 text-lh-50 font-weight-light mb-6"
-                                        data-scs-animation-in="fadeInUp"
-                                        data-scs-animation-delay="200">
-                                        SHOP <stong class="font-weight-bold">ELECTRIC WATER</stong> HEATERS
-                                    </h1>
-                                    <a href="#l" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
-                                       data-scs-animation-in="fadeInUp"
-                                       data-scs-animation-delay="300">
-                                        Start Buying
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-xl-5 col-6 flex-horizontal-center ml-auto ml-md-0"
-                                 data-scs-animation-in="fadeInRight"
-                                 data-scs-animation-delay="500">
-                                <img class="img-fluid ml-auto mr-5" src="assets/img/slider_1.png" alt="Image Description">
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

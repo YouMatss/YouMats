@@ -17,6 +17,7 @@ define("CURRENCY_PATH", 'currency');
 define("INQUIRE_PATH", 'inquire');
 define("PAGE_PATH", 'page');
 define("CONTENT_PATH", 'content');
+define("SLIDER_PATH", 'slider');
 
 
 // define validation
