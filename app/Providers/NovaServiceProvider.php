@@ -33,6 +33,7 @@ use App\Nova\Page;
 use App\Nova\PaymentGateway;
 use App\Nova\Product;
 use App\Nova\Quote;
+use App\Nova\Slider;
 use App\Nova\SubCategory;
 use App\Nova\Subscriber;
 use App\Nova\Tag;
@@ -179,6 +180,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'resources' => [
                             Admin::class,
                             Team::class,
+                            Slider::class,
                             Group::make([
                                 'label' => 'Settings',
                                 'expanded' => false,
