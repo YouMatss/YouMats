@@ -8,7 +8,7 @@
                         <ul class="list-inline mb-0">
                             @if(!Auth::guard('vendor')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                    <a href="{{ route('wishlist.index') }}" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> My Wishlist </a>
+                                    <a href="{{ route('wishlist.index') }}" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> {{__('general.wishlist')}} </a>
                                 </li>
                             @endif
                             @if(\Config::get('currencies'))
@@ -66,8 +66,8 @@
                                         </span>
                                         </a>
                                         <div id="userTypeDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="userTypeDropdownInvoker2">
-                                            <a class="dropdown-item" href="{{route('front.introduce', ['individual'])}}">Continue As Individual</a>
-                                            <a class="dropdown-item" href="{{route('front.introduce', ['company'])}}">Continue As Company</a>
+                                            <a class="dropdown-item" href="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_company')}}</a>
+                                            <a class="dropdown-item" href="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_individual')}}</a>
                                         </div>
                                     </div>
                                     <!-- End Language -->
@@ -99,12 +99,12 @@
                             @elseif(!Auth::guard('vendor')->check())
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <a href="{{route('register')}}" role="button" class="u-header-topbar__nav-link">
-                                    <i class="ec ec-user mr-1"></i> Register
+                                    <i class="ec ec-user mr-1"></i> {{__('general.user_register')}}
                                 </a>
                             </li>
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <a href="{{route('login')}}" role="button" class="u-header-topbar__nav-link">
-                                    <i class="ec ec-user mr-1"></i> Login
+                                    <i class="ec ec-user mr-1"></i> {{__('general.user_login')}}
                                 </a>
                             </li>
                             @endif
@@ -134,19 +134,19 @@
                             @elseif(!Auth::guard('web')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                     <a href="{{route('vendor.login')}}" role="button" class="u-header-topbar__nav-link">
-                                        <i class="ec ec-user mr-1"></i> {{ __('Vendor Login') }}
+                                        <i class="ec ec-user mr-1"></i> {{ __('general.vendor_register') }}
                                     </a>
                                 </li>
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                     <a href="{{route('vendor.register')}}" role="button" class="u-header-topbar__nav-link">
-                                        <i class="ec ec-user mr-1"></i> {{ __('Sell') }}
+                                        <i class="ec ec-user mr-1"></i> {{ __('general.vendor_login') }}
                                     </a>
                                 </li>
                             @endif
 
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
-                                    Get Quote
+                                    {{__('general.get_quote')}}
                                 </a>
                             </li>
                         </ul>
@@ -232,19 +232,19 @@
                                 <ul class="navbar-nav u-header__navbar-nav">
 
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{route('home')}}">Home</a>
+                                        <a class="nav-link u-header__nav-link" href="{{route('home')}}">{{__('general.home')}}</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{route('front.product.all')}}">All Products</a>
+                                        <a class="nav-link u-header__nav-link" href="{{route('front.product.all')}}">{{__('general.all_products')}}</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{ route('vendor.index') }}">Our Partners</a>
+                                        <a class="nav-link u-header__nav-link" href="{{ route('vendor.index') }}">{{__('general.our_partners')}}</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{route('front.faqs.page')}}">FAQs</a>
+                                        <a class="nav-link u-header__nav-link" href="{{route('front.faqs.page')}}">{{__('general.faq')}}</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{route('front.contact.page')}}">Contact Us</a>
+                                        <a class="nav-link u-header__nav-link" href="{{route('front.contact.page')}}">{{__('general.contact_us')}}</a>
                                     </li>
 
                                 </ul>
@@ -259,10 +259,10 @@
                             <i class="ec ec-support font-size-50 text-primary"></i>
                             <div class="ml-2">
                                 <div class="phone">
-                                    <strong>Support</strong> <a href="tel:00966502111754" class="text-gray-90">(+966) 502111754</a>
+                                    <strong>{{__('general.support')}}</strong> <a href="tel:{{__('info.phone')}}" class="text-gray-90">{{__('info.phone')}}</a>
                                 </div>
                                 <div class="email">
-                                    E-mail: <a href="mailto:info@youmats.com" class="text-gray-90">info@youmats.com</a>
+                                    {{__('general.quotation_email')}}: <a href="mailto:{{__('info.email')}}" class="text-gray-90">{{__('info.email')}}</a>
                                 </div>
                             </div>
                         </div>
@@ -295,7 +295,7 @@
                                     @endif
                                 </li>
                                 <li class="col pr-xl-0 px-2 px-sm-3">
-                                    <a href="{{ route('cart.show') }}" class="text-gray-90 position-relative d-flex" data-toggle="tooltip" data-placement="top" title="Cart">
+                                    <a href="{{ route('cart.show') }}" class="text-gray-90 position-relative d-flex" data-toggle="tooltip" data-placement="top">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span class="width-22 height-22 bg-dark position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12 text-white cartCount">{{ Cart::instance('cart')->count() }}</span>
                                         <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3 cartTotal">{{ getCurrency('code'). ' ' . Cart::instance('cart')->total() }}</span>
@@ -322,7 +322,7 @@
                                                 data-target="#basicsCollapseOne"
                                                 aria-expanded="false"
                                                 aria-controls="basicsCollapseOne">
-                                            <span class="pl-1 text-gray-110">All Categories</span>
+                                            <span class="pl-1 text-gray-110">{{__('general.all_categories')}}</span>
                                             <span class="text-gray-110 ml-3">
                                                 <span class="ec ec-arrow-down-search"></span>
                                             </span>
@@ -354,8 +354,8 @@
                                                                             <li>
                                                                                 <a class="nav-link u-header__sub-menu-nav-link u-nav-divider border-top pt-2 flex-column align-items-start"
                                                                                    href="{{route('front.category', ['category_slug' => $category->slug])}}">
-                                                                                    <div class="">ALL CATEGORIES</div>
-                                                                                    <div class="u-nav-subtext font-size-11 text-gray-30">Discover more products</div>
+                                                                                    <div class="">{{__('general.all_categories')}}</div>
+                                                                                    <div class="u-nav-subtext font-size-11 text-gray-30">{{__('general.discover_more_products')}}</div>
                                                                                 </a>
                                                                             </li>
                                                                         </ul>
@@ -377,7 +377,7 @@
                                                         @if(count($categories) > 17)
                                                             <li class="nav-item hs-has-mega-menu u-header__nav-item" data-event="hover" data-position="left">
                                                                 <a id="otherCategories" class="nav-link u-header__nav-link u-header__nav-link-toggle"
-                                                                   href="#" aria-haspopup="true" aria-expanded="false">Other Categories</a>
+                                                                   href="#" aria-haspopup="true" aria-expanded="false">{{__('general.other_categories')}}</a>
 
                                                                 <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="otherCategories">
                                                                     <div class="vmm-bg">
@@ -385,7 +385,7 @@
                                                                     </div>
                                                                     <div class="row u-header__mega-menu-wrapper">
                                                                         <div class="col mb-3 mb-sm-0">
-                                                                            <span class="u-header__sub-menu-title">Other Categories</span>
+                                                                            <span class="u-header__sub-menu-title">{{__('general.other_categories')}}</span>
                                                                             <ul class="u-header__sub-menu-nav-group mb-3">
                                                                                 @foreach($categories->skip(17)->take(10) as $category)
                                                                                     <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [$category->slug])}}">{{$category->name}}</a></li>
@@ -394,7 +394,7 @@
                                                                         </div>
                                                                         @if(count($categories) > 27)
                                                                         <div class="col mb-3 mb-sm-0">
-                                                                            <span class="u-header__sub-menu-title">Other Categories</span>
+                                                                            <span class="u-header__sub-menu-title">{{__('general.other_categories')}}</span>
                                                                             <ul class="u-header__sub-menu-nav-group mb-3">
                                                                                 @foreach($categories->skip(27) as $category)
                                                                                     <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [$category->slug])}}">{{$category->name}}</a></li>
@@ -417,7 +417,7 @@
                     </div>
                     <div class="col align-self-center">
                         <!-- Search-Form -->
-                        <label class="sr-only" for="searchProduct">Search</label>
+                        <label class="sr-only" for="searchProduct">{{__('general.search')}}</label>
                         <div class="input-group">
                             <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="Search for Products" aria-label="Search for Products" aria-describedby="searchProduct1" required>
                             <div class="input-group-append">
@@ -431,7 +431,7 @@
                     </div>
                     <div class="col align-self-center d-none" id="searchClassic">
                         <!-- Search-Form -->
-                            <label class="sr-only" for="searchProduct">Search</label>
+                            <label class="sr-only" for="searchProduct">{{__('general.search')}}</label>
                             <div class="input-group">
                                 <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="Search for Products" aria-label="Search for Products" aria-describedby="searchProduct1" required>
                                 <div class="input-group-append">
@@ -469,7 +469,7 @@
                             <div class="block_search_check">
                                 <div id="attributeRegion"></div>
                                 <div class="range-slider">
-                                    <h4 class="font-size-14 mb-3 font-weight-bold">Price</h4>
+                                    <h4 class="font-size-14 mb-3 font-weight-bold">{{__('general.search_price')}}</h4>
                                     <div id="priceRegion"></div>
                                     <button type="submit" class="btn px-4 btn-primary-dark-w py-2 rounded-lg text-white" id="searchFilterBtn"><span id="searchFilterSpan"> {{ __('Filter') }}</span></button>
                                 </div>

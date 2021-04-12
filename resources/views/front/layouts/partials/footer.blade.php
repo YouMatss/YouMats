@@ -6,7 +6,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto flex-horizontal-center">
                             <i class="ec ec-newsletter font-size-40"></i>
-                            <h2 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h2>
+                            <h2 class="font-size-20 mb-0 ml-3">{{__('general.subscribe_title')}}</h2>
                         </div>
                     </div>
                 </div>
@@ -14,11 +14,11 @@
                     <!-- Subscribe Form -->
                     <form class="js-form-message" id="subscribeForm">
                         @csrf
-                        <label class="sr-only">Email address</label>
+                        <label class="sr-only">{{__('general.subscribe_input')}}</label>
                         <div class="input-group input-group-pill">
                             <input type="email" class="form-control border-0 height-40" name="email" placeholder="Email address" aria-label="Email address" required>
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-dark btn-sm-wide height-40 py-2">Subscribe</button>
+                                <button type="submit" class="btn btn-dark btn-sm-wide height-40 py-2">{{__('general.subscribe_button')}}</button>
                             </div>
                         </div>
                     </form>
@@ -44,36 +44,36 @@
                                 <i class="ec ec-support text-primary font-size-56"></i>
                             </div>
                             <div class="col pl-3">
-                                <div class="font-size-13 font-weight-light">Got questions? Call us 24/7!</div>
-                                <a href="tel:+966112111877" class="font-size-20 text-gray-90">(00966) 502111754, </a><a href="tel:+00966112111877" class="font-size-20 text-gray-90">(00966) 112111877</a>
+                                <div class="font-size-13 font-weight-light">{{__('general.footer_gotquestions')}}</div>
+                                <a href="tel:{{__('info.phone')}}" class="font-size-20 text-gray-90">{{__('info.phone')}}, </a><a href="tel:{{__('info.phone2')}}" class="font-size-20 text-gray-90">{{__('info.phone2')}}</a>
                             </div>
                         </div>
                     </div>
                     <div class="mb-4">
-                        <h6 class="mb-1 font-weight-bold">Contact info</h6>
+                        <h6 class="mb-1 font-weight-bold">{{__('general.footer_contact_info')}}</h6>
                         <address class="">
-                            Building No 6249- Hamzah Ibn Abdul Muttalib, Dhahrat Al Badi'ah , Riyadh
+                            {{__('info.address')}}
                         </address>
                     </div>
                     <div class="my-4 my-md-4">
                         <ul class="list-inline mb-0 opacity-7">
                             <li class="list-inline-item mr-0">
-                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="#">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="{{__('info.facebook')}}">
                                     <span class="fab fa-facebook-f btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item mr-0">
-                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="#">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="{{__('info.googleplus')}}">
                                     <span class="fab fa-google btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item mr-0">
-                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="#">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="{{__('info.twitter')}}">
                                     <span class="fab fa-twitter btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item mr-0">
-                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="#">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="{{__('info.instagram')}}">
                                     <span class="fab fa-github btn-icon__inner"></span>
                                 </a>
                             </li>
@@ -84,7 +84,7 @@
                 <div class="col-lg-7">
                     <div class="row">
                         <div class="col-12 col-md mb-4 mb-md-0">
-                            <h6 class="mb-3 font-weight-bold">Find it Fast</h6>
+                            <h6 class="mb-3 font-weight-bold">{{__('general.footer_find_it_fast')}}</h6>
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
                                 @foreach($footer_sub_categories->take(7)->get() as $sub_category)
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="col-12 col-md mb-4 mb-md-0">
-                            <h6 class="mb-3 font-weight-bold">Customer Care</h6>
+                            <h6 class="mb-3 font-weight-bold">{{__('general.footer_customer_care')}}</h6>
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
                                 <li><a class="list-group-item list-group-item-action" href="#">My Account</a></li>
@@ -131,7 +131,7 @@
     <div class="bg-gray-14 py-2">
         <div class="container">
             <div class="flex-center-between d-block d-md-flex">
-                <div class="mb-3 mb-md-0">© <a href="#" class="font-weight-bold text-gray-90">SeoEra</a> - All rights Reserved</div>
+                <div class="mb-3 mb-md-0">© <a href="#" class="font-weight-bold text-gray-90">SeoEra</a> - {{__('general.footer_all_rights_reserved')}}</div>
                 <div class="text-md-right">
                             <span class="d-inline-block bg-white border rounded p-1">
                                 <img class="max-width-5" src="assets/img/patment-icon_1.png" alt="Image Description">
@@ -176,15 +176,15 @@
                             <div id="login" data-target-group="idForm">
                                 <!-- Title -->
                                 <header class="text-center mb-7">
-                                    <h2 class="h4 mb-0">Register Quotation!</h2>
-                                    <p>Login to manage your account.</p>
+                                    <h2 class="h4 mb-0">{{__('general.quotation_title')}}</h2>
+                                    <p>{{__('general.quotation_subtitle')}}</p>
                                 </header>
                                 <!-- End Title -->
 
                                 <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
-                                        <label class="sr-only">Company Name</label>
+                                        <label class="sr-only">{{__('general.quotation_company_name')}}</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
@@ -200,7 +200,7 @@
                                 <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
-                                        <label class="sr-only">Contact Person</label>
+                                        <label class="sr-only">{{__('general.quotation_contact_person')}}</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
@@ -216,7 +216,7 @@
                                 <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
-                                        <label class="sr-only">Email</label>
+                                        <label class="sr-only">{{__('general.quotation_email')}}</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" >
@@ -232,7 +232,7 @@
                                 <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
-                                        <label class="sr-only">Phone</label>
+                                        <label class="sr-only">{{__('general.quotation_phone')}}</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
@@ -248,7 +248,7 @@
                                 <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
-                                        <label class="sr-only">Message</label>
+                                        <label class="sr-only">{{__('general.quotation_message')}}</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
@@ -278,7 +278,7 @@
 
 
                                 <div class="mb-2">
-                                    <button type="submit" class="btn btn-block btn-sm btn-primary transition-3d-hover">Send Now</button>
+                                    <button type="submit" class="btn btn-block btn-sm btn-primary transition-3d-hover">{{__('general.quotation_button')}}</button>
                                 </div>
 
                             </div>

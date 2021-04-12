@@ -38,10 +38,10 @@ function doTheMagic(url, callback = 'default') {
                     <div class="product-item__outer h-100">
                         <div class="product-item__inner px-xl-4 p-3">
                             <div class="product-item__body pb-xl-2">
-                                <div class="mb-2"><a href="{{ env('APP_URL') }}/category/${value.sub_category.category.slug}/${value.sub_category.slug}" class="font-size-12 text-gray-5">${value.sub_category.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></div>
-                                <h5 class="mb-1 product-item__title"><a href="{{ env('APP_URL') }}/product/${value.slug}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
+                                <div class="mb-2"><a href="{{ env('APP_URL') }}/${value.sub_category.category.slug}/${value.sub_category.slug}/dp" class="font-size-12 text-gray-5">${value.sub_category.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></div>
+                                <h5 class="mb-1 product-item__title"><a href="{{ env('APP_URL') }}/${value.slug}/i" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
                                 <div class="mb-2">
-                                    <a href="{{ env('APP_URL') }}/product/${value.slug}" class="d-block text-center">
+                                    <a href="{{ env('APP_URL') }}/${value.slug}/i" class="d-block text-center">
                                         <img class="img-fluid" src="${value.image_url.url}" alt="${value.image_url.alt}" title="${value.image_url.title}">
                                     </a>
                                 </div>
@@ -64,15 +64,15 @@ function doTheMagic(url, callback = 'default') {
                         <div class="product-item__inner remove-prodcut-hover py-4 row">
                             <div class="product-item__header col-6 col-md-2">
                                 <div class="mb-2">
-                                    <a href="{{ env('APP_URL') }}/product/${value.slug}" class="d-block text-center">
+                                    <a href="{{ env('APP_URL') }}/${value.slug}/i" class="d-block text-center">
                                         <img class="img-fluid" src="${value.image_url.url}" alt="${value.image_url.alt}" title="${value.image_url.title}">
                                     </a>
                                 </div>
                             </div>
                             <div class="product-item__body col-6 col-md-10">
                                 <div class="pr-lg-10">
-                                    <div class="mb-2"><a href="{{ env('APP_URL') }}/category/${value.sub_category.category.slug}/${value.sub_category.slug}" class="font-size-12 text-gray-5">${value.sub_category.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></div>
-                                    <h5 class="mb-2 product-item__title"><a href="{{ env('APP_URL') }}/product/${value.slug}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
+                                    <div class="mb-2"><a href="{{ env('APP_URL') }}/${value.sub_category.category.slug}/${value.sub_category.slug}/dp" class="font-size-12 text-gray-5">${value.sub_category.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></div>
+                                    <h5 class="mb-2 product-item__title"><a href="{{ env('APP_URL') }}/${value.slug}/i" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
 
                                     <div class="mb-2 flex-center-between">
                                         <div class="prodcut-price">
@@ -96,7 +96,7 @@ function doTheMagic(url, callback = 'default') {
 
             if(callback !== 'filter') {
                 attributesRegion.html(`<div class="border-bottom mb-4">
-                            <h4 class="font-size-14 mb-3 font-weight-bold">Sub Categories</h4>`);
+                            <h4 class="font-size-14 mb-3 font-weight-bold">{{__('general.search_subCategory')}}</h4>`);
 
                 $.each(sub_categories, function(key, value) {
                     attributesRegion.append(`<div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
@@ -109,7 +109,7 @@ function doTheMagic(url, callback = 'default') {
                 attributesRegion.append(`</div>`);
 
                 attributesRegion.append(`<div class="border-bottom mb-4">
-                            <h4 class="font-size-14 mb-3 font-weight-bold">Tags</h4>`);
+                            <h4 class="font-size-14 mb-3 font-weight-bold">{{__('general.search_tags')}}</h4>`);
 
                 $.each(tags, function(key, value) {
                     attributesRegion.append(`<div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
@@ -137,7 +137,7 @@ function doTheMagic(url, callback = 'default') {
                            data-result-max="#rangeSliderExample3MaxResult">
                     <!-- End Range Slider -->
                     <div class="mt-1 text-gray-111 d-flex mb-4">
-                        <span class="mr-0dot5">{{ __('Price: ') }} </span>
+                        <span class="mr-0dot5">{{ __('general.search_price') }} </span>
                         <span> {{ getCurrency('code') }}</span>
                         <span id="rangeSliderExample3MinResult" class=""></span>
                         <span class="mx-0dot5"> — </span>
@@ -150,7 +150,7 @@ function doTheMagic(url, callback = 'default') {
             //Show the div
             $("#searchDiv").removeClass('d-none');
             searchFilterSpan.removeClass('spinner-border text-success');
-            searchFilterSpan.html('{{ __('Filter') }}');
+            searchFilterSpan.html('{{ __('general.search_button') }}');
             searchButtonSpan.removeClass('spinner-border text-success');
             searchButtonSpan.addClass('ec ec-search font-size-24');
         }
@@ -158,7 +158,7 @@ function doTheMagic(url, callback = 'default') {
             //Show the div
             $("#searchDiv").removeClass('d-none');
             searchFilterSpan.removeClass('spinner-border text-success');
-            searchFilterSpan.html('{{ __('Filter') }}');
+            searchFilterSpan.html('{{ __('general.search_button') }}');
             searchButtonSpan.removeClass('spinner-border text-success');
             searchButtonSpan.addClass('ec ec-search font-size-24');
             searchRegionList.html('{{ __('Could not find records that match your criteria') }}');

@@ -66,10 +66,10 @@
                                 </div>
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
-                                        SHOP <strong>CONSTRUCTION TIMBER </strong>
+                                        <strong>{{__('home.first_section')}}</strong>
                                     </div>
-                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="#">
-                                        Read More
+                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.first_section_url')}}">
+                                        {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
                                                     <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
                                                 </span>
@@ -86,10 +86,10 @@
                                 </div>
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
-                                        SHOP <STRONG>IRON</STRONG> PRODUCTS
+                                        <STRONG>{{__('home.second_section')}}</STRONG>
                                     </div>
-                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="#">
-                                        Read More
+                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.second_section_url')}}">
+                                        {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
                                                     <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
                                                 </span>
@@ -108,10 +108,10 @@
 
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
-                                        SHOP <STRONG>COARSE AGGREGATE</STRONG> AND <STRONG>STONS</STRONG>
+                                        <STRONG>{{__('home.third_section')}}</STRONG>
                                     </div>
-                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="#">
-                                        Read More
+                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.third_section_url')}}">
+                                        {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
                                                     <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
                                                 </span>
@@ -127,7 +127,7 @@
 
     <div class="container mb-8">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Most Buy Company</h3>
+            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{__('home.categories_title')}}</h3>
         </div>
 
         <div class="js-slick-carousel u-slick my-1" data-slides-show="5" data-slides-scroll="1" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y" data-arrow-left-classes="fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9" data-arrow-right-classes="fa fa-angle-right u-slick__arrow-classic-inner--right"
@@ -161,8 +161,8 @@
         <div class="container">
             <div class="row">
                 <div class="box p-1 pr-2">
-                    <h2 class="text-uppercase">YouMats - Building Construction Material Suppliers in Saudi Arabia</h2>
-                    <p>YouMats is one of the biggest building materials suppliers in Saudi Arabia. Providing you with a wide range of construction material supplies at the best prices. Contact us!</p>
+                    <h2 class="text-uppercase">{{__('home.categories_subtitle')}}</h2>
+                    <p>{{__('home.catgeories_desc')}}</p>
                 </div>
                 @foreach($featured_categories as $f_category)
                 <div class="box">
@@ -190,7 +190,7 @@
             <div class="container p-0">
 
                 <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-                    <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">LATEST PRODUCTS</h3>
+                    <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{__('home.featured_products')}}</h3>
                 </div>
 
                 <div class="mb-4 position-relative">
@@ -283,7 +283,7 @@
                         </a>
                         <div class="des_block_cat_new">
                             <h3>{{$section_i_category->name}}</h3>
-                            <a href="{{route('front.category', [$section_i_category->slug])}}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16 animated fadeInUp">VIEW ALL</a>
+                            <a href="{{route('front.category', [$section_i_category->slug])}}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16 animated fadeInUp">{{__('general.view_all')}}</a>
                         </div>
                     </div>
                 </div>
@@ -362,7 +362,7 @@
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_ii_subCategory->name}}</h3>
             <a class="d-block text-gray-16" href="{{route('front.subCategory', [$section_ii_subCategory->category->slug, $section_ii_subCategory->slug])}}">
-                Go to ALL PRODUCTS
+                {{__('general.go_to_all_products')}}
                 <i class="ec ec-arrow-right-categproes"></i>
             </a>
         </div>
@@ -422,7 +422,7 @@
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iii_subCategory->name}}</h3>
             <a class="d-block text-gray-16" href="{{route('front.subCategory', [$section_iii_subCategory->category->slug, $section_iii_subCategory->slug])}}">
-                Go to ALL PRODUCTS
+                {{__('general.go_to_all_products')}}
                 <i class="ec ec-arrow-right-categproes"></i>
             </a>
         </div>
@@ -482,7 +482,7 @@
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iv_subCategory->name}}</h3>
             <a class="d-block text-gray-16" href="{{route('front.subCategory', [$section_iv_subCategory->category->slug, $section_iv_subCategory->slug])}}">
-                Go to ALL PRODUCTS
+                {{__('general.go_to_all_products')}}
                 <i class="ec ec-arrow-right-categproes"></i>
             </a>
         </div>
