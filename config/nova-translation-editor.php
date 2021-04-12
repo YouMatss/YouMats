@@ -1,6 +1,10 @@
 <?php
 return [
-    'groups' => ['general', 'home'],
+    'groups' => [
+        'info',
+        'general',
+        'home'
+    ],
     'languages' => [
         'en', 'ar'
     ]
