@@ -47,7 +47,7 @@ function doTheMagic(url, callback = 'default') {
                                 </div>
                                 <div class="flex-center-between mb-1">
                                     <div class="prodcut-price">
-                                        <div class="text-gray-100">{{ getCurrency('code') }} ${value.price}</div>
+                                        <div class="text-gray-100">{{ getCurrency('symbol') }} ${value.price}</div>
                                     </div>
                                     <div class="d-none d-xl-block prodcut-add-cart searchCartDiv-${value.id}">
                                         <button data-url="{{ env('APP_URL') }}/cart/add/${value.id}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
@@ -76,7 +76,7 @@ function doTheMagic(url, callback = 'default') {
 
                                     <div class="mb-2 flex-center-between">
                                         <div class="prodcut-price">
-                                            <div class="text-gray-100">{{ getCurrency('code') }} ${value.price}</div>
+                                            <div class="text-gray-100">{{ getCurrency('symbol') }} ${value.price}</div>
                                         </div>
                                         <div class="prodcut-add-cart searchCartDiv-${value.id}">
                                             <button data-url="{{ env('APP_URL') }}/cart/add/${value.id}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
@@ -128,7 +128,7 @@ function doTheMagic(url, callback = 'default') {
                            data-type="double"
                            data-grid="false"
                            data-hide-from-to="true"
-                           data-prefix="{{ getCurrency('code') }}"
+                           data-prefix="{{ getCurrency('symbol') }}"
                            data-min="0"
                            data-max="${response.maxPrice}"
                            data-from="0"
@@ -138,10 +138,10 @@ function doTheMagic(url, callback = 'default') {
                     <!-- End Range Slider -->
                     <div class="mt-1 text-gray-111 d-flex mb-4">
                         <span class="mr-0dot5">{{ __('general.search_price') }} </span>
-                        <span> {{ getCurrency('code') }}</span>
+                        <span> {{ getCurrency('symbol') }}</span>
                         <span id="rangeSliderExample3MinResult" class=""></span>
                         <span class="mx-0dot5"> — </span>
-                        <span> {{ getCurrency('code') }}</span>
+                        <span> {{ getCurrency('symbol') }}</span>
                         <span id="rangeSliderExample3MaxResult" class="">${response.maxPrice}</span>
                     </div>
                 `);

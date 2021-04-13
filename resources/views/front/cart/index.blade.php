@@ -141,15 +141,15 @@
                         <tbody>
                         <tr class="cart-subtotal">
                             <th>Subtotal</th>
-                            <td data-title="Subtotal"><span class="amount" id="subtotal">{{ getCurrency('code') . ' ' . Cart::subtotal() }}</span></td>
+                            <td data-title="Subtotal"><span class="amount" id="subtotal">{{ getCurrency('symbol') . ' ' . Cart::subtotal() }}</span></td>
                         </tr>
                         <tr class="shipping">
                             <th>{{ __('Tax') }}</th>
-                            <td data-title="tax"><span class="amount" id="tax">{{ getCurrency('code') . ' ' . Cart::tax() }}</span></td>
+                            <td data-title="tax"><span class="amount" id="tax">{{ getCurrency('symbol') . ' ' . Cart::tax() }}</span></td>
                         </tr>
                         <tr class="order-total">
                             <th>Total</th>
-                            <td data-title="Total"><strong><span class="amount" id="total">{{ getCurrency('code') . ' ' . Cart::total() }}</span></strong></td>
+                            <td data-title="Total"><strong><span class="amount" id="total">{{ getCurrency('symbol') . ' ' . Cart::total() }}</span></strong></td>
                         </tr>
                         </tbody>
                     </table>

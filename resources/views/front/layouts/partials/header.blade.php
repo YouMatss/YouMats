@@ -17,7 +17,7 @@
                                         <!-- Language -->
                                         <div class="position-relative">
                                             <a id="languageDropdownInvoker" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-                                                <span class="d-inline-block d-sm-none">{{getCurrency('code')}}</span>
+                                                <span class="d-inline-block d-sm-none">{{getCurrency('symbol')}}</span>
                                                 <span class="d-none d-sm-inline-flex align-items-center"><i class="ec ec-dollar mr-1"></i> {{getCurrency('code')}} ({{getCurrency('symbol')}})</span>
                                             </a>
                                             <div id="languageDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker">
@@ -298,7 +298,7 @@
                                     <a href="{{ route('cart.show') }}" class="text-gray-90 position-relative d-flex" data-toggle="tooltip" data-placement="top">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span class="width-22 height-22 bg-dark position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12 text-white cartCount">{{ Cart::instance('cart')->count() }}</span>
-                                        <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3 cartTotal">{{ getCurrency('code'). ' ' . Cart::instance('cart')->total() }}</span>
+                                        <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3 cartTotal">{{ getCurrency('symbol'). ' ' . Cart::instance('cart')->total() }}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -450,7 +450,7 @@
                                     <a href="{{ route('cart.show') }}" class="text-gray-110 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12 cartCount">{{ Cart::instance('cart')->count() }}</span>
-                                        <span class="font-weight-bold font-size-16 text-gray-110 ml-3 cartTotal">{{ getCurrency('code'). ' ' . Cart::instance('cart')->total() }}</span>
+                                        <span class="font-weight-bold font-size-16 text-gray-110 ml-3 cartTotal">{{ getCurrency('symbol'). ' ' . Cart::instance('cart')->total() }}</span>
                                     </a>
                                 </li>
                             </ul>

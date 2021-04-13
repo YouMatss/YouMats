@@ -13,8 +13,7 @@ class MiscController extends Controller
 {
     public function changeCurrency(Request $request) {
         try {
-            Session::put('currencyCode', $request->code);
-            setCurrency();
+            setCurrency($request->code);
         } catch (\Exception $e) {
             $output['status'] = 0;
         }

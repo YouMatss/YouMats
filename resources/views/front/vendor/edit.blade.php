@@ -493,7 +493,7 @@
                                                     @if($product->type === 'product')
                                                         <div class="flex-center-between mb-1">
                                                             <div class="prodcut-price">
-                                                                <div class="text-gray-100">{{ getCurrency('code') .' '. $product->price }}</div>
+                                                                <div class="text-gray-100">{{ getCurrency('symbol') .' '. $product->price }}</div>
                                                             </div>
                                                         </div>
                                                     @endif
