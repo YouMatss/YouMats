@@ -31,7 +31,7 @@
             <div class="flex-center-between mb-1">
                 @if($product->type == 'product')
                     <div class="prodcut-price">
-                        <div class="text-gray-100">{{getCurrency('code')}} {{$product->price}}</div>
+                        <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
                     </div>
                 @endif
                 {!! cartOrChat($product) !!}
@@ -62,7 +62,7 @@
                     <div class="mb-2"><a href="{{route('front.subCategory', [$product->subCategory->category->slug, $product->subCategory->slug])}}" class="font-size-12 text-gray-5">{{$product->subCategory->name}}</a></div>
                     <h5 class="mb-2 product-item__title"><a href="{{route('front.product', [$product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a></h5>
                     <div class="prodcut-price d-md-none">
-                        <div class="text-gray-100">{{getCurrency('code')}} {{$product->price}}</div>
+                        <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
                     </div>
                     <div class="font-size-12 p-0 mb-4 d-none d-md-block">
                         {!! $product->short_desc !!}
@@ -87,7 +87,7 @@
                 <div class="mb-2 flex-center-between">
                     @if($product->type == 'product')
                     <div class="prodcut-price">
-                        <div class="text-gray-100">{{getCurrency('code')}} {{$product->price}}</div>
+                        <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
                     </div>
                     @endif
                     @if(!Auth::guard('vendor')->check())

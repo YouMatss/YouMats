@@ -16,33 +16,19 @@ if (!function_exists('checkCurrencyLocation')) {
     }
 }
 
-if (!function_exists('checkCurrencySession')) {
-    function checkCurrencyCode() {
-        if(Session::has('currencyCode'))
-            $currencyCode = Session::get('currencyCode');
-        else
-            $currencyCode = checkCurrencyLocation();
-        return $currencyCode;
-    }
-}
-
 if (!function_exists('setCurrency')) {
-    function setCurrency() {
-        $currencyCode = checkCurrencyCode();
-        $currency = Currency::where('code', $currencyCode)->select('name', 'code', 'symbol', 'rate')->first();
-        Session::put('currency', [
-            'name' => $currency->name ?? 'Saudi Riyal',
-            'code' => $currency->code ?? 'SAR',
-            'symbol' => $currency->symbol ?? '﷼',
-            'rate' => $currency->rate ?? 1
-        ]);
+    function setCurrency($code) {
+        $currency = Currency::where('code', $code)->select('name', 'code', 'symbol', 'rate')->first();
+        if(!$currency)
+            $currency = Currency::select('name', 'code', 'symbol', 'rate')->first();
+        Session::put('currency', $currency);
     }
 }
 
 if (!function_exists('getCurrency')) {
     function getCurrency($value) {
         if(!Session::has('currency'))
-            setCurrency();
+            setCurrency('SAR');
         return Session::get('currency')[$value];
     }
 }

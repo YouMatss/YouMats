@@ -37,16 +37,16 @@
                             <!-- Range Slider -->
                             <input class="js-range-slider" type="text"
                                    data-extra-classes="u-range-slider u-range-slider-indicator u-range-slider-grid"
-                                   data-type="double" data-grid="false" data-hide-from-to="true" data-prefix="{{ getCurrency('code') }}"
+                                   data-type="double" data-grid="false" data-hide-from-to="true" data-prefix="{{ getCurrency('symbol') }}"
                                    data-min="{{$minPrice}}" data-max="{{$maxPrice}}" data-from="{{$minPrice}}" data-to="{{$maxPrice}}"
                                    data-result-min="#rangeSliderExample3MinResultSubCategory" data-result-max="#rangeSliderExample3MaxResultSubCategory">
                             <!-- End Range Slider -->
                             <div class="mt-1 text-gray-111 d-flex mb-4">
                                 <span class="mr-0dot5">Price: </span>
-                                <span>{{ getCurrency('code') }} </span>
+                                <span>{{ getCurrency('symbol') }} </span>
                                 <span id="rangeSliderExample3MinResultSubCategory">{{$minPrice}}</span>
                                 <span class="mx-0dot5"> — </span>
-                                <span>{{ getCurrency('code') }} </span>
+                                <span>{{ getCurrency('symbol') }} </span>
                                 <span id="rangeSliderExample3MaxResultSubCategory">{{$maxPrice}}</span>
                             </div>
                             <button class="btn px-4 btn-primary-dark-w py-2 rounded-lg text-white" id="priceFilterBtn">Filter</button>

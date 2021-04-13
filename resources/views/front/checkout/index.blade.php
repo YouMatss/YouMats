@@ -154,22 +154,22 @@
                                         @foreach($cartItems as $item)
                                             <tr class="cart_item">
                                                 <td>{{ $item->name }}</td>
-                                                <td>{{ getCurrency('code') . ' ' . $item->price }}</td>
+                                                <td>{{ getCurrency('symbol') . ' ' . $item->price }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
                                     <tr>
                                         <th>Subtotal</th>
-                                        <td>{{ getCurrency('code') . ' ' . Cart::subtotal() }}</td>
+                                        <td>{{ getCurrency('symbol') . ' ' . Cart::subtotal() }}</td>
                                     </tr>
                                     <tr>
                                         <th>Tax</th>
-                                        <td>{{ getCurrency('code') . ' ' . Cart::tax() }}</td>
+                                        <td>{{ getCurrency('symbol') . ' ' . Cart::tax() }}</td>
                                     </tr>
                                     <tr>
                                         <th>Total</th>
-                                        <td><strong>{{ getCurrency('code') . ' ' . Cart::total() }}</strong></td>
+                                        <td><strong>{{ getCurrency('symbol') . ' ' . Cart::total() }}</strong></td>
                                     </tr>
                                     </tfoot>
                                 </table>

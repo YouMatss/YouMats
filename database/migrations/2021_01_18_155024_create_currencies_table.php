@@ -18,7 +18,7 @@ class CreateCurrenciesTable extends Migration
 
             $table->string('name', 50)->unique();
             $table->string('code', 50)->unique();
-            $table->string('symbol', 5)->nullable();
+            $table->text('symbol');
             $table->decimal('rate', 10, 6)->default(1.000000);
 
             $table->tinyInteger('active')->default(0);

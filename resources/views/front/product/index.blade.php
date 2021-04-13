@@ -101,7 +101,7 @@
                                 @endif
                             </div>
                             <div class="mb-3">
-                                <div class="font-size-36">{{getCurrency('code')}} {{$product->price}}</div>
+                                <div class="font-size-36">{{getCurrency('symbol')}} {{$product->price}}</div>
                             </div>
 
                             <div class="mb-3">
@@ -248,7 +248,7 @@
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
-                                                    <div class="text-gray-100">{{getCurrency('code')}} {{$r_product->price}}</div>
+                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->price}}</div>
                                                 </div>
                                                 {!! cartOrChat($product) !!}
                                             </div>
