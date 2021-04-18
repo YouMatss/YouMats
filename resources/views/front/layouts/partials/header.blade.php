@@ -66,8 +66,8 @@
                                         </span>
                                         </a>
                                         <div id="userTypeDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="userTypeDropdownInvoker2">
-                                            <a class="dropdown-item" href="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_company')}}</a>
-                                            <a class="dropdown-item" href="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_individual')}}</a>
+                                            <a class="dropdown-item" href="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
+                                            <a class="dropdown-item" href="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
                                         </div>
                                     </div>
                                     <!-- End Language -->
