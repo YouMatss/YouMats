@@ -38,6 +38,7 @@
         "kirschbaum-development/nova-inline-relationship": "^0.3.0",
         "laravel/framework": "^8.12",
         "laravel/nova": "*",
+        "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
         "maatwebsite/laravel-nova-excel": "^1.2",
         "mcamara/laravel-localization": "^1.6",
