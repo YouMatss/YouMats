@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 //Actions routes
 Route::post('changeCurrency', 'Common\MiscController@changeCurrency')->name('front.currencySwitch');
 Route::get('introduce/{type}', 'Common\MiscController@introduce')->name('front.introduce');
@@ -10,6 +11,14 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function(){
+
+    Route::get('/', function () {
+        return view('coming_soon');
+    });
+    Route::group([
+        'prefix' => 'demo'
+    ], function () {
+
     //Auth (Verified/Authenticated) routes
     Route::group(['namespace' => 'User'], function () {
         Auth::routes(['verify' => true]);
@@ -91,4 +100,5 @@ Route::group([
     Route::get('/{slug}/i', 'Product\ProductController@index')->name('front.product');
     Route::get('/{category_slug}/dp', 'Category\CategoryController@index')->name('front.category');
     Route::get('/{category_slug}/{subCategory_slug}/dp', 'Category\SubCategoryController@index')->name('front.subCategory');
+});
 });
