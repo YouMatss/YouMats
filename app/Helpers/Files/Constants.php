@@ -18,6 +18,11 @@ define("INQUIRE_PATH", 'inquire');
 define("PAGE_PATH", 'page');
 define("CONTENT_PATH", 'content');
 define("SLIDER_PATH", 'slider');
+define("DRIVER_PHOTO", 'driver_photo');
+define("DRIVER_ID", 'driver_id');
+define("DRIVER_LICENSE", 'driver_license');
+define("CAR_PHOTO", 'car_photo');
+define("CAR_LICENSE", 'car_license');
 
 
 // define validation

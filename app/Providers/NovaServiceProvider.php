@@ -5,12 +5,15 @@ namespace App\Providers;
 use Anaseqal\NovaImport\NovaImport;
 use App\Nova\Admin;
 use App\Nova\Attribute;
+use App\Nova\Car;
+use App\Nova\CarType;
 use App\Nova\Category;
 use App\Nova\City;
 use App\Nova\Contact;
 use App\Nova\Country;
 use App\Nova\Coupon;
 use App\Nova\Currency;
+use App\Nova\Driver;
 use App\Nova\FAQ;
 use App\Nova\Inquire;
 use App\Nova\Language;
@@ -162,6 +165,15 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'resources' => [
                             Vendor::class,
                             Membership::class
+                        ]
+                    ]),
+                    TopLevelResource::make([
+                        'label' => 'Tracker',
+                        'expanded' => false,
+                        'resources' => [
+                            Driver::class,
+                            Car::class,
+                            CarType::class,
                         ]
                     ]),
                     TopLevelResource::make([

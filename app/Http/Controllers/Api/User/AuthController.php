@@ -21,7 +21,7 @@ class AuthController extends Controller
         $login = $request->validated();
 
         if (!Auth::attempt($login)) {
-            return response(['message' => 'Invalid login credentials.']);
+            return response(['message' => 'Invalid login credentials.'], 400);
         }
         $user = Auth::user();
         $token = $user->createToken('authToken')->accessToken;
