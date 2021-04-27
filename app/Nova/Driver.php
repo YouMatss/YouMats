@@ -6,6 +6,7 @@ use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
@@ -105,6 +106,8 @@ class Driver extends Resource
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()
                 ->hideFromIndex(),
+
+            HasOne::make('Car'),
 
         ];
     }

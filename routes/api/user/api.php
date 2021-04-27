@@ -9,6 +9,8 @@ Route::post('password/forget', 'AuthController@password_forgot');
 Route::middleware('auth:api')->group(function () {
     Route::post('password/reset', 'AuthController@password_reset');
     Route::post('profile/update', 'AuthController@profile_update');
+
+    Route::post('makeRequest', 'TripController@makeRequest');
 });
 
 Route::get('/get-driver/{id}', 'DriverController@getDriverById');

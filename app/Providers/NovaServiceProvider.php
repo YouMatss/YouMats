@@ -41,17 +41,16 @@ use App\Nova\SubCategory;
 use App\Nova\Subscriber;
 use App\Nova\Tag;
 use App\Nova\Team;
+use App\Nova\Trip;
 use App\Nova\Unit;
 use App\Nova\User;
 use App\Nova\Vendor;
-use App\Observers\CategoryObserver;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
 use Bernhardh\NovaTranslationEditor\NovaTranslationEditor;
 use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
-use DigitalCreative\CollapsibleResourceManager\Resources\InternalLink;
 use DigitalCreative\CollapsibleResourceManager\Resources\NovaResource;
 use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
 use Illuminate\Support\Facades\Gate;
@@ -171,6 +170,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'label' => 'Tracker',
                         'expanded' => false,
                         'resources' => [
+                            Trip::class,
                             Driver::class,
                             Car::class,
                             CarType::class,

@@ -35,7 +35,7 @@ class Driver extends Authenticatable implements HasMedia
         return $this->belongsTo(Country::class);
     }
 
-    public function cars() {
-        return $this->hasMany(Car::class);
+    public function car() {
+        return $this->hasOne(Car::class);
     }
 }

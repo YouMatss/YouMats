@@ -2,8 +2,12 @@
 
 namespace App\Nova;
 
+use GeneaLabs\NovaMapMarkerField\MapMarker;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Trip extends Resource
@@ -28,7 +32,7 @@ class Trip extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id'
     ];
 
     /**
@@ -41,6 +45,40 @@ class Trip extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
+            BelongsTo::make('User')->withoutTrashed(),
+            BelongsTo::make('Driver')->withoutTrashed()->nullable(),
+
+            MapMarker::make('Pickup Location')
+                ->defaultZoom(8)
+                ->defaultLatitude(24.7136)
+                ->latitude('pickup_latitude')
+                ->defaultLongitude(46.6753)
+                ->longitude('pickup_longitude')
+                ->hideFromIndex(),
+
+            MapMarker::make('Destination Location')
+                ->defaultZoom(8)
+                ->defaultLatitude(24.7136)
+                ->latitude('destination_latitude')
+                ->defaultLongitude(46.6753)
+                ->longitude('destination_longitude')
+                ->hideFromIndex(),
+
+            Number::make('Distance')
+                ->rules(REQUIRED_NUMERIC_VALIDATION)
+                ->min(0)
+                ->step(0.1)
+                ->help('In KiloMeter'),
+
+            Currency::make('Price')
+                ->rules(REQUIRED_NUMERIC_VALIDATION)
+                ->min(0)
+                ->step(0.05),
+
+            Number::make('Drivers Available', 'driver_available')
+                ->rules(NULLABLE_INTEGER_VALIDATION)
+                ->min(0),
         ];
     }
 
