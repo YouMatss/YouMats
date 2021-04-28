@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\MakeRequestRequest;
+use App\Http\Requests\Api\User\PickDriverRequest;
+use App\Http\Resources\CarDriverListResource;
 use App\Http\Resources\TripResource;
 use App\Models\Car;
-use App\Models\Driver;
 use App\Models\Trip;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,6 +35,14 @@ class TripController extends Controller
             'driver_available' => count($cars)
         ]);
 
-        return new TripResource($trip);
+        return (new TripResource($trip))->additional([
+            'available_cars' => CarDriverListResource::collection($cars)
+        ]);
+    }
+
+    public function pickDriver(PickDriverRequest $request) {
+        $data = $request->validated();
+
+        return $data;
     }
 }
