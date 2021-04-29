@@ -11,7 +11,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('profile/update', 'AuthController@profile_update');
 
     Route::post('make-request', 'TripController@makeRequest');
-    Route::post('pick-driver', 'TripController@makeRequest');
+    Route::post('pick-driver', 'TripController@pickDriver');
 });
 
 Route::get('/get-driver/{id}', 'DriverController@getDriverById');

@@ -24,7 +24,8 @@ class PickDriverRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'trip_id' => 'required|integer|exists:trips,id',
+            'car_id' => 'required|integer|exists:cars,id'
         ];
     }
 }

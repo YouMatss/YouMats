@@ -19,8 +19,8 @@ class CreateTripsTable extends Migration
             $table->bigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->bigInteger('driver_id')->unsigned()->nullable();
-            $table->foreign('driver_id')->references('id')->on('drivers')
+            $table->bigInteger('car_id')->unsigned()->nullable();
+            $table->foreign('car_id')->references('id')->on('cars')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->string('pickup_latitude');
@@ -29,7 +29,13 @@ class CreateTripsTable extends Migration
             $table->string('destination_longitude');
             $table->float('distance');
             $table->decimal('price', 10, 2)->nullable();
-            $table->integer('driver_available')->nullable();
+
+            $table->enum('driver_status', [0, 1, 2])->comment('0 / Pending, 1 / Accepted, 2 / Refused')->default(0);
+            $table->enum('status', [0, 1, 2])->comment('0 / Pending, 1 / In progress, 2 / Completed')->default(0);
+
+            $table->timestamp('started_at')->nullable();
+            $table->decimal('user_rate', 10, 1)->nullable();
+            $table->decimal('driver_rate', 10, 1)->nullable();
 
             $table->softDeletes();
             $table->timestamps();
