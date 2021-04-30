@@ -23,7 +23,7 @@ class CarController extends Controller
         $data = $request->validated();
         $driver_id = Auth::guard('driver-api')->id();
 
-        if (count(Car::where('driver_id',  $driver_id)->get()) > 1) {
+        if (count(Car::where('driver_id',  $driver_id)->get()) >= 1) {
             return response()->json(['message' => 'Car Already Added!'], 400);
         }
 
