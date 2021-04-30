@@ -32,7 +32,10 @@ class TripController extends Controller
             'id' => $id
         ])->first();
 
-        return new TripResource($trip);
+        if($trip) {
+            return new TripResource($trip);
+        }
+        return response()->json(['message' => 'Request dosn\'t exists.'], 400);
     }
 
     public function requestResponse(RequestResponseRequest $request, $id) {
@@ -42,26 +45,29 @@ class TripController extends Controller
             'driver_id' => $driver->id,
             'id' => $id
         ])->first();
-        if($trip->driver_status == '0') {
-            if($data['response'] == '1') {
-                $trip->update([
-                    'driver_status' => $data['response'],
-                    'status' => '1',
-                    'started_at' => now(),
-                    'price' => $trip->distance * $driver->car->price_per_kilo
-                ]);
-            } elseif($data['response'] == '2') {
-                $trip->update([
-                    'driver_status' => $data['response'],
-                    'status' => '0'
-                ]);
+        if($trip) {
+            if($trip->driver_status == '0') {
+                if($data['response'] == '1') {
+                    $trip->update([
+                        'driver_status' => '1',
+                        'status' => '1',
+                        'started_at' => now(),
+                        'price' => $trip->distance * $driver->car->price_per_kilo
+                    ]);
+                } elseif($data['response'] == '2') {
+                    $trip->update([
+                        'driver_status' => '2',
+                        'status' => '0'
+                    ]);
+                }
+                return response()->json([
+                    'message' => 'Request Updated Successfully.',
+                    'trip' => new TripResource($trip)
+                ], 200);
             }
-            return response()->json([
-                'message' => 'Request Updated Successfully.',
-                'trip' => new TripResource($trip)
-            ], 200);
+            return response()->json(['message' => 'Request Already Updated.'], 400);
         }
-        return response()->json(['message' => 'Request Already Updated.'], 400);
+        return response()->json(['message' => 'Request dosn\'t exists.'], 400);
     }
 
     public function requestComplete($id) {
@@ -83,7 +89,7 @@ class TripController extends Controller
             ], 200);
         }
 
-        return response()->json(['message' => 'Trip dosn\'t exist.'], 400);
+        return response()->json(['message' => 'Request dosn\'t exists.'], 400);
     }
 
     public function giveRate(GiveRateRequest $request, $id) {

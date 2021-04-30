@@ -8,6 +8,7 @@ use App\Http\Resources\CarResource;
 use App\Http\Resources\CarTypeResource;
 use App\Models\Car;
 use App\Models\CarType;
+use App\Nova\Driver;
 use Illuminate\Support\Facades\Auth;
 
 class CarController extends Controller
@@ -20,8 +21,13 @@ class CarController extends Controller
 
     public function store(CarRequest $request) {
         $data = $request->validated();
-        $driver = Auth::guard('driver-api')->user();
-        $data['driver_id'] = $driver->id;
+        $driver_id = Auth::guard('driver-api')->id();
+
+        if (count(Car::where('driver_id',  $driver_id)->get()) > 1) {
+            return response()->json(['message' => 'Car Already Added!'], 400);
+        }
+
+        $data['driver_id'] = $driver_id;
 
         $car = Car::create($data);
 
@@ -46,9 +52,10 @@ class CarController extends Controller
         ], 200);
     }
 
-    public function update(CarRequest $request, $id) {
+    public function update(CarRequest $request) {
         $data = $request->validated();
-        $car = Car::findorfail($id);
+        $driver = Auth::guard('driver-api')->user();
+        $car = $driver->car;
 
         if(isset($request->car_photo))
             foreach($request->car_photo as $image) {
@@ -71,11 +78,10 @@ class CarController extends Controller
         ], 200);
     }
 
-    public function delete($id) {
+    public function delete() {
         $driver = Auth::guard('driver-api')->user();
-
-        if($driver->cars()->where('id', $id)->first()) {
-            Car::destroy($id);
+        if($driver->car) {
+            $driver->car->delete();
             return response()->json(['message' => 'Car Deleted Successfully.'], 200);
         }
         return response()->json(['message' => 'This car doesn\'t exists!'], 400);
