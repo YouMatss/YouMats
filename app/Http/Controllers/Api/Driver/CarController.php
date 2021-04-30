@@ -85,17 +85,17 @@ class CarController extends Controller
         return CarTypeResource::collection(CarType::all());
     }
 
-    public function deleteImage($car_id, $collectionName, $collection_id) {
-        $driver_id = Auth::guard('driver-api')->id();
-        $car = Car::where([
-            'id' => $car_id,
-            'driver_id' => $driver_id
-        ])->first();
-
-        if($car) {
-            $car->clearMediaCollection($collectionName, $collection_id);
-            return response()->json(['message' => 'Image Deleted Successfully.'], 200);
-        }
-        return response()->json(['message' => 'This car doesn\'t exists!'], 400);
-    }
+//    public function deleteImage($car_id, $collectionName, $collection_id) {
+//        $driver_id = Auth::guard('driver-api')->id();
+//        $car = Car::where([
+//            'id' => $car_id,
+//            'driver_id' => $driver_id
+//        ])->first();
+//
+//        if($car) {
+//            $car->clearMediaCollection($collectionName, $collection_id);
+//            return response()->json(['message' => 'Image Deleted Successfully.'], 200);
+//        }
+//        return response()->json(['message' => 'This car doesn\'t exists!'], 400);
+//    }
 }

@@ -16,7 +16,7 @@ Route::middleware('auth:driver-api')->group(function () {
         Route::post('/store', 'CarController@store');
         Route::put('/update/{id}', 'CarController@update');
         Route::delete('/delete/{id}', 'CarController@delete');
-        Route::delete('/delete-image/{car_id}/{collection_name}/{collection_id}', 'CarController@deleteImage');
+//        Route::delete('/delete-image/{car_id}/{collection_name}/{collection_id}', 'CarController@deleteImage');
     });
 
     Route::get('all-requests', 'TripController@getAllRequests');
