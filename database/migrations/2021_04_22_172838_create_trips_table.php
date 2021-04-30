@@ -19,8 +19,8 @@ class CreateTripsTable extends Migration
             $table->bigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->bigInteger('car_id')->unsigned()->nullable();
-            $table->foreign('car_id')->references('id')->on('cars')
+            $table->bigInteger('driver_id')->unsigned()->nullable();
+            $table->foreign('driver_id')->references('id')->on('drivers')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->string('pickup_latitude');

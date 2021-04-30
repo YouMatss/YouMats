@@ -12,6 +12,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('make-request', 'TripController@makeRequest');
     Route::post('pick-driver', 'TripController@pickDriver');
+    Route::post('request/{id}/give-rate', 'TripController@giveRate');
 });
 
 Route::get('/get-driver/{id}', 'DriverController@getDriverById');

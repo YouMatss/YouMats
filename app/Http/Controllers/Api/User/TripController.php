@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Driver\GiveRateRequest;
 use App\Http\Requests\Api\User\MakeRequestRequest;
 use App\Http\Requests\Api\User\PickDriverRequest;
 use App\Http\Resources\CarDriverListResource;
@@ -55,9 +56,30 @@ class TripController extends Controller
         ])->first();
 
         $trip->update([
-            'car_id' => $data['car_id']
+            'driver_id' => $data['driver_id']
         ]);
 
         return new TripResource($trip);
+    }
+
+    public function giveRate(GiveRateRequest $request, $id) {
+        $user_id = Auth::guard('api')->id();
+        $data = $request->validated();
+        $trip = Trip::where([
+            'user_id' => $user_id,
+            'id' => $id,
+            'driver_status' => '1',
+            'status' => '2'
+        ])->first();
+        if($trip) {
+            $trip->update([
+                'driver_rate' => $data['rate']
+            ]);
+            return response()->json([
+                'message' => 'Rate Submit Successfully.',
+                'trip' => new TripResource($trip)
+            ], 200);
+        }
+        return response()->json(['message' => 'Trip dosn\'t exist.'], 400);
     }
 }

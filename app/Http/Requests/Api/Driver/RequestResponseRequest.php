@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\User;
+namespace App\Http\Requests\Api\Driver;
 
 use App\Http\Requests\Api\FormRequest;
 
-class PickDriverRequest extends FormRequest
+class RequestResponseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class PickDriverRequest extends FormRequest
     public function rules()
     {
         return [
-            'trip_id' => 'required|integer|exists:trips,id',
-            'driver_id' => 'required|integer|exists:drivers,id'
+            'response' => 'required|integer|In:1,2'
         ];
     }
 }

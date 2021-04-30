@@ -17,6 +17,7 @@ class CarDriverListResource extends JsonResource
         return [
             'id' => $this->id,
             'driver' => [
+                'id' => $this->driver->id,
                 'name' => $this->driver->name,
                 'phone' => $this->phone,
                 'phone2' => $this->phone2,

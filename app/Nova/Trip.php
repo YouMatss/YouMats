@@ -49,7 +49,7 @@ class Trip extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             BelongsTo::make('User')->withoutTrashed(),
-            BelongsTo::make('Car')->withoutTrashed()->nullable(),
+            BelongsTo::make('Driver')->withoutTrashed()->nullable(),
 
             MapMarker::make('Pickup Location')
                 ->defaultZoom(8)

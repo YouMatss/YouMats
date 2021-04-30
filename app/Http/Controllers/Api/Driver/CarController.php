@@ -14,9 +14,8 @@ class CarController extends Controller
 {
     public function index() {
         $driver = Auth::guard('driver-api')->user();
-        $cars = $driver->cars;
-
-        return CarResource::collection($cars);
+        $car = $driver->car;
+        return new CarResource($car);
     }
 
     public function store(CarRequest $request) {
@@ -77,13 +76,26 @@ class CarController extends Controller
 
         if($driver->cars()->where('id', $id)->first()) {
             Car::destroy($id);
-        } else {
-            return response()->json(['message' => 'This car doesn\'t exists!'], 400);
+            return response()->json(['message' => 'Car Deleted Successfully.'], 200);
         }
-        return response()->json(['message' => 'Car Deleted Successfully.'], 200);
+        return response()->json(['message' => 'This car doesn\'t exists!'], 400);
     }
 
     public function getCarTypes() {
         return CarTypeResource::collection(CarType::all());
+    }
+
+    public function deleteImage($car_id, $collectionName, $collection_id) {
+        $driver_id = Auth::guard('driver-api')->id();
+        $car = Car::where([
+            'id' => $car_id,
+            'driver_id' => $driver_id
+        ])->first();
+
+        if($car) {
+            $car->clearMediaCollection($collectionName, $collection_id);
+            return response()->json(['message' => 'Image Deleted Successfully.'], 200);
+        }
+        return response()->json(['message' => 'This car doesn\'t exists!'], 400);
     }
 }

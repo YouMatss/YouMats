@@ -97,7 +97,7 @@ class AuthController extends Controller
     }
 
     public function updatePhotos(ProfileUpdatePhotosRequest $request) {
-        $data = $request->validated();
+//        $data = $request->validated();
         $driver = Auth::user();
 
         $this->uploadDriverPhotos($request, $driver);

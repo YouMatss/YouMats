@@ -16,7 +16,15 @@ Route::middleware('auth:driver-api')->group(function () {
         Route::post('/store', 'CarController@store');
         Route::put('/update/{id}', 'CarController@update');
         Route::delete('/delete/{id}', 'CarController@delete');
+        Route::delete('/delete-image/{car_id}/{collection_name}/{collection_id}', 'CarController@deleteImage');
     });
+
+    Route::get('all-requests', 'TripController@getAllRequests');
+    Route::get('pending-requests', 'TripController@getPendingRequests');
+    Route::get('request/{id}', 'TripController@getRequestById');
+    Route::post('request/{id}/response', 'TripController@requestResponse');
+    Route::post('request/{id}/complete', 'TripController@requestComplete');
+    Route::post('request/{id}/give-rate', 'TripController@giveRate');
 });
 
 Route::get('/car-types', 'CarController@getCarTypes');

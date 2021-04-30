@@ -11,7 +11,7 @@ class TripResource extends JsonResource
         return [
             'id' => $this->id,
             'user' => new UserResource($this->user),
-            'car' => new CarResource($this->car),
+            'driver' => new DriverResource($this->driver),
             'pickup_latitude' => $this->pickup_latitude,
             'pickup_longitude' => $this->pickup_longitude,
             'destination_latitude' => $this->destination_latitude,
