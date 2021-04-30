@@ -11,11 +11,11 @@ Route::middleware('auth:driver-api')->group(function () {
     Route::post('profile/update', 'AuthController@profile_update');
     Route::post('profile/update-photos', 'AuthController@updatePhotos');
 
-    Route::group(['prefix' => 'cars'], function () {
+    Route::group(['prefix' => 'car'], function () {
         Route::get('/', 'CarController@index');
         Route::post('/store', 'CarController@store');
-        Route::put('/update/{id}', 'CarController@update');
-        Route::delete('/delete/{id}', 'CarController@delete');
+        Route::put('/update', 'CarController@update');
+        Route::delete('/delete', 'CarController@delete');
 //        Route::delete('/delete-image/{car_id}/{collection_name}/{collection_id}', 'CarController@deleteImage');
     });
 
