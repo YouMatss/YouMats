@@ -17,9 +17,9 @@ class CreateUserMessagesTable extends Migration
             $table->id();
             $table->unsignedInteger('message_id');
             $table->unsignedInteger('sender_id');
-            $table->enum('sender_type', ['user', 'vendor']);
+            $table->enum('sender_type', ['user', 'vendor', 'driver']);
             $table->unsignedInteger('receiver_id');
-            $table->enum('receiver_type', ['user', 'vendor']);
+            $table->enum('receiver_type', ['user', 'vendor', 'driver']);
             $table->tinyInteger('type')->default(0)
                 ->comment('1: group message, 0: personal message');
             $table->tinyInteger('seen_status')->default(0)

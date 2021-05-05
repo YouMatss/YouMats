@@ -25,6 +25,12 @@ Route::middleware('auth:driver-api')->group(function () {
     Route::post('request/{id}/response', 'TripController@requestResponse');
     Route::post('request/{id}/complete', 'TripController@requestComplete');
     Route::post('request/{id}/give-rate', 'TripController@giveRate');
+
+    Route::group(['prefix' => 'chat'], function () {
+        Route::get('view_messages/{user_id}', 'ChatController@viewMessage');
+        Route::post('send_message', 'ChatController@sendMessage');
+    });
+
 });
 
 Route::get('/car-types', 'CarController@getCarTypes');
