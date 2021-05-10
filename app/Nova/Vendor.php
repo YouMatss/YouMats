@@ -187,10 +187,6 @@ class Vendor extends Resource
 
                 Text::make('Meta Title', 'meta_title')
                     ->hideFromIndex()
-                    ->displayUsing(function ($value) {
-                        if($value == '')
-                            return $this->name;
-                    })
                     ->rules(NULLABLE_STRING_VALIDATION)
                     ->translatable()
                     ->canSee(fn() => auth('admin')->user()->can('seo')),

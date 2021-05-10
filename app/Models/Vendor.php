@@ -28,7 +28,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 
     protected $guard = 'vendor';
 
-    protected $translatable = ['name'];
+    protected $translatable = ['name', 'meta_title', 'meta_keywords', 'meta_desc'];
 
     protected $dates = ['deleted_at'];
 
