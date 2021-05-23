@@ -68,6 +68,18 @@ class SubCategory extends Resource
                 ->croppable('cropper')
                 ->previewUsing('cropper'),
 
+            Toggle::make(__('Top Category'), 'topCategory')
+                ->falseColor('#bacad6')
+                ->editableIndex(),
+            Toggle::make(__('Section II'), 'section_ii')
+                ->falseColor('#bacad6')
+                ->editableIndex(),
+            Toggle::make(__('Section III'), 'section_iii')
+                ->falseColor('#bacad6')
+                ->editableIndex(),
+            Toggle::make(__('Section IV'), 'section_iv')
+                ->falseColor('#bacad6')
+                ->editableIndex(),
             Toggle::make('Show In Footer')
                 ->falseColor('#bacad6')
                 ->editableIndex(),

@@ -51,9 +51,20 @@ return [
             'provider' => 'vendors',
         ],
 
+        'driver' => [
+            'driver' => 'session',
+            'provider' => 'drivers'
+        ],
+
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
+            'hash' => false,
+        ],
+
+        'driver-api' => [
+            'driver' => 'passport',
+            'provider' => 'drivers',
             'hash' => false,
         ],
     ],
@@ -91,6 +102,11 @@ return [
             'model' => App\Models\Vendor::class,
         ],
 
+        'drivers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Driver::class,
+        ]
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -127,6 +143,12 @@ return [
         ],
         'vendors' => [
             'provider' => 'vendors',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'drivers' => [
+            'provider' => 'drivers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

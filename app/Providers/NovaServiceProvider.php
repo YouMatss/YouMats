@@ -5,12 +5,15 @@ namespace App\Providers;
 use Anaseqal\NovaImport\NovaImport;
 use App\Nova\Admin;
 use App\Nova\Attribute;
+use App\Nova\Car;
+use App\Nova\CarType;
 use App\Nova\Category;
 use App\Nova\City;
 use App\Nova\Contact;
 use App\Nova\Country;
 use App\Nova\Coupon;
 use App\Nova\Currency;
+use App\Nova\Driver;
 use App\Nova\FAQ;
 use App\Nova\Inquire;
 use App\Nova\Language;
@@ -33,20 +36,21 @@ use App\Nova\Page;
 use App\Nova\PaymentGateway;
 use App\Nova\Product;
 use App\Nova\Quote;
+use App\Nova\Slider;
 use App\Nova\SubCategory;
 use App\Nova\Subscriber;
 use App\Nova\Tag;
 use App\Nova\Team;
+use App\Nova\Trip;
 use App\Nova\Unit;
 use App\Nova\User;
 use App\Nova\Vendor;
-use App\Observers\CategoryObserver;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
+use Bernhardh\NovaTranslationEditor\NovaTranslationEditor;
 use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
-use DigitalCreative\CollapsibleResourceManager\Resources\InternalLink;
 use DigitalCreative\CollapsibleResourceManager\Resources\NovaResource;
 use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
 use Illuminate\Support\Facades\Gate;
@@ -163,6 +167,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         ]
                     ]),
                     TopLevelResource::make([
+                        'label' => 'Tracker',
+                        'expanded' => false,
+                        'resources' => [
+                            Trip::class,
+                            Driver::class,
+                            Car::class,
+                            CarType::class,
+                        ]
+                    ]),
+                    TopLevelResource::make([
                         'label' => 'Users',
                         'expanded' => false,
                         'resources' => [
@@ -178,6 +192,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'resources' => [
                             Admin::class,
                             Team::class,
+                            Slider::class,
                             Group::make([
                                 'label' => 'Settings',
                                 'expanded' => false,
@@ -186,11 +201,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                     Currency::class,
                                     PaymentGateway::class,
                                     Coupon::class,
-                                    InternalLink::make([
-                                        'label' => 'Site Content',
-                                        'target' => '_self',
-                                        'url' => '#'
-                                    ]),
                                     Page::class,
                                     NovaResource::make(FAQ::class)->label('FAQs'),
                                     Unit::class,
@@ -220,6 +230,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ])
                 ]
             ]),
+            NovaTranslationEditor::make(),
             (new BackupTool())
                 ->canSee(function ($request) {
                     return $request->user()->isSuperAdmin();

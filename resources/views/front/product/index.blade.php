@@ -32,8 +32,8 @@
     </div>
     <div class="container">
         <div class="mb-14">
-            <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-5 mb-4 mb-md-0">
+            <div class="row rtl">
+                <div class="col-md-6 col-lg-4 col-xl-5 mb-4 mb-md-0 ltr">
                     <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2" data-infinite="true" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4" data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4" data-nav-for="#sliderSyncingThumb">
                         @if(count($product->getMedia(PRODUCT_PATH)))
                         @foreach($product->getMedia(PRODUCT_PATH) as $image)
@@ -76,13 +76,16 @@
                         <a href="{{ route('home') }}" class="d-inline-block max-width-150 ml-n2 mb-2">
                             <img class="img-fluid" src="{{front_url()}}/assets/img/logo.png">
                         </a>
-                        <div class="mb-2">
-                            <ul class="font-size-14 pl-3 ml-1 text-gray-9">
-                                @foreach($product->tags as $tag)
-                                <li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
+                        {{--<div class="mb-2">--}}
+                            {{--<ul class="font-size-14 pl-3 ml-1 text-gray-9">--}}
+                                {{--@foreach($product->tags as $tag)--}}
+                                {{--<li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}</a></li>--}}
+                                {{--@endforeach--}}
+                            {{--</ul>--}}
+                        {{--</div>--}}
+
+
+
                         <p>{!! $product->short_desc !!}</p>
                         <p><strong>SKU</strong>: {{$product->SKU}}</p>
                     </div>
@@ -98,7 +101,7 @@
                                 @endif
                             </div>
                             <div class="mb-3">
-                                <div class="font-size-36">{{getCurrency('code')}} {{$product->price}}</div>
+                                <div class="font-size-36">{{getCurrency('symbol')}} {{$product->price}}</div>
                             </div>
 
                             <div class="mb-3">
@@ -122,6 +125,14 @@
                             @endif
                         </div>
                     </div>
+                    <div class="mb-2">
+                        <ul class="font-size-14 pl-3 ml-1 text-gray-9 style_tags">
+                            @foreach($product->tags as $tag)
+                                <li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}  </a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -189,7 +200,7 @@
 
             <div class="container p-0">
 
-                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3">
+                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
                     <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">RELATED PRODUCTS</h3>
                 </div>
 
@@ -237,7 +248,7 @@
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
-                                                    <div class="text-gray-100">{{getCurrency('code')}} {{$r_product->price}}</div>
+                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->price}}</div>
                                                 </div>
                                                 {!! cartOrChat($product) !!}
                                             </div>

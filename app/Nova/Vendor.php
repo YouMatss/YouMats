@@ -136,8 +136,6 @@ class Vendor extends Resource
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper')
-                ->previewUsing('cropper')
                 ->hideFromIndex(),
 
             Medialibrary::make('Licenses', VENDOR_PATH)->fields(function () {
@@ -189,10 +187,6 @@ class Vendor extends Resource
 
                 Text::make('Meta Title', 'meta_title')
                     ->hideFromIndex()
-                    ->displayUsing(function ($value) {
-                        if($value == '')
-                            return $this->name;
-                    })
                     ->rules(NULLABLE_STRING_VALIDATION)
                     ->translatable()
                     ->canSee(fn() => auth('admin')->user()->can('seo')),

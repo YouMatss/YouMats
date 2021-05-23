@@ -59,7 +59,8 @@ class Currency extends Resource
 
             Text::make('Symbol')
                 ->sortable()
-                ->rules(NULLABLE_STRING_VALIDATION),
+                ->translatable()
+                ->rules(REQUIRED_STRING_VALIDATION),
 
             Number::make('Rate')
                 ->sortable()

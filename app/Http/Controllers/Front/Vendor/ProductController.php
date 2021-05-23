@@ -201,6 +201,17 @@ class ProductController extends Controller
 
         $this->validateRequest($request);
 
+        $data = $this->validate($request, [
+            'cities' => ARRAY_VALIDATION,
+            'cities.*' => 'required|integer|exists:cities,id',
+            'price_shipping' => ARRAY_VALIDATION,
+            'price_shipping.*' => REQUIRED_INTEGER_VALIDATION,
+            'time' => ARRAY_VALIDATION,
+            'time.*' => REQUIRED_INTEGER_VALIDATION,
+            'format' => ARRAY_VALIDATION,
+            'format.*' => 'required|string|In:hour,day',
+        ]);
+
         if($product->SKU != $request->sku) {
             $request->validate([
                 'sku' => 'required|string|unique:products'
@@ -222,8 +233,20 @@ class ProductController extends Controller
                 $product->addMedia($image)->toMediaCollection(PRODUCT_PATH);
             }
 
-        return redirect()->back()
-        ->with([
+        $shippingPrices = [];
+
+        for ($i=0;$i<count($data['cities']);$i++) {
+            $shippingPrices[$i]['cities'] = $data['cities'][$i];
+            $shippingPrices[$i]['price'] = $data['price_shipping'][$i];
+            $shippingPrices[$i]['time'] = $data['time'][$i];
+            $shippingPrices[$i]['format'] = $data['format'][$i];
+        }
+
+        $product->update([
+            'shipping_prices' => $shippingPrices
+        ]);
+
+        return redirect()->back()->with([
             'custom_success' => __('Product has been updated.')
         ]);
     }

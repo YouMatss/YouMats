@@ -257,7 +257,7 @@
                                                 <th scope="row">{{ $user->type == 'company' ? $order->quote_no : $order->order_id }}</th>
                                                 <td>{{$order->created_at->format('l, F d, Y h:i A')}}</td>
                                                 @if($user->type != 'company')
-                                                    <td>{{getCurrency('code')}} {{$order->total_price}}</td>
+                                                    <td>{{getCurrency('symbol')}} {{$order->total_price}}</td>
                                                     <td>{{$order->payment_status}}</td>
                                                 @endif
                                                 <td>{{$order->status}}</td>
@@ -419,7 +419,7 @@
                                                                                         <b>Total Price:</b>
                                                                                     </div>
                                                                                     <div class="col-md-8">
-                                                                                        <span class="">{{getCurrency('code')}} {{$order->total_price}}</span>
+                                                                                        <span class="">{{getCurrency('symbol')}} {{$order->total_price}}</span>
                                                                                     </div>
                                                                                 </li>
                                                                             @endif

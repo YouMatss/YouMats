@@ -17,8 +17,8 @@
     <div class="mb-4">
         <div class="bg-img-hero" style="background-image: url({{front_url()}}/assets/img/bg-2.png);">
             <div class="container min-height-438 overflow-hidden">
-                <div class="js-slick-carousel u-slick"
-                     data-pagi-classes="text-center position-absolute right-0 bottom-0 left-0 u-slick__pagination u-slick__pagination--long justify-content-start mb-3 mb-md-4 offset-xl-2 pl-xl-16 pl-wd-13">
+                <div class="js-slick-carousel u-slick" data-pagi-classes="text-center position-absolute right-0 bottom-0 left-0 u-slick__pagination u-slick__pagination--long justify-content-start mb-3 mb-md-4 offset-xl-2 pl-xl-16 pl-wd-13">
+                    @foreach($sliders as $slider)
                     <div class="js-slide">
                         <div class="row min-height-438 pt-7 py-md-0">
                             <div class="d-none d-xl-block col-auto">
@@ -28,87 +28,28 @@
                                 <div class="ml-xl-4">
                                     <h6 class="font-size-15 font-weight-bold mb-2 text-cyan"
                                         data-scs-animation-in="fadeInUp">
-                                        BIGGEST BUILDING MATERIALS SUPPLIERS IN KSA
+                                        {{$slider->quote}}
                                     </h6>
                                     <h1 class="font-size-46 text-lh-50 font-weight-light mb-6"
                                         data-scs-animation-in="fadeInUp"
                                         data-scs-animation-delay="200">
-                                        SHOP <stong class="font-weight-bold">PLUMBING</stong> APPLIANCES
+                                        <stong class="font-weight-bold">{{$slider->title}}</stong>
                                     </h1>
-                                    <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                    <a href="{{$slider->button_link}}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
                                        data-scs-animation-in="fadeInUp"
                                        data-scs-animation-delay="300">
-                                        Start Buying
+                                        {{$slider->button_title}}
                                     </a>
                                 </div>
                             </div>
                             <div class="col-xl-5 col-6 d-flex align-items-end ml-auto ml-md-0"
                                  data-scs-animation-in="fadeInUp"
                                  data-scs-animation-delay="500">
-                                <img class="img-fluid ml-auto mr-5" src="assets/img/slider_3.png" alt="Image Description">
+                                <img class="img-fluid ml-auto mr-5" src="{{ $slider->getFirstMediaUrlOrDefault(SLIDER_PATH)['url'] }}" alt="{{$slider->getFirstMediaUrlOrDefault(SLIDER_PATH)['alt']}}" title="{{$slider->getFirstMediaUrlOrDefault(SLIDER_PATH)['title']}}">
                             </div>
                         </div>
                     </div>
-                    <div class="js-slide">
-                        <div class="row min-height-438 pt-7 py-md-0">
-                            <div class="d-none d-xl-block col-auto">
-                                <div class="max-width-270 min-width-270"></div>
-                            </div>
-                            <div class="col-xl col col-md-6 mt-md-8 mt-lg-10">
-                                <div class="ml-xl-4">
-                                    <h6 class="font-size-15 font-weight-bold mb-2 text-cyan"
-                                        data-scs-animation-in="fadeInUp">
-                                        BIGGEST BUILDING MATERIALS SUPPLIERS IN KSA
-                                    </h6>
-                                    <h1 class="font-size-46 text-lh-50 font-weight-light mb-6"
-                                        data-scs-animation-in="fadeInUp"
-                                        data-scs-animation-delay="200">
-                                        SHOP <stong class="font-weight-bold">BUILDING MATERIAL</stong> IN SAUDI ARABIA
-                                    </h1>
-                                    <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
-                                       data-scs-animation-in="fadeInUp"
-                                       data-scs-animation-delay="300">
-                                        Start Buying
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-xl-5 col-6 flex-horizontal-center ml-auto ml-md-0"
-                                 data-scs-animation-in="fadeInRight"
-                                 data-scs-animation-delay="500">
-                                <img class="img-fluid ml-auto mr-5" src="assets/img/slider_2.png" alt="Image Description">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="js-slide">
-                        <div class="row min-height-438 pt-7 py-md-0">
-                            <div class="d-none d-xl-block col-auto">
-                                <div class="max-width-270 min-width-270"></div>
-                            </div>
-                            <div class="col-xl col col-md-6 mt-md-8 mt-lg-10">
-                                <div class="ml-xl-4">
-                                    <h6 class="font-size-15 font-weight-bold mb-2 text-cyan"
-                                        data-scs-animation-in="fadeInUp">
-                                        BIGGEST BUILDING MATERIALS SUPPLIERS IN KSA
-                                    </h6>
-                                    <h1 class="font-size-46 text-lh-50 font-weight-light mb-6"
-                                        data-scs-animation-in="fadeInUp"
-                                        data-scs-animation-delay="200">
-                                        SHOP <stong class="font-weight-bold">ELECTRIC WATER</stong> HEATERS
-                                    </h1>
-                                    <a href="#l" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
-                                       data-scs-animation-in="fadeInUp"
-                                       data-scs-animation-delay="300">
-                                        Start Buying
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-xl-5 col-6 flex-horizontal-center ml-auto ml-md-0"
-                                 data-scs-animation-in="fadeInRight"
-                                 data-scs-animation-delay="500">
-                                <img class="img-fluid ml-auto mr-5" src="assets/img/slider_1.png" alt="Image Description">
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -125,10 +66,10 @@
                                 </div>
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
-                                        SHOP <strong>CONSTRUCTION TIMBER </strong>
+                                        <strong>{{__('home.first_section')}}</strong>
                                     </div>
-                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="#">
-                                        Read More
+                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.first_section_url')}}">
+                                        {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
                                                     <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
                                                 </span>
@@ -145,10 +86,10 @@
                                 </div>
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
-                                        SHOP <STRONG>IRON</STRONG> PRODUCTS
+                                        <STRONG>{{__('home.second_section')}}</STRONG>
                                     </div>
-                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="#">
-                                        Read More
+                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.second_section_url')}}">
+                                        {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
                                                     <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
                                                 </span>
@@ -167,10 +108,10 @@
 
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
-                                        SHOP <STRONG>COARSE AGGREGATE</STRONG> AND <STRONG>STONS</STRONG>
+                                        <STRONG>{{__('home.third_section')}}</STRONG>
                                     </div>
-                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="#">
-                                        Read More
+                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.third_section_url')}}">
+                                        {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
                                                     <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
                                                 </span>
@@ -186,7 +127,7 @@
 
     <div class="container mb-8">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Most Buy Company</h3>
+            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{__('home.categories_title')}}</h3>
         </div>
 
         <div class="js-slick-carousel u-slick my-1" data-slides-show="5" data-slides-scroll="1" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y" data-arrow-left-classes="fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9" data-arrow-right-classes="fa fa-angle-right u-slick__arrow-classic-inner--right"
@@ -209,7 +150,7 @@
             @foreach($featuredVendors as $f_vendor)
             <div class="js-slide img_vend">
                 <a href="{{ route('vendor.show', [$f_vendor->slug]) }}" class="link-hover__brand">
-                    <img class="img-fluid m-auto max-height-50" style="width: 70px" src="{{ $f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" alt="{{$f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
+                    <img class="img-fluid m-auto max-height-50" src="{{ $f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" alt="{{$f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$f_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                 </a>
             </div>
             @endforeach
@@ -220,8 +161,8 @@
         <div class="container">
             <div class="row">
                 <div class="box p-1 pr-2">
-                    <h2 class="text-uppercase">YouMats - Building Construction Material Suppliers in Saudi Arabia</h2>
-                    <p>YouMats is one of the biggest building materials suppliers in Saudi Arabia. Providing you with a wide range of construction material supplies at the best prices. Contact us!</p>
+                    <h2 class="text-uppercase">{{__('home.categories_subtitle')}}</h2>
+                    <p>{{__('home.catgeories_desc')}}</p>
                 </div>
                 @foreach($featured_categories as $f_category)
                 <div class="box">
@@ -249,7 +190,7 @@
             <div class="container p-0">
 
                 <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-                    <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">LATEST PRODUCTS</h3>
+                    <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{__('home.featured_products')}}</h3>
                 </div>
 
                 <div class="mb-4 position-relative">
@@ -295,12 +236,12 @@
                                             </h5>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [$bs_product->slug])}}" class="d-block text-center">
-                                                    <img class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
+                                                    <img class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, '')['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                                 </a>
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
-                                                    <div class="text-gray-100">{{getCurrency('code')}} {{$bs_product->price}}</div>
+                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$bs_product->price}}</div>
                                                 </div>
                                                 {!! cartOrChat($bs_product) !!}
                                             </div>
@@ -342,7 +283,7 @@
                         </a>
                         <div class="des_block_cat_new">
                             <h3>{{$section_i_category->name}}</h3>
-                            <a href="{{route('front.category', [$section_i_category->slug])}}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16 animated fadeInUp">VIEW ALL</a>
+                            <a href="{{route('front.category', [$section_i_category->slug])}}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16 animated fadeInUp">{{__('general.view_all')}}</a>
                         </div>
                     </div>
                 </div>
@@ -366,7 +307,7 @@
                                         </div>
                                         <div class="flex-center-between mb-1">
                                             <div class="prodcut-price">
-                                                <div class="text-gray-100">{{getCurrency('code')}} {{$i_product->price}}</div>
+                                                <div class="text-gray-100">{{getCurrency('symbol')}} {{$i_product->price}}</div>
                                             </div>
                                             {!! cartOrChat($i_product) !!}
                                         </div>
@@ -395,13 +336,13 @@
         </div>
         <div class="mb-6">
             <div class="row rtl flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
-                @foreach($top_categories as $t_category)
+                @foreach($top_subCategories as $t_category)
                 <div class="col-md-6 col-xl-4 mb-5 flex-shrink-0 flex-md-shrink-1">
                     <div class="bg-gray-1 overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
-                        <a href="{{route('front.category', [$t_category->slug])}}" class="d-block  pr-2 pr-wd-6">
+                        <a href="{{route('front.subCategory', [$t_category->category->slug, $t_category->slug])}}" class="d-block">
                             <div class="media align-items-center">
                                 <div class="max-width-148 img_cat_home">
-                                    <img class="img-fluid" src="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                                    <img class="img-fluid" src="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH, '')['url']}}" alt="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$t_category->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['title']}}" />
                                 </div>
                                 <div class="ml-4 media-body">
                                     <h4 class="mb-0 text-gray-90">{{$t_category->name}}</h4>
@@ -415,33 +356,33 @@
         </div>
     </div>
 
-    @if(isset($section_ii_category))
+    @if(isset($section_ii_subCategory))
     <!-- Section II Category -->
     <div class="container mb-8">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_ii_category->name}}</h3>
-            <a class="d-block text-gray-16" href="{{route('front.category', [$section_ii_category->slug])}}">
-                Go to ALL PRODUCTS
+            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_ii_subCategory->name}}</h3>
+            <a class="d-block text-gray-16" href="{{route('front.subCategory', [$section_ii_subCategory->category->slug, $section_ii_subCategory->slug])}}">
+                {{__('general.go_to_all_products')}}
                 <i class="ec ec-arrow-right-categproes"></i>
             </a>
         </div>
 
         <div class="row rtl">
             <div class="col-12 col-md-2">
-                <a href="{{route('front.category', [$section_ii_category->slug])}}" class="d-block">
-                    <img class="img-fluid img_main_block" width="200" src="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                <a href="{{route('front.subCategory', [$section_ii_subCategory->category->slug, $section_ii_subCategory->slug])}}" class="d-block">
+                    <img class="img-fluid img_main_block" width="200" src="{{$section_ii_subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" alt="{{$section_ii_subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$section_ii_subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
                 <!-- Tab Content -->
                 <ul class="row list-unstyled products-group no-gutters">
-                    @foreach($section_ii_category->products->take(6) as $ii_product)
+                    @foreach($section_ii_subCategory->products->take(6) as $ii_product)
                     <li class="col-6 col-md-2 col-xl-2 product-item">
                         <div class="product-item__outer h-100">
                             <div class="product-item__inner px-xl-3 p-3">
                                 <div class="product-item__body pb-xl-2">
                                     <div class="mb-2">
-                                        <a href="{{route('front.subCategory', [$section_ii_category->slug, $ii_product->subCategory->slug])}}" class="font-size-12 text-gray-5">{{$ii_product->subCategory->name}}</a>
+                                        <a href="{{route('front.subCategory', [$section_ii_subCategory->category->slug, $section_ii_subCategory->slug])}}" class="font-size-12 text-gray-5">{{$section_ii_subCategory->name}}</a>
                                     </div>
                                     <h5 class="mb-1 product-item__title">
                                         <a href="{{route('front.product', [$ii_product->slug])}}" class="text-blue font-weight-bold">{{$ii_product->name}}</a>
@@ -453,7 +394,7 @@
                                     </div>
                                     <div class="flex-center-between mb-1">
                                         <div class="prodcut-price">
-                                            <div class="text-gray-100">{{getCurrency('code')}} {{$ii_product->price}}</div>
+                                            <div class="text-gray-100">{{getCurrency('symbol')}} {{$ii_product->price}}</div>
                                         </div>
                                         {!! cartOrChat($ii_product) !!}
                                     </div>
@@ -475,33 +416,33 @@
     </div>
     @endif
 
-    @if(isset($section_iii_category))
+    @if(isset($section_iii_subCategory))
     <!-- Section III Category -->
     <div class="container mb-8">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iii_category->name}}</h3>
-            <a class="d-block text-gray-16" href="{{route('front.category', [$section_iii_category->slug])}}">
-                Go to ALL PRODUCTS
+            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iii_subCategory->name}}</h3>
+            <a class="d-block text-gray-16" href="{{route('front.subCategory', [$section_iii_subCategory->category->slug, $section_iii_subCategory->slug])}}">
+                {{__('general.go_to_all_products')}}
                 <i class="ec ec-arrow-right-categproes"></i>
             </a>
         </div>
 
         <div class="row rtl">
             <div class="col-12 col-md-2">
-                <a href="{{route('front.category', [$section_iii_category->slug])}}" class="d-block">
-                    <img class="img-fluid img_main_block" width="200" src="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                <a href="{{route('front.subCategory', [$section_iii_subCategory->category->slug, $section_iii_subCategory->slug])}}" class="d-block">
+                    <img class="img-fluid img_main_block" width="200" src="{{$section_iii_subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" alt="{{$section_iii_subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$section_iii_subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
                 <!-- Tab Content -->
                 <ul class="row list-unstyled products-group no-gutters">
-                    @foreach($section_iii_category->products->take(6) as $iii_product)
+                    @foreach($section_iii_subCategory->products->take(6) as $iii_product)
                         <li class="col-6 col-md-2 col-xl-2 product-item">
                             <div class="product-item__outer h-100">
                                 <div class="product-item__inner px-xl-3 p-3">
                                     <div class="product-item__body pb-xl-2">
                                         <div class="mb-2">
-                                            <a href="{{route('front.subCategory', [$section_iii_category->slug, $iii_product->subCategory->slug])}}" class="font-size-12 text-gray-5">{{$iii_product->subCategory->name}}</a>
+                                            <a href="{{route('front.subCategory', [$section_iii_subCategory->category->slug, $section_iii_subCategory->slug])}}" class="font-size-12 text-gray-5">{{$section_iii_subCategory->name}}</a>
                                         </div>
                                         <h5 class="mb-1 product-item__title">
                                             <a href="{{route('front.product', [$iii_product->slug])}}" class="text-blue font-weight-bold">{{$iii_product->name}}</a>
@@ -513,7 +454,7 @@
                                         </div>
                                         <div class="flex-center-between mb-1">
                                             <div class="prodcut-price">
-                                                <div class="text-gray-100">{{getCurrency('code')}} {{$iii_product->price}}</div>
+                                                <div class="text-gray-100">{{getCurrency('symbol')}} {{$iii_product->price}}</div>
                                             </div>
                                             {!! cartOrChat($iii_product) !!}
                                         </div>
@@ -535,33 +476,33 @@
     </div>
     @endif
 
-    @if(isset($section_iv_category))
+    @if(isset($section_iv_subCategory))
     <!-- Section IV Category -->
     <div class="container mb-8">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iv_category->name}}</h3>
-            <a class="d-block text-gray-16" href="{{route('front.category', [$section_iv_category->slug])}}">
-                Go to ALL PRODUCTS
+            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iv_subCategory->name}}</h3>
+            <a class="d-block text-gray-16" href="{{route('front.subCategory', [$section_iv_subCategory->category->slug, $section_iv_subCategory->slug])}}">
+                {{__('general.go_to_all_products')}}
                 <i class="ec ec-arrow-right-categproes"></i>
             </a>
         </div>
 
         <div class="row rtl">
             <div class="col-12 col-md-2">
-                <a href="{{route('front.category', [$section_iv_category->slug])}}" class="d-block">
-                    <img class="img-fluid img_main_block" width="200" src="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                <a href="{{route('front.subCategory', [$section_iv_subCategory->category->slug, $section_iv_subCategory->slug])}}" class="d-block">
+                    <img class="img-fluid img_main_block" width="200" src="{{$section_iv_subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" alt="{{$section_iv_subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$section_iv_subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
                 <!-- Tab Content -->
                 <ul class="row list-unstyled products-group no-gutters">
-                    @foreach($section_iv_category->products->take(6) as $iv_product)
+                    @foreach($section_iv_subCategory->products->take(6) as $iv_product)
                         <li class="col-6 col-md-2 col-xl-2 product-item">
                             <div class="product-item__outer h-100">
                                 <div class="product-item__inner px-xl-3 p-3">
                                     <div class="product-item__body pb-xl-2">
                                         <div class="mb-2">
-                                            <a href="{{route('front.subCategory', [$section_iv_category->slug, $iv_product->subCategory->slug])}}" class="font-size-12 text-gray-5">{{$iv_product->subCategory->name}}</a>
+                                            <a href="{{route('front.subCategory', [$section_iv_subCategory->category->slug, $section_iv_subCategory->slug])}}" class="font-size-12 text-gray-5">{{$section_iv_subCategory->name}}</a>
                                         </div>
                                         <h5 class="mb-1 product-item__title">
                                             <a href="{{route('front.product', [$iv_product->slug])}}" class="text-blue font-weight-bold">{{$iv_product->name}}</a>
@@ -573,7 +514,7 @@
                                         </div>
                                         <div class="flex-center-between mb-1">
                                             <div class="prodcut-price">
-                                                <div class="text-gray-100">{{getCurrency('code')}} {{$iv_product->price}}</div>
+                                                <div class="text-gray-100">{{getCurrency('symbol')}} {{$iv_product->price}}</div>
                                             </div>
                                             {!! cartOrChat($iv_product) !!}
                                         </div>

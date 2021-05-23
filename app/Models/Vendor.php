@@ -28,7 +28,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 
     protected $guard = 'vendor';
 
-    protected $translatable = ['name'];
+    protected $translatable = ['name', 'meta_title', 'meta_keywords', 'meta_desc'];
 
     protected $dates = ['deleted_at'];
 
@@ -50,9 +50,6 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 
         $this->addMediaConversion('cropper')
             ->performOnCollections(VENDOR_COVER);
-
-        $this->addMediaConversion('cropper')
-            ->performOnCollections(VENDOR_LOGO);
     }
 
     public function sendPasswordResetNotification($token)
@@ -116,4 +113,32 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     public function setWhatsappPhoneAttribute($value) {
         $this->attributes['whatsapp_phone'] = '+966' . ltrim($value, '+966');
     }
+
+    public function users_conversations() {
+        return ($this->belongsToMany(User::class, 'user_messages',
+            'sender_id','receiver_id')->where('sender_type', 'vendor')->get()->collect()->unique())
+            ->merge($this->belongsToMany(User::class, 'user_messages',
+                'receiver_id','sender_id')->where('receiver_type', 'vendor')->get()->collect()->unique())
+            ->unique('id');
+    }
+
+    private function messages($user_id) {
+        return ($this->hasMany(UserMessage::class, 'sender_id')
+            ->with('message')->where([
+                'receiver_id' => $user_id, 'receiver_type' => 'user', 'sender_type' => 'vendor'
+            ])->get()->collect())
+            ->merge($this->hasMany(UserMessage::class, 'receiver_id')
+            ->with('message')->where([
+                'sender_id' => $user_id, 'receiver_type' => 'vendor', 'sender_type' => 'user'
+            ])->get()->collect());
+    }
+
+    public function last_message($user_id) {
+        return $this->messages($user_id)->sortBy('created_at')->last()->message;
+    }
+
+    public function count_messages($user_id) {
+        return count($this->messages($user_id));
+    }
+
 }

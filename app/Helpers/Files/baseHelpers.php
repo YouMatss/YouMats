@@ -57,7 +57,7 @@ if (!function_exists('getCityNameById')) {
 
 if (!function_exists('cartOrChat')) {
     function cartOrChat($product) {
-        $chat = '<div><button data-url="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="fa fa-comments"></i></button></div>';
+        $chat = '<div><a href="'. route('chat.user.conversations', [$product->vendor_id]) .'" class="btn-add-cart btn-primary transition-3d-hover"><i class="fa fa-comments"></i></a></div>';
         $cart = '<div class="prodcut-add-cart"><button data-url="' . route('cart.add', ['product' => $product]) . '" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button></div>';
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company() || ($product->type == 'product' && $product->price > 0))
@@ -90,4 +90,19 @@ if (!function_exists('generate_map_branch')) {
         $html_tag .= '<hr>';
         return $html_tag;
     }
+}
+
+function haversineGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000) {
+    // convert from degrees to radians
+    $latFrom = deg2rad($latitudeFrom);
+    $lonFrom = deg2rad($longitudeFrom);
+    $latTo = deg2rad($latitudeTo);
+    $lonTo = deg2rad($longitudeTo);
+
+    $latDelta = $latTo - $latFrom;
+    $lonDelta = $lonTo - $lonFrom;
+
+    $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+            cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+    return ($angle * $earthRadius) / 1000;
 }
