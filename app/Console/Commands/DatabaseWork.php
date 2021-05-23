@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Product;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\UnreachableUrl;
 
 class DatabaseWork extends Command
 {
@@ -39,8 +40,35 @@ class DatabaseWork extends Command
      */
     public function handle()
     {
-        $this->CopyArabicProducts();
-        $this->CopyEnglishProducts();
+        $this->CopyProductImages();
+    }
+
+    private function CopyProductImages()
+    {
+        $this->line('Starting product images copying');
+
+        $letsCount = [];
+
+        $products = $this->getProductsWithImages();
+
+        foreach($products as $product) {
+            $currentProduct = Product::find($product->pro_id);
+            $imageUrl = 'http://youmats.com/' . $product->path;
+
+            if($currentProduct) {
+                $productId = $currentProduct->id;
+
+                try {
+                    $currentProduct->addMediaFromUrl($imageUrl)->toMediaCollection(PRODUCT_PATH);
+                    $this->info("Added [$imageUrl] to a product with ID [$productId]");
+                }
+                catch(UnreachableUrl $e) {
+                    $this->info("The image could not be resolved. Product: $productId");
+                }
+            }
+        }
+
+        $this->info('Operation has completed successfully');
     }
 
     private function CopyArabicProducts()
@@ -104,6 +132,15 @@ class DatabaseWork extends Command
                 JOIN products_translate OP ON OP.pro_id = P.id
             WHERE OP.lang_id = $language
             ORDER BY P.id DESC;
+        "));
+    }
+
+    private function getProductsWithImages()
+    {
+        return DB::select(DB::raw("
+            SELECT*FROM old_products P
+                JOIN attachments A ON A.id = P.small_img_id
+            ORDER BY P.pro_id ASC;
         "));
     }
 }
