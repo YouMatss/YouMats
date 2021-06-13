@@ -28,7 +28,7 @@ class ProductController extends Controller
     }
 
     public function all() {
-        $data['products'] = Product::where('active', 1)->orderBy('sort')->paginate(20);
+        $data['products'] = Product::where('active', 1)->orderBy('sort')->paginate(30);
 
         return view('front.product.all')->with($data);
     }

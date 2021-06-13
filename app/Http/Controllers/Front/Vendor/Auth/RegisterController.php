@@ -62,7 +62,7 @@ class RegisterController extends Controller
             'country_id' => $data['country_id'],
             'name' => $data['name_en'],
             'email' => $data['email'],
-            'phone' => '+966' . $data['phone'],
+            'phone' => $data['phone'],
             'address' => $data['address'],
             'password' => Hash::make($data['password']),
             'slug' => $data['name_en']

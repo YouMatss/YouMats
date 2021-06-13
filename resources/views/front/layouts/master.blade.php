@@ -18,6 +18,7 @@
         </main>
         @include('front.layouts.partials.footer')
         @include('front.layouts.partials.assets_js')
+        @include('front.layouts.partials.welcome-popup')
         @include('front.layouts.partials.search')
         @stack('chat')
     </body>

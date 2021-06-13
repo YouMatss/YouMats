@@ -96,7 +96,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="phone" class="form-label">Phone</label>
-                                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone">
+                                                <input type="tel" class="form-control phoneNumber @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required>
                                                 @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

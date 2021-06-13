@@ -147,31 +147,37 @@
                                     <thead>
                                     <tr>
                                         <th class="product-name">Product</th>
-                                        <th class="product-total">Total</th>
+                                        @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                                            <th class="product-total">Total</th>
+                                        @endif
                                     </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($cartItems as $item)
                                             <tr class="cart_item">
                                                 <td>{{ $item->name }}</td>
-                                                <td>{{ getCurrency('symbol') . ' ' . $item->price }}</td>
+                                                @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                                                    <td>{{ getCurrency('symbol') . ' ' . $item->price }}</td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Subtotal</th>
-                                        <td>{{ getCurrency('symbol') . ' ' . Cart::subtotal() }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tax</th>
-                                        <td>{{ getCurrency('symbol') . ' ' . Cart::tax() }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Total</th>
-                                        <td><strong>{{ getCurrency('symbol') . ' ' . Cart::total() }}</strong></td>
-                                    </tr>
-                                    </tfoot>
+                                    @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                                        <tfoot>
+                                        <tr>
+                                            <th>Subtotal</th>
+                                            <td>{{ getCurrency('symbol') . ' ' . Cart::subtotal() }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tax</th>
+                                            <td>{{ getCurrency('symbol') . ' ' . Cart::tax() }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total</th>
+                                            <td><strong>{{ getCurrency('symbol') . ' ' . Cart::total() }}</strong></td>
+                                        </tr>
+                                        </tfoot>
+                                    @endif
                                 </table>
                                 <!-- End Product Content -->
                                 <div class="border-top border-width-3 border-color-1 pt-3 mb-3">

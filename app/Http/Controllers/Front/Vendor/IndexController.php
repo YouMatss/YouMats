@@ -170,7 +170,7 @@ class IndexController extends Controller
 
         $data['vendor_id'] = $vendor->id;
         if(isset($data['phone_number']))
-            $data['phone_number'] = '+966' . $data['phone_number'];
+            $data['phone_number'] = $data['phone_number'];
 
         VendorBranch::create($data);
 

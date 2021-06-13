@@ -44,9 +44,11 @@
                                 <th class="product-remove">&nbsp;</th>
                                 <th class="product-thumbnail">&nbsp;</th>
                                 <th class="product-name">Product</th>
-                                <th class="product-price">Price</th>
                                 <th class="product-quantity w-lg-15">Quantity</th>
-                                <th class="product-subtotal">Total</th>
+                                @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                                    <th class="product-price">Price</th>
+                                    <th class="product-subtotal">Total</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
@@ -67,38 +69,39 @@
                                         <a href="#" class="text-gray-90">{{ $item->name }}</a>
                                     </td>
 
-                                    <td data-title="Price">
-                                        <span class="">{{ $item->price }}</span>
-                                    </td>
-
                                     @if($item->model)
-                                    <td data-title="Quantity">
-                                        <span class="sr-only">Quantity</span>
-                                        <!-- Quantity -->
-                                        <div class="border rounded-pill py-1 width-122 w-xl-80 px-3 border-color-1">
-                                            <div class="js-quantity row align-items-center">
-                                                <div class="col">
-                                                    <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" row_id="{{ $item->rowId }}" value="{{ $item->qty }}">
-                                                </div>
-                                                <div class="col-auto pr-1">
-                                                    <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
-                                                        <small class="fas fa-minus btn-icon__inner"></small>
-                                                    </a>
-                                                    <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
-                                                        <small class="fas fa-plus btn-icon__inner"></small>
-                                                    </a>
+                                        <td data-title="Quantity">
+                                            <span class="sr-only">Quantity</span>
+                                            <!-- Quantity -->
+                                            <div class="border rounded-pill py-1 width-122 w-xl-80 px-3 border-color-1">
+                                                <div class="js-quantity row align-items-center">
+                                                    <div class="col">
+                                                        <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" row_id="{{ $item->rowId }}" value="{{ $item->qty }}">
+                                                    </div>
+                                                    <div class="col-auto pr-1">
+                                                        <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
+                                                            <small class="fas fa-minus btn-icon__inner"></small>
+                                                        </a>
+                                                        <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
+                                                            <small class="fas fa-plus btn-icon__inner"></small>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- End Quantity -->
-                                    </td>
+                                            <!-- End Quantity -->
+                                        </td>
                                     @else
                                         <td>-</td>
                                     @endif
 
-                                    <td data-title="Total">
-                                        <span class="">{{ $item->subtotal }}</span>
-                                    </td>
+                                    @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                                        <td data-title="Price">
+                                            <span class="">{{ $item->price }}</span>
+                                        </td>
+                                        <td data-title="Total">
+                                            <span class="">{{ $item->subtotal }}</span>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             <tr>
@@ -132,29 +135,31 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xl-5 col-lg-6  col-md-8 mb-5">
-                    <div class="border-bottom border-color-1 mb-3">
-                        <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Cart totals</h3>
+            @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                <div class="row">
+                    <div class="col-xl-5 col-lg-6  col-md-8 mb-5">
+                        <div class="border-bottom border-color-1 mb-3">
+                            <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Cart totals</h3>
+                        </div>
+                        <table class="table mb-3 mb-md-0">
+                            <tbody>
+                            <tr class="cart-subtotal">
+                                <th>Subtotal</th>
+                                <td data-title="Subtotal"><span class="amount" id="subtotal">{{ getCurrency('symbol') . ' ' . Cart::subtotal() }}</span></td>
+                            </tr>
+                            <tr class="shipping">
+                                <th>{{ __('Tax') }}</th>
+                                <td data-title="tax"><span class="amount" id="tax">{{ getCurrency('symbol') . ' ' . Cart::tax() }}</span></td>
+                            </tr>
+                            <tr class="order-total">
+                                <th>Total</th>
+                                <td data-title="Total"><strong><span class="amount" id="total">{{ getCurrency('symbol') . ' ' . Cart::total() }}</span></strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <table class="table mb-3 mb-md-0">
-                        <tbody>
-                        <tr class="cart-subtotal">
-                            <th>Subtotal</th>
-                            <td data-title="Subtotal"><span class="amount" id="subtotal">{{ getCurrency('symbol') . ' ' . Cart::subtotal() }}</span></td>
-                        </tr>
-                        <tr class="shipping">
-                            <th>{{ __('Tax') }}</th>
-                            <td data-title="tax"><span class="amount" id="tax">{{ getCurrency('symbol') . ' ' . Cart::tax() }}</span></td>
-                        </tr>
-                        <tr class="order-total">
-                            <th>Total</th>
-                            <td data-title="Total"><strong><span class="amount" id="total">{{ getCurrency('symbol') . ' ' . Cart::total() }}</span></strong></td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
-            </div>
+            @endif
         @else
             <h4>{{ __('You do not have item(s) in the cart.') }}</h4>
     </div>

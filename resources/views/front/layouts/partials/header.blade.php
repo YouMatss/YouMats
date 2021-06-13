@@ -144,11 +144,13 @@
                                 </li>
                             @endif
 
-                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
-                                    {{__('general.get_quote')}}
-                                </a>
-                            </li>
+                            @if(session('userType') !== 'individual' || !auth()->guard('vendor')->check())
+                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                    <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
+                                        {{__('general.get_quote')}}
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -298,7 +300,9 @@
                                     <a href="{{ route('cart.show') }}" class="text-gray-90 position-relative d-flex" data-toggle="tooltip" data-placement="top">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span class="width-22 height-22 bg-dark position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12 text-white cartCount">{{ Cart::instance('cart')->count() }}</span>
-                                        <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3 cartTotal">{{ getCurrency('symbol'). ' ' . Cart::instance('cart')->total() }}</span>
+                                        @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                                            <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3 cartTotal">{{ getCurrency('symbol'). ' ' . Cart::instance('cart')->total() }}</span>
+                                        @endif
                                     </a>
                                 </li>
                             </ul>
@@ -450,7 +454,9 @@
                                     <a href="{{ route('cart.show') }}" class="text-gray-110 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12 cartCount">{{ Cart::instance('cart')->count() }}</span>
-                                        <span class="font-weight-bold font-size-16 text-gray-110 ml-3 cartTotal">{{ getCurrency('symbol'). ' ' . Cart::instance('cart')->total() }}</span>
+                                        @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                                            <span class="font-weight-bold font-size-16 text-gray-110 ml-3 cartTotal">{{ getCurrency('symbol'). ' ' . Cart::instance('cart')->total() }}</span>
+                                        @endif
                                     </a>
                                 </li>
                             </ul>

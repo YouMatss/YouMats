@@ -22,12 +22,10 @@
     </div>
 </div>
 
-@section('extraScripts')
-    @if(!\Illuminate\Support\Facades\Session::get('userType'))
-    <script type="text/javascript">
-        $(window).on('load', function() {
-            $('#myModal').modal('show');
-        });
-    </script>
-    @endif
-@endsection
+@if(!\Illuminate\Support\Facades\Session::get('userType'))
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myModal').modal({backdrop: 'static', keyboard: false});
+    });
+</script>
+@endif
