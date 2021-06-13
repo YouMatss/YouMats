@@ -59,12 +59,30 @@
                 }
             });
         });
+
+        let input = document.querySelector(".phoneNumber");
+
+        window.intlTelInput(input, {
+            utilsScript: '{{front_url()}}/assets/js/utils.js',
+            formatOnDisplay: true,
+            autoPlaceholder: true,
+            initialCountry: "auto",
+            hiddenInput: "phone",
+            geoIpLookup: function(success, failure) {
+                $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "us";
+                    success(countryCode);
+                });
+            },
+        });
+
         // inquireForm Request
         $("#inquireForm").submit(function (e) {
             e.preventDefault();
-            var form = $(this),
-                button = $("#inquireForm button"),
-                buttonContent = button.text();
+            var button = $("#inquireForm button"),
+                buttonContent = button.text(),
+                inputs = $(this);
+
             $.ajax({
                 type: 'POST',
                 url: "{{route('front.inquire.request')}}",
@@ -80,7 +98,8 @@
                 success: function (response) {
                     if (response.status) {
                         toastr.success(response.message);
-                        form.find("input, textarea").val("");
+                        inputs.find("input, textarea").val("");
+                        $("#sidebarContent").addClass('u-unfold--hidden');
                     } else
                         toastr.warning(response.message);
 

@@ -17,6 +17,7 @@
 <script src="{{front_url()}}/assets/vendor/slick-carousel/slick/slick.js"></script>
 <script src="{{front_url()}}/assets/vendor/appear.js"></script>
 <script src="{{front_url()}}/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="{{front_url()}}/assets/js/intlTelInput.min.js"></script>
 
 <!-- JS Electro -->
 <script src="{{front_url()}}/assets/js/hs.core.js"></script>
@@ -178,15 +179,15 @@
                 url: url,
                 data: { _token: '{{ csrf_token() }}' }
             })
-                .done(function(response) {
-                    if(response.status)
-                        toastr.success(response.message);
-                    else
-                        toastr.warning(response.message)
-                })
-                .fail(function(response) {
-                    toastr.error(response.responseJSON.message ?? {{ __('Error') }});
-                })
+            .done(function(response) {
+                if(response.status)
+                    toastr.success(response.message);
+                else
+                    toastr.warning(response.message)
+            })
+            .fail(function(response) {
+                toastr.error(response.responseJSON.message ?? {{ __('Error') }});
+            })
         });
     });
 

@@ -104,9 +104,6 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     public function getWhatsappPhoneAttribute($value) {
         return '+966' . trim($value, '+966');
     }
-    public function setPhoneAttribute($value) {
-        $this->attributes['phone'] = '+966' . ltrim($value, '+966');
-    }
     public function setPhone2Attribute($value) {
         $this->attributes['phone2'] = '+966' . ltrim($value, '+966');
     }

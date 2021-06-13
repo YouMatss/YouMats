@@ -28,8 +28,11 @@
                 <p class="mb-1">{!! $product->short_desc !!}</p>
             </div>
             <div class="text-gray-20 mb-2 font-size-12">SKU: {{$product->SKU}}</div>
+            @if(auth()->guard('admin')->check())
+                <div class="text-gray-20 mb-2 font-size-12">Vendor: {{$product->vendor->name}}</div>
+            @endif
             <div class="flex-center-between mb-1">
-                @if($product->type == 'product')
+                @if($product->type == 'product' && session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
                     <div class="prodcut-price">
                         <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
                     </div>
@@ -61,13 +64,18 @@
                 <div class="pr-lg-10">
                     <div class="mb-2"><a href="{{route('front.subCategory', [$product->subCategory->category->slug, $product->subCategory->slug])}}" class="font-size-12 text-gray-5">{{$product->subCategory->name}}</a></div>
                     <h5 class="mb-2 product-item__title"><a href="{{route('front.product', [$product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a></h5>
-                    <div class="prodcut-price d-md-none">
-                        <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
-                    </div>
+                    @if($product->type == 'product' && session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                        <div class="prodcut-price d-md-none">
+                            <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
+                        </div>
+                    @endif
                     <div class="font-size-12 p-0 mb-4 d-none d-md-block">
                         {!! $product->short_desc !!}
                     </div>
                     <div class="text-gray-20 mb-2 font-size-12">SKU: {{$product->SKU}}</div>
+                    @if(auth()->guard('admin')->check())
+                        <div class="text-gray-20 mb-2 font-size-12">Vendor: {{$product->vendor->name}}</div>
+                    @endif
                     <div class="mb-3 d-none d-md-block">
                         <a class="d-inline-flex align-items-center small font-size-14" href="#">
                             <div class="text-warning mr-2">
@@ -85,7 +93,7 @@
             </div>
             <div class="product-item__footer col-md-3 d-md-block">
                 <div class="mb-2 flex-center-between">
-                    @if($product->type == 'product')
+                    @if($product->type == 'product' && session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
                     <div class="prodcut-price">
                         <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
                     </div>

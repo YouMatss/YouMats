@@ -85,8 +85,7 @@
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
                                                 <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1" style="border-radius: 1.4rem 0 0 1.4rem">+966</span>
-                                                    <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone" required>
+                                                    <input type="tel" class="form-control phoneNumber @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required>
                                                 </div>
                                                 @error('phone')
                                                 <span class="invalid-feedback" role="alert">

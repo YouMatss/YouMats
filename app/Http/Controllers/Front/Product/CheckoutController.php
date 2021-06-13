@@ -55,7 +55,7 @@ class CheckoutController extends Controller
     {
         //Validating the data.
         $rules = [
-//            'payment_method' => REQUIRED_STRING_VALIDATION,
+            'payment_method' => REQUIRED_STRING_VALIDATION,
             'terms' => 'required|accepted',
             'name' => REQUIRED_STRING_VALIDATION,
             'phone' => REQUIRED_STRING_VALIDATION,

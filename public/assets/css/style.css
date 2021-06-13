@@ -922,3 +922,7 @@
     border: 2px solid #003f91;
     font-weight: bold;
 }
+
+.modal-dialog {
+    pointer-events: all;
+}

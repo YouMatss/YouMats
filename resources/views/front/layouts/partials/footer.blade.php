@@ -239,7 +239,7 @@
                                                     <span class="fas fa-phone"></span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control" name="phone" placeholder="Phone">
+                                            <input type="tel" class="form-control phoneNumber">
                                         </div>
                                     </div>
                                 </div>

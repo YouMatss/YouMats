@@ -537,5 +537,4 @@
     @endif
 
     @include('front.layouts.partials.team')
-    @include('front.layouts.partials.welcome-popup')
 @endsection
