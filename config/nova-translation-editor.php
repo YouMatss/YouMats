@@ -3,7 +3,8 @@ return [
     'groups' => [
         'info',
         'general',
-        'home'
+        'home',
+        'auth'
     ],
     'languages' => [
         'en', 'ar'

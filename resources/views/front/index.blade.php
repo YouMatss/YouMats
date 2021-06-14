@@ -240,9 +240,11 @@
                                                 </a>
                                             </div>
                                             <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$bs_product->price}}</div>
-                                                </div>
+                                                @if(!is_company())
+                                                    <div class="prodcut-price">
+                                                        <div class="text-gray-100">{{getCurrency('symbol')}} {{$bs_product->price}}</div>
+                                                    </div>
+                                                @endif
                                                 {!! cartOrChat($bs_product) !!}
                                             </div>
                                         </div>
@@ -306,9 +308,11 @@
                                             </a>
                                         </div>
                                         <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price">
-                                                <div class="text-gray-100">{{getCurrency('symbol')}} {{$i_product->price}}</div>
-                                            </div>
+                                            @if(!is_company())
+                                                <div class="prodcut-price">
+                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$i_product->price}}</div>
+                                                </div>
+                                            @endif
                                             {!! cartOrChat($i_product) !!}
                                         </div>
                                     </div>
@@ -393,9 +397,11 @@
                                         </a>
                                     </div>
                                     <div class="flex-center-between mb-1">
-                                        <div class="prodcut-price">
-                                            <div class="text-gray-100">{{getCurrency('symbol')}} {{$ii_product->price}}</div>
-                                        </div>
+                                        @if(!is_company())
+                                            <div class="prodcut-price">
+                                                <div class="text-gray-100">{{getCurrency('symbol')}} {{$ii_product->price}}</div>
+                                            </div>
+                                        @endif
                                         {!! cartOrChat($ii_product) !!}
                                     </div>
                                 </div>
@@ -453,9 +459,11 @@
                                             </a>
                                         </div>
                                         <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price">
-                                                <div class="text-gray-100">{{getCurrency('symbol')}} {{$iii_product->price}}</div>
-                                            </div>
+                                            @if(!is_company())
+                                                <div class="prodcut-price">
+                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$iii_product->price}}</div>
+                                                </div>
+                                            @endif
                                             {!! cartOrChat($iii_product) !!}
                                         </div>
                                     </div>
@@ -513,9 +521,11 @@
                                             </a>
                                         </div>
                                         <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price">
-                                                <div class="text-gray-100">{{getCurrency('symbol')}} {{$iv_product->price}}</div>
-                                            </div>
+                                            @if(!is_company())
+                                                <div class="prodcut-price">
+                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$iv_product->price}}</div>
+                                                </div>
+                                            @endif
                                             {!! cartOrChat($iv_product) !!}
                                         </div>
                                     </div>

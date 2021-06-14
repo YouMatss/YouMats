@@ -16,7 +16,7 @@
                                     <div class="d-flex align-items-center">
                                         <!-- Language -->
                                         <div class="position-relative">
-                                            <a id="languageDropdownInvoker" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                            <a id="languageDropdownInvoker" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                                 <span class="d-inline-block d-sm-none">{{getCurrency('symbol')}}</span>
                                                 <span class="d-none d-sm-inline-flex align-items-center"><i class="ec ec-dollar mr-1"></i> {{getCurrency('code')}} ({{getCurrency('symbol')}})</span>
                                             </a>
@@ -38,7 +38,7 @@
                                 <div class="d-flex align-items-center">
                                     <!-- Language -->
                                     <div class="position-relative">
-                                        <a id="languageDropdownInvoker2" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                        <a id="languageDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                             <span class="d-none d-sm-inline-flex align-items-center">
                                                 <i class="fas fa-globe-americas mr-1 font-size-14"></i>
                                                 {{ LaravelLocalization::getCurrentLocaleNative() }}
@@ -59,7 +59,7 @@
                                 <div class="d-flex align-items-center">
                                     <!-- Language -->
                                     <div class="position-relative">
-                                        <a id="userTypeDropdownInvoker2" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#userTypeDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                        <a id="userTypeDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#userTypeDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                         <span class="d-none d-sm-inline-flex align-items-center">
                                             <i class="ec ec-user mr-1"></i>
                                             {{ucfirst(\Illuminate\Support\Facades\Session::get('userType'))}}
@@ -80,7 +80,7 @@
                                 <div class="d-flex align-items-center">
                                     <!-- Language -->
                                     <div class="position-relative">
-                                        <a id="profileDropdownInvoker2" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#profileDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                        <a id="profileDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#profileDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                             <span class="d-none d-sm-inline-flex align-items-center">
                                                 <i class="ec ec-user mr-1"></i> {{auth('web')->user()->name}}
                                             </span>
@@ -96,17 +96,6 @@
                                     <!-- End Language -->
                                 </div>
                             </li>
-                            @elseif(!Auth::guard('vendor')->check())
-                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                <a href="{{route('register')}}" role="button" class="u-header-topbar__nav-link">
-                                    <i class="ec ec-user mr-1"></i> {{__('general.user_register')}}
-                                </a>
-                            </li>
-                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                <a href="{{route('login')}}" role="button" class="u-header-topbar__nav-link">
-                                    <i class="ec ec-user mr-1"></i> {{__('general.user_login')}}
-                                </a>
-                            </li>
                             @endif
 
                             @if(Auth::guard('vendor')->check() && !Auth::guard('web')->check())
@@ -114,7 +103,7 @@
                                     <div class="d-flex align-items-center">
                                         <!-- Language -->
                                         <div class="position-relative">
-                                            <a id="profileDropdownInvoker2" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#profileDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                            <a id="profileDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#profileDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                             <span class="d-none d-sm-inline-flex align-items-center">
                                                 <i class="ec ec-user mr-1"></i> {{auth('vendor')->user()->name}}
                                             </span>
@@ -131,15 +120,17 @@
                                         <!-- End Language -->
                                     </div>
                                 </li>
-                            @elseif(!Auth::guard('web')->check())
+                            @endif
+
+                            @if(!auth()->guard('vendor')->check() && !auth()->guard('web')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                    <a href="{{route('vendor.login')}}" role="button" class="u-header-topbar__nav-link">
-                                        <i class="ec ec-user mr-1"></i> {{ __('general.vendor_login') }}
+                                    <a href="{{route('register')}}" role="button" class="u-header-topbar__nav-link">
+                                        <i class="ec ec-user mr-1"></i> {{__('general.user_register')}}
                                     </a>
                                 </li>
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                    <a href="{{route('vendor.register')}}" role="button" class="u-header-topbar__nav-link">
-                                        <i class="ec ec-user mr-1"></i> {{ __('general.vendor_register') }}
+                                    <a href="{{route('login')}}" role="button" class="u-header-topbar__nav-link">
+                                        <i class="ec ec-user mr-1"></i> {{__('general.user_login')}}
                                     </a>
                                 </li>
                             @endif
@@ -255,7 +246,7 @@
                         </nav>
                         <!-- End Nav -->
                     </div>
-                    @if(is_company())
+                    @if(!is_company())
                     <div class="d-none d-xl-block col-md-auto">
                         <div class="d-flex">
                             <i class="ec ec-support font-size-50 text-primary"></i>
@@ -300,7 +291,7 @@
                                     <a href="{{ route('cart.show') }}" class="text-gray-90 position-relative d-flex" data-toggle="tooltip" data-placement="top">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span class="width-22 height-22 bg-dark position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12 text-white cartCount">{{ Cart::instance('cart')->count() }}</span>
-                                        @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                                        @if(!is_company())
                                             <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3 cartTotal">{{ getCurrency('symbol'). ' ' . Cart::instance('cart')->total() }}</span>
                                         @endif
                                     </a>
@@ -454,7 +445,7 @@
                                     <a href="{{ route('cart.show') }}" class="text-gray-110 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12 cartCount">{{ Cart::instance('cart')->count() }}</span>
-                                        @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                                        @if(!is_company())
                                             <span class="font-weight-bold font-size-16 text-gray-110 ml-3 cartTotal">{{ getCurrency('symbol'). ' ' . Cart::instance('cart')->total() }}</span>
                                         @endif
                                     </a>

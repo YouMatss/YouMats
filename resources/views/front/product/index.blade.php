@@ -100,9 +100,11 @@
                                 <span class="text-red font-weight-bold">Out of stock</span>
                                 @endif
                             </div>
-                            <div class="mb-3">
-                                <div class="font-size-36">{{getCurrency('symbol')}} {{$product->price}}</div>
-                            </div>
+                            @if(!is_company())
+                                <div class="mb-3">
+                                    <div class="font-size-36">{{getCurrency('symbol')}} {{$product->price}}</div>
+                                </div>
+                            @endif
 
                             <div class="mb-3">
                                 <div class="left-page-single">
@@ -247,9 +249,11 @@
                                                 </a>
                                             </div>
                                             <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->price}}</div>
-                                                </div>
+                                                @if(!is_company())
+                                                    <div class="prodcut-price">
+                                                        <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->price}}</div>
+                                                    </div>
+                                                @endif
                                                 {!! cartOrChat($product) !!}
                                             </div>
                                         </div>

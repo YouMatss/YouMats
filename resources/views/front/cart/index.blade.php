@@ -45,7 +45,7 @@
                                 <th class="product-thumbnail">&nbsp;</th>
                                 <th class="product-name">Product</th>
                                 <th class="product-quantity w-lg-15">Quantity</th>
-                                @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                                @if(!is_company())
                                     <th class="product-price">Price</th>
                                     <th class="product-subtotal">Total</th>
                                 @endif
@@ -94,7 +94,7 @@
                                         <td>-</td>
                                     @endif
 
-                                    @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                                    @if(!is_company())
                                         <td data-title="Price">
                                             <span class="">{{ $item->price }}</span>
                                         </td>
@@ -135,7 +135,7 @@
                 </div>
             </div>
 
-            @if(session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+            @if(!is_company())
                 <div class="row">
                     <div class="col-xl-5 col-lg-6  col-md-8 mb-5">
                         <div class="border-bottom border-color-1 mb-3">

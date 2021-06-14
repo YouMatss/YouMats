@@ -60,20 +60,22 @@
             });
         });
 
-        let input = document.querySelector(".phoneNumber");
+        let inputs = document.querySelectorAll(".phoneNumber");
 
-        window.intlTelInput(input, {
-            utilsScript: '{{front_url()}}/assets/js/utils.js',
-            formatOnDisplay: true,
-            autoPlaceholder: true,
-            initialCountry: "auto",
-            hiddenInput: "phone",
-            geoIpLookup: function(success, failure) {
-                $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-                    var countryCode = (resp && resp.country) ? resp.country : "us";
-                    success(countryCode);
-                });
-            },
+        $.each(inputs, function(key, value){
+            window.intlTelInput(value, {
+                utilsScript: '{{front_url()}}/assets/js/utils.js',
+                formatOnDisplay: true,
+                autoPlaceholder: true,
+                initialCountry: "auto",
+                hiddenInput: "phone",
+                geoIpLookup: function(success, failure) {
+                    $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                        var countryCode = (resp && resp.country) ? resp.country : "us";
+                        success(countryCode);
+                    });
+                },
+            });
         });
 
         // inquireForm Request

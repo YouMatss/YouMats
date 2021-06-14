@@ -30,18 +30,12 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="mb-8">
-                    <form class="box_login_page" method="POST" action="{{ route('vendor.login') }}">
+                    <form method="POST" action="{{ route('vendor.login') }}">
                         @csrf
-
-                        <div class="row">
-                            <div class="mb-4">
-                                <h1 class="text-center col-md-12">{{ __('Vendor Login') }}</h1>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="js-form-message form-group mb-5">
-                                    <label class="form-label" for="email">{{ __('E-Mail Address') }}</label>
+                                    <label class="form-label" for="email">{{ __('auth.email') }}</label>
                                     <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -53,7 +47,7 @@
 
                             <div class="col-md-12">
                                 <div class="js-form-message form-group mb-5">
-                                    <label class="form-label" for="password">{{ __('Password') }}</label>
+                                    <label class="form-label" for="password">{{ __('auth.password_input') }}</label>
                                     <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -67,7 +61,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        {{ __('auth.remember_me') }}
                                     </label>
                                 </div>
                             </div>
@@ -75,18 +69,18 @@
 
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary-dark-w px-5 text-white">{{ __('Login') }}</button>
+                                    <button type="submit" class="btn btn-primary-dark-w px-5 text-white">{{ __('auth.login') }}</button>
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 @if (Route::has('vendor.password.request'))
                                     <a class="btn btn-link" href="{{ route('vendor.password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('auth.forget_password') }}
                                     </a>
                                 @endif
-                                <a class="btn btn-link" href="{{route('vendor.register')}}">
-                                    Register
+                                <a class="btn btn-link" href="{{route('register')}}">
+                                    {{ __('auth.register') }}
                                 </a>
                             </div>
 

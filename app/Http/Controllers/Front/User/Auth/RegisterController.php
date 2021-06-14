@@ -3,9 +3,19 @@
 namespace App\Http\Controllers\Front\User\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Rules\TopLevelEmailDomainValidator;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,21 +31,57 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    /**
+     * @param Request $request
+     * @return Application|JsonResponse|RedirectResponse|Redirector
+     */
+    public function register(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if($validator->fails())
+            return redirect(url()->previous() . '#register-tab')->withInput()->withErrors($validator);
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 201)
+            : redirect($this->redirectPath());
+    }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function showRegistrationForm()
+    {
+        $countries = Country::all();
+
+        return view('auth.register', compact('countries'));
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'type' => ['required', 'string', 'In:individual,company'],
             'name' => ['required', 'string', 'max:191'],
-            'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:191', 'unique:users', new TopLevelEmailDomainValidator()],
             'phone' => ['nullable', 'string', 'max:191'],
             'address' => ['nullable', 'string', 'max:191'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'files' => ['required_if:type,company', 'array'],
+            'files.*' => NULLABLE_FILE_VALIDATION
         ]);
     }
 
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'type' => $data['type'],
             'name' => $data['name'],
             'email' => $data['email'],
@@ -43,5 +89,10 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'password' => Hash::make($data['password']),
         ]);
+
+        foreach($data['files'] as $file)
+            $user->addMedia($file)->toMediaCollection(COMPANY_PATH);
+
+        return $user;
     }
 }
