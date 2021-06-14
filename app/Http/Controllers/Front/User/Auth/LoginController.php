@@ -83,12 +83,12 @@ class LoginController extends Controller
         if($user && !$user->active && Hash::check($request->password, $user->password))
             throw ValidationException::withMessages([
                 $this->username() => [trans('auth.inactive')]
-            ]);
+            ])->redirectTo($this->redirectTo . '#login-tab');
 
         throw ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],
             'active' => $inactiveMsg ?? ''
-        ]);
+        ])->redirectTo($this->redirectTo . '#login-tab');
     }
 
     /**

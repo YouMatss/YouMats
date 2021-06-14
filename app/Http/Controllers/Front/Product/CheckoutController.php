@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class CheckoutController extends Controller
 {
@@ -65,8 +66,10 @@ class CheckoutController extends Controller
             'district' => NULLABLE_STRING_VALIDATION,
             'city' => REQUIRED_STRING_VALIDATION,
             'email' => REQUIRED_EMAIL_VALIDATION,
-            'notes' => NULLABLE_STRING_VALIDATION
+            'notes' => NULLABLE_STRING_VALIDATION,
+            'delivery_time' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_company())]
         ];
+
         $data = $request->validate($rules);
 
         //Let's create an account for him & login so we complete the order.
@@ -124,6 +127,7 @@ class CheckoutController extends Controller
                 'street'            => $data['street'],
                 'district'          => $data['district'],
                 'city'              => $data['city'],
+                'delivery_time'     => $data['delivery_time'],
                 'status'            => 'pending',
                 'notes'             => $data['notes']
             ]);

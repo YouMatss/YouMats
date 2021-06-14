@@ -6,12 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Providers\RouteServiceProvider;
 use App\Models\Vendor;
+use App\Rules\TopLevelEmailDomainValidator;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,7 +37,29 @@ class RegisterController extends Controller
     public function __construct()
     {
         parent::__construct();
+
         $this->middleware('guest:vendor');
+    }
+
+    /**
+     * @param Request $request
+     * @return Application|JsonResponse|RedirectResponse|Redirector
+     */
+    public function register(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if($validator->fails())
+            return redirect(url()->previous() . '#vendor-registration-tab')->withInput()->withErrors($validator);
+
+        return parent::register($request);
+    }
+
+    public function showRegistrationForm()
+    {
+        $countries = Country::all();
+
+        return view('front.vendor.auth.register', compact('countries'));
     }
 
     /**
@@ -44,7 +72,7 @@ class RegisterController extends Controller
             'country_id' => ['required', 'numeric', 'exists:countries,id'],
             'name_en' => ['required', 'string', 'max:191'],
             'name_ar' => ['required', 'string', 'max:191'],
-            'email' => ['required', 'email', 'unique:vendors'],
+            'email' => ['required', 'string', 'max:191', 'email', 'unique:vendors', new TopLevelEmailDomainValidator()],
             'phone' => ['required', 'string', 'max:30'],
             'address' => ['required', 'string', 'max:191'],
             'password' => ['required', 'string', 'min:8', 'confirmed']
@@ -74,15 +102,6 @@ class RegisterController extends Controller
         $vendor->save();
 
         return $vendor;
-    }
-
-    /**
-     * @return Application|Factory|View
-     */
-    protected function showRegistrationForm()
-    {
-        $countries = Country::all();
-        return view('front.vendor.auth.register', ['countries' => $countries]);
     }
 
     /**

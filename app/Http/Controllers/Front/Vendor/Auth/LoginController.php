@@ -24,6 +24,8 @@ class LoginController extends Controller
 
     public function __construct() {
         parent::__construct();
+
+        $this->redirectTo = url()->previous();
         $this->middleware('guest:vendor')->except('logout');
     }
 
@@ -58,6 +60,17 @@ class LoginController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ];
+    }
+
+    /**
+     * @param Request $request
+     * @throws ValidationException
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            $this->username() => [trans('auth.failed')]
+        ])->redirectTo($this->redirectTo . '#vendor-login-tab');
     }
 
     /**

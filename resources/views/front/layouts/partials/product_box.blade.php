@@ -32,7 +32,7 @@
                 <div class="text-gray-20 mb-2 font-size-12">Vendor: {{$product->vendor->name}}</div>
             @endif
             <div class="flex-center-between mb-1">
-                @if($product->type == 'product' && session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                @if($product->type == 'product' && !is_company())
                     <div class="prodcut-price">
                         <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
                     </div>
@@ -64,7 +64,7 @@
                 <div class="pr-lg-10">
                     <div class="mb-2"><a href="{{route('front.subCategory', [$product->subCategory->category->slug, $product->subCategory->slug])}}" class="font-size-12 text-gray-5">{{$product->subCategory->name}}</a></div>
                     <h5 class="mb-2 product-item__title"><a href="{{route('front.product', [$product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a></h5>
-                    @if($product->type == 'product' && session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                    @if($product->type == 'product' && !is_company())
                         <div class="prodcut-price d-md-none">
                             <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
                         </div>
@@ -93,7 +93,7 @@
             </div>
             <div class="product-item__footer col-md-3 d-md-block">
                 <div class="mb-2 flex-center-between">
-                    @if($product->type == 'product' && session('userType') === 'individual' || (auth()->guard('web')->check() && auth()->guard('web')->user()->type === 'individual'))
+                    @if($product->type == 'product' && !is_company())
                     <div class="prodcut-price">
                         <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
                     </div>
