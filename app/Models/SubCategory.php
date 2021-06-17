@@ -24,6 +24,10 @@ class SubCategory extends Model implements Sortable, HasMedia
 
     protected $cascadeDeletes = ['products'];
 
+    public function getNameAttribute() {
+        return $this->getTranslations('name')[app()->getLocale()];
+    }
+
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);
@@ -46,6 +50,10 @@ class SubCategory extends Model implements Sortable, HasMedia
             ->join('products as p', 'p.id', '=', 'pt.product_id')
             ->join('sub_categories as sub', 'sub.id', '=', 'p.subCategory_id')
             ->where('sub.id', '=', $this->id)->distinct()->get();
+    }
+
+    public function vendors() {
+        return $this->hasMany(Vendor::class, 'subCategory_id');
     }
 
     public function attributes() {

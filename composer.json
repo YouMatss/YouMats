@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "php": "7.4",
+        "php": "7.4.10",
         "ampeco/nova-date-range-filter": "^0.1.1",
         "anaseqal/nova-import": "^0.0.6",
         "benjacho/belongs-to-many-field": "^1.8",
@@ -47,6 +47,7 @@
         "optimistdigital/nova-simple-repeatable": "^1.2",
         "optimistdigital/nova-sortable": "^2.0",
         "optimistdigital/nova-translatable": "^1.6",
+        "orlyapps/nova-belongsto-depend": "^3.0",
         "predis/predis": "^1.1",
         "richardkeep/nova-timenow": "^1.0",
         "spatie/laravel-medialibrary": "^9.4",
@@ -54,6 +55,7 @@
         "spatie/laravel-translatable": "^4.6",
         "spatie/laravel-translation-loader": "^2.7",
         "spatie/nova-backup-tool": "^4.1",
+        "staudenmeir/belongs-to-through": "^2.5",
         "torann/geoip": "^3.0",
         "vyuldashev/nova-permission": "^2.10",
         "waynestate/nova-ckeditor4-field": "^0.7.0",

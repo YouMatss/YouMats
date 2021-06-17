@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Models\Category;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use GeneaLabs\NovaMapMarkerField\MapMarker;
@@ -18,6 +19,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
+use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 
 class Vendor extends Resource
 {
@@ -43,6 +45,13 @@ class Vendor extends Resource
                 ->showCreateRelationButton()
                 ->hideFromIndex()
                 ->withoutTrashed(),
+
+            NovaBelongsToDepend::make('Category')
+                ->options(Category::all())->readonly(),
+            NovaBelongsToDepend::make('SubCategory')
+                ->optionsResolve(function ($category) {
+                    return $category->subCategories()->get(['id', 'name']);
+                })->dependsOn('Category'),
 
             Text::make('Name')
                 ->sortable()

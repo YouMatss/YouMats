@@ -28,7 +28,7 @@ class CreateProductsTable extends Migration
             $table->longText('desc')->nullable();
             $table->text('short_desc')->nullable();
 
-            $table->decimal('rate', 10, 1);
+            $table->decimal('rate', 10, 1)->default(5);
             $table->enum('type', ['product', 'service']);
             $table->decimal('cost', 10, 2)->nullable();
             $table->decimal('price', 10, 2)->nullable();
@@ -44,7 +44,7 @@ class CreateProductsTable extends Migration
             $table->json('attributes')->nullable();
 
             $table->tinyInteger('active')->default(1);
-            $table->integer('views')->default(0);
+            $table->integer('views')->default(1);
 
             $table->string('slug')->unique();
             $table->text('meta_title')->nullable();

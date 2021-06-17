@@ -117,6 +117,7 @@ class SubCategory extends Resource
             ])),
 
             HasMany::make('Products'),
+            HasMany::make('Vendors'),
         ];
     }
 

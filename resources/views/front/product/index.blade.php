@@ -69,6 +69,7 @@
                                     @for($i=5;$i>$product->rate;$i--)
                                         <small class="far fa-star text-muted"></small>
                                     @endfor
+                                    {{$product->rate}}
                                 </div>
                                 <span class="text-secondary font-size-13">({{$product->views}} customer views)</span>
                             </a>
