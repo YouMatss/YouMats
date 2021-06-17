@@ -17,6 +17,9 @@ class ProductController extends Controller
         $data['product'] = Product::with('subCategory', 'category', 'tags', 'vendor')->where(['slug' => $slug, 'active' => 1])->first();
         abort_if(!$data['product'], 404);
 
+        $data['product']->views++;
+        $data['product']->save();
+
         $data['FAQs'] = FAQ::orderBy('sort')->get();
         $data['related_products'] = Product::with('subCategory')
             ->where('subCategory_id', $data['product']->subCategory_id)

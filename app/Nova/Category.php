@@ -126,7 +126,7 @@ class Category extends Resource
 
             HasMany::make('SubCategories'),
             HasMany::make('Products'),
-
+            HasMany::make('Vendors'),
         ];
     }
 

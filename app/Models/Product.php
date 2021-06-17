@@ -12,10 +12,11 @@ use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
+use Znck\Eloquent\Traits\BelongsToThrough;
 
 class Product extends Model implements Sortable, HasMedia, Buyable
 {
-    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage;
+    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, BelongsToThrough;
 
     protected $fillable = ['shipping_prices'];
 
@@ -48,7 +49,8 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     }
 
     public function category() {
-        return $this->hasOneThrough(Category::class, SubCategory::class, 'category_id', 'id');
+        return $this->belongsToThrough(Category::class, SubCategory::class,
+            null, '', [SubCategory::class => 'subCategory_id']);
     }
 
     public function subCategory() {
