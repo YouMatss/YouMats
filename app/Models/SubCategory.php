@@ -52,8 +52,12 @@ class SubCategory extends Model implements Sortable, HasMedia
             ->where('sub.id', '=', $this->id)->distinct()->get();
     }
 
+//    public function vendors() {
+//        return $this->hasMany(Vendor::class, 'subCategory_id');
+//    }
+
     public function vendors() {
-        return $this->hasMany(Vendor::class, 'subCategory_id');
+        return $this->belongsToMany(Vendor::class, Product::class, 'subCategory_id')->distinct();
     }
 
     public function attributes() {

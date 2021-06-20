@@ -24,9 +24,9 @@ class CreateVendorsTable extends Migration
             $table->foreign('country_id')->references('id')->on('countries')
                 ->onDelete('NO ACTION')->onUpdate('CASCADE');
 
-            $table->bigInteger('subCategory_id')->unsigned()->index();
-            $table->foreign('subCategory_id')->references('id')->on('sub_categories')
-                ->onDelete('CASCADE')->onUpdate('CASCADE');
+//            $table->bigInteger('subCategory_id')->unsigned()->index();
+//            $table->foreign('subCategory_id')->references('id')->on('sub_categories')
+//                ->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->text('name');
             $table->string('email')->unique();
