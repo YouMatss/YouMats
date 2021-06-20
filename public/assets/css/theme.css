@@ -37653,8 +37653,8 @@ blockquote:not(.blockquote) p {
 
 .img_category_page{
   width:85px;
-  -webkit-transform: rotate(-15deg);
-  transform: rotate(-15deg);
+  /*-webkit-transform: rotate(-15deg);*/
+  /*transform: rotate(-15deg);*/
 }
 
 .li_side_bar li img{
