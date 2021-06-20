@@ -46,12 +46,12 @@ class Vendor extends Resource
                 ->hideFromIndex()
                 ->withoutTrashed(),
 
-            NovaBelongsToDepend::make('Category')
-                ->options(Category::all())->readonly(),
-            NovaBelongsToDepend::make('SubCategory')
-                ->optionsResolve(function ($category) {
-                    return $category->subCategories()->get(['id', 'name']);
-                })->dependsOn('Category'),
+//            NovaBelongsToDepend::make('Category')
+//                ->options(Category::all())->readonly(),
+//            NovaBelongsToDepend::make('SubCategory')
+//                ->optionsResolve(function ($category) {
+//                    return $category->subCategories()->get(['id', 'name']);
+//                })->dependsOn('Category'),
 
             Text::make('Name')
                 ->sortable()

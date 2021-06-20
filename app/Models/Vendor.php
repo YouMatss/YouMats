@@ -67,14 +67,14 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->hasMany(Product::class);
     }
 
-    public function category() {
-        return $this->belongsToThrough(Category::class, SubCategory::class,
-            null, '', [SubCategory::class => 'subCategory_id']);
-    }
-
-    public function subCategory() {
-        return $this->belongsTo(SubCategory::class, 'subCategory_id');
-    }
+//    public function category() {
+//        return $this->belongsToThrough(Category::class, SubCategory::class,
+//            null, '', [SubCategory::class => 'subCategory_id']);
+//    }
+//
+//    public function subCategory() {
+//        return $this->belongsTo(SubCategory::class, 'subCategory_id');
+//    }
 
     public function membership() {
         return $this->belongsTo(Membership::class);
