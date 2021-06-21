@@ -54,16 +54,19 @@ class TripController extends Controller
                         'started_at' => now(),
                         'price' => $trip->distance * $driver->car->price_per_kilo
                     ]);
+                    return response()->json([
+                        'message' => 'Request Accepted Successfully.',
+                        'trip' => new TripResource($trip)
+                    ], 200);
                 } elseif($data['response'] == '2') {
                     $trip->update([
-                        'driver_status' => '2',
-                        'status' => '0'
+                        'driver_id' => null
                     ]);
+                    return response()->json([
+                        'message' => 'Request Rejected.',
+                        'trip' => new TripResource($trip)
+                    ], 200);
                 }
-                return response()->json([
-                    'message' => 'Request Updated Successfully.',
-                    'trip' => new TripResource($trip)
-                ], 200);
             }
             return response()->json(['message' => 'Request Already Updated.'], 400);
         }
@@ -85,6 +88,32 @@ class TripController extends Controller
             ]);
             return response()->json([
                 'message' => 'Trip Completed Successfully.',
+                'trip' => new TripResource($trip)
+            ], 200);
+        }
+
+        return response()->json(['message' => 'Request dosn\'t exists.'], 400);
+    }
+
+    public function cancelRequest($id) {
+        $driver = Auth::guard('driver-api')->user();
+        $trip = Trip::where([
+            'driver_id' => $driver->id,
+            'id' => $id,
+            'driver_status' => '1',
+            'status' => '1'
+        ])->first();
+
+        if($trip) {
+            $trip->update([
+                'driver_id' => null,
+                'driver_status' => '0',
+                'status' => '0',
+                'started_at' => null,
+                'price' => null
+            ]);
+            return response()->json([
+                'message' => 'Trip Cancelled Successfully.',
                 'trip' => new TripResource($trip)
             ], 200);
         }

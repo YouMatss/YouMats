@@ -24,6 +24,7 @@ Route::middleware('auth:driver-api')->group(function () {
     Route::get('request/{id}', 'TripController@getRequestById');
     Route::post('request/{id}/response', 'TripController@requestResponse');
     Route::post('request/{id}/complete', 'TripController@requestComplete');
+    Route::post('request/{id}/cancel', 'TripController@cancelRequest');
     Route::post('request/{id}/give-rate', 'TripController@giveRate');
 
     Route::group(['prefix' => 'chat'], function () {

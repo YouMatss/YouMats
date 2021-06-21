@@ -30,7 +30,7 @@ class CreateTripsTable extends Migration
             $table->float('distance');
             $table->decimal('price', 10, 2)->nullable();
 
-            $table->enum('driver_status', [0, 1, 2])->comment('0 / Pending, 1 / Accepted, 2 / Refused')->default(0);
+            $table->enum('driver_status', [0, 1])->comment('0 / Pending, 1 / Accepted')->default(0);
             $table->enum('status', [0, 1, 2])->comment('0 / Pending, 1 / In progress, 2 / Completed')->default(0);
 
             $table->timestamp('started_at')->nullable();

@@ -12,8 +12,7 @@ use App\Models\Car;
 use App\Models\Trip;
 use Illuminate\Support\Facades\Auth;
 
-class TripController extends Controller
-{
+class TripController extends Controller {
     public function makeRequest(MakeRequestRequest $request) {
         $data = $request->validated();
         $user_id = Auth::guard('api')->id();
@@ -81,5 +80,68 @@ class TripController extends Controller
             ], 200);
         }
         return response()->json(['message' => 'Trip dosn\'t exist.'], 400);
+    }
+
+    public function trips($type, $count = 3) {
+        $user_id = Auth::guard('api')->id();
+        $trips = null;
+        if($type == 'recent') {
+            $trips = Trip::where('user_id', $user_id)
+                ->orderBy('id', 'desc')
+                ->take($count)->get();
+        } elseif ($type == 'pending') {
+            $trips = Trip::where('user_id', $user_id)
+                ->where('driver_status', '0')
+                ->where('status', '0')
+                ->orderBy('id', 'desc')
+                ->take($count)->get();
+        } elseif ($type == 'past') {
+            $trips = Trip::where('user_id', $user_id)
+                ->where('status', '2')
+                ->orderBy('id', 'desc')
+                ->take($count)->get();
+        } else {
+            return response()->json(['message' => 'Choose Right Type (recent, pending, past)'], 400);
+        }
+        return TripResource::collection($trips);
+    }
+
+    public function tripDetails($trip_id) {
+        $user_id = Auth::guard('api')->id();
+        $trip = Trip::where([
+            'user_id' => $user_id,
+            'id' => $trip_id
+        ])->first();
+
+        if($trip) {
+            return new TripResource($trip);
+        }
+        return response()->json(['message' => 'Trip dosn\'t exists.'], 400);
+    }
+
+    public function tripCancel($trip_id) {
+        $user_id = Auth::guard('api')->id();
+        $trip = Trip::where([
+            'user_id' => $user_id,
+            'id' => $trip_id,
+            'driver_status' => '1',
+            'status' => '1'
+        ])->first();
+
+        if($trip) {
+            $trip->update([
+                'driver_id' => null,
+                'driver_status' => '0',
+                'status' => '0',
+                'started_at' => null,
+                'price' => null
+            ]);
+            return response()->json([
+                'message' => 'Trip Cancelled Successfully.',
+                'trip' => new TripResource($trip)
+            ], 200);
+        }
+
+        return response()->json(['message' => 'Request dosn\'t exists.'], 400);
     }
 }
