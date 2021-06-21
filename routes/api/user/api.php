@@ -22,7 +22,7 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::get('trips/{type}/{count?}', 'TripController@trips');
-Route::get('trips/{trip_id}/details', 'TripController@tripDetails');
+Route::get('trips_details/{trip_id}', 'TripController@tripDetails');
 Route::post('trips/{trip_id}/cancel', 'TripController@tripCancel');
 
 Route::get('/get-driver/{id}', 'DriverController@getDriverById');
