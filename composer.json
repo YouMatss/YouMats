@@ -26,6 +26,7 @@
         "davidpiesse/nova-toggle": "^0.0.8",
         "digital-creative/collapsible-resource-manager": "^1.2",
         "dmitrybubyakin/nova-medialibrary-field": "^3.2",
+        "drobee/nova-sluggable": "^1.2",
         "dyrynda/laravel-cascade-soft-deletes": "^4.1",
         "epartment/nova-dependency-container": "^1.2",
         "fideloper/proxy": "^4.4",
