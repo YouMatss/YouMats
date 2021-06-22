@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
+use Drobee\NovaSluggable\SluggableText;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
@@ -32,6 +33,7 @@ class Category extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             Text::make('Name')
+//                ->slug('Slug')
                 ->sortable()
                 ->translatable()
                 ->rules(REQUIRED_STRING_VALIDATION),
@@ -93,6 +95,7 @@ class Category extends Resource
 
             (new Panel('SEO', [
                 Slug::make('Slug')
+//                    ->slugLanguage('en')->event('blur')
                     ->hideFromIndex()
                     ->rules(NULLABLE_STRING_VALIDATION)
                     ->creationRules('unique:categories,slug')
