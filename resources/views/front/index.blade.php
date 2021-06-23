@@ -232,10 +232,10 @@
                                                 <a href="{{route('front.subCategory', [$bs_product->subCategory->category->slug, $bs_product->subCategory->slug])}}" class="font-size-12 text-gray-5">{{$bs_product->subCategory->name}}</a>
                                             </div>
                                             <h5 class="mb-1 product-item__title">
-                                                <a href="{{route('front.product', [$bs_product->slug])}}" class="text-blue font-weight-bold">{{$bs_product->name}}</a>
+                                                <a href="{{route('front.product', [$bs_product->subCategory->category->slug, $bs_product->subCategory->slug, $bs_product->slug])}}" class="text-blue font-weight-bold">{{$bs_product->name}}</a>
                                             </h5>
                                             <div class="mb-2">
-                                                <a href="{{route('front.product', [$bs_product->slug])}}" class="d-block text-center">
+                                                <a href="{{route('front.product', [$bs_product->subCategory->category->slug, $bs_product->subCategory->slug, $bs_product->slug])}}" class="d-block text-center">
                                                     <img class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, '')['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                                 </a>
                                             </div>
@@ -300,10 +300,10 @@
                                             <a href="{{route('front.subCategory', [$section_i_category->slug, $i_product->subCategory->slug])}}" class="font-size-12 text-gray-5">{{$i_product->subCategory->name}}</a>
                                         </div>
                                         <h5 class="mb-1 product-item__title">
-                                            <a href="{{route('front.product', [$i_product->slug])}}" class="text-blue font-weight-bold">{{$i_product->name}}</a>
+                                            <a href="{{route('front.product', [$i_product->subCategory->category->slug, $i_product->subCategory->slug, $i_product->slug])}}" class="text-blue font-weight-bold">{{$i_product->name}}</a>
                                         </h5>
                                         <div class="mb-2">
-                                            <a href="{{route('front.product', [$i_product->slug])}}" class="d-block text-center">
+                                            <a href="{{route('front.product', [$i_product->subCategory->category->slug, $i_product->subCategory->slug, $i_product->slug])}}" class="d-block text-center">
                                                 <img class="img-fluid" src="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
@@ -389,10 +389,10 @@
                                         <a href="{{route('front.subCategory', [$section_ii_subCategory->category->slug, $section_ii_subCategory->slug])}}" class="font-size-12 text-gray-5">{{$section_ii_subCategory->name}}</a>
                                     </div>
                                     <h5 class="mb-1 product-item__title">
-                                        <a href="{{route('front.product', [$ii_product->slug])}}" class="text-blue font-weight-bold">{{$ii_product->name}}</a>
+                                        <a href="{{route('front.product', [$ii_product->subCategory->category->slug, $ii_product->subCategory->slug, $ii_product->slug])}}" class="text-blue font-weight-bold">{{$ii_product->name}}</a>
                                     </h5>
                                     <div class="mb-2">
-                                        <a href="{{route('front.product', [$ii_product->slug])}}" class="d-block text-center">
+                                        <a href="{{route('front.product', [$ii_product->subCategory->category->slug, $ii_product->subCategory->slug, $ii_product->slug])}}" class="d-block text-center">
                                             <img class="img-fluid" src="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                         </a>
                                     </div>
@@ -451,10 +451,10 @@
                                             <a href="{{route('front.subCategory', [$section_iii_subCategory->category->slug, $section_iii_subCategory->slug])}}" class="font-size-12 text-gray-5">{{$section_iii_subCategory->name}}</a>
                                         </div>
                                         <h5 class="mb-1 product-item__title">
-                                            <a href="{{route('front.product', [$iii_product->slug])}}" class="text-blue font-weight-bold">{{$iii_product->name}}</a>
+                                            <a href="{{route('front.product', [$iii_product->subCategory->category->slug, $iii_product->subCategory->slug, $iii_product->slug])}}" class="text-blue font-weight-bold">{{$iii_product->name}}</a>
                                         </h5>
                                         <div class="mb-2">
-                                            <a href="{{route('front.product', [$iii_product->slug])}}" class="d-block text-center">
+                                            <a href="{{route('front.product', [$iii_product->subCategory->category->slug, $iii_product->subCategory->slug, $iii_product->slug])}}" class="d-block text-center">
                                                 <img class="img-fluid" src="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
@@ -513,10 +513,10 @@
                                             <a href="{{route('front.subCategory', [$section_iv_subCategory->category->slug, $section_iv_subCategory->slug])}}" class="font-size-12 text-gray-5">{{$section_iv_subCategory->name}}</a>
                                         </div>
                                         <h5 class="mb-1 product-item__title">
-                                            <a href="{{route('front.product', [$iv_product->slug])}}" class="text-blue font-weight-bold">{{$iv_product->name}}</a>
+                                            <a href="{{route('front.product', [$iv_product->subCategory->category->slug, $iv_product->subCategory->slug, $iv_product->slug])}}" class="text-blue font-weight-bold">{{$iv_product->name}}</a>
                                         </h5>
                                         <div class="mb-2">
-                                            <a href="{{route('front.product', [$iv_product->slug])}}" class="d-block text-center">
+                                            <a href="{{route('front.product', [$iv_product->subCategory->category->slug, $iv_product->subCategory->slug, $iv_product->slug])}}" class="d-block text-center">
                                                 <img class="img-fluid" src="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>

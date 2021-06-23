@@ -13,7 +13,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
 {
-    public function index($slug) {
+    public function index($category_slug, $subCategory_slug, $slug) {
         $data['product'] = Product::with('subCategory', 'category', 'tags', 'vendor')->where(['slug' => $slug, 'active' => 1])->first();
         abort_if(!$data['product'], 404);
 

@@ -243,9 +243,9 @@
                                     <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
                                         <div class="product-item__body pb-xl-2">
                                             <div class="mb-2"><a href="{{route('front.subCategory', [$r_product->subCategory->category->slug, $r_product->subCategory->slug])}}" class="font-size-12 text-gray-5">{{$r_product->subCategory->name}}</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="{{route('front.product', [$r_product->slug])}}" class="text-blue font-weight-bold">{{$r_product->name}}</a></h5>
+                                            <h5 class="mb-1 product-item__title"><a href="{{route('front.product', [$r_product->subCategory->category->slug, $r_product->subCategory->slug, $r_product->slug])}}" class="text-blue font-weight-bold">{{$r_product->name}}</a></h5>
                                             <div class="mb-2">
-                                                <a href="{{route('front.product', [$r_product->slug])}}" class="a_img_pro d-block text-center">
+                                                <a href="{{route('front.product', [$r_product->subCategory->category->slug, $r_product->subCategory->slug, $r_product->slug])}}" class="a_img_pro d-block text-center">
                                                     <img class="img-fluid" src="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                                                 </a>
                                             </div>
