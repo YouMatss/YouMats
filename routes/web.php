@@ -96,9 +96,9 @@ Route::group([
     Route::get('/search', 'Product\ProductController@search')->name('products.search');
     Route::get('/filter/{subCategory_id}', 'Category\SubCategoryController@filter')->name('subCategory.filter');
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
-    Route::get('/{category_slug}', 'Category\CategoryController@index')->name('front.category');
+    Route::get('/{category_slug}/i', 'Category\CategoryController@index')->name('front.category');
+    Route::get('/{category_slug}/{subCategory_slug}/i', 'Category\SubCategoryController@index')->name('front.subCategory');
     Route::get('/{category_slug}/{subCategory_slug}/{slug}/i', 'Product\ProductController@index')->name('front.product');
-    Route::get('/{category_slug}/{subCategory_slug}', 'Category\SubCategoryController@index')
-        ->where('category_slug', '^(?!nova|admin.*$).*')->name('front.subCategory');
+//    ->where('category_slug', '^(?!nova|admin.*$).*');
 });
 //});
