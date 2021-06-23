@@ -4,10 +4,10 @@
         <div class="product-item__body pb-xl-2">
             <div class="mb-2"><a href="{{route('front.subCategory', [$product->subCategory->category->slug, $product->subCategory->slug])}}" class="font-size-12 text-gray-5">{{$product->subCategory->name}}</a></div>
             <h5 class="mb-1 product-item__title">
-                <a href="{{route('front.product', [$product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a>
+                <a href="{{route('front.product', [$product->subCategory->category->slug, $product->subCategory->slug, $product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a>
             </h5>
             <div class="mb-2">
-                <a href="{{route('front.product', [$product->slug])}}" class="d-block text-center">
+                <a href="{{route('front.product', [$product->subCategory->category->slug, $product->subCategory->slug, $product->slug])}}" class="d-block text-center">
                     <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}">
                 </a>
             </div>
@@ -55,7 +55,7 @@
         <div class="product-item__inner remove-prodcut-hover py-4 row">
             <div class="product-item__header col-6 col-md-2">
                 <div class="mb-2">
-                    <a href="{{route('front.product', [$product->slug])}}" class="d-block text-center">
+                    <a href="{{route('front.product', [$product->subCategory->category->slug, $product->subCategory->slug, $product->slug])}}" class="d-block text-center">
                         <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}">
                     </a>
                 </div>
@@ -63,7 +63,7 @@
             <div class="product-item__body col-6 col-md-7">
                 <div class="pr-lg-10">
                     <div class="mb-2"><a href="{{route('front.subCategory', [$product->subCategory->category->slug, $product->subCategory->slug])}}" class="font-size-12 text-gray-5">{{$product->subCategory->name}}</a></div>
-                    <h5 class="mb-2 product-item__title"><a href="{{route('front.product', [$product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a></h5>
+                    <h5 class="mb-2 product-item__title"><a href="{{route('front.product', [$product->subCategory->category->slug, $product->subCategory->slug, $product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a></h5>
                     @if($product->type == 'product' && !is_company())
                         <div class="prodcut-price d-md-none">
                             <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 //Actions routes
 Route::post('changeCurrency', 'Common\MiscController@changeCurrency')->name('front.currencySwitch');
 Route::get('introduce/{type}', 'Common\MiscController@introduce')->name('front.introduce');
@@ -15,9 +14,9 @@ Route::group([
     Route::get('/', function () {
         return view('coming_soon');
     });
-    Route::group([
-        'prefix' => 'demo'
-    ], function () {
+//    Route::group([
+//        'prefix' => 'demo'
+//    ], function () {
 
     //Auth (Verified/Authenticated) routes
     Route::group(['namespace' => 'User'], function () {
@@ -97,8 +96,9 @@ Route::group([
     Route::get('/search', 'Product\ProductController@search')->name('products.search');
     Route::get('/filter/{subCategory_id}', 'Category\SubCategoryController@filter')->name('subCategory.filter');
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
-    Route::get('/{slug}/i', 'Product\ProductController@index')->name('front.product');
-    Route::get('/{category_slug}/dp', 'Category\CategoryController@index')->name('front.category');
-    Route::get('/{category_slug}/{subCategory_slug}/dp', 'Category\SubCategoryController@index')->name('front.subCategory');
+    Route::get('/{category_slug}', 'Category\CategoryController@index')->name('front.category');
+    Route::get('/{category_slug}/{subCategory_slug}/{slug}/i', 'Product\ProductController@index')->name('front.product');
+    Route::get('/{category_slug}/{subCategory_slug}', 'Category\SubCategoryController@index')
+        ->where('category_slug', '^(?!nova|admin.*$).*')->name('front.subCategory');
 });
-});
+//});
