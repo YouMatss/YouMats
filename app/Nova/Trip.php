@@ -80,10 +80,9 @@ class Trip extends Resource
 
             Select::make('Driver Status')->options([
                 '0' => 'Pending',
-                '1' => 'Accepted',
-                '2' => 'Refused'
+                '1' => 'Accepted'
             ])->displayUsingLabels()
-                ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:0,1,2'])),
+                ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:0,1'])),
 
             Select::make('Status')->options([
                 '0' => 'Pending',
