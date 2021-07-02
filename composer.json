@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "php": "7.4.10",
+        "php": "7.4.12",
         "ampeco/nova-date-range-filter": "^0.1.1",
         "anaseqal/nova-import": "^0.0.6",
         "benjacho/belongs-to-many-field": "^1.8",

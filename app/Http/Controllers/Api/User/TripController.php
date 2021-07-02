@@ -7,8 +7,10 @@ use App\Http\Requests\Api\Driver\GiveRateRequest;
 use App\Http\Requests\Api\User\MakeRequestRequest;
 use App\Http\Requests\Api\User\PickDriverRequest;
 use App\Http\Resources\CarDriverListResource;
+use App\Http\Resources\CarTypeResource;
 use App\Http\Resources\TripResource;
 use App\Models\Car;
+use App\Models\CarType;
 use App\Models\Trip;
 use Illuminate\Support\Facades\Auth;
 
@@ -143,5 +145,10 @@ class TripController extends Controller {
         }
 
         return response()->json(['message' => 'Request dosn\'t exists.'], 400);
+    }
+
+    public function carTypes() {
+        $types = CarType::all();
+        return CarTypeResource::collection($types);
     }
 }
