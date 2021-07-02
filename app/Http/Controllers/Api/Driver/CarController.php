@@ -16,7 +16,10 @@ class CarController extends Controller
     public function index() {
         $driver = Auth::guard('driver-api')->user();
         $car = $driver->car;
-        return new CarResource($car);
+        if(isset($car))
+            return new CarResource($car);
+        else
+            return response()->json(['message' => 'No added car'], 400);
     }
 
     public function store(CarRequest $request) {

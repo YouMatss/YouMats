@@ -38,10 +38,11 @@ class ChatController extends Controller
         $sender_type = 'driver';
         $receiver_type = 'user';
 
-        $message = new Message();
-        $message->message = $request->message;
+        $message = Message::create([
+            'message' => $request->message
+        ]);
 
-        if($message->save()) {
+        if(isset($message)) {
             try {
                 $message->users()->attach($sender_id, [
                     'receiver_id' => $receiver_id,

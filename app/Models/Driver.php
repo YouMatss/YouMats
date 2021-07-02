@@ -38,4 +38,12 @@ class Driver extends Authenticatable implements HasMedia
     public function car() {
         return $this->hasOne(Car::class);
     }
+
+    public function trips() {
+        return $this->hasMany(Trip::class);
+    }
+
+    public function rate() {
+        return $this->trips()->avg('driver_rate');
+    }
 }

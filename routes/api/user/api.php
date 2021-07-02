@@ -19,10 +19,10 @@ Route::middleware('auth:api')->group(function () {
         Route::post('send_message', 'ChatController@sendMessage');
     });
 
+    Route::get('trips/{type}/{count?}', 'TripController@trips');
+    Route::get('trips_details/{trip_id}', 'TripController@tripDetails');
+    Route::post('trips/{trip_id}/cancel', 'TripController@tripCancel');
 });
 
-Route::get('trips/{type}/{count?}', 'TripController@trips');
-Route::get('trips_details/{trip_id}', 'TripController@tripDetails');
-Route::post('trips/{trip_id}/cancel', 'TripController@tripCancel');
-
+Route::get('/car_types', 'TripController@carTypes');
 Route::get('/get-driver/{id}', 'DriverController@getDriverById');
