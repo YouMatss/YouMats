@@ -53,7 +53,11 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
         return $this->hasMany(Quote::class)->with('items');
     }
 
-    public function vendors_conversations() {
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function vendors_conversations(): \Illuminate\Support\Collection
+    {
         return ($this->belongsToMany(Vendor::class, 'user_messages',
             'sender_id','receiver_id')->where('sender_type', 'user')->get()->collect()->unique())
             ->merge($this->belongsToMany(Vendor::class, 'user_messages',
@@ -61,7 +65,12 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
             ->unique('id');
     }
 
-    private function messages($vendor_id) {
+    /**
+     * @param $vendor_id
+     * @return \Illuminate\Support\Collection
+     */
+    private function messages($vendor_id): \Illuminate\Support\Collection
+    {
         return ($this->hasMany(UserMessage::class, 'sender_id')
             ->with('message')->where([
                 'receiver_id' => $vendor_id, 'receiver_type' => 'vendor', 'sender_type' => 'user'
@@ -72,12 +81,36 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
                 ])->get()->collect());
     }
 
+    /**
+     * @param $vendor_id
+     * @return mixed
+     */
     public function last_message($vendor_id) {
         return $this->messages($vendor_id)->sortBy('created_at')->last()->message;
     }
 
-    public function count_messages($vendor_id) {
+    /**
+     * @param $vendor_id
+     * @return int
+     */
+    public function count_messages($vendor_id): int
+    {
         return count($this->messages($vendor_id));
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function trips(): HasMany
+    {
+        return $this->hasMany(Trip::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function rate() {
+        return $this->trips()->avg('user_rate');
     }
 
 }

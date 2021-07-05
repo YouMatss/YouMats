@@ -26,24 +26,50 @@ class Driver extends Authenticatable implements HasMedia
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);
     }
 
-    public function country() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
         return $this->belongsTo(Country::class);
     }
 
-    public function car() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function car(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
         return $this->hasOne(Car::class);
     }
 
-    public function trips() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function trips(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Trip::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function rate() {
         return $this->trips()->avg('driver_rate');
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function reviews(): \Illuminate\Support\Collection
+    {
+        return $this->trips()->pluck('driver_review');
     }
 }
