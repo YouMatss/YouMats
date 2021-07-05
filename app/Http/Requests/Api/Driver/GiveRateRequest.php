@@ -24,7 +24,8 @@ class GiveRateRequest extends FormRequest
     public function rules()
     {
         return [
-            'rate' => 'required|integer|between:1,5'
+            'rate' => 'required|integer|between:1,5',
+            'review' => NULLABLE_TEXT_VALIDATION
         ];
     }
 }

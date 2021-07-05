@@ -22,6 +22,7 @@ class DriverResource extends JsonResource
             'phone' => $this->phone,
             'phone2' => $this->phone2,
             'rate' => $this->rate(),
+            'reviews' => $this->reviews(),
             'driver_photo' => $this->getImages(DRIVER_PHOTO),
             'driver_id' => $this->getImages(DRIVER_ID),
             'driver_license' => $this->getImages(DRIVER_LICENSE),

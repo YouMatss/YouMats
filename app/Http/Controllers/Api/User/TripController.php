@@ -74,7 +74,8 @@ class TripController extends Controller {
         ])->first();
         if($trip) {
             $trip->update([
-                'driver_rate' => $data['rate']
+                'driver_rate' => $data['rate'],
+                'driver_review' => $data['review']
             ]);
             return response()->json([
                 'message' => 'Rate Submit Successfully.',
@@ -82,6 +83,11 @@ class TripController extends Controller {
             ], 200);
         }
         return response()->json(['message' => 'Trip dosn\'t exist.'], 400);
+    }
+
+    public function tripsCount() {
+        $user_id = Auth::guard('api')->id();
+        return Trip::where('user_id', $user_id)->orderBy('id', 'desc')->count();
     }
 
     public function trips($type, $count = 3) {

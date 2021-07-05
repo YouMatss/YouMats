@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Textarea;
 use Nikaia\Rating\Rating;
 
 class Trip extends Resource
@@ -102,6 +103,10 @@ class Trip extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_NUMERIC_VALIDATION),
 
+            Textarea::make('User Review')
+                ->rules(NULLABLE_TEXT_VALIDATION)
+                ->hideFromIndex(),
+
             Rating::make('Driver Rate')
                 ->min(0)
                 ->max(5)
@@ -109,6 +114,9 @@ class Trip extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_NUMERIC_VALIDATION),
 
+            Textarea::make('Driver Review')
+                ->rules(NULLABLE_TEXT_VALIDATION)
+                ->hideFromIndex(),
         ];
     }
 
