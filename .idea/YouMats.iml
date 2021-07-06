@@ -98,6 +98,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/nyholm/psr7" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/opis/closure" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/optimistdigital/nova-multiselect-field" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/optimistdigital/nova-settings" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/optimistdigital/nova-simple-repeatable" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/optimistdigital/nova-sortable" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/optimistdigital/nova-translatable" />

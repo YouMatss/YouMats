@@ -15,7 +15,7 @@ class Driver extends Authenticatable implements HasMedia
 {
     use HasApiTokens, SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage;
 
-    protected $fillable = ['country_id', 'name', 'email', 'phone', 'phone2', 'email_verified_at', 'password', 'remember_token', 'active'];
+    protected $fillable = ['country_id', 'name', 'email', 'phone', 'phone2', 'whatsapp', 'email_verified_at', 'password', 'remember_token', 'active'];
 
     protected $hidden = [
         'password',

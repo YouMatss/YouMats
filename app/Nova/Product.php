@@ -41,10 +41,6 @@ class Product extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-//            BelongsTo::make('SubCategory')
-//                ->withoutTrashed()
-//                ->searchable(),
-
             NovaBelongsToDepend::make('Category')
                 ->options(Category::all())->readonly(),
             NovaBelongsToDepend::make('SubCategory')

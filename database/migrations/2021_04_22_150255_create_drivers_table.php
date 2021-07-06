@@ -24,6 +24,7 @@ class CreateDriversTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('phone2')->nullable();
+            $table->string('whatsapp')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
