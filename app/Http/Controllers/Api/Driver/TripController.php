@@ -14,7 +14,9 @@ class TripController extends Controller
 {
     public function requestsCount() {
         $driver_id = Auth::guard('driver-api')->id();
-        return Trip::where('driver_id', $driver_id)->count();
+        return response()->json([
+            'count' => Trip::where('driver_id', $driver_id)->count()
+        ], 200);
     }
 
     public function getAllRequests() {

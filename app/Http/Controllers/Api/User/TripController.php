@@ -87,7 +87,9 @@ class TripController extends Controller {
 
     public function tripsCount() {
         $user_id = Auth::guard('api')->id();
-        return Trip::where('user_id', $user_id)->orderBy('id', 'desc')->count();
+        return response()->json([
+            'count' => Trip::where('user_id', $user_id)->orderBy('id', 'desc')->count()
+        ], 200);
     }
 
     public function trips($type, $count = 3) {
