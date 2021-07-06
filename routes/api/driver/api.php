@@ -37,3 +37,5 @@ Route::middleware('auth:driver-api')->group(function () {
 
 Route::get('/car-types', 'CarController@getCarTypes');
 Route::get('/countries', 'CountryController@index');
+
+Route::get('/social-links', 'GeneralController@socialLinks');

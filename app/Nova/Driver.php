@@ -33,7 +33,7 @@ class Driver extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email', 'phone', 'phone2'
+        'id', 'name', 'email', 'phone', 'phone2', 'whatsapp'
     ];
 
     /**
@@ -66,6 +66,10 @@ class Driver extends Resource
                 ->rules(REQUIRED_STRING_VALIDATION),
 
             Text::make('Phone2')
+                ->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION),
+
+            Text::make('Whatsapp')
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
