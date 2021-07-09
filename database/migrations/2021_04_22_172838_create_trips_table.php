@@ -35,7 +35,9 @@ class CreateTripsTable extends Migration
 
             $table->timestamp('started_at')->nullable();
             $table->decimal('user_rate', 10, 1)->nullable();
+            $table->text('user_review')->nullable();
             $table->decimal('driver_rate', 10, 1)->nullable();
+            $table->text('driver_review')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

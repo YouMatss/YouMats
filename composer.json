@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "php": "7.4.12",
+        "php": "7.4.10",
         "ampeco/nova-date-range-filter": "^0.1.1",
         "anaseqal/nova-import": "^0.0.6",
         "benjacho/belongs-to-many-field": "^1.8",
@@ -45,6 +45,7 @@
         "mcamara/laravel-localization": "^1.6",
         "nikaia/nova-rating-field": "^1.0",
         "optimistdigital/nova-multiselect-field": "^2.0",
+        "optimistdigital/nova-settings": "^3.2",
         "optimistdigital/nova-simple-repeatable": "^1.2",
         "optimistdigital/nova-sortable": "^2.0",
         "optimistdigital/nova-translatable": "^1.6",

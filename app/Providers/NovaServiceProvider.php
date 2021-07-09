@@ -56,8 +56,11 @@ use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
 use Illuminate\Support\Facades\Gate;
 use KABBOUCHI\LogsTool\LogsTool;
 use Laravel\Nova\Actions\ActionResource;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use Laravel\Nova\Panel;
+use OptimistDigital\NovaSettings\NovaSettings;
 use Richardkeep\NovaTimenow\NovaTimenow;
 use Spatie\BackupTool\BackupTool;
 use Vyuldashev\NovaPermission\NovaPermissionTool;
@@ -67,6 +70,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
+        NovaSettings::addSettingsFields([
+            new Panel('Social Media Links', $this->socialFields())
+        ]);
 //        Nova::serving(function () {
 //            \App\Models\Category::observe(CategoryObserver::class);
 //        });
@@ -230,6 +236,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ])
                 ]
             ]),
+            NovaSettings::make()->canSee(function ($request) {
+                return $request->user()->isSuperAdmin();
+            }),
             NovaTranslationEditor::make(),
             (new BackupTool())
                 ->canSee(function ($request) {
@@ -252,5 +261,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function register()
     {
 
+    }
+
+    private function socialFields()
+    {
+        return [
+            Text::make('Facebook')->rules(NULLABLE_URL_VALIDATION),
+            Text::make('Twitter')->rules(NULLABLE_URL_VALIDATION),
+        ];
     }
 }

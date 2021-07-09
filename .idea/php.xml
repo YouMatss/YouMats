@@ -205,6 +205,7 @@
       <path value="$PROJECT_DIR$/vendor/orlyapps/nova-belongsto-depend" />
       <path value="$PROJECT_DIR$/vendor/staudenmeir/belongs-to-through" />
       <path value="$PROJECT_DIR$/vendor/drobee/nova-sluggable" />
+      <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-settings" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

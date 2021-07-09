@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Auth;
 
 class TripController extends Controller
 {
+    public function requestsCount() {
+        $driver_id = Auth::guard('driver-api')->id();
+        return response()->json([
+            'count' => Trip::where('driver_id', $driver_id)->count()
+        ], 200);
+    }
+
     public function getAllRequests() {
         $driver_id = Auth::guard('driver-api')->id();
         $trips = Trip::where('driver_id', $driver_id)->get();
@@ -132,7 +139,8 @@ class TripController extends Controller
         ])->first();
         if($trip) {
             $trip->update([
-                'user_rate' => $data['rate']
+                'user_rate' => $data['rate'],
+                'user_review' => $data['review']
             ]);
             return response()->json([
                 'message' => 'Rate Submit Successfully.',

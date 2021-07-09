@@ -19,6 +19,7 @@ Route::middleware('auth:driver-api')->group(function () {
 //        Route::delete('/delete-image/{car_id}/{collection_name}/{collection_id}', 'CarController@deleteImage');
     });
 
+    Route::get('requests/count', 'TripController@requestsCount');
     Route::get('all-requests', 'TripController@getAllRequests');
     Route::get('pending-requests', 'TripController@getPendingRequests');
     Route::get('request/{id}', 'TripController@getRequestById');
@@ -36,3 +37,5 @@ Route::middleware('auth:driver-api')->group(function () {
 
 Route::get('/car-types', 'CarController@getCarTypes');
 Route::get('/countries', 'CountryController@index');
+
+Route::get('/social-links', 'GeneralController@socialLinks');

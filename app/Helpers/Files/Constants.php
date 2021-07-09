@@ -7,6 +7,7 @@ define("LANGUAGE_PATH", 'language');
 define("CATEGORY_PATH", 'category');
 define("CATEGORY_COVER", 'category_cover');
 define("SUB_CATEGORY_PATH", 'subCategory');
+define("THIRD_CATEGORY_PATH", 'thirdCategory');
 define("TEAM_PATH", 'team');
 define("PRODUCT_PATH", 'product');
 define("COMPANY_PATH", 'company');
