@@ -82,6 +82,6 @@ class MiscController extends Controller
         if($type == 'individual' || $type == 'company')
             Session::put('userType', $type);
 
-        return redirect()->route('home');
+        return redirect()->back();
     }
 }
