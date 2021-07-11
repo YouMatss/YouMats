@@ -63,6 +63,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/jakub-onderka/php-console-highlighter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kabbouchi/laravel-ward" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kabbouchi/nova-logs-tool" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kalnoy/nestedset" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kirschbaum-development/nova-inline-relationship" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/framework" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/passport" />
@@ -109,6 +110,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/sodium_compat" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phar-io/manifest" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phar-io/version" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phoenix-lib/nova-nested-tree-attach-many" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/message-factory" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-common" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-docblock" />
