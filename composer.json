@@ -50,6 +50,7 @@
         "optimistdigital/nova-sortable": "^2.0",
         "optimistdigital/nova-translatable": "^1.6",
         "orlyapps/nova-belongsto-depend": "^3.0",
+        "phoenix-lib/nova-nested-tree-attach-many": "^1.7",
         "predis/predis": "^1.1",
         "richardkeep/nova-timenow": "^1.0",
         "spatie/laravel-medialibrary": "^9.4",

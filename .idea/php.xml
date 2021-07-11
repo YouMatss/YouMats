@@ -206,6 +206,8 @@
       <path value="$PROJECT_DIR$/vendor/staudenmeir/belongs-to-through" />
       <path value="$PROJECT_DIR$/vendor/drobee/nova-sluggable" />
       <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-settings" />
+      <path value="$PROJECT_DIR$/vendor/kalnoy/nestedset" />
+      <path value="$PROJECT_DIR$/vendor/phoenix-lib/nova-nested-tree-attach-many" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
