@@ -24,33 +24,6 @@ class SubCategory extends Model implements Sortable, HasMedia
 
     protected $cascadeDeletes = ['products'];
 
-    public function getNameAttribute() {
-        if(!isset($this->getTranslations('name')[app()->getLocale()]))
-            return;
-        return $this->getTranslations('name')[app()->getLocale()];
-    }
-
-    public function getMetaTitleAttribute() {
-        if(!isset($this->getTranslations('meta_title')[app()->getLocale()]))
-            return;
-        if(empty($this->getTranslations('meta_title')[app()->getLocale()]))
-            return $this->getTranslations('name')[app()->getLocale()];
-        return $this->getTranslations('meta_title')[app()->getLocale()];
-    }
-    public function getMetaDescAttribute() {
-        if(!isset($this->getTranslations('meta_desc')[app()->getLocale()]))
-            return;
-        if(empty($this->getTranslations('meta_desc')[app()->getLocale()]))
-            return $this->getTranslations('short_desc')[app()->getLocale()];
-        return $this->getTranslations('meta_desc')[app()->getLocale()];
-    }
-    public function getMetaKeywordsAttribute() {
-        if(!isset($this->getTranslations('meta_keywords')[app()->getLocale()]))
-            return;
-        if(empty($this->getTranslations('meta_keywords')[app()->getLocale()]))
-            return $this->getTranslations('name')[app()->getLocale()];
-        return $this->getTranslations('meta_keywords')[app()->getLocale()];
-    }
 
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')

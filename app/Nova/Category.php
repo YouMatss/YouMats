@@ -4,8 +4,10 @@ namespace App\Nova;
 
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
-use Drobee\NovaSluggable\SluggableText;
+use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Slug;
@@ -13,6 +15,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
+use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
 use Waynestate\Nova\CKEditor;
 
 class Category extends Resource
@@ -33,10 +36,15 @@ class Category extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             Text::make('Name')
-//                ->slug('Slug')
                 ->sortable()
                 ->translatable()
                 ->rules(REQUIRED_STRING_VALIDATION),
+
+            Boolean::make('Category', 'parent_id')->hideFromIndex()->hideFromDetail(),
+            BelongsTo::make('Parent', 'parent', self::class)->onlyOnIndex(),
+            NovaDependencyContainer::make([
+                NestedTreeAttachManyField::make('Parent', 'parent', self::class)->useSingleSelect()->hideFromIndex()->nullable(),
+            ])->dependsOn('parent_id', false),
 
             Textarea::make('Short Description', 'short_desc')
                 ->translatable()
@@ -95,7 +103,6 @@ class Category extends Resource
 
             (new Panel('SEO', [
                 Slug::make('Slug')
-//                    ->slugLanguage('en')->event('blur')
                     ->hideFromIndex()
                     ->rules(NULLABLE_STRING_VALIDATION)
                     ->creationRules('unique:categories,slug')
@@ -127,7 +134,7 @@ class Category extends Resource
 
             ])),
 
-            HasMany::make('SubCategories'),
+            HasMany::make('Children', 'children', self::class),
             HasMany::make('Products'),
         ];
     }

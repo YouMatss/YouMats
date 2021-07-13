@@ -158,7 +158,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'icon' => '',
                         'resources' => [
                             Category::class,
-                            SubCategory::class,
                             Product::class,
                             Tag::class,
                             Attribute::class,

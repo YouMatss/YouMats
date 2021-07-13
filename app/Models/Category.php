@@ -63,17 +63,13 @@ class Category extends Model implements Sortable, HasMedia
             ->performOnCollections(CATEGORY_COVER);
     }
 
-    public function subCategories() {
-        return $this->hasMany(SubCategory::class)->orderBy('sort');
-    }
-
     public function products() {
-        return $this->hasManyThrough(Product::class, SubCategory::class, '', 'subCategory_id')
-            ->where('active', 1)->orderBy('updated_at', 'desc');
+        return $this->hasMany(Product::class)
+            ->where('active', 1)
+            ->orderBy('updated_at', 'desc');
     }
 
 //    public function vendors() {
 //        return $this->hasManyThrough(Vendor::class, SubCategory::class, '', 'subCategory_id');
 //    }
-
 }
