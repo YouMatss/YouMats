@@ -24,7 +24,7 @@
                     {{--<span class="text-secondary">(40)</span>--}}
                 </a>
             </div>
-            <div class="font-size-12 p-0 text-gray-110 mb-4">
+            <div class="font-size-12 p-0 text-gray-110 mb-4 productDesc">
                 <p class="mb-1">{!! $product->short_desc !!}</p>
             </div>
             <div class="text-gray-20 mb-2 font-size-12">SKU: {{$product->SKU}}</div>

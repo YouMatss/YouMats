@@ -20,7 +20,7 @@ class SubCategoryController extends Controller
         abort_if(!$data['category'], 404);
         abort_if(!$data['subCategory'], 404);
 
-        $data['products'] = $data['subCategory']->products()->paginate(15);
+        $data['products'] = $data['subCategory']->products()->paginate(20);
         $data['tags'] = $data['subCategory']->tags();
         $data['subCategory']->load('attributes', 'attributes.values');
         $data['minPrice'] = $data['products']->min('price');

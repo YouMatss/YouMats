@@ -90,8 +90,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        foreach($data['files'] as $file)
-            $user->addMedia($file)->toMediaCollection(COMPANY_PATH);
+        if(isset($data['files']))
+            foreach($data['files'] as $file)
+                $user->addMedia($file)->toMediaCollection(COMPANY_PATH);
 
         return $user;
     }
