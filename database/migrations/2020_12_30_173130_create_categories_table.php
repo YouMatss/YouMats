@@ -35,9 +35,6 @@ class CreateCategoriesTable extends Migration
             $table->boolean('section_iv')->default(0);
 
             $table->integer('sort');
-
-            $table->nestedSet();
-
             $table->softDeletes();
             $table->timestamps();
         });

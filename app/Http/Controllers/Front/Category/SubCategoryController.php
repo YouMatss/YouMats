@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Front\Category;
 
-use App\Helpers\Filters\FiltersJsonField;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
-use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 

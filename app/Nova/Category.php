@@ -35,16 +35,14 @@ class Category extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make('Name')
-                ->sortable()
-                ->translatable()
-                ->rules(REQUIRED_STRING_VALIDATION),
+            Text::make('Name')->sortable()->translatable()->rules(REQUIRED_STRING_VALIDATION),
 
-            Boolean::make('Category', 'parent_id')->hideFromIndex()->hideFromDetail(),
+            Boolean::make('Category')->hideFromIndex(),
             BelongsTo::make('Parent', 'parent', self::class)->onlyOnIndex(),
             NovaDependencyContainer::make([
-                NestedTreeAttachManyField::make('Parent', 'parent', self::class)->useSingleSelect()->hideFromIndex()->nullable(),
-            ])->dependsOn('parent_id', false),
+                NestedTreeAttachManyField::make('Parent', 'parent', self::class)
+                    ->useSingleSelect()->hideFromIndex()->nullable(),
+            ])->dependsOn('category', false),
 
             Textarea::make('Short Description', 'short_desc')
                 ->translatable()
@@ -136,6 +134,7 @@ class Category extends Resource
 
             HasMany::make('Children', 'children', self::class),
             HasMany::make('Products'),
+            HasMany::make('Vendors'),
         ];
     }
 

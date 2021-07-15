@@ -40,29 +40,23 @@ class Product extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            NestedTreeAttachManyField::make('Category'),
-
-            BelongsTo::make('Vendor')
-                ->withoutTrashed()
-                ->hideFromIndex()
-                ->searchable(),
-
-            BelongsToManyField::make('Tags')
-                ->hideFromIndex(),
-
-            Text::make('Name')
-                ->sortable()
-                ->translatable()
+            Text::make('Name')->sortable()->translatable()
                 ->rules(REQUIRED_STRING_VALIDATION),
 
+            BelongsTo::make('Category')->onlyOnDetail(),
+            NestedTreeAttachManyField::make('Category')->useSingleSelect(),
+
+            BelongsTo::make('Vendor')
+                ->withoutTrashed()->hideFromIndex()->searchable(),
+
+            BelongsToManyField::make('Tags')->hideFromIndex(),
+
             CKEditor::make('Short Description', 'short_desc')
-                ->hideFromIndex()
-                ->translatable()
+                ->hideFromIndex()->translatable()
                 ->rules(NULLABLE_TEXT_VALIDATION),
 
             CKEditor::make('Description', 'desc')
-                ->hideFromIndex()
-                ->translatable()
+                ->hideFromIndex()->translatable()
                 ->rules(REQUIRED_TEXT_VALIDATION),
 
             Select::make('Type')->options([
@@ -73,23 +67,17 @@ class Product extends Resource
 
             NovaDependencyContainer::make([
                 Currency::make('Cost')
-                    ->rules(REQUIRED_NUMERIC_VALIDATION)
-                    ->min(0)
-                    ->step(0.05),
+                    ->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
 
                 Currency::make('Price')
-                    ->rules(REQUIRED_NUMERIC_VALIDATION)
-                    ->min(0)
-                    ->step(0.05),
+                    ->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
 
                 Number::make(__('Stock'), 'stock')
-                    ->min(0)
-                    ->rules(REQUIRED_INTEGER_VALIDATION),
+                    ->min(0)->rules(REQUIRED_INTEGER_VALIDATION),
             ])->dependsOn('type', 'product'),
 
             BelongsTo::make('Unit')
-                ->hideFromIndex()
-                ->nullable(),
+                ->hideFromIndex()->nullable(),
 
             Text::make('SKU', 'SKU')
                 ->hideFromIndex()
@@ -99,23 +87,17 @@ class Product extends Resource
                 ->updateRules('unique:products,SKU,{{resourceId}}'),
 
             Rating::make('Rate')
-                ->min(0)
-                ->max(5)
-                ->increment(1)
-                ->hideFromIndex()
-                ->rules(REQUIRED_NUMERIC_VALIDATION),
+                ->min(0)->max(5)->increment(1)
+                ->hideFromIndex()->rules(REQUIRED_NUMERIC_VALIDATION),
 
             Toggle::make('Active')
-                ->falseColor('#bacad6')
-                ->editableIndex(),
+                ->falseColor('#bacad6')->editableIndex(),
 
             Toggle::make(__('Best Seller'), 'best_seller')
-                ->falseColor('#bacad6')
-                ->editableIndex(),
+                ->falseColor('#bacad6')->editableIndex(),
 
             Number::make('Views')
-                ->hideWhenUpdating()
-                ->hideWhenCreating(),
+                ->hideWhenUpdating()->hideWhenCreating(),
 
             (new Panel('Gallery', [
                 Medialibrary::make('Images', PRODUCT_PATH)->fields(function () {
@@ -162,7 +144,7 @@ class Product extends Resource
                 Multiselect::make('Attributes')
                     ->options(function () {
                         $collection = [];
-                        $data = \App\Models\Attribute::with('values')->where('subCategory_id', $this->subCategory_id)->get();
+                        $data = \App\Models\Attribute::with('values')->where('category_id', $this->category_id)->get();
                         foreach ($data as $row) {
                             foreach ($row->values as $value) {
                                 $collection[$value->id] = ['label' => $value->value, 'group' => $row->key];
@@ -207,8 +189,6 @@ class Product extends Resource
                     ->rules(NULLABLE_TEXT_VALIDATION)
                     ->canSee(fn() => auth('admin')->user()->can('seo')),
             ])),
-
-
         ];
     }
 

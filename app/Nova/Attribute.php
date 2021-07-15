@@ -43,7 +43,7 @@ class Attribute extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make('SubCategory')->withoutTrashed()->searchable(),
+            BelongsTo::make('Category')->withoutTrashed()->searchable(),
             Text::make('Key')->translatable()->rules(REQUIRED_STRING_VALIDATION),
             NestedForm::make('Values', 'values', AttributeValue::class)->open(false),
         ];

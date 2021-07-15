@@ -26,7 +26,6 @@ use App\Nova\Metrics\ProductCount;
 use App\Nova\Metrics\Quote\QuotePerDay;
 use App\Nova\Metrics\Quote\QuotesStatus;
 use App\Nova\Metrics\Revenue;
-use App\Nova\Metrics\SubCategoryCount;
 use App\Nova\Metrics\SubscribersCount;
 use App\Nova\Metrics\UsersPerDay;
 use App\Nova\Metrics\UsersStatus;
@@ -37,7 +36,6 @@ use App\Nova\PaymentGateway;
 use App\Nova\Product;
 use App\Nova\Quote;
 use App\Nova\Slider;
-use App\Nova\SubCategory;
 use App\Nova\Subscriber;
 use App\Nova\Tag;
 use App\Nova\Team;
@@ -116,7 +114,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new QuotePerDay,
             new QuotesStatus,
             new CategoryCount,
-            new SubCategoryCount,
             new ProductCount,
             new SubscribersCount,
             new ContactCount

@@ -14,9 +14,9 @@ Route::group([
     Route::get('/', function () {
         return view('coming_soon');
     });
-    Route::group([
-        'prefix' => 'demo'
-    ], function () {
+//    Route::group([
+//        'prefix' => 'demo'
+//    ], function () {
 
     //Auth (Verified/Authenticated) routes
     Route::group(['namespace' => 'User'], function () {
@@ -101,4 +101,4 @@ Route::group([
     Route::get('/i/{category_slug}/{subCategory_slug}/{slug}', 'Product\ProductController@index')->name('front.product');
 //    ->where('category_slug', '^(?!nova|admin.*$).*');
 });
-});
+//});
