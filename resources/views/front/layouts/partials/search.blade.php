@@ -1,5 +1,5 @@
 <script>
-let timer, timeoutVal = 700;
+let timer, timeoutVal = 200;
 
 function doTheMagic(url, callback = 'default') {
     let searchRegionGrid = $("#searchRegionGrid"),

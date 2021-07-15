@@ -1,5 +1,19 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+        $(".showPassword").click(function(e) {
+            e.preventDefault();
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            let input = $($(this).data("toggle"));
+
+            if (input.attr("type") === "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+
         // Change Currency
         $('.currency_button').click(function () {
             var this_element = $(this),
@@ -12,7 +26,7 @@
                     success: function (data) {
                         var return_data = JSON.parse(data);
                         if (typeof (return_data.status) != "undefined" && return_data.status != 0) {
-                            window.location.href = "{{url()->current()}}";
+                            window.location.href = "{{ \Request::fullUrl() }}";
                         } else {
                             return false;
                         }
