@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Models\Category;
 use Benjacho\BelongsToManyField\BelongsToManyField;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
@@ -20,7 +21,7 @@ use Nikaia\Rating\Rating;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
-use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
+use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 use Waynestate\Nova\CKEditor;
 
 class Product extends Resource
@@ -40,7 +41,12 @@ class Product extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            NestedTreeAttachManyField::make('Category'),
+            NovaBelongsToDepend::make('Category')
+                ->options(Category::all())->readonly(),
+            NovaBelongsToDepend::make('SubCategory')
+                ->optionsResolve(function ($category) {
+                    return $category->subCategories()->get(['id', 'name']);
+                })->dependsOn('Category'),
 
             BelongsTo::make('Vendor')
                 ->withoutTrashed()
