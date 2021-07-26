@@ -21,14 +21,13 @@ class Category extends Model implements Sortable, HasMedia
 
     protected $dates = ['deleted_at'];
 
-    protected $cascadeDeletes = ['subCategories', 'products'];
+    protected $cascadeDeletes = ['products'];
 
     public function getNameAttribute() {
         if(!isset($this->getTranslations('name')[app()->getLocale()]))
             return;
         return $this->getTranslations('name')[app()->getLocale()];
     }
-
     public function getMetaTitleAttribute() {
         if(!isset($this->getTranslations('meta_title')[app()->getLocale()]))
             return;
@@ -62,17 +61,31 @@ class Category extends Model implements Sortable, HasMedia
             ->performOnCollections(CATEGORY_COVER);
     }
 
-    public function subCategories() {
-        return $this->hasMany(SubCategory::class)->orderBy('sort');
+    public function parent() {
+        return $this->belongsTo(self::class, 'parent_id', 'id');
     }
 
     public function products() {
-        return $this->hasManyThrough(Product::class, SubCategory::class, '', 'subCategory_id')
-            ->where('active', 1)->orderBy('updated_at', 'desc');
+        if(count($this->children)) {
+            return $this->hasManyThrough(Product::class, self::class, 'parent_id')
+                ->where('active', 1)->orderBy('updated_at', 'desc');
+        }
+        return $this->hasMany(Product::class)->where('active', 1)->orderBy('updated_at', 'desc');
     }
 
-//    public function vendors() {
-//        return $this->hasManyThrough(Vendor::class, SubCategory::class, '', 'subCategory_id');
-//    }
+    public function vendors() {
+        return $this->belongsToMany(Vendor::class, Product::class)->distinct();
+    }
+
+    public function tags() {
+        return Tag::select('tags.*')->join('product_tag AS pt', 'pt.tag_id', '=', 'tags.id')
+            ->join('products as p', 'p.id', '=', 'pt.product_id')
+            ->join('categories as c', 'c.id', '=', 'p.category_id')
+            ->where('c.id', '=', $this->id)->distinct()->get();
+    }
+
+    public function attributes() {
+        return $this->hasMany(Attribute::class);
+    }
 
 }

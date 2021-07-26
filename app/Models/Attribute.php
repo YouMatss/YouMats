@@ -14,8 +14,8 @@ class Attribute extends Model implements Sortable
 
     public $translatable = ['key'];
 
-    public function subCategory() {
-        return $this->belongsTo(SubCategory::class, 'subCategory_id');
+    public function Category() {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function values() {

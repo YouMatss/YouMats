@@ -87,9 +87,9 @@
                             <h6 class="mb-3 font-weight-bold">{{__('general.footer_find_it_fast')}}</h6>
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
-                                @foreach($footer_sub_categories->take(7)->get() as $sub_category)
+                                @foreach($footer_categories->take(7)->get() as $category)
                                     <li>
-                                        <a class="list-group-item list-group-item-action" href="{{ route('front.subCategory', ['category_slug' => $sub_category->category->slug, 'subCategory_slug' => $sub_category->slug]) }}">{{ $sub_category->name }}</a>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('front.category', [$category->slug]) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -99,9 +99,9 @@
                         <div class="col-12 col-md mb-4 mb-md-0">
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
-                                @foreach($footer_sub_categories->skip(7)->take(7)->get() as $sub_category)
+                                @foreach($footer_categories->skip(7)->take(7)->get() as $category)
                                     <li>
-                                        <a class="list-group-item list-group-item-action" href="{{ route('front.subCategory', ['category_slug' => $sub_category->category->slug, 'subCategory_slug' => $sub_category->slug]) }}">{{ $sub_category->name }}</a>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('front.category', [$category->slug]) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>

@@ -71,12 +71,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     }
 
     public function category() {
-        return $this->belongsToThrough(Category::class, SubCategory::class,
-            null, '', [SubCategory::class => 'subCategory_id']);
-    }
-
-    public function subCategory() {
-        return $this->belongsTo(SubCategory::class, 'subCategory_id');
+        return $this->belongsTo(Category::class);
     }
 
     public function unit() {

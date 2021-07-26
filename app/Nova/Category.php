@@ -4,8 +4,10 @@ namespace App\Nova;
 
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
-use Drobee\NovaSluggable\SluggableText;
+use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Slug;
@@ -13,6 +15,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
+use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
 use Waynestate\Nova\CKEditor;
 
 class Category extends Resource
@@ -32,11 +35,14 @@ class Category extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make('Name')
-//                ->slug('Slug')
-                ->sortable()
-                ->translatable()
-                ->rules(REQUIRED_STRING_VALIDATION),
+            Text::make('Name')->sortable()->translatable()->rules(REQUIRED_STRING_VALIDATION),
+
+            Boolean::make('Category')->hideFromIndex(),
+            BelongsTo::make('Parent', 'parent', self::class)->onlyOnIndex(),
+            NovaDependencyContainer::make([
+                NestedTreeAttachManyField::make('Parent', 'parent', self::class)
+                    ->useSingleSelect()->hideFromIndex()->nullable(),
+            ])->dependsOn('category', false),
 
             Textarea::make('Short Description', 'short_desc')
                 ->translatable()
@@ -86,16 +92,16 @@ class Category extends Resource
                 ->previewUsing('cropper')
                 ->hideFromIndex(),
 
-            Toggle::make(__('Featured'), 'isFeatured')
-                ->falseColor('#bacad6')
-                ->editableIndex(),
-            Toggle::make(__('Section I'), 'section_i')
-                ->falseColor('#bacad6')
-                ->editableIndex(),
+            Toggle::make(__('Section I'), 'section_i')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Section II'), 'section_ii')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Section III'), 'section_iii')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Section IV'), 'section_iv')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Featured'), 'isFeatured')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Top Category'), 'topCategory')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Show in footer'), 'show_in_footer')->falseColor('#bacad6')->editableIndex(),
 
             (new Panel('SEO', [
                 Slug::make('Slug')
-//                    ->slugLanguage('en')->event('blur')
                     ->hideFromIndex()
                     ->rules(NULLABLE_STRING_VALIDATION)
                     ->creationRules('unique:categories,slug')
@@ -127,8 +133,9 @@ class Category extends Resource
 
             ])),
 
-            HasMany::make('SubCategories'),
+            HasMany::make('Children', 'children', self::class),
             HasMany::make('Products'),
+            HasMany::make('Vendors'),
         ];
     }
 

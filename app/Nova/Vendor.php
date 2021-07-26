@@ -46,13 +46,6 @@ class Vendor extends Resource
                 ->hideFromIndex()
                 ->withoutTrashed(),
 
-//            NovaBelongsToDepend::make('Category')
-//                ->options(Category::all())->readonly(),
-//            NovaBelongsToDepend::make('SubCategory')
-//                ->optionsResolve(function ($category) {
-//                    return $category->subCategories()->get(['id', 'name']);
-//                })->dependsOn('Category'),
-
             Text::make('Name')
                 ->sortable()
                 ->rules(REQUIRED_STRING_VALIDATION)
@@ -149,26 +142,19 @@ class Vendor extends Resource
 
             Medialibrary::make('Licenses', VENDOR_PATH)->fields(function () {
                 return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
+                    Text::make('File Name', 'file_name')->rules('required', 'min:2'),
                 ];
-            })->rules('array', 'required')
-                ->creationRules('min:1')
-                ->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails()
-                ->hideFromIndex(),
+            })->rules('array', 'required')->creationRules('min:1')
+                ->attachRules(REQUIRED_IMAGE_VALIDATION)->accept('image/*')
+                ->autouploading()->attachOnDetails()->hideFromIndex(),
 
             Toggle::make('Active')
-                ->falseColor('#bacad6')
-                ->editableIndex(),
+                ->falseColor('#bacad6')->editableIndex(),
 
             Toggle::make(__('Featured'), 'isFeatured')
-                ->falseColor('#bacad6')
-                ->editableIndex(),
+                ->falseColor('#bacad6')->editableIndex(),
 
-            Password::make('Password')
-                ->onlyOnForms()
+            Password::make('Password')->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
 

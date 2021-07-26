@@ -13,16 +13,16 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
 {
-    public function index($category_slug, $subCategory_slug, $slug) {
-        $data['product'] = Product::with('subCategory', 'category', 'tags', 'vendor')->where(['slug' => $slug, 'active' => 1])->first();
+    public function index($category_slug, $slug) {
+        $data['product'] = Product::with('category', 'tags', 'vendor')->where(['slug' => $slug, 'active' => 1])->first();
         abort_if(!$data['product'], 404);
 
         $data['product']->views++;
         $data['product']->save();
 
         $data['FAQs'] = FAQ::orderBy('sort')->get();
-        $data['related_products'] = Product::with('subCategory')
-            ->where('subCategory_id', $data['product']->subCategory_id)
+        $data['related_products'] = Product::with('category')
+            ->where('category_id', $data['product']->category_id)
             ->where('id', '!=', $data['product']->id)
             ->where('active', 1)
             ->orderby('sort')->take(10)->get();
@@ -48,9 +48,9 @@ class ProductController extends Controller
                             AllowedFilter::scope('price_from'),
                             AllowedFilter::scope('price_to'),
                             AllowedFilter::callback('has_tags', fn($query, $value) => $query->whereHas('tags', fn($query) => $query->whereIn('tags.id', $value))),
-                            AllowedFilter::callback('has_subcategories', fn($query, $value) => $query->whereHas('subCategory', fn($query) => $query->whereIn('sub_categories.id', $value)))
+                            AllowedFilter::callback('has_categories', fn($query, $value) => $query->whereHas('category', fn($query) => $query->whereIn('categories.id', $value)))
                         ])
-                        ->allowedIncludes(['tags', 'subCategory', 'subCategory.category'])
+                        ->allowedIncludes(['tags', 'category'])
                         ->where('active', 1)
                         ->limit(30)
                         ->get();

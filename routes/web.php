@@ -14,9 +14,9 @@ Route::group([
     Route::get('/', function () {
         return view('coming_soon');
     });
-    Route::group([
-        'prefix' => 'demo'
-    ], function () {
+//    Route::group([
+//        'prefix' => 'demo'
+//    ], function () {
 
     //Auth (Verified/Authenticated) routes
     Route::group(['namespace' => 'User'], function () {
@@ -94,11 +94,10 @@ Route::group([
 
     Route::get('/page/{slug}', 'Common\PageController@page')->name('front.page.index');
     Route::get('/search', 'Product\ProductController@search')->name('products.search');
-    Route::get('/filter/{subCategory_id}', 'Category\SubCategoryController@filter')->name('subCategory.filter');
+    Route::get('/filter/{category_id}', 'Category\CategoryController@filter')->name('category.filter');
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
     Route::get('/i/{category_slug}', 'Category\CategoryController@index')->name('front.category');
-    Route::get('/i/{category_slug}/{subCategory_slug}', 'Category\SubCategoryController@index')->name('front.subCategory');
-    Route::get('/i/{category_slug}/{subCategory_slug}/{slug}', 'Product\ProductController@index')->name('front.product');
+    Route::get('/i/{category_slug}/{slug}', 'Product\ProductController@index')->name('front.product');
 //    ->where('category_slug', '^(?!nova|admin.*$).*');
 });
-});
+//});

@@ -71,13 +71,13 @@
                             <div class="col-md-4">
                                 <!-- Input -->
                                 <div class="js-form-message mb-6">
-                                    <label class="form-label">Sub Gategory</label>
-                                    <select class="form-control js-select selectpicker dropdown-select st_input @error('subCategory_id') is-invalid @enderror" name="subCategory_id" required="" data-live-search="true" data-style="form-control border-color-1 font-weight-normal">
-                                        @foreach($subCategories as $sub)
-                                            <option value="{{ $sub->id }}" {{ $product->subCategory_id == $sub->id ? 'selected' : '' }}>{{ $sub->name }}</option>
+                                    <label class="form-label">Category</label>
+                                    <select class="form-control js-select selectpicker dropdown-select st_input @error('category_id') is-invalid @enderror" name="category_id" required="" data-live-search="true" data-style="form-control border-color-1 font-weight-normal">
+                                        @foreach($categories as $cat)
+                                            <option value="{{ $cat->id }}" {{ $product->category_id == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('subCategory_id')
+                                    @error('category_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
