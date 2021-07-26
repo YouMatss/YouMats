@@ -21206,6 +21206,11 @@ button:focus {
           transform: translate3d(0, -33px, 0);
 }
 
+.product-item__body .productDesc {
+    height: 40px;
+    overflow: hidden;
+}
+
 /*------------------------------------
   Header Helpers
 ------------------------------------*/

@@ -31,6 +31,7 @@
         <div class="container">
             <div class="row mb-8 rtl">
                 <div class="d-none d-xl-block col-xl-3 col-wd-2gdot5">
+                    @if(!is_company())
                     <div class="mb-6">
                         <div class="range-slider bg-gray-3 p-3">
                             <h4 class="font-size-14 mb-3 font-weight-bold">Price</h4>
@@ -52,6 +53,7 @@
                             <button class="btn px-4 btn-primary-dark-w py-2 rounded-lg text-white" id="priceFilterBtn">Filter</button>
                         </div>
                     </div>
+                    @endif
                     @foreach($category->attributes as $attribute)
                     <div class="mb-6">
                         <div class="border-bottom border-color-1 mb-5">

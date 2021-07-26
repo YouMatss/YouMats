@@ -58,7 +58,9 @@ if (!function_exists('getCityNameById')) {
 if (!function_exists('cartOrChat')) {
     function cartOrChat($product) {
         $chat = '<div><a href="'. route('chat.user.conversations', [$product->vendor_id]) .'" class="btn-add-cart btn-primary transition-3d-hover"><i class="fa fa-comments"></i></a></div>';
-        $cart = '<div class="prodcut-add-cart"><button data-url="' . route('cart.add', ['product' => $product]) . '" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button></div>';
+        $Icon = is_company() ? 'fa fa-file-alt': 'ec ec-add-to-cart';
+        $cart = '<div class="prodcut-add-cart"><button data-url="' . route('cart.add', ['product' => $product]) . '" class="btn-add-cart btn-primary transition-3d-hover"><i class="' . $Icon .'"></i></button></div>';
+
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company() || ($product->type == 'product' && $product->price > 0))
                 return $cart;

@@ -28,20 +28,9 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-6 offset-md-3">
                 <div class="mb-8">
-                    <div class="position-relative position-md-static px-md-6">
-                        <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0" id="pills-tab-8" role="tablist">
-                            <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                                <a class="nav-link active show" id="login-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">{{ __('auth.user_login') }}</a>
-                            </li>
-                            <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2" role="presentation">
-                                <a class="nav-link" id="vendor-login-tab" data-toggle="pill" href="#vendor-login" role="tab" aria-controls="vendor-login">{{ __('auth.vendor_login') }}</a>
-                            </li>
-                        </ul>
-                    </div>
                     <div class="borders-radius-17 border p-4 mt-4 mt-md-0 px-lg-10 py-lg-9">
-                        <div class="tab-content" id="registerTab">
                             <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="login-tab">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -111,71 +100,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="tab-pane fade" id="vendor-login" role="tabpanel" aria-labelledby="vendor-login-tab">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="text-gray-90 mb-4">{{ __('auth.vendor_login_text') }}</p>
-                                    </div>
-                                </div>
-                                <form method="POST" action="{{ route('vendor.login') }}">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="js-form-message form-group mb-5">
-                                                <label class="form-label" for="email">{{ __('auth.email') }}</label>
-                                                <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                                @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="js-form-message form-group mb-5">
-                                                <label class="form-label" for="password">{{ __('auth.password_input') }}</label>
-                                                <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                                @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="remember">
-                                                    {{ __('auth.remember_me') }}
-                                                </label>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <button type="submit" class="btn btn-primary-dark-w px-5 text-white">{{ __('auth.login') }}</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            @if (Route::has('vendor.password.request'))
-                                                <a class="btn btn-link" href="{{ route('vendor.password.request') }}">
-                                                    {{ __('auth.forget_password') }}
-                                                </a>
-                                            @endif
-                                            <a class="btn btn-link" href="{{route('register')}}">
-                                                {{ __('auth.register') }}
-                                            </a>
-                                        </div>
-
-                                    </div>
-                                </form>
-                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

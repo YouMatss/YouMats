@@ -33,7 +33,7 @@
                     <div class="position-relative position-md-static px-md-6">
                         <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0" id="pills-tab-8" role="tablist">
                             <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                                <a class="nav-link active" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">{{ __('auth.register') }}</a>
+                                <a class="nav-link active" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">{{ __('auth.vendor_register') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -118,7 +118,12 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="password" class="form-label">{{ __('auth.password_input') }} <span class="text-danger">*</span></label>
-                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                                <div class="eye_show">
+                                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="passwordInput" name="password" required autocomplete="new-password">
+                                                    <span href="#" class="showPassword fa fa-eye" data-toggle="#passwordInput"></span>
+                                                </div>
+
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -129,7 +134,9 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="password-confirm" class="form-label">{{ __('auth.confirm_password') }} <span class="text-danger">*</span></label>
-                                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                                <div class="eye_show">
+                                                    <input type="password" class="form-control" id="passwordConfirmInput" name="password_confirmation" required autocomplete="new-password">
+                                                    <span href="#" class="showPassword fa fa-eye" data-toggle="#passwordConfirmInput"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-12">

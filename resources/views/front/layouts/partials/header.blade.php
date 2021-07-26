@@ -8,7 +8,7 @@
                         <ul class="list-inline mb-0">
                             @if(!Auth::guard('vendor')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                    <a href="{{ route('wishlist.index') }}" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> {{__('general.wishlist')}} </a>
+                                    <a href="@if(Cart::instance('wishlist')->count() > 0) {{ route('wishlist.index') }} @else # @endif" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> {{__('general.wishlist')}} </a>
                                 </li>
                             @endif
                             @if(\Config::get('currencies'))
@@ -123,15 +123,41 @@
                             @endif
 
                             @if(!auth()->guard('vendor')->check() && !auth()->guard('web')->check())
-                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                    <a href="{{route('register')}}" role="button" class="u-header-topbar__nav-link">
-                                        <i class="ec ec-user mr-1"></i> {{__('general.user_register')}}
-                                    </a>
+                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Register -->
+                                        <div class="position-relative">
+                                            <a id="registerDropDownInvoker" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#registerDropDown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                                <span class="d-none d-sm-inline-flex align-items-center"> <i class="ec ec-user mr-1"></i>{{__('general.user_register')}}</span>
+                                            </a>
+                                            <div id="registerDropDown" class="dropdown-menu dropdown-unfold" aria-labelledby="registerDropDownInvoker">
+                                                <a href="{{route('register')}}" class="dropdown-item">
+                                                     {{__('general.user_register')}}
+                                                </a>
+                                                <a href="{{route('vendor.register')}}" class="dropdown-item">{{__('general.vendor_register')}}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- End Register -->
+                                    </div>
                                 </li>
-                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                    <a href="{{route('login')}}" role="button" class="u-header-topbar__nav-link">
-                                        <i class="ec ec-user mr-1"></i> {{__('general.user_login')}}
-                                    </a>
+                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Register -->
+                                        <div class="position-relative">
+                                            <a id="loginDropDownInvoker" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#loginDropDown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                                <span class="d-none d-sm-inline-flex align-items-center"> <i class="ec ec-user mr-1"></i>{{__('general.user_login')}}</span>
+                                            </a>
+                                            <div id="loginDropDown" class="dropdown-menu dropdown-unfold" aria-labelledby="loginDropDownInvoker">
+                                                <a href="{{route('login')}}" class="dropdown-item">
+                                                    {{__('general.user_login')}}
+                                                </a>
+                                                <a href="{{route('vendor.login')}}" class="dropdown-item">{{__('general.vendor_login')}}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- End Register -->
+                                    </div>
                                 </li>
                             @endif
 
@@ -323,7 +349,7 @@
                                             </span>
                                         </button>
                                     </div>
-                                    <div id="basicsCollapseOne" class="collapse @if(\Request::route()->getName() == 'home') show @endif vertical-menu v1"
+                                    <div id="basicsCollapseOne" class="collapse vertical-menu v1"
                                          aria-labelledby="basicsHeadingOne"
                                          data-parent="#basicsAccordion">
                                         <div class="card-body p-0">

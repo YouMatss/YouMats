@@ -13,7 +13,8 @@ class CategoryController extends Controller
     public function index($category_slug) {
         $data['category'] = Category::whereSlug($category_slug)->first();
         abort_if(!$data['category'], 404);
-        $data['products'] = $data['category']->products()->paginate(15);
+
+        $data['products'] = $data['category']->products()->paginate(20);
         $data['parent'] = $data['category']->parent;
         $data['children'] = $data['category']->children;
         if(isset($data['parent'])) {
@@ -42,7 +43,7 @@ class CategoryController extends Controller
                 'category_id' => $category_id
             ])
             ->with('category')
-            ->paginate(15);
+            ->paginate(20);
 
         return view('front.category.productsContainer')->with($data)->render();
     }

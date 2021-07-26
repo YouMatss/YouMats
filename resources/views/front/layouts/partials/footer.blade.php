@@ -191,7 +191,7 @@
                                                     <span class="fas fa-building"></span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control" name="company_name" placeholder="Company Name">
+                                            <input type="text" class="form-control" @if(auth()->check()) value="{{ auth()->user()->name }}" disabled @endif name="company_name" placeholder="Company Name">
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +223,7 @@
                                                     <span class="fas fa-envelope"></span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control" name="email"  placeholder="Email">
+                                            <input type="text" class="form-control" @if(auth()->check()) value="{{ auth()->user()->email }}" disabled @endif name="email"  placeholder="Email">
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +239,7 @@
                                                     <span class="fas fa-phone"></span>
                                                 </span>
                                             </div>
-                                            <input type="tel" class="form-control phoneNumber">
+                                            <input type="tel" class="form-control phoneNumber" @if(auth()->check()) value="{{ auth()->user()->phone }}" disabled @endif>
                                         </div>
                                     </div>
                                 </div>

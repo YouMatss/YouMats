@@ -93,14 +93,14 @@
                 <div class="mx-md-auto mx-lg-0 col-md-6 col-lg-4 col-xl-3">
                     <div class="mb-2">
                         <div class="card p-5 border-width-2 border-color-1 borders-radius-17">
-                            <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">Availability:
-                                @if($product->stock)
-                                <span class="text-green font-weight-bold">{{$product->stock}} in stock</span>
-                                @else
-                                <span class="text-red font-weight-bold">Out of stock</span>
-                                @endif
-                            </div>
                             @if(!is_company())
+                                <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">Availability:
+                                    @if($product->stock)
+                                        <span class="text-green font-weight-bold">{{$product->stock}} in stock</span>
+                                    @else
+                                        <span class="text-red font-weight-bold">Out of stock</span>
+                                    @endif
+                                </div>
                                 <div class="mb-3">
                                     <div class="font-size-36">{{getCurrency('symbol')}} {{$product->price}}</div>
                                 </div>
