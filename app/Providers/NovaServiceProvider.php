@@ -51,9 +51,11 @@ use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 use DigitalCreative\CollapsibleResourceManager\Resources\NovaResource;
 use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use KABBOUCHI\LogsTool\LogsTool;
 use Laravel\Nova\Actions\ActionResource;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
@@ -69,7 +71,23 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
         NovaSettings::addSettingsFields([
-            new Panel('Social Media Links', $this->socialFields())
+            new Panel('Social Media Links', $this->socialFields()),
+            new Panel('Media', [
+                Image::make(__('Slider Background'), 'slider_background')
+                    ->maxWidth(140)
+                    ->store(function(Request $request, $model) {
+                        $file = $request->slider_background->getClientOriginalName();
+                        $fileName = pathinfo($file, PATHINFO_FILENAME);
+                        $extension = pathinfo($file, PATHINFO_EXTENSION);
+                        $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
+
+                        $request->slider_background->storeAs('/', $combinedName, 'public');
+                        return [
+                            'slider_background' => $combinedName
+                        ];
+                    })
+                    ->rules(NULLABLE_IMAGE_VALIDATION),
+            ])
         ]);
 //        Nova::serving(function () {
 //            \App\Models\Category::observe(CategoryObserver::class);

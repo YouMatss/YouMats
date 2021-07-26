@@ -21,7 +21,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{ route('home') }}">{{ __('general.home') }}</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('My Cart') }}</li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __(is_company() ? 'cart.quote_items' : 'cart.cart') }}</li>
                     </ol>
                 </nav>
             </div>
@@ -33,7 +33,7 @@
         @if(count($items) > 0)
             <div class="row">
                 <div class="mb-4">
-                    <h1 class="text-center">My Cart</h1>
+                    <h1 class="text-center">{{ __(is_company() ? 'cart.quote_items' : 'cart.cart') }}</h1>
                 </div>
             </div>
             <div class="row">
@@ -108,23 +108,25 @@
                                 <td colspan="6" class="border-top space-top-2 justify-content-center">
                                     <div class="pt-md-3">
                                         <div class="d-block d-md-flex flex-center-between">
-                                            <div class="mb-3 mb-md-0 w-xl-40">
-                                                <!-- Apply coupon Form -->
-                                                <form class="js-focus-state" action="{{ route('apply.coupon') }}" method="POST">
-                                                    @csrf
-                                                    <label class="sr-only">{{ __('Coupon code') }}</label>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" name="code" placeholder="Coupon code" id="couponCode" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
-                                                        <div class="input-group-append">
-                                                            <input type="submit" class="btn btn-block btn-dark px-4" value="Apply coupon" />
+                                            @if(!is_company())
+                                                <div class="mb-3 mb-md-0 w-xl-40">
+                                                    <!-- Apply coupon Form -->
+                                                    <form class="js-focus-state" action="{{ route('apply.coupon') }}" method="POST">
+                                                        @csrf
+                                                        <label class="sr-only">{{ __('Coupon code') }}</label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="code" placeholder="Coupon code" id="couponCode" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
+                                                            <div class="input-group-append">
+                                                                <input type="submit" class="btn btn-block btn-dark px-4" value="Apply coupon" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </form>
-                                                <!-- End Apply coupon Form -->
-                                            </div>
+                                                    </form>
+                                                    <!-- End Apply coupon Form -->
+                                                </div>
+                                            @endif
                                             <div class="d-md-flex">
-                                                <button type="button" id="updateCart" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5 w-100 w-md-auto">Update cart</button>
-                                                <a href="{{ route('checkout.index') }}" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block">Proceed to checkout</a>
+                                                <button type="button" id="updateCart" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5 w-100 w-md-auto">{{ __(is_company() ? 'cart.update_quote' : 'cart.update_cart') }}</button>
+                                                <a href="{{ route('checkout.index') }}" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block">{{ __(is_company() ? 'cart.get_prices' : 'cart.proceed_to_checkout') }}</a>
                                             </div>
                                         </div>
                                     </div>

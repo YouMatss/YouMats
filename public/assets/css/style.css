@@ -936,3 +936,8 @@
     right: 15px;
     top: 12px;
 }
+.r-group {
+    border: 1px whitesmoke solid;
+    padding: 3px;
+    margin-top: 10px;
+}

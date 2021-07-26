@@ -6,6 +6,7 @@ use App\Helpers\Traits\DefaultImage;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -77,15 +78,18 @@ class Category extends Model implements Sortable, HasMedia
         return $this->belongsToMany(Vendor::class, Product::class)->distinct();
     }
 
+    /**
+     * @return HasMany
+     */
+    public function attributes(): HasMany
+    {
+        return $this->hasMany(Attribute::class);
+    }
+
     public function tags() {
         return Tag::select('tags.*')->join('product_tag AS pt', 'pt.tag_id', '=', 'tags.id')
             ->join('products as p', 'p.id', '=', 'pt.product_id')
             ->join('categories as c', 'c.id', '=', 'p.category_id')
             ->where('c.id', '=', $this->id)->distinct()->get();
     }
-
-    public function attributes() {
-        return $this->hasMany(Attribute::class);
-    }
-
 }

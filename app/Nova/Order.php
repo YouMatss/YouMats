@@ -46,8 +46,11 @@ class Order extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
-            Text::make('order_id')->readonly()->default('ORD-'.strtoupper(uniqid())),
+            Text::make(__('ID'), 'id')->exceptOnForms()->sortable(),
+            Text::make('Order Id', 'order_id', fn() =>
+                '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->order_id . '</a>'
+            )->asHtml()->exceptOnForms()->default('ORD'.strtoupper(uniqid())),
+
             DateTime::make('Date', 'created_at')->format('LLLL')->hideWhenCreating()->hideWhenUpdating()->sortable(),
             BelongsTo::make('User')->withoutTrashed()->hideFromIndex(),
             Text::make('Name')->sortable()->rules(REQUIRED_STRING_VALIDATION),

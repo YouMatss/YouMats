@@ -21,6 +21,9 @@ class Slider extends Model implements Sortable, HasMedia
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);
+
+        $this->addMediaCollection(SLIDER_PATH)
+            ->singleFile();
     }
 
 }

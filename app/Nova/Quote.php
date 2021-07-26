@@ -36,8 +36,10 @@ class Quote extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Quote No')->readonly()->default('QUO-'.strtoupper(uniqid())),
+            Text::make(__('ID'), 'id')->exceptOnForms()->sortable(),
+            Text::make('Quote No', 'quote_no', fn() =>
+                '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->quote_no . '</a>'
+            )->asHtml()->exceptOnForms()->default('QUO-'.strtoupper(uniqid())),
             DateTime::make('Date', 'created_at')->format('LLLL')->hideWhenCreating()->hideWhenUpdating()->sortable(),
             BelongsTo::make('User')->withoutTrashed()->hideFromIndex(),
             Text::make('Name')->sortable()->rules(REQUIRED_STRING_VALIDATION),

@@ -22,7 +22,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, HasTranslations, CascadeSoftDeletes, BelongsToThrough;
 
-    protected $fillable = ['name', 'country_id', 'category_id', 'email' , 'phone', 'phone2', 'address', 'address2', 'whatsapp_phone',
+    protected $fillable = ['name', 'country_id', 'subCategory_id', 'email' , 'contacts',
         'latitude', 'longitude', 'shipping_prices',
         'membership_id', 'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url',
         'slug'];
@@ -42,7 +42,8 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'shipping_prices' => 'array'
+        'shipping_prices'   => 'array',
+        'contacts'          => 'array',
     ];
 
     public function registerAllMediaConversions(): void {

@@ -56,6 +56,9 @@
                             <a class="nav-link" id="Jpills-shipping-example1-tab" data-toggle="pill" href="#Jpills-shipping-example1" role="tab" aria-controls="Jpills-shipping-example1" aria-selected="false">Shipping Prices</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
+                            <a class="nav-link" id="Jpills-contacts-example1-tab" data-toggle="pill" href="#Jpills-contacts-example1" role="tab" aria-controls="Jpills-contacts-example1" aria-selected="false">Contacts</a>
+                        </li>
+                        <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
                             <a class="nav-link" id="Jpills-two-example1-tab" data-toggle="pill" href="#Jpills-two-example1" role="tab" aria-controls="Jpills-two-example1" aria-selected="false">My Products</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
@@ -149,7 +152,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">E-Mail <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $vendor->email }}" placeholder="Enter your email" required="">
@@ -160,68 +163,53 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Phone Number <span class="text-danger">*</span></label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1" style="border-radius: 1.4rem 0 0 1.4rem">+966</span>
-                                                    <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ trim($vendor->phone, '+966') }}" placeholder="Enter your phone" required>
+                                        <div class="col-md-12 contactsRegion">
+                                            <div class="r-group row">
+
+                                                <div class="col-md-3">
+                                                    <p>
+                                                        <label data-pattern-text="Person Name ++:">Person Name:</label>
+                                                        <input class="form-control @error('contacts.*.person_name') is-invalid @enderror" value="{{ $vendor->contacts[0]['person_name'] }}" type="text" name="contacts[0][person_name]" data-pattern-name="contacts[++][person_name]" data-pattern-id="contacts_++_person_name" />
+                                                    </p>
                                                 </div>
-                                                @error('phone')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Phone Number 2 </label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1" style="border-radius: 1.4rem 0 0 1.4rem">+966</span>
-                                                    <input type="text" class="form-control @error('phone2') is-invalid @enderror" name="phone2" value="{{ trim($vendor->phone2, '+966') }}" placeholder="Enter your second phone">
+
+                                                <div class="col-md-3">
+                                                    <p>
+                                                        <label data-pattern-text="Phone ++:">Phone:</label>
+                                                        <input type="text" name="contacts[0][phone]" class="form-control @error('contacts.*.phone') is-invalid @enderror" value="{{ $vendor->contacts[0]['phone'] }}"  data-pattern-name="contacts[++][phone]" data-pattern-id="contacts_++_phone" />
+                                                    </p>
                                                 </div>
-                                                @error('phone2')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">WhatsApp</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1" style="border-radius: 1.4rem 0 0 1.4rem">+966</span>
-                                                    <input type="text" class="form-control @error('whatsapp_phone') is-invalid @enderror" name="whatsapp_phone" value="{{ trim($vendor->whatsapp_phone, '+966') }}" placeholder="Enter WhatsApp phone">
+
+                                                <div class="col-md-3">
+                                                    <p>
+                                                        <label data-pattern-text="Email ++:">Email:</label>
+                                                        <input type="email" name="contacts[0][email]" class="form-control @error('contacts.*.email') is-invalid @enderror" value="{{ $vendor->contacts[0]['email'] }}" data-pattern-name="contacts[++][email]" data-pattern-id="contacts_++_email" />
+                                                    </p>
                                                 </div>
-                                                @error('whatsapp_phone')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+
+                                                <div class="col-md-3">
+                                                    <p>
+                                                        <label data-pattern-text="Job ++:">Job:</label>
+                                                        <input type="text" name="contacts[0][job]" class="form-control @error('contacts.*.job') is-invalid @enderror" value="{{ $vendor->contacts[0]['job'] }}" data-pattern-name="contacts[++][job]" data-pattern-id="contacts_++_job" />
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <p>
+                                                        <label data-pattern-text="Address ++:">Address:</label>
+                                                        <input type="text" name="contacts[0][address]" class="form-control @error('contacts.*.address') is-invalid @enderror" value="{{ $vendor->contacts[0]['address'] }}" data-pattern-name="contacts[++][address]" data-pattern-id="contacts_++_address" />
+                                                    </p>
+                                                </div>
+
+                                                <p>
+                                                    <!-- Manually a remove button for the item. -->
+                                                    <!-- If one didn't exist, it would be added to overall group -->
+                                                    <button style="margin-top: 35px;" type="button" class="r-btnRemove btn btn-sm btn-danger">Remove -</button>
+                                                </p>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Address <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ $vendor->address }}" placeholder="Enter your address" required>
-                                                @error('address')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Address 2</label>
-                                                <input type="text" class="form-control @error('address2') is-invalid @enderror" name="address2" value="{{ $vendor->address2 }}" placeholder="Enter your second address">
-                                                @error('address2')
-                                                <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                            <div class="col-md-4">
+                                                <!-- The add button -->
+                                                <button type="button" class="r-btnAdd btn btn-sm btn-primary">Add Contact +</button>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3">
@@ -256,6 +244,9 @@
                                                         </div>
                                                     @endforeach
                                                     <i class="fa fa-plus imgAdd"></i>
+
+
+
                                                 </div><!-- row -->
                                                 @if ($errors->has('licenses.*') || $errors->has('licenses'))
                                                     <div class="alert alert-danger">
@@ -452,6 +443,20 @@
                                         </div>
                                     </form>
                                 @endif
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="Jpills-contacts-example1" role="tabpanel" aria-labelledby="Jpills-contacts-example1-tab">
+                            <div class="container">
+                                <ul class="list-unstyled">
+                                    @foreach($vendor->contacts as $contact)
+                                        <li>Person Name: {{ $contact['person_name'] }}</li>
+                                        <li>Phone: {{ $contact['phone'] }}</li>
+                                        <li>Email: {{ $contact['email'] }}</li>
+                                        <li>Job: {{ $contact['job'] }}</li>
+                                        <li>Address: {{ $contact['address'] }}</li>
+                                        <hr />
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
@@ -1048,8 +1053,24 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
     <script src="{{front_url()}}/assets/js/map.js"></script>
     <script src="{{front_url()}}/assets/js/map-branch.js"></script>
+    <script src="{{front_url()}}/assets/js/jquery.form-repeater.js"></script>
     <script>
         $(document).ready(function () {
+            $('.contactsRegion').repeater({
+                btnAddClass: 'r-btnAdd',
+                btnRemoveClass: 'r-btnRemove',
+                groupClass: 'r-group',
+                minItems: {{ count($vendor->contacts) > 0 ? count($vendor->contacts) : 1 }},
+                maxItems: 3,
+                startingIndex: 1,
+                showMinItemsOnLoad: true,
+                reindexOnDelete: true,
+                repeatMode: 'insertAfterLast',
+                animation: null,
+                animationSpeed: 400,
+                animationEasing: 'swing',
+                clearValues: true
+            });
             $(".btn_clone_add").click(function(){
                 var clone_item = `<div class="row clone_item">
                                                 <div class="col-md-3">

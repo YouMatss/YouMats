@@ -37,7 +37,7 @@ class CartController extends Controller
     {
         Cart::instance('cart')->add($product->id, $product->name, 1, $product->price, [], 0)->associate($product);
 
-        return response()->json(['message' => __('Product has been added to your cart'),
+        return response()->json(['message' => __(is_company() ? 'product.added_to_quote_list' : 'product.added_to_cart'),
             'cart' => Cart::content(),
             'total' => getCurrency('code') . ' ' . Cart::total(),
             'count' => Cart::count()]);

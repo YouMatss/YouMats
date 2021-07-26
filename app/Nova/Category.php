@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
+use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
 use Waynestate\Nova\CKEditor;
@@ -135,6 +136,7 @@ class Category extends Resource
 
             HasMany::make('Children', 'children', self::class),
             HasMany::make('Products'),
+            HasMany::make('Attributes'),
             HasMany::make('Vendors'),
         ];
     }
@@ -180,6 +182,8 @@ class Category extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new DownloadExcel,
+        ];
     }
 }
