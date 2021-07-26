@@ -92,12 +92,13 @@ class Category extends Resource
                 ->previewUsing('cropper')
                 ->hideFromIndex(),
 
-            Toggle::make(__('Featured'), 'isFeatured')
-                ->falseColor('#bacad6')
-                ->editableIndex(),
-            Toggle::make(__('Section I'), 'section_i')
-                ->falseColor('#bacad6')
-                ->editableIndex(),
+            Toggle::make(__('Section I'), 'section_i')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Section II'), 'section_ii')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Section III'), 'section_iii')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Section IV'), 'section_iv')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Featured'), 'isFeatured')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Top Category'), 'topCategory')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Show in footer'), 'show_in_footer')->falseColor('#bacad6')->editableIndex(),
 
             (new Panel('SEO', [
                 Slug::make('Slug')

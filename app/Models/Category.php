@@ -67,9 +67,11 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     public function products() {
-        return $this->hasMany(Product::class)
-            ->where('active', 1) // comment this
-            ->orderBy('updated_at', 'desc');
+        if(count($this->children)) {
+            return $this->hasManyThrough(Product::class, self::class, 'parent_id')
+                ->where('active', 1)->orderBy('updated_at', 'desc');
+        }
+        return $this->hasMany(Product::class)->where('active', 1)->orderBy('updated_at', 'desc');
     }
 
     public function vendors() {

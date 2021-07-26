@@ -23,7 +23,7 @@
                                             <div id="languageDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker">
                                                 @foreach(\Config::get('currencies') as $currency)
                                                 <a class="dropdown-item active currency_button" data-code="{{$currency->code}}" href="#">
-                                                    <img width="20px" src="{{$currency->media[0]->getUrl()}}" />&nbsp;
+{{--                                                    <img width="20px" src="{{$currency->media[0]->getUrl()}}" />&nbsp;--}}
                                                     {{$currency->code}} @if($currency->symbol) ({{$currency->symbol}}) @endif
                                                 </a>
                                                 @endforeach
@@ -200,8 +200,8 @@
 
                                                         <div id="{{$category->slug}}" class="collapse" data-parent="#headerSidebarContent">
                                                             <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
-                                                                @foreach($category->subCategories->take(4) as $subCategory)
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="{{route('front.subCategory', ['category_slug' => $category->slug, 'subCategory_slug' => $subCategory->slug])}}">{{$subCategory->name}}</a></li>
+                                                                @foreach($category->children->take(4) as $child)
+                                                                <li><a class="u-header-collapse__submenu-nav-link" href="{{route('front.category', [$child->slug])}}">{{$child->name}}</a></li>
                                                                 @endforeach
                                                             </ul>
                                                         </div>
@@ -343,24 +343,24 @@
                                                                     <div class="col mb-3 mb-sm-0">
                                                                         <span class="u-header__sub-menu-title">{{$category->name}}</span>
                                                                         <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            @foreach($category->subCategories->take(7) as $subCategory)
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.subCategory', ['category_slug' => $category->slug, 'subCategory_slug' => $subCategory->slug])}}">{{$subCategory->name}}</a></li>
+                                                                            @foreach($category->children->take(7) as $child)
+                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [$child->slug])}}">{{$child->name}}</a></li>
                                                                             @endforeach
                                                                             <li>
                                                                                 <a class="nav-link u-header__sub-menu-nav-link u-nav-divider border-top pt-2 flex-column align-items-start"
-                                                                                   href="{{route('front.category', ['category_slug' => $category->slug])}}">
+                                                                                   href="{{route('front.category', [$category->slug])}}">
                                                                                     <div class="">{{__('general.all_categories')}}</div>
                                                                                     <div class="u-nav-subtext font-size-11 text-gray-30">{{__('general.discover_more_products')}}</div>
                                                                                 </a>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-                                                                    @if(count($category->subCategories) > 7)
+                                                                    @if(count($category->children) > 7)
                                                                     <div class="col mb-3 mb-sm-0">
                                                                         <span class="u-header__sub-menu-title">{{$category->name}}</span>
                                                                         <ul class="u-header__sub-menu-nav-group mb-3">
-                                                                            @foreach($category->subCategories->skip(7)->take(7) as $subCategory)
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.subCategory', ['category_slug' => $category->slug, 'subCategory_slug' => $subCategory->slug])}}">{{$subCategory->name}}</a></li>
+                                                                            @foreach($category->children->skip(7)->take(7) as $child)
+                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [$child->slug])}}">{{$child->name}}</a></li>
                                                                             @endforeach
                                                                         </ul>
                                                                     </div>

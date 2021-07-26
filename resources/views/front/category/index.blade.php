@@ -16,7 +16,6 @@
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
         <div class="container">
-            <!-- breadcrumb -->
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
@@ -31,16 +30,16 @@
     <div class="mb-6 bg-gray-7 py-6">
         <div class="container">
             <div class="row flex-nowrap flex-md-wrap overflow-auto overflow-md-visble rtl">
-                @foreach($category->subCategories as $subCategory)
+                @foreach($children as $child)
                 <div class="col-md-4 col-lg-3 col-xl-4 col-xl-2gdot4 mb-3 flex-shrink-0 flex-md-shrink-1">
                     <div class="bg-white overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
-                        <a href="{{route('front.subCategory', [$category->slug, $subCategory->slug])}}" class="d-block pr-2 pr-wd-6">
+                        <a href="{{route('front.category', [$child->slug])}}" class="d-block pr-2 pr-wd-6">
                             <div class="media align-items-center">
                                 <div class="pt-2">
-                                    <img class="img-fluid img_category_page" src="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" alt="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['title']}}">
+                                    <img class="img-fluid img_category_page" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}">
                                 </div>
                                 <div class="ml-3 media-body">
-                                    <h6 class="mb-0 text-gray-90">{{$subCategory->name}}</h6>
+                                    <h6 class="mb-0 text-gray-90">{{$child->name}}</h6>
                                 </div>
                             </div>
                         </a>
@@ -59,17 +58,17 @@
                             <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">All Categories</h3>
                         </div>
                         <ul class="list-unstyled li_side_bar">
-                            @foreach($category->subCategories as $subCategory)
+                            @foreach($children as $child)
                             <li class="mb-3">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <a href="{{route('front.subCategory', [$category->slug, $subCategory->slug])}}" class="d-block width-75">
-                                            <img class="img-fluid" src="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['url']}}" alt="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['alt']}}" title="{{$subCategory->getFirstMediaUrlOrDefault(SUB_CATEGORY_PATH)['title']}}">
+                                        <a href="{{route('front.category', [$child->slug])}}" class="d-block width-75">
+                                            <img class="img-fluid" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}">
                                         </a>
                                     </div>
                                     <div class="col p-0 mt-3">
                                         <h3 class="text-lh-1dot2 font-size-14 mb-0">
-                                            <a href="{{route('front.subCategory', [$category->slug, $subCategory->slug])}}">{{$subCategory->name}}</a>
+                                            <a href="{{route('front.category', [$child->slug])}}">{{$child->name}}</a>
                                         </h3>
                                     </div>
                                 </div>
@@ -79,7 +78,6 @@
                     </div>
                 </div>
                 <div class="col-xl-12">
-
                     <div class="d-block d-md-flex flex-center-between mb-3 rtl">
                         <h3 class="font-size-25 mb-2 mb-md-0">{{$category->name}}</h3>
                         <p class="font-size-14 text-gray-90 mb-0">Showing {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}} of {{$products->total()}} results</p>

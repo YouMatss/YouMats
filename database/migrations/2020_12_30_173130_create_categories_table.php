@@ -28,6 +28,7 @@ class CreateCategoriesTable extends Migration
 
             $table->boolean('isFeatured')->default(0);
             $table->boolean('topCategory')->default(0);
+            $table->boolean('show_in_footer')->default(0);
 
             $table->boolean('section_i')->default(0);
             $table->boolean('section_ii')->default(0);
