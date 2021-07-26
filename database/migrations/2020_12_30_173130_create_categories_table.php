@@ -24,9 +24,11 @@ class CreateCategoriesTable extends Migration
             $table->text('meta_title')->nullable();
             $table->text('meta_desc')->nullable();
             $table->text('meta_keywords')->nullable();
+            $table->text('schema')->nullable();
 
             $table->boolean('isFeatured')->default(0);
             $table->boolean('topCategory')->default(0);
+            $table->boolean('show_in_footer')->default(0);
 
             $table->boolean('section_i')->default(0);
             $table->boolean('section_ii')->default(0);
@@ -34,7 +36,6 @@ class CreateCategoriesTable extends Migration
             $table->boolean('section_iv')->default(0);
 
             $table->integer('sort');
-
             $table->softDeletes();
             $table->timestamps();
         });

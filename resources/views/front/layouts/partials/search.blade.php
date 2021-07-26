@@ -13,7 +13,7 @@ function doTheMagic(url, callback = 'default') {
     searchButtonSpan.removeClass('ec ec-search font-size-24');
     searchButtonSpan.addClass('spinner-border text-success');
 
-    url += '&include=tags,tagsCount,subCategory,subCategoryCount,subCategory.category';
+    url += '&include=tags,tagsCount,category,categoryCount';
 
     $.ajax({
         url: url,
@@ -22,7 +22,7 @@ function doTheMagic(url, callback = 'default') {
     .done(function(response) {
         if(response['products'].length > 0) {
             let tags             = {},
-                sub_categories   = {};
+                categories   = {};
 
             //Clear the previous search results
             searchRegionGrid.html('');
@@ -31,17 +31,17 @@ function doTheMagic(url, callback = 'default') {
             $.each(response['products'], function (key, value) {
                 if(value.tags.length > 0)
                     tags[value.tags[0].id] = value.tags;
-                sub_categories[value.subCategory_id] = value.sub_category;
+                categories[value.category_id] = value.category;
 
                 searchRegionGrid.append(`
                     <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
                     <div class="product-item__outer h-100">
                         <div class="product-item__inner px-xl-4 p-3">
                             <div class="product-item__body pb-xl-2">
-                                <div class="mb-2"><a href="{{ env('APP_URL') }}/demo/i/${value.sub_category.category.slug}/${value.sub_category.slug}" class="font-size-12 text-gray-5">${value.sub_category.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></div>
-                                <h5 class="mb-1 product-item__title"><a href="{{ env('APP_URL') }}/demo/i/${value.sub_category.category.slug}/${value.sub_category.slug}/${value.slug}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
+                                <div class="mb-2"><a href="{{ env('APP_URL') }}/demo/i/${value.category.slug}" class="font-size-12 text-gray-5">${value.category.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></div>
+                                <h5 class="mb-1 product-item__title"><a href="{{ env('APP_URL') }}/demo/i/${value.category.slug}/${value.slug}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
                                 <div class="mb-2">
-                                    <a href="{{ env('APP_URL') }}/demo/i/${value.sub_category.category.slug}/${value.sub_category.slug}/${value.slug}" class="d-block text-center">
+                                    <a href="{{ env('APP_URL') }}/demo/i/${value.category.slug}/${value.slug}" class="d-block text-center">
                                         <img class="img-fluid" src="${value.image_url.url}" alt="${value.image_url.alt}" title="${value.image_url.title}">
                                     </a>
                                 </div>
@@ -64,15 +64,15 @@ function doTheMagic(url, callback = 'default') {
                         <div class="product-item__inner remove-prodcut-hover py-4 row">
                             <div class="product-item__header col-6 col-md-2">
                                 <div class="mb-2">
-                                    <a href="{{ env('APP_URL') }}/demo/i/${value.sub_category.category.slug}/${value.sub_category.slug}/${value.slug}" class="d-block text-center">
+                                    <a href="{{ env('APP_URL') }}/demo/i/${value.category.slug}/${value.slug}" class="d-block text-center">
                                         <img class="img-fluid" src="${value.image_url.url}" alt="${value.image_url.alt}" title="${value.image_url.title}">
                                     </a>
                                 </div>
                             </div>
                             <div class="product-item__body col-6 col-md-10">
                                 <div class="pr-lg-10">
-                                    <div class="mb-2"><a href="{{ env('APP_URL') }}/demo/i/${value.sub_category.category.slug}/${value.sub_category.slug}" class="font-size-12 text-gray-5">${value.sub_category.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></div>
-                                    <h5 class="mb-2 product-item__title"><a href="{{ env('APP_URL') }}/demo/i/${value.sub_category.category.slug}/${value.sub_category.slug}/${value.slug}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
+                                    <div class="mb-2"><a href="{{ env('APP_URL') }}/demo/i/${value.category.slug}" class="font-size-12 text-gray-5">${value.category.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></div>
+                                    <h5 class="mb-2 product-item__title"><a href="{{ env('APP_URL') }}/demo/i/${value.category.slug}/${value.slug}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
 
                                     <div class="mb-2 flex-center-between">
                                         <div class="prodcut-price">
@@ -96,12 +96,12 @@ function doTheMagic(url, callback = 'default') {
 
             if(callback !== 'filter') {
                 attributesRegion.html(`<div class="border-bottom mb-4">
-                            <h4 class="font-size-14 mb-3 font-weight-bold">{{__('general.search_subCategory')}}</h4>`);
+                            <h4 class="font-size-14 mb-3 font-weight-bold">{{__('general.search_category')}}</h4>`);
 
-                $.each(sub_categories, function(key, value) {
+                $.each(categories, function(key, value) {
                     attributesRegion.append(`<div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input subCategory" value="${ value.id }" id="tag-${value.id}">
+                                                    <input type="checkbox" class="custom-control-input category" value="${ value.id }" id="tag-${value.id}">
                                                     <label class="custom-control-label" for="tag-${value.id}">${value.name.{{app()->getLocale()}}}</label>
                                                 </div>
                                             </div>`);
@@ -184,8 +184,8 @@ $(document).on('ready', function () {
             searchText = $("#searchProductInput").val(),
             tagsCheckboxes = $(".tag:checkbox"),
             checkedTags = '',
-            subCategoryCheckBoxes = $(".subCategory:checkbox"),
-            checkedSubCategories = '';
+            categoryCheckBoxes = $(".category:checkbox"),
+            checkedCategories = '';
 
         tagsCheckboxes.each(function() {
             let checkBoxItem = (this.checked ? $(this).val() : "");
@@ -193,17 +193,17 @@ $(document).on('ready', function () {
             if(checkBoxItem.length > 0)
                 checkedTags += checkBoxItem + ',';
         })
-        subCategoryCheckBoxes.each(function() {
+        categoryCheckBoxes.each(function() {
             let checkBoxItem = (this.checked ? $(this).val() : "");
 
             if(checkBoxItem.length > 0)
-                checkedSubCategories += checkBoxItem + ',';
+                checkedCategories += checkBoxItem + ',';
         })
 
         checkedTags.replace(/, \s*$/, "");
-        checkedSubCategories.replace(/, \s*$/, "");
+        checkedCategories.replace(/, \s*$/, "");
 
-        doTheMagic(`{{ route('products.search') }}?filter[name]=${searchText}&filter[price_from]=${priceFrom}&filter[price_to]=${priceTo}&filter[has_tags]=${checkedTags}&filter[has_subcategories]=${checkedSubCategories}`, 'filter');
+        doTheMagic(`{{ route('products.search') }}?filter[name]=${searchText}&filter[price_from]=${priceFrom}&filter[price_to]=${priceTo}&filter[has_tags]=${checkedTags}&filter[has_categories]=${checkedCategories}`, 'filter');
     });
 
     $(document).on('keyup', '#searchProductInput', function(e) {

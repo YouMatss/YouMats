@@ -23,7 +23,6 @@ class RolesAndPermissionsSeeder extends Seeder
             'users',
             'vendors',
             'categories',
-            'subCategories',
             'products',
             'languages',
             'faqs',

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Front\Vendor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\SubCategory;
+use App\Models\Category;
 use App\Models\Unit;
 use App\Models\Vendor;
 use Exception;
@@ -39,7 +39,7 @@ class ProductController extends Controller
         return $request->validate([
             'name_en' => REQUIRED_STRING_VALIDATION,
             'name_ar' => REQUIRED_STRING_VALIDATION,
-            'subCategory_id' => REQUIRED_NUMERIC_VALIDATION,
+            'category_id' => REQUIRED_NUMERIC_VALIDATION,
             'type' => 'required|in:product,service',
             'price' => 'required_if:type,product|numeric',
             'stock' => 'required_if:type,product|numeric',
@@ -59,7 +59,7 @@ class ProductController extends Controller
     protected function setProduct(Request $request, Product $product)
     {
         $slug = Str::slug($request->name_en, '-');
-        $product->subCategory_id = $request->subCategory_id;
+        $product->category_id = $request->category_id;
         $product->slug = $slug;
         $product->type = $request->type;
         $product->rate = $request->rate;
@@ -99,12 +99,12 @@ class ProductController extends Controller
         if(!$vendor->active)
             return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
 
-        $subCategories = SubCategory::all();
+        $categories = Category::all();
         $units = Unit::orderby('sort')->get();
 
         return view('front.vendor.product.create', [
             'vendor' => $vendor,
-            'subCategories' => $subCategories,
+            'categories' => $categories,
             'units' => $units
         ]);
     }
@@ -173,12 +173,12 @@ class ProductController extends Controller
         if($product->vendor_id !== $vendor->id)
             return back()->with(['custom_warning' => __('You do not have permissions to edit this product.')]);
 
-        $subCategories = SubCategory::all();
+        $categories = Category::all();
         $units = Unit::orderBy('sort')->get();
 
         return view('front.vendor.product.edit', [
             'product' => $product,
-            'subCategories' => $subCategories,
+            'categories' => $categories,
             'units' => $units
         ]);
     }

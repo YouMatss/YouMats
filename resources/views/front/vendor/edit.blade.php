@@ -472,10 +472,10 @@
                                         <div class="product-item__outer h-100">
                                             <div class="product-item__inner px-xl-2 p-3">
                                                 <div class="product-item__body pb-xl-2">
-                                                    <div class="mb-2"><a href="{{ route('front.category', ['category_slug' => $product->subCategory->category->slug]) }}" class="font-size-12 text-gray-5">{{ $product->subCategory->category->name }}</a></div>
-                                                    <h5 class="mb-1 product-item__title"><a href="{{ route('front.product', [$product->subCategory->category->slug, $product->subCategory->slug, $product->slug]) }}" class="text-blue font-weight-bold">{{ $product->name }}</a></h5>
+                                                    <div class="mb-2"><a href="{{ route('front.category', [$product->category->slug]) }}" class="font-size-12 text-gray-5">{{ $product->category->name }}</a></div>
+                                                    <h5 class="mb-1 product-item__title"><a href="{{ route('front.product', [$product->category->slug, $product->slug]) }}" class="text-blue font-weight-bold">{{ $product->name }}</a></h5>
                                                     <div class="mb-2">
-                                                        <a href="{{ route('front.product', [$product->subCategory->category->slug, $product->subCategory->slug, $product->slug]) }}" class="d-block text-center"><img class="img-fluid" src="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
+                                                        <a href="{{ route('front.product', [$product->category->slug, $product->slug]) }}" class="d-block text-center"><img class="img-fluid" src="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
                                                     </div>
                                                     <div class="mb-3">
                                                         <div class="text-warning mr-2">
