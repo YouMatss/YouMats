@@ -6,7 +6,11 @@ use App\Helpers\Filters\FiltersJsonField;
 use App\Http\Controllers\Controller;
 use App\Models\FAQ;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\Filters\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -30,8 +34,19 @@ class ProductController extends Controller
         return view('front.product.index')->with($data);
     }
 
-    public function all() {
-        $data['products'] = Product::where('active', 1)->orderBy('sort')->paginate(30);
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     */
+    public function all(Request $request)
+    {
+        $query = Product::where('active', 1)->orderBy('sort');
+
+        if($request->has('search'))
+            $query->where("name->en", 'like', '%'. $request->search . '%')
+                ->orWhere("name->ar", 'like', '%'. $request->search .'%');
+
+        $data['products'] = $query->paginate(20);
 
         return view('front.product.all')->with($data);
     }

@@ -28,7 +28,7 @@ class Vendor extends Resource
     public static $title = 'name';
 
     public static $search = [
-        'id', 'name', 'email', 'phone', 'phone2', 'address', 'address2'
+        'id', 'name', 'contacts'
     ];
 
     public function fields(Request $request)
@@ -58,31 +58,25 @@ class Vendor extends Resource
                 ->rules(REQUIRED_STRING_VALIDATION)
                 ->translatable(),
 
-            Text::make('Email')
+            Text::make('Main EMail', 'email')
                 ->sortable()
+                ->help('It will be used to login')
                 ->rules(REQUIRED_EMAIL_VALIDATION)
                 ->creationRules('unique:vendors,email')
                 ->updateRules('unique:vendors,email,{{resourceId}}'),
 
-            Text::make('Phone')
-                ->hideFromIndex()
+           SimpleRepeatable::make('Contacts', 'contacts', [
+              Text::make('Person Name', 'person_name')
+                ->rules(REQUIRED_STRING_VALIDATION),
+              Text::make('Email', 'email')
+                ->rules(REQUIRED_EMAIL_VALIDATION),
+              Text::make('Phone', 'phone')
+                ->rules(REQUIRED_STRING_VALIDATION),
+              Text::make('Address', 'address')
                 ->rules(NULLABLE_STRING_VALIDATION),
-
-            Text::make('Phone2')
-                ->hideFromIndex()
+              Text::make('Job', 'job')
                 ->rules(NULLABLE_STRING_VALIDATION),
-
-            Text::make('Whatsapp Phone')
-                ->hideFromIndex()
-                ->rules(NULLABLE_STRING_VALIDATION),
-
-            Text::make('Address')
-                ->hideFromIndex()
-                ->rules(NULLABLE_STRING_VALIDATION),
-
-            Text::make('Address2')
-                ->hideFromIndex()
-                ->rules(NULLABLE_STRING_VALIDATION),
+           ]),
 
             MapMarker::make('Location')
                 ->defaultZoom(8)

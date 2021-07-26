@@ -61,12 +61,13 @@ class CheckoutController extends Controller
             'name' => REQUIRED_STRING_VALIDATION,
             'phone' => REQUIRED_STRING_VALIDATION,
             'address' => REQUIRED_STRING_VALIDATION,
-            'building_number' => REQUIRED_INTEGER_VALIDATION,
+            'building_number' => NULLABLE_INTEGER_VALIDATION,
             'street' => NULLABLE_STRING_VALIDATION,
             'district' => NULLABLE_STRING_VALIDATION,
-            'city' => REQUIRED_STRING_VALIDATION,
+            'city' => NULLABLE_INTEGER_VALIDATION,
             'email' => REQUIRED_EMAIL_VALIDATION,
             'notes' => NULLABLE_STRING_VALIDATION,
+            'notes.*.title' => REQUIERD_STRING_VALIDATION,
             'delivery_time' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_company())]
         ];
 

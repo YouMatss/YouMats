@@ -174,6 +174,8 @@ $(document).on('ready', function () {
         let searchText = $("#searchProductInput").val();
 
         doTheMagic("{{ route('products.search') }}?filter[name]=" + searchText);
+
+        window.location.href = "{{ route('front.product.all') }}?search=" + searchText;
     });
 
     $(document).on('click', '#searchFilterBtn', function() {

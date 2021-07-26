@@ -6,6 +6,7 @@ use App\Helpers\Traits\DefaultImage;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -69,6 +70,14 @@ class Category extends Model implements Sortable, HasMedia
     public function products() {
         return $this->hasManyThrough(Product::class, SubCategory::class, '', 'subCategory_id')
             ->where('active', 1)->orderBy('updated_at', 'desc');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function attributes(): HasMany
+    {
+        return $this->hasMany(Attribute::class);
     }
 
 //    public function vendors() {

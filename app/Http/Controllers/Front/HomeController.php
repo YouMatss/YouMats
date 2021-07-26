@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Slider;
 use App\Models\SubCategory;
 use App\Models\Team;
+use App\Models\Vendor;
 
 class HomeController extends Controller
 {
@@ -16,6 +17,7 @@ class HomeController extends Controller
         $data['team'] = Team::where('active', 1)->orderBy('sort')->take(4)->get();
         $data['featured_categories'] = Category::where('isFeatured', 1)->orderBy('sort')->take(9)->get();
         $data['section_i_category'] = Category::where('section_i', 1)->first();
+        $data['vendors'] = Vendor::with('cities', 'media')->whereActive(true)->limit(10)->latest()->get();
 
         $data['top_subCategories'] = SubCategory::where('topCategory', 1)->orderBy('sort')->take(6)->get();
         $data['section_ii_subCategory'] = SubCategory::where('section_ii', 1)->first();

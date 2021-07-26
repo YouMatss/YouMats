@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
+use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Waynestate\Nova\CKEditor;
 
@@ -162,6 +163,8 @@ class SubCategory extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new DownloadExcel,
+        ];
     }
 }

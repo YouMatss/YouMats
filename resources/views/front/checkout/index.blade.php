@@ -16,7 +16,7 @@
 @section('content')
     <div class="container">
         <div class="mb-5">
-            <h1 class="text-center">{{ __('Checkout') }}</h1>
+            <h1 class="text-center">{{ __(is_company() ? 'checkout.get_quote_price' : 'checkout.checkout') }}</h1>
         </div>
         @if(!Auth::guard('web')->check())
             <!-- Accordion -->
@@ -176,34 +176,36 @@
                                         </tfoot>
                                     @endif
                                 </table>
-                                <!-- End Product Content -->
-                                <div class="border-top border-width-3 border-color-1 pt-3 mb-3">
-                                    <!-- Basics Accordion -->
-                                    <div id="basicsAccordion1">
+                                @if(!is_company())
+                                    <!-- End Product Content -->
+                                    <div class="border-top border-width-3 border-color-1 pt-3 mb-3">
+                                        <!-- Basics Accordion -->
+                                        <div id="basicsAccordion1">
 
-                                        @foreach($paymentGateways as $gateway)
-                                            <!-- Card -->
-                                            <div class="border-bottom border-color-1 border-dotted-bottom">
-                                                <div class="p-3" id="basicsHeadingOne">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" class="custom-control-input" name="payment_method" value="{{ $gateway->name }}" checked="">
-                                                        <label class="custom-control-label form-label collapsed" for="stylishRadio1" data-toggle="collapse" data-target="#basicsCollapseOnee" aria-expanded="false" aria-controls="basicsCollapseOnee">
-                                                            {{ $gateway->name }}
-                                                        </label>
+                                            @foreach($paymentGateways as $gateway)
+                                                <!-- Card -->
+                                                <div class="border-bottom border-color-1 border-dotted-bottom">
+                                                    <div class="p-3" id="basicsHeadingOne">
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" class="custom-control-input" name="payment_method" value="{{ $gateway->name }}" checked="">
+                                                            <label class="custom-control-label form-label collapsed" for="stylishRadio1" data-toggle="collapse" data-target="#basicsCollapseOnee" aria-expanded="false" aria-controls="basicsCollapseOnee">
+                                                                {{ $gateway->name }}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div id="basicsCollapseOnee" class="border-top border-color-1 border-dotted-top bg-dark-lighter collapse" aria-labelledby="basicsHeadingOne" data-parent="#basicsAccordion1" style="">
+                                                        <div class="p-4">
+                                                            {!! $gateway->description !!}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div id="basicsCollapseOnee" class="border-top border-color-1 border-dotted-top bg-dark-lighter collapse" aria-labelledby="basicsHeadingOne" data-parent="#basicsAccordion1" style="">
-                                                    <div class="p-4">
-                                                        {!! $gateway->description !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Card -->
-                                        @endforeach
+                                                <!-- End Card -->
+                                            @endforeach
 
+                                        </div>
+                                        <!-- End Basics Accordion -->
                                     </div>
-                                    <!-- End Basics Accordion -->
-                                </div>
+                                @endif
                                 <div class="form-group d-flex align-items-center justify-content-between px-3 mb-5">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="terms" value="true" id="defaultCheck10" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
@@ -290,78 +292,80 @@
                                 <!-- End Input -->
                             </div>
 
-                            <div class="col-md-6">
-                                <!-- Input -->
-                                <div class="js-form-message mb-6">
-                                    <label class="form-label">
-                                        Building No.
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="number" class="form-control" value="{{ old('building_number') }}" name="building_number" aria-label="470 Lucy Forks" required="" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
-                                    @error('building_number')
-                                    <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                    @enderror
-                                </div>
-                                <!-- End Input -->
-                            </div>
-
-                            <div class="col-md-6">
-                                <!-- Input -->
-                                <div class="js-form-message mb-6">
-                                    <label class="form-label">
-                                        Street
-                                    </label>
-                                    <input type="text" class="form-control" value="{{ old('street') }}" name="street" aria-label="470 Lucy Forks" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
-                                    @error('street')
-                                    <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                    @enderror
-                                </div>
-                                <!-- End Input -->
-                            </div>
-
-                            <div class="col-md-6">
-                                <!-- Input -->
-                                <div class="js-form-message mb-6">
-                                    <label class="form-label">
-                                        District
-                                    </label>
-                                    <input type="text" class="form-control" value="{{ old('district') }}" name="district" aria-label="470 Lucy Forks" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
-                                    @error('district')
-                                    <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                    @enderror
-                                </div>
-                                <!-- End Input -->
-                            </div>
-
-                            <div class="col-md-6">
-                                <!-- Input -->
-                                <div class="js-form-message mb-6">
-                                    <label class="form-label">
-                                        City
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="dropdown bootstrap-select form-control js-select dropdown-select">
-                                        <select class="form-control js-select selectpicker dropdown-select" name="city" required="" data-msg="Please select state." data-error-class="u-has-error" data-success-class="u-has-success" data-live-search="true" data-style="form-control border-color-1 font-weight-normal" tabindex="-98">
-                                            <option value="">Select city</option>
-                                            @foreach($cities as $city)
-                                                <option value="{{ $city->name }}" @if($city->name == old('city')) selected @endif>{{ $city->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('city')
+                            @if(!is_company())
+                                <div class="col-md-6">
+                                    <!-- Input -->
+                                    <div class="js-form-message mb-6">
+                                        <label class="form-label">
+                                            Building No.
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="number" class="form-control" value="{{ old('building_number') }}" name="building_number" aria-label="470 Lucy Forks" required="" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        @error('building_number')
                                         <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                         @enderror
                                     </div>
+                                    <!-- End Input -->
                                 </div>
-                                <!-- End Input -->
-                            </div>
+
+                                <div class="col-md-6">
+                                    <!-- Input -->
+                                    <div class="js-form-message mb-6">
+                                        <label class="form-label">
+                                            Street
+                                        </label>
+                                        <input type="text" class="form-control" value="{{ old('street') }}" name="street" aria-label="470 Lucy Forks" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        @error('street')
+                                        <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                        @enderror
+                                    </div>
+                                    <!-- End Input -->
+                                </div>
+
+                                <div class="col-md-6">
+                                    <!-- Input -->
+                                    <div class="js-form-message mb-6">
+                                        <label class="form-label">
+                                            District
+                                        </label>
+                                        <input type="text" class="form-control" value="{{ old('district') }}" name="district" aria-label="470 Lucy Forks" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        @error('district')
+                                        <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                        @enderror
+                                    </div>
+                                    <!-- End Input -->
+                                </div>
+
+                                <div class="col-md-6">
+                                    <!-- Input -->
+                                    <div class="js-form-message mb-6">
+                                        <label class="form-label">
+                                            City
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="dropdown bootstrap-select form-control js-select dropdown-select">
+                                            <select class="form-control js-select selectpicker dropdown-select" name="city" required="" data-msg="Please select state." data-error-class="u-has-error" data-success-class="u-has-success" data-live-search="true" data-style="form-control border-color-1 font-weight-normal" tabindex="-98">
+                                                <option value="">Select city</option>
+                                                @foreach($cities as $city)
+                                                    <option value="{{ $city->name }}" @if($city->name == old('city')) selected @endif>{{ $city->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('city')
+                                            <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <!-- End Input -->
+                                </div>
+                            @endif
 
                             <div class="col-md-6">
                                 <!-- Input -->
@@ -439,8 +443,8 @@
                                     <div class="js-form-message form-group mb-5">
                                         <label for="type" class="form-label">Type <span class="text-danger">*</span></label>
                                         <select class="form-control @error('name') is-invalid @enderror" id="type" name="type" required>
-                                            <option value="individual">Individual</option>
-                                            <option value="company">Company</option>
+                                            <option value="individual" @if(!is_company()) selected @endif>Individual</option>
+                                            <option value="company" @if(is_company()) selected @endif>Company</option>
                                         </select>
                                         @error('type')
                                         <span class="invalid-feedback" role="alert">
