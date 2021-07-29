@@ -15,11 +15,12 @@ class OrderItem extends Resource
     public static $model = \App\Models\OrderItem::class;
 
     public static $displayInNavigation = false;
+    public static $globallySearchable = false;
 
-    public static $title = 'SKU';
+    public static $title = 'id';
 
     public static $search = [
-        'id', 'SKU'
+        'id'
     ];
 
     public function fields(Request $request)
