@@ -28,7 +28,7 @@ class Vendor extends Resource
     public static $title = 'name';
 
     public static $search = [
-        'id', 'name', 'contacts'
+        'id', 'name'
     ];
 
     public function fields(Request $request)
