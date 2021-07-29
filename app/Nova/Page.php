@@ -22,7 +22,7 @@ class Page extends Resource
     public static $title = 'title';
 
     public static $search = [
-        'id', 'title', 'desc', 'short_desc'
+        'id', 'title', 'desc'
     ];
 
     public function fields(Request $request)
