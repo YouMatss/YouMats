@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use App\Models\Category;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use GeneaLabs\NovaMapMarkerField\MapMarker;
@@ -19,7 +18,6 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
-use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 
 class Vendor extends Resource
 {
