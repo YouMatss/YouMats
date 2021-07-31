@@ -21,8 +21,8 @@ use Nikaia\Rating\Rating;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
-use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
 use Waynestate\Nova\CKEditor;
+use ZiffDavis\Nova\Nestedset\Fields\NestedsetSelect;
 
 class Product extends Resource
 {
@@ -44,8 +44,9 @@ class Product extends Resource
             Text::make('Name')->sortable()->translatable()
                 ->rules(REQUIRED_STRING_VALIDATION),
 
-            BelongsTo::make('Category')->onlyOnDetail(),
-            NestedTreeAttachManyField::make('Category')->useSingleSelect(),
+            BelongsTo::make('Category')->hideWhenUpdating()->hideWhenCreating(),
+//            NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
+            NestedsetSelect::make('Category', 'category')->onlyOnForms(),
 
             BelongsTo::make('Vendor')
                 ->withoutTrashed()->hideFromIndex()->searchable(),

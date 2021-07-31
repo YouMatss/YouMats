@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "44e3ab6390be236dfdbed1d7547e2683",
+    "content-hash": "2b0bda8505b8963f80ac5970fe6de29e",
     "packages": [
         {
             "name": "ampeco/nova-date-range-filter",
@@ -10966,6 +10966,51 @@
                 "source": "https://github.com/yassipad/laravel-nova-nested-form/tree/v3.0.12"
             },
             "time": "2021-05-26T14:40:19+00:00"
+        },
+        {
+            "name": "ziffdavis/nova-nestedset",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ZiffDavis/nova-nestedset.git",
+                "reference": "ce0d200d97c8c332394feca160b69a42fa3bf521"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ZiffDavis/nova-nestedset/zipball/ce0d200d97c8c332394feca160b69a42fa3bf521",
+                "reference": "ce0d200d97c8c332394feca160b69a42fa3bf521",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ZiffDavis\\Nova\\Nestedset\\NovaNestedsetServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ZiffDavis\\Nova\\Nestedset\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova field for Nestedset.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/ZiffDavis/nova-nestedset/issues",
+                "source": "https://github.com/ZiffDavis/nova-nestedset/tree/master"
+            },
+            "time": "2019-02-26T17:02:01+00:00"
         }
     ],
     "packages-dev": [
