@@ -35,7 +35,6 @@
         "hardevine/shoppingcart": "^2.9",
         "inspheric/nova-indicator-field": "^1.43",
         "kabbouchi/nova-logs-tool": "^0.3.0",
-        "kirschbaum-development/nova-inline-relationship": "^0.3.0",
         "laravel/framework": "^8.12",
         "laravel/nova": "*",
         "laravel/passport": "^10.1",
