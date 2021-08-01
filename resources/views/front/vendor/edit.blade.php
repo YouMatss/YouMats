@@ -169,35 +169,35 @@
                                                 <div class="col-md-3">
                                                     <p>
                                                         <label data-pattern-text="Person Name ++:">Person Name:</label>
-                                                        <input class="form-control @error('contacts.*.person_name') is-invalid @enderror" value="{{ $vendor->contacts[0]['person_name'] }}" type="text" name="contacts[0][person_name]" data-pattern-name="contacts[++][person_name]" data-pattern-id="contacts_++_person_name" />
+                                                        <input class="form-control @error('contacts.*.person_name') is-invalid @enderror" @if(count($vendor->contacts) > 0)value="{{ $vendor->contacts[0]['person_name'] }}" @endif type="text" name="contacts[0][person_name]" data-pattern-name="contacts[++][person_name]" data-pattern-id="contacts_++_person_name" />
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-3">
                                                     <p>
                                                         <label data-pattern-text="Phone ++:">Phone:</label>
-                                                        <input type="text" name="contacts[0][phone]" class="form-control @error('contacts.*.phone') is-invalid @enderror" value="{{ $vendor->contacts[0]['phone'] }}"  data-pattern-name="contacts[++][phone]" data-pattern-id="contacts_++_phone" />
+                                                        <input type="text" name="contacts[0][phone]" class="form-control @error('contacts.*.phone') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['phone'] }}" @endif  data-pattern-name="contacts[++][phone]" data-pattern-id="contacts_++_phone" />
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-3">
                                                     <p>
                                                         <label data-pattern-text="Email ++:">Email:</label>
-                                                        <input type="email" name="contacts[0][email]" class="form-control @error('contacts.*.email') is-invalid @enderror" value="{{ $vendor->contacts[0]['email'] }}" data-pattern-name="contacts[++][email]" data-pattern-id="contacts_++_email" />
+                                                        <input type="email" name="contacts[0][email]" class="form-control @error('contacts.*.email') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['email'] }}" @endif data-pattern-name="contacts[++][email]" data-pattern-id="contacts_++_email" />
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-3">
                                                     <p>
                                                         <label data-pattern-text="Job ++:">Job:</label>
-                                                        <input type="text" name="contacts[0][job]" class="form-control @error('contacts.*.job') is-invalid @enderror" value="{{ $vendor->contacts[0]['job'] }}" data-pattern-name="contacts[++][job]" data-pattern-id="contacts_++_job" />
+                                                        <input type="text" name="contacts[0][job]" class="form-control @error('contacts.*.job') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['job'] }}" @endif data-pattern-name="contacts[++][job]" data-pattern-id="contacts_++_job" />
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-4">
                                                     <p>
                                                         <label data-pattern-text="Address ++:">Address:</label>
-                                                        <input type="text" name="contacts[0][address]" class="form-control @error('contacts.*.address') is-invalid @enderror" value="{{ $vendor->contacts[0]['address'] }}" data-pattern-name="contacts[++][address]" data-pattern-id="contacts_++_address" />
+                                                        <input type="text" name="contacts[0][address]" class="form-control @error('contacts.*.address') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['address'] }}" @endif data-pattern-name="contacts[++][address]" data-pattern-id="contacts_++_address" />
                                                     </p>
                                                 </div>
 
