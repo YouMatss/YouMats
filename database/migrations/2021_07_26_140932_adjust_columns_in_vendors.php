@@ -17,11 +17,7 @@ class AdjustColumnsInVendors extends Migration
             $table->dropColumn('phone','phone2','whatsapp_phone','address2', 'address');
 
             $table->after('name', function($table) {
-               $table->text('person_name');
-               $table->text('emails');
-               $table->text('phones');
-               $table->text('addresses');
-               $table->text('job');
+               $table->text('contacts')->default('[]');
             });
         });
     }
@@ -34,7 +30,6 @@ class AdjustColumnsInVendors extends Migration
     public function down()
     {
         Schema::table('vendors', function (Blueprint $table) {
-            //
         });
     }
 }
