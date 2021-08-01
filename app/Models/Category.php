@@ -68,7 +68,7 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     public function products() {
-        if(count($this->children)) {
+        if($this->isRoot()) {
             return $this->hasManyThrough(Product::class, self::class, 'parent_id')
                 ->where('active', 1)->orderBy('updated_at', 'desc');
         }
