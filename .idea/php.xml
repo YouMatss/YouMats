@@ -178,7 +178,6 @@
       <path value="$PROJECT_DIR$/vendor/dyrynda/laravel-cascade-soft-deletes" />
       <path value="$PROJECT_DIR$/vendor/chris-ware/nova-breadcrumbs" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-query-builder" />
-      <path value="$PROJECT_DIR$/vendor/kirschbaum-development/nova-inline-relationship" />
       <path value="$PROJECT_DIR$/vendor/yassi/nova-nested-form" />
       <path value="$PROJECT_DIR$/vendor/genealabs/nova-map-marker-field" />
       <path value="$PROJECT_DIR$/vendor/symfony/thanks" />

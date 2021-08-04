@@ -19,6 +19,7 @@ class CreateShippingsTable extends Migration
             $table->integer('price');
             $table->integer('time');
             $table->string('format');
+            $table->json('cities')->nullable();
             $table->timestamps();
         });
     }

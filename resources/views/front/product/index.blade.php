@@ -98,12 +98,14 @@
                                     @if($product->stock)
                                         <span class="text-green font-weight-bold">{{$product->stock}} in stock</span>
                                     @else
-                                        <span class="text-red font-weight-bold">Out of stock</span>
+                                        <span class="text-green font-weight-bold">In stock</span>
                                     @endif
                                 </div>
+                                @if($product->price)
                                 <div class="mb-3">
                                     <div class="font-size-36">{{getCurrency('symbol')}} {{$product->price}}</div>
                                 </div>
+                                @endif
                             @endif
 
                             <div class="mb-3">
@@ -249,11 +251,11 @@
                                                 </a>
                                             </div>
                                             <div class="flex-center-between mb-1">
-                                                @if(!is_company())
-                                                    <div class="prodcut-price">
-                                                        <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->price}}</div>
-                                                    </div>
-                                                @endif
+                                                <div class="prodcut-price">
+                                                    @if((!is_company()) && $r_product->price)
+                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->price}}</div>
+                                                    @endif
+                                                </div>
                                                 {!! cartOrChat($product) !!}
                                             </div>
                                         </div>

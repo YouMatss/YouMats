@@ -21,6 +21,8 @@ class ProductController extends Controller
         $data['product'] = Product::with('category', 'tags', 'vendor')->where(['slug' => $slug, 'active' => 1])->first();
         abort_if(!$data['product'], 404);
 
+//        dd($data['product']->delivery);
+
         $data['product']->views++;
         $data['product']->save();
 

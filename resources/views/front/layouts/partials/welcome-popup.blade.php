@@ -7,14 +7,10 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <label class="select_reg">
-                            <a href="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
-                        </label>
+                        <a class="select_reg" href="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
                     </div>
                     <div class="col-md-6">
-                        <label class="select_reg">
-                            <a href="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
-                        </label>
+                        <a class="select_reg" href="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
                     </div>
                 </div>
             </div>

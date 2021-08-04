@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b9dfdfb76b5f1a94732808a1bb76c76",
+    "content-hash": "3a1e06b160e0bd39cf25e0077b6bd253",
     "packages": [
         {
             "name": "ampeco/nova-date-range-filter",
@@ -932,16 +932,16 @@
         },
         {
             "name": "dmitrybubyakin/nova-medialibrary-field",
-            "version": "3.2.9",
+            "version": "3.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmitrybubyakin/nova-medialibrary-field.git",
-                "reference": "43633d7b1d7f139873b7924aab050eb0335338f1"
+                "reference": "3f92a30d4ed1893a3eada02ae47a418d68c8bb74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dmitrybubyakin/nova-medialibrary-field/zipball/43633d7b1d7f139873b7924aab050eb0335338f1",
-                "reference": "43633d7b1d7f139873b7924aab050eb0335338f1",
+                "url": "https://api.github.com/repos/dmitrybubyakin/nova-medialibrary-field/zipball/3f92a30d4ed1893a3eada02ae47a418d68c8bb74",
+                "reference": "3f92a30d4ed1893a3eada02ae47a418d68c8bb74",
                 "shasum": ""
             },
             "require": {
@@ -989,9 +989,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dmitrybubyakin/nova-medialibrary-field/issues",
-                "source": "https://github.com/dmitrybubyakin/nova-medialibrary-field/tree/3.2.9"
+                "source": "https://github.com/dmitrybubyakin/nova-medialibrary-field/tree/3.2.10"
             },
-            "time": "2021-07-29T05:46:33+00:00"
+            "time": "2021-08-04T05:40:52+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -2715,16 +2715,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.52.0",
+            "version": "v8.53.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "8fe9877d52e25f8aed36c51734e5a8510be967e6"
+                "reference": "4b2e3e7317da82dd9f5b88d477abd93444748b43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/8fe9877d52e25f8aed36c51734e5a8510be967e6",
-                "reference": "8fe9877d52e25f8aed36c51734e5a8510be967e6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/4b2e3e7317da82dd9f5b88d477abd93444748b43",
+                "reference": "4b2e3e7317da82dd9f5b88d477abd93444748b43",
                 "shasum": ""
             },
             "require": {
@@ -2797,7 +2797,7 @@
                 "illuminate/view": "self.version"
             },
             "require-dev": {
-                "aws/aws-sdk-php": "^3.155",
+                "aws/aws-sdk-php": "^3.186.4",
                 "doctrine/dbal": "^2.6|^3.0",
                 "filp/whoops": "^2.8",
                 "guzzlehttp/guzzle": "^6.5.5|^7.0.1",
@@ -2810,7 +2810,7 @@
                 "symfony/cache": "^5.1.4"
             },
             "suggest": {
-                "aws/aws-sdk-php": "Required to use the SQS queue driver, DynamoDb failed job storage and SES mail driver (^3.155).",
+                "aws/aws-sdk-php": "Required to use the SQS queue driver, DynamoDb failed job storage and SES mail driver (^3.186.4).",
                 "brianium/paratest": "Required to run tests in parallel (^6.0).",
                 "doctrine/dbal": "Required to rename columns and drop SQLite columns (^2.6|^3.0).",
                 "ext-ftp": "Required to use the Flysystem FTP driver.",
@@ -2879,7 +2879,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-07-27T13:03:29+00:00"
+            "time": "2021-08-03T14:36:33+00:00"
         },
         {
             "name": "laravel/nova",
@@ -3173,23 +3173,23 @@
         },
         {
             "name": "laravie/serialize-queries",
-            "version": "v0.3.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravie/serialize-queries.git",
-                "reference": "e6e5498ed80727cc2eac345e5394f7608aeb3f8c"
+                "reference": "28a02c387f04bf167db816a9fce87e5d80bbe0e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravie/serialize-queries/zipball/e6e5498ed80727cc2eac345e5394f7608aeb3f8c",
-                "reference": "e6e5498ed80727cc2eac345e5394f7608aeb3f8c",
+                "url": "https://api.github.com/repos/laravie/serialize-queries/zipball/28a02c387f04bf167db816a9fce87e5d80bbe0e6",
+                "reference": "28a02c387f04bf167db816a9fce87e5d80bbe0e6",
                 "shasum": ""
             },
             "require": {
                 "illuminate/database": "^5.8 || ^6.0 || ^7.0 || ^8.0",
                 "illuminate/queue": "^5.8 || ^6.0 || ^7.0 || ^8.0",
                 "opis/closure": "^3.4.2",
-                "php": ">=7.1"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "orchestra/testbench": "~3.8.6 || ^4.16 || ^5.18 || ^6.17"
@@ -3203,7 +3203,10 @@
             "autoload": {
                 "psr-4": {
                     "Laravie\\SerializesQuery\\": "src/"
-                }
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3218,7 +3221,7 @@
             "description": "Serializable Laravel Query Builder",
             "support": {
                 "issues": "https://github.com/laravie/serialize-queries/issues",
-                "source": "https://github.com/laravie/serialize-queries/tree/v0.3.0"
+                "source": "https://github.com/laravie/serialize-queries/tree/v1.0.0"
             },
             "funding": [
                 {
@@ -3230,7 +3233,7 @@
                     "type": "liberapay"
                 }
             ],
-            "time": "2021-04-18T15:42:48+00:00"
+            "time": "2021-08-01T10:00:52+00:00"
         },
         {
             "name": "lcobucci/clock",
@@ -3371,16 +3374,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "167142baf9a6b946f99ad9325b06028606f8238e"
+                "reference": "0d57f20aa03129ee7ef5f690e634884315d4238c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/167142baf9a6b946f99ad9325b06028606f8238e",
-                "reference": "167142baf9a6b946f99ad9325b06028606f8238e",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/0d57f20aa03129ee7ef5f690e634884315d4238c",
+                "reference": "0d57f20aa03129ee7ef5f690e634884315d4238c",
                 "shasum": ""
             },
             "require": {
@@ -3478,7 +3481,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-24T20:12:58+00:00"
+            "time": "2021-07-31T19:15:22+00:00"
         },
         {
             "name": "league/config",
@@ -3998,21 +4001,21 @@
         },
         {
             "name": "maatwebsite/laravel-nova-excel",
-            "version": "1.2.5",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Nova-Excel.git",
-                "reference": "1e579d35cc815e7739b6e46113b0220b3200ea7e"
+                "reference": "c6f9441b62a9e0fa74466202838b77673abb0167"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Nova-Excel/zipball/1e579d35cc815e7739b6e46113b0220b3200ea7e",
-                "reference": "1e579d35cc815e7739b6e46113b0220b3200ea7e",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Nova-Excel/zipball/c6f9441b62a9e0fa74466202838b77673abb0167",
+                "reference": "c6f9441b62a9e0fa74466202838b77673abb0167",
                 "shasum": ""
             },
             "require": {
                 "laravel/nova": "*",
-                "laravie/serialize-queries": "^0.3",
+                "laravie/serialize-queries": "^0.3|^1.0",
                 "maatwebsite/excel": "^3.1",
                 "php": ">=7.1.0"
             },
@@ -4050,9 +4053,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Maatwebsite/Laravel-Nova-Excel/issues",
-                "source": "https://github.com/Maatwebsite/Laravel-Nova-Excel/tree/1.2.5"
+                "source": "https://github.com/Maatwebsite/Laravel-Nova-Excel/tree/1.2.6"
             },
-            "time": "2021-05-21T08:40:29+00:00"
+            "time": "2021-08-04T09:49:32+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -6722,16 +6725,16 @@
         },
         {
             "name": "ramsey/collection",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/collection.git",
-                "reference": "28a5c4ab2f5111db6a60b2b4ec84057e0f43b9c1"
+                "reference": "ab2237657ad99667a5143e32ba2683c8029563d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/collection/zipball/28a5c4ab2f5111db6a60b2b4ec84057e0f43b9c1",
-                "reference": "28a5c4ab2f5111db6a60b2b4ec84057e0f43b9c1",
+                "url": "https://api.github.com/repos/ramsey/collection/zipball/ab2237657ad99667a5143e32ba2683c8029563d4",
+                "reference": "ab2237657ad99667a5143e32ba2683c8029563d4",
                 "shasum": ""
             },
             "require": {
@@ -6783,7 +6786,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/collection/issues",
-                "source": "https://github.com/ramsey/collection/tree/1.1.3"
+                "source": "https://github.com/ramsey/collection/tree/1.1.4"
             },
             "funding": [
                 {
@@ -6795,7 +6798,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-21T17:40:04+00:00"
+            "time": "2021-07-30T00:58:27+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -11558,16 +11561,16 @@
         },
         {
             "name": "maximebf/debugbar",
-            "version": "v1.17.0",
+            "version": "v1.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "4ef8e359d9fffbfbce26218ee36f196453a4dd7d"
+                "reference": "0a3532556be0145603f8a9de23e76dc28eed7054"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/4ef8e359d9fffbfbce26218ee36f196453a4dd7d",
-                "reference": "4ef8e359d9fffbfbce26218ee36f196453a4dd7d",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/0a3532556be0145603f8a9de23e76dc28eed7054",
+                "reference": "0a3532556be0145603f8a9de23e76dc28eed7054",
                 "shasum": ""
             },
             "require": {
@@ -11617,9 +11620,9 @@
             ],
             "support": {
                 "issues": "https://github.com/maximebf/php-debugbar/issues",
-                "source": "https://github.com/maximebf/php-debugbar/tree/v1.17.0"
+                "source": "https://github.com/maximebf/php-debugbar/tree/v1.17.1"
             },
-            "time": "2021-07-27T05:47:57+00:00"
+            "time": "2021-08-01T09:19:02+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -12495,16 +12498,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.7",
+            "version": "9.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5"
+                "reference": "191768ccd5c85513b4068bdbe99bb6390c7d54fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d0dc8b6999c937616df4fb046792004b33fd31c5",
-                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/191768ccd5c85513b4068bdbe99bb6390c7d54fb",
+                "reference": "191768ccd5c85513b4068bdbe99bb6390c7d54fb",
                 "shasum": ""
             },
             "require": {
@@ -12516,7 +12519,7 @@
                 "ext-xml": "*",
                 "ext-xmlwriter": "*",
                 "myclabs/deep-copy": "^1.10.1",
-                "phar-io/manifest": "^2.0.1",
+                "phar-io/manifest": "^2.0.3",
                 "phar-io/version": "^3.0.2",
                 "php": ">=7.3",
                 "phpspec/prophecy": "^1.12.1",
@@ -12582,7 +12585,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.7"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.8"
             },
             "funding": [
                 {
@@ -12594,7 +12597,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-07-19T06:14:47+00:00"
+            "time": "2021-07-31T15:17:34+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -13449,7 +13452,6 @@
                     "type": "github"
                 }
             ],
-            "abandoned": true,
             "time": "2020-09-28T06:45:17+00:00"
         },
         {
@@ -13689,5 +13691,5 @@
         "php": "7.4.*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
