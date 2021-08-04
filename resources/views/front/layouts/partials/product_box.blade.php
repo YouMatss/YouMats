@@ -32,11 +32,11 @@
                 <div class="text-gray-20 mb-2 font-size-12">Vendor: {{$product->vendor->name}}</div>
             @endif
             <div class="flex-center-between mb-1">
-                @if($product->type == 'product' && !is_company())
-                    <div class="prodcut-price">
-                        <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
-                    </div>
-                @endif
+                <div class="prodcut-price">
+                    @if($product->type == 'product' && (!is_company()) && $product->price)
+                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
+                    @endif
+                </div>
                 {!! cartOrChat($product) !!}
             </div>
         </div>
@@ -64,7 +64,7 @@
                 <div class="pr-lg-10">
                     <div class="mb-2"><a href="{{route('front.category', [$product->category->slug])}}" class="font-size-12 text-gray-5">{{$product->category->name}}</a></div>
                     <h5 class="mb-2 product-item__title"><a href="{{route('front.product', [$product->category->slug, $product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a></h5>
-                    @if($product->type == 'product' && !is_company())
+                    @if($product->type == 'product' && (!is_company()) && $product->price)
                         <div class="prodcut-price d-md-none">
                             <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
                         </div>
@@ -93,11 +93,11 @@
             </div>
             <div class="product-item__footer col-md-3 d-md-block">
                 <div class="mb-2 flex-center-between">
-                    @if($product->type == 'product' && !is_company())
                     <div class="prodcut-price">
+                        @if($product->type == 'product' && (!is_company()) && $product->price)
                         <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
+                        @endif
                     </div>
-                    @endif
                     @if(!Auth::guard('vendor')->check())
                         <div class="flex-horizontal-center justify-content-between justify-content-wd-center flex-wrap border-top pt-3">
                             {!! cartOrChat($product) !!}

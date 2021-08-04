@@ -126,20 +126,21 @@ class Product extends Resource
             ])),
 
             (new Panel('Shipping Prices', [
-                SimpleRepeatable::make('Shipping Prices', 'shipping_prices', [
-                    Select::make('Cities')->options(function () {
-                        if(isset($this->vendor->cities))
-                            return $this->vendor->cities->pluck('name', 'id');
-                        else
-                            return '';
-                    })->rules(['required', 'integer']),
-                    Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
-                    Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
-                    Select::make('Format')->options([
-                        'hour' => 'Hour',
-                        'day' => 'Day'
-                    ])->rules(['required','in:hour,day']),
-                ])->hideWhenCreating()
+                BelongsTo::make('Shipping')->withoutTrashed()->nullable()->hideFromIndex(),
+//                SimpleRepeatable::make('Shipping Prices', 'shipping_prices', [
+//                    Select::make('Cities')->options(function () {
+//                        if(isset($this->vendor->cities))
+//                            return $this->vendor->cities->pluck('name', 'id');
+//                        else
+//                            return '';
+//                    })->rules(['required', 'integer']),
+//                    Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+//                    Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
+//                    Select::make('Format')->options([
+//                        'hour' => 'Hour',
+//                        'day' => 'Day'
+//                    ])->rules(['required','in:hour,day']),
+//                ])->hideWhenCreating()
             ])),
 
             (new Panel('Attributes (For Product Filtration)', [

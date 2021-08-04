@@ -27,7 +27,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      *
      * @var array
      */
-    protected $appends = ['image_url'];
+    protected $appends = ['image_url', 'delivery'];
 
     public function getMetaTitleAttribute() {
         if(!isset($this->getTranslations('meta_title')[app()->getLocale()]))
@@ -71,6 +71,16 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return $this->vendor->select('latitude', 'longitude')->first();
     }
 
+    public function getDeliveryAttribute() {
+        if(isset($this->shipping)) {
+            return $this->shipping;
+        } elseif(isset($this->category->shipping)) {
+            return  $this->category->shipping;
+        } else {
+            return null;
+        }
+    }
+
     public function category() {
         return $this->belongsTo(Category::class);
     }
@@ -85,6 +95,14 @@ class Product extends Model implements Sortable, HasMedia, Buyable
 
     public function tags() {
         return $this->belongsToMany(Tag::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function shipping(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Shipping::class);
     }
 
     /**

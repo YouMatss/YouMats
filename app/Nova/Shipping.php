@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use OptimistDigital\MultiselectField\Multiselect;
 
 class Shipping extends Resource
 {
@@ -59,7 +60,16 @@ class Shipping extends Resource
                 'day' => 'Day'
             ])->rules(['required','in:hour,day']),
 
-            HasMany::make('Bindings', 'bindings', ShippingBinding::class),
+            Multiselect::make('Cities')
+                ->options(function () {
+                    $collection = [];
+                    $data = \App\Models\City::with('country')->get();
+                    foreach ($data as $row) {
+                        $collection[$row->id] = ['label' => $row->name, 'group' => $row->country->name];
+                    }
+                    return $collection;
+                })
+                ->placeholder('Choose Cities')->saveAsJSON()->hideFromIndex(),
         ];
     }
 

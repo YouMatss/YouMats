@@ -93,6 +93,8 @@ class Category extends Resource
                 ->previewUsing('cropper')
                 ->hideFromIndex(),
 
+            BelongsTo::make('Shipping')->withoutTrashed()->nullable()->hideFromIndex(),
+
             Toggle::make(__('Section I'), 'section_i')->falseColor('#bacad6')->editableIndex(),
             Toggle::make(__('Section II'), 'section_ii')->falseColor('#bacad6')->editableIndex(),
             Toggle::make(__('Section III'), 'section_iii')->falseColor('#bacad6')->editableIndex(),
