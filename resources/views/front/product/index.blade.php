@@ -95,11 +95,11 @@
                         <div class="card p-5 border-width-2 border-color-1 borders-radius-17">
                             @if(!is_company())
                                 <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">Availability:
-                                    @if($product->stock)
-                                        <span class="text-green font-weight-bold">{{$product->stock}} in stock</span>
-                                    @else
+{{--                                    @if($product->stock)--}}
+{{--                                        <span class="text-green font-weight-bold">{{$product->stock}} in stock</span>--}}
+{{--                                    @else--}}
                                         <span class="text-green font-weight-bold">In stock</span>
-                                    @endif
+{{--                                    @endif--}}
                                 </div>
                                 @if($product->price)
                                 <div class="mb-3">

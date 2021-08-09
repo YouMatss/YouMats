@@ -103,7 +103,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'address' => $data['address'],
             'password' => Hash::make($data['password']),
-            'slug' => $data['name_en']
+            'slug' => $data['name_en'] . rand(1,10)
         ]);
 
         $vendor->setTranslation('name', 'en', $data['name_en']);
