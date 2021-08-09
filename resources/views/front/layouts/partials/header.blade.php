@@ -23,7 +23,7 @@
                                             <div id="languageDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker">
                                                 @foreach(\Config::get('currencies') as $currency)
                                                 <a class="dropdown-item active currency_button" data-code="{{$currency->code}}" href="#">
-{{--                                                    <img width="20px" src="{{$currency->media[0]->getUrl()}}" />&nbsp;--}}
+                                                    <img width="20px" src="{{$currency->getFirstMediaUrlOrDefault(CURRENCY_PATH, 'thumb')['url']}}" />&nbsp;
                                                     {{$currency->code}} @if($currency->symbol) ({{$currency->symbol}}) @endif
                                                 </a>
                                                 @endforeach
