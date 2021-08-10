@@ -19,7 +19,6 @@ use Laravel\Nova\Panel;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use Nikaia\Rating\Rating;
 use OptimistDigital\MultiselectField\Multiselect;
-use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Waynestate\Nova\CKEditor;
 use ZiffDavis\Nova\Nestedset\Fields\NestedsetSelect;
@@ -157,8 +156,7 @@ class Product extends Resource
                     })
                     ->placeholder('Choose Attributes Values')
                     ->saveAsJSON()
-                    ->hideFromIndex()
-                    ->hideWhenCreating(),
+                    ->hideFromIndex()->hideWhenCreating(),
             ])),
 
             (new Panel('SEO', [

@@ -62,7 +62,7 @@
                         <a href="#" class="d-black text-gray-90">
                             <div class="min-height-166 py-1 py-xl-2 py-wd-4 d-flex bg-gray-1 align-items-center">
                                 <div class="col-6 col-xl-7 col-wd-6 pr-0">
-                                    <img class="img-fluid" src="assets/img/cat_1.png" alt="Image Description">
+                                    <img class="img-fluid" src="{{ Storage::url(nova_get_setting('home_first_section', 'default_logo.jpg')) }}" title="{{__('home.first_section')}}" alt="{{__('home.first_section')}}">
                                 </div>
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
@@ -71,8 +71,8 @@
                                     <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.first_section_url')}}">
                                         {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
-                                                    <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
-                                                </span>
+                                            <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                         <a href="#" class="d-black text-gray-90">
                             <div class="min-height-166 py-1 py-xl-2 py-wd-4 d-flex bg-gray-1 align-items-center">
                                 <div class="col-6 col-xl-7 col-wd-6 pr-0">
-                                    <img class="img-fluid" src="assets/img/cat_2.png" alt="Image Description">
+                                    <img class="img-fluid" src="{{ Storage::url(nova_get_setting('home_second_section', 'default_logo.jpg')) }}" title="{{__('home.second_section')}}" alt="{{__('home.second_section')}}">
                                 </div>
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
@@ -91,8 +91,8 @@
                                     <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.second_section_url')}}">
                                         {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
-                                                    <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
-                                                </span>
+                                            <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                             <div class="min-height-166 py-1 py-xl-2 py-wd-4 d-flex bg-gray-1 align-items-center">
 
                                 <div class="col-6 col-xl-7 col-wd-6 pr-0">
-                                    <img class="img-fluid" src="assets/img/cat_3.png" alt="Image Description">
+                                    <img class="img-fluid" src="{{ Storage::url(nova_get_setting('home_third_section', 'default_logo.jpg')) }}" title="{{__('home.third_section')}}" alt="{{__('home.third_section')}}">
                                 </div>
 
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
@@ -113,8 +113,8 @@
                                     <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.third_section_url')}}">
                                         {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
-                                                    <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
-                                                </span>
+                                            <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

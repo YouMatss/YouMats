@@ -53,14 +53,9 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     public function registerAllMediaConversions(): void {
-        $this->addMediaConversion('thumb')
-            ->width(200)->height(200);
-
-        $this->addMediaConversion('cropper')
-            ->performOnCollections(CATEGORY_PATH);
-
-        $this->addMediaConversion('cropper')
-            ->performOnCollections(CATEGORY_COVER);
+        $this->addMediaConversion('thumb')->width(200)->height(200);
+        $this->addMediaConversion('cropper')->performOnCollections(CATEGORY_PATH);
+        $this->addMediaConversion('cropper')->performOnCollections(CATEGORY_COVER);
     }
 
     public function parent() {
