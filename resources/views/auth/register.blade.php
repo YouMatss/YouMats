@@ -57,7 +57,7 @@
                                             <div class="js-form-message form-group mb-5">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label class="select_reg" for="registerAsIndividual">
+                                                        <label class="select_reg active" for="registerAsIndividual">
                                                             <input type="radio" name="type" value="individual" id="registerAsIndividual">
                                                             {{ __('auth.register_as_individual') }}
                                                         </label>
@@ -169,6 +169,9 @@
 @endsection
 @section('extraScripts')
     <script>
+        $(function(){
+            $('#registerAsIndividual').attr('checked', 'checked');
+        });
         $('.select_reg').on('click', function () {
             $('.select_reg').removeClass('active');
             $(this).addClass('active');

@@ -81,13 +81,47 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         $fileName = pathinfo($file, PATHINFO_FILENAME);
                         $extension = pathinfo($file, PATHINFO_EXTENSION);
                         $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
-
                         $request->slider_background->storeAs('/', $combinedName, 'public');
                         return [
                             'slider_background' => $combinedName
                         ];
-                    })
-                    ->rules(NULLABLE_IMAGE_VALIDATION),
+                    })->rules(NULLABLE_IMAGE_VALIDATION),
+                Image::make(__('Home First Section'), 'home_first_section')
+                    ->maxWidth(140)
+                    ->store(function(Request $request, $model) {
+                        $file = $request->home_first_section->getClientOriginalName();
+                        $fileName = pathinfo($file, PATHINFO_FILENAME);
+                        $extension = pathinfo($file, PATHINFO_EXTENSION);
+                        $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
+                        $request->home_first_section->storeAs('/', $combinedName, 'public');
+                        return [
+                            'home_first_section' => $combinedName
+                        ];
+                    })->rules(NULLABLE_IMAGE_VALIDATION),
+                Image::make(__('Home Second Section'), 'home_second_section')
+                    ->maxWidth(140)
+                    ->store(function(Request $request, $model) {
+                        $file = $request->home_second_section->getClientOriginalName();
+                        $fileName = pathinfo($file, PATHINFO_FILENAME);
+                        $extension = pathinfo($file, PATHINFO_EXTENSION);
+                        $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
+                        $request->home_second_section->storeAs('/', $combinedName, 'public');
+                        return [
+                            'home_second_section' => $combinedName
+                        ];
+                    })->rules(NULLABLE_IMAGE_VALIDATION),
+                Image::make(__('Home Third Section'), 'home_third_section')
+                    ->maxWidth(140)
+                    ->store(function(Request $request, $model) {
+                        $file = $request->home_third_section->getClientOriginalName();
+                        $fileName = pathinfo($file, PATHINFO_FILENAME);
+                        $extension = pathinfo($file, PATHINFO_EXTENSION);
+                        $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
+                        $request->home_third_section->storeAs('/', $combinedName, 'public');
+                        return [
+                            'home_third_section' => $combinedName
+                        ];
+                    })->rules(NULLABLE_IMAGE_VALIDATION),
             ])
         ]);
 //        Nova::serving(function () {
