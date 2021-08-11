@@ -150,20 +150,6 @@ class Vendor extends Resource
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
 
-            (new Panel('Shipping Prices', [
-                SimpleRepeatable::make('Shipping Prices', 'shipping_prices', [
-                    Select::make('Cities')->options(function () {
-                        return $this->cities->pluck('name', 'id');
-                    })->rules(['required', 'integer']),
-                    Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
-                    Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
-                    Select::make('Format')->options([
-                        'hour' => 'Hour',
-                        'day' => 'Day'
-                    ])->rules(['required','in:hour,day']),
-                ])->hideWhenCreating(),
-            ])),
-
             (new Panel('SEO', [
                 Slug::make('Slug')
                     ->hideFromIndex()
@@ -198,6 +184,7 @@ class Vendor extends Resource
 
             HasMany::make('Products'),
             HasMany::make('Branches'),
+            HasMany::make('Shippings'),
         ];
     }
 

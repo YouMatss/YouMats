@@ -163,10 +163,10 @@ class IndexController extends Controller
             'city_id' => 'required|integer|exists:cities,id',
             'phone_number' => REQUIRED_STRING_VALIDATION,
             'fax' => NULLABLE_STRING_VALIDATION,
-            'website' => REQUIRED_URL_VALIDATION,
+            'website' => NULLABLE_URL_VALIDATION,
             'address' => REQUIRED_STRING_VALIDATION,
-            'latitude' => REQUIRED_STRING_VALIDATION,
-            'longitude' => REQUIRED_STRING_VALIDATION
+            'latitude' => NULLABLE_STRING_VALIDATION,
+            'longitude' => NULLABLE_STRING_VALIDATION
         ]);
 
         $data['vendor_id'] = $vendor->id;
