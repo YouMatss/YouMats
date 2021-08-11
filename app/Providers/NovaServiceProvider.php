@@ -35,7 +35,6 @@ use App\Nova\Page;
 use App\Nova\PaymentGateway;
 use App\Nova\Product;
 use App\Nova\Quote;
-use App\Nova\Shipping;
 use App\Nova\Slider;
 use App\Nova\Subscriber;
 use App\Nova\Tag;
@@ -254,7 +253,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                 'resources' => [
                                     Language::class,
                                     Currency::class,
-                                    Shipping::class,
                                     PaymentGateway::class,
                                     Coupon::class,
                                     Page::class,

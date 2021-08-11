@@ -4,29 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Shipping extends Model
 {
     use HasFactory;
 
     protected $casts = [
-        'cities' => 'array'
+        'cities_prices' => 'array'
     ];
 
     /**
-     * @return HasMany
+     * @return BelongsTo
      */
-    public function categories(): HasMany
+    public function vendor(): BelongsTo
     {
-        return $this->hasMany(Category::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::calss);
+        return $this->belongsTo(Vendor::class);
     }
 }

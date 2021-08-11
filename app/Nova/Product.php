@@ -8,6 +8,7 @@ use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -19,6 +20,7 @@ use Laravel\Nova\Panel;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use Nikaia\Rating\Rating;
 use OptimistDigital\MultiselectField\Multiselect;
+use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Waynestate\Nova\CKEditor;
 use ZiffDavis\Nova\Nestedset\Fields\NestedsetSelect;
@@ -125,21 +127,30 @@ class Product extends Resource
             ])),
 
             (new Panel('Shipping Prices', [
-                BelongsTo::make('Shipping')->withoutTrashed()->nullable()->hideFromIndex(),
-//                SimpleRepeatable::make('Shipping Prices', 'shipping_prices', [
-//                    Select::make('Cities')->options(function () {
-//                        if(isset($this->vendor->cities))
-//                            return $this->vendor->cities->pluck('name', 'id');
-//                        else
-//                            return '';
-//                    })->rules(['required', 'integer']),
-//                    Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
-//                    Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
-//                    Select::make('Format')->options([
-//                        'hour' => 'Hour',
-//                        'day' => 'Day'
-//                    ])->rules(['required','in:hour,day']),
-//                ])->hideWhenCreating()
+                Select::make('Shipping', 'shipping_id')
+                    ->options(function () {
+                        return \App\Models\Shipping::where('vendor_id', $this->vendor_id)->pluck('name', 'id');
+                    })->placeholder('Choose shipping group')
+                    ->hideFromIndex()->hideWhenCreating(),
+                Boolean::make('Specific shipping', 'specific_shipping')->hideFromIndex()->nullable(),
+                NovaDependencyContainer::make([
+                    SimpleRepeatable::make('Shipping Prices', 'shipping_prices', [
+                        Select::make('Cities')->options(function () {
+                            $collection = [];
+                            $data = \App\Models\City::with('country')->get();
+                            foreach ($data as $row) {
+                                $collection[$row->id] = ['label' => $row->name, 'group' => $row->country->name];
+                            }
+                            return $collection;
+                        })->displayUsingLabels()->placeholder('Choose City')->rules(['required', 'integer']),
+                        Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+                        Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1)->step(1),
+                        Select::make('Format')->options([
+                            'hour' => 'Hour',
+                            'day' => 'Day'
+                        ])->rules(['required', 'in:hour,day']),
+                    ]),
+                ])->dependsOn('specific_shipping', true),
             ])),
 
             (new Panel('Attributes (For Product Filtration)', [

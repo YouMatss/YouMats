@@ -3,15 +3,15 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Panel;
 use OptimistDigital\MultiselectField\Multiselect;
+use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 
 class Shipping extends Resource
 {
@@ -49,27 +49,40 @@ class Shipping extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make('Name'),
+            BelongsTo::make(__('Vendor'), 'vendor')->withoutTrashed(),
 
-            Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+            Text::make('Name')->rules(REQUIRED_STRING_VALIDATION),
 
-            Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1),
+            new Panel('Specific shipping terms', [
+                SimpleRepeatable::make('Cities Prices', 'cities_prices', [
+                    Select::make('Cities')->options(function () {
+                        $collection = [];
+                        $data = \App\Models\City::with('country')->get();
+                        foreach ($data as $row) {
+                            $collection[$row->id] = ['label' => $row->name, 'group' => $row->country->name];
+                        }
+                        return $collection;
+                    })->displayUsingLabels()->placeholder('Choose City')->rules(['required', 'integer']),
+                    Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+                    Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1)->step(1),
+                    Select::make('Format')->options([
+                        'hour' => 'Hour',
+                        'day' => 'Day'
+                    ])->rules(['required', 'in:hour,day']),
+                ]),
+            ]),
 
-            Select::make('Format')->options([
-                'hour' => 'Hour',
-                'day' => 'Day'
-            ])->rules(['required','in:hour,day']),
-
-            Multiselect::make('Cities')
-                ->options(function () {
-                    $collection = [];
-                    $data = \App\Models\City::with('country')->get();
-                    foreach ($data as $row) {
-                        $collection[$row->id] = ['label' => $row->name, 'group' => $row->country->name];
-                    }
-                    return $collection;
-                })
-                ->placeholder('Choose Cities')->saveAsJSON()->hideFromIndex(),
+            new Panel('Default for all cities (Optional)', [
+                Currency::make('Price', 'default_price')->rules(NULLABLE_NUMERIC_VALIDATION)->min(0)->step(0.05)
+                    ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
+                Number::make('Time', 'default_time')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1)
+                    ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
+                Select::make('Format', 'default_format')->options([
+                    'hour' => 'Hour',
+                    'day' => 'Day'
+                ])->rules(['nullable', 'in:hour,day'])
+                    ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
+            ]),
         ];
     }
 

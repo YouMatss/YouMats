@@ -15,11 +15,15 @@ class CreateShippingsTable extends Migration
     {
         Schema::create('shippings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('vendor_id')->index();
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('name');
-            $table->integer('price');
-            $table->integer('time');
-            $table->string('format');
-            $table->json('cities')->nullable();
+            $table->integer('default_price')->nullable();
+            $table->integer('default_time')->nullable();
+            $table->string('default_format')->nullable();
+
+            $table->json('cities_prices')->nullable();
+
             $table->timestamps();
         });
     }

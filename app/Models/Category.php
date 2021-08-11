@@ -88,12 +88,4 @@ class Category extends Model implements Sortable, HasMedia
             ->join('categories as c', 'c.id', '=', 'p.category_id')
             ->where('c.id', '=', $this->id)->distinct()->get();
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function shipping(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Shipping::class);
-    }
 }
