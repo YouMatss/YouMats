@@ -112,13 +112,13 @@
                             <h6 class="mb-3 font-weight-bold">{{__('general.footer_customer_care')}}</h6>
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
-                                <li><a class="list-group-item list-group-item-action" href="#">My Account</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">Wish List</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="{{route('front.team.index')}}">Our Team</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="#">{{ __('footer.account') }}</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="#">{{ __('footer.wishlist') }}</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="{{route('front.team.index')}}">{{ __('footer.team') }}</a></li>
                                 @foreach($pages as $page)
                                 <li><a class="list-group-item list-group-item-action" href="{{route('front.page.index', [$page->slug])}}">{{$page->title}}</a></li>
                                 @endforeach
-                                <li><a class="list-group-item list-group-item-action" href="{{route('front.faqs.page')}}">FAQs</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="{{route('front.faqs.page')}}">{{ __('footer.faq') }}</a></li>
                             </ul>
                             <!-- End List Group -->
                         </div>
@@ -131,7 +131,7 @@
     <div class="bg-gray-14 py-2">
         <div class="container">
             <div class="flex-center-between d-block d-md-flex">
-                <div class="mb-3 mb-md-0">© <a href="#" class="font-weight-bold text-gray-90">SeoEra</a> - {{__('general.footer_all_rights_reserved')}}</div>
+                <div class="mb-3 mb-md-0">© <a href="#" class="font-weight-bold text-gray-90">YouMats</a> - {{__('general.footer_all_rights_reserved')}}</div>
                 <div class="text-md-right">
                             <span class="d-inline-block bg-white border rounded p-1">
                                 <img class="max-width-5" src="assets/img/patment-icon_1.png" alt="Image Description">
@@ -267,10 +267,10 @@
                                     <input type="file" name="file" id="actual-btn" hidden/>
 
                                     <!-- our custom upload button -->
-                                    <label class="ub_file" for="actual-btn">Choose File</label>
+                                    <label class="ub_file" for="actual-btn">{{ __('general.choose_file') }}</label>
 
                                     <!-- name of file chosen -->
-                                    <span id="file-chosen">No file chosen</span>
+                                    <span id="file-chosen">{{ __('general.no_file_chosen') }}</span>
                                 </div>
                                 <!-- End Form Group -->
 

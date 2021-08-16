@@ -21,6 +21,13 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     public $translatable = ['name', 'desc', 'short_desc', 'meta_title', 'meta_keywords', 'meta_desc'];
 
     /**
+     * @var string[]
+     */
+    protected $casts = [
+        'specific_shipping' => 'array',
+    ];
+
+    /**
      * The accessors to append to the model's array form.
      *
      * @var array

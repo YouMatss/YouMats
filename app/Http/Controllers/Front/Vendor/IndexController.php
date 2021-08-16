@@ -142,7 +142,7 @@ class IndexController extends Controller
                 $vendor->addMedia($license)->toMediaCollection(VENDOR_PATH);
             }
 
-        return back()->with(['custom_success' => __('Profile has been updated successfully')]);
+        return back()->with(['custom_success' => __('vendor.profile_updated')]);
 
     }
 
@@ -156,7 +156,7 @@ class IndexController extends Controller
         $vendor = Auth::guard('vendor')->user();
 
         if(!$vendor->active)
-            return response(['status' => false, 'custom_warning' => __('Your account is not activated')]);
+            return response(['status' => false, 'custom_warning' => __('vendor.account_not_active')]);
 
         $data = $request->validate([
             'name' => REQUIRED_STRING_VALIDATION,
@@ -175,7 +175,7 @@ class IndexController extends Controller
 
         VendorBranch::create($data);
 
-        return response()->json(['status' => true, 'message' => __('Branch has been added successfully')]);
+        return response()->json(['status' => true, 'message' => __('vendor.branch_added')]);
     }
 
     /**
@@ -187,23 +187,23 @@ class IndexController extends Controller
     {
         $branch->delete();
 
-        return back()->with(['custom_success' => __('Branch has been deleted successfully')]);
+        return back()->with(['custom_success' => __('vendor.branch_deleted')]);
     }
 
     public function deleteLicense(Vendor $vendor, Media $media)
     {
         if(!Auth::guard('vendor')->user()->active)
-            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
+            return redirect()->route('vendor.edit')->with(['custom_warning' => __('vendor.no_permissions')]);
 
         if(count($vendor->getMedia(VENDOR_PATH)) === 1)
-            return response()->json(['status' => false, 'message' => __('You cannot delete the only license of this vendor.')]);
+            return response()->json(['status' => false, 'message' => __('vendor.default_license_needed')]);
 
         $media::where('model_id', $vendor->id)
             ->where('model_type', 'App\Models\Vendor')
             ->where('id', $media->id)
             ->delete();
 
-        return response()->json(['status' => true, 'message' => __('Image has been removed.')]);
+        return response()->json(['status' => true, 'message' => __('vendor.license_removed.')]);
     }
 
     public function updateShippingPrices(Request $request) {
@@ -233,6 +233,6 @@ class IndexController extends Controller
         $vendor->update([
             'shipping_prices' => $shippingPrices
         ]);
-        return back()->with(['custom_success' => __('Shipping Prices has been updated successfully')]);
+        return back()->with(['custom_success' => __('vendor.shipping_prices_updated')]);
     }
 }

@@ -209,7 +209,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Category::class,
                             Product::class,
                             Tag::class,
-                            Attribute::class,
                         ]
                     ]),
                     TopLevelResource::make([

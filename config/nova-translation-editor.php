@@ -4,7 +4,13 @@ return [
         'info',
         'general',
         'home',
-        'auth'
+        'auth',
+        'product',
+        'order',
+        'vendor',
+        'cart',
+        'contact',
+        'footer',
     ],
     'languages' => [
         'en', 'ar'

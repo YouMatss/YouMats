@@ -50,22 +50,23 @@
                 <div class="position-relative position-md-static px-md-6">
                     <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0" id="pills-tab-8" role="tablist">
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link active" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">Main Info</a>
+                            <a class="nav-link active" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">{{ __('vendor.main_info') }}</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link" id="Jpills-shipping-example1-tab" data-toggle="pill" href="#Jpills-shipping-example1" role="tab" aria-controls="Jpills-shipping-example1" aria-selected="false">Shipping Prices</a>
+                            <a class="nav-link" id="Jpills-shipping-example1-tab" data-toggle="pill" href="#Jpills-shipping-example1" role="tab" aria-controls="Jpills-shipping-example1" aria-selected="false">{{ __('vendor.shipping') }}</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link" id="Jpills-contacts-example1-tab" data-toggle="pill" href="#Jpills-contacts-example1" role="tab" aria-controls="Jpills-contacts-example1" aria-selected="false">Contacts</a>
+                            <a class="nav-link" id="Jpills-contacts-example1-tab" data-toggle="pill" href="#Jpills-contacts-example1" role="tab" aria-controls="Jpills-contacts-example1" aria-selected="false">{{ __('vendor.contacts') }}</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link" id="Jpills-two-example1-tab" data-toggle="pill" href="#Jpills-two-example1" role="tab" aria-controls="Jpills-two-example1" aria-selected="false">My Products</a>
+                            <a class="nav-link" id="Jpills-two-example1-tab" data-toggle="pill" href="#Jpills-two-example1" role="tab" aria-controls="Jpills-two-example1" aria-selected="false">{{ __('vendor.products') }}</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link" id="Jpills-three-example1-tab" data-toggle="pill" href="#Jpills-three-example1" role="tab" aria-controls="Jpills-three-example1" aria-selected="false">My Branches</a>
+                            <a class="nav-link" id="Jpills-three-example1-tab" data-toggle="pill" href="#Jpills-three-example1" role="tab" aria-controls="Jpills-three-example1" aria-selected="false">{{ __('vendor.branches') }}</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link" id="Jpills-four-example1-tab" data-toggle="pill" href="#Jpills-four-example1" role="tab" aria-controls="Jpills-four-example1" aria-selected="false"> My Order </a>
+                            <a class="nav-link" id="Jpills-four-example1-tab" data-toggle="pill" href="#Jpills-four-example1" role="tab" aria-controls="Jpills-four-example1" aria-selected="false">
+                                {{ __('vendor.orders') }} </a>
                         </li>
                     </ul>
                 </div>
@@ -74,7 +75,7 @@
                 <div class="borders-radius-17 border p-4 mt-4 mt-md-0 px-lg-10 py-lg-9 mb-5">
                     <div class="tab-content" id="Jpills-tabContent">
                         @if(!$vendor->active)
-                            <div class="alert alert-warning">{{ __('Your account is not active yet. Please contact the administrators of this site.') }}</div>
+                            <div class="alert alert-warning">{{ __('vendor.account_not_active') }}</div>
                         @endif
                         <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
                             <div class="block_info_vendor">
@@ -97,12 +98,12 @@
 
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label"> Image Cover <span class="text-danger">*</span></label>
+                                                <label class="form-label"> {{ __('vendor.image_cover') }} <span class="text-danger">*</span></label>
                                                 <div class="box">
                                                     <input type="file" name="cover" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" />
                                                     <label for="file-7">
                                                         <span></span>
-                                                        <strong>Choose a file&hellip;</strong>
+                                                        <strong>{{ __('vendor.choose_a_file') }}&hellip;</strong>
                                                     </label>
                                                 </div>
                                                 @error('cover')
@@ -114,12 +115,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label"> Image Profile <span class="text-danger">*</span></label>
+                                                <label class="form-label"> {{ __('vendor.profile_image') }} <span class="text-danger">*</span></label>
                                                 <div class="box">
                                                     <input type="file" name="logo" id="file-8" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" />
                                                     <label for="file-8">
                                                         <span></span>
-                                                        <strong>Choose a file&hellip;</strong>
+                                                        <strong>{{ __('vendor.choose_a_file') }}&hellip;</strong>
                                                     </label>
                                                 </div>
                                                 @error('logo')
@@ -132,7 +133,7 @@
 
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Full Name<span class="text-danger"> (English)*</span></label>
+                                                <label class="form-label">{{ __('vendor.full_name') }}<span class="text-danger"> ({{ __('vendor.english') }})*</span></label>
                                                 <input type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{ $vendor->getTranslation('name','en') }}" placeholder="Enter your name in english" required="">
                                                 @error('name_en')
                                                 <span class="invalid-feedback" role="alert">
@@ -143,7 +144,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Full Name<span class="text-danger">(Arabic)*</span></label>
+                                                <label class="form-label">{{ __('vendor.full_name') }}<span class="text-danger">({{ __('vendor.arabic') }})*</span></label>
                                                 <input type="text" class="form-control @error('name_ar') is-invalid @enderror" name="name_ar" value="{{ $vendor->getTranslation('name','ar') }}" placeholder="Enter your name in arabic" required="">
                                                 @error('name_ar')
                                                 <span class="invalid-feedback" role="alert">
@@ -168,35 +169,35 @@
 
                                                 <div class="col-md-3">
                                                     <p>
-                                                        <label data-pattern-text="Person Name ++:">Person Name:</label>
+                                                        <label data-pattern-text="Person Name ++:">{{ __('vendor.contact_person_name') }}:</label>
                                                         <input class="form-control @error('contacts.*.person_name') is-invalid @enderror" @if(count($vendor->contacts) > 0)value="{{ $vendor->contacts[0]['person_name'] }}" @endif type="text" name="contacts[0][person_name]" data-pattern-name="contacts[++][person_name]" data-pattern-id="contacts_++_person_name" />
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-3">
                                                     <p>
-                                                        <label data-pattern-text="Phone ++:">Phone:</label>
+                                                        <label data-pattern-text="Phone ++:">{{ __('vendor.contact_phone') }}:</label>
                                                         <input type="text" name="contacts[0][phone]" class="form-control @error('contacts.*.phone') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['phone'] }}" @endif  data-pattern-name="contacts[++][phone]" data-pattern-id="contacts_++_phone" />
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-3">
                                                     <p>
-                                                        <label data-pattern-text="Email ++:">Email:</label>
+                                                        <label data-pattern-text="Email ++:">{{ __('vendor.contact_email') }}:</label>
                                                         <input type="email" name="contacts[0][email]" class="form-control @error('contacts.*.email') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['email'] }}" @endif data-pattern-name="contacts[++][email]" data-pattern-id="contacts_++_email" />
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-3">
                                                     <p>
-                                                        <label data-pattern-text="Job ++:">Job:</label>
+                                                        <label data-pattern-text="Job ++:">{{ __('vendor.contact_job') }}:</label>
                                                         <input type="text" name="contacts[0][job]" class="form-control @error('contacts.*.job') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['job'] }}" @endif data-pattern-name="contacts[++][job]" data-pattern-id="contacts_++_job" />
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-4">
                                                     <p>
-                                                        <label data-pattern-text="Address ++:">Address:</label>
+                                                        <label data-pattern-text="Address ++:">{{ __('vendor.contact_address') }}:</label>
                                                         <input type="text" name="contacts[0][address]" class="form-control @error('contacts.*.address') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['address'] }}" @endif data-pattern-name="contacts[++][address]" data-pattern-id="contacts_++_address" />
                                                     </p>
                                                 </div>
@@ -204,18 +205,19 @@
                                                 <p>
                                                     <!-- Manually a remove button for the item. -->
                                                     <!-- If one didn't exist, it would be added to overall group -->
-                                                    <button style="margin-top: 35px;" type="button" class="r-btnRemove btn btn-sm btn-danger">Remove -</button>
+                                                    <button style="margin-top: 35px;" type="button" class="r-btnRemove btn btn-sm btn-danger">
+                                                        {{ __('general.remove') }} -</button>
                                                 </p>
                                             </div>
                                             <div class="col-md-4">
                                                 <!-- The add button -->
-                                                <button type="button" class="r-btnAdd btn btn-sm btn-primary">Add Contact +</button>
+                                                <button type="button" class="r-btnAdd btn btn-sm btn-primary">{{ __('vendor.add_contact') }} +</button>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <hr>
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Location</label>
+                                                <label class="form-label">{{ __('vendor.location') }}</label>
                                                 {!! generate_map() !!}
                                                 <input type="hidden" class="lat" value="{{$vendor->latitude}}" readonly name="latitude" required>
                                                 <input type="hidden" class="lng" value="{{$vendor->longitude}}" readonly name="longitude" required>
@@ -224,7 +226,7 @@
                                         <div class="col-md-12">
                                             <div class="js-form-message mb-3">
                                                 <label class="form-label mb-3">
-                                                    Add Licenses*
+                                                    {{ __('vendor.licenses') }}*
                                                 </label>
 
                                                 <div class="row">
@@ -232,7 +234,7 @@
                                                         <div class="col-sm-2 imgUp">
                                                             <div class="imagePreview"></div>
                                                             <label class="btn btn-primary">
-                                                                Upload <input type="file" name="licenses[]" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                                                                {{ __('vendor.choose_a_file') }} <input type="file" name="licenses[]" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
                                                             </label>
                                                         </div><!-- col-2 -->
                                                     @endif
@@ -263,7 +265,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Facebook</label>
+                                                <label class="form-label">{{ __('vendor.facebook_url') }}</label>
                                                 <input type="text" class="form-control @error('facebook_url') is-invalid @enderror" name="facebook_url" value="{{ $vendor->facebook_url }}" placeholder="Enter your facebook">
                                                 @error('facebook_url')
                                                 <span class="invalid-feedback" role="alert">
@@ -274,7 +276,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Twitter</label>
+                                                <label class="form-label">{{ __('vendor.twitter_url') }}</label>
                                                 <input type="text" class="form-control @error('twitter_url') is-invalid @enderror" name="twitter_url" value="{{ $vendor->twitter_url }}" placeholder="Enter your twitter">
                                                 @error('twitter_url')
                                                 <span class="invalid-feedback" role="alert">
@@ -285,7 +287,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Youtube</label>
+                                                <label class="form-label">{{ __('vendor.youtube_url') }}</label>
                                                 <input type="text" class="form-control @error('youtube_url') is-invalid @enderror" name="youtube_url" value="{{ $vendor->youtube_url }}" placeholder="Enter your youtube">
                                                 @error('youtube_url')
                                                 <span class="invalid-feedback" role="alert">
@@ -296,7 +298,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Instagram</label>
+                                                <label class="form-label">{{ __('vendor.instagram_url') }}</label>
                                                 <input type="text" class="form-control @error('instagram_url') is-invalid @enderror" name="instagram_url" value="{{ $vendor->instagram_url }}" placeholder="Enter your instagram">
                                                 @error('instagram_url')
                                                 <span class="invalid-feedback" role="alert">
@@ -307,7 +309,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Pinterest</label>
+                                                <label class="form-label">{{ __('vendor.pinterest_url') }}</label>
                                                 <input type="text" class="form-control @error('pinterest_url') is-invalid @enderror" name="pinterest_url" value="{{ $vendor->pinterest_url }}" placeholder="Enter your pinterest">
                                                 @error('pinterest_url')
                                                 <span class="invalid-feedback" role="alert">
@@ -318,7 +320,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Website</label>
+                                                <label class="form-label">{{ __('vendor.website_url') }}</label>
                                                 <input type="text" class="form-control @error('website_url') is-invalid @enderror" name="website_url" value="{{ $vendor->website_url }}" placeholder="Enter your website">
                                                 @error('website_url')
                                                 <span class="invalid-feedback" role="alert">
@@ -329,7 +331,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Password<span class="text-danger">*</span></label>
+                                                <label class="form-label">{{ __('vendor.password') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Change the password">
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert">
@@ -340,7 +342,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">Password Confirmation<span class="text-danger">*</span></label>
+                                                <label class="form-label">{{ __('vendor.password_confirmation') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" placeholder="Confirm your password">
                                                 @error('password_confirmation')
                                                 <span class="invalid-feedback" role="alert">
@@ -351,7 +353,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-6">
-                                                <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i> Save Change</button>
+                                                <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i> {{ __('general.save_changes') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -371,7 +373,7 @@
                                             <div class="row clone_item">
                                                 <div class="col-md-3">
                                                     <div class="js-form-message form-group mb-5">
-                                                        <label class="form-label">Cities <span class="text-danger">*</span></label>
+                                                        <label class="form-label">{{__('vendor.shipping_cities')}} <span class="text-danger">*</span></label>
                                                         <select name="cities[]" class="form-control @error("cities[]") is-invalid @enderror" required>
                                                             @foreach($cities as $city)
                                                                 <option value="{{$city->id}}" @if($shipping_price['cities'] == $city->id) selected @endif>{{$city->name}}</option>
@@ -386,7 +388,7 @@
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="js-form-message form-group mb-5">
-                                                        <label class="form-label">Price <span class="text-danger">*</span></label>
+                                                        <label class="form-label">{{ __('vendor.shipping_price') }} <span class="text-danger">*</span></label>
                                                         <input type="number" class="form-control @error("price[]") is-invalid @enderror" name="price[]" value="{{$shipping_price['price']}}" required>
                                                         @error("price[]")
                                                         <span class="invalid-feedback" role="alert">
@@ -397,7 +399,7 @@
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="js-form-message form-group mb-5">
-                                                        <label class="form-label">Time <span class="text-danger">*</span></label>
+                                                        <label class="form-label">{{ __('vendor.shipping_time') }} <span class="text-danger">*</span></label>
                                                         <input type="number" class="form-control @error("time[]") is-invalid @enderror" name="time[]" value="{{$shipping_price['time']}}" required>
                                                         @error("time[]")
                                                         <span class="invalid-feedback" role="alert">
@@ -408,10 +410,10 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="js-form-message form-group mb-5">
-                                                        <label class="form-label">Format <span class="text-danger">*</span></label>
+                                                        <label class="form-label">{{ __('vendor.shipping_format') }} <span class="text-danger">*</span></label>
                                                         <select name="format[]" class="form-control @error("format[]") is-invalid @enderror" required>
-                                                            <option value="hour" @if($shipping_price['format'] == 'hour') selected @endif>Hour</option>
-                                                            <option value="day" @if($shipping_price['format'] == 'day') selected @endif>Day</option>
+                                                            <option value="hour" @if($shipping_price['format'] == 'hour') selected @endif>{{ __('vendor.hour') }}</option>
+                                                            <option value="day" @if($shipping_price['format'] == 'day') selected @endif>{{ __('vendor.day') }}</option>
                                                         </select>
                                                         @error("format[]")
                                                         <span class="invalid-feedback" role="alert">
@@ -422,23 +424,24 @@
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="mt-4">
-                                                        <button type="button" class="btn btn-danger px-5 text-white mr-2 btn_clone_remove">Delete</button>
+                                                        <button type="button" class="btn btn-danger px-5 text-white mr-2 btn_clone_remove">{{ __('general.delete') }}</button>
                                                     </div>
                                                 </div>
                                             </div>
                                             @endforeach
                                             @else
-                                                <h4>{{ __('You do not have any prices') }}</h4>
+                                                <h4>{{ __('vendor.no_shipping_prices') }}</h4>
                                             @endif
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-6">
-                                                <button type="button" class="btn btn-primary-dark-w px-5 text-white mr-2 btn_clone_add"> <i class="fas fa-plus"></i> Add Price</button>
+                                                <button type="button" class="btn btn-primary-dark-w px-5 text-white mr-2 btn_clone_add"> <i class="fas fa-plus"></i> {{ __('vendor.add_price') }}</button>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-6">
-                                                <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i> Save Change</button>
+                                                <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i>
+                                                    {{ __('general.save_changes') }}</button>
                                             </div>
                                         </div>
                                     </form>
@@ -449,11 +452,11 @@
                             <div class="container">
                                 <ul class="list-unstyled">
                                     @foreach($vendor->contacts as $contact)
-                                        <li>Person Name: {{ $contact['person_name'] }}</li>
-                                        <li>Phone: {{ $contact['phone'] }}</li>
-                                        <li>Email: {{ $contact['email'] }}</li>
-                                        <li>Job: {{ $contact['job'] }}</li>
-                                        <li>Address: {{ $contact['address'] }}</li>
+                                        <li>{{ __('vendor.contact_person_name') }}: {{ $contact['person_name'] }}</li>
+                                        <li>{{ __('vendor.contact_phone') }}: {{ $contact['phone'] }}</li>
+                                        <li>{{ __('vendor.contact_email') }}: {{ $contact['email'] }}</li>
+                                        <li>{{ __('vendor.contact_job') }}: {{ $contact['job'] }}</li>
+                                        <li>{{ __('vendor.contact_address') }}: {{ $contact['address'] }}</li>
                                         <hr />
                                     @endforeach
                                 </ul>
@@ -462,7 +465,7 @@
                         <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
                             @if($vendor->active)
                                 <a href="{{ route('vendor.addProduct') }}" class="btn btn-primary-dark-w px-5 text-white mr-2">
-                                    {{ __('Add Product') }}
+                                    {{ __('vendor.add_product') }}
                                 </a>
                             @endif
                             @if(count($products) > 0)
@@ -515,7 +518,7 @@
                                 </ul>
                             {{ $products->links() }}
                             @else
-                                <h4>{{ __('You do not have products') }}</h4>
+                                <h4>{{ __('vendor.no_products') }}</h4>
                             @endif
                         </div>
                         <div class="tab-pane fade" id="Jpills-three-example1" role="tabpanel" aria-labelledby="Jpills-three-example1-tab">
@@ -523,14 +526,14 @@
                                 @if($vendor->active)
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary-dark-w px-5 text-white mr-2" data-toggle="modal" data-target="#branchModal">
-                                    {{ __('Add Branch') }}
+                                    {{ __('vendor.add_branch') }}
                                 </button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="branchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" style="max-width: 700px;" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">{{ __('Add Branch') }}</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">{{ __('vendor.add_branch') }}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
@@ -541,13 +544,13 @@
                                                 <div class="row mb-5">
                                                 <div class="col-md-6">
                                                     <div class="js-form-message form-group mb-5">
-                                                        <label for="name" class="form-label">{{ __('Name') }} <span class="text-danger">*</span></label>
+                                                        <label for="name" class="form-label">{{ __('vendor.branch_name') }} <span class="text-danger">*</span></label>
                                                         <input type="text" class="form-control" id="name" name="name" required autocomplete="name" autofocus>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="js-form-message form-group mb-5">
-                                                        <label for="city" class="form-label">{{ __('City') }} <span class="text-danger">*</span></label>
+                                                        <label for="city" class="form-label">{{ __('vendor.branch_city') }} <span class="text-danger">*</span></label>
                                                         <select class="form-control" id="city" name="city_id" required>
                                                             @foreach($cities as $city)
                                                                 <option value="{{$city->id}}">{{$city->name}}</option>
@@ -557,7 +560,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="js-form-message form-group mb-5">
-                                                        <label for="phone_number" class="form-label">{{ __('Phone') }} <span class="text-danger">*</span></label>
+                                                        <label for="phone_number" class="form-label">{{ __('vendor.branch_phone') }} <span class="text-danger">*</span></label>
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text" id="basic-addon1" style="border-radius: 1.4rem 0 0 1.4rem">+966</span>
                                                             <input type="text" class="form-control" id="phone_number" name="phone_number" required autocomplete="phone_number">
@@ -566,19 +569,19 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="js-form-message form-group mb-5">
-                                                        <label for="fax" class="form-label">{{ __('Fax') }}</label>
+                                                        <label for="fax" class="form-label">{{ __('vendor.branch_fax') }}</label>
                                                         <input type="text" class="form-control" id="fax" name="fax" autocomplete="fax">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="js-form-message form-group mb-5">
-                                                        <label for="website" class="form-label">{{ __('Website') }}</label>
+                                                        <label for="website" class="form-label">{{ __('vendor.branch_website') }}</label>
                                                         <input type="text" class="form-control" id="website" name="website" autocomplete="website">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="js-form-message form-group mb-5">
-                                                        <label for="address" class="form-label">{{ __('Address') }} <span class="text-danger">*</span></label>
+                                                        <label for="address" class="form-label">{{ __('vendor.branch_address') }} <span class="text-danger">*</span></label>
                                                         <input type="text" class="form-control" id="address" name="address" required autocomplete="address">
                                                     </div>
                                                 </div>
@@ -586,7 +589,7 @@
                                                 <input type="hidden" class="lat" readonly name="latitude" required>
                                                 <input type="hidden" class="lng" readonly name="longitude" required>
                                                 </div>
-                                                <button id="addBranchBtn" class="btn btn-primary-dark-w px-5 text-white" style="cursor:pointer;">{{ __('Save') }}</button>
+                                                <button id="addBranchBtn" class="btn btn-primary-dark-w px-5 text-white" style="cursor:pointer;">{{ __('general.save_changes') }}</button>
                                             </form>
                                         </div>
                                         </div>
@@ -607,7 +610,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-xl-4">
-                                            <h5 class="font-size-14 font-weight-bold mb-3">{{ __('Main Information') }}</h5>
+                                            <h5 class="font-size-14 font-weight-bold mb-3">{{ __('vendor.main_information') }}</h5>
                                             <div class="">
                                                 <ul class="list-unstyled-branches mb-6">
                                                     <li class="row">
@@ -615,7 +618,7 @@
                                                             <i class="fas fa-phone"></i>
                                                         </div>
                                                         <div class="col-md-10 mt-2">
-                                                            <b>{{ __('Phone') }}:</b>
+                                                            <b>{{ __('vendor.branch_phone') }}:</b>
                                                             <span class=""> {{ $branch->phone_number }} </span>
                                                         </div>
                                                     </li>
@@ -625,7 +628,7 @@
                                                                 <i class="fas fa-fax"></i>
                                                             </div>
                                                             <div class="col-md-10 mt-2">
-                                                                <b>{{ __('Fax') }}:</b>
+                                                                <b>{{ __('vendor.branch_fax') }}:</b>
                                                                 <span class=""> {{ $branch->fax }} </span>
                                                             </div>
                                                         </li>
@@ -636,7 +639,7 @@
                                                             <i class="fas fa-globe-americas"></i>
                                                         </div>
                                                         <div class="col-md-10 mt-2">
-                                                            <b>{{ __('Website') }}:</b>
+                                                            <b>{{ __('vendor.branch_website') }}:</b>
                                                             <span class=""> {{ $branch->website }} </span>
                                                         </div>
                                                     </li>
@@ -646,7 +649,7 @@
                                                             <i class="fas fa-map-marker-alt"></i>
                                                         </div>
                                                         <div class="col-md-10 mt-2">
-                                                            <b>{{ __('Address') }}:</b>
+                                                            <b>{{ __('vendor.branch_address') }}:</b>
                                                             <span class=""> {{ $branch->address }} </span>
                                                         </div>
                                                     </li>
@@ -654,7 +657,7 @@
                                                         <a class="btn btn-primary btn-block" href="{{ route('vendor.deleteBranch', ['branch' => $branch]) }}"
                                                            onclick="event.preventDefault();
                                                             document.getElementById('delete-branch-{{ $branch->id }}').submit();">
-                                                            {{ __('Delete') }}
+                                                            {{ __('general.delete') }}
                                                         </a>
 
                                                         <form id="delete-branch-{{ $branch->id }}" action="{{ route('vendor.deleteBranch', ['branch' => $branch]) }}" method="POST" style="display: none;">
@@ -669,7 +672,7 @@
                                     @endforeach
                                     {{ $branches->links() }}
                                 @else
-                                    <h4>{{ __('You do not have any branches') }}</h4>
+                                    <h4>{{ __('vendor.no_branches') }}</h4>
                                 @endif
                             </div>
                         </div>
@@ -680,13 +683,13 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <th scope="col">{{ __('ID') }}</th>
-                                            <th scope="col">{{ __('Name') }}</th>
-                                            <th scope="col">{{ __('Price') }}</th>
-                                            <th scope="col">{{ __('Order Status') }}</th>
-                                            <th scope="col">{{ __('Payment Status') }}</th>
-                                            <th scope="col">{{ __('Date') }}</th>
-                                            <th scope="col" class="text-center">{{ __('Order Details') }}</th>
+                                            <th scope="col">{{ __('order.id') }}</th>
+                                            <th scope="col">{{ __('order.name') }}</th>
+                                            <th scope="col">{{ __('order.price') }}</th>
+                                            <th scope="col">{{ __('order.status') }}</th>
+                                            <th scope="col">{{ __('order.payment_status') }}</th>
+                                            <th scope="col">{{ __('order.date') }}</th>
+                                            <th scope="col" class="text-center">{{ __('order.details') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -711,13 +714,13 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">{{ __('order.details') }}</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="alert alert-danger d-none">{{ __('Could not find the order') }}</div>
+                                                <div class="alert alert-danger d-none">{{ __('order.could_not_find_order') }}</div>
                                                 <div class="row">
                                                     <div class="col-md-12 col-xl-12">
                                                         <form method="POST" action="{{ route('vendor.order.update', ['vendor' => $vendor->id]) }}">
@@ -728,7 +731,7 @@
                                                                 <ul class="list-unstyled-branches list_order_vendor mb-6">
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>ID:</b>
+                                                                            <b>{{ __('order.id') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="id"></span>
@@ -736,7 +739,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>order_id:</b>
+                                                                            <b>{{ __('order.order_id') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="order_id"></span>
@@ -744,7 +747,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Date:</b>
+                                                                            <b>{{ __('order.date') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="date"></span>
@@ -752,7 +755,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>User:</b>
+                                                                            <b>{{ __('order.user') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="user"></span>
@@ -760,7 +763,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Name:</b>
+                                                                            <b>{{ __('order.name') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="name"></span>
@@ -768,7 +771,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Email:</b>
+                                                                            <b>{{ __('order.email') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="email"></span>
@@ -776,7 +779,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Phone:</b>
+                                                                            <b>{{ __('order.phone') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="phone"></span>
@@ -784,7 +787,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Address:</b>
+                                                                            <b>{{ __('order.address') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="address"></span>
@@ -792,7 +795,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Building Number:</b>
+                                                                            <b>{{ __('order.building_number') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="buildingNo"></span>
@@ -800,7 +803,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Street:</b>
+                                                                            <b>{{ __('order.street') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="street"></span>
@@ -808,7 +811,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>District:</b>
+                                                                            <b>{{ __('order.district') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="district"></span>
@@ -816,7 +819,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>City:</b>
+                                                                            <b>{{ __('order.city') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="city"></span>
@@ -824,13 +827,13 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Payment Status:</b>
+                                                                            <b>{{ __('order.payment_status') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <select class="form-control" name="payment_status" id="paymentStatus">
-                                                                                <option value="pending" selected>Pending</option>
-                                                                                <option value="refunded">Refunded</option>
-                                                                                <option value="completed">Completed</option>
+                                                                                <option value="pending" selected>{{ __('order.payment_pending') }}</option>
+                                                                                <option value="refunded">{{ __('order.payment_refunded') }}</option>
+                                                                                <option value="completed">{{ __('order.payment_completed') }}</option>
                                                                             </select>
                                                                             @error('payment_status')
                                                                                 <span class="invalid-feedback" role="alert">
@@ -841,14 +844,14 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Order Status:</b>
+                                                                            <b>{{ __('order.status') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <select class="form-control" name="status" id="orderStatus">
-                                                                                <option value="pending" selected>Pending</option>
-                                                                                <option value="shipping">Shipping</option>
-                                                                                <option value="completed">Completed</option>
-                                                                                <option value="refused">Refused</option>
+                                                                                <option value="pending" selected>{{ __('order.pending') }}</option>
+                                                                                <option value="shipping">{{ __('order.shipping') }}</option>
+                                                                                <option value="completed">{{ __('order.completed') }}</option>
+                                                                                <option value="refused">{{ __('order.refused') }}</option>
                                                                             </select>
                                                                             @error('status')
                                                                             <span class="invalid-feedback" role="alert">
@@ -859,7 +862,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Notes:</b>
+                                                                            <b>{{ __('order.notes') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="notes"></span>
@@ -867,7 +870,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Refused Notes:</b>
+                                                                            <b>{{ __('order.refused_notes') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <textarea class="form-control" name="refused_note" id="refusedNotes" rows="3"></textarea>
@@ -880,7 +883,7 @@
                                                                     </li>
                                                                     <li class="row">
                                                                         <div class="col-md-4">
-                                                                            <b>Total Price:</b>
+                                                                            <b>{{ __('order.total') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span class="" id="total"></span>
@@ -888,7 +891,7 @@
                                                                     </li>
                                                                     <li class="row mt-5">
                                                                         <div class="col-md-4">
-                                                                            <b>Payment Method:</b>
+                                                                            <b>{{ __('order.payment_method') }}:</b>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <span id="paymentMethod"></span>
@@ -896,7 +899,7 @@
                                                                     </li>
                                                                     <div class="col-md-12">
                                                                         <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-paper-plane"></i>
-                                                                            {{ __('Submit') }} </button>
+                                                                            {{ __('general.submit') }} </button>
                                                                     </div>
                                                                 </ul>
                                                             </div>
@@ -908,7 +911,7 @@
                                     </div>
                                 </div>
                                 @else
-                                    <h4>{{ __('You do not have any orders') }}</h4>
+                                    <h4>{{ __('order.no_orders') }}</h4>
                                 @endif
                             </div>
                         </div>

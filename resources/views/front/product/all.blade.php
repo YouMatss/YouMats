@@ -19,8 +19,8 @@
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">Home</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">All Products</li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{ __('general.home') }}</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('products.all_products') }}</li>
                     </ol>
                 </nav>
             </div>
@@ -32,8 +32,8 @@
                 <div class="col-xl-12">
 
                     <div class="d-block d-md-flex flex-center-between mb-3 rtl">
-                        <h3 class="font-size-25 mb-2 mb-md-0">All Products</h3>
-                        <p class="font-size-14 text-gray-90 mb-0">Showing 1–25 of 56 results</p>
+                        <h3 class="font-size-25 mb-2 mb-md-0">{{ __('products.all_products') }}</h3>
+                        <p class="font-size-14 text-gray-90 mb-0">Showing {{ $products->firstItem()  }}–{{ $products->lastItem() }} of {{ $products->total() }} results</p>
                     </div>
 
                     <!-- Shop-control-bar -->
@@ -51,7 +51,7 @@
                                data-unfold-animation-in="fadeInLeft"
                                data-unfold-animation-out="fadeOutLeft"
                                data-unfold-duration="500">
-                                <i class="fas fa-sliders-h"></i> <span class="ml-1">Filters</span>
+                                <i class="fas fa-sliders-h"></i> <span class="ml-1">{{ __('product.filters') }}</span>
                             </a>
                             <!-- End Account Sidebar Toggle Button -->
                         </div>

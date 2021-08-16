@@ -43,11 +43,11 @@
                             <tr>
                                 <th class="product-remove">&nbsp;</th>
                                 <th class="product-thumbnail">&nbsp;</th>
-                                <th class="product-name">Product</th>
-                                <th class="product-quantity w-lg-15">Quantity</th>
+                                <th class="product-name">{{ __('cart.product') }}</th>
+                                <th class="product-quantity w-lg-15">{{ __('cart.quantity') }}</th>
                                 @if(!is_company())
-                                    <th class="product-price">Price</th>
-                                    <th class="product-subtotal">Total</th>
+                                    <th class="product-price">{{__('cart.price')}}</th>
+                                    <th class="product-subtotal">{{__('cart.total')}}</th>
                                 @endif
                             </tr>
                             </thead>
@@ -113,11 +113,11 @@
                                                     <!-- Apply coupon Form -->
                                                     <form class="js-focus-state" action="{{ route('apply.coupon') }}" method="POST">
                                                         @csrf
-                                                        <label class="sr-only">{{ __('Coupon code') }}</label>
+                                                        <label class="sr-only">{{ __('cart.coupon_code') }}</label>
                                                         <div class="input-group">
                                                             <input type="text" class="form-control" name="code" placeholder="Coupon code" id="couponCode" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
                                                             <div class="input-group-append">
-                                                                <input type="submit" class="btn btn-block btn-dark px-4" value="Apply coupon" />
+                                                                <input type="submit" class="btn btn-block btn-dark px-4" value="{{ __('cart.apply_coupon') }}" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -141,20 +141,20 @@
                 <div class="row">
                     <div class="col-xl-5 col-lg-6  col-md-8 mb-5">
                         <div class="border-bottom border-color-1 mb-3">
-                            <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Cart totals</h3>
+                            <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">{{ __('cart.cart_totals') }}</h3>
                         </div>
                         <table class="table mb-3 mb-md-0">
                             <tbody>
                             <tr class="cart-subtotal">
-                                <th>Subtotal</th>
+                                <th>{{ __('cart.subtotal') }}</th>
                                 <td data-title="Subtotal"><span class="amount" id="subtotal">{{ getCurrency('symbol') . ' ' . Cart::subtotal() }}</span></td>
                             </tr>
                             <tr class="shipping">
-                                <th>{{ __('Tax') }}</th>
+                                <th>{{ __('cart.shipping') }}</th>
                                 <td data-title="tax"><span class="amount" id="tax">{{ getCurrency('symbol') . ' ' . Cart::tax() }}</span></td>
                             </tr>
                             <tr class="order-total">
-                                <th>Total</th>
+                                <th>{{ __('cart.total') }}</th>
                                 <td data-title="Total"><strong><span class="amount" id="total">{{ getCurrency('symbol') . ' ' . Cart::total() }}</span></strong></td>
                             </tr>
                             </tbody>
@@ -163,7 +163,7 @@
                 </div>
             @endif
         @else
-            <h4>{{ __('You do not have item(s) in the cart.') }}</h4>
+            <h4>{{ __('cart.no_items_in_cart') }}</h4>
     </div>
     @endif
 @endsection

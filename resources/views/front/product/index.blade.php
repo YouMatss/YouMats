@@ -20,7 +20,7 @@
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">Home</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{ __('general.home') }}</a></li>
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [$product->category->slug])}}">{{$product->category->name}}</a></li>
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{$product->name}}</li>
                     </ol>
@@ -151,14 +151,14 @@
                                 <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
                                     <a class="nav-link active" href="#Description">
                                         <div class="d-md-flex justify-content-md-center align-items-md-center">
-                                            About Product
+                                            {{ __('product.about') }}
                                         </div>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div class="mx-md-4 pt-1">
-                            <h3 class="font-size-24 mb-3">Description</h3>
+                            <h3 class="font-size-24 mb-3">{{ __('product.description') }}</h3>
                             {!! $product->desc !!}
                             <div class="row">
                                 <div class="col-md-6 text-right">
@@ -205,7 +205,7 @@
             <div class="container p-0">
 
                 <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-                    <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">RELATED PRODUCTS</h3>
+                    <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('product.related_products') }}</h3>
                 </div>
 
                 <div class="mb-4 position-relative">
