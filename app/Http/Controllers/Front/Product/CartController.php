@@ -62,7 +62,7 @@ class CartController extends Controller
     {
         Cart::instance('cart')->destroy();
 
-        return response()->json(['status' => true, 'message' => __('Cart has been destroyed')]);
+        return response()->json(['status' => true, 'message' => __('cart.cart_has_been_destroyed')]);
     }
 
     /**
@@ -93,17 +93,17 @@ class CartController extends Controller
 
         //Coupon doesn't exist. Lets return an error!
         if(!$coupon)
-            return back()->with(['custom_error' => __('Coupon code doesn\'t exist') ]);
+            return back()->with(['custom_error' => __('cart.coupon_code_doesnt_exist') ]);
 
         //The total of the cart is less than the coupon starting price
         if($total < $coupon->price)
-            return back()->with(['custom_error' => __('Your cart total is less than the coupon starting price') ]);
+            return back()->with(['custom_error' => __('cart.coupon_code_discount_higher_than_cart_total') ]);
 
         //The coupon code has been added already.
         if(Cart::instance('cart')->search(function($cartItem, $rowId) {
                 return $cartItem->id == 'discount';
             })->count() > 0)
-            return back()->with(['custom_error' => __('You already added the coupon') ]);
+            return back()->with(['custom_error' => __('cart.coupon_already_added') ]);
 
         //Coupon discount more than the cart total. So let's make the cart 0!
         if($coupon->value > $total)
@@ -120,6 +120,6 @@ class CartController extends Controller
             $coupon->save();
         }
 
-        return back()->with(['custom_success' => __('Coupon code has been activated') ]);
+        return back()->with(['custom_success' => __('cart.coupon_activated') ]);
     }
 }

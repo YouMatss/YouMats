@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Kalnoy\Nestedset\NodeTrait;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -70,8 +71,12 @@ class Category extends Model implements Sortable, HasMedia
         return $this->hasMany(Product::class)->where('active', 1)->orderBy('updated_at', 'desc');
     }
 
-    public function vendors() {
-        return $this->belongsToMany(Vendor::class, Product::class)->distinct();
+    public function vendors()
+    {
+        return $this->belongsToMany(Vendor::class, Product::class)
+            ->join('categories', 'categories.id', 'products.category_id')
+            ->orWhere('categories.parent_id', $this->id)
+            ->distinct('vendors.id');
     }
 
     /**
@@ -86,6 +91,6 @@ class Category extends Model implements Sortable, HasMedia
         return Tag::select('tags.*')->join('product_tag AS pt', 'pt.tag_id', '=', 'tags.id')
             ->join('products as p', 'p.id', '=', 'pt.product_id')
             ->join('categories as c', 'c.id', '=', 'p.category_id')
-            ->where('c.id', '=', $this->id)->distinct()->get();
+            ->where('c.id', '=', $this->id)->distinct('tags.id')->get();
     }
 }

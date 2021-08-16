@@ -20,8 +20,8 @@
         <div class="my-md-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                    <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">Home</a></li>
-                    <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">FAQs</li>
+                    <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{ __('general.home') }}</a></li>
+                    <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('general.faqs') }}</li>
                 </ol>
             </nav>
         </div>
@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="mb-12 text-center">
-                    <h1>YouMats FAQs</h1>
+                    <h1>{{ __('general.youmats_faq') }}</h1>
                 </div>
             </div>
         </div>

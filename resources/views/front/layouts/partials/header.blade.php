@@ -440,7 +440,7 @@
                         <!-- Search-Form -->
                         <label class="sr-only" for="searchProduct">{{__('general.search')}}</label>
                         <div class="input-group">
-                            <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="Search for Products" aria-label="Search for Products" aria-describedby="searchProduct1" required>
+                            <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
                             <div class="input-group-append">
                                 <!-- End Select -->
                                 <button class="btn btn-dark height-40 py-2 px-3 rounded-right-pill" type="button" id="searchProductBtn">
@@ -454,7 +454,7 @@
                         <!-- Search-Form -->
                             <label class="sr-only" for="searchProduct">{{__('general.search')}}</label>
                             <div class="input-group">
-                                <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="Search for Products" aria-label="Search for Products" aria-describedby="searchProduct1" required>
+                                <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
                                 <div class="input-group-append">
                                     <!-- End Select -->
                                     <button class="btn btn-dark height-40 py-2 px-3 rounded-right-pill" type="button" id="searchProductBtn">

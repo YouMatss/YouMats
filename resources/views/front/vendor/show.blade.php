@@ -20,7 +20,7 @@
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{ route('home') }}">{{ __('general.home') }}</a></li>
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ $vendor->name }}</li>
                     </ol>
                 </nav>
@@ -50,13 +50,13 @@
                 <div class="position-relative position-md-static px-md-6">
                     <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0" id="pills-tab-8" role="tablist">
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link active" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">{{ __('Information') }}</a>
+                            <a class="nav-link active" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">{{ __('vendor.information') }}</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link" id="Jpills-two-example1-tab" data-toggle="pill" href="#Jpills-two-example1" role="tab" aria-controls="Jpills-two-example1" aria-selected="false">{{ __('Products') }}</a>
+                            <a class="nav-link" id="Jpills-two-example1-tab" data-toggle="pill" href="#Jpills-two-example1" role="tab" aria-controls="Jpills-two-example1" aria-selected="false">{{ __('vendor.products') }}</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link" id="Jpills-three-example1-tab" data-toggle="pill" href="#Jpills-three-example1" role="tab" aria-controls="Jpills-three-example1" aria-selected="false">{{ __('Branches') }}</a>
+                            <a class="nav-link" id="Jpills-three-example1-tab" data-toggle="pill" href="#Jpills-three-example1" role="tab" aria-controls="Jpills-three-example1" aria-selected="false">{{ __('vendor.branches') }}</a>
                         </li>
                     </ul>
                 </div>
@@ -71,69 +71,69 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                         <tr>
-                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('EMail') }}</th>
+                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.email') }}</th>
                                             <td class="pt-3 pb-3 pl-3">{{ $vendor->email }}</td>
                                         </tr>
                                         <tr>
-                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('Phone')  }}</th>
+                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.phone')  }}</th>
                                             <td class="pt-3 pb-3 pl-3">{{ $vendor->phone }}</td>
                                         </tr>
                                         <tr>
-                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('Phone Number 2') }}</th>
+                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.phone_2') }}</th>
                                             <td class="pt-3 pb-3 pl-3">{{ $vendor->phone2 }}</td>
                                         </tr>
                                         <tr>
-                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('WhatsApp')  }}</th>
+                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.whatsapp')  }}</th>
                                             <td class="pt-3 pb-3 pl-3">{{ $vendor->whatsapp_phone }}</td>
                                         </tr>
                                         <tr>
-                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('Address') }}</th>
+                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.address') }}</th>
                                             <td class="pt-3 pb-3 pl-3">{{ $vendor->address }}</td>
                                         </tr>
                                         @if($vendor->address2)
                                             <tr>
-                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('Address 2') }}</th>
+                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.address_2') }}</th>
                                                 <td class="pt-3 pb-3 pl-3">{{ $vendor->address2 }}</td>
                                             </tr>
                                         @endif
                                         @if($vendor->facebook_url)
                                             <tr>
-                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('Facebook')  }}</th>
+                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.facebook_url')  }}</th>
                                                 <td class="pt-3 pb-3 pl-3">{{ $vendor->facebook_url }}</td>
                                             </tr>
                                         @endif
                                         @if($vendor->twitter_url)
                                             <tr>
-                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('Twitter')  }}</th>
+                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.twitter_url')  }}</th>
                                                 <td class="pt-3 pb-3 pl-3">{{ $vendor->twitter_url }}</td>
                                             </tr>
                                         @endif
                                         @if($vendor->youtube_url)
                                             <tr>
-                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('Youtube')  }}</th>
+                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.youtube_url')  }}</th>
                                                 <td class="pt-3 pb-3 pl-3">{{ $vendor->youtube_url }}</td>
                                             </tr>
                                         @endif
                                         @if($vendor->instagram_url)
                                             <tr>
-                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('Instagram')  }}</th>
+                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.instagram_url')  }}</th>
                                                 <td class="pt-3 pb-3 pl-3">{{ $vendor->instagram_url }}</td>
                                             </tr>
                                         @endif
                                         @if($vendor->pinterest_url)
                                             <tr>
-                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('Pinterest')  }}</th>
+                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.pinterest_url')  }}</th>
                                                 <td class="pt-3 pb-3 pl-3">{{ $vendor->pinterest_url }}</td>
                                             </tr>
                                         @endif
                                         @if($vendor->website_url)
                                             <tr>
-                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('Website')  }}</th>
+                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.website_url')  }}</th>
                                                 <td class="pt-3 pb-3 pl-3">{{ $vendor->website_url }}</td>
                                             </tr>
                                         @endif
                                         <tr>
-                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('Verified') }}</th>
+                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.status') }}</th>
                                             <td class="pt-3 pb-3 pl-3">@if($vendor->active) <i class="fas fa-check-circle"></i> @else <i class="fas fa-times-circle"></i> @endif</td>
                                         </tr>
                                         </tbody>
@@ -179,7 +179,7 @@
                                                         <i class="fas fa-phone"></i>
                                                     </div>
                                                     <div class="col-md-10 mt-2">
-                                                        <b>{{ __('Phone') }}:</b>
+                                                        <b>{{ __('vendor.phone') }}:</b>
                                                         <span class=""> {{ $branch->phone_number }} </span>
                                                     </div>
                                                 </li>
@@ -189,7 +189,7 @@
                                                             <i class="fas fa-fax"></i>
                                                         </div>
                                                         <div class="col-md-10 mt-2">
-                                                            <b>{{ __('Fax') }}:</b>
+                                                            <b>{{ __('vendor.fax') }}:</b>
                                                             <span class=""> {{ $branch->fax }} </span>
                                                         </div>
                                                     </li>
@@ -200,7 +200,7 @@
                                                             <i class="fas fa-globe-americas"></i>
                                                         </div>
                                                         <div class="col-md-10 mt-2">
-                                                            <b>{{ __('Website') }}:</b>
+                                                            <b>{{ __('vendor.website_url') }}:</b>
                                                             <span class=""> {{ $branch->website }} </span>
                                                         </div>
                                                     </li>
@@ -210,7 +210,7 @@
                                                         <i class="fas fa-map-marker-alt"></i>
                                                     </div>
                                                     <div class="col-md-10 mt-2">
-                                                        <b>{{ __('Address') }}:</b>
+                                                        <b>{{ __('vendor.address') }}:</b>
                                                         <span class=""> {{ $branch->address }} </span>
                                                     </div>
                                                 </li>
@@ -221,7 +221,7 @@
                             @endforeach
                             {{ $branches->links() }}
                         @else
-                            <h4>{{ __('You do not have any branches') }}</h4>
+                            <h4>{{ __('vendor.no_branches') }}</h4>
                         @endif
                     </div>
                 </div>

@@ -20,8 +20,8 @@
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">Home</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">Contact Us</li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{ __('general.home') }}</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('contact.contact_us') }}</li>
                     </ol>
                 </nav>
             </div>
@@ -41,9 +41,9 @@
             <div class="col-md-8 col-xl-9">
                 <div class="mr-xl-6">
                     <div class="border-bottom border-color-1 mb-5">
-                        <h3 class="section-title mb-0 pb-2 font-size-25">Leave us a Message</h3>
+                        <h3 class="section-title mb-0 pb-2 font-size-25">{{ __('contact.leave_a_message') }}</h3>
                     </div>
-                    <p class="max-width-830-xl text-gray-90">Maecenas dolor elit, semper a sem sed, pulvinar molestie lacus. Aliquam dignissim, elit non mattis ultrices, neque odio ultricies tellus, eu porttitor nisl ipsum eu massa.</p>
+                    <p class="max-width-830-xl text-gray-90">{{ __('contact.description') }}</p>
                     <form id="contactForm">
                         @csrf
                         <div class="row">
@@ -51,7 +51,7 @@
                                 <!-- Input -->
                                 <div class="js-form-message mb-4">
                                     <label class="form-label">
-                                        Name
+                                        {{ __('contact.name') }}
                                         <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" name="name">
@@ -62,7 +62,7 @@
                                 <!-- Input -->
                                 <div class="js-form-message mb-4">
                                     <label class="form-label">
-                                        Email
+                                        {{ __('contact.email') }}
                                         <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" name="email">
@@ -73,7 +73,7 @@
                                 <!-- Input -->
                                 <div class="js-form-message mb-4">
                                     <label class="form-label">
-                                        Phone
+                                        {{ __('contact.phone') }}
                                         <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" name="phone">
@@ -83,7 +83,7 @@
                             <div class="col-md-12">
                                 <div class="js-form-message mb-4">
                                     <label class="form-label">
-                                        Your Message
+                                        {{ __('contact.message') }}
                                     </label>
                                     <div class="input-group">
                                         <textarea class="form-control p-5" rows="4" name="message"></textarea>
@@ -92,14 +92,14 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-primary-dark-w px-5">Send Message</button>
+                            <button type="submit" class="btn btn-primary-dark-w px-5">{{ __('contact.send_message') }}</button>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="col-md-4 col-xl-3">
                 <div class="border-bottom border-color-1 mb-5">
-                    <h3 class="section-title mb-0 pb-2 font-size-25">Our Store</h3>
+                    <h3 class="section-title mb-0 pb-2 font-size-25">{{ __('contact.our_store') }}</h3>
                 </div>
                 <div class="mr-xl-6">
                     <address class="mb-6">
@@ -107,7 +107,7 @@
                         Melbourne VIC 3000, <br>
                         Australia
                     </address>
-                    <h5 class="font-size-14 font-weight-bold mb-3">Hours of Operation</h5>
+                    <h5 class="font-size-14 font-weight-bold mb-3">{{ __('contact.hours_of_operation') }}</h5>
                     <ul class="list-unstyled mb-6">
                         <li class="flex-center-between mb-1"><span class="">Monday:</span><span class="">12-6 PM</span></li>
                         <li class="flex-center-between mb-1"><span class="">Tuesday:</span><span class="">12-6 PM</span></li>
@@ -117,8 +117,8 @@
                         <li class="flex-center-between mb-1"><span class="">Saturday:</span><span class="">12-6 PM</span></li>
                         <li class="flex-center-between"><span class="">Sunday</span><span class="">Closed</span></li>
                     </ul>
-                    <h5 class="font-size-14 font-weight-bold mb-3">Careers</h5>
-                    <p class="text-gray-90">If you’re interested in employment opportunities at Electro, please email us: <a class="text-blue text-decoration-on" href="mailto:contact@Youmats.com">contact@Youmats.com</a></p>
+                    <h5 class="font-size-14 font-weight-bold mb-3">{{ __('contact.careers') }}</h5>
+                    <p class="text-gray-90">{{ __('contact.careers_message') }}: <a class="text-blue text-decoration-on" href="mailto:contact@Youmats.com">contact@Youmats.com</a></p>
                 </div>
             </div>
         </div>
