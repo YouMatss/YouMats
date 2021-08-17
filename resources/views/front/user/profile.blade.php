@@ -183,6 +183,15 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-12 mb-3">
+                                            <hr>
+                                            <div class="js-form-message form-group mb-5">
+                                                <label class="form-label">{{ __('vendor.location') }}</label>
+                                                {!! generate_map() !!}
+                                                <input type="hidden" class="lat" value="{{$user->latitude}}" readonly name="latitude" required>
+                                                <input type="hidden" class="lng" value="{{$user->longitude}}" readonly name="longitude" required>
+                                            </div>
+                                        </div>
                                         @if($user->type == 'company')
                                         <div class="col-md-12">
                                             <div class="js-form-message form-group mb-5">
@@ -501,4 +510,8 @@
             </div>
         </div>
     </div>
+@endsection
+@section('extraScripts')
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
+    <script src="{{front_url()}}/assets/js/map.js"></script>
 @endsection

@@ -120,6 +120,11 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            {!! generate_map() !!}
+                                            <input type="hidden" class="lat" value="{{old('latitude')}}" readonly name="latitude" required>
+                                            <input type="hidden" class="lng" value="{{old('longitude')}}" readonly name="longitude" required>
+                                        </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="password" class="form-label">{{ __('auth.password_input') }} <span class="text-danger">*</span></label>
@@ -168,6 +173,8 @@
     </div>
 @endsection
 @section('extraScripts')
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
+    <script src="{{front_url()}}/assets/js/map.js"></script>
     <script>
         $(function(){
             $('#registerAsIndividual').attr('checked', 'checked');

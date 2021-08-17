@@ -19,7 +19,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
 
 //    protected $guarded = ['id'];
     protected $fillable = ['type', 'name', 'email', 'phone', 'phone2', 'email_verified_at', 'password', 'address', 'address2',
-        'remember_token', 'active'];
+        'latitude', 'longitude', 'remember_token', 'active'];
 
     protected $hidden = [
         'password',

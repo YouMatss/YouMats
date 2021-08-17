@@ -45,8 +45,8 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label for="name" class="form-label">{{ __('auth.name') }} <span class="text-danger">(English)*</span></label>
-                                                <input type="text" class="form-control @error('name_en') is-invalid @enderror" id="name" name="name_en" value="{{ old('name_en') }}" required autocomplete="name_en" autofocus>
+                                                <label for="name_en" class="form-label">{{ __('auth.name') }} <span class="text-danger">(English)*</span></label>
+                                                <input type="text" class="form-control @error('name_en') is-invalid @enderror" id="name_en" name="name_en" value="{{ old('name_en') }}" required autocomplete="name_en" autofocus>
                                                 @error('name_en')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -56,8 +56,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label for="name" class="form-label">{{ __('auth.name') }} <span class="text-danger">(Arabic)*</span></label>
-                                                <input type="text" class="form-control @error('name_ar') is-invalid @enderror" id="name" name="name_ar" value="{{ old('name_ar') }}" required autocomplete="name_ar" autofocus>
+                                                <label for="name_ar" class="form-label">{{ __('auth.name') }} <span class="text-danger">(Arabic)*</span></label>
+                                                <input type="text" class="form-control @error('name_ar') is-invalid @enderror" id="name_ar" name="name_ar" value="{{ old('name_ar') }}" required autocomplete="name_ar" autofocus>
                                                 @error('name_ar')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -115,6 +115,11 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            {!! generate_map() !!}
+                                            <input type="hidden" class="lat" value="{{old('latitude')}}" readonly name="latitude" required>
+                                            <input type="hidden" class="lng" value="{{old('longitude')}}" readonly name="longitude" required>
+                                        </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="password" class="form-label">{{ __('auth.password_input') }} <span class="text-danger">*</span></label>
@@ -137,6 +142,7 @@
                                                 <div class="eye_show">
                                                     <input type="password" class="form-control" id="passwordConfirmInput" name="password_confirmation" required autocomplete="new-password">
                                                     <span href="#" class="showPassword fa fa-eye" data-toggle="#passwordConfirmInput"></span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -161,4 +167,8 @@
             </div>
         </div>
     </div>
+@endsection
+@section('extraScripts')
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
+    <script src="{{front_url()}}/assets/js/map.js"></script>
 @endsection
