@@ -24,7 +24,6 @@ use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
 use Waynestate\Nova\CKEditor;
-use ZiffDavis\Nova\Nestedset\Fields\NestedsetSelect;
 
 class Product extends Resource
 {
