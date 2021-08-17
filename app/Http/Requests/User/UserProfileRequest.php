@@ -34,6 +34,8 @@ class UserProfileRequest extends FormRequest
             'phone2' => NULLABLE_STRING_VALIDATION,
             'address' => REQUIRED_STRING_VALIDATION,
             'address2' => NULLABLE_STRING_VALIDATION,
+            'latitude' => NULLABLE_STRING_VALIDATION,
+            'longitude' => NULLABLE_STRING_VALIDATION,
             'password' => NULLABLE_PASSWORD_VALIDATION,
         ];
     }

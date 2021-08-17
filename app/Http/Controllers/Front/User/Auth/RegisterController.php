@@ -73,6 +73,8 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users', new TopLevelEmailDomainValidator()],
             'phone' => ['nullable', 'string', 'max:191'],
             'address' => ['nullable', 'string', 'max:191'],
+            'latitude' => NULLABLE_STRING_VALIDATION,
+            'longitude' => NULLABLE_STRING_VALIDATION,
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'files' => ['required_if:type,company', 'array'],
             'files.*' => NULLABLE_FILE_VALIDATION
@@ -87,6 +89,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'address' => $data['address'],
+            'latitude' => $data['latitude'],
+            'longitude' => $data['longitude'],
             'password' => Hash::make($data['password']),
         ]);
 

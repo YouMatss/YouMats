@@ -85,6 +85,8 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'max:191', 'email', 'unique:vendors', new TopLevelEmailDomainValidator()],
             'phone' => ['required', 'string', 'max:30'],
             'address' => ['required', 'string', 'max:191'],
+            'latitude' => NULLABLE_STRING_VALIDATION,
+            'longitude' => NULLABLE_STRING_VALIDATION,
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
     }
@@ -102,6 +104,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'address' => $data['address'],
+            'latitude' => $data['latitude'],
+            'longitude' => $data['longitude'],
             'password' => Hash::make($data['password']),
             'slug' => $data['name_en'] . rand(1,10)
         ]);
