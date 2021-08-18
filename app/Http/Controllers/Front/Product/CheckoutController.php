@@ -56,7 +56,7 @@ class CheckoutController extends Controller
     {
         //Validating the data.
         $rules = [
-            'payment_method' => REQUIRED_STRING_VALIDATION,
+            'payment_method' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_individual())],
             'terms' => 'required|accepted',
             'name' => REQUIRED_STRING_VALIDATION,
             'phone' => REQUIRED_STRING_VALIDATION,
@@ -67,8 +67,11 @@ class CheckoutController extends Controller
             'city' => NULLABLE_INTEGER_VALIDATION,
             'email' => REQUIRED_EMAIL_VALIDATION,
             'notes' => NULLABLE_STRING_VALIDATION,
-            'notes.*.title' => REQUIERD_STRING_VALIDATION,
-            'delivery_time' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_company())]
+            'notes.*.title' => NULLABLE_STRING_VALIDATION,
+            'delivery_time' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_company())],
+            'delivery_time_unit' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_company()), 'In:day,week,month'],
+            'latitude' => NULLABLE_STRING_VALIDATION,
+            'longitude' => NULLABLE_STRING_VALIDATION
         ];
 
         $data = $request->validate($rules);
@@ -117,21 +120,10 @@ class CheckoutController extends Controller
 
         //A company is ordering. So let's register all the order as service
         if($user->type == 'company') {
-            $quote = Quote::create([
-                'quote_no'          => 'QOT-'. strtoupper(uniqid()),
-                'user_id'           => $user->id,
-                'name'              => $data['name'],
-                'email'             => $data['email'],
-                'phone'             => $data['phone'],
-                'address'           => $data['address'],
-                'building_number'   => $data['building_number'],
-                'street'            => $data['street'],
-                'district'          => $data['district'],
-                'city'              => $data['city'],
-                'delivery_time'     => $data['delivery_time'],
-                'status'            => 'pending',
-                'notes'             => $data['notes']
-            ]);
+            $data['quote_no'] = 'QOT-'. strtoupper(uniqid());
+            $data['user_id'] = $user->id;
+            $data['status'] = 'pending';
+            $quote = Quote::create($data);
 
             foreach($cartItems as $item)
             {

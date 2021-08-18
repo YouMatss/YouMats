@@ -134,7 +134,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">{{ __('vendor.full_name') }}<span class="text-danger"> ({{ __('vendor.english') }})*</span></label>
-                                                <input type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{ $vendor->getTranslation('name','en') }}" placeholder="Enter your name in english" required="">
+                                                <input type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{ $vendor->getTranslation('name','en') }}" placeholder="{{__('vendor.name_en_placeholder')}}" required="">
                                                 @error('name_en')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -145,7 +145,7 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">{{ __('vendor.full_name') }}<span class="text-danger">({{ __('vendor.arabic') }})*</span></label>
-                                                <input type="text" class="form-control @error('name_ar') is-invalid @enderror" name="name_ar" value="{{ $vendor->getTranslation('name','ar') }}" placeholder="Enter your name in arabic" required="">
+                                                <input type="text" class="form-control @error('name_ar') is-invalid @enderror" name="name_ar" value="{{ $vendor->getTranslation('name','ar') }}" placeholder="{{__('vendor.name_ar_placeholder')}}" required="">
                                                 @error('name_ar')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -155,9 +155,37 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="js-form-message form-group mb-5">
-                                                <label class="form-label">E-Mail <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $vendor->email }}" placeholder="Enter your email" required="">
+                                                <label class="form-label">{{__('vendor.email')}} <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $vendor->email }}" placeholder="{{__('vendor.email_placeholder')}}" required="">
                                                 @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="js-form-message form-group mb-5">
+                                                <label class="form-label">{{__('vendor.address')}}</label>
+                                                <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ $vendor->address }}" placeholder="{{__('vendor.address_placeholder')}}">
+                                                @error('address')
+                                                <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="js-form-message form-group mb-5">
+                                                <label class="form-label">{{__('vendor.type')}}</label>
+                                                <select class="form-control @error('type') is-invalid @enderror" name="type">
+                                                    <option selected disabled>{{__('vendor.type_placeholder')}}</option>
+                                                    <option value="factory" @if($vendor->type == 'factory') selected @endif>{{__('vendor.type_factory')}}</option>
+                                                    <option value="distributor" @if($vendor->type == 'distributor') selected @endif>{{__('vendor.type_distributor')}}</option>
+                                                    <option value="wholesales" @if($vendor->type == 'wholesales') selected @endif>{{__('vendor.type_wholesales')}}</option>
+                                                    <option value="retail" @if($vendor->type == 'retail') selected @endif>{{__('vendor.type_retail')}}</option>
+                                                </select>
+                                                @error('type')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -166,39 +194,31 @@
                                         </div>
                                         <div class="col-md-12 contactsRegion">
                                             <div class="r-group row">
-
                                                 <div class="col-md-3">
                                                     <p>
-                                                        <label data-pattern-text="Person Name ++:">{{ __('vendor.contact_person_name') }}:</label>
+                                                        <label data-pattern-text="{{__('vendor.contact_person_name')}} ++:">{{ __('vendor.contact_person_name') }}:</label>
                                                         <input class="form-control @error('contacts.*.person_name') is-invalid @enderror" @if(count($vendor->contacts) > 0)value="{{ $vendor->contacts[0]['person_name'] }}" @endif type="text" name="contacts[0][person_name]" data-pattern-name="contacts[++][person_name]" data-pattern-id="contacts_++_person_name" />
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-3">
                                                     <p>
-                                                        <label data-pattern-text="Phone ++:">{{ __('vendor.contact_phone') }}:</label>
+                                                        <label data-pattern-text="{{ __('vendor.contact_phone') }} ++:">{{ __('vendor.contact_phone') }}:</label>
                                                         <input type="text" name="contacts[0][phone]" class="form-control @error('contacts.*.phone') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['phone'] }}" @endif  data-pattern-name="contacts[++][phone]" data-pattern-id="contacts_++_phone" />
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-3">
                                                     <p>
-                                                        <label data-pattern-text="Email ++:">{{ __('vendor.contact_email') }}:</label>
+                                                        <label data-pattern-text="{{ __('vendor.contact_email') }} ++:">{{ __('vendor.contact_email') }}:</label>
                                                         <input type="email" name="contacts[0][email]" class="form-control @error('contacts.*.email') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['email'] }}" @endif data-pattern-name="contacts[++][email]" data-pattern-id="contacts_++_email" />
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-3">
                                                     <p>
-                                                        <label data-pattern-text="Job ++:">{{ __('vendor.contact_job') }}:</label>
-                                                        <input type="text" name="contacts[0][job]" class="form-control @error('contacts.*.job') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['job'] }}" @endif data-pattern-name="contacts[++][job]" data-pattern-id="contacts_++_job" />
-                                                    </p>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <p>
-                                                        <label data-pattern-text="Address ++:">{{ __('vendor.contact_address') }}:</label>
-                                                        <input type="text" name="contacts[0][address]" class="form-control @error('contacts.*.address') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['address'] }}" @endif data-pattern-name="contacts[++][address]" data-pattern-id="contacts_++_address" />
+                                                        <label data-pattern-text="{{ __('vendor.contact_position') }} ++:">{{ __('vendor.contact_position') }}:</label>
+                                                        <input type="text" name="contacts[0][position]" class="form-control @error('contacts.*.position') is-invalid @enderror" @if(count($vendor->contacts) > 0) value="{{ $vendor->contacts[0]['position'] }}" @endif data-pattern-name="contacts[++][position]" data-pattern-id="contacts_++_position" />
                                                     </p>
                                                 </div>
 
@@ -455,8 +475,7 @@
                                         <li>{{ __('vendor.contact_person_name') }}: {{ $contact['person_name'] }}</li>
                                         <li>{{ __('vendor.contact_phone') }}: {{ $contact['phone'] }}</li>
                                         <li>{{ __('vendor.contact_email') }}: {{ $contact['email'] }}</li>
-                                        <li>{{ __('vendor.contact_job') }}: {{ $contact['job'] }}</li>
-                                        <li>{{ __('vendor.contact_address') }}: {{ $contact['address'] }}</li>
+                                        <li>{{ __('vendor.contact_position') }}: {{ $contact['position'] }}</li>
                                         <hr />
                                     @endforeach
                                 </ul>

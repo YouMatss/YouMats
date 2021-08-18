@@ -49,12 +49,16 @@ class Vendor extends Resource
                 ->rules(REQUIRED_STRING_VALIDATION)
                 ->translatable(),
 
-            Text::make('Main EMail', 'email')
+            Text::make('Main Email', 'email')
                 ->sortable()
                 ->help('It will be used to login')
                 ->rules(REQUIRED_EMAIL_VALIDATION)
                 ->creationRules('unique:vendors,email')
                 ->updateRules('unique:vendors,email,{{resourceId}}'),
+
+            Text::make('Address')
+                ->rules(NULLABLE_STRING_VALIDATION)
+                ->hideFromIndex(),
 
            SimpleRepeatable::make('Contacts', 'contacts', [
               Text::make('Person Name', 'person_name')
@@ -63,11 +67,17 @@ class Vendor extends Resource
                 ->rules(REQUIRED_EMAIL_VALIDATION),
               Text::make('Phone', 'phone')
                 ->rules(REQUIRED_STRING_VALIDATION),
-              Text::make('Address', 'address')
-                ->rules(NULLABLE_STRING_VALIDATION),
-              Text::make('Job', 'job')
+              Text::make('Position', 'position')
                 ->rules(NULLABLE_STRING_VALIDATION),
            ]),
+
+            Select::make('Type')->options([
+                'factory' => 'Factory',
+                'distributor' => 'Distributor',
+                'wholesales' => 'Wholesales',
+                'retail' => 'Retail'
+            ])->displayUsingLabels()->hideFromIndex()
+                ->rules([...NULLABLE_STRING_VALIDATION, 'In:factory,distributor,wholesales,retail']),
 
             MapMarker::make('Location')
                 ->defaultZoom(8)

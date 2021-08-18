@@ -41,6 +41,9 @@
             <div class="col-md-12">
                 <div class="info_main_vendor">
                     <h3>{{ $vendor->name }}</h3>
+                    @if(isset($vendor->type))
+                    <label style="font-weight: bold">{{ucfirst($vendor->type)}}</label>
+                    @endif
                     <p>{{ __('Started') . ' ' . $vendor->created_at->format('d/m/Y') }}</p>
                 </div>
             </div>
@@ -69,32 +72,30 @@
                             <div class="row">
                                 <div class="col-md-12 mb-5">
                                     <table class="table table-bordered">
-                                        <tbody>
                                         <tr>
                                             <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.email') }}</th>
                                             <td class="pt-3 pb-3 pl-3">{{ $vendor->email }}</td>
                                         </tr>
                                         <tr>
-                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.phone')  }}</th>
-                                            <td class="pt-3 pb-3 pl-3">{{ $vendor->phone }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.phone_2') }}</th>
-                                            <td class="pt-3 pb-3 pl-3">{{ $vendor->phone2 }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.whatsapp')  }}</th>
-                                            <td class="pt-3 pb-3 pl-3">{{ $vendor->whatsapp_phone }}</td>
-                                        </tr>
-                                        <tr>
                                             <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.address') }}</th>
                                             <td class="pt-3 pb-3 pl-3">{{ $vendor->address }}</td>
                                         </tr>
-                                        @if($vendor->address2)
-                                            <tr>
-                                                <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.address_2') }}</th>
-                                                <td class="pt-3 pb-3 pl-3">{{ $vendor->address2 }}</td>
-                                            </tr>
+                                        @if(count($vendor->contacts))
+                                            @foreach($vendor->contacts as $contact)
+                                                <tr>
+                                                    <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.contacts') . ' ' . $loop->iteration }}</th>
+                                                    <td>
+                                                        <label style="font-weight: bold">{{__('vendor.person_name')}}: </label>
+                                                        <span>{{ $contact['person_name'] }}</span><br/>
+                                                        <label style="font-weight: bold">{{__('vendor.phone')}}: </label>
+                                                        <span>{{ $contact['phone'] }}</span><br/>
+                                                        <label style="font-weight: bold">{{__('vendor.email')}}: </label>
+                                                        <span>{{ $contact['email'] }}</span><br/>
+                                                        <label style="font-weight: bold">{{__('vendor.position')}}: </label>
+                                                        <span>{{ $contact['position'] }}</span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @endif
                                         @if($vendor->facebook_url)
                                             <tr>
@@ -136,7 +137,6 @@
                                             <th class="pt-3 pb-3 pl-3 w-25">{{ __('vendor.status') }}</th>
                                             <td class="pt-3 pb-3 pl-3">@if($vendor->active) <i class="fas fa-check-circle"></i> @else <i class="fas fa-times-circle"></i> @endif</td>
                                         </tr>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
