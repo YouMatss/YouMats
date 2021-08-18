@@ -123,6 +123,7 @@
             <!-- End Card -->
         </div>
         <!-- End Accordion -->
+
         <form class="js-validate" novalidate="novalidate" action="{{ route('checkout') }}" method="POST">
             @csrf
             <div class="row">
@@ -243,30 +244,29 @@
 
                         <!-- Billing Form -->
                         <div class="row">
-                                <div class="col-md-6">
-                                    <!-- Input -->
-                                    <div class="js-form-message mb-6">
-                                        <label class="form-label">
-                                            Name
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->name ?? old('name') }}" name="name" required="" data-msg="Please enter your frist name." data-error-class="u-has-error" data-success-class="u-has-success" autocomplete="off">
-                                        @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <!-- End Input -->
+                            <div class="col-md-6">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        Name
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->name ?? old('name') }}" name="name" required="" data-msg="Please enter your frist name." data-error-class="u-has-error" data-success-class="u-has-success" autocomplete="off">
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-
-                                <div class="col-md-6">
+                                <!-- End Input -->
+                            </div>
+                            <div class="col-md-6">
                                     <!-- Input -->
                                     <div class="js-form-message mb-6">
                                         <label class="form-label">
                                             Phone
                                         </label>
-                                        <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->phone ?? old('phone') }}" name="phone" aria-label="Phone Number" data-msg="Please enter a phone number." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <input type="tel" class="form-control phoneNumber" value="{{ Auth::guard('web')->user()->phone ?? old('phone') }}" name="phone" aria-label="Phone Number" data-msg="Please enter a phone number." data-error-class="u-has-error" data-success-class="u-has-success">
                                         @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -291,7 +291,6 @@
                                 </div>
                                 <!-- End Input -->
                             </div>
-
                             @if(!is_company())
                                 <div class="col-md-6">
                                     <!-- Input -->
@@ -309,7 +308,6 @@
                                     </div>
                                     <!-- End Input -->
                                 </div>
-
                                 <div class="col-md-6">
                                     <!-- Input -->
                                     <div class="js-form-message mb-6">
@@ -325,7 +323,6 @@
                                     </div>
                                     <!-- End Input -->
                                 </div>
-
                                 <div class="col-md-6">
                                     <!-- Input -->
                                     <div class="js-form-message mb-6">
@@ -341,7 +338,6 @@
                                     </div>
                                     <!-- End Input -->
                                 </div>
-
                                 <div class="col-md-6">
                                     <!-- Input -->
                                     <div class="js-form-message mb-6">
@@ -366,7 +362,6 @@
                                     <!-- End Input -->
                                 </div>
                             @endif
-
                             <div class="col-md-6">
                                 <!-- Input -->
                                 <div class="js-form-message mb-6">
@@ -391,17 +386,37 @@
                                             Delivery Time
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" class="form-control" value="{{ old('delivery_time') }}" name="delivery_time" aria-label="{{ date('d-m-Y') }}" required="" data-msg="Please enter a delivery time." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="number" class="form-control" value="{{ old('delivery_time') }}" name="delivery_time" min="1" max="10" step="1" aria-label="{{ date('d-m-Y') }}" required data-msg="Please enter a delivery time." data-error-class="u-has-error" data-success-class="u-has-success">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="form-control" name="delivery_time_unit">
+                                                    <option value="day" @if(old('delivery_time_unit') == 'day') selected @endif>Day</option>
+                                                    <option value="week" @if(old('delivery_time_unit') == 'week') selected @endif>Week</option>
+                                                    <option value="month" @if(old('delivery_time_unit') == 'month') selected @endif>Month</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         @error('delivery_time')
-                                        <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                        @error('delivery_time_unit')
+                                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
                                     </div>
                                     <!-- End Input -->
                                 </div>
+                                <div class="col-md-12 mb-3">
+                                    <hr>
+                                    <div class="js-form-message form-group mb-5">
+                                        <label class="form-label">{{ __('general.location') }}</label>
+                                        {!! generate_map() !!}
+                                        <input type="hidden" class="lat" value="{{old('latitude')}}" readonly name="latitude" required>
+                                        <input type="hidden" class="lng" value="{{old('longitude')}}" readonly name="longitude" required>
+                                    </div>
+                                </div>
                             @endif
-
                             <div class="w-100"></div>
                         </div>
                         <!-- End Billing Form -->
@@ -474,4 +489,8 @@
             </div>
         </form>
     </div>
+@endsection
+@section('extraScripts')
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
+    <script src="{{front_url()}}/assets/js/map.js"></script>
 @endsection

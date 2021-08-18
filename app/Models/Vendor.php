@@ -22,7 +22,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, HasTranslations, CascadeSoftDeletes, BelongsToThrough;
 
-    protected $fillable = ['name', 'country_id', 'subCategory_id', 'email' , 'contacts', 'latitude', 'longitude',
+    protected $fillable = ['name', 'country_id', 'subCategory_id', 'email' , 'contacts', 'address', 'type', 'latitude', 'longitude',
         'membership_id', 'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url', 'slug'];
 
     protected $guard = 'vendor';

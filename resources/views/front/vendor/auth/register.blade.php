@@ -40,7 +40,7 @@
                     <div class="borders-radius-17 border p-4 mt-4 mt-md-0 px-lg-10 py-lg-9">
                         <div class="tab-content" id="Jpills-tabContent">
                             <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
-                                <form method="POST" action="{{ route('vendor.register') }}">
+                                <form method="POST" action="{{ route('vendor.register') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
@@ -120,6 +120,33 @@
                                             <input type="hidden" class="lat" value="{{old('latitude')}}" readonly name="latitude" required>
                                             <input type="hidden" class="lng" value="{{old('longitude')}}" readonly name="longitude" required>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="js-form-message mb-3">
+                                                <label class="form-label mb-3">
+                                                    {{ __('vendor.licenses') }}
+                                                </label>
+                                                <div class="row">
+                                                    <div class="col-md-3 imgUp">
+                                                        <div class="imagePreview"></div>
+                                                        <label class="btn btn-primary">
+                                                            {{ __('vendor.choose_a_file') }} <input type="file" name="licenses[]" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                                                        </label>
+                                                    </div>
+                                                    <i class="fa fa-plus imgAdd"></i>
+                                                </div>
+                                                @if ($errors->has('licenses.*') || $errors->has('licenses'))
+                                                    <div class="alert alert-danger">
+                                                        <ul role="alert" style="list-style: list-unstyled">
+                                                            @if($errors->has('licenses.*'))
+                                                                <li>{{ $errors->first('licenses.*') }}</li>
+                                                            @else
+                                                                <li>{{ $errors->first('licenses') }}</li>
+                                                            @endif
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="password" class="form-label">{{ __('auth.password_input') }} <span class="text-danger">*</span></label>
@@ -171,4 +198,31 @@
 @section('extraScripts')
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
     <script src="{{front_url()}}/assets/js/map.js"></script>
+    <script>
+        // upload Licenses
+        $(".imgAdd").click(function(){
+            $(this).closest(".row").find('.imgAdd').before('<div class="col-md-3 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input name="licenses[]" type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
+        });
+        $(document).on("click", "i.del" , function() {
+            $(this).parent().remove();
+        });
+        $(function() {
+            $(document).on("change",".uploadFile", function()
+            {
+                var uploadFile = $(this);
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+                if (/^image/.test( files[0].type)){ // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+
+                    reader.onloadend = function(){ // set image data as background of div
+                        //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                        uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

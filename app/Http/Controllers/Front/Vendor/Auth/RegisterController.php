@@ -87,6 +87,8 @@ class RegisterController extends Controller
             'address' => ['required', 'string', 'max:191'],
             'latitude' => NULLABLE_STRING_VALIDATION,
             'longitude' => NULLABLE_STRING_VALIDATION,
+            'licenses' => ARRAY_VALIDATION,
+            'licenses.*' => REQUIRED_IMAGE_VALIDATION,
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
     }
@@ -112,6 +114,12 @@ class RegisterController extends Controller
 
         $vendor->setTranslation('name', 'en', $data['name_en']);
         $vendor->setTranslation('name', 'ar', $data['name_ar']);
+
+        // Add licenses to the vendor
+        if(isset($data['licenses']))
+            foreach($data['licenses'] as $license) {
+                $vendor->addMedia($license)->toMediaCollection(VENDOR_PATH);
+            }
 
         $vendor->save();
 

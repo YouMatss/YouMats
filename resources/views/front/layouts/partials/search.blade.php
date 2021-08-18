@@ -38,27 +38,26 @@ function doTheMagic(url, callback = 'default') {
                     <div class="product-item__outer h-100">
                         <div class="product-item__inner px-xl-4 p-3">
                             <div class="product-item__body pb-xl-2">
-                                <div class="mb-2"><a href="{{ env('APP_URL') }}/i/${value.category.slug}" class="font-size-12 text-gray-5">${value.category.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></div>
-                                <h5 class="mb-1 product-item__title"><a href="{{ env('APP_URL') }}/i/${value.category.slug}/${value.slug}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
+                                <div class="mb-2"><a href="{{ env('APP_URL') }}/i/${value.category.slug}" class="font-size-12 text-gray-5">${value.category.name}</a></div>
+                                <h5 class="mb-1 product-item__title"><a title="${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}" href="{{ env('APP_URL') }}/i/${value.category.slug}/${value.slug}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
                                 <div class="mb-2">
                                     <a href="{{ env('APP_URL') }}/i/${value.category.slug}/${value.slug}" class="d-block text-center">
                                         <img class="img-fluid" src="${value.image_url.url}" alt="${value.image_url.alt}" title="${value.image_url.title}">
                                     </a>
                                 </div>
                                 <div class="flex-center-between mb-1">
-                                    <div class="prodcut-price">
+                                    <div class="product-price searchPrice-${value.id}">
                                         <div class="text-gray-100">{{ getCurrency('symbol') }} ${value.price}</div>
                                     </div>
-                                    <div class="d-none d-xl-block prodcut-add-cart searchCartDiv-${value.id}">
+                                    <div class="d-none d-xl-block product-add-cart searchCartDiv-${value.id}">
                                         <button data-url="{{ env('APP_URL') }}/cart/add/${value.id}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </li>
-            `);
-            searchRegionList.append(`
+                </li>`);
+                searchRegionList.append(`
                 <li class="product-item remove-divider">
                     <div class="product-item__outer w-100">
                         <div class="product-item__inner remove-prodcut-hover py-4 row">
@@ -71,11 +70,11 @@ function doTheMagic(url, callback = 'default') {
                             </div>
                             <div class="product-item__body col-6 col-md-10">
                                 <div class="pr-lg-10">
-                                    <div class="mb-2"><a href="{{ env('APP_URL') }}/i/${value.category.slug}" class="font-size-12 text-gray-5">${value.category.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></div>
+                                    <div class="mb-2"><a href="{{ env('APP_URL') }}/i/${value.category.slug}" class="font-size-12 text-gray-5">${value.category.name}</a></div>
                                     <h5 class="mb-2 product-item__title"><a href="{{ env('APP_URL') }}/i/${value.category.slug}/${value.slug}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
 
                                     <div class="mb-2 flex-center-between">
-                                        <div class="prodcut-price">
+                                        <div class="prodcut-price searchPrice-${value.id}">
                                             <div class="text-gray-100">{{ getCurrency('symbol') }} ${value.price}</div>
                                         </div>
                                         <div class="prodcut-add-cart searchCartDiv-${value.id}">
@@ -90,8 +89,10 @@ function doTheMagic(url, callback = 'default') {
                 </li>
             `);
 
-                if(value.price === 0 || value.type === 'service')
+                if(value.price === 0 || value.type === 'service') {
                     $(`.searchCartDiv-${value.id}`).remove();
+                    $(`.searchPrice-${value.id}`).remove();
+                }
             })
 
             if(callback !== 'filter') {
@@ -102,7 +103,7 @@ function doTheMagic(url, callback = 'default') {
                     attributesRegion.append(`<div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input category" value="${ value.id }" id="tag-${value.id}">
-                                                    <label class="custom-control-label" for="tag-${value.id}">${value.name.{{app()->getLocale()}}}</label>
+                                                    <label class="custom-control-label" for="tag-${value.id}">${value.name}</label>
                                                 </div>
                                             </div>`);
                 });
