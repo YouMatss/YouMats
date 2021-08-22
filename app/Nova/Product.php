@@ -34,7 +34,7 @@ class Product extends Resource
     public static $title = 'name';
 
     public static $search = [
-        'id', 'name', 'desc', 'short_desc', 'slug'
+        'id', 'name', 'desc', 'short_desc', 'slug', 'SKU'
     ];
 
     public function fields(Request $request)
@@ -47,10 +47,9 @@ class Product extends Resource
 
             BelongsTo::make('Category')->hideWhenUpdating()->hideWhenCreating(),
             NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
-         //   NestedsetSelect::make('Category', 'category')->onlyOnForms(),
 
             BelongsTo::make('Vendor')
-                ->withoutTrashed()->hideFromIndex()->searchable(),
+                ->withoutTrashed()->searchable(),
 
             BelongsToManyField::make('Tags')->hideFromIndex(),
 
