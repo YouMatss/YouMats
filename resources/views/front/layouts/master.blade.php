@@ -14,7 +14,9 @@
         @include('front.layouts.partials.header')
         <main id="content" role="main">
             @yield('content')
-            @include('front.layouts.partials.vendors')
+            @if(\Illuminate\Support\Facades\Request::segment(2) != 'cart')
+                @include('front.layouts.partials.vendors')
+            @endif
         </main>
         @include('front.layouts.partials.footer')
         @include('front.layouts.partials.assets_js')
