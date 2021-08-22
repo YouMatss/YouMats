@@ -941,3 +941,8 @@
     padding: 3px;
     margin-top: 10px;
 }
+.attr-container {
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}

@@ -36,7 +36,11 @@ class Category extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make('Name')->sortable()->translatable()->rules(REQUIRED_STRING_VALIDATION),
+            Text::make('Name')->hideFromIndex()->translatable()->rules(REQUIRED_STRING_VALIDATION),
+
+            Text::make('Name', 'name', fn() =>
+                '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
+            )->asHtml()->onlyOnIndex(),
 
             Boolean::make('Category')->hideFromIndex(),
             BelongsTo::make('Parent', 'parent', self::class)->onlyOnIndex(),
