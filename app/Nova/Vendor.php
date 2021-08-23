@@ -121,7 +121,6 @@ class Vendor extends Resource
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
                 ->croppable('cropper')
-                ->previewUsing('cropper')
                 ->hideFromIndex(),
 
             Medialibrary::make('Logo', VENDOR_LOGO)->fields(function () {

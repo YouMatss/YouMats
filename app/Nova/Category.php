@@ -60,41 +60,23 @@ class Category extends Resource
 
             Medialibrary::make('Image', CATEGORY_PATH)->fields(function () {
                 return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-
-                    Text::make('Image Title', 'img_title')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION),
-
-                    Text::make('Image Alt', 'img_alt')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION)
+                    Text::make('File Name', 'file_name')->rules('required', 'min:2'),
+                    Text::make('Image Title', 'img_title')->translatable()->rules(NULLABLE_STRING_VALIDATION),
+                    Text::make('Image Alt', 'img_alt')->translatable()->rules(NULLABLE_STRING_VALIDATION)
                 ];
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper')
-                ->previewUsing('cropper'),
+                ->accept('image/*')->autouploading()->attachOnDetails()->single()
+                ->croppable('cropper'),
 
             Medialibrary::make('Cover', CATEGORY_COVER)->fields(function () {
                 return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-
-                    Text::make('Image Title', 'img_title')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION),
-
-                    Text::make('Image Alt', 'img_alt')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION)
+                    Text::make('File Name', 'file_name')->rules('required', 'min:2'),
+                    Text::make('Image Title', 'img_title')->translatable()->rules(NULLABLE_STRING_VALIDATION),
+                    Text::make('Image Alt', 'img_alt')->translatable()->rules(NULLABLE_STRING_VALIDATION)
                 ];
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails()->single()
+                ->accept('image/*')->autouploading()->attachOnDetails()->single()
                 ->croppable('cropper')
-                ->previewUsing('cropper')
                 ->hideFromIndex(),
 
             Toggle::make(__('Section I'), 'section_i')->falseColor('#bacad6')->editableIndex(),

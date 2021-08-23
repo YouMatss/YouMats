@@ -51,8 +51,7 @@ class Page extends Resource
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper')
-                ->previewUsing('cropper'),
+                ->croppable('cropper'),
 
             CKEditor::make('Description', 'desc')
                 ->hideFromIndex()

@@ -109,11 +109,11 @@
                                             </span>
                                             </a>
                                             <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
-                                                <a class="dropdown-item" href="{{ route('vendor.edit') }}">Profile</a>
-                                                <a class="dropdown-item" href="{{ route('chat.vendor.conversations', [1]) }}">Messages</a>
+                                                <a class="dropdown-item" href="{{ route('vendor.edit') }}">{{__('general.profile')}}</a>
+                                                <a class="dropdown-item" href="{{ route('chat.vendor.conversations', [1]) }}">{{__('general.messages')}}</a>
                                                 <form class="dropdown-item" style="cursor: pointer" action="{{route('vendor.logout')}}" method="POST">
                                                     @csrf
-                                                    <button type="submit" class="dropdown-item">Logout</button>
+                                                    <button type="submit" class="dropdown-item">{{__('general.logout')}}</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -160,7 +160,11 @@
                                     </div>
                                 </li>
                             @endif
-
+                            @if(auth()->guard('admin')->check())
+                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                    <span class="badge badge-danger">{{__('general.login_as_admin')}}</span>
+                                </li>
+                            @endif
                             @if(session('userType') !== 'individual' || !auth()->guard('vendor')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                     <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
@@ -272,7 +276,7 @@
                         </nav>
                         <!-- End Nav -->
                     </div>
-                    @if(!is_company())
+                    @if(is_company())
                     <div class="d-none d-xl-block col-md-auto">
                         <div class="d-flex">
                             <i class="ec ec-support font-size-50 text-primary"></i>

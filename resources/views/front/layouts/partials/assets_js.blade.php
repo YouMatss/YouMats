@@ -47,12 +47,14 @@
 <!-- Socket.io -->
 <script src="https://cdn.socket.io/4.0.0/socket.io.min.js" integrity="sha384-DkkWv9oJFWLIydBXXjkBWnG1/fuVhw8YPBq37uvvD6WSYRFRqr21eY5Dg9ZhmWdy" crossorigin="anonymous"></script>
 
+@if(is_company())
 <script>
     (function(w,d,u){
         var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/60000|0);
         var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
     })(window,document,'https://cdn.bitrix24.com/b12855593/crm/site_button/loader_1_sdm5a9.js');
 </script>
+@endif
 
 @include('front.layouts.partials.alerts')
 

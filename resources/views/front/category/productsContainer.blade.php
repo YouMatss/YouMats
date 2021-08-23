@@ -1,3 +1,6 @@
+{{--@if($city)--}}
+{{--<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{$city}}</button>--}}
+{{--@endif--}}
 <div class="d-block d-md-flex flex-center-between mb-3 rtl">
     <h3 class="font-size-25 mb-2 mb-md-0">{{$category->name}}</h3>
     <input type="hidden" value="{{$category->id}}" id="categoryIdContainer">
