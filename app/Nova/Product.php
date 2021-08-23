@@ -121,8 +121,7 @@ class Product extends Resource
                     ->accept('image/*')
                     ->autouploading()->sortable()->attachOnDetails()
                     ->hideFromIndex()
-                    ->croppable('cropper')
-                    ->previewUsing('cropper'),
+                    ->croppable('cropper'),
             ])),
 
             (new Panel('Shipping Prices', [

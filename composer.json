@@ -58,6 +58,7 @@
         "spatie/nova-backup-tool": "^4.1",
         "staudenmeir/belongs-to-through": "^2.5",
         "staudenmeir/eloquent-has-many-deep": "^1.13",
+        "stevebauman/location": "^6.2",
         "torann/geoip": "^3.0",
         "vyuldashev/nova-permission": "^2.10",
         "waynestate/nova-ckeditor4-field": "^0.7.0",

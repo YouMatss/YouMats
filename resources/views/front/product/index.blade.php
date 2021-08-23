@@ -84,10 +84,11 @@
                             {{--</ul>--}}
                         {{--</div>--}}
 
-
-
                         <p>{!! $product->short_desc !!}</p>
-                        <p><strong>SKU</strong>: {{$product->SKU}}</p>
+                        <div><strong>SKU</strong>: {{$product->SKU}}</div>
+                        @if(auth()->guard('admin')->check())
+                            <div><strong>Vendor</strong>: {{$product->vendor->name}}</div>
+                        @endif
                     </div>
                 </div>
                 <div class="mx-md-auto mx-lg-0 col-md-6 col-lg-4 col-xl-3">

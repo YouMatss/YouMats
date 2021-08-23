@@ -349,7 +349,7 @@
                                             <select class="form-control js-select selectpicker dropdown-select" name="city" required="" data-msg="Please select state." data-error-class="u-has-error" data-success-class="u-has-success" data-live-search="true" data-style="form-control border-color-1 font-weight-normal" tabindex="-98">
                                                 <option value="">Select city</option>
                                                 @foreach($cities as $city)
-                                                    <option value="{{ $city->name }}" @if($city->name == old('city')) selected @endif>{{ $city->name }}</option>
+                                                    <option value="{{ $city->id }}" @if($city->id == old('city')) selected @endif>{{ $city->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('city')

@@ -47,8 +47,7 @@ class Language extends Resource
             })->attachRules(REQUIRED_IMAGE_VALIDATION)
                 ->accept('image/*')
                 ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper')
-                ->previewUsing('cropper'),
+                ->croppable('cropper'),
 
             Slug::make('Slug')
                 ->sortable()
