@@ -16,7 +16,13 @@ class CategoryController extends Controller
     public function getCityByLocation() {
         $ip = Request::ip();
         $location = Location::get($ip);
-        return ($location->cityName) ?? null;
+        if($location) {
+            $city = City::where('name', 'LIKE', '%'.$location->cityName.'%')->first();
+            if($city) {
+                return $location->cityName;
+            }
+        }
+        return null;
     }
 
     public function index($category_slug) {

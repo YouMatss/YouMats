@@ -139,7 +139,9 @@
             </div>
         </div>
     </div>
-    @include('front.layouts.partials.change_city')
+    @if($city_location)
+        @include('front.layouts.partials.change_city')
+    @endif
 @endsection
 @section('extraScripts')
     @include('front.layouts.partials.filter')
