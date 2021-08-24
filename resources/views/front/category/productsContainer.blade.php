@@ -1,6 +1,3 @@
-{{--@if($city)--}}
-{{--<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{$city}}</button>--}}
-{{--@endif--}}
 <div class="d-block d-md-flex flex-center-between mb-3 rtl">
     <h3 class="font-size-25 mb-2 mb-md-0">{{$category->name}}</h3>
     <input type="hidden" value="{{$category->id}}" id="categoryIdContainer">
@@ -43,6 +40,12 @@
                 </a>
             </li>
         </ul>
+    </div>
+    <div>
+        @if($city_location)
+            {{__('general.city_button_title')}} {{$city_location}}
+            (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal" title="{{__('general.city_button_title')}}">{{__('general.change_city')}}</button>)
+        @endif
     </div>
     <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
         <a class="text-gray-30 font-size-20 mr-2" href="{{$products->previousPageUrl()}}">←</a>

@@ -946,3 +946,8 @@
     overflow-x: hidden;
     overflow-y: scroll;
 }
+.choose_city {
+    background: transparent;
+    border: 0;
+    color: #003f91;
+}

@@ -139,7 +139,7 @@
             </div>
         </div>
     </div>
-{{--    @include('front.layouts.partials.change_city')--}}
+    @include('front.layouts.partials.change_city')
 @endsection
 @section('extraScripts')
     @include('front.layouts.partials.filter')
