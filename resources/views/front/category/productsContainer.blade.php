@@ -43,8 +43,8 @@
     </div>
     <div>
         @if($city_location)
-            {{__('general.city_button_title')}} {{$city_location}}
-            (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal" title="{{__('general.city_button_title')}}">{{__('general.change_city')}}</button>)
+            {{__('general.city_location_text')}} {{$city_location}}
+            (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>)
         @endif
     </div>
     <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
