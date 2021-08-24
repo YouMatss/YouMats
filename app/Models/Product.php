@@ -50,11 +50,8 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     }
 
     public function registerAllMediaConversions(): void {
-        $this->addMediaConversion('thumb')
-            ->width(200)->height(200);
-
-        $this->addMediaConversion('cropper')
-            ->performOnCollections(PRODUCT_PATH);
+        $this->addMediaConversion('thumb')->width(200)->height(200);
+        $this->addMediaConversion('cropper')->performOnCollections(PRODUCT_PATH);
     }
 
     public function getPriceAttribute($value) {
@@ -90,6 +87,10 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     public function vendor() {
         return $this->belongsTo(Vendor::class);
     }
+
+//    public function branches() {
+//        return $this->belongsToMany(VendorBranch::class, Vendor::class, 'vendor_id', 'id');
+//    }
 
     public function tags() {
         return $this->belongsToMany(Tag::class);

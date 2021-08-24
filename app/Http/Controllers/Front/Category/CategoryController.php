@@ -4,17 +4,39 @@ namespace App\Http\Controllers\Front\Category;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Product;
+use Illuminate\Support\Facades\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
+use Stevebauman\Location\Facades\Location;
 
 class CategoryController extends Controller
 {
+    public function getCityByLocation() {
+        $ip = Request::ip();
+        $location = Location::get($ip);
+        return ($location->cityName) ?? null;
+    }
+
     public function index($category_slug) {
         $data['category'] = Category::whereSlug($category_slug)->first();
         abort_if(!$data['category'], 404);
 
-        $data['products'] = $data['category']->products()->paginate(20);
+//        $city = City::where('name', 'LIKE', '%'.$this->getCityByLocation().'%')->first();
+        $data['city_location'] = $this->getCityByLocation();
+        $data['products'] = $data['category']->products()
+//            ->join('vendors', 'vendors.id', '=', 'products.vendor_id')
+//            ->join('vendor_branches', 'vendor_branches.vendor_id', '=', 'vendors.id')
+//            ->leftJoin('cities', function($join) use($city) {
+//                $join->on( 'cities.id', '=', $city->id);
+//            })
+//            ->limit(2)
+//            ->orderBy('cities.id', 'ASC')
+            ->paginate(20);
+
+//        dd($data['products']->get());
+
         $data['parent'] = $data['category']->parent;
         $data['children'] = $data['category']->children;
         if(isset($data['parent'])) {
@@ -31,7 +53,7 @@ class CategoryController extends Controller
 
     public function filter($category_id) {
         $data['category'] = Category::findorfail($category_id);
-
+        $data['city_location'] = $this->getCityByLocation();
         $data['products'] = QueryBuilder::for(Product::class)
             ->allowedFilters([
                 'attributes',
@@ -42,7 +64,8 @@ class CategoryController extends Controller
                 'active' => 1,
                 'category_id' => $category_id
             ])
-            ->with('category')
+//            ->allowedSorts('vendor.branches.city_id')
+            ->with('category'/*, 'vendor', 'vendor.branches'*/)
             ->paginate(20);
 
         return view('front.category.productsContainer')->with($data)->render();
