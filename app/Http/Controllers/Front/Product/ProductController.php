@@ -11,8 +11,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Spatie\QueryBuilder\AllowedFilter;
-use Spatie\QueryBuilder\Filters\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
@@ -20,9 +20,9 @@ class ProductController extends Controller
     public function index($category_slug, $slug) {
         $data['product'] = Product::with('category', 'tags', 'vendor')->where(['slug' => $slug, 'active' => 1])->first();
         abort_if(!$data['product'], 404);
-
-//        dd($data['product']->delivery);
-
+        if(Session::has('city')) {
+            $data['delivery'] = $data['product']->delivery(Session::get('city')->id);
+        }
         $data['product']->views++;
         $data['product']->save();
 

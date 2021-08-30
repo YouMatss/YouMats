@@ -49,7 +49,8 @@ class Shipping extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            BelongsTo::make(__('Vendor'), 'vendor')->withoutTrashed(),
+            BelongsTo::make(__('Vendor'), 'vendor')
+                ->searchable()->withoutTrashed(),
 
             Text::make('Name')->rules(REQUIRED_STRING_VALIDATION),
 

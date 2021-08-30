@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //Actions routes
 Route::post('changeCurrency', 'Common\MiscController@changeCurrency')->name('front.currencySwitch');
+Route::post('changeCity', 'Common\MiscController@changeCity')->name('front.citySwitch');
 Route::get('introduce/{type}', 'Common\MiscController@introduce')->name('front.introduce');
 
 Route::group([

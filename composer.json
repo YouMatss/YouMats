@@ -93,7 +93,8 @@
         "files": [
             "app/Helpers/Files/baseHelpers.php",
             "app/Helpers/Files/Constants.php",
-            "app/Helpers/Files/Currency.php"
+            "app/Helpers/Files/Currency.php",
+            "app/Helpers/Files/City.php"
         ]
     },
     "autoload-dev": {
