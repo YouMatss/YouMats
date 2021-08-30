@@ -51,7 +51,8 @@ class Product extends Resource
             BelongsTo::make('Vendor')
                 ->withoutTrashed()->searchable(),
 
-            BelongsToManyField::make('Tags')->hideFromIndex(),
+            BelongsToManyField::make('Tags')
+                ->optionsLabel('translated_name')->hideFromIndex(),
 
             CKEditor::make('Short Description', 'short_desc')
                 ->hideFromIndex()->translatable()
