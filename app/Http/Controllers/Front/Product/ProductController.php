@@ -18,6 +18,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 class ProductController extends Controller
 {
     public function index($category_slug, $slug) {
+        setCityLocation();
         $data['product'] = Product::with('category', 'tags', 'vendor')->where(['slug' => $slug, 'active' => 1])->first();
         abort_if(!$data['product'], 404);
         if(Session::has('city')) {
