@@ -20,6 +20,8 @@ if (!function_exists('setCityLocation')) {
                     $city = City::where('name', 'LIKE', '%'.$location->cityName.'%')->first();
                     if($city) {
                         Session::put('city', $city);
+                    } else {
+                        setDefaultCity();
                     }
                 } else {
                     setDefaultCity();
