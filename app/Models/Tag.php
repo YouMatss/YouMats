@@ -12,6 +12,8 @@ class Tag extends Model {
 
     public $translatable = ['name', 'desc', 'meta_title', 'meta_desc', 'meta_keywords'];
 
+    protected $appends = ['translated_name'];
+
     public function products() {
         return $this->belongsToMany(Product::class)->where('active', 1);
     }
@@ -19,7 +21,7 @@ class Tag extends Model {
     /**
      * @return mixed
      */
-    public function getNameAttribute() {
+    public function getTranslatedNameAttribute() {
         return $this->getTranslations('name')[app()->getLocale()];
     }
 
