@@ -7,30 +7,18 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Product;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use Stevebauman\Location\Facades\Location;
 
 class CategoryController extends Controller
 {
-    public function getCityByLocation() {
-        $ip = Request::ip();
-        $location = Location::get($ip);
-        if($location) {
-            $city = City::where('name', 'LIKE', '%'.$location->cityName.'%')->first();
-            if($city) {
-                return $location->cityName;
-            }
-        }
-        return null;
-    }
-
     public function index($category_slug) {
         $data['category'] = Category::whereSlug($category_slug)->first();
         abort_if(!$data['category'], 404);
 
 //        $city = City::where('name', 'LIKE', '%'.$this->getCityByLocation().'%')->first();
-        $data['city_location'] = $this->getCityByLocation();
         $data['products'] = $data['category']->products()
 //            ->join('vendors', 'vendors.id', '=', 'products.vendor_id')
 //            ->join('vendor_branches', 'vendor_branches.vendor_id', '=', 'vendors.id')

@@ -13,6 +13,8 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Znck\Eloquent\Traits\BelongsToThrough;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model implements Sortable, HasMedia, Buyable
 {
@@ -25,7 +27,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      *
      * @var array
      */
-    protected $appends = ['image_url', 'delivery'];
+    protected $appends = ['image_url'];
 
     public function getMetaTitleAttribute() {
         if(!isset($this->getTranslations('meta_title')[app()->getLocale()]))
@@ -66,40 +68,71 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return $this->vendor->select('latitude', 'longitude')->first();
     }
 
-    public function getDeliveryAttribute() {
-        if(isset($this->shipping)) {
-            return $this->shipping;
-        } elseif(isset($this->category->shipping)) {
-            return  $this->category->shipping;
-        } else {
-            return null;
+    public function delivery($current_city = null) {
+        if($this->specific_shipping) {
+            if($this->shipping_prices) {
+                foreach (json_decode($this->shipping_prices, true) as $shipping) {
+                    if($shipping['cities'] == $current_city) {
+                        return $shipping;
+                    }
+                }
+            }
         }
+        if (isset($this->shipping)) {
+            if($this->shipping->cities_prices) {
+                foreach ($this->shipping->cities_prices as $shipping) {
+                    if($shipping['cities'] == $current_city) {
+                        return $shipping;
+                    }
+                }
+            }
+            if($this->shipping->default_price) {
+                return [
+                    'price' => $this->shipping->default_price,
+                    'time' => $this->shipping->default_time,
+                    'format' => $this->shipping->default_format,
+                ];
+            }
+        }
+        return null;
     }
 
-    public function category() {
+    /**
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function unit() {
+    /**
+     * @return BelongsTo
+     */
+    public function unit(): BelongsTo
+    {
         return $this->belongsTo(Unit::class);
     }
 
-    public function vendor() {
+    /**
+     * @return BelongsTo
+     */
+    public function vendor(): BelongsTo
+    {
         return $this->belongsTo(Vendor::class);
     }
 
-//    public function branches() {
-//        return $this->belongsToMany(VendorBranch::class, Vendor::class, 'vendor_id', 'id');
-//    }
-
-    public function tags() {
+    /**
+     * @return BelongsToMany
+     */
+    public function tags(): BelongsToMany
+    {
         return $this->belongsToMany(Tag::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function shipping(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function shipping(): BelongsTo
     {
         return $this->belongsTo(Shipping::class);
     }

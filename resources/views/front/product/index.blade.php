@@ -102,6 +102,19 @@
                                         <span class="text-green font-weight-bold">In stock</span>
 {{--                                    @endif--}}
                                 </div>
+                                @if(isset($delivery))
+                                    <div>
+                                        <span>{{__('product.delivery_to_your_city')}}: <b>{{Session::get('city')->name}}</b></span>
+                                        (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>)
+                                        <br/>
+                                        <span>{{__('general.price')}}: <b>{{getCurrency('symbol')}} {{round($delivery['price'] * getCurrency('rate'), 2)}}</b></span> <br/>
+                                        <span>{{__('general.time')}}: <b>{{$delivery['time'] . ' ' . $delivery['format']}}</b></span>
+                                    </div>
+                                @else
+                                    <div style="color:#F00;">
+                                        {{__('product.no_delivery')}}
+                                    </div>
+                                @endif
                                 @if($product->price)
                                 <div class="mb-3">
                                     <div class="font-size-36">{{getCurrency('symbol')}} {{$product->price}}</div>
@@ -117,7 +130,7 @@
                                     <a href="mailto:info@youmats.com"> <i class="fa fa-envelope"></i> info@youmats.com </a>
                                     @endif
                                     <h3> How to Pay</h3>
-                                    <p>Youmats Support pay on Delivery for That Product</p>
+                                    <p>YouMats Support pay on Delivery for That Product</p>
                                 </div>
                             </div>
 
@@ -277,4 +290,7 @@
             </div>
         </div>
     </div>
+    @if(isset($delivery))
+        @include('front.layouts.partials.change_city')
+    @endif
 @endsection

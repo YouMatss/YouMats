@@ -42,8 +42,8 @@
         </ul>
     </div>
     <div>
-        @if($city_location)
-            {{__('general.city_location_text')}} {{$city_location}}
+        @if(Session::has('city'))
+            {{__('general.city_location_text')}}: {{Session::get('city')->name}}
             (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>)
         @endif
     </div>

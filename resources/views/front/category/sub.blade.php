@@ -139,7 +139,7 @@
             </div>
         </div>
     </div>
-    @if($city_location)
+    @if(Session::has('city'))
         @include('front.layouts.partials.change_city')
     @endif
 @endsection
