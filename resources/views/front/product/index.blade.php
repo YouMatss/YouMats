@@ -113,8 +113,6 @@
                                 @else
                                     <div>
                                         <span style="color:#F00;">{{__('product.no_delivery')}}</span>
-                                        (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>)
-                                        <br/>
                                     </div>
                                 @endif
                                 @if($product->price)
