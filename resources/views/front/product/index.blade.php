@@ -111,8 +111,10 @@
                                         <span>{{__('general.time')}}: <b>{{$delivery['time'] . ' ' . $delivery['format']}}</b></span>
                                     </div>
                                 @else
-                                    <div style="color:#F00;">
-                                        {{__('product.no_delivery')}}
+                                    <div>
+                                        <span style="color:#F00;">{{__('product.no_delivery')}}</span>
+                                        (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>)
+                                        <br/>
                                     </div>
                                 @endif
                                 @if($product->price)
