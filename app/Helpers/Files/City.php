@@ -5,18 +5,29 @@ use Illuminate\Support\Facades\Request;
 use Stevebauman\Location\Facades\Location;
 use App\Models\City;
 
+function setDefaultCity() {
+    $defaultCity = City::find(1);
+    Session::put('city', $defaultCity);
+}
+
 if (!function_exists('setCityLocation')) {
     function setCityLocation() {
-        try {
-            $ip = Request::ip();
-            $location = Location::get($ip);
-            if($location) {
-                $city = City::where('name', 'LIKE', '%'.$location->cityName.'%')->first();
-                if($city) {
-                    Session::put('city', $city);
+        if(!Session::has('city')) {
+            try {
+                $ip = Request::ip();
+                $location = Location::get($ip);
+                if($location) {
+                    $city = City::where('name', 'LIKE', '%'.$location->cityName.'%')->first();
+                    if($city) {
+                        Session::put('city', $city);
+                    }
+                } else {
+                    setDefaultCity();
                 }
+            } catch (\Exception $e) {
+                setDefaultCity();
             }
-        } catch (\Exception $e) {}
+        }
     }
 }
 
