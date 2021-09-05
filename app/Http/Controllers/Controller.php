@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Page;
+use App\Models\Partner;
 use App\Models\Vendor;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -20,6 +21,7 @@ class Controller extends BaseController
     public function __construct() {
         $data['categories'] = Category::withDepth()->having('depth', '=', 0)->orderBy('sort')->get();
         $data['featuredVendors'] = Vendor::where('isFeatured', '1')->get();
+        $data['featuredPartners'] = Partner::where('featured', '1')->get();
         $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
         $data['pages'] = Page::orderBy('sort')->get();
         $data['footer_categories'] = Category::where('show_in_footer', '1')->orderBy('created_at', 'desc');

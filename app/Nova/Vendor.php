@@ -62,13 +62,20 @@ class Vendor extends Resource
 
            SimpleRepeatable::make('Contacts', 'contacts', [
               Text::make('Person Name', 'person_name')
-                ->rules(REQUIRED_STRING_VALIDATION),
+                  ->rules(REQUIRED_STRING_VALIDATION),
               Text::make('Email', 'email')
-                ->rules(REQUIRED_EMAIL_VALIDATION),
+                  ->rules(REQUIRED_EMAIL_VALIDATION),
               Text::make('Phone', 'phone')
-                ->rules(REQUIRED_STRING_VALIDATION),
+                  ->rules(REQUIRED_STRING_VALIDATION),
               Text::make('Position', 'position')
-                ->rules(NULLABLE_STRING_VALIDATION),
+                  ->rules(NULLABLE_STRING_VALIDATION),
+              Select::make('With?', 'with')
+                  ->options([
+                      'individual' => 'Individual',
+                      'company' => 'Company',
+                      'both' => 'Both'
+                  ])
+                  ->rules(REQUIRED_STRING_VALIDATION),
            ]),
 
             Select::make('Type')->options([
