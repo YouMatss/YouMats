@@ -12,6 +12,7 @@ define("COMPANY_PATH", 'company');
 define("VENDOR_PATH", 'vendor');
 define("VENDOR_LOGO", 'vendor_logo');
 define("VENDOR_COVER", 'vendor_cover');
+define("PARTNER_PATH", 'partner');
 define("CURRENCY_PATH", 'currency');
 define("INQUIRE_PATH", 'inquire');
 define("PAGE_PATH", 'page');

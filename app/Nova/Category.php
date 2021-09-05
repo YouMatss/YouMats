@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\Category\CategoryType;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
@@ -146,7 +147,9 @@ class Category extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new CategoryType
+        ];
     }
 
     /**

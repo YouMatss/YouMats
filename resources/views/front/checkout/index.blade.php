@@ -27,70 +27,76 @@
                         {{ __('Returning customer?') }} <a href="#" class="alert-link collapsed text-white" data-toggle="collapse" data-target="#shopCartOne" aria-expanded="false" aria-controls="shopCartOne">Click here to login</a>
                     </div>
                     <div id="shopCartOne" class="border border-top-0 collapse" aria-labelledby="shopCartHeadingOne" data-parent="#shopCartAccordion" style="">
-                        <!-- Form -->
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-
-                            <div class="row">
-                                <div class="mb-4">
-                                    <h1 class="text-center col-md-12">{{ __('auth.login') }}</h1>
-                                </div>
-                            </div>
+                        <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="js-form-message form-group mb-5">
-                                        <label class="form-label" for="email">{{ __('auth.email') }}</label>
-                                        <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                        @error('email')
-                                        <span class="invalid-feedback" role="alert">
+                                    <!-- Form -->
+                                    <form method="POST" action="{{ route('login') }}">
+                                        @csrf
+
+                                        <div class="row">
+                                            <div class="mb-4">
+                                                <h1 class="text-center col-md-12">{{ __('auth.login') }}</h1>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="js-form-message form-group mb-5">
+                                                    <label class="form-label" for="email">{{ __('auth.email') }}</label>
+                                                    <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                                    @error('email')
+                                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                        @enderror
-                                    </div>
-                                </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
 
-                                <div class="col-md-12">
-                                    <div class="js-form-message form-group mb-5">
-                                        <label class="form-label" for="password">{{ __('auth.password_input') }}</label>
-                                        <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                        @error('password')
-                                        <span class="invalid-feedback" role="alert">
+                                            <div class="col-md-12">
+                                                <div class="js-form-message form-group mb-5">
+                                                    <label class="form-label" for="password">{{ __('auth.password_input') }}</label>
+                                                    <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                                    @error('password')
+                                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                        @enderror
-                                    </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="remember">
+                                                        {{ __('auth.remember_me') }}
+                                                    </label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <button type="submit" class="btn btn-primary-dark-w px-5 text-white">{{ __('auth.login') }}</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                @if (Route::has('password.request'))
+                                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                        {{ __('auth.forget_password') }}
+                                                    </a>
+                                                @endif
+                                                <a class="btn btn-link" href="{{route('register')}}">
+                                                    {{ __('auth.register') }}
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                    <!-- End Form -->
                                 </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="remember">
-                                            {{ __('auth.remember_me') }}
-                                        </label>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-12">
-                                    <div class="mb-3">
-                                        <button type="submit" class="btn btn-primary-dark-w px-5 text-white">{{ __('auth.login') }}</button>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('auth.forget_password') }}
-                                        </a>
-                                    @endif
-                                    <a class="btn btn-link" href="{{route('register')}}">
-                                        {{ __('auth.register') }}
-                                    </a>
-                                </div>
-
                             </div>
-                        </form>
-                        <!-- End Form -->
+                        </div>
                     </div>
                 </div>
                 <!-- End Card -->
@@ -106,18 +112,24 @@
                     Have a coupon? <a href="#" class="alert-link text-white" data-toggle="collapse" data-target="#shopCartTwo" aria-expanded="false" aria-controls="shopCartTwo">Click here to enter your code</a>
                 </div>
                 <div id="shopCartTwo" class="collapse border border-top-0" aria-labelledby="shopCartHeadingTwo" data-parent="#shopCartAccordion1" style="">
-                    <!-- Apply coupon Form -->
-                    <form class="js-focus-state" action="{{ route('apply.coupon') }}" method="POST">
-                        @csrf
-                        <label class="sr-only">{{ __('Coupon code') }}</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" @if($coupon) disabled @endif name="code" value="@if($coupon) {{ $coupon->name }} @else {{ old('code') }} @endif" placeholder="Coupon code" id="couponCode" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
-                            <div class="input-group-append">
-                                <input type="submit" class="btn btn-block btn-dark px-4" @if($coupon) disabled @endif value="Apply coupon" />
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12" style="padding: 15px">
+                                <!-- Apply coupon Form -->
+                                <form class="js-focus-state" action="{{ route('apply.coupon') }}" method="POST">
+                                    @csrf
+                                    <label class="sr-only">{{ __('Coupon code') }}</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" @if($coupon) disabled @endif name="code" value="@if($coupon) {{ $coupon->name }} @else {{ old('code') }} @endif" placeholder="Coupon code" id="couponCode" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
+                                        <div class="input-group-append">
+                                            <input type="submit" class="btn btn-block btn-dark px-4" @if($coupon) disabled @endif value="Apply coupon" />
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- End Apply coupon Form -->
                             </div>
                         </div>
-                    </form>
-                    <!-- End Apply coupon Form -->
+                    </div>
                 </div>
             </div>
             <!-- End Card -->
@@ -243,6 +255,27 @@
                         <!-- End Title -->
 
                         <!-- Billing Form -->
+                        <div class="js-form-message form-group mb-5">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="select_reg @if(!is_company()) active @endif" for="registerAsIndividual">
+                                        <input type="radio" name="type" value="individual" id="registerAsIndividual">
+                                        {{ __('auth.register_as_individual') }}
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="select_reg @if(is_company()) active @endif" for="registerAsCompany">
+                                        <input type="radio" name="type" value="company" id="registerAsCompany">
+                                        {{ __('auth.register_as_company') }}
+                                    </label>
+                                </div>
+                            </div>
+                            @error('type')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <!-- Input -->
@@ -279,14 +312,14 @@
                                 <!-- Input -->
                                 <div class="js-form-message mb-6">
                                     <label class="form-label">
-                                        {{ is_company() ? 'Delivery Location' : 'Address' }}
+                                        {{ is_company() ? 'Delivery Address' : 'Address' }}
                                         <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->address ?? old('address') }}" name="address" aria-label="470 Lucy Forks" required="" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
                                     @error('address')
                                     <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                                 <!-- End Input -->
@@ -372,8 +405,8 @@
                                     <input type="email" class="form-control" value="{{ Auth::guard('web')->user()->email ?? old('email') }}" name="email" aria-label="jackwayley@gmail.com" required="" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                                 <!-- End Input -->
@@ -388,7 +421,11 @@
                                         </label>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input type="number" class="form-control" value="{{ old('delivery_time') }}" name="delivery_time" min="1" max="10" step="1" aria-label="{{ date('d-m-Y') }}" required data-msg="Please enter a delivery time." data-error-class="u-has-error" data-success-class="u-has-success">
+                                                <select class="form-control" name="delivery_time" required data-msg="Please enter a delivery time." data-error-class="u-has-error" data-success-class="u-has-success">
+                                                    @for($i = 1; $i<=10;$i++)
+                                                        <option value="{{$i}}" @if($i == old('delivery_time')) selected @endif>{{$i}}</option>
+                                                    @endfor
+                                                </select>
                                             </div>
                                             <div class="col-md-6">
                                                 <select class="form-control" name="delivery_time_unit">
@@ -421,13 +458,9 @@
                         </div>
                         <!-- End Billing Form -->
 
-                        <!-- Accordion -->
                         @if(!Auth::guard('web')->check())
-                        <div id="shopCartAccordion2" class="accordion rounded mb-6">
-                            <!-- Card -->
-                            <div class="card border-0">
-                                <div aria-labelledby="shopCartHeadingThree" style="">
-                                    <!-- Form Group -->
+                            <div class="row">
+                                <div class="col-md-6">
                                     <div class="js-form-message form-group py-5">
                                         <label class="form-label" for="signinSrPasswordExample1">
                                             Create account password
@@ -436,12 +469,12 @@
                                         <input type="password" class="form-control" name="password" id="signinSrPasswordExample1" placeholder="********" aria-label="********" required="" data-msg="Enter password." data-error-class="u-has-error" data-success-class="u-has-success">
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
-                                    <!-- End Form Group -->
-                                    <!-- Form Group -->
+                                </div>
+                                <div class="col-md-6">
                                     <div class="js-form-message form-group py-5">
                                         <label class="form-label" for="signinSrPasswordExample1">
                                             Confirm account password
@@ -450,28 +483,12 @@
                                         <input type="password" class="form-control" name="password_confirmation" id="signinSrPasswordExample2" placeholder="********" aria-label="********" required="" data-msg="Enter password." data-error-class="u-has-error" data-success-class="u-has-success">
                                         @error('password_confirmation')
                                         <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <!-- End Form Group -->
-                                    <div class="js-form-message form-group mb-5">
-                                        <label for="type" class="form-label">Type <span class="text-danger">*</span></label>
-                                        <select class="form-control @error('name') is-invalid @enderror" id="type" name="type" required>
-                                            <option value="individual" @if(!is_company()) selected @endif>Individual</option>
-                                            <option value="company" @if(is_company()) selected @endif>Company</option>
-                                        </select>
-                                        @error('type')
-                                        <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
-                            <!-- End Card -->
-                        </div>
-                        <!-- End Accordion -->
                         @endif
                         <!-- Input -->
                         <div class="js-form-message mb-6">
@@ -493,4 +510,17 @@
 @section('extraScripts')
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
     <script src="{{front_url()}}/assets/js/map.js"></script>
+    <script>
+        $(function(){
+            @if(!is_company())
+            $('#registerAsIndividual').attr('checked', 'checked');
+            @elseif(is_company())
+            $('#registerAsCompany').attr('checked', 'checked');
+            @endif
+        });
+        $('.select_reg').on('click', function () {
+            $('.select_reg').removeClass('active');
+            $(this).addClass('active');
+        });
+    </script>
 @endsection

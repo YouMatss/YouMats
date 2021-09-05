@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Anaseqal\NovaImport\NovaImport;
 use App\Nova\Admin;
-use App\Nova\Attribute;
 use App\Nova\Car;
 use App\Nova\CarType;
 use App\Nova\Category;
@@ -32,6 +31,7 @@ use App\Nova\Metrics\UsersStatus;
 use App\Nova\Metrics\UsersType;
 use App\Nova\Order;
 use App\Nova\Page;
+use App\Nova\Partner;
 use App\Nova\PaymentGateway;
 use App\Nova\Product;
 use App\Nova\Quote;
@@ -49,6 +49,7 @@ use Bernhardh\NovaTranslationEditor\NovaTranslationEditor;
 use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
+use DigitalCreative\CollapsibleResourceManager\Resources\InternalLink;
 use DigitalCreative\CollapsibleResourceManager\Resources\NovaResource;
 use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
 use Illuminate\Http\Request;
@@ -206,6 +207,20 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'expanded' => true,
                         'icon' => '',
                         'resources' => [
+//                            InternalLink::make([
+//                                'label' => 'View Categories',
+//                                'badge' => null, // can be used to indicate the number of updates or notifications in this resource
+//                                'icon' => null, // HTML/SVG string or callback that produces one, see below
+//                                'target' => '_self',
+//                                'path' => '/resources/categories?categories_page=1&categories_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXENhdGVnb3J5XFxDYXRlZ29yeVR5cGUiLCJ2YWx1ZSI6IjEifV0%3D'
+//                            ]),
+//                            InternalLink::make([
+//                                'label' => 'View SubCategories',
+//                                'badge' => null, // can be used to indicate the number of updates or notifications in this resource
+//                                'icon' => null, // HTML/SVG string or callback that produces one, see below
+//                                'target' => '_self',
+//                                'path' => '/resources/categories?categories_page=1&categories_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXENhdGVnb3J5XFxDYXRlZ29yeVR5cGUiLCJ2YWx1ZSI6IjAifV0%3D'
+//                            ]),
                             Category::class,
                             Product::class,
                             Tag::class,
@@ -245,6 +260,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'resources' => [
                             Admin::class,
                             Team::class,
+                            Partner::class,
                             Slider::class,
                             Group::make([
                                 'label' => 'Settings',
