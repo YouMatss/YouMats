@@ -69,8 +69,12 @@ class Team extends Resource
 
             Text::make('Name')
                 ->sortable()
-                ->translatable()
+                ->translatable()->hideFromIndex()
                 ->rules(REQUIRED_STRING_VALIDATION),
+
+            Text::make('Name', 'name', fn() =>
+                '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
+            )->asHtml()->onlyOnIndex(),
 
             Text::make('Position')
                 ->sortable()

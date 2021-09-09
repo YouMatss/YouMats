@@ -13,9 +13,9 @@ class ChangeCategoryIdInProducts extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->unsignedBigInteger('category_id')->nullable()->change();
-        });
+        $table_prefix = DB::getTablePrefix();
+
+        DB::statement('ALTER TABLE `' . $table_prefix . 'products` MODIFY `category_id` BIGINT UNSIGNED NULL;');
     }
 
     /**
@@ -25,8 +25,8 @@ class ChangeCategoryIdInProducts extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            //
-        });
+        $table_prefix = DB::getTablePrefix();
+
+        DB::statement('ALTER TABLE `' . $table_prefix . 'products` MODIFY `category_id` BIGINT UNSIGNED NOT NULL;');
     }
 }
