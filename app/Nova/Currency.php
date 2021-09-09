@@ -29,9 +29,14 @@ class Currency extends Resource
 
             Text::make('Name')
                 ->sortable()
+                ->hideFromIndex()
                 ->rules(REQUIRED_STRING_VALIDATION)
                 ->creationRules('unique:currencies,name')
                 ->updateRules('unique:currencies,name,{{resourceId}}'),
+
+            Text::make('Name', 'name', fn() =>
+                '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
+            )->asHtml()->onlyOnIndex(),
 
             Medialibrary::make('Image', CURRENCY_PATH)->fields(function () {
                 return [

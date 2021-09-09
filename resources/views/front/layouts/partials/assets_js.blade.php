@@ -162,21 +162,27 @@
 
         //HANDLE CART
         $(document).on('click', '.btn-add-cart', function(){
-            let url = $(this).data('url');
+            let url  = $(this).data('url'),
+                btn = $(this);
 
             $.ajax({
                 type: 'POST',
                 url: url,
                 data: { _token: '{{ csrf_token() }}' }
             })
-                .done(function(response) {
-                    $('.cartCount').html(response.count);
-                    $('.cartTotal').html(response.total);
-                    toastr.success(response.message);
-                })
-                .fail(function(response) {
-                    toastr.error(response);
-                })
+            .done(function(response) {
+                $('.cartCount').html(response.count);
+                $('.cartTotal').html(response.total);
+                toastr.success(response.message);
+                btn.css('background-color', 'green');
+                btn.css('border-color', 'green');
+                btn.find('i').removeClass('fa-file-alt');
+                btn.find('i').removeClass('ec ec-add-to-cart');
+                btn.find('i').addClass('fa fa-check');
+            })
+            .fail(function(response) {
+                toastr.error(response);
+            })
         });
 
         //WISHLIST

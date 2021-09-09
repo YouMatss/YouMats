@@ -54,7 +54,12 @@ class Branch extends Resource
             Text::make(__('Name'), 'name')
                 ->rules(REQUIRED_STRING_VALIDATION)
                 ->translatable()
+                ->hideFromIndex()
                 ->sortable(),
+
+            Text::make('Name', 'name', fn() =>
+                '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
+            )->asHtml()->onlyOnIndex(),
 
             Text::make(__('Phone Number'), 'phone_number')
                 ->rules(REQUIRED_STRING_VALIDATION),
