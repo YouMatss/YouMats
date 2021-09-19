@@ -175,7 +175,6 @@ class Product extends Resource
                         return $collection;
                     })
                     ->placeholder('Choose Attributes Values')
-                    ->saveAsJSON()
                     ->hideFromIndex(),
             ])),
 
