@@ -160,17 +160,23 @@ class Product extends Resource
                 Multiselect::make('Attributes')
                     ->options(function () {
                         $collection = [];
-                        $data = \App\Models\Attribute::with('values')->where('category_id', $this->category_id)->get();
+                        $query = \App\Models\Attribute::with('values');
+
+                        if(!is_null($this->category_id))
+                            $query->where('category_id', $this->category_id);
+
+                        $data = $query->get();
+
                         foreach ($data as $row) {
                             foreach ($row->values as $value) {
-                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key];
+                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key . '. Category: (' . $row->category->name . ')'];
                             }
                         }
                         return $collection;
                     })
                     ->placeholder('Choose Attributes Values')
                     ->saveAsJSON()
-                    ->hideFromIndex()->hideWhenCreating(),
+                    ->hideFromIndex(),
             ])),
 
             (new Panel('SEO', [
