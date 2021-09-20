@@ -136,7 +136,7 @@
         </div>
         <!-- End Accordion -->
 
-        <form class="js-validate" novalidate="novalidate" action="{{ route('checkout') }}" method="POST">
+        <form class="js-validate" novalidate="novalidate" action="{{ route('checkout') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-lg-5 order-lg-2 mb-7 mb-lg-0">
@@ -214,7 +214,11 @@
                                                 </div>
                                                 <!-- End Card -->
                                             @endforeach
-
+                                            @error('payment_method')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                         <!-- End Basics Accordion -->
                                     </div>
@@ -253,28 +257,29 @@
                             <h3 class="section-title mb-0 pb-2 font-size-25">Billing details</h3>
                         </div>
                         <!-- End Title -->
-
                         <!-- Billing Form -->
                         <div class="js-form-message form-group mb-5">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label class="select_reg @if(!is_company()) active @endif" for="registerAsIndividual">
-                                        <input type="radio" name="type" value="individual" id="registerAsIndividual">
-                                        {{ __('auth.register_as_individual') }}
-                                    </label>
+                            @if(!auth()->guard('web')->check() && !session()->has('userType'))
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="select_reg @if(!is_company()) active @endif" for="registerAsIndividual">
+                                            <input type="radio" name="type" value="individual" id="registerAsIndividual">
+                                            {{ __('auth.register_as_individual') }}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="select_reg @if(is_company()) active @endif" for="registerAsCompany">
+                                            <input type="radio" name="type" value="company" id="registerAsCompany">
+                                            {{ __('auth.register_as_company') }}
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="select_reg @if(is_company()) active @endif" for="registerAsCompany">
-                                        <input type="radio" name="type" value="company" id="registerAsCompany">
-                                        {{ __('auth.register_as_company') }}
-                                    </label>
-                                </div>
-                            </div>
-                            @error('type')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                @error('type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            @endif
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -299,8 +304,8 @@
                                         <label class="form-label">
                                             Phone
                                         </label>
-                                        <input type="tel" class="form-control phoneNumber" value="{{ Auth::guard('web')->user()->phone ?? old('phone') }}" name="phone" aria-label="Phone Number" data-msg="Please enter a phone number." data-error-class="u-has-error" data-success-class="u-has-success">
-                                        @error('phone')
+                                        <input type="tel" class="form-control phoneNumber" value="{{ Auth::guard('web')->user()->phone ?? old('phone') }}" name="phone_number" aria-label="Phone Number" data-msg="Please enter a phone number." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -379,7 +384,7 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="dropdown bootstrap-select form-control js-select dropdown-select">
-                                            <select class="form-control js-select selectpicker dropdown-select" name="city" required="" data-msg="Please select state." data-error-class="u-has-error" data-success-class="u-has-success" data-live-search="true" data-style="form-control border-color-1 font-weight-normal" tabindex="-98">
+                                            <select class="form-control js-select selectpicker dropdown-select" name="city" required="" data-msg="Please select city." data-error-class="u-has-error" data-success-class="u-has-success" data-live-search="true" data-style="form-control border-color-1 font-weight-normal" tabindex="-98">
                                                 <option value="">Select city</option>
                                                 @foreach($cities as $city)
                                                     <option value="{{ $city->id }}" @if($city->id == old('city')) selected @endif>{{ $city->name }}</option>
@@ -444,10 +449,21 @@
                                     </div>
                                     <!-- End Input -->
                                 </div>
+                                <div class="col-md-12">                                       
+                                    <label class="form-label">
+                                        {{ __('checkout.attachments')}}
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="file" name="attachments[]" class="form-control" multiple />
+
+                                    @error('attachments')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    @enderror
+                                </div>
                                 <div class="col-md-12 mb-3">
                                     <hr>
                                     <div class="js-form-message form-group mb-5">
-                                        <label class="form-label">{{ __('general.location') }}</label>
+                                        <label class="form-label">{{ __('checkout.location') }}</label>
                                         {!! generate_map() !!}
                                         <input type="hidden" class="lat" value="{{old('latitude')}}" readonly name="latitude" required>
                                         <input type="hidden" class="lng" value="{{old('longitude')}}" readonly name="longitude" required>

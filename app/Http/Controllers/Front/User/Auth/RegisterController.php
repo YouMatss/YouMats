@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Front\User\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Country;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Notifications\CompanyRegistered;
 use App\Rules\TopLevelEmailDomainValidator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Foundation\Application;
@@ -97,6 +99,10 @@ class RegisterController extends Controller
         if(isset($data['files']))
             foreach($data['files'] as $file)
                 $user->addMedia($file)->toMediaCollection(COMPANY_PATH);
+
+        if($data['type'] == 'company')
+            foreach(Admin::all() as $admin)
+                $admin->notify(new CompanyRegistered($user));
 
         return $user;
     }

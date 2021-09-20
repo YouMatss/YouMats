@@ -204,6 +204,26 @@
                 toastr.error(response.responseJSON.message ?? {{ __('Error') }});
             })
         });
+
+        let inputs = document.querySelectorAll(".phoneNumber");
+
+        $.each(inputs, function(key, value){
+            window.intlTelInput(value, {
+                utilsScript: '{{front_url()}}/assets/js/utils.js',
+                formatOnDisplay: true,
+                autoPlaceholder: true,
+                initialCountry: "auto",
+                hiddenInput: "phone",
+                separateDialCode: true,
+                autoPlaceholder: "polite",
+                geoIpLookup: function(success, failure) {
+                    $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                        var countryCode = (resp && resp.country) ? resp.country : "sa";
+                        success(countryCode);
+                    });
+                }
+            });
+        });
     });
 
     // initialization of quantity counter

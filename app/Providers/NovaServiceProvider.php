@@ -332,6 +332,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     return $request->user()->isSuperAdmin();
                 }),
             new NovaImport,
+            \Mirovit\NovaNotifications\NovaNotifications::make(),
         ];
     }
 

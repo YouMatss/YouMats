@@ -234,11 +234,6 @@
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_phone')}}</label>
                                         <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <span class="fas fa-phone"></span>
-                                                </span>
-                                            </div>
                                             <input type="tel" class="form-control phoneNumber" @if(auth()->check()) value="{{ auth()->user()->phone }}" disabled @endif>
                                         </div>
                                     </div>
