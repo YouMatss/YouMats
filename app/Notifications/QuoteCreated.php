@@ -49,7 +49,7 @@ class QuoteCreated extends Notification
         return \Mirovit\NovaNotifications\Notification::make()
             ->info('A new quote has been placed.')
             ->subtitle('There is a new quote in the system - Placed by:' . $this->user->name . '!')
-            ->routeDetail('quotes', $this->order->id)
+            ->routeDetail('quotes', $this->quote->id)
             ->toArray();
     }
 }
