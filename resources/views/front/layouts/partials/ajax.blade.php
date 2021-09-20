@@ -93,25 +93,6 @@
             });
         });
 
-        let inputs = document.querySelectorAll(".phoneNumber");
-
-        $.each(inputs, function(key, value){
-            window.intlTelInput(value, {
-                utilsScript: '{{front_url()}}/assets/js/utils.js',
-                formatOnDisplay: true,
-                autoPlaceholder: true,
-                initialCountry: "auto",
-                hiddenInput: "phone",
-                separateDialCode: true,
-                geoIpLookup: function(success, failure) {
-                    $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-                        var countryCode = (resp && resp.country) ? resp.country : "sa";
-                        success(countryCode);
-                    });
-                }
-            });
-        });
-
         // inquireForm Request
         $("#inquireForm").submit(function (e) {
             e.preventDefault();
@@ -134,7 +115,8 @@
                 success: function (response) {
                     if (response.status) {
                         toastr.success(response.message);
-                        inputs.find("input, textarea").val("");
+                        inputs.find("input, textarea, file").val("");
+                        $("#file-chosen").remove();
                         $("#sidebarContent").addClass('u-unfold--hidden');
                     } else
                         toastr.warning(response.message);

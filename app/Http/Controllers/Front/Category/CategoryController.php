@@ -58,7 +58,7 @@ class CategoryController extends Controller
                 'active' => 1,
                 'category_id' => $category_id
             ])
-//            ->allowedSorts('vendor.branches.city_id')
+            ->orderBy('updated_at', 'DESC')
             ->with('category'/*, 'vendor', 'vendor.branches'*/)
             ->paginate(20);
 
