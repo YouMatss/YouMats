@@ -405,9 +405,6 @@
                                                                    href="#" aria-haspopup="true" aria-expanded="false">{{__('general.other_categories')}}</a>
 
                                                                 <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="otherCategories">
-                                                                    <div class="vmm-bg">
-                                                                        <img class="img-fluid" src="{{front_url()}}/assets/img/logo.png" alt="YouMats" title="YouMats">
-                                                                    </div>
                                                                     <div class="row u-header__mega-menu-wrapper">
                                                                         <div class="col mb-3 mb-sm-0">
                                                                             <span class="u-header__sub-menu-title">{{__('general.other_categories')}}</span>

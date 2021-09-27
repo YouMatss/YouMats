@@ -19,7 +19,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function __construct() {
-        $data['categories'] = Category::withDepth()->having('depth', '=', 0)->orderBy('sort')->get();
+        $data['categories'] = Category::withDepth()->having('depth', '=', 0)->where('category', '1')->orderBy('sort')->get();
         $data['featuredVendors'] = Vendor::where('isFeatured', '1')->get();
         $data['featuredPartners'] = Partner::where('featured', '1')->get();
         $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
