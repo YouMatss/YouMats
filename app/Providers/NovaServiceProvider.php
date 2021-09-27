@@ -224,6 +224,20 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Category::class,
                             Product::class,
                             Tag::class,
+                            InternalLink::make([
+                                'label' => 'Create Main Category',
+                                'target' => '_self',
+                                'badge' => null,
+                                'icon' => null,
+                                'path' => '/resources/main-categories/new'
+                            ]),
+                            InternalLink::make([
+                                'label' => 'Create Sub Category',
+                                'target' => '_self',
+                                'badge' => null,
+                                'icon' => null,
+                                'path' => '/resources/sub-categories/new'
+                            ]),
                         ]
                     ]),
                     TopLevelResource::make([
@@ -318,6 +332,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     return $request->user()->isSuperAdmin();
                 }),
             new NovaImport,
+            \Mirovit\NovaNotifications\NovaNotifications::make(),
         ];
     }
 

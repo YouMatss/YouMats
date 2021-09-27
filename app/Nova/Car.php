@@ -59,7 +59,12 @@ class Car extends Resource
             Text::make('Name')
                 ->sortable()
                 ->translatable()
+                ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
+
+            Text::make('Name', 'name', fn() =>
+                '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
+            )->asHtml()->onlyOnIndex(),
 
             Text::make('Model')
                 ->sortable()

@@ -57,9 +57,20 @@ if (!function_exists('getCityNameById')) {
 
 if (!function_exists('cartOrChat')) {
     function cartOrChat($product) {
+
         $chat = '<div><a href="'. route('chat.user.conversations', [$product->vendor_id]) .'" class="btn-add-cart btn-primary transition-3d-hover"><i class="fa fa-comments"></i></a></div>';
         $icon = is_company() ? 'fa fa-file-alt': 'ec ec-add-to-cart';
-        $cart = '<div class="prodcut-add-cart"><button data-url="' . route('cart.add', ['product' => $product]) . '" class="btn-add-cart btn-primary transition-3d-hover"><i class="' . $icon .'"></i></button></div>';
+        $additionalStyle = '';
+
+        $cartItems = \Gloudemans\Shoppingcart\Facades\Cart::instance('cart')->content();
+        foreach($cartItems as $item) {
+            if($item->id == $product->id) {
+                $icon = 'fa fa-check';
+                $additionalStyle = 'background-color: green; border-color: green;';
+            }
+        }
+
+        $cart = '<div class="prodcut-add-cart" ><button style="' . $additionalStyle . '" data-url="' . route('cart.add', ['product' => $product]) . '" class="btn-add-cart btn-primary transition-3d-hover"><i class="' . $icon .'"></i></button></div>';
 
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company() || ($product->type == 'product' && $product->price > 0))

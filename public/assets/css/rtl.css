@@ -303,3 +303,9 @@ h3.font-size-24 {
 .pagination {
     padding: 0 !important;
 }
+
+.eye_show span {
+    top: 16px !important;
+    left: 15px !important;
+    right: auto !important;
+}

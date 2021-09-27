@@ -23,6 +23,7 @@ define("DRIVER_ID", 'driver_id');
 define("DRIVER_LICENSE", 'driver_license');
 define("CAR_PHOTO", 'car_photo');
 define("CAR_LICENSE", 'car_license');
+define('QUOTE_ATTACHMENT', 'quote');
 
 
 // define validation

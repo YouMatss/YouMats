@@ -42,8 +42,12 @@ class Product extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make('Name')->sortable()->translatable()
+            Text::make('Name')->sortable()->translatable()->hideFromIndex()
                 ->rules(REQUIRED_STRING_VALIDATION),
+
+            Text::make('Name', 'name', fn() =>
+                '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
+            )->asHtml()->onlyOnIndex(),
 
             BelongsTo::make('Category')->hideWhenUpdating()->hideWhenCreating(),
             NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
@@ -156,17 +160,22 @@ class Product extends Resource
                 Multiselect::make('Attributes')
                     ->options(function () {
                         $collection = [];
-                        $data = \App\Models\Attribute::with('values')->where('category_id', $this->category_id)->get();
+                        $query = \App\Models\Attribute::with('values');
+
+                        if(!is_null($this->category_id))
+                            $query->where('category_id', $this->category_id);
+
+                        $data = $query->get();
+
                         foreach ($data as $row) {
                             foreach ($row->values as $value) {
-                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key];
+                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key . '. Category: (' . $row->category->name . ')'];
                             }
                         }
                         return $collection;
                     })
                     ->placeholder('Choose Attributes Values')
-                    ->saveAsJSON()
-                    ->hideFromIndex()->hideWhenCreating(),
+                    ->hideFromIndex(),
             ])),
 
             (new Panel('SEO', [

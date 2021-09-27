@@ -8,9 +8,10 @@
         });
     }
     function arrangeData() {
-        let priceFrom, priceTo, attributesCheckboxes, checkedAttributes, categoryId;
-        priceFrom = $("#rangeSliderExample3MinResultCategory").html();
-        priceTo = $("#rangeSliderExample3MaxResultCategory").html();
+        let priceFrom, priceTo, attributesCheckboxes, checkedAttributes, categoryId, url;
+
+        priceFrom = parseInt($("#rangeSliderExample3MinResultCategory").html());
+        priceTo = parseInt($("#rangeSliderExample3MaxResultCategory").html());
         attributesCheckboxes = $(".filter-checkboxes:checkbox");
         categoryId = $("#categoryIdContainer").val();
         checkedAttributes = [];
@@ -21,7 +22,16 @@
             if(checkBoxItem.length > 0)
                 checkedAttributes.push(parseInt(checkBoxItem));
         })
-        attributesFilter(`{{env('APP_URL')}}/filter/${categoryId}?filter[price_from]=${priceFrom}&filter[price_to]=${priceTo}&filter[attributes]=${checkedAttributes}`);
+
+        url = `{{ env('APP_URL')}}/filter/${categoryId}?filter[attributes]=${checkedAttributes}`;
+
+        if(priceFrom > 0)
+            url += `&filter[price_from]=${priceFrom}`;
+        
+        if(priceTo > 0)
+            url += `&filter[price_to]=${priceTo}`;
+
+        attributesFilter(url);
     }
     $(document).on('ready', function () {
         $(document).on('change', '.filter-checkboxes', function() { arrangeData(); });

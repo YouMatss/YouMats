@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Product;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PaymentGateway;
@@ -10,6 +11,8 @@ use App\Models\City;
 use App\Models\Quote;
 use App\Models\QuoteItem;
 use App\Models\User;
+use App\Notifications\OrderCreated;
+use App\Notifications\QuoteCreated;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -59,7 +62,7 @@ class CheckoutController extends Controller
             'payment_method' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_individual())],
             'terms' => 'required|accepted',
             'name' => REQUIRED_STRING_VALIDATION,
-            'phone' => REQUIRED_STRING_VALIDATION,
+            'phone_number' => REQUIRED_STRING_VALIDATION,
             'address' => REQUIRED_STRING_VALIDATION,
             'building_number' => NULLABLE_INTEGER_VALIDATION,
             'street' => NULLABLE_STRING_VALIDATION,
@@ -70,6 +73,7 @@ class CheckoutController extends Controller
             'notes.*.title' => NULLABLE_STRING_VALIDATION,
             'delivery_time' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_company())],
             'delivery_time_unit' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_company()), 'In:day,week,month'],
+            'attachments.*' => NULLABLE_FILE_VALIDATION,
             'latitude' => NULLABLE_STRING_VALIDATION,
             'longitude' => NULLABLE_STRING_VALIDATION
         ];
@@ -79,15 +83,18 @@ class CheckoutController extends Controller
         //Let's create an account for him & login so we complete the order.
         if(!Auth::guard('web')->check()) {
             $rules['email'] = 'required|email|unique:users|max:191';
-            $rules['type'] =  'required|string|In:individual,company';
+
+            if(!session()->has('userType'))
+                $rules['type'] =  'required|string|In:individual,company';
+
             $rules['password'] =  'required|string|min:8|confirmed';
             $data += $request->validate($rules);
 
             $user = User::create([
-                'type' => $data['type'],
+                'type' => session()->has('userType') ? session()->get('userType') : $data['type'],
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'phone' => $data['phone'],
+                'phone' => $data['phone_number'],
                 'address' => $data['address'],
                 'password' => Hash::make($data['password']),
             ]);
@@ -116,14 +123,36 @@ class CheckoutController extends Controller
         $cartItems = Cart::instance('cart')->search(function($cartItems, $rowItems) {
             return $cartItems->id !== 'discount';
         });
+
+        //Prepare data for insertation
         $user = Auth::guard('web')->user();
+        $type = '';
+
+        if($user)
+            $type = $user->type;
+        else if(session()->has('userType'))
+            $type = session()->get('userType');
+        else
+            $type = $data['type'];
+
+        $data['phone'] = $data['phone_number'];
+        unset($data['phone_number']);
+        
 
         //A company is ordering. So let's register all the order as service
-        if($user->type == 'company') {
+        if($type == 'company') {
             $data['quote_no'] = 'QOT-'. strtoupper(uniqid());
             $data['user_id'] = $user->id;
             $data['status'] = 'pending';
             $quote = Quote::create($data);
+
+            foreach(Admin::all() as $admin)
+                $admin->notify(new QuoteCreated($user, $quote));
+
+
+            if($request->has('attachments'))
+                foreach($data['attachments'] as $attachment)
+                    $quote->addMedia($attachment)->toMediaCollection(QUOTE_ATTACHMENT);
 
             foreach($cartItems as $item)
             {
@@ -136,8 +165,11 @@ class CheckoutController extends Controller
             }
             $returnText = "Quote has been placed successfully.";
 
-        } else if ($user->type == 'individual') {
+        } else if ($type == 'individual') {
             $order = Order::create($data);
+
+            foreach(Admin::all() as $admin)
+                $admin->notify(new OrderCreated($user, $order));
 
             foreach($cartItems as $item)
             {

@@ -58,10 +58,22 @@ class CategoryController extends Controller
                 'active' => 1,
                 'category_id' => $category_id
             ])
-//            ->allowedSorts('vendor.branches.city_id')
+            ->orderBy('updated_at', 'DESC')
             ->with('category'/*, 'vendor', 'vendor.branches'*/)
             ->paginate(20);
 
         return view('front.category.productsContainer')->with($data)->render();
+    }
+
+    public function getCityByLocation() {
+        $ip = Request::ip();
+        $location = Location::get($ip);
+        if($location) {
+            $city = City::where('name', 'LIKE', '%'.$location->cityName.'%')->first();
+            if($city) {
+                return $location->cityName;
+            }
+        }
+        return null;
     }
 }

@@ -29,7 +29,12 @@ class Language extends Resource
             Text::make('Name')
                 ->sortable()
                 ->translatable()
+                ->hideFromIndex()
                 ->rules(REQUIRED_STRING_VALIDATION),
+
+            Text::make('Name', 'name', fn() =>
+                '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
+            )->asHtml()->onlyOnIndex(),
 
             Medialibrary::make('Image', LANGUAGE_PATH)->fields(function () {
                 return [

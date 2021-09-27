@@ -165,7 +165,7 @@
                                     <span class="badge badge-danger">{{__('general.login_as_admin')}}</span>
                                 </li>
                             @endif
-                            @if(session('userType') !== 'individual' || !auth()->guard('vendor')->check())
+                            @if(is_company() || auth()->guard('vendor')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                     <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
                                         {{__('general.get_quote')}}
