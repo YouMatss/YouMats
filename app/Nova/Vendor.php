@@ -17,6 +17,7 @@ use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
+use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 
 class Vendor extends Resource
@@ -73,8 +74,9 @@ class Vendor extends Resource
                   ->rules(REQUIRED_EMAIL_VALIDATION),
               Text::make('Phone', 'phone')
                   ->rules(REQUIRED_STRING_VALIDATION),
-              Text::make('Position', 'position')
-                  ->rules(NULLABLE_STRING_VALIDATION),
+              Multiselect::make('Cities', 'cities')
+                  ->options(\App\Models\City::pluck('name', 'id'))
+                  ->saveAsJSON(),
               Select::make('With?', 'with')
                   ->options([
                       'individual' => 'Individual',
