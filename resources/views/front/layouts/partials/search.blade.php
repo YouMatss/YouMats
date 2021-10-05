@@ -209,7 +209,7 @@ $(document).on('ready', function () {
 
     $(document).on('keyup', '#searchProductInput', function(e) {
         window.clearTimeout(timer);
-        if(e.which <= 90 && e.which >= 48) {
+        if((e.which <= 90 && e.which >= 48) || e.which === 8) {
             timer = window.setTimeout(() => {
                 let searchText = $("#searchProductInput").val();
                 doTheMagic("{{ route('products.search') }}?filter[name]=" + searchText);
