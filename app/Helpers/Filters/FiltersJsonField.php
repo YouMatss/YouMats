@@ -9,7 +9,8 @@ class FiltersJsonField implements Filter
 {
     public function __invoke(Builder $query, $value, string $property) : Builder
     {
-        return $query->where("{$property}->en", 'like', '%'. $value . '%')
-                     ->orWhere("{$property}->ar", 'like', '%'. $value .'%');
+        $value = str_replace(' ', '%', $value);
+        return $query->where("{$property}->en", 'LIKE',"%${value}%")
+                     ->orWhere("{$property}->ar", 'LIKE',"%${value}%");
     }
 }

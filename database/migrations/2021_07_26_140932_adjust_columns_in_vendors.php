@@ -17,7 +17,7 @@ class AdjustColumnsInVendors extends Migration
             $table->dropColumn('phone','phone2','whatsapp_phone','address2', 'address');
 
             $table->after('name', function($table) {
-               $table->text('contacts')->default('[]');
+                $table->longText('contacts')->nullable();
             });
         });
     }
