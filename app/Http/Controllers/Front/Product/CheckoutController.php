@@ -137,7 +137,7 @@ class CheckoutController extends Controller
 
         $data['phone'] = $data['phone_number'];
         unset($data['phone_number']);
-        
+
 
         //A company is ordering. So let's register all the order as service
         if($type == 'company') {
@@ -186,6 +186,10 @@ class CheckoutController extends Controller
                     ]);
             }
             $returnText = "Order has been placed successfully.";
+        }
+
+        if(isset($order) && strtolower($order->payment_method) == 'online') {
+            return redirect()->route('payment.form');
         }
 
         //Clear the cart!

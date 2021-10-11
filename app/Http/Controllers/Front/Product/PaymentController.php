@@ -10,9 +10,13 @@ class PaymentController extends Controller
 {
     public string $provider = 'payfort';
 
+    public function form() {
+        return view('front.payment.form');
+    }
+
     public function submit() {
-        $merchant_reference = Payment::use($this->provider)->generateMerchantReference();
-        return Payment::use($this->provider, $merchant_reference)->pay();
+        $merchant_reference = rand(0, getrandmax());
+        return Payment::use('payfort', $merchant_reference)->pay();
     }
 
     public function success() {

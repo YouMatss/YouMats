@@ -51,6 +51,7 @@ class RolesAndPermissionsSeeder extends Seeder
             Permission::create(['name' => 'restore ' . $item, 'guard_name' => 'admin']);
             Permission::create(['name' => 'forceDelete ' . $item, 'guard_name' => 'admin']);
         });
+        Permission::create(['name' => 'seo', 'guard_name' => 'admin']);
 
         // Create a Super Admin Role and assign all Permissions
         $role = Role::create(['name' => 'Super Admin', 'guard_name' => 'admin']);
@@ -58,6 +59,14 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // Give User Super Admin Role
         $admin = Admin::whereEmail('superAdmin@youmats.com')->first();
+
+        if(!$admin) {
+            $admin = Admin::create([
+                'name' => 'SuperAdmin',
+                'email' => 'superAdmin@youmats.com',
+                'password' => bcrypt('123456')
+            ]);
+        }
         $admin->assignRole('Super Admin');
     }
 }

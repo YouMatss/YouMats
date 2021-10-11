@@ -155,7 +155,6 @@
                                     <thead>
                                     <tr>
                                         <th class="product-name">Product</th>
-                                        <th class="product-name">Quantity</th>
                                         @if(!is_company())
                                             <th class="product-total">Total</th>
                                         @endif
@@ -164,10 +163,9 @@
                                     <tbody>
                                         @foreach($cartItems as $item)
                                             <tr class="cart_item">
-                                                <td>{{ $item->name }}</td>
-                                                <td>{{ $item->qty }}</td>
+                                                <td>{{ $item->name }} <b>({{ $item->qty }} x {{getCurrency('symbol') . ' ' . $item->price}})</b> </td>
                                                 @if(!is_company())
-                                                    <td>{{ getCurrency('symbol') . ' ' . $item->price }}</td>
+                                                    <td>{{ getCurrency('symbol') . ' ' . $item->qty * $item->price }}</td>
                                                 @endif
                                             </tr>
                                         @endforeach
