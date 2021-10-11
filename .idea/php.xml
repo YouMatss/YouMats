@@ -216,6 +216,8 @@
       <path value="$PROJECT_DIR$/vendor/stevebauman/location" />
       <path value="$PROJECT_DIR$/vendor/maxmind-db/reader" />
       <path value="$PROJECT_DIR$/vendor/mirovit/nova-notifications" />
+      <path value="$PROJECT_DIR$/vendor/laravel/serializable-closure" />
+      <path value="$PROJECT_DIR$/vendor/devinweb/payment" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

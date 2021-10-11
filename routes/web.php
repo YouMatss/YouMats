@@ -73,6 +73,10 @@ Route::group([
     Route::group(['prefix' => 'checkout', 'namespace' => 'Product'], function() {
         Route::get('/', 'CheckoutController@index')->name('checkout.index');
         Route::post('/', 'CheckoutController@checkout')->name('checkout');
+
+        Route::post('/submit-payment', 'PaymentController@submit')->name('payfort.submit');
+        Route::get('/callback-success', 'PaymentController@success')->name('payfort.success');
+        Route::get('/callback-error', 'PaymentController@error')->name('payfort.error');
     });
 
     //Pages routes

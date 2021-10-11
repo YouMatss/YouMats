@@ -194,25 +194,17 @@
                                     <div class="border-top border-width-3 border-color-1 pt-3 mb-3">
                                         <!-- Basics Accordion -->
                                         <div id="basicsAccordion1">
-
                                             @foreach($paymentGateways as $gateway)
-                                                <!-- Card -->
                                                 <div class="border-bottom border-color-1 border-dotted-bottom">
                                                     <div class="p-3" id="basicsHeadingOne">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" class="custom-control-input" name="payment_method" value="{{ $gateway->name }}" checked="">
-                                                            <label class="custom-control-label form-label collapsed" for="stylishRadio1" data-toggle="collapse" data-target="#basicsCollapseOnee" aria-expanded="false" aria-controls="basicsCollapseOnee">
+                                                            <input type="radio" id="gateway-{{$gateway->id}}" class="custom-control-input" name="payment_method" value="{{ $gateway->name }}" checked>
+                                                            <label class="custom-control-label form-label" for="gateway-{{$gateway->id}}" >
                                                                 {{ $gateway->name }}
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div id="basicsCollapseOnee" class="border-top border-color-1 border-dotted-top bg-dark-lighter collapse" aria-labelledby="basicsHeadingOne" data-parent="#basicsAccordion1" style="">
-                                                        <div class="p-4">
-                                                            {!! $gateway->description !!}
-                                                        </div>
-                                                    </div>
                                                 </div>
-                                                <!-- End Card -->
                                             @endforeach
                                             @error('payment_method')
                                                 <span class="invalid-feedback" role="alert">
@@ -449,7 +441,7 @@
                                     </div>
                                     <!-- End Input -->
                                 </div>
-                                <div class="col-md-12">                                       
+                                <div class="col-md-12">
                                     <label class="form-label">
                                         {{ __('checkout.attachments')}}
                                         <span class="text-danger">*</span>
