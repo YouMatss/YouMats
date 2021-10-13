@@ -96,10 +96,10 @@
 
                                     @if(!is_company())
                                         <td data-title="Price">
-                                            <span class="">{{ $item->price }}</span>
+                                            <span class="">{{__('general.sar') . ' ' . $item->price }}</span>
                                         </td>
                                         <td data-title="Total">
-                                            <span class="">{{ $item->subtotal }}</span>
+                                            <span class="">{{__('general.sar') . ' ' . $item->subtotal }}</span>
                                         </td>
                                     @endif
                                 </tr>
@@ -147,15 +147,15 @@
                             <tbody>
                             <tr class="cart-subtotal">
                                 <th>{{ __('cart.subtotal') }}</th>
-                                <td data-title="Subtotal"><span class="amount" id="subtotal">{{ getCurrency('symbol') . ' ' . Cart::subtotal() }}</span></td>
+                                <td data-title="Subtotal"><span class="amount" id="subtotal">{{ __('general.sar') . ' ' . Cart::subtotal() }}</span></td>
                             </tr>
                             <tr class="shipping">
                                 <th>{{ __('cart.shipping') }}</th>
-                                <td data-title="tax"><span class="amount" id="tax">{{ getCurrency('symbol') . ' ' . Cart::tax() }}</span></td>
+                                <td data-title="tax"><span class="amount" id="tax">{{ __('general.sar') . ' ' . Cart::tax() }}</span></td>
                             </tr>
                             <tr class="order-total">
                                 <th>{{ __('cart.total') }}</th>
-                                <td data-title="Total"><strong><span class="amount" id="total">{{ getCurrency('symbol') . ' ' . Cart::total() }}</span></strong></td>
+                                <td data-title="Total"><strong><span class="amount" id="total">{{ __('general.sar') . ' ' . Cart::total() }}</span></strong></td>
                             </tr>
                             </tbody>
                         </table>

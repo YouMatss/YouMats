@@ -163,9 +163,9 @@
                                     <tbody>
                                         @foreach($cartItems as $item)
                                             <tr class="cart_item">
-                                                <td>{{ $item->name }} <b>({{ $item->qty }} x {{getCurrency('symbol') . ' ' . $item->price}})</b> </td>
+                                                <td>{{ $item->name }} <b>({{ $item->qty }} x {{__('general.sar') . ' ' . $item->price}})</b> </td>
                                                 @if(!is_company())
-                                                    <td>{{ getCurrency('symbol') . ' ' . $item->qty * $item->price }}</td>
+                                                    <td>{{ __('general.sar') . ' ' . $item->qty * $item->price }}</td>
                                                 @endif
                                             </tr>
                                         @endforeach
@@ -174,15 +174,15 @@
                                         <tfoot>
                                         <tr>
                                             <th>Subtotal</th>
-                                            <td>{{ getCurrency('symbol') . ' ' . Cart::subtotal() }}</td>
+                                            <td>{{ __('general.sar') . ' ' . Cart::subtotal() }}</td>
                                         </tr>
                                         <tr>
                                             <th>Tax</th>
-                                            <td>{{ getCurrency('symbol') . ' ' . Cart::tax() }}</td>
+                                            <td>{{ __('general.sar') . ' ' . Cart::tax() }}</td>
                                         </tr>
                                         <tr>
                                             <th>Total</th>
-                                            <td><strong>{{ getCurrency('symbol') . ' ' . Cart::total() }}</strong></td>
+                                            <td><strong>{{ __('general.sar') . ' ' . Cart::total() }}</strong></td>
                                         </tr>
                                         </tfoot>
                                     @endif
@@ -215,7 +215,7 @@
                                 @endif
                                 <div class="form-group d-flex align-items-center justify-content-between px-3 mb-5">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="terms" value="true" id="defaultCheck10" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <input class="form-check-input" @if(old('terms')) checked @endif type="checkbox" name="terms" value="true" id="defaultCheck10" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
                                         <label class="form-check-label form-label" for="defaultCheck10">
                                             I have read and agree to the website <a href="#" class="text-blue">terms and conditions </a>
                                             <span class="text-danger">*</span>
@@ -294,7 +294,7 @@
                                         <label class="form-label">
                                             Phone
                                         </label>
-                                        <input type="tel" class="form-control phoneNumber" value="{{ Auth::guard('web')->user()->phone ?? old('phone') }}" name="phone_number" aria-label="Phone Number" data-msg="Please enter a phone number." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <input type="tel" class="form-control phoneNumber" value="{{ Auth::guard('web')->user()->phone ?? old('phone_number') }}" name="phone_number" aria-label="Phone Number" data-msg="Please enter a phone number." data-error-class="u-has-error" data-success-class="u-has-success">
                                         @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

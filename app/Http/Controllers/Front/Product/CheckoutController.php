@@ -21,6 +21,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
@@ -124,7 +125,7 @@ class CheckoutController extends Controller
             return $cartItems->id !== 'discount';
         });
 
-        //Prepare data for insertation
+        //Prepare data for insertion
         $user = Auth::guard('web')->user();
         $type = '';
 
@@ -189,6 +190,7 @@ class CheckoutController extends Controller
         }
 
         if(isset($order) && strtolower($order->payment_method) == 'online') {
+            Cache::put('order_id', $order->order_id);
             return redirect()->route('payment.form');
         }
 

@@ -19,19 +19,36 @@
 <div id="app" class="min-h-screen flex-col w-sreen container mx-auto flex items-center justify-center">
     <div class="max-w-lg w-full flex items-center mb-8">
         <ul class="w-full flex-1 max-w-lg border border-gray-200 rounded-md">
+            @foreach($cartItems as $item)
+                @if($item->model->type == 'product')
+                <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
+                    <div class="w-0 flex-1 flex items-center">
+                        <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="ml-2 flex-1 w-0 truncate">
+                            {{$item->name}} <b>({{$item->qty . 'x' . $item->price}})</b>
+                        </span>
+                    </div>
+                    <div class="ml-4 flex-shrink-0">
+                        <span class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
+                            {{$item->qty*$item->price}} {{__('general.sar')}}
+                        </span>
+                    </div>
+                </li>
+                @endif
+            @endforeach
             <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
                 <div class="w-0 flex-1 flex items-center">
                     <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
                     </svg>
-                    <span class="ml-2 flex-1 w-0 truncate">
-                            parfums de marly
-                        </span>
+                    <span class="ml-2 flex-1 w-0 truncate"><b>Total</b></span>
                 </div>
                 <div class="ml-4 flex-shrink-0">
-                    <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
-                        @{{amount}} S.A.R
-                    </a>
+                <span class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
+                    @{{amount}} {{__('general.sar')}}
+                </span>
                 </div>
             </li>
         </ul>
@@ -39,22 +56,13 @@
 
     <div class="w-full max-w-lg">
         <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div class="w-full px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                     Hold Name
                 </label>
                 <input v-model="hold_name" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" :class="{'border-red-500': errors['hold_name']}" id="grid-first-name" type="text" placeholder="Jane Doe" />
                 <p class="text-red-500 text-xs italic" v-if="errors['hold_name']">
                     @{{errors['hold_name'][0]}}
-                </p>
-            </div>
-            <div class="w-full md:w-1/2 px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                    Email
-                </label>
-                <input v-model="email" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="name@company.com" :class="{'border-red-500': errors['email']}" />
-                <p class="text-red-500 text-xs italic" v-if="errors['email']">
-                    @{{errors['email'][0]}}
                 </p>
             </div>
         </div>
@@ -110,14 +118,14 @@
 <script>
     Vue.directive("mask", VueMask.VueMaskDirective);
     new Vue({
+        // 4005550000000001
         el: "#app",
         data: {
-            expiration_date: "05/23",
-            hold_name: "darbaoui imad",
-            email: "imad@devinweb.com",
-            cvc: "123",
-            card_number: "4005550000000001",
-            amount: 480,
+            expiration_date: "",
+            hold_name: "",
+            cvc: "",
+            card_number: "",
+            amount: {{$cart->total()}},
             errors: {},
             loading: false,
         },
@@ -141,7 +149,6 @@
                     expiration_year,
                     expiration_month,
                     cvc,
-                    email,
                     amount,
                     hold_name,
                 } = this;
@@ -151,13 +158,10 @@
                         expiration_year,
                         expiration_month,
                         cvc,
-                        email,
                         amount,
                         hold_name,
                     })
-                    .then(({
-                               data
-                           }) => {
+                    .then(({data}) => {
                         const paymentWrapper = document.createElement(
                             "div"
                         );
