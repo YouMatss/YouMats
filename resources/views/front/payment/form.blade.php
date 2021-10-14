@@ -32,7 +32,7 @@
                     </div>
                     <div class="ml-4 flex-shrink-0">
                         <span class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
-                            {{$item->qty*$item->price}} {{__('general.sar')}}
+                            {{__('general.sar')}} {{$item->qty*$item->price}}
                         </span>
                     </div>
                 </li>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="ml-4 flex-shrink-0">
                 <span class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
-                    @{{amount}} {{__('general.sar')}}
+                    {{__('general.sar')}} @{{amount}}
                 </span>
                 </div>
             </li>
@@ -123,6 +123,7 @@
         data: {
             expiration_date: "",
             hold_name: "",
+            email: "info@youmats.com",
             cvc: "",
             card_number: "",
             amount: {{$cart->total()}},
@@ -149,6 +150,7 @@
                     expiration_year,
                     expiration_month,
                     cvc,
+                    email,
                     amount,
                     hold_name,
                 } = this;
@@ -158,6 +160,7 @@
                         expiration_year,
                         expiration_month,
                         cvc,
+                        email,
                         amount,
                         hold_name,
                     })

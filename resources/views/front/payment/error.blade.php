@@ -50,7 +50,7 @@
                 Amount
             </dt>
             <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ Request::get('amount')/100 }} {{__('general.sar')}}
+                {{__('general.sar')}} {{ Request::get('amount')/100 }}
             </dd>
         </div>
         <div class="bg-gray-100 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -82,7 +82,7 @@
                             </div>
                             <div class="ml-4 flex-shrink-0">
                                 <span class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
-                                    {{$item->qty*$item->price}} {{__('general.sar')}}
+                                    {{__('general.sar')}} {{$item->qty*$item->price}}
                                 </span>
                             </div>
                         </li>

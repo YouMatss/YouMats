@@ -43,6 +43,16 @@ class PaymentController extends Controller
                 return true;
             });
 
+            $data['order']->update([
+                'reference_number' => request('merchant_reference'),
+                'card_number' => request('card_number'),
+                'card_type' => request('payment_option'),
+                'card_name' => request('card_holder_name'),
+                'card_exp_date' => request('expiry_date'),
+                'transaction_date' => now(),
+                'payment_status' => 'completed'
+            ]);
+
             //Clear the cart!
             Cart::instance('cart')->destroy();
 
@@ -53,9 +63,6 @@ class PaymentController extends Controller
     }
 
     public function error() {
-
-        dd(request());
-
         try {
             $data['order'] = Order::whereOrderId(Cache::get('order_id'))->first();
 
