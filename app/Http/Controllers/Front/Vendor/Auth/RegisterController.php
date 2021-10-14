@@ -85,6 +85,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'max:191', 'email', 'unique:vendors', new TopLevelEmailDomainValidator()],
             'phone' => ['required', 'string', 'max:30'],
             'address' => ['required', 'string', 'max:191'],
+            'type' => [...NULLABLE_STRING_VALIDATION, 'In:factory,distributor,wholesales,retail'],
             'latitude' => NULLABLE_STRING_VALIDATION,
             'longitude' => NULLABLE_STRING_VALIDATION,
             'licenses' => ARRAY_VALIDATION,
@@ -106,10 +107,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'address' => $data['address'],
+            'type' => $data['type'],
             'latitude' => $data['latitude'],
             'longitude' => $data['longitude'],
             'password' => Hash::make($data['password']),
-            'slug' => $data['name_en'] . rand(1,10)
+            'slug' => $data['name_en'] . rand(1,9)
         ]);
 
         $vendor->setTranslation('name', 'en', $data['name_en']);

@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Success transaction</title>
+@extends('front.layouts.master')
+@section('metaTags')
+    <title>{{env('APP_NAME')}} | {{__('general.success_payment')}}</title>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo&family=Tajawal&display=swap" rel="stylesheet">
-</head>
-
-<body>
-<div id="app" class="min-h-screen flex-col w-screen container mx-auto flex items-center justify-center">
-    <div class="w-full max-w-lg flex items-center justify-start mb-4">
-        <a href="{{ route('home') }}" class="w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-gray-600 w-8" viewBox="0 0 24 24">
-                <path d="M6 20v-5.5A1.5 1.5 0 017.5 13h3a1.5 1.5 0 011.5 1.5V20h6.5a1.5 1.5 0 001.5-1.5v-8h1v8a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 18.5v-8h1v8A1.5 1.5 0 005.5 20H6zm1 0h4v-5.5a.5.5 0 00-.5-.5h-3a.5.5 0 00-.5.5V20zm8-5.5v2a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-2a.5.5 0 00-.5-.5h-1a.5.5 0 00-.5.5zm-1 0a1.5 1.5 0 011.5-1.5h1a1.5 1.5 0 011.5 1.5v2a1.5 1.5 0 01-1.5 1.5h-1a1.5 1.5 0 01-1.5-1.5v-2zM6 11H3.5A1.5 1.5 0 012 9.5v-.807c0-.191.036-.38.107-.558l1.929-4.82A.5.5 0 014.5 3h15a.5.5 0 01.464.314l1.929 4.821a1.5 1.5 0 01.107.558V9.5a1.5 1.5 0 01-1.5 1.5H18c-.384 0-.735-.144-1-.382A1.494 1.494 0 0116 11h-3c-.384 0-.735-.144-1-.382A1.494 1.494 0 0111 11H8c-.384 0-.735-.144-1-.382A1.494 1.494 0 016 11zM4.839 4L3.036 8.507A.5.5 0 003 8.693V9.5a.5.5 0 00.5.5H6a.5.5 0 00.5-.5v-1a.5.5 0 011 0v1a.5.5 0 00.5.5h3a.5.5 0 00.5-.5v-1a.5.5 0 111 0v1a.5.5 0 00.5.5h3a.5.5 0 00.5-.5v-1a.5.5 0 111 0v1a.5.5 0 00.5.5h2.5a.5.5 0 00.5-.5v-.807a.5.5 0 00-.036-.186L19.161 4H4.84z" /></svg>
-        </a>
-    </div>
-
+@endsection
+@section('content')
+<div id="app" class="my-6 flex-col w-screen container mx-auto flex items-center justify-center">
     <div class="w-full max-w-lg rounded-lg shadow">
         <div class="w-full items-center justify-center flex p-8">
                 <span class="text-2xl text-gray-700 mr-4" style="font-family: Cairo, sans-serif;">
@@ -104,5 +94,4 @@
         </div>
     </div>
 </div>
-</body>
-</html>
+@endsection

@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+@extends('front.layouts.master')
+@section('metaTags')
+    <title>{{env('APP_NAME')}} | {{__('general.payment')}}</title>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
@@ -13,11 +12,10 @@
             color: transparent;
         }
     </style>
-</head>
-
-<body>
-<div id="app" class="min-h-screen flex-col w-sreen container mx-auto flex items-center justify-center">
-    <div class="max-w-lg w-full flex items-center mb-8">
+@endsection
+@section('content')
+<div id="app" class="flex-col w-screen container mx-auto flex items-center justify-center my-6">
+    <div class="max-w-lg w-full flex items-center mb-4">
         <ul class="w-full flex-1 max-w-lg border border-gray-200 rounded-md">
             @foreach($cartItems as $item)
                 @if($item->model->type == 'product')
@@ -55,8 +53,8 @@
     </div>
 
     <div class="w-full max-w-lg">
-        <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3 mb-6 md:mb-0">
+        <div class="flex flex-wrap -mx-3">
+            <div class="w-full px-3 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                     Hold Name
                 </label>
@@ -66,7 +64,7 @@
                 </p>
             </div>
         </div>
-        <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="flex flex-wrap -mx-3">
             <div class="w-full px-3">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                     Card Number
@@ -78,7 +76,7 @@
             </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-2">
-            <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
+            <div class="w-full md:w-2/3 px-3 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
                     Expiration Date
                 </label>
@@ -89,7 +87,7 @@
                 </p>
             </div>
 
-            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <div class="w-full md:w-1/3 px-3 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
                     CVC
                 </label>
@@ -100,25 +98,23 @@
             </div>
         </div>
 
-        <div class="mt-6">
+        <div class="mt-4">
             <button @click="submitForm" :disabled="loading" :class="{'loading': loading}" class="group relative w-full items-center flex justify-center py-3 px-4 border border-transparent leading-tight font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                 <svg v-if="loading" version="1.1" class="position absolute w-12 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
-                        <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
-                            <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite" />
-                        </path>
-                    </svg>
+                    <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                    </path>
+                </svg>
                 <span>
-                        SUBMIT
-                    </span>
+                    SUBMIT
+                </span>
             </button>
         </div>
     </div>
 </div>
-</body>
 <script>
     Vue.directive("mask", VueMask.VueMaskDirective);
     new Vue({
-        // 4005550000000001
         el: "#app",
         data: {
             expiration_date: "",
@@ -126,7 +122,7 @@
             email: "info@youmats.com",
             cvc: "",
             card_number: "",
-            amount: {{$cart->total()}},
+            amount: {{round($cart->total())}},
             errors: {},
             loading: false,
         },
@@ -205,5 +201,4 @@
         },
     });
 </script>
-
-</html>
+@endsection

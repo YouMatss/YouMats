@@ -34,7 +34,7 @@ class CreateOrderItemsTable extends Migration
             $table->string('payment_status')->default('pending');
             $table->string('refused_note')->nullable();
 
-            $table->tinyInteger('quantity');
+            $table->smallInteger('quantity');
             $table->double('price');
 
             $table->timestamps();

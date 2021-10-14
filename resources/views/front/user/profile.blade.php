@@ -197,7 +197,7 @@
                                             <div class="js-form-message form-group mb-5">
                                                 <label class="form-label">Licenses</label>
                                                 <div class="box">
-                                                    <input type="file" name="licenses" id="licenses" class="inputfile inputfile-6 @error('licenses') is-invalid @enderror" multiple />
+                                                    <input type="file" name="licenses[]" id="licenses" class="inputfile inputfile-6 @error('licenses') is-invalid @enderror" multiple />
                                                     <label for="licenses">
                                                         <span></span>
                                                         <strong>Choose a files&hellip;</strong>
@@ -207,6 +207,11 @@
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                     @enderror
+                                                </div>
+                                                <div class="box">
+                                                    @foreach($user->getMedia(COMPANY_PATH) as $license)
+                                                        <img src="{{$license->getFullUrl()}}" class="img-thumbnail" width="100px" />
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
