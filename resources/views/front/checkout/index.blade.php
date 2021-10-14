@@ -155,7 +155,6 @@
                                     <thead>
                                     <tr>
                                         <th class="product-name">Product</th>
-                                        <th class="product-name">Quantity</th>
                                         @if(!is_company())
                                             <th class="product-total">Total</th>
                                         @endif
@@ -164,10 +163,9 @@
                                     <tbody>
                                         @foreach($cartItems as $item)
                                             <tr class="cart_item">
-                                                <td>{{ $item->name }}</td>
-                                                <td>{{ $item->qty }}</td>
+                                                <td>{{ $item->name }} <b>({{ $item->qty }} x {{__('general.sar') . ' ' . $item->price}})</b> </td>
                                                 @if(!is_company())
-                                                    <td>{{ getCurrency('symbol') . ' ' . $item->price }}</td>
+                                                    <td>{{ __('general.sar') . ' ' . $item->qty * $item->price }}</td>
                                                 @endif
                                             </tr>
                                         @endforeach
@@ -176,15 +174,15 @@
                                         <tfoot>
                                         <tr>
                                             <th>Subtotal</th>
-                                            <td>{{ getCurrency('symbol') . ' ' . Cart::subtotal() }}</td>
+                                            <td>{{ __('general.sar') . ' ' . Cart::subtotal() }}</td>
                                         </tr>
                                         <tr>
                                             <th>Tax</th>
-                                            <td>{{ getCurrency('symbol') . ' ' . Cart::tax() }}</td>
+                                            <td>{{ __('general.sar') . ' ' . Cart::tax() }}</td>
                                         </tr>
                                         <tr>
                                             <th>Total</th>
-                                            <td><strong>{{ getCurrency('symbol') . ' ' . Cart::total() }}</strong></td>
+                                            <td><strong>{{ __('general.sar') . ' ' . Cart::total() }}</strong></td>
                                         </tr>
                                         </tfoot>
                                     @endif
@@ -194,25 +192,17 @@
                                     <div class="border-top border-width-3 border-color-1 pt-3 mb-3">
                                         <!-- Basics Accordion -->
                                         <div id="basicsAccordion1">
-
                                             @foreach($paymentGateways as $gateway)
-                                                <!-- Card -->
                                                 <div class="border-bottom border-color-1 border-dotted-bottom">
                                                     <div class="p-3" id="basicsHeadingOne">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" class="custom-control-input" name="payment_method" value="{{ $gateway->name }}" checked="">
-                                                            <label class="custom-control-label form-label collapsed" for="stylishRadio1" data-toggle="collapse" data-target="#basicsCollapseOnee" aria-expanded="false" aria-controls="basicsCollapseOnee">
+                                                            <input type="radio" id="gateway-{{$gateway->id}}" class="custom-control-input" name="payment_method" value="{{ $gateway->name }}" checked>
+                                                            <label class="custom-control-label form-label" for="gateway-{{$gateway->id}}" >
                                                                 {{ $gateway->name }}
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div id="basicsCollapseOnee" class="border-top border-color-1 border-dotted-top bg-dark-lighter collapse" aria-labelledby="basicsHeadingOne" data-parent="#basicsAccordion1" style="">
-                                                        <div class="p-4">
-                                                            {!! $gateway->description !!}
-                                                        </div>
-                                                    </div>
                                                 </div>
-                                                <!-- End Card -->
                                             @endforeach
                                             @error('payment_method')
                                                 <span class="invalid-feedback" role="alert">
@@ -225,7 +215,7 @@
                                 @endif
                                 <div class="form-group d-flex align-items-center justify-content-between px-3 mb-5">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="terms" value="true" id="defaultCheck10" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <input class="form-check-input" @if(old('terms')) checked @endif type="checkbox" name="terms" value="true" id="defaultCheck10" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
                                         <label class="form-check-label form-label" for="defaultCheck10">
                                             I have read and agree to the website <a href="#" class="text-blue">terms and conditions </a>
                                             <span class="text-danger">*</span>
@@ -304,7 +294,7 @@
                                         <label class="form-label">
                                             Phone
                                         </label>
-                                        <input type="tel" class="form-control phoneNumber" value="{{ Auth::guard('web')->user()->phone ?? old('phone') }}" name="phone_number" aria-label="Phone Number" data-msg="Please enter a phone number." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <input type="tel" class="form-control phoneNumber" value="{{ Auth::guard('web')->user()->phone ?? old('phone_number') }}" name="phone_number" aria-label="Phone Number" data-msg="Please enter a phone number." data-error-class="u-has-error" data-success-class="u-has-success">
                                         @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -449,7 +439,7 @@
                                     </div>
                                     <!-- End Input -->
                                 </div>
-                                <div class="col-md-12">                                       
+                                <div class="col-md-12">
                                     <label class="form-label">
                                         {{ __('checkout.attachments')}}
                                         <span class="text-danger">*</span>

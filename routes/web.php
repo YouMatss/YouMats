@@ -73,6 +73,11 @@ Route::group([
     Route::group(['prefix' => 'checkout', 'namespace' => 'Product'], function() {
         Route::get('/', 'CheckoutController@index')->name('checkout.index');
         Route::post('/', 'CheckoutController@checkout')->name('checkout');
+
+        Route::get('/payment', 'PaymentController@form')->name('payment.form');
+        Route::post('/submit-payment', 'PaymentController@submit')->name('payment.submit');
+        Route::get('/success', 'PaymentController@success')->name('payment.success');
+        Route::get('/error', 'PaymentController@error')->name('payment.error');
     });
 
     //Pages routes
