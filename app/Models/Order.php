@@ -10,6 +10,8 @@ class Order extends Model
 {
     use SoftDeletes, HasFactory;
 
+    protected $dates = ['transaction_date'];
+
     protected $guarded = [];
 
     public function getTotalPriceAttribute($value) {

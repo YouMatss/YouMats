@@ -43,7 +43,7 @@
                                 <form method="POST" action="{{ route('vendor.register') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="name_en" class="form-label">{{ __('auth.name') }} <span class="text-danger">(English)*</span></label>
                                                 <input type="text" class="form-control @error('name_en') is-invalid @enderror" id="name_en" name="name_en" value="{{ old('name_en') }}" required autocomplete="name_en" autofocus>
@@ -54,7 +54,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="name_ar" class="form-label">{{ __('auth.name') }} <span class="text-danger">(Arabic)*</span></label>
                                                 <input type="text" class="form-control @error('name_ar') is-invalid @enderror" id="name_ar" name="name_ar" value="{{ old('name_ar') }}" required autocomplete="name_ar" autofocus>
@@ -91,8 +91,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label for="type" class="form-label">{{ __('auth.country') }} <span class="text-danger">*</span></label>
-                                                <select class="form-control @error('country_id') is-invalid @enderror" id="type" name="country_id" required>
+                                                <label for="country" class="form-label">{{ __('auth.country') }} <span class="text-danger">*</span></label>
+                                                <select class="form-control @error('country_id') is-invalid @enderror" id="country" name="country_id" required>
                                                     @foreach($countries as $country)
                                                         <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                     @endforeach
@@ -109,6 +109,22 @@
                                                 <label for="address" class="form-label">{{ __('auth.address') }} <span class="text-danger">*</span></label>
                                                 <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" autocomplete="address" required>
                                                 @error('address')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="js-form-message form-group mb-5">
+                                                <label for="type" class="form-label">{{ __('auth.type') }} <span class="text-danger">*</span></label>
+                                                <select class="form-control @error('type') is-invalid @enderror" id="type" name="type" required>
+                                                    <option value="factory" @if(old('type') == 'factory') selected @endif>{{__('auth.type_factory')}}</option>
+                                                    <option value="distributor" @if(old('type') == 'distributor') selected @endif>{{__('auth.type_distributor')}}</option>
+                                                    <option value="wholesales" @if(old('type') == 'wholesales') selected @endif>{{__('auth.type_wholesales')}}</option>
+                                                    <option value="retail" @if(old('type') == 'retail') selected @endif>{{__('auth.type_retail')}}</option>
+                                                </select>
+                                                @error('type')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

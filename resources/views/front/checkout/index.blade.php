@@ -26,7 +26,7 @@
                     <div id="shopCartHeadingOne" class="alert alert-primary mb-0 text-white" role="alert">
                         {{ __('Returning customer?') }} <a href="#" class="alert-link collapsed text-white" data-toggle="collapse" data-target="#shopCartOne" aria-expanded="false" aria-controls="shopCartOne">Click here to login</a>
                     </div>
-                    <div id="shopCartOne" class="border border-top-0 collapse" aria-labelledby="shopCartHeadingOne" data-parent="#shopCartAccordion" style="">
+                    <div id="shopCartOne" class="border border-top-0 collapse {{ ($errors->email || $errors->password) ? 'show' : '' }}" aria-labelledby="shopCartHeadingOne" data-parent="#shopCartAccordion" style="">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
@@ -46,8 +46,8 @@
                                                     <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                                     @error('email')
                                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -58,8 +58,8 @@
                                                     <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                                     @error('password')
                                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -183,6 +183,10 @@
                                         <tr>
                                             <th>Total</th>
                                             <td><strong>{{ __('general.sar') . ' ' . Cart::total() }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Payment Amount</th>
+                                            <td><strong>{{ __('general.sar') . ' ' . round(Cart::total()) }}</strong></td>
                                         </tr>
                                         </tfoot>
                                     @endif
@@ -397,7 +401,7 @@
                                         Email address
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="email" class="form-control" value="{{ Auth::guard('web')->user()->email ?? old('email') }}" name="email" aria-label="jackwayley@gmail.com" required="" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ Auth::guard('web')->user()->email ?? old('email') }}" name="email" aria-label="jackwayley@gmail.com" required="" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

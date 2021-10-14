@@ -33,9 +33,13 @@ class ProfileController extends Controller
             $auth_user->clearMediaCollection(USER_COVER);
             $auth_user->addMedia($request->cover)->toMediaCollection(USER_COVER);
         }
-        if(isset($request->licenses))
-            foreach ($request->licenses as $license)
-                $auth_user->addMedia($license)->toMediaCollection(COMPANY_PATH);
+        if(isset($request->licenses)) {
+            if(!count($auth_user->getMedia(COMPANY_PATH))) {
+                foreach ($request->licenses as $license) {
+                    $auth_user->addMedia($license)->toMediaCollection(COMPANY_PATH);
+                }
+            }
+        }
 
 //        if($request->email != $auth_user->email)
 //            $data['email_verified_at'] = null;
