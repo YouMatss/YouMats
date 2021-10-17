@@ -17,7 +17,7 @@
             @if(\Request::route()->getName() != 'cart.show' && \Request::route()->getName() != 'home')
                 @include('front.layouts.partials.partners')
             @endif
-            @if(\Request::route()->getName() != 'cart.show')
+            @if(\Request::route()->getName() != 'cart.show' && \Request::route()->getName() != 'front.faqs.page')
                 @include('front.layouts.partials.faqs')
             @endif
         </main>
