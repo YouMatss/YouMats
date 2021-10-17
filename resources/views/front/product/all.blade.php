@@ -87,7 +87,7 @@
                         <div class="tab-pane fade pt-2 show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab" data-target-group="groups">
                             <ul class="row list-unstyled products-group no-gutters">
                                 @foreach($products as $product)
-                                    <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
+                                    <li class="col-6 col-md-3 col-wd-2gdot4 product-item st_new">
                                         @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'grid'])
                                     </li>
                                 @endforeach

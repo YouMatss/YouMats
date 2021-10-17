@@ -972,3 +972,7 @@
     line-height: 32px;
     border-radius: 25px;
 }
+
+.ec.ec-arrow-right-categproes{
+    transform: rotate(180deg);
+}
