@@ -951,3 +951,24 @@
     border: 0;
     color: #003f91;
 }
+
+
+.st_new .product-item__title a{
+    min-height: 4.50rem;
+}
+
+.st_new .product-item__title a {
+    -webkit-line-clamp: inherit;
+
+}
+
+.u-slick.slick-initialized .js-next, .u-slick.slick-initialized .js-prev {
+    opacity: 1;
+    background: #003f91;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 25px;
+}
