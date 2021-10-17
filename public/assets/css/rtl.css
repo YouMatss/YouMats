@@ -37,6 +37,11 @@ bodey,p,h1,h2,h3,h4,h5,h6,a{
     margin-left: 0 !important;
 }
 
+.mr-xl-6, .mx-xl-6 {
+    margin-left: 2.5rem !important;
+    margin-right: 0 !important;
+}
+
 .left-12 {
     right: 0.74987rem;
     left:auto;
@@ -308,4 +313,8 @@ h3.font-size-24 {
     top: 16px !important;
     left: 15px !important;
     right: auto !important;
+}
+
+.form-check-label{
+    margin-right: 20px;
 }

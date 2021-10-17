@@ -32,8 +32,8 @@
                 <div class="col-xl-12">
 
                     <div class="d-block d-md-flex flex-center-between mb-3 rtl">
-                        <h3 class="font-size-25 mb-2 mb-md-0">{{ __('products.all_products') }}</h3>
-                        <p class="font-size-14 text-gray-90 mb-0">Showing {{ $products->firstItem()  }}–{{ $products->lastItem() }} of {{ $products->total() }} results</p>
+                        <h3 class="font-size-25 mb-2 mb-md-0">{{ __('product.all_products') }}</h3>
+                        <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} {{ $products->firstItem()  }}–{{ $products->lastItem() }} {{__('general.of')}} {{ $products->total() }} {{__('general.results')}}</p>
                     </div>
 
                     <!-- Shop-control-bar -->

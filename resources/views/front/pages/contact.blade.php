@@ -103,22 +103,20 @@
                 </div>
                 <div class="mr-xl-6">
                     <address class="mb-6">
-                        121 King Street, <br>
-                        Melbourne VIC 3000, <br>
-                        Australia
+                        {{__('info.address')}}
                     </address>
                     <h5 class="font-size-14 font-weight-bold mb-3">{{ __('contact.hours_of_operation') }}</h5>
                     <ul class="list-unstyled mb-6">
-                        <li class="flex-center-between mb-1"><span class="">Monday:</span><span class="">12-6 PM</span></li>
-                        <li class="flex-center-between mb-1"><span class="">Tuesday:</span><span class="">12-6 PM</span></li>
-                        <li class="flex-center-between mb-1"><span class="">Wednesday:</span><span class="">12-6 PM</span></li>
-                        <li class="flex-center-between mb-1"><span class="">Thursday:</span><span class="">12-6 PM</span></li>
-                        <li class="flex-center-between mb-1"><span class="">Friday:</span><span class="">12-6 PM</span></li>
-                        <li class="flex-center-between mb-1"><span class="">Saturday:</span><span class="">12-6 PM</span></li>
-                        <li class="flex-center-between"><span class="">Sunday</span><span class="">Closed</span></li>
+                        <li class="flex-center-between mb-1"><span class="">{{__('contact.saturday')}}:</span><span class="">{{__('contact.saturday_time')}}</span></li>
+                        <li class="flex-center-between"><span class="">{{__('contact.sunday')}}</span><span class="">{{__('contact.sunday_time')}}</span></li>
+                        <li class="flex-center-between mb-1"><span class="">{{__('contact.monday')}}:</span><span class="">{{__('contact.monday_time')}}</span></li>
+                        <li class="flex-center-between mb-1"><span class="">{{__('contact.tuesday')}}:</span><span class="">{{__('contact.tuesday_time')}}</span></li>
+                        <li class="flex-center-between mb-1"><span class="">{{__('contact.wednesday')}}:</span><span class="">{{__('contact.wednesday_time')}}</span></li>
+                        <li class="flex-center-between mb-1"><span class="">{{__('contact.thursday')}}:</span><span class="">{{__('contact.thursday_time')}}</span></li>
+                        <li class="flex-center-between mb-1"><span class="">{{__('contact.friday')}}:</span><span class="">{{__('contact.friday_time')}}</span></li>
                     </ul>
                     <h5 class="font-size-14 font-weight-bold mb-3">{{ __('contact.careers') }}</h5>
-                    <p class="text-gray-90">{{ __('contact.careers_message') }}: <a class="text-blue text-decoration-on" href="mailto:contact@Youmats.com">contact@Youmats.com</a></p>
+                    <p class="text-gray-90">{{ __('contact.careers_message') }}: <a class="text-blue text-decoration-on" href="mailto:{{__('info.email')}}">{{__('info.email')}}</a></p>
                 </div>
             </div>
         </div>

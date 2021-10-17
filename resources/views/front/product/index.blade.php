@@ -21,6 +21,9 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{ __('general.home') }}</a></li>
+                        @foreach($product->category->ancestors as $ancestor)
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [$ancestor->slug])}}">{{$ancestor->name}}</a></li>
+                        @endforeach
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [$product->category->slug])}}">{{$product->category->name}}</a></li>
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{$product->name}}</li>
                     </ol>
@@ -70,7 +73,7 @@
                                     @endfor
                                     {{$product->rate}}
                                 </div>
-                                <span class="text-secondary font-size-13">({{$product->views}} customer views)</span>
+                                <span class="text-secondary font-size-13">({{$product->views}} {{__('product.views')}})</span>
                             </a>
                         </div>
                         <a href="{{ route('home') }}" class="d-inline-block max-width-150 ml-n2 mb-2">
@@ -85,9 +88,9 @@
                         {{--</div>--}}
 
                         <p>{!! $product->short_desc !!}</p>
-                        <div><strong>SKU</strong>: {{$product->SKU}}</div>
+                        <div><strong>{{__('general.sku')}}</strong>: {{$product->SKU}}</div>
                         @if(auth()->guard('admin')->check())
-                            <div><strong>Vendor</strong>: {{$product->vendor->name}}</div>
+                            <div><strong>{{__('general.vendor')}}</strong>: {{$product->vendor->name}}</div>
                         @endif
                     </div>
                 </div>
@@ -95,11 +98,11 @@
                     <div class="mb-2">
                         <div class="card p-5 border-width-2 border-color-1 borders-radius-17">
                             @if(!is_company())
-                                <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">Availability:
+                                <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">
 {{--                                    @if($product->stock)--}}
 {{--                                        <span class="text-green font-weight-bold">{{$product->stock}} in stock</span>--}}
 {{--                                    @else--}}
-                                        <span class="text-green font-weight-bold">In stock</span>
+                                        <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
 {{--                                    @endif--}}
                                 </div>
                                 @if(isset($delivery))
@@ -125,12 +128,12 @@
                             <div class="mb-3">
                                 <div class="left-page-single">
                                     @if(is_company())
-                                    <a href="{{ route('home') }}"> <i class="fa fa-user"></i> YouMats </a>
-                                    <a href="tel:+966502111754" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> (+966) 502111754 </a>
-                                    <a href="mailto:info@youmats.com"> <i class="fa fa-envelope"></i> info@youmats.com </a>
+                                    <a href="{{ route('home') }}"> <i class="fa fa-user"></i> {{env('APP_NAME')}} </a>
+                                    <a href="tel:+966502111754" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> {{__('info.phone')}} </a>
+                                    <a href="mailto:info@youmats.com"> <i class="fa fa-envelope"></i> {{__('info.email')}} </a>
                                     @endif
-                                    <h3> How to Pay</h3>
-                                    <p>YouMats Support pay on Delivery for That Product</p>
+                                    <h3> {{__('product.how_to_pay')}} </h3>
+                                    <p> {{__('product.how_to_pay_desc')}} </p>
                                 </div>
                             </div>
 
@@ -138,7 +141,7 @@
                             @if(!Auth::guard('vendor')->check())
                                 {!! cartOrChat($product) !!}
                                 <div class="flex-content-center flex-wrap">
-                                    <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                    <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i>{{__('product.wishlist')}}</a>
                                 </div>
                             @endif
                         </div>
@@ -181,34 +184,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="basicsAccordion" class="mb-12">
-                    @foreach($FAQs as $row)
-                    <div class="card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0">
-                        <div class="card-header card-collapse bg-transparent-on-hover border-0" id="qu{{$row->id}}">
-                            <h5 class="mb-0">
-                                <button type="button" class="px-0 btn btn-link btn-block d-flex justify-content-between card-btn py-3 font-size-25 border-0" data-toggle="collapse" data-target="#q{{$row->id}}" aria-expanded="true" aria-controls="q{{$row->id}}">
-                                    {{$row->question}}
-
-                                    <span class="card-btn-arrow">
-                                        <i class="fas fa-chevron-down text-gray-90 font-size-18"></i>
-                                    </span>
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="q{{$row->id}}" class="collapse" aria-labelledby="qu{{$row->id}}" data-parent="#basicsAccordion">
-                            <div class="card-body pl-0 pb-8">
-                                <p class="mb-0">{!! $row->answer !!}</p>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
                 </div>
             </div>
         </div>

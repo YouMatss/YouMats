@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
-                                        <STRONG>{{__('home.second_section')}}</STRONG>
+                                        <strong>{{__('home.second_section')}}</strong>
                                     </div>
                                     <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.second_section_url')}}">
                                         {{__('general.read_more')}}
@@ -111,7 +111,7 @@
 
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
-                                        <STRONG>{{__('home.third_section')}}</STRONG>
+                                        <strong>{{__('home.third_section')}}</strong>
                                     </div>
                                     <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.third_section_url')}}">
                                         {{__('general.read_more')}}
@@ -155,6 +155,8 @@
             </div>
         </div>
     </div>
+
+    @include('front.layouts.partials.partners')
 
     <div class="mb-5">
 
