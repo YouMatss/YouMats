@@ -226,7 +226,7 @@
                                         @if(!Auth::guard('vendor')->check())
                                             <div class="product-item__footer">
                                                 <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                    <a data-url="{{ route('wishlist.add', ['product' => $bs_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                                    <a data-url="{{ route('wishlist.add', ['product' => $bs_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
                                                 </div>
                                             </div>
                                         @endif
@@ -293,7 +293,7 @@
                                     <div class="product-item__footer">
                                         @if(!Auth::guard('vendor')->check())
                                             <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a data-url="{{ route('wishlist.add', ['product' => $i_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                                <a data-url="{{ route('wishlist.add', ['product' => $i_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
                                             </div>
                                         @endif
                                     </div>
@@ -382,7 +382,7 @@
                                 @if(!Auth::guard('vendor')->check())
                                     <div class="product-item__footer">
                                         <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a data-url="{{ route('wishlist.add', ['product' => $ii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                            <a data-url="{{ route('wishlist.add', ['product' => $ii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
                                         </div>
                                     </div>
                                 @endif
@@ -444,7 +444,7 @@
                                     @if(!Auth::guard('vendor')->check())
                                         <div class="product-item__footer">
                                             <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a data-url="{{ route('wishlist.add', ['product' => $iii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                                <a data-url="{{ route('wishlist.add', ['product' => $iii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
                                             </div>
                                         </div>
                                     @endif
@@ -506,7 +506,7 @@
                                     @if(!Auth::guard('vendor')->check())
                                         <div class="product-item__footer">
                                             <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a data-url="{{ route('wishlist.add', ['product' => $iv_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                                <a data-url="{{ route('wishlist.add', ['product' => $iv_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
                                             </div>
                                         </div>
                                     @endif
