@@ -14,6 +14,8 @@
     <meta name="twitter:image" content="">
 @endsection
 @section('content')
+
+
     <div class="mb-4">
         <div class="bg-img-hero" style="background-image: url({{ Storage::url(nova_get_setting('slider_background', 'default_image.png')) }});">
             <div class="container min-height-438 overflow-hidden">
@@ -156,7 +158,7 @@
 
     <div class="mb-5">
 
-        <div class="bg-img-hero bg_cat_new pt-5">
+        <div class="bg-img-hero bg_cat_new st_new pt-5">
 
             <div class="container p-0">
 
@@ -304,7 +306,7 @@
     </div>
     @endif
 
-    <div class="container">
+    <div class="container st_new">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('home.top_categories') }}</h3>
         </div>
@@ -332,7 +334,7 @@
 
     @if(isset($section_ii_category))
     <!-- Section II Category -->
-    <div class="container mb-8">
+    <div class="container mb-8 st_new">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_ii_category->name}}</h3>
             <a class="d-block text-gray-16" href="{{route('front.category', [$section_ii_category->slug])}}">
@@ -394,7 +396,7 @@
 
     @if(isset($section_iii_category))
     <!-- Section III Category -->
-    <div class="container mb-8">
+    <div class="container mb-8 st_new">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iii_category->name}}</h3>
             <a class="d-block text-gray-16" href="{{route('front.category', [$section_iii_category->slug])}}">
@@ -456,7 +458,7 @@
 
     @if(isset($section_iv_category))
     <!-- Section IV Category -->
-    <div class="container mb-8">
+    <div class="container mb-8 st_new">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iv_category->name}}</h3>
             <a class="d-block text-gray-16" href="{{route('front.category', [$section_iv_category->slug])}}">
