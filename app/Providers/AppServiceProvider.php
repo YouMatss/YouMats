@@ -13,7 +13,6 @@ class AppServiceProvider extends ServiceProvider
     }
 
     public function boot() {
-//        Category::fixTree();
         Paginator::useBootstrap();
     }
 }

@@ -14,8 +14,11 @@
         @include('front.layouts.partials.header')
         <main id="content" role="main">
             @yield('content')
-            @if(\Illuminate\Support\Facades\Request::segment(2) != 'cart')
+            @if(\Request::route()->getName() != 'cart.show' && \Request::route()->getName() != 'home')
                 @include('front.layouts.partials.partners')
+            @endif
+            @if(\Request::route()->getName() != 'cart.show')
+                @include('front.layouts.partials.faqs')
             @endif
         </main>
         @include('front.layouts.partials.footer')

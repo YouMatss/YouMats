@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Front\Product;
 
 use App\Helpers\Filters\FiltersJsonField;
 use App\Http\Controllers\Controller;
-use App\Models\FAQ;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -19,15 +18,19 @@ class ProductController extends Controller
 {
     public function index($category_slug, $slug) {
         setCityLocation();
-        $data['product'] = Product::with('category', 'tags', 'vendor')->where(['slug' => $slug, 'active' => 1])->first();
+
+        $data['product'] = Product::with('category', 'tags', 'vendor')
+            ->where(['slug' => $slug, 'active' => 1])->first();
         abort_if(!$data['product'], 404);
+
         if(Session::has('city')) {
             $data['delivery'] = $data['product']->delivery(Session::get('city')->id);
         }
+
         $data['product']->views++;
+
         $data['product']->save();
 
-        $data['FAQs'] = FAQ::orderBy('sort')->get();
         $data['related_products'] = Product::with('category')
             ->where('category_id', $data['product']->category_id)
             ->where('id', '!=', $data['product']->id)

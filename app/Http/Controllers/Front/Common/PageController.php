@@ -11,8 +11,7 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     public function faqs() {
-        $faqs = FAQ::orderBy('sort')->get();
-        return view('front.pages.faq')->with(compact('faqs'));
+        return view('front.pages.faq');
     }
 
     public function page($slug) {

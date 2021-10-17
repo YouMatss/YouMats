@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div id="basicsAccordion" class="mb-12">
-                    @foreach($faqs as $row)
+                    @foreach($FAQs as $row)
                     <div class="card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0">
                         <div class="card-header card-collapse bg-transparent-on-hover border-0" id="qu{{$row->id}}">
                             <h5 class="mb-0">
