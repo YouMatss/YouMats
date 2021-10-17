@@ -95,6 +95,6 @@ Route::group([
     Route::get('/search', 'Product\ProductController@search')->name('products.search');
     Route::get('/filter/{category_id}', 'Category\CategoryController@filter')->name('category.filter');
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
-    Route::get('/{category_slug}', 'Category\CategoryController@index')->name('front.category');
-    Route::get('/{category_slug}/{slug}', 'Product\ProductController@index')->name('front.product');
+    Route::get('/i/{category_slug}', 'Category\CategoryController@index')->name('front.category');
+    Route::get('/i/{category_slug}/{slug}', 'Product\ProductController@index')->name('front.product');
 });
