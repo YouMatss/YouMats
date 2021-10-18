@@ -14,9 +14,11 @@ use Stevebauman\Location\Facades\Location;
 
 class CategoryController extends Controller
 {
-    public function index($category_slug) {
-        $data['category'] = Category::whereSlug($category_slug)->first();
-        abort_if(!$data['category'], 404);
+    public function index($slug) {
+        $parsedSlug = explode('/', $slug);
+        $slug = end($parsedSlug);
+
+        $data['category'] = Category::whereSlug($slug)->firstOrFail();
 
 //        $city = City::where('name', 'LIKE', '%'.$this->getCityByLocation().'%')->first();
         $data['products'] = $data['category']->products()

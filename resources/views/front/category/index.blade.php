@@ -28,12 +28,17 @@
         </div>
     </div>
     <div class="mb-6 bg-gray-7 py-6">
+        <div class="container mb-8">
+            <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
+                <h1 class="section-title section-title__full mb-0 pb-2 font-size-22">{{(!empty($category->title)) ? $category->title : $category->name}}</h1>
+            </div>
+        </div>
         <div class="container">
             <div class="row flex-nowrap flex-md-wrap overflow-auto overflow-md-visble rtl">
                 @foreach($children as $child)
                 <div class="col-md-4 col-lg-3 col-xl-4 col-xl-2gdot4 mb-3 flex-shrink-0 flex-md-shrink-1">
                     <div class="bg-white overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
-                        <a href="{{route('front.category', [$child->slug])}}" class="d-block pr-2 pr-wd-6">
+                        <a href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2 pr-wd-6">
                             <div class="media align-items-center">
                                 <div class="pt-2">
                                     <img class="img-fluid img_category_page" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}">
@@ -52,31 +57,6 @@
     <div class="mb-6 bg-md-transparent py-0">
         <div class="container">
             <div class="row mb-8">
-                <div class="d-none col-xl-3 col-wd-2gdot5">
-                    <div class="mb-8">
-                        <div class="border-bottom border-color-1 mb-5">
-                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">All Categories</h3>
-                        </div>
-                        <ul class="list-unstyled li_side_bar">
-                            @foreach($children as $child)
-                            <li class="mb-3">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <a href="{{route('front.category', [$child->slug])}}" class="d-block width-75">
-                                            <img class="img-fluid" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}">
-                                        </a>
-                                    </div>
-                                    <div class="col p-0 mt-3">
-                                        <h3 class="text-lh-1dot2 font-size-14 mb-0">
-                                            <a href="{{route('front.category', [$child->slug])}}">{{$child->name}}</a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
                 <div class="col-xl-12">
                     <div class="d-block d-md-flex flex-center-between mb-3 rtl">
                         <h3 class="font-size-25 mb-2 mb-md-0">{{$category->name}}</h3>
@@ -86,13 +66,6 @@
 
                     <!-- Shop-control-bar -->
                     <div class="bg-gray-1 flex-center-between borders-radius-9 py-1">
-                        <div class="d-xl-none">
-                            <!-- Account Sidebar Toggle Button -->
-                            <a id="sidebarNavToggler1" class="btn btn-sm py-1 font-weight-normal" href="javascript:;" role="button" aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1" data-unfold-type="css-animation" data-unfold-animation-in="fadeInLeft" data-unfold-animation-out="fadeOutLeft" data-unfold-duration="500">
-                                <i class="fas fa-sliders-h"></i> <span class="ml-1">Filters</span>
-                            </a>
-                            <!-- End Account Sidebar Toggle Button -->
-                        </div>
                         <div class="px-3 d-none d-xl-block">
                             <ul class="nav nav-tab-shop" id="pills-tab" role="tablist">
                                 <li class="nav-item">
@@ -113,7 +86,7 @@
                         </div>
                         <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
                             <a class="text-gray-30 font-size-20 mr-2" href="{{$products->previousPageUrl()}}">←</a>
-                            <b>{{$products->currentPage()}} </b> &nbsp; of {{$products->lastPage()}}
+                            <b>{{$products->currentPage()}} </b> &nbsp; {{__('general.of')}} {{$products->lastPage()}}
                             <a class="text-gray-30 font-size-20 ml-2" href="{{$products->nextPageUrl()}}">→</a>
                         </nav>
                     </div>

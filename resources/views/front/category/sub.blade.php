@@ -21,7 +21,7 @@
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{__('general.home')}}</a></li>
                         @foreach($category->ancestors as $ancestor)
-                            <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [$ancestor->slug])}}">{{$ancestor->name}}</a></li>
+                            <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors()->pluck('slug')->toArray(), $ancestor->slug)])}}">{{$ancestor->name}}</a></li>
                         @endforeach
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{$category->name}}</li>
                     </ol>
@@ -29,7 +29,12 @@
             </div>
         </div>
     </div>
-    <div class="mb-6 bg-md-transparent py-6">
+    <div class="mb-6 bg-md-transparent">
+        <div class="container mb-8">
+            <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
+                <h1 class="section-title section-title__full mb-0 pb-2 font-size-22">{{(!empty($category->title)) ? $category->title : $category->name}}</h1>
+            </div>
+        </div>
         <div class="container">
             <div class="row mb-8 rtl">
                 <div class="d-none d-xl-block col-xl-3 col-wd-2gdot5">
@@ -81,7 +86,7 @@
                             @foreach($category->getSiblings() as $sibling)
                             <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                 <div class="custom-control custom-checkbox">
-                                    <a @if($sibling->id == $category->id) style="font-weight: bold" @endif href="{{route('front.category', [$sibling->slug])}}" class="custom-control-label">{{$sibling->name}}
+                                    <a @if($sibling->id == $category->id) style="font-weight: bold" @endif href="{{route('front.category', [generatedNestedSlug($sibling->ancestors()->pluck('slug')->toArray(), $sibling->slug)])}}" class="custom-control-label">{{$sibling->name}}
                                         <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($sibling->products)}})</span>
                                     </a>
                                 </div>
@@ -114,9 +119,9 @@
                         <div class="container">
                             <div class="row flex-nowrap flex-md-wrap overflow-auto overflow-md-visble rtl">
                                 @foreach($category->children as $child)
-                                    <div class="col-md-4 col-lg-3 col-xl-4 col-xl-2gdot4 mb-3 flex-shrink-0 flex-md-shrink-1">
+                                    <div class="col-md-3">
                                         <div class="bg-white overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
-                                            <a href="{{route('front.category', [$child->slug])}}" class="d-block pr-2 pr-wd-6">
+                                            <a href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2 pr-wd-6">
                                                 <div class="media align-items-center">
                                                     <div class="pt-2">
                                                         <img class="img-fluid img_category_page" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}"
@@ -132,7 +137,7 @@
                                 @endforeach
                             </div>
                         </div>
-                </div>
+                    </div>
                     @endif
                     <div id="productsContainer">
                         @include('front.category.productsContainer', ['category' => $category, 'products' => $products])
