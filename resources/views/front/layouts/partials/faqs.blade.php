@@ -1,5 +1,8 @@
 <div class="container">
     <div class="row">
+
+
+
         <div class="col-md-12">
             <div id="basicsAccordion" class="mb-12">
                 @foreach($FAQs as $row)

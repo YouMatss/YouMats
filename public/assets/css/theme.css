@@ -37897,6 +37897,17 @@ section {
 
   }
 
+
+
+    .h_scroll {
+        width: 92%;
+    }
+
+
+    .close_search{
+        right: 10px;
+    }
+
   .cat .container .box .content .title{
 	  font-size: 18px;
   }
