@@ -44,7 +44,7 @@
                                     <img class="img-fluid img_category_page" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}">
                                 </div>
                                 <div class="ml-3 media-body">
-                                    <h6 class="mb-0 text-gray-90">{{$child->name}}</h6>
+                                    <h2 class="mb-0 text-gray-90" style="font-size: 1rem;">{{$child->name}}</h2>
                                 </div>
                             </div>
                         </a>
@@ -59,7 +59,7 @@
             <div class="row mb-8">
                 <div class="col-xl-12">
                     <div class="d-block d-md-flex flex-center-between mb-3 rtl">
-                        <h3 class="font-size-25 mb-2 mb-md-0">{{$category->name}}</h3>
+                       <h3 class="font-size-25 mb-2 mb-md-0"><!-- {{$category->name}} --></h3>
                         <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}}
                             {{__('general.of')}} {{$products->total()}} {{__('general.results')}}</p>
                     </div>

@@ -15,7 +15,7 @@
     text-align: right;
 }
 
-bodey,p,h1,h2,h3,h4,h5,h6,a{
+bodey,p,h1,h2,h3,h4,h5,h6,a,.card {
     font-family: 'Cairo', sans-serif;
 }
 

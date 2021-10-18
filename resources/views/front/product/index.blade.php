@@ -175,7 +175,7 @@
                             </ul>
                         </div>
                         <div class="mx-md-4 pt-1">
-                            <h3 class="font-size-24 mb-3">{{ __('product.description') }}</h3>
+                            <h2 class="font-size-24 mb-3">{{ __('product.description') }}</h2>
                             {!! $product->desc !!}
                             <div class="row">
                                 <div class="col-md-6 text-right">
@@ -194,7 +194,7 @@
             <div class="container p-0">
 
                 <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-                    <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('product.related_products') }}</h3>
+                    <h2 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('product.related_products') }}</h2>
                 </div>
 
                 <div class="mb-4 position-relative">

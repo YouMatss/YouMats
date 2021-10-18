@@ -953,11 +953,15 @@
 }
 
 
-.st_new .product-item__title a{
+.product-item__title a{
     min-height: 4.50rem;
 }
 
-.st_new .product-item__title a {
+.st_one_block a{
+    min-height: 2.25rem !important;
+}
+
+.product-item__title a {
     -webkit-line-clamp: inherit;
 
 }

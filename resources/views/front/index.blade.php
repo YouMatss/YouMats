@@ -35,7 +35,7 @@
                                     <h1 class="font-size-46 text-lh-50 font-weight-light mb-6"
                                         data-scs-animation-in="fadeInUp"
                                         data-scs-animation-delay="200">
-                                        <stong class="font-weight-bold">{{$slider->title}}</stong>
+                                        <b class="font-weight-bold">{{$slider->title}}</b>
                                     </h1>
                                     <a href="{{$slider->button_link}}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
                                        data-scs-animation-in="fadeInUp"
@@ -134,7 +134,7 @@
         <div class="container">
             <div class="row">
                 <div class="box p-1 pr-2">
-                    <h2 class="text-uppercase">{{__('home.categories_subtitle')}}</h2>
+                    <h1 class="text-uppercase">{{__('home.categories_subtitle')}}</h1>
                     <p>{{__('home.catgeories_desc')}}</p>
                 </div>
                 @foreach($featured_categories as $f_category)
@@ -144,7 +144,7 @@
                              alt="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['alt']}}"
                              title="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['title']}}" />
                         <div class="content d-flex">
-                            <h3 class="title">{{$f_category->name}}</h3>
+                            <h2 class="title">{{$f_category->name}}</h2>
                             <span class="text-blue">
                                 <i class="fas fa-plus"></i>
                             </span>
@@ -165,7 +165,7 @@
             <div class="container p-0">
 
                 <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-                    <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{__('home.featured_products')}}</h3>
+                    <h2 class="section-title section-title__full mb-0 pb-2 font-size-22">{{__('home.featured_products')}}</h2>
                 </div>
 
                 <div class="mb-4 position-relative">
@@ -247,7 +247,7 @@
             <!-- Nav nav-pills -->
             <div class="position-relative text-center z-index-2">
                 <div class=" d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 rtl">
-                    <h3 class="section-title mb-0 pb-2 font-size-22">{{$section_i_category->name}}</h3>
+                    <h2 class="section-title mb-0 pb-2 font-size-22">{{$section_i_category->name}}</h2>
                 </div>
             </div>
             <!-- End Nav Pills -->
@@ -310,7 +310,7 @@
 
     <div class="container st_new">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('home.top_categories') }}</h3>
+            <h2 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('home.top_categories') }}</h2>
         </div>
         <div class="mb-6">
             <div class="row rtl flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
@@ -323,7 +323,7 @@
                                     <img class="img-fluid" src="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, '')['url']}}" alt="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                                 </div>
                                 <div class="ml-4 media-body">
-                                    <h4 class="mb-0 text-gray-90">{{$t_category->name}}</h4>
+                                    <h3 class="mb-0 text-gray-90">{{$t_category->name}}</h3>
                                 </div>
                             </div>
                         </a>

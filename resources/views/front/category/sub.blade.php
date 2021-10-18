@@ -128,7 +128,7 @@
                                                              alt="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}">
                                                     </div>
                                                     <div class="ml-3 media-body">
-                                                        <h6 class="mb-0 text-gray-90">{{$child->name}}</h6>
+                                                        <h2 class="mb-0 text-gray-90" style="font-size: 1rem;">{{$child->name}}</h2>
                                                     </div>
                                                 </div>
                                             </a>
