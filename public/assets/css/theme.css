@@ -37905,7 +37905,7 @@ section {
 
 
     .close_search{
-        right: 10px;
+        right: 10px !important;
     }
 
   .cat .container .box .content .title{
