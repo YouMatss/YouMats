@@ -15,10 +15,9 @@
     text-align: right;
 }
 
-bodey,p,h1,h2,h3,h4,h5,h6,a,.card ,address ,.font-weight-light,.phone,.email {
+body,p,h1,h2,h3,h4,h5,h6,a,.card ,address ,.font-weight-light,.phone,.email, .custom-control-label{
     font-family: 'Cairo', sans-serif;
 }
-
 
 .u-header-topbar{
     direction: rtl;
