@@ -35,7 +35,7 @@
                                     <h1 class="font-size-46 text-lh-50 font-weight-light mb-6"
                                         data-scs-animation-in="fadeInUp"
                                         data-scs-animation-delay="200">
-                                        <stong class="font-weight-bold">{{$slider->title}}</stong>
+                                        <b class="font-weight-bold">{{$slider->title}}</b>
                                     </h1>
                                     <a href="{{$slider->button_link}}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
                                        data-scs-animation-in="fadeInUp"
@@ -206,9 +206,9 @@
                                             <div class="mb-2">
                                                 <a href="{{route('front.category', [$bs_product->category->slug])}}" class="font-size-12 text-gray-5">{{$bs_product->category->name}}</a>
                                             </div>
-                                            <h5 class="mb-1 product-item__title">
+                                            <h2 class="mb-1 product-item__title">
                                                 <a href="{{route('front.product', [$bs_product->category->slug, $bs_product->slug])}}" class="text-blue font-weight-bold">{{$bs_product->name}}</a>
-                                            </h5>
+                                            </h2>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [$bs_product->category->slug, $bs_product->slug])}}" class="d-block text-center">
                                                     <img class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, '')['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
@@ -247,7 +247,7 @@
             <!-- Nav nav-pills -->
             <div class="position-relative text-center z-index-2">
                 <div class=" d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 rtl">
-                    <h3 class="section-title mb-0 pb-2 font-size-22">{{$section_i_category->name}}</h3>
+                    <h2 class="section-title mb-0 pb-2 font-size-22">{{$section_i_category->name}}</h2>
                 </div>
             </div>
             <!-- End Nav Pills -->
@@ -273,9 +273,9 @@
                                         <div class="mb-2">
                                             <a href="{{route('front.category', [$i_product->category->slug])}}" class="font-size-12 text-gray-5">{{$i_product->category->name}}</a>
                                         </div>
-                                        <h5 class="mb-1 product-item__title st_one_block">
+                                        <h3 class="mb-1 product-item__title st_one_block">
                                             <a href="{{route('front.product', [$i_product->category->slug, $i_product->slug])}}" class="text-blue font-weight-bold">{{$i_product->name}}</a>
-                                        </h5>
+                                        </h3>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [$i_product->category->slug, $i_product->slug])}}" class="d-block text-center">
                                                 <img class="img-fluid" src="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
@@ -323,7 +323,7 @@
                                     <img class="img-fluid" src="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, '')['url']}}" alt="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                                 </div>
                                 <div class="ml-4 media-body">
-                                    <h4 class="mb-0 text-gray-90">{{$t_category->name}}</h4>
+                                    <h3 class="mb-0 text-gray-90">{{$t_category->name}}</h3>
                                 </div>
                             </div>
                         </a>
@@ -362,9 +362,9 @@
                                     <div class="mb-2">
                                         <a href="{{route('front.category', [$section_ii_category->slug])}}" class="font-size-12 text-gray-5">{{$section_ii_category->name}}</a>
                                     </div>
-                                    <h5 class="mb-1 product-item__title">
+                                    <h3 class="mb-1 product-item__title">
                                         <a href="{{route('front.product', [$ii_product->category->slug, $ii_product->slug])}}" class="text-blue font-weight-bold">{{$ii_product->name}}</a>
-                                    </h5>
+                                    </h3>
                                     <div class="mb-2">
                                         <a href="{{route('front.product', [$ii_product->category->slug, $ii_product->slug])}}" class="d-block text-center">
                                             <img class="img-fluid" src="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />

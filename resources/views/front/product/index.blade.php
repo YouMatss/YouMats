@@ -175,7 +175,7 @@
                             </ul>
                         </div>
                         <div class="mx-md-4 pt-1">
-                            <h3 class="font-size-24 mb-3">{{ __('product.description') }}</h3>
+                            <h2 class="font-size-24 mb-3">{{ __('product.description') }}</h2>
                             {!! $product->desc !!}
                             <div class="row">
                                 <div class="col-md-6 text-right">
@@ -194,7 +194,7 @@
             <div class="container p-0">
 
                 <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-                    <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('product.related_products') }}</h3>
+                    <h2 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('product.related_products') }}</h2>
                 </div>
 
                 <div class="mb-4 position-relative">
@@ -233,7 +233,7 @@
                                     <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
                                         <div class="product-item__body pb-xl-2">
                                             <div class="mb-2"><a href="{{route('front.category', [$r_product->category->slug])}}" class="font-size-12 text-gray-5">{{$r_product->category->name}}</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="{{route('front.product', [$r_product->category->slug, $r_product->slug])}}" class="text-blue font-weight-bold">{{$r_product->name}}</a></h5>
+                                            <h3 class="mb-1 product-item__title"><a href="{{route('front.product', [$r_product->category->slug, $r_product->slug])}}" class="text-blue font-weight-bold">{{$r_product->name}}</a></h3>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [$r_product->category->slug, $r_product->slug])}}" class="a_img_pro d-block text-center">
                                                     <img class="img-fluid" src="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
