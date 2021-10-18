@@ -90,8 +90,22 @@ class MiscController extends Controller
     }
 
     public function introduce($type) {
-        if($type == 'individual' || $type == 'company')
+
+        $translation = [
+            'company' => [
+                'ar' => 'شركه',
+                'en' => 'Company'
+            ],
+            'individual' => [
+                'ar' => 'فرد',
+                'en' => 'Individual'
+            ]
+        ];
+
+        if($type == 'individual' || $type == 'company') {
             Session::put('userType', $type);
+            Session::put('userTypeTranslation', $translation[$type]);
+        }
 
         return redirect()->back();
     }

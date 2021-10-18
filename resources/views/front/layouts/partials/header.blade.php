@@ -18,7 +18,10 @@
                                         <div class="position-relative">
                                             <a id="languageDropdownInvoker" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                                 <span class="d-inline-block d-sm-none">{{getCurrency('symbol')}}</span>
-                                                <span class="d-none d-sm-inline-flex align-items-center"><i class="ec ec-dollar mr-1"></i> {{getCurrency('code')}} ({{getCurrency('symbol')}})</span>
+                                                <span class="d-none d-sm-inline-flex align-items-center">
+                                                    <i class="far fa-money-bill-alt mr-1"></i>
+                                                    {{getCurrency('code')}} ({{getCurrency('symbol')}})
+                                                </span>
                                             </a>
                                             <div id="languageDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker">
                                                 @foreach(\Config::get('currencies') as $currency)
@@ -62,7 +65,7 @@
                                         <a id="userTypeDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#userTypeDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                         <span class="d-none d-sm-inline-flex align-items-center">
                                             <i class="ec ec-user mr-1"></i>
-                                            {{ucfirst(\Illuminate\Support\Facades\Session::get('userType'))}}
+                                            {{\Illuminate\Support\Facades\Session::get('userTypeTranslation')[\App::getLocale()]}}
                                         </span>
                                         </a>
                                         <div id="userTypeDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="userTypeDropdownInvoker2">

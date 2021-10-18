@@ -19,7 +19,7 @@
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">Home</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{__('general.home')}}</a></li>
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{$category->name}}</li>
                     </ol>
                 </nav>
@@ -80,7 +80,8 @@
                 <div class="col-xl-12">
                     <div class="d-block d-md-flex flex-center-between mb-3 rtl">
                         <h3 class="font-size-25 mb-2 mb-md-0">{{$category->name}}</h3>
-                        <p class="font-size-14 text-gray-90 mb-0">Showing {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}} of {{$products->total()}} results</p>
+                        <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}}
+                            {{__('general.of')}} {{$products->total()}} {{__('general.results')}}</p>
                     </div>
 
                     <!-- Shop-control-bar -->

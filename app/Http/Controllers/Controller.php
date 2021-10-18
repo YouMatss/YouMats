@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Currency;
+use App\Models\FAQ;
 use App\Models\Page;
 use App\Models\Partner;
 use App\Models\Vendor;
@@ -25,6 +26,7 @@ class Controller extends BaseController
         $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
         $data['pages'] = Page::orderBy('sort')->get();
         $data['footer_categories'] = Category::where('show_in_footer', '1')->orderBy('created_at', 'desc');
+        $data['FAQs'] = FAQ::orderBy('sort')->get();
 
         View::share($data);
         Config::set($config);

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Anaseqal\NovaImport\NovaImport;
+use App\Models\Category as CategoryModel;
 use App\Nova\Admin;
 use App\Nova\Car;
 use App\Nova\CarType;
@@ -43,6 +44,7 @@ use App\Nova\Trip;
 use App\Nova\Unit;
 use App\Nova\User;
 use App\Nova\Vendor;
+use App\Observers\CategoryObserver;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
 use Bernhardh\NovaTranslationEditor\NovaTranslationEditor;
@@ -71,6 +73,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
+        CategoryModel::fixTree();
         NovaSettings::addSettingsFields([
             new Panel('Social Media Links', $this->socialFields()),
             new Panel('Media', [
@@ -125,7 +128,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ])
         ]);
 //        Nova::serving(function () {
-//            \App\Models\Category::observe(CategoryObserver::class);
+//            CategoryModel::observe(CategoryObserver::class);
 //        });
     }
 

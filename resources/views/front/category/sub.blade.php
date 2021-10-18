@@ -19,8 +19,10 @@
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">Home</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [$category->parent->slug])}}">{{$category->parent->name}}</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{__('general.home')}}</a></li>
+                        @foreach($category->ancestors as $ancestor)
+                            <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [$ancestor->slug])}}">{{$ancestor->name}}</a></li>
+                        @endforeach
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{$category->name}}</li>
                     </ol>
                 </nav>
@@ -34,7 +36,7 @@
                     @if(!is_company())
                     <div class="mb-6">
                         <div class="range-slider bg-gray-3 p-3">
-                            <h4 class="font-size-14 mb-3 font-weight-bold">Price</h4>
+                            <h4 class="font-size-14 mb-3 font-weight-bold">{{__('general.price')}}</h4>
                             <!-- Range Slider -->
                             <input class="js-range-slider" type="text"
                                    data-extra-classes="u-range-slider u-range-slider-indicator u-range-slider-grid"
@@ -43,14 +45,14 @@
                                    data-result-min="#rangeSliderExample3MinResultCategory" data-result-max="#rangeSliderExample3MaxResultCategory">
                             <!-- End Range Slider -->
                             <div class="mt-1 text-gray-111 d-flex mb-4">
-                                <span class="mr-0dot5">Price: </span>
+                                <span class="mr-0dot5">{{__('general.price')}}: </span>
                                 <span>{{ getCurrency('symbol') }} </span>
                                 <span id="rangeSliderExample3MinResultCategory">{{$minPrice}}</span>
                                 <span class="mx-0dot5"> — </span>
                                 <span>{{ getCurrency('symbol') }} </span>
                                 <span id="rangeSliderExample3MaxResultCategory">{{$maxPrice}}</span>
                             </div>
-                            <button class="btn px-4 btn-primary-dark-w py-2 rounded-lg text-white" id="priceFilterBtn">Filter</button>
+                            <button class="btn px-4 btn-primary-dark-w py-2 rounded-lg text-white" id="priceFilterBtn">{{__('general.search_button')}}</button>
                         </div>
                     </div>
                     @endif
@@ -73,7 +75,7 @@
                     @endforeach
                     <div class="mb-6">
                         <div class="border-bottom border-color-1 mb-5">
-                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Categories</h3>
+                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">{{__('general.categories')}}</h3>
                         </div>
                         <div class="border-bottom pb-4 mb-4 attr-container">
                             @foreach($category->getSiblings() as $sibling)
@@ -90,7 +92,7 @@
                     @if(count($tags))
                     <div class="mb-6 d-none">
                         <div class="border-bottom border-color-1 mb-5">
-                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Tags</h3>
+                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">{{__('general.search_tags')}}</h3>
                         </div>
                         <div class="border-bottom pb-4 mb-4 attr-container">
                             @foreach($tags as $tag)

@@ -12,13 +12,6 @@ Route::group([
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function(){
 
-//    Route::get('/', function () {
-//        return view('coming_soon');
-//    });
-//    Route::group([
-//        'prefix' => 'demo'
-//    ], function () {
-
     //Auth (Verified/Authenticated) routes
     Route::group(['namespace' => 'User'], function () {
         Auth::routes(['verify' => true]);
@@ -104,6 +97,4 @@ Route::group([
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
     Route::get('/i/{category_slug}', 'Category\CategoryController@index')->name('front.category');
     Route::get('/i/{category_slug}/{slug}', 'Product\ProductController@index')->name('front.product');
-//    ->where('category_slug', '^(?!nova|admin.*$).*');
 });
-//});
