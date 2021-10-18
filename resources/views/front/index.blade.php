@@ -206,9 +206,9 @@
                                             <div class="mb-2">
                                                 <a href="{{route('front.category', [$bs_product->category->slug])}}" class="font-size-12 text-gray-5">{{$bs_product->category->name}}</a>
                                             </div>
-                                            <h2 class="mb-1 product-item__title">
+                                            <h3p class="mb-1 product-item__title">
                                                 <a href="{{route('front.product', [$bs_product->category->slug, $bs_product->slug])}}" class="text-blue font-weight-bold">{{$bs_product->name}}</a>
-                                            </h2>
+                                            </h3p>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [$bs_product->category->slug, $bs_product->slug])}}" class="d-block text-center">
                                                     <img class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, '')['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
@@ -424,9 +424,9 @@
                                         <div class="mb-2">
                                             <a href="{{route('front.category', [$section_iii_category->slug])}}" class="font-size-12 text-gray-5">{{$section_iii_category->name}}</a>
                                         </div>
-                                        <h5 class="mb-1 product-item__title">
+                                        <h3 class="mb-1 product-item__title">
                                             <a href="{{route('front.product', [$iii_product->category->slug, $iii_product->slug])}}" class="text-blue font-weight-bold">{{$iii_product->name}}</a>
-                                        </h5>
+                                        </h3>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [$iii_product->category->slug, $iii_product->slug])}}" class="d-block text-center">
                                                 <img class="img-fluid" src="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
