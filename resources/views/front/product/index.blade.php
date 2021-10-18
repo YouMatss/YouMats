@@ -22,9 +22,9 @@
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{ __('general.home') }}</a></li>
                         @foreach($product->category->ancestors as $ancestor)
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [$ancestor->slug])}}">{{$ancestor->name}}</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors()->pluck('slug')->toArray(), $ancestor->slug)])}}">{{$ancestor->name}}</a></li>
                         @endforeach
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [$product->category->slug])}}">{{$product->category->name}}</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{$product->category->name}}</a></li>
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{$product->name}}</li>
                     </ol>
                 </nav>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 col-xl-4 mb-md-6 mb-lg-0">
                     <div class="mb-2">
-                        <a href="{{route('front.category', [$product->category->slug])}}" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{$product->category->name}}</a>
+                        <a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{$product->category->name}}</a>
                         <h2 class="font-size-25 text-lh-1dot2">{{$product->name}}</h2>
                         <div class="mb-2">
                             <a class="d-inline-flex align-items-center small font-size-15 text-lh-1">
@@ -232,10 +232,10 @@
                                 <div class="product-item__outer h-100">
                                     <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
                                         <div class="product-item__body pb-xl-2">
-                                            <div class="mb-2"><a href="{{route('front.category', [$r_product->category->slug])}}" class="font-size-12 text-gray-5">{{$r_product->category->name}}</a></div>
-                                            <h3 class="mb-1 product-item__title"><a href="{{route('front.product', [$r_product->category->slug, $r_product->slug])}}" class="text-blue font-weight-bold">{{$r_product->name}}</a></h3>
+                                            <div class="mb-2"><a href="{{route('front.category', [generatedNestedSlug($r_product->category->ancestors()->pluck('slug')->toArray(), $r_product->category->slug)])}}" class="font-size-12 text-gray-5">{{$r_product->category->name}}</a></div>
+                                            <h5 class="mb-1 product-item__title"><a href="{{route('front.product', [generatedNestedSlug($r_product->category->ancestors()->pluck('slug')->toArray(), $r_product->category->slug), $r_product->slug])}}" class="text-blue font-weight-bold">{{$r_product->name}}</a></h5>
                                             <div class="mb-2">
-                                                <a href="{{route('front.product', [$r_product->category->slug, $r_product->slug])}}" class="a_img_pro d-block text-center">
+                                                <a href="{{route('front.product', [generatedNestedSlug($r_product->category->ancestors()->pluck('slug')->toArray(), $r_product->category->slug), $r_product->slug])}}" class="a_img_pro d-block text-center">
                                                     <img class="img-fluid" src="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                                                 </a>
                                             </div>
