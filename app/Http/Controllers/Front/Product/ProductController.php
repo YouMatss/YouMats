@@ -16,7 +16,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
 {
-    public function index($category_slug, $slug) {
+    public function index($categories_slug, $slug) {
         setCityLocation();
 
         $data['product'] = Product::with('category', 'tags', 'vendor')

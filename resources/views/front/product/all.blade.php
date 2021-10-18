@@ -20,7 +20,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{ __('general.home') }}</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('products.all_products') }}</li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('product.all_products') }}</li>
                     </ol>
                 </nav>
             </div>
@@ -76,7 +76,7 @@
                         <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
                             <form method="post" class="min-width-50 mr-1">
                                 <input size="2" min="1" max="3" step="1" type="number" class="form-control text-center px-2 height-35" value="1">
-                            </form> of 3
+                            </form> {{__('general.of')}} 3
                             <a class="text-gray-30 font-size-20 ml-2" href="#">→</a>
                         </nav>
                     </div>
