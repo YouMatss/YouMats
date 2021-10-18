@@ -3,9 +3,9 @@
     <div class="product-item__inner px-xl-2 p-3">
         <div class="product-item__body pb-xl-2">
             <div class="mb-2"><a href="{{route('front.category', [$product->category->slug])}}" class="font-size-12 text-gray-5">{{$product->category->name}}</a></div>
-            <h5 class="mb-1 product-item__title">
+            <h2 class="mb-1 product-item__title">
                 <a href="{{route('front.product', [$product->category->slug, $product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a>
-            </h5>
+            </h2>
             <div class="mb-2">
                 <a href="{{route('front.product', [$product->category->slug, $product->slug])}}" class="d-block text-center">
                     <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}">

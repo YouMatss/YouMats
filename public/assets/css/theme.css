@@ -37506,7 +37506,8 @@ blockquote:not(.blockquote) p {
 }
 
 
-.cat .container .box h2{
+.cat .container .box h2,
+.cat .container .box h1{
   line-height: normal;
   font-size: 24px;
   font-weight: bold;
@@ -37549,6 +37550,7 @@ blockquote:not(.blockquote) p {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 24px;
+  color:#fff;
 }
 
 .svg-inline--fa {
