@@ -210,20 +210,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'expanded' => true,
                         'icon' => '',
                         'resources' => [
-//                            InternalLink::make([
-//                                'label' => 'View Categories',
-//                                'badge' => null, // can be used to indicate the number of updates or notifications in this resource
-//                                'icon' => null, // HTML/SVG string or callback that produces one, see below
-//                                'target' => '_self',
-//                                'path' => '/resources/categories?categories_page=1&categories_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXENhdGVnb3J5XFxDYXRlZ29yeVR5cGUiLCJ2YWx1ZSI6IjEifV0%3D'
-//                            ]),
-//                            InternalLink::make([
-//                                'label' => 'View SubCategories',
-//                                'badge' => null, // can be used to indicate the number of updates or notifications in this resource
-//                                'icon' => null, // HTML/SVG string or callback that produces one, see below
-//                                'target' => '_self',
-//                                'path' => '/resources/categories?categories_page=1&categories_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXENhdGVnb3J5XFxDYXRlZ29yeVR5cGUiLCJ2YWx1ZSI6IjAifV0%3D'
-//                            ]),
                             Category::class,
                             Product::class,
                             Tag::class,

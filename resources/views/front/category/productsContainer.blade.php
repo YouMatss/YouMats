@@ -1,28 +1,11 @@
 <div class="d-block d-md-flex flex-center-between mb-3 rtl">
-    <h3 class="font-size-25 mb-2 mb-md-0">{{$category->name}}</h3>
+    <spane class="font-size-25 mb-2 mb-md-0"></spane>
     <input type="hidden" value="{{$category->id}}" id="categoryIdContainer">
     <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}} {{__('general.of')}} {{$products->total()}} {{__('general.results')}}</p>
 </div>
 
 <!-- Shop-control-bar -->
 <div class="bg-gray-1 flex-center-between borders-radius-9 py-1">
-    <div class="d-xl-none">
-        <!-- Account Sidebar Toggle Button -->
-        <a id="sidebarNavToggler1" class="btn btn-sm py-1 font-weight-normal" href="javascript:;" role="button"
-           aria-controls="sidebarContent1"
-           aria-haspopup="true"
-           aria-expanded="false"
-           data-unfold-event="click"
-           data-unfold-hide-on-scroll="false"
-           data-unfold-target="#sidebarContent1"
-           data-unfold-type="css-animation"
-           data-unfold-animation-in="fadeInLeft"
-           data-unfold-animation-out="fadeOutLeft"
-           data-unfold-duration="500">
-            <i class="fas fa-sliders-h"></i> <span class="ml-1">Filters</span>
-        </a>
-        <!-- End Account Sidebar Toggle Button -->
-    </div>
     <div class="px-3 d-none d-xl-block">
         <ul class="nav nav-tab-shop" id="pills-tab" role="tablist">
             <li class="nav-item">
@@ -49,7 +32,7 @@
     </div>
     <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
         <a class="text-gray-30 font-size-20 mr-2" href="{{$products->previousPageUrl()}}">←</a>
-        <b>{{$products->currentPage()}} </b> &nbsp; of {{$products->lastPage()}}
+        <b>{{$products->currentPage()}} </b> &nbsp; {{__('general.of')}} {{$products->lastPage()}}
         <a class="text-gray-30 font-size-20 ml-2" href="{{$products->nextPageUrl()}}">→</a>
     </nav>
 </div>
