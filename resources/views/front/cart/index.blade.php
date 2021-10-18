@@ -138,7 +138,7 @@
             </div>
 
             @if(!is_company())
-                <div class="row">
+                <div class="row rtl">
                     <div class="col-xl-5 col-lg-6  col-md-8 mb-5">
                         <div class="border-bottom border-color-1 mb-3">
                             <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">{{ __('cart.cart_totals') }}</h3>
@@ -163,7 +163,7 @@
                 </div>
             @endif
         @else
-            <h4>{{ __('cart.no_items_in_cart') }}</h4>
+            <h4 class="tit_cart_min">{{ __('cart.no_items_in_cart') }}</h4>
     </div>
     @endif
 @endsection

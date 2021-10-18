@@ -15,7 +15,7 @@
     text-align: right;
 }
 
-bodey,p,h1,h2,h3,h4,h5,h6,a,.card {
+bodey,p,h1,h2,h3,h4,h5,h6,a,.card ,address ,.font-weight-light,.phone,.email {
     font-family: 'Cairo', sans-serif;
 }
 
@@ -319,4 +319,35 @@ h3.font-size-24 {
 
 .form-check-label{
     margin-right: 20px;
+}
+
+
+.ec.ec-arrow-right-categproes {
+    transform: rotate(180deg);
+    margin-top: -2px;
+}
+
+
+.tit_cart_min{
+    text-align: right;
+}
+
+
+.iti--allow-dropdown input, .iti--allow-dropdown input[type=tel], .iti--allow-dropdown input[type=text], .iti--separate-dial-code input, .iti--separate-dial-code input[type=tel], .iti--separate-dial-code input[type=text] {
+
+    margin-left: 0;
+    padding: 0 95px 0 0 !important;
+}
+
+.iti--allow-dropdown .iti__flag-container, .iti--separate-dial-code .iti__flag-container {
+    left: auto;
+    right: 0;
+}
+
+.iti--separate-dial-code .iti__selected-flag {
+    border-radius: 0 15px 15px 0;
+}
+
+.input-group > .input-group-append > .btn{
+    border-radius: 25px 0 0 25px !important;
 }
