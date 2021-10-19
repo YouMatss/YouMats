@@ -119,7 +119,7 @@
                         <div class="container">
                             <div class="row flex-nowrap flex-md-wrap overflow-auto overflow-md-visble rtl">
                                 @foreach($category->children as $child)
-                                    <div class="col-md-3">
+                                    <div class="col-md-4 col-lg-3 col-xl-4 col-xl-2gdot4 mb-3 flex-shrink-0 flex-md-shrink-1">
                                         <div class="bg-white overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
                                             <a href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2 pr-wd-6">
                                                 <div class="media align-items-center">
