@@ -8,7 +8,8 @@ Route::post('changeCity', 'Common\MiscController@changeCity')->name('front.cityS
 Route::get('introduce/{type}', 'Common\MiscController@introduce')->name('front.introduce');
 
 Route::group([
-    'prefix' => LaravelLocalization::setLocale()
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localizationRedirect' ]
 ], function(){
 
     //Auth (Verified/Authenticated) routes
