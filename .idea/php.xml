@@ -218,6 +218,7 @@
       <path value="$PROJECT_DIR$/vendor/mirovit/nova-notifications" />
       <path value="$PROJECT_DIR$/vendor/laravel/serializable-closure" />
       <path value="$PROJECT_DIR$/vendor/devinweb/payment" />
+      <path value="$PROJECT_DIR$/vendor/drobee/nova-sluggable" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

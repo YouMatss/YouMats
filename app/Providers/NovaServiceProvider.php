@@ -58,11 +58,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use KABBOUCHI\LogsTool\LogsTool;
 use Laravel\Nova\Actions\ActionResource;
+use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Laravel\Nova\Panel;
+use Mirovit\NovaNotifications\NovaNotifications;
 use OptimistDigital\NovaSettings\NovaSettings;
 use Richardkeep\NovaTimenow\NovaTimenow;
 use Spatie\BackupTool\BackupTool;
@@ -75,57 +78,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         parent::boot();
         CategoryModel::fixTree();
         NovaSettings::addSettingsFields([
+            new Panel('General SEO', $this->generalSeo()),
             new Panel('Social Media Links', $this->socialFields()),
-            new Panel('Media', [
-                Image::make(__('Slider Background'), 'slider_background')
-                    ->maxWidth(140)
-                    ->store(function(Request $request, $model) {
-                        $file = $request->slider_background->getClientOriginalName();
-                        $fileName = pathinfo($file, PATHINFO_FILENAME);
-                        $extension = pathinfo($file, PATHINFO_EXTENSION);
-                        $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
-                        $request->slider_background->storeAs('/', $combinedName, 'public');
-                        return [
-                            'slider_background' => $combinedName
-                        ];
-                    })->rules(NULLABLE_IMAGE_VALIDATION),
-                Image::make(__('Home First Section'), 'home_first_section')
-                    ->maxWidth(140)
-                    ->store(function(Request $request, $model) {
-                        $file = $request->home_first_section->getClientOriginalName();
-                        $fileName = pathinfo($file, PATHINFO_FILENAME);
-                        $extension = pathinfo($file, PATHINFO_EXTENSION);
-                        $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
-                        $request->home_first_section->storeAs('/', $combinedName, 'public');
-                        return [
-                            'home_first_section' => $combinedName
-                        ];
-                    })->rules(NULLABLE_IMAGE_VALIDATION),
-                Image::make(__('Home Second Section'), 'home_second_section')
-                    ->maxWidth(140)
-                    ->store(function(Request $request, $model) {
-                        $file = $request->home_second_section->getClientOriginalName();
-                        $fileName = pathinfo($file, PATHINFO_FILENAME);
-                        $extension = pathinfo($file, PATHINFO_EXTENSION);
-                        $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
-                        $request->home_second_section->storeAs('/', $combinedName, 'public');
-                        return [
-                            'home_second_section' => $combinedName
-                        ];
-                    })->rules(NULLABLE_IMAGE_VALIDATION),
-                Image::make(__('Home Third Section'), 'home_third_section')
-                    ->maxWidth(140)
-                    ->store(function(Request $request, $model) {
-                        $file = $request->home_third_section->getClientOriginalName();
-                        $fileName = pathinfo($file, PATHINFO_FILENAME);
-                        $extension = pathinfo($file, PATHINFO_EXTENSION);
-                        $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
-                        $request->home_third_section->storeAs('/', $combinedName, 'public');
-                        return [
-                            'home_third_section' => $combinedName
-                        ];
-                    })->rules(NULLABLE_IMAGE_VALIDATION),
-            ])
+            new Panel('Media', $this->generalMedia()),
         ]);
 //        Nova::serving(function () {
 //            CategoryModel::observe(CategoryObserver::class);
@@ -321,7 +276,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     return $request->user()->isSuperAdmin();
                 }),
             new NovaImport,
-            \Mirovit\NovaNotifications\NovaNotifications::make(),
+            NovaNotifications::make(),
         ];
     }
 
@@ -330,11 +285,102 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
     }
 
-    private function socialFields()
+    /**
+     * @return array
+     */
+    private function socialFields(): array
     {
         return [
             Text::make('Facebook')->rules(NULLABLE_URL_VALIDATION),
             Text::make('Twitter')->rules(NULLABLE_URL_VALIDATION),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generalMedia(): array
+    {
+        return [
+            Image::make(__('Logo'), 'logo')
+                ->store(function(Request $request, $model) {
+                    $file = $request->logo->getClientOriginalName();
+                    $fileName = pathinfo($file, PATHINFO_FILENAME);
+                    $extension = pathinfo($file, PATHINFO_EXTENSION);
+                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
+                    $request->logo->storeAs('/', $combinedName, 'public');
+                    return [
+                        'logo' => $combinedName
+                    ];
+                })->rules(NULLABLE_IMAGE_VALIDATION),
+            Image::make(__('Slider Background'), 'slider_background')
+                ->maxWidth(140)
+                ->store(function(Request $request, $model) {
+                    $file = $request->slider_background->getClientOriginalName();
+                    $fileName = pathinfo($file, PATHINFO_FILENAME);
+                    $extension = pathinfo($file, PATHINFO_EXTENSION);
+                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
+                    $request->slider_background->storeAs('/', $combinedName, 'public');
+                    return [
+                        'slider_background' => $combinedName
+                    ];
+                })->rules(NULLABLE_IMAGE_VALIDATION),
+            Image::make(__('Home First Section'), 'home_first_section')
+                ->maxWidth(140)
+                ->store(function(Request $request, $model) {
+                    $file = $request->home_first_section->getClientOriginalName();
+                    $fileName = pathinfo($file, PATHINFO_FILENAME);
+                    $extension = pathinfo($file, PATHINFO_EXTENSION);
+                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
+                    $request->home_first_section->storeAs('/', $combinedName, 'public');
+                    return [
+                        'home_first_section' => $combinedName
+                    ];
+                })->rules(NULLABLE_IMAGE_VALIDATION),
+            Image::make(__('Home Second Section'), 'home_second_section')
+                ->maxWidth(140)
+                ->store(function(Request $request, $model) {
+                    $file = $request->home_second_section->getClientOriginalName();
+                    $fileName = pathinfo($file, PATHINFO_FILENAME);
+                    $extension = pathinfo($file, PATHINFO_EXTENSION);
+                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
+                    $request->home_second_section->storeAs('/', $combinedName, 'public');
+                    return [
+                        'home_second_section' => $combinedName
+                    ];
+                })->rules(NULLABLE_IMAGE_VALIDATION),
+            Image::make(__('Home Third Section'), 'home_third_section')
+                ->maxWidth(140)
+                ->store(function(Request $request, $model) {
+                    $file = $request->home_third_section->getClientOriginalName();
+                    $fileName = pathinfo($file, PATHINFO_FILENAME);
+                    $extension = pathinfo($file, PATHINFO_EXTENSION);
+                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
+                    $request->home_third_section->storeAs('/', $combinedName, 'public');
+                    return [
+                        'home_third_section' => $combinedName
+                    ];
+                })->rules(NULLABLE_IMAGE_VALIDATION),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generalSeo(): array
+    {
+        return [
+            Text::make('Home Meta Title', 'home_meta_title')
+                ->rules(NULLABLE_STRING_VALIDATION)->translatable(),
+
+            Text::make('Home Meta Keywords', 'home_meta_keywords')
+                ->rules(NULLABLE_TEXT_VALIDATION)->translatable(),
+
+            Textarea::make('Home Meta Description', 'home_meta_desc')
+                ->rules(NULLABLE_TEXT_VALIDATION)->translatable(),
+
+            Code::make('Home Schema', 'home_schema')
+                ->rules(NULLABLE_TEXT_VALIDATION),
         ];
     }
 }
