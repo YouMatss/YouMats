@@ -38,10 +38,10 @@ function doTheMagic(url, callback = 'default') {
                     <div class="product-item__outer h-100">
                         <div class="product-item__inner px-xl-4 p-3">
                             <div class="product-item__body pb-xl-2">
-                                <div class="mb-2"><a href="{{ env('APP_URL') }}/i/${value.category.slug}" class="font-size-12 text-gray-5">${value.category.name}</a></div>
-                                <h5 class="mb-1 product-item__title"><a title="${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}" href="{{ env('APP_URL') }}/i/${value.category.slug}/${value.slug}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
+                                <div class="mb-2"><a href="${value.category_url}" class="font-size-12 text-gray-5">${value.category.name}</a></div>
+                                <h5 class="mb-1 product-item__title"><a title="${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}" href="${value.url}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
                                 <div class="mb-2">
-                                    <a href="{{ env('APP_URL') }}/i/${value.category.slug}/${value.slug}" class="d-block text-center">
+                                    <a href="${value.url}" class="d-block text-center">
                                         <img class="img-fluid" src="${value.image_url.url}" alt="${value.image_url.alt}" title="${value.image_url.title}">
                                     </a>
                                 </div>
@@ -63,15 +63,15 @@ function doTheMagic(url, callback = 'default') {
                         <div class="product-item__inner remove-prodcut-hover py-4 row">
                             <div class="product-item__header col-6 col-md-2">
                                 <div class="mb-2">
-                                    <a href="{{ env('APP_URL') }}/i/${value.category.slug}/${value.slug}" class="d-block text-center">
+                                    <a href="${value.url}" class="d-block text-center">
                                         <img class="img-fluid" src="${value.image_url.url}" alt="${value.image_url.alt}" title="${value.image_url.title}">
                                     </a>
                                 </div>
                             </div>
                             <div class="product-item__body col-6 col-md-10">
                                 <div class="pr-lg-10">
-                                    <div class="mb-2"><a href="{{ env('APP_URL') }}/i/${value.category.slug}" class="font-size-12 text-gray-5">${value.category.name}</a></div>
-                                    <h5 class="mb-2 product-item__title"><a href="{{ env('APP_URL') }}/i/${value.category.slug}/${value.slug}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
+                                    <div class="mb-2"><a href="${value.category_url}" class="font-size-12 text-gray-5">${value.category.name}</a></div>
+                                    <h5 class="mb-2 product-item__title"><a href="${value.url}" class="text-blue font-weight-bold">${value.name.{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() }}}</a></h5>
 
                                     <div class="mb-2 flex-center-between">
                                         <div class="prodcut-price searchPrice-${value.id}">

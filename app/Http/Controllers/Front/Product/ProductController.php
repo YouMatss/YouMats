@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -62,7 +63,6 @@ class ProductController extends Controller
      */
     public function search(): JsonResponse
     {
-
         $products = QueryBuilder::for(Product::class)
                         ->allowedFilters([
                             AllowedFilter::custom('name', new FiltersJsonField),
@@ -75,6 +75,11 @@ class ProductController extends Controller
                         ->where('active', 1)
                         ->limit(30)
                         ->get();
+
+        foreach ($products as $product) {
+            $product['category_url'] = route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)]);
+            $product['url'] = route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug]);
+        }
 
         return response()->json(['products' => $products, 'maxPrice' => $products->max('price')], 200);
     }
