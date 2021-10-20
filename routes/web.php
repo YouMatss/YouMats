@@ -90,15 +90,15 @@ Route::group([
         Route::patch('/vendor/{vendor}/update', 'OrderController@vendorUpdate')->name('vendor.order.update');
     });
 
-    Route::get('page/{slug}', 'Common\PageController@page')->name('front.page.index');
-    Route::get('search', 'Product\ProductController@search')->name('products.search');
-    Route::get('filter/{category_id}', 'Category\CategoryController@filter')->name('category.filter');
-    Route::get('tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
+    Route::get('/page/{slug}', 'Common\PageController@page')->name('front.page.index');
+    Route::get('/search', 'Product\ProductController@search')->name('products.search');
+    Route::get('/filter/{category_id}', 'Category\CategoryController@filter')->name('category.filter');
+    Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
 
-    Route::get('{categories_slug}/{slug}/i', 'Product\ProductController@index')
+    Route::get('/{categories_slug}/{slug}/i', 'Product\ProductController@index')
         ->name('front.product')->where('categories_slug', '.*');
 
-    Route::get('{slug}', 'Category\CategoryController@index')
+    Route::get('/{slug}', 'Category\CategoryController@index')
         ->name('front.category')->where('slug', '.*')
         ->where('slug', '^(?!admin_panel|nova-api|nova-vendor).*$');
 

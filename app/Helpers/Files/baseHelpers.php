@@ -128,6 +128,10 @@ if(!function_exists('generatedNestedSlug')) {
      */
     function generatedNestedSlug($array, $slug): string
     {
+        if(count($array) == 0) {
+            return $slug;
+        }
+
         return implode('/', $array) . '/' . $slug;
     }
 }

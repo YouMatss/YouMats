@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c4ed441767f2c9ec13f6aa7efdad978",
+    "content-hash": "036018ad9173d19994b74062f0341514",
     "packages": [
         {
             "name": "ampeco/nova-date-range-filter",
@@ -1611,6 +1611,53 @@
                 }
             ],
             "time": "2020-11-24T19:55:57+00:00"
+        },
+        {
+            "name": "drobee/nova-sluggable",
+            "version": "1.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/drobee/nova-sluggable.git",
+                "reference": "d197423f92e510a475870a35281ecd69b4ba534c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drobee/nova-sluggable/zipball/d197423f92e510a475870a35281ecd69b4ba534c",
+                "reference": "d197423f92e510a475870a35281ecd69b4ba534c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "5.6.*|5.7.*|5.8.*|6.*|7.*|8.*",
+                "illuminate/support": "5.6.*|5.7.*|5.8.*|6.*|7.*|8.*",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Drobee\\NovaSluggable\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Drobee\\NovaSluggable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Slug field for Laravel Nova",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/drobee/nova-sluggable/issues",
+                "source": "https://github.com/drobee/nova-sluggable/tree/1.2.6"
+            },
+            "time": "2021-03-22T09:20:01+00:00"
         },
         {
             "name": "dyrynda/laravel-cascade-soft-deletes",

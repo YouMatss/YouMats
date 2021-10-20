@@ -77,7 +77,7 @@
                             </a>
                         </div>
                         <a href="{{ route('home') }}" class="d-inline-block max-width-150 ml-n2 mb-2">
-                            <img class="img-fluid" src="{{front_url()}}/assets/img/logo.png">
+                            <img class="img-fluid" src="{{ Storage::url(nova_get_setting('logo')) }}">
                         </a>
                         {{--<div class="mb-2">--}}
                             {{--<ul class="font-size-14 pl-3 ml-1 text-gray-9">--}}

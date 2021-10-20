@@ -34,7 +34,7 @@
                 <div class="col-lg-5">
                     <div class="mb-6">
                         <a href="{{route('home')}}" class="d-inline-block">
-                            <img src="{{front_url()}}/assets/img/logo.png" height="50">
+                            <img src="{{ Storage::url(nova_get_setting('logo')) }}" height="50">
                         </a>
                     </div>
                     @if(is_company())

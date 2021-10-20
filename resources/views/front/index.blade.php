@@ -1,21 +1,20 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>YouMats | Building Construction Material Suppliers in Saudi Arabia</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <title>{{ json_decode(nova_get_setting('home_meta_title', env('APP_NAME')))->{\App::getLocale()} }}</title>
+    <meta name="keywords" content="{{ json_decode(nova_get_setting('home_meta_keywords', env('APP_NAME')))->{\App::getLocale()} }}">
+    <meta name="description" content="{{ json_decode(nova_get_setting('home_meta_desc', env('APP_NAME')))->{\App::getLocale()} }}">
     <meta property="og:url" content="{{url()->current()}}" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:image" content="" />
+    <meta property="og:title" content="{{ json_decode(nova_get_setting('home_meta_title', env('APP_NAME')))->{\App::getLocale()} }}" />
+    <meta property="og:description" content="{{ json_decode(nova_get_setting('home_meta_desc', env('APP_NAME')))->{\App::getLocale()} }}" />
+    <meta property="og:image" content="{{ Storage::url(nova_get_setting('logo')) }}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
-    <meta name="twitter:title" content="">
-    <meta name="twitter:description" content="">
-    <meta name="twitter:image" content="">
+    <meta name="twitter:title" content="{{ json_decode(nova_get_setting('home_meta_title', env('APP_NAME')))->{\App::getLocale()} }}">
+    <meta name="twitter:description" content="{{ json_decode(nova_get_setting('home_meta_desc', env('APP_NAME')))->{\App::getLocale()} }}">
+    <meta name="twitter:image" content="{{ Storage::url(nova_get_setting('logo')) }}">
+    {!! nova_get_setting('home_schema') !!}
 @endsection
 @section('content')
-
-
     <div class="mb-4">
         <div class="bg-img-hero" style="background-image: url({{ Storage::url(nova_get_setting('slider_background', 'default_image.png')) }});">
             <div class="container min-height-438 overflow-hidden">

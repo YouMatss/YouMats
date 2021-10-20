@@ -2,7 +2,9 @@
 
 namespace App\Nova;
 
+use App\Helpers\Nova\Fields;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
+use Drobee\NovaSluggable\SluggableText;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Slug;
@@ -30,7 +32,8 @@ class Page extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make('Title')
+            SluggableText::make('Title')
+                ->slug($request->isUpdateOrUpdateAttachedRequest() ? 'DONOTUPDATE' : 'Slug')
                 ->sortable()
                 ->translatable()
                 ->rules(REQUIRED_STRING_VALIDATION),
@@ -58,39 +61,7 @@ class Page extends Resource
                 ->translatable()
                 ->rules(NULLABLE_TEXT_VALIDATION),
 
-
-            (new Panel('SEO', [
-                Slug::make('Slug')
-                    ->sortable()
-                    ->rules(REQUIRED_STRING_VALIDATION)
-                    ->creationRules('unique:pages,slug')
-                    ->updateRules('unique:pages,slug,{{resourceId}}')
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Text::make('Meta Title', 'meta_title')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_STRING_VALIDATION)
-                    ->translatable()
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Text::make('Meta Keywords', 'meta_keywords')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable()
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Textarea::make('Meta Description', 'meta_desc')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable()
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Textarea::make('Schema')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-            ])),
+            Fields::SEO(static::$model,'pages'),
 
         ];
     }

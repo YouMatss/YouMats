@@ -2,8 +2,10 @@
 
 namespace App\Nova;
 
+use App\Helpers\Nova\Fields;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
+use Drobee\NovaSluggable\SluggableText;
 use GeneaLabs\NovaMapMarkerField\MapMarker;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -47,7 +49,8 @@ class Vendor extends Resource
                 ->hideFromIndex()
                 ->withoutTrashed(),
 
-            Text::make('Name')
+            SluggableText::make('Name')
+                ->slug($request->isUpdateOrUpdateAttachedRequest() ? 'DONOTUPDATE' : 'Slug')
                 ->sortable()
                 ->rules(REQUIRED_STRING_VALIDATION)->hideFromIndex()
                 ->translatable(),
@@ -174,37 +177,7 @@ class Vendor extends Resource
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
 
-            (new Panel('SEO', [
-                Slug::make('Slug')
-                    ->hideFromIndex()
-                    ->rules(REQUIRED_STRING_VALIDATION)
-                    ->creationRules('unique:vendors,slug')
-                    ->updateRules('unique:vendors,slug,{{resourceId}}')
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Text::make('Meta Title', 'meta_title')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_STRING_VALIDATION)
-                    ->translatable()
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Text::make('Meta Keywords', 'meta_keywords')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable()
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Textarea::make('Meta Description', 'meta_desc')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable()
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Textarea::make('Schema')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-            ])),
+            Fields::SEO(static::$model,'vendors'),
 
             HasMany::make('Products'),
             HasMany::make('Branches'),

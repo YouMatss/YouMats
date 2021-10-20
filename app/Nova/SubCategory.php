@@ -2,8 +2,10 @@
 
 namespace App\Nova;
 
+use App\Helpers\Nova\Fields;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
+use Drobee\NovaSluggable\SluggableText;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -52,7 +54,9 @@ class SubCategory extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make('Name')->hideFromIndex()->translatable()->rules(REQUIRED_STRING_VALIDATION),
+            SluggableText::make('Name')
+                ->slug($request->isUpdateOrUpdateAttachedRequest() ? 'DONOTUPDATE' : 'Slug')
+                ->hideFromIndex()->translatable()->rules(REQUIRED_STRING_VALIDATION),
 
             Text::make('Name', 'name', fn() =>
                 '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
@@ -99,38 +103,7 @@ class SubCategory extends Resource
             Toggle::make(__('Top Category'), 'topCategory')->falseColor('#bacad6')->editableIndex(),
             Toggle::make(__('Show in footer'), 'show_in_footer')->falseColor('#bacad6')->editableIndex(),
 
-            (new Panel('SEO', [
-                Slug::make('Slug')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_STRING_VALIDATION)
-                    ->creationRules('unique:categories,slug')
-                    ->updateRules('unique:categories,slug,{{resourceId}}')
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Text::make('Meta Title', 'meta_title')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_STRING_VALIDATION)
-                    ->translatable()
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Text::make('Meta Keywords', 'meta_keywords')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable()
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Textarea::make('Meta Description', 'meta_desc')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->translatable()
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-                Textarea::make('Schema')
-                    ->hideFromIndex()
-                    ->rules(NULLABLE_TEXT_VALIDATION)
-                    ->canSee(fn() => auth('admin')->user()->can('seo')),
-
-            ])),
+            Fields::SEO(static::$model,'categories'),
 
             HasMany::make('Children', 'children', self::class),
             HasMany::make('Products'),

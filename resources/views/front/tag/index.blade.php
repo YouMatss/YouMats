@@ -6,12 +6,12 @@
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:title" content="{{$tag->meta_title}}" />
     <meta property="og:description" content="{{$tag->meta_desc}}" />
-    <meta property="og:image" content="{{front_url()}}/assets/img/logo.png" />
+    <meta property="og:image" content="{{ Storage::url(nova_get_setting('logo')) }}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
     <meta name="twitter:title" content="{{$tag->meta_title}}">
     <meta name="twitter:description" content="{{$tag->meta_desc}}">
-    <meta name="twitter:image" content="{{front_url()}}/assets/img/logo.png">
+    <meta name="twitter:image" content="{{ Storage::url(nova_get_setting('logo')) }}">
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
