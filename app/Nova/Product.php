@@ -173,7 +173,8 @@ class Product extends Resource
 
                         foreach ($data as $row) {
                             foreach ($row->values as $value) {
-                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key . '. Category: (' . $row->category->name . ')'];
+//                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key . '. Category: (' . $row->category->name . ')'];
+                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key];
                             }
                         }
                         return $collection;
