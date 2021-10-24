@@ -250,7 +250,7 @@
                             </div>
                         </aside>
                     </div>
-                    <div class="col col-12 d-xl-block">
+                    <div class="col d-none d-xl-block">
                         <!-- Nav -->
                         <nav class="js-mega-menu navbar navbar-expand-md u-header__navbar u-header__navbar--no-space">
                             <!-- Navigation -->
