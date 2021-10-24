@@ -32,7 +32,7 @@
     <div class="container">
         @if(count($items) > 0)
             <div class="row">
-                <div class="mb-4">
+                <div class="mb-4 col">
                     <h1 class="text-center">{{ __(is_company() ? 'cart.quote_items' : 'cart.cart') }}</h1>
                 </div>
             </div>
@@ -65,12 +65,12 @@
                                         @endif
                                     </td>
 
-                                    <td data-title="Product">
+                                    <td data-title="{{ __('cart.product') }}">
                                         <a href="#" class="text-gray-90">{{ $item->name }}</a>
                                     </td>
 
                                     @if($item->model)
-                                        <td data-title="Quantity">
+                                        <td data-title="{{ __('cart.quantity') }}">
                                             <span class="sr-only">Quantity</span>
                                             <!-- Quantity -->
                                             <div class="border rounded-pill py-1 width-122 w-xl-80 px-3 border-color-1">
@@ -95,10 +95,10 @@
                                     @endif
 
                                     @if(!is_company())
-                                        <td data-title="Price">
+                                        <td data-title="{{__('cart.price')}}">
                                             <span class="">{{__('general.sar') . ' ' . $item->price }}</span>
                                         </td>
-                                        <td data-title="Total">
+                                        <td data-title="{{__('cart.total')}}">
                                             <span class="">{{__('general.sar') . ' ' . $item->subtotal }}</span>
                                         </td>
                                     @endif
@@ -126,7 +126,7 @@
                                             @endif
                                             <div class="d-md-flex">
                                                 <button type="button" id="updateCart" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5 w-100 w-md-auto">{{ __(is_company() ? 'cart.update_quote' : 'cart.update_cart') }}</button>
-                                                <a href="{{ route('checkout.index') }}" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block">{{ __(is_company() ? 'cart.get_prices' : 'cart.proceed_to_checkout') }}</a>
+                                                <a href="{{ route('checkout.index') }}" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-md-inline-block">{{ __(is_company() ? 'cart.get_prices' : 'cart.proceed_to_checkout') }}</a>
                                             </div>
                                         </div>
                                     </div>

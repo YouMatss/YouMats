@@ -1,7 +1,8 @@
 <header id="header" class="u-header u-header-left-aligned-nav">
     <div class="u-header__section shadow-none">
+
         <!-------- Top header -------->
-        <div class="u-header-topbar bg-gray-2 border-0 py-2 d-xl-block">
+        <div class="u-header-topbar d-lg-block bg-gray-2 border-0 py-2 d-xl-block">
             <div class="container">
                 <div class="d-flex align-items-center">
                     <div class="topbar-right ml-auto st_nav_mob">
@@ -17,7 +18,7 @@
                                         <!-- Language -->
                                         <div class="position-relative">
                                             <a id="languageDropdownInvoker" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-                                                <span class="d-inline-block d-sm-none">{{getCurrency('symbol')}}</span>
+                                                <span class="d-none d-sm-none">{{getCurrency('symbol')}}</span>
                                                 <span class="d-sm-inline-flex align-items-center">
                                                     <i class="far fa-money-bill-alt mr-1"></i>
                                                     {{getCurrency('code')}} ({{getCurrency('symbol')}})
@@ -180,6 +181,7 @@
                 </div>
             </div>
         </div>
+        <!-------- End Top header -------->
 
         <!-------- logo & menu -------->
         <div class="py-2 py-xl-4 bg-primary-down-lg nav_fixed">
@@ -224,6 +226,21 @@
                                                     <img src="{{front_url()}}/assets/img/logo.png">
                                                 </a>
 
+                                                <!-------- Top header -------->
+                                                    <ul class="u-header-collapse__nav d-none">
+
+                                                    @if(!Auth::guard('vendor')->check())
+                                                        <li class="u-has-submenu u-header-collapse__submenu">
+                                                            <a href="@if(Cart::instance('wishlist')->count() > 0) {{ route('wishlist.index') }} @else # @endif" class="u-header-collapse__nav-link"><i class="ec ec-favorites mr-1"></i> {{__('general.wishlist')}} </a>
+                                                        </li>
+                                                    @endif
+
+
+                                                </ul>
+
+
+                                                <!-------- End Top header -------->
+
                                                 <ul id="headerSidebarList" class="u-header-collapse__nav">
                                                     @foreach($categories->take(20) as $category)
                                                     <li class="u-has-submenu u-header-collapse__submenu">
@@ -242,6 +259,10 @@
                                                     @endforeach
                                                 </ul>
                                                 <!-- End List -->
+
+
+
+
                                             </div>
                                         </div>
 

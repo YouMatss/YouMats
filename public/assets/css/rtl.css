@@ -335,16 +335,15 @@ h3.font-size-24 {
 .iti--allow-dropdown input, .iti--allow-dropdown input[type=tel], .iti--allow-dropdown input[type=text], .iti--separate-dial-code input, .iti--separate-dial-code input[type=tel], .iti--separate-dial-code input[type=text] {
 
     margin-left: 0;
-    padding: 0 95px 0 0 !important;
+    padding: 0 0 0 85px !important;
 }
 
 .iti--allow-dropdown .iti__flag-container, .iti--separate-dial-code .iti__flag-container {
-    left: auto;
-    right: 0;
+
 }
 
 .iti--separate-dial-code .iti__selected-flag {
-    border-radius: 0 15px 15px 0;
+    border-radius: 15px 0 0 15px;
 }
 
 .input-group > .input-group-append > .btn{
