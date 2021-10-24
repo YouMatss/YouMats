@@ -1015,12 +1015,22 @@
 
     .st_nav_mob ul li.btn_iffer_price{
         width: 99%;
+        overflow: hidden;
+        height: 45px;
     }
 
     #sidebarNavToggler {
         width: 100%;
         display: block;
     }
+    .u-header-topbar__nav-item + .u-header-topbar__nav-item-border::before, .u-header-topbar__nav-item + .u-header-topbar__nav-item-border-single > div::before {
+        content: '';
+        margin: 0;
+    }
 
+
+    .u-slick__arrow-normal{
+        display: block !important;
+    }
 
 }
