@@ -120,7 +120,7 @@
                                 @endif
                                 @if($product->price)
                                 <div class="mb-3">
-                                    <div class="font-size-36">{{getCurrency('symbol')}} {{$product->price}}</div>
+                                    <div class="font-size-36">{{getCurrency('symbol')}} {{$product->formatted_price}}</div>
                                 </div>
                                 @endif
                             @endif
@@ -242,7 +242,7 @@
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
                                                     @if((!is_company()) && $r_product->price)
-                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->price}}</div>
+                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->formatted_price}}</div>
                                                     @endif
                                                 </div>
                                                 {!! cartOrChat($product) !!}

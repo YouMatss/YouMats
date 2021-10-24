@@ -57,7 +57,11 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     }
 
     public function getPriceAttribute($value) {
-        return number_format(round($value * getCurrency('rate'), 2), 2);
+        return round($value * getCurrency('rate'), 2);
+    }
+
+    public function getFormattedPriceAttribute() {
+        return number_format($this->price, 2);
     }
 
     public function getCostAttribute($value) {
