@@ -169,7 +169,7 @@
                                 </li>
                             @endif
                             @if(is_company() || auth()->guard('vendor')->check())
-                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                <li class="btn_iffer_price list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                     <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
                                         {{__('general.get_quote')}}
                                     </a>
@@ -250,7 +250,7 @@
                             </div>
                         </aside>
                     </div>
-                    <div class="col d-none d-xl-block">
+                    <div class="col col-12 d-xl-block">
                         <!-- Nav -->
                         <nav class="js-mega-menu navbar navbar-expand-md u-header__navbar u-header__navbar--no-space">
                             <!-- Navigation -->
