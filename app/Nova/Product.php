@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -157,6 +158,16 @@ class Product extends Resource
                             'day' => 'Day'
                         ])->rules(['required', 'in:hour,day']),
                     ]),
+                    Heading::make('Default for all cities (Optional)'),
+                    Currency::make('Price', 'default_price')->rules(NULLABLE_NUMERIC_VALIDATION)->min(0)->step(0.05)
+                        ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
+                    Number::make('Time', 'default_time')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1)
+                        ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
+                    Select::make('Format', 'default_format')->options([
+                        'hour' => 'Hour',
+                        'day' => 'Day'
+                    ])->rules(['nullable', 'in:hour,day'])
+                        ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
                 ])->dependsOn('specific_shipping', true),
             ])),
 

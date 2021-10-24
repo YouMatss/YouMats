@@ -26,6 +26,7 @@ class ProductController extends Controller
 
         if(Session::has('city')) {
             $data['delivery'] = $data['product']->delivery(Session::get('city')->id);
+            $data['delivery_cities'] = $data['product']->delivery_cities();
         }
 
         $data['product']->views++;

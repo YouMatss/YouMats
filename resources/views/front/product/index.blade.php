@@ -115,7 +115,8 @@
                                     </div>
                                 @else
                                     <div>
-                                        <span style="color:#F00;">{{__('product.no_delivery')}}</span>
+                                        <span style="color:#F00;">{{__('product.no_delivery')}}: {{Session::get('city')->name}}</span>
+                                        (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>)
                                     </div>
                                 @endif
                                 @if($product->price)
@@ -265,7 +266,5 @@
             </div>
         </div>
     </div>
-    @if(isset($delivery))
-        @include('front.layouts.partials.change_city')
-    @endif
+    @include('front.layouts.partials.change_city', ['delivery_cities' => $delivery_cities])
 @endsection
