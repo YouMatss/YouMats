@@ -191,7 +191,7 @@
                                                     <span class="fas fa-building"></span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control" @if(auth()->check()) value="{{ auth()->user()->name }}" disabled @endif name="company_name" placeholder="Company Name">
+                                            <input type="text" class="form-control" @if(auth()->check()) value="{{ auth()->user()->name }}" disabled @endif name="company_name" placeholder="{{__('general.quotation_company_name')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +207,7 @@
                                                     <span class="fas fa-user"></span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control" name="name" placeholder="Contact Person">
+                                            <input type="text" class="form-control" name="name" placeholder="{{__('general.quotation_contact_person')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +223,7 @@
                                                     <span class="fas fa-envelope"></span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control" @if(auth()->check()) value="{{ auth()->user()->email }}" disabled @endif name="email"  placeholder="Email">
+                                            <input type="text" class="form-control" @if(auth()->check()) value="{{ auth()->user()->email }}" disabled @endif name="email"  placeholder="{{__('general.quotation_email')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +234,7 @@
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_phone')}}</label>
                                         <div class="input-group">
-                                            <input type="tel" class="form-control phoneNumber" @if(auth()->check()) value="{{ auth()->user()->phone }}" disabled @endif>
+                                            <input type="tel" class="form-control phoneNumber" @if(auth()->check()) value="{{ auth()->user()->phone }}" disabled @endif style="padding-left: 90px !important;">
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +250,7 @@
                                                     <span class="fas fa-sticky-note"></span>
                                                 </span>
                                             </div>
-                                            <textarea class="form-control" name="message" placeholder="Message"></textarea>
+                                            <textarea class="form-control" name="message" placeholder="{{__('general.quotation_message')}}"></textarea>
                                         </div>
                                     </div>
                                 </div>

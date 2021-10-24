@@ -12,9 +12,15 @@
                 <div class="modal-body">
                     <select name="city_id" class="form-control">
                         <option value="" selected disabled>{{__('general.select_city')}}</option>
-                        @foreach(\App\Models\City::all() as $city_loop)
-                            <option value="{{$city_loop->id}}" @if($city_loop->id == Session::get('city')->id) selected @endif>{{$city_loop->name}}</option>
-                        @endforeach
+                        @if(isset($delivery_cities) && $delivery_cities != 'all' && count($delivery_cities))
+                            @foreach($delivery_cities as $d_city_loop)
+                                <option value="{{$d_city_loop->id}}" @if($d_city_loop->id == Session::get('city')->id) selected @endif>{{$d_city_loop->name}}</option>
+                            @endforeach
+                        @else
+                            @foreach(\App\Models\City::all() as $city_loop)
+                                <option value="{{$city_loop->id}}" @if($city_loop->id == Session::get('city')->id) selected @endif>{{$city_loop->name}}</option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
                 <div class="modal-footer">

@@ -81,6 +81,13 @@ class Product extends Model implements Sortable, HasMedia, Buyable
                     }
                 }
             }
+            if(isset($this->default_price) && isset($this->default_time) && isset($this->default_format)) {
+                return [
+                    'price' => $this->default_price,
+                    'time' => $this->default_time,
+                    'format' => $this->default_format,
+                ];
+            }
         }
         if (isset($this->shipping)) {
             if($this->shipping->cities_prices) {
@@ -90,7 +97,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
                     }
                 }
             }
-            if($this->shipping->default_price) {
+            if($this->shipping->default_price && $this->shipping->default_time && $this->shipping->default_format) {
                 return [
                     'price' => $this->shipping->default_price,
                     'time' => $this->shipping->default_time,
@@ -99,6 +106,31 @@ class Product extends Model implements Sortable, HasMedia, Buyable
             }
         }
         return null;
+    }
+
+    public function delivery_cities() {
+        $cities = [];
+        if($this->specific_shipping) {
+            if($this->shipping_prices) {
+                foreach (json_decode($this->shipping_prices, true) as $shipping) {
+                    $cities[] = $shipping['cities'];
+                }
+            }
+            if(isset($this->default_price) && isset($this->default_time) && isset($this->default_format)) {
+                return 'all';
+            }
+        }
+        if (isset($this->shipping)) {
+            if($this->shipping->cities_prices) {
+                foreach ($this->shipping->cities_prices as $shipping) {
+                    $cities[] = $shipping['cities'];
+                }
+            }
+            if($this->shipping->default_price && $this->shipping->default_time && $this->shipping->default_format) {
+                return 'all';
+            }
+        }
+        return City::whereIn('id', $cities)->get();
     }
 
     /**
