@@ -34,7 +34,7 @@
             <div class="flex-center-between mb-1">
                 <div class="prodcut-price">
                     @if($product->type == 'product' && (!is_company()) && $product->price)
-                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
+                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->formatted_price}}</div>
                     @endif
                 </div>
                 {!! cartOrChat($product) !!}
@@ -66,7 +66,7 @@
                     <h5 class="mb-2 product-item__title"><a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a></h5>
                     @if($product->type == 'product' && (!is_company()) && $product->price)
                         <div class="prodcut-price d-md-none">
-                            <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
+                            <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->formatted_price}}</div>
                         </div>
                     @endif
                     <div class="font-size-12 p-0 mb-4 d-none d-md-block">
@@ -95,7 +95,7 @@
                 <div class="mb-2 flex-center-between">
                     <div class="prodcut-price">
                         @if($product->type == 'product' && (!is_company()) && $product->price)
-                        <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->price}}</div>
+                        <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->formatted_price}}</div>
                         @endif
                     </div>
                     @if(!Auth::guard('vendor')->check())

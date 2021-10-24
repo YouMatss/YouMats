@@ -13,7 +13,7 @@
         priceFrom = parseInt($("#rangeSliderExample3MinResultCategory").html());
         priceTo = parseInt($("#rangeSliderExample3MaxResultCategory").html());
         attributesCheckboxes = $(".filter-checkboxes:checkbox");
-        categoryId = $("#categoryIdContainer").val();
+        // categoryId = $("#categoryIdContainer").val();
         checkedAttributes = [];
 
         attributesCheckboxes.each(function() {
@@ -23,11 +23,12 @@
                 checkedAttributes.push(parseInt(checkBoxItem));
         })
 
-        url = `{{ env('APP_URL')}}/filter/${categoryId}?filter[attributes]=${checkedAttributes}`;
+        url = `{{route('category.filter', [$category->id])}}?filter[attributes]=${checkedAttributes}`;
+        {{--url = `{{ env('APP_URL')}}/filter/${categoryId}?filter[attributes]=${checkedAttributes}`;--}}
 
         if(priceFrom > 0)
             url += `&filter[price_from]=${priceFrom}`;
-        
+
         if(priceTo > 0)
             url += `&filter[price_to]=${priceTo}`;
 
