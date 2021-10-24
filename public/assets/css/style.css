@@ -993,9 +993,34 @@
 
     .st_nav_mob ul li{
         float: left;
-        width: 32%;
+        width: 33%;
+        height: 30px;
         border: 1px solid rgb(255 255 255 / 14%);
-        margin: 3px;
+        margin: 0 0 1px 0;
         padding: 5px;
+        text-align: center;
+        display: block;
     }
+
+    .st_nav_mob .u-header-topbar__nav-link {
+        font-size: 0.813rem;
+        color: #fff;
+        font-size: 10px;
+    }
+
+    .st_nav_mob .u-header-topbar__nav-item + .u-header-topbar__nav-item-border-single > div::before {
+        content: '';
+        margin: 0;
+    }
+
+    .st_nav_mob ul li.btn_iffer_price{
+        width: 99%;
+    }
+
+    #sidebarNavToggler {
+        width: 100%;
+        display: block;
+    }
+
+
 }
