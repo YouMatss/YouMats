@@ -57,7 +57,7 @@ class Partner extends Resource
                 ->croppable('cropper'),
 
             Text::make('Link')->rules(NULLABLE_URL_VALIDATION),
-            Toggle::make(__('Featured'), 'featured')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make('Featured')->falseColor('#bacad6')->editableIndex(),
         ];
     }
 
