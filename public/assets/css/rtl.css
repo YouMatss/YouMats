@@ -349,3 +349,37 @@ h3.font-size-24 {
 .input-group > .input-group-append > .btn{
     border-radius: 25px 0 0 25px !important;
 }
+
+
+@media (max-width: 768px) {
+    .input-group > .form-control:not(:last-child),
+    .input-group > .custom-select:not(:last-child){
+        border-radius: 5px 0 0 5px;
+    }
+
+    .input-group > .input-group-append > .btn {
+        border-radius: 0 5px 5px 0 !important;
+    }
+
+    .u-header-collapse__nav {
+        padding-right: 0;
+    }
+
+    .u-header-collapse__nav-pointer::after{
+        margin-right: auto;
+        margin-left: 0;
+    }
+
+    .u-header-collapse__submenu .u-header-collapse__nav-list {
+        border-right: 2px solid #003f91;
+        border-left: 0;
+
+        padding-right: 1rem;
+        padding-left: 0;
+    }
+
+    .dropdown-item {
+        text-align: right;
+    }
+
+}

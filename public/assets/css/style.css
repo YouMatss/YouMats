@@ -1062,3 +1062,10 @@
     }
 
 }
+
+
+.nav_mob_new{
+    border-bottom: 2px solid #ddd;
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+}
