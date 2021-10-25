@@ -270,6 +270,7 @@
                                                                 </div>
                                                             </li>
 
+                                                        @if(is_guest() && \Illuminate\Support\Facades\Session::get('userType'))
                                                         <li class="u-has-submenu u-header-collapse__submenu">
                                                             <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-3" data-target="#top-header-nav-3">
                                                                 <span class="d-sm-inline-flex align-items-center">
@@ -286,6 +287,7 @@
                                                                 </ul>
                                                             </div>
                                                         </li>
+                                                        @endif
 
                                                         @if(Auth::guard('web')->check() && !Auth::guard('vendor')->check())
                                                         <li class="u-has-submenu u-header-collapse__submenu">
