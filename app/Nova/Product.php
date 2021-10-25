@@ -84,7 +84,7 @@ class Product extends Resource
                 Currency::make('Price')
                     ->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
 
-                Number::make(__('Stock'), 'stock')
+                Number::make('Stock')
                     ->min(0)->rules(REQUIRED_INTEGER_VALIDATION),
             ])->dependsOn('type', 'product'),
 
@@ -105,7 +105,7 @@ class Product extends Resource
             Toggle::make('Active')
                 ->falseColor('#bacad6')->editableIndex(),
 
-            Toggle::make(__('Best Seller'), 'best_seller')
+            Toggle::make('Best Seller')
                 ->falseColor('#bacad6')->editableIndex(),
 
             Number::make('Views')
