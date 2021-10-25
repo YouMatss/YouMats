@@ -2,7 +2,7 @@
     <div class="u-header__section shadow-none">
 
         <!-------- Top header -------->
-        <div class="u-header-topbar d-lg-block bg-gray-2 border-0 py-2 d-xl-block">
+        <div class="u-header-topbar d-none d-lg-block bg-gray-2 border-0 py-2 d-xl-block">
             <div class="container">
                 <div class="d-flex align-items-center">
                     <div class="topbar-right ml-auto st_nav_mob">
@@ -226,19 +226,158 @@
                                                     <img src="{{front_url()}}/assets/img/logo.png">
                                                 </a>
 
-                                                <!-------- Top header -------->
-                                                    <ul class="u-header-collapse__nav d-none">
 
-                                                    @if(!Auth::guard('vendor')->check())
+                                                <!-------- Top header -------->
+                                                <ul class="u-header-collapse__nav">
+                                                        @if(\Config::get('currencies'))
                                                         <li class="u-has-submenu u-header-collapse__submenu">
-                                                            <a href="@if(Cart::instance('wishlist')->count() > 0) {{ route('wishlist.index') }} @else # @endif" class="u-header-collapse__nav-link"><i class="ec ec-favorites mr-1"></i> {{__('general.wishlist')}} </a>
+                                                            <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-1" data-target="#top-header-nav-1">
+                                                                <span class="d-none d-sm-none">{{getCurrency('symbol')}}</span>
+                                                                <span class="d-sm-inline-flex align-items-center">
+                                                                    <i class="far fa-money-bill-alt mr-1"></i>
+                                                                    {{getCurrency('code')}} ({{getCurrency('symbol')}})
+                                                                </span>
+                                                            </a>
+                                                            <div id="top-header-nav-1" class="collapse" data-parent="#headerSidebarContent">
+                                                                <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
+                                                                    <li>
+                                                                        @foreach(\Config::get('currencies') as $currency)
+                                                                            <a class="dropdown-item active currency_button" data-code="{{$currency->code}}" href="#">
+                                                                                <img width="20px" src="{{$currency->getFirstMediaUrlOrDefault(CURRENCY_PATH, 'thumb')['url']}}" />&nbsp;
+                                                                                {{$currency->code}} @if($currency->symbol) ({{$currency->symbol}}) @endif
+                                                                            </a>
+                                                                        @endforeach
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
                                                         </li>
-                                                    @endif
+                                                        @endif
+                                                        <li class="u-has-submenu u-header-collapse__submenu">
+                                                                <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-2" data-target="#top-header-nav-2">
+                                                                    <span class="d-sm-inline-flex align-items-center">
+                                                                        <i class="fas fa-globe-americas mr-1 font-size-14"></i>
+                                                                        {{ LaravelLocalization::getCurrentLocaleNative() }}
+                                                                    </span>
+                                                                </a>
+                                                                <div id="top-header-nav-2" class="collapse" data-parent="#headerSidebarContent">
+                                                                    <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
+                                                                        <li>
+                                                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                                                <a class="dropdown-item {{$localeCode}}" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">{{ $properties['native'] }}</a>
+                                                                            @endforeach
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+
+                                                        <li class="u-has-submenu u-header-collapse__submenu">
+                                                            <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-3" data-target="#top-header-nav-3">
+                                                                <span class="d-sm-inline-flex align-items-center">
+                                                                    <i class="ec ec-user mr-1"></i>
+                                                                    {{\Illuminate\Support\Facades\Session::get('userTypeTranslation')[\App::getLocale()]}}
+                                                                </span>
+                                                            </a>
+                                                            <div id="top-header-nav-3" class="collapse" data-parent="#headerSidebarContent">
+                                                                <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
+                                                                    <li>
+                                                                        <a class="dropdown-item" href="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
+                                                                        <a class="dropdown-item" href="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+
+                                                        @if(Auth::guard('web')->check() && !Auth::guard('vendor')->check())
+                                                        <li class="u-has-submenu u-header-collapse__submenu">
+                                                            <div id="top-header-nav-5" class="collapse" data-parent="#headerSidebarContent">
+                                                                <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
+                                                                    <li>
+                                                                        <div class="d-flex align-items-center">
+                                                                            <!-- Language -->
+                                                                            <div class="position-relative">
+                                                                                <a id="profileDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#profileDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                                                                    <span class="d-sm-inline-flex align-items-center">
+                                                                                        <i class="ec ec-user mr-1"></i> {{auth('web')->user()->name}}
+                                                                                    </span>
+                                                                                </a>
+                                                                                <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
+                                                                                    <a class="dropdown-item" href="{{route('front.user.profile')}}">Profile</a>
+                                                                                    <form class="dropdown-item" style="cursor: pointer" action="{{route('logout')}}" method="POST">
+                                                                                        @csrf
+                                                                                        <button type="submit" class="dropdown-item">Logout</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- End Language -->
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        @endif
+
+                                                        @if(Auth::guard('vendor')->check() && !Auth::guard('web')->check())
+                                                            <li class="u-has-submenu u-header-collapse__submenu">
+                                                                <div id="top-header-nav-6" class="collapse" data-parent="#headerSidebarContent">
+                                                                    <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
+                                                                        <li>
+                                                                            <div class="d-flex align-items-center">
+                                                                                <!-- Language -->
+                                                                                <div class="position-relative">
+                                                                                    <a id="profileDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#profileDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                                                                        <span class="d-sm-inline-flex align-items-center">
+                                                                                            <i class="ec ec-user mr-1"></i> {{auth('vendor')->user()->name}}
+                                                                                        </span>
+                                                                                    </a>
+                                                                                    <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
+                                                                                        <a class="dropdown-item" href="{{ route('vendor.edit') }}">{{__('general.profile')}}</a>
+                                                                                        <a class="dropdown-item" href="{{ route('chat.vendor.conversations', [1]) }}">{{__('general.messages')}}</a>
+                                                                                        <form class="dropdown-item" style="cursor: pointer" action="{{route('vendor.logout')}}" method="POST">
+                                                                                            @csrf
+                                                                                            <button type="submit" class="dropdown-item">{{__('general.logout')}}</button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- End Language -->
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        @endif
+
+                                                        @if(!auth()->guard('vendor')->check() && !auth()->guard('web')->check())
+                                                        <li class="u-has-submenu u-header-collapse__submenu">
+                                                                <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-7" data-target="#top-header-nav-7">
+                                                                    <span class="d-sm-inline-flex align-items-center"> <i class="ec ec-user mr-1"></i>{{__('general.user_register')}}</span>
+                                                                </a>
+                                                                <div id="top-header-nav-7" class="collapse" data-parent="#headerSidebarContent">
+                                                                    <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
+                                                                        <li>
+                                                                            <a href="{{route('register')}}" class="dropdown-item">
+                                                                                {{__('general.user_register')}}
+                                                                            </a>
+                                                                            <a href="{{route('vendor.register')}}" class="dropdown-item">{{__('general.vendor_register')}}
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                        </li>
+                                                        @endif
+
+                                                            @if(is_company() || auth()->guard('vendor')->check())
+                                                                <li class="btn_offer_price_nav u-has-submenu u-header-collapse__submenu">
+                                                                    <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
+                                                                        {{__('general.get_quote')}}
+                                                                    </a>
+                                                                </li>
+                                                            @endif
+
+
+
 
 
                                                 </ul>
-
-
                                                 <!-------- End Top header -------->
 
                                                 <ul id="headerSidebarList" class="u-header-collapse__nav">
@@ -319,7 +458,7 @@
                         <div class="d-inline-flex">
                             <ul class="d-flex list-unstyled mb-0 align-items-center">
                                 <!-- Search -->
-                                <li class="col d-xl-none px-2 px-sm-3 position-static">
+                                <li class="col d-none px-2 px-sm-3 position-static">
                                     <a id="searchClassicInvoker" class="font-size-22 text-gray-90 text-lh-1 btn-text-secondary" href="javascript:;" role="button" data-toggle="tooltip" data-placement="top" title="Search" aria-controls="searchClassic" aria-haspopup="true" aria-expanded="false" data-unfold-target="#searchClassic" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                         <span class="ec ec-search"></span>
                                     </a>
@@ -356,6 +495,21 @@
                 </div>
             </div>
         </div>
+
+        <!-- Search-Form -->
+
+        <div class="box_search_nav">
+            <div class="input-group">
+                <input type="search" autocomplete="off" class="fils_search_nav form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
+                <div class="input-group-append">
+                    <!-- End Select -->
+                    <button class="btn btn-dark height-40 py-2 px-3 rounded-right-pill" type="button" id="searchProductBtn">
+                        <span class="ec ec-search font-size-24" id="searchButtonSpan"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- End Search-Form -->
 
         <!-------- search & cart -------->
         <div class="d-none d-xl-block bg-primary" id="searchAndCartDiv">

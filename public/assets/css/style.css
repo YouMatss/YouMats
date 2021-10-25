@@ -1038,5 +1038,27 @@
         left: -30px !important;
     }
 
+    .btn_offer_price_nav{
+        text-align: center;
+        margin: 5px 0 5px 0;
+    }
+
+    .box_search_nav{
+        padding: 0 10px;
+        margin: 15px 0;
+    }
+
+    .box_search_nav .input-group{
+
+    }
+
+    .box_search_nav .input-group .fils_search_nav{
+        background: #ddd;
+        border-radius: 5px;
+    }
+
+    .box_search_nav .input-group button{
+        border-radius: 0 5px 5px 0;
+    }
 
 }
