@@ -1086,7 +1086,7 @@
         top: 0;
     }
 
-    .cart-table .table tr td:nth-child(1){
+    .cart-table .table tr td.close_cart_new{
         padding-top: 0 !important;
         height: 0;
     }

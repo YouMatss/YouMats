@@ -37,7 +37,7 @@
         </div>
         <div class="container">
             <div class="row mb-8 rtl">
-                <div class="d-none d-xl-block col-xl-3 col-wd-2gdot5">
+                <div class="d-xl-block col-xl-3 col-wd-2gdot5">
                     @if(!is_company())
                     <div class="mb-6">
                         <div class="range-slider bg-gray-3 p-3">
@@ -117,11 +117,11 @@
                     @if(count($category->children))
                     <div class="mb-6 bg-gray-7">
                         <div class="container">
-                            <div class="row flex-nowrap flex-md-wrap overflow-auto overflow-md-visble rtl">
+                            <div class="row flex-nowrap flex-md-wrap overflow-auto overflow-md-visble rtl" style="padding-top: 15px">
                                 @foreach($category->children as $child)
                                     <div class="col-md-4 col-lg-3 col-xl-4 col-xl-2gdot4 mb-3 flex-shrink-0 flex-md-shrink-1">
                                         <div class="bg-white overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
-                                            <a href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2 pr-wd-6">
+                                            <a href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2">
                                                 <div class="media align-items-center">
                                                     <div class="pt-2">
                                                         <img class="img-fluid img_category_page" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}"

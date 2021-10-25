@@ -54,7 +54,7 @@
                             <tbody>
                             @foreach($items as $item)
                                 <tr>
-                                    <td class="text-center">
+                                    <td class="text-center close_cart_new">
                                         <a style="cursor: pointer" class="deleteCart" data-url="{{ route('cart.remove', ['rowId' => $item->rowId]) }}" class="text-gray-32 font-size-26">×</a>
                                     </td>
                                     <td class="d-md-table-cell img_cart_view">
