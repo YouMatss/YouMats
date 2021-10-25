@@ -45,13 +45,13 @@ class Branch extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            BelongsTo::make(__('Vendor'), 'vendor')
+            BelongsTo::make('Vendor')
                 ->searchable(),
 
-            BelongsTo::make(__('City'), 'city')
+            BelongsTo::make('City')
                 ->withoutTrashed(),
 
-            Text::make(__('Name'), 'name')
+            Text::make('Name')
                 ->rules(REQUIRED_STRING_VALIDATION)
                 ->translatable()
                 ->hideFromIndex()
@@ -61,16 +61,16 @@ class Branch extends Resource
                 '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
             )->asHtml()->onlyOnIndex(),
 
-            Text::make(__('Phone Number'), 'phone_number')
+            Text::make('Phone Number')
                 ->rules(REQUIRED_STRING_VALIDATION),
 
-            Text::make(__('Fax'), 'fax')
+            Text::make('Fax')
                 ->rules(REQUIRED_STRING_VALIDATION),
 
-            Text::make(__('Website'), 'website')
+            Text::make('Website')
                 ->rules(REQUIRED_STRING_VALIDATION),
 
-            Text::make(__('Address'), 'address')
+            Text::make('Address')
                 ->rules(REQUIRED_STRING_VALIDATION),
 
             MapMarker::make('Location')
