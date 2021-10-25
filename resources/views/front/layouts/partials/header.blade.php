@@ -228,7 +228,7 @@
 
 
                                                 <!-------- Top header -------->
-                                                <ul class="u-header-collapse__nav">
+                                                <ul class="u-header-collapse__nav nav_mob_new">
                                                         @if(\Config::get('currencies'))
                                                         <li class="u-has-submenu u-header-collapse__submenu">
                                                             <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-1" data-target="#top-header-nav-1">
@@ -498,7 +498,7 @@
 
         <!-- Search-Form -->
 
-        <div class="box_search_nav">
+        <div class="box_search_nav d-block d-lg-none">
             <div class="input-group">
                 <input type="search" autocomplete="off" class="fils_search_nav form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
                 <div class="input-group-append">

@@ -57,7 +57,7 @@
                                     <td class="text-center">
                                         <a style="cursor: pointer" class="deleteCart" data-url="{{ route('cart.remove', ['rowId' => $item->rowId]) }}" class="text-gray-32 font-size-26">×</a>
                                     </td>
-                                    <td class="d-none d-md-table-cell">
+                                    <td class="d-md-table-cell img_cart_view">
                                         @if($item->model)
                                             <a href="#"><img class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
                                         @else
@@ -126,7 +126,7 @@
                                             @endif
                                             <div class="d-md-flex">
                                                 <button type="button" id="updateCart" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5 w-100 w-md-auto">{{ __(is_company() ? 'cart.update_quote' : 'cart.update_cart') }}</button>
-                                                <a href="{{ route('checkout.index') }}" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-md-inline-block">{{ __(is_company() ? 'cart.get_prices' : 'cart.proceed_to_checkout') }}</a>
+                                                <a href="{{ route('checkout.index') }}" class="d-none d-lg-block btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-md-inline-block">{{ __(is_company() ? 'cart.get_prices' : 'cart.proceed_to_checkout') }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -160,7 +160,16 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
+
+                <div class="border-top space-top-2 justify-content-center p_bn_cart">
+                    <div class="d-md-flex">
+                        <a href="{{ route('checkout.index') }}" class="d-block d-lg-none btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-md-inline-block">{{ __(is_company() ? 'cart.get_prices' : 'cart.proceed_to_checkout') }}</a>
+                    </div>
+                </div>
+
+
             @endif
         @else
             <h4 class="tit_cart_min">{{ __('cart.no_items_in_cart') }}</h4>
