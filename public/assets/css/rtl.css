@@ -382,4 +382,9 @@ h3.font-size-24 {
         text-align: right;
     }
 
+    .cart-table .table tr td:nth-child(3) a{
+        padding-right: 15px !important;
+        padding-left: 0 !important;
+    }
+
 }
