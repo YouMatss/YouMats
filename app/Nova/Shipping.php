@@ -10,7 +10,6 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Panel;
-use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 
 class Shipping extends Resource
@@ -49,7 +48,7 @@ class Shipping extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            BelongsTo::make(__('Vendor'), 'vendor')
+            BelongsTo::make('Vendor')
                 ->searchable()->withoutTrashed(),
 
             Text::make('Name')->rules(REQUIRED_STRING_VALIDATION),

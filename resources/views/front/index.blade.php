@@ -1,16 +1,16 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>{{ json_decode(nova_get_setting('home_meta_title', env('APP_NAME')))->{LaravelLocalization::getCurrentLocale()} }}</title>
-    <meta name="keywords" content="{{ json_decode(nova_get_setting('home_meta_keywords', env('APP_NAME')))->{LaravelLocalization::getCurrentLocale()} }}">
-    <meta name="description" content="{{ json_decode(nova_get_setting('home_meta_desc', env('APP_NAME')))->{LaravelLocalization::getCurrentLocale()} }}">
+    <title>{{ (json_decode(nova_get_setting('home_meta_title'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}</title>
+    <meta name="keywords" content="{{ (json_decode(nova_get_setting('home_meta_keywords'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}">
+    <meta name="description" content="{{ (json_decode(nova_get_setting('home_meta_desc'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}">
     <meta property="og:url" content="{{url()->current()}}" />
-    <meta property="og:title" content="{{ json_decode(nova_get_setting('home_meta_title', env('APP_NAME')))->{LaravelLocalization::getCurrentLocale()} }}" />
-    <meta property="og:description" content="{{ json_decode(nova_get_setting('home_meta_desc', env('APP_NAME')))->{LaravelLocalization::getCurrentLocale()} }}" />
+    <meta property="og:title" content="{{ (json_decode(nova_get_setting('home_meta_title'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}" />
+    <meta property="og:description" content="{{ (json_decode(nova_get_setting('home_meta_desc'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}" />
     <meta property="og:image" content="{{ Storage::url(nova_get_setting('logo')) }}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
-    <meta name="twitter:title" content="{{ json_decode(nova_get_setting('home_meta_title', env('APP_NAME')))->{LaravelLocalization::getCurrentLocale()} }}">
-    <meta name="twitter:description" content="{{ json_decode(nova_get_setting('home_meta_desc', env('APP_NAME')))->{LaravelLocalization::getCurrentLocale()} }}">
+    <meta name="twitter:title" content="{{ (json_decode(nova_get_setting('home_meta_title'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}">
+    <meta name="twitter:description" content="{{ (json_decode(nova_get_setting('home_meta_desc'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}">
     <meta name="twitter:image" content="{{ Storage::url(nova_get_setting('logo')) }}">
     {!! nova_get_setting('home_schema') !!}
 @endsection
