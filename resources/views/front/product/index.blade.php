@@ -108,15 +108,17 @@
                                 @if(isset($delivery))
                                     <div>
                                         <span>{{__('product.delivery_to_your_city')}}: <b>{{Session::get('city')->name}}</b></span>
-                                        (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>)
+                                        <button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
                                         <br/>
                                         <span>{{__('general.price')}}: <b>{{getCurrency('symbol')}} {{round($delivery['price'] * getCurrency('rate'), 2)}}</b></span> <br/>
                                         <span>{{__('general.time')}}: <b>{{$delivery['time'] . ' ' . $delivery['format']}}</b></span>
                                     </div>
                                 @else
                                     <div>
-                                        <span style="color:#F00;">{{__('product.no_delivery')}}: {{Session::get('city')->name}}</span>
-                                        (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>)
+                                        <span style="color:#ff0000;">{{__('product.no_delivery')}}: {{Session::get('city')->name}}</span>
+                                        @if(!is_null($delivery_cities))
+                                        <button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
+                                        @endif
                                     </div>
                                 @endif
                                 @if($product->price)

@@ -109,7 +109,7 @@
             <!-- Card -->
             <div class="card border-0">
                 <div id="shopCartHeadingTwo" class="alert alert-primary mb-0 text-white" role="alert">
-                    Have a coupon? <a href="#" class="alert-link text-white" data-toggle="collapse" data-target="#shopCartTwo" aria-expanded="false" aria-controls="shopCartTwo">Click here to enter your code</a>
+                    {{__('general.have_coupon')}} <a href="#" class="alert-link text-white" data-toggle="collapse" data-target="#shopCartTwo" aria-expanded="false" aria-controls="shopCartTwo">Click here to enter your code</a>
                 </div>
                 <div id="shopCartTwo" class="collapse border border-top-0" aria-labelledby="shopCartHeadingTwo" data-parent="#shopCartAccordion1" style="">
                     <div class="container">
@@ -154,9 +154,9 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th class="product-name">Product</th>
+                                        <th class="product-name">{{__('general.product')}}</th>
                                         @if(!is_company())
-                                            <th class="product-total">Total</th>
+                                            <th class="product-total">{{ __('cart.total') }}</th>
                                         @endif
                                     </tr>
                                     </thead>
@@ -173,19 +173,19 @@
                                     @if(!is_company())
                                         <tfoot>
                                         <tr>
-                                            <th>Subtotal</th>
+                                            <th>{{ __('cart.subtotal') }}</th>
                                             <td>{{ __('general.sar') . ' ' . Cart::subtotal() }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Tax</th>
+                                            <th>{{ __('cart.shipping') }}</th>
                                             <td>{{ __('general.sar') . ' ' . Cart::tax() }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Total</th>
+                                            <th>{{ __('cart.total') }}</th>
                                             <td><strong>{{ __('general.sar') . ' ' . Cart::total() }}</strong></td>
                                         </tr>
                                         <tr>
-                                            <th>Payment Amount</th>
+                                            <th>{{ __('cart.payment_total') }}</th>
                                             <td><strong>{{ __('general.sar') . ' ' . round(Cart::total()) }}</strong></td>
                                         </tr>
                                         </tfoot>
