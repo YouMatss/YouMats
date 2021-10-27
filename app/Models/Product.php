@@ -130,7 +130,9 @@ class Product extends Model implements Sortable, HasMedia, Buyable
                 return 'all';
             }
         }
-        return City::whereIn('id', $cities)->get();
+        if(count($cities))
+            return City::whereIn('id', $cities)->get();
+        return null;
     }
 
     /**

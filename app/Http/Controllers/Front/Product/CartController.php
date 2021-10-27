@@ -42,6 +42,7 @@ class CartController extends Controller
             round($product->price / getCurrency('rate'), 2),
             [],
             0
+//            $product->delivery(Session::get('city')->id)['price']
         )->associate($product);
         return response()->json(['message' => __(is_company() ? 'product.added_to_quote_list' : 'product.added_to_cart'),
             'cart' => Cart::content(),
