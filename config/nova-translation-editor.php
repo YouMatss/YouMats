@@ -11,6 +11,8 @@ return [
         'cart',
         'contact',
         'footer',
+        'breadcrumb',
+        'novaSettings'
     ],
     'languages' => [
         'en', 'ar'
