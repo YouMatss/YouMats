@@ -60,7 +60,7 @@ class CheckoutController extends Controller
     {
         //Validating the data.
         $rules = [
-            'payment_method' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_individual())],
+            'payment_method' => [...[NULLABLE_STRING_VALIDATION], 'In:Cash,Online', Rule::requiredIf(fn() => is_individual())],
             'terms' => 'required|accepted',
             'name' => REQUIRED_STRING_VALIDATION,
             'phone_number' => REQUIRED_STRING_VALIDATION,

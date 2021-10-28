@@ -200,8 +200,8 @@
                                                 <div class="border-bottom border-color-1 border-dotted-bottom">
                                                     <div class="p-3" id="basicsHeadingOne">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" id="gateway-{{$gateway->id}}" class="custom-control-input" name="payment_method" value="{{ $gateway->name }}" checked>
-                                                            <label class="custom-control-label form-label" for="gateway-{{$gateway->id}}" >
+                                                            <input type="radio" id="gateway-{{$gateway->id}}" class="custom-control-input" name="payment_method" value="{{ $gateway->value }}" checked>
+                                                            <label class="custom-control-label form-label" for="gateway-{{$gateway->id}}">
                                                                 {{ $gateway->name }}
                                                             </label>
                                                         </div>
