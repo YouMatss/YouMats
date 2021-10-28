@@ -16,9 +16,9 @@ class PaymentController extends Controller
     public string $provider = 'payfort';
 
     public function form() {
-
         try {
             $data['order'] = Order::whereOrderId(Cache::get('order_id'))->first();
+            abort_if(!$data['order'],401);
 
             $data['cart'] = Cart::instance('cart');
             $data['cartItems'] = $data['cart']->search(function($cartItems) {
@@ -40,6 +40,7 @@ class PaymentController extends Controller
     public function success() {
         try {
             $data['order'] = Order::whereOrderId(Cache::get('order_id'))->first();
+            abort_if(!$data['order'],401);
 
             $data['cart'] = Cart::instance('cart');
             $data['cartItems'] = $data['cart']->search(function($cartItems) {
@@ -56,8 +57,11 @@ class PaymentController extends Controller
                 'payment_status' => 'completed'
             ]);
 
+            $data['delivery'] = Cart::tax();
+
             //Clear the cart!
             Cart::instance('cart')->destroy();
+            Cache::forget('order_id');
 
             Mail::to(Auth::guard('web')->user())->send(new OrderPlaced($data['order']));
 

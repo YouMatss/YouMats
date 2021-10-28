@@ -139,7 +139,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-//            NovaBreadcrumbs::make(),
+            NovaBreadcrumbs::make(),
             (NovaPermissionTool::make()
                 ->rolePolicy(RolePolicy::class)
                 ->permissionPolicy(PermissionPolicy::class)

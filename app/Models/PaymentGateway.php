@@ -12,4 +12,10 @@ class PaymentGateway extends Model
     use HasFactory, SoftDeletes, HasTranslations;
 
     protected $translatable = ['name', 'subtitle', 'description'];
+
+    public function getValueAttribute() {
+        if(!isset($this->getTranslations('name')['en']))
+            return;
+        return $this->getTranslations('name')['en'];
+    }
 }

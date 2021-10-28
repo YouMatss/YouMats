@@ -35,14 +35,18 @@ class CartController extends Controller
      */
     public function add(Request $request, Product $product): JsonResponse
     {
+        $deliveryIsExist = $product->delivery(Session::get('city')->id);
+        $delivery = 0;
+        if(!is_null($deliveryIsExist)) {
+            $delivery = round($deliveryIsExist['price'] / getCurrency('rate'), 2);
+        }
         Cart::instance('cart')->add(
             $product->id,
             $product->name,
             1,
             round($product->price / getCurrency('rate'), 2),
             [],
-            0
-//            $product->delivery(Session::get('city')->id)['price']
+            ($delivery / round($product->price / getCurrency('rate'), 2)) * 100
         )->associate($product);
         return response()->json(['message' => __(is_company() ? 'product.added_to_quote_list' : 'product.added_to_cart'),
             'cart' => Cart::content(),
