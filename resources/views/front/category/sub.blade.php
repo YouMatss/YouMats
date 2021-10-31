@@ -97,7 +97,7 @@
                                             <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                                 <div class="custom-control custom-checkbox">
                                                     <a @if($sibling->id == $category->id) style="font-weight: bold" @endif href="{{route('front.category', [generatedNestedSlug($sibling->ancestors()->pluck('slug')->toArray(), $sibling->slug)])}}" class="custom-control-label">{{$sibling->name}}
-                                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($sibling->products)}})</span>
+{{--                                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($sibling->products)}})</span>--}}
                                                     </a>
                                                 </div>
                                             </div>
@@ -177,7 +177,7 @@
                             <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                 <div class="custom-control custom-checkbox">
                                     <a @if($sibling->id == $category->id) style="font-weight: bold" @endif href="{{route('front.category', [generatedNestedSlug($sibling->ancestors()->pluck('slug')->toArray(), $sibling->slug)])}}" class="custom-control-label">{{$sibling->name}}
-                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($sibling->products)}})</span>
+{{--                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($sibling->products)}})</span>--}}
                                     </a>
                                 </div>
                             </div>
