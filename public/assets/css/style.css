@@ -1126,3 +1126,10 @@
 .card-header-filter button i{
     float: right;
 }
+
+
+.phone-footer-com{
+    direction: ltr;
+    display: block;
+    float: left;
+}

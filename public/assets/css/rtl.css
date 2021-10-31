@@ -410,3 +410,14 @@ h3.font-size-24 {
 .card-header-filter button i{
     float: left;
 }
+
+
+.phone-footer-com{
+    direction: ltr;
+    float: right;
+}
+
+
+.ti_rtl h2 ,.ti_rtl p{
+    text-align: right;
+}

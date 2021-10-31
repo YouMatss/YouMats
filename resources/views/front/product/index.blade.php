@@ -167,7 +167,7 @@
                 <div class="bg-white pt-4 pb-6 px-xl-11 px-md-5 px-4 mb-6 overflow-hidden">
                     <div id="Description" class="mx-md-2">
                         <div class="position-relative mb-6">
-                            <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center mb-6 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-lg-down-bottom-0 pb-1 pb-xl-0 mb-n1 mb-xl-0">
+                            <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-center mb-6 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-lg-down-bottom-0 pb-1 pb-xl-0 mb-n1 mb-xl-0">
                                 <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
                                     <a class="nav-link active" href="#Description">
                                         <div class="d-md-flex justify-content-md-center align-items-md-center">
@@ -177,7 +177,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="mx-md-4 pt-1">
+                        <div class="mx-md-4 pt-1 ti_rtl">
                             <h2 class="font-size-24 mb-3">{{ __('product.description') }}</h2>
                             {!! $product->desc !!}
                             <div class="row">
