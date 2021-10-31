@@ -45,7 +45,8 @@
                             </div>
                             <div class="col pl-3">
                                 <div class="font-size-13 font-weight-light">{{__('general.footer_gotquestions')}}</div>
-                                <a href="tel:{{__('info.phone')}}" class="font-size-20 text-gray-90">{{__('info.phone')}}, </a><a href="tel:{{__('info.phone2')}}" class="font-size-20 text-gray-90">{{__('info.phone2')}}</a>
+                                <a href="tel:{{__('info.phone')}}" class="phone-footer-com font-size-20 text-gray-90"> , {{__('info.phone')}} </a>
+                                <a href="tel:{{__('info.phone2')}}" class="phone-footer-com font-size-20 text-gray-90">{{__('info.phone2')}}</a>
                             </div>
                         </div>
                     </div>
