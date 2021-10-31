@@ -3,7 +3,7 @@ return [
     'groups' => [
         'info',
         'general',
-        'home',
+        'homee',
         'auth',
         'product',
         'order',

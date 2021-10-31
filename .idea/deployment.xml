@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="era-app.com" persistUploadOnCheckin="false" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" serverName="youmats.sa" persistUploadOnCheckin="false" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="era-app.com">
+      <paths name="youmats.sa">
         <serverdata>
           <mappings>
-            <mapping deploy="/youmats.era-app.com" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/var/www/YouMats" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

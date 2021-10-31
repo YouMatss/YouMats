@@ -61,16 +61,16 @@
             <div class="col-xl-9 ml-auto col-wd-auto max-width-1045">
                 <div class="row mb-6">
                     <div class="col-md-6 mb-4 mb-xl-0 col-wd-4">
-                        <a href="{{__('home.first_section_url')}}" class="d-black text-gray-90">
+                        <a href="{{__('homee.first_section_url')}}" class="d-black text-gray-90">
                             <div class="min-height-166 py-1 py-xl-2 py-wd-4 d-flex bg-gray-1 align-items-center">
                                 <div class="col-6 col-xl-7 col-wd-6 pr-0">
-                                    <img class="img-fluid" src="{{ Storage::url(nova_get_setting('home_first_section', 'default_logo.jpg')) }}" title="{{__('home.first_section')}}" alt="{{__('home.first_section')}}">
+                                    <img class="img-fluid" src="{{ Storage::url(nova_get_setting('home_first_section', 'default_logo.jpg')) }}" title="{{__('homee.first_section')}}" alt="{{__('homee.first_section')}}">
                                 </div>
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
-                                        <strong>{{__('home.first_section')}}</strong>
+                                        <strong>{{__('homee.first_section')}}</strong>
                                     </div>
-                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.first_section_url')}}">
+                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('homee.first_section_url')}}">
                                         {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
                                             <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
@@ -81,16 +81,16 @@
                         </a>
                     </div>
                     <div class="col-md-6 mb-4 mb-xl-0 col-wd-4">
-                        <a href="{{__('home.second_section_url')}}" class="d-black text-gray-90">
+                        <a href="{{__('homee.second_section_url')}}" class="d-black text-gray-90">
                             <div class="min-height-166 py-1 py-xl-2 py-wd-4 d-flex bg-gray-1 align-items-center">
                                 <div class="col-6 col-xl-7 col-wd-6 pr-0">
-                                    <img class="img-fluid" src="{{ Storage::url(nova_get_setting('home_second_section', 'default_logo.jpg')) }}" title="{{__('home.second_section')}}" alt="{{__('home.second_section')}}">
+                                    <img class="img-fluid" src="{{ Storage::url(nova_get_setting('home_second_section', 'default_logo.jpg')) }}" title="{{__('homee.second_section')}}" alt="{{__('homee.second_section')}}">
                                 </div>
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
-                                        <strong>{{__('home.second_section')}}</strong>
+                                        <strong>{{__('homee.second_section')}}</strong>
                                     </div>
-                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.second_section_url')}}">
+                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('homee.second_section_url')}}">
                                         {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
                                             <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
@@ -101,18 +101,18 @@
                         </a>
                     </div>
                     <div class="col-md-6 mb-4 mb-xl-0 col-wd-4 d-md-none d-wd-block">
-                        <a href="{{__('home.third_section_url')}}" class="d-black text-gray-90">
+                        <a href="{{__('homee.third_section_url')}}" class="d-black text-gray-90">
                             <div class="min-height-166 py-1 py-xl-2 py-wd-4 d-flex bg-gray-1 align-items-center">
 
                                 <div class="col-6 col-xl-7 col-wd-6 pr-0">
-                                    <img class="img-fluid" src="{{ Storage::url(nova_get_setting('home_third_section', 'default_logo.jpg')) }}" title="{{__('home.third_section')}}" alt="{{__('home.third_section')}}">
+                                    <img class="img-fluid" src="{{ Storage::url(nova_get_setting('home_third_section', 'default_logo.jpg')) }}" title="{{__('homee.third_section')}}" alt="{{__('homee.third_section')}}">
                                 </div>
 
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
-                                        <strong>{{__('home.third_section')}}</strong>
+                                        <strong>{{__('homee.third_section')}}</strong>
                                     </div>
-                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('home.third_section_url')}}">
+                                    <div class="link text-gray-90 font-weight-bold font-size-15" href="{{__('homee.third_section_url')}}">
                                         {{__('general.read_more')}}
                                         <span class="link__icon ml-1">
                                             <span class="link__icon-inner"><i class="ec ec-arrow-right-categproes"></i></span>
@@ -133,8 +133,8 @@
         <div class="container">
             <div class="row">
                 <div class="box p-1 pr-2">
-                    <h1 class="text-uppercase">{{__('home.categories_subtitle')}}</h1>
-                    <p>{{__('home.catgeories_desc')}}</p>
+                    <h1 class="text-uppercase">{{__('homee.categories_subtitle')}}</h1>
+                    <p>{{__('homee.catgeories_desc')}}</p>
                 </div>
                 @foreach($featured_categories as $f_category)
                 <div class="box">
@@ -164,7 +164,7 @@
             <div class="container p-0">
 
                 <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-                    <h2 class="section-title section-title__full mb-0 pb-2 font-size-22">{{__('home.featured_products')}}</h2>
+                    <h2 class="section-title section-title__full mb-0 pb-2 font-size-22">{{__('homee.featured_products')}}</h2>
                 </div>
 
                 <div class="mb-4 position-relative">
@@ -309,7 +309,7 @@
 
     <div class="container st_new">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-            <h2 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('home.top_categories') }}</h2>
+            <h2 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('homee.top_categories') }}</h2>
         </div>
         <div class="mb-6">
             <div class="row rtl flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">

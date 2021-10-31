@@ -3,7 +3,7 @@
     <section id="team" class="pb-5">
         <div class="container">
             <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-                <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{__('home.team_title')}}</h3>
+                <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{__('homee.team_title')}}</h3>
                 <a class="d-block text-gray-16" href="{{route('front.team.index')}}">{{__('general.go_to_all_team')}}<i class="ec ec-arrow-right-categproes"></i></a>
             </div>
             <div class="row rtl">
