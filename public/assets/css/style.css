@@ -1108,3 +1108,21 @@
     margin: 0 0 10px 0;
     padding: 0 0 10px 0;
 }
+
+
+.card-header-filter{
+    background: #eee;
+    cursor: pointer;
+}
+
+.card-header-filter button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+
+.card-header-filter button i{
+    float: right;
+}

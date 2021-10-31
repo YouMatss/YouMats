@@ -350,7 +350,7 @@ h3.font-size-24 {
     border-radius: 25px 0 0 25px !important;
 }
 
-#productsContainer{
+#productsContainer .rtl{
     text-align: right;
 }
 
@@ -402,3 +402,11 @@ h3.font-size-24 {
 
 }
 
+.card-header-filter button {
+    text-align: right;
+}
+
+
+.card-header-filter button i{
+    float: left;
+}
