@@ -37,7 +37,97 @@
         </div>
         <div class="container">
             <div class="row mb-8 rtl">
-                <div class="d-xl-block col-xl-3 col-wd-2gdot5">
+
+                <div class="d-block d-xl-none col-xl-3 col-wd-2gdot5">
+
+                    <div class="accordion" id="accordionExample">
+                        <div class="card-filter">
+                            <div class="card-header-filter" id="headingOne">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <b> بحث متقدم<i class="fa fa-filter" aria-hidden="true"></i>  </b>
+                                    </button>
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                @if(!is_company())
+                                    <div class="mb-6">
+                                        <div class="range-slider bg-gray-3 p-3">
+                                            <h4 class="font-size-14 mb-3 font-weight-bold">{{__('general.price')}}</h4>
+                                            <!-- Range Slider -->
+                                            <input class="js-range-slider" type="text"
+                                                   data-extra-classes="u-range-slider u-range-slider-indicator u-range-slider-grid"
+                                                   data-type="double" data-grid="false" data-hide-from-to="true" data-prefix="{{ getCurrency('symbol') }}"
+                                                   data-min="{{$minPrice}}" data-max="{{$maxPrice}}" data-from="{{$minPrice}}" data-to="{{$maxPrice}}"
+                                                   data-result-min="#rangeSliderExample3MinResultCategory" data-result-max="#rangeSliderExample3MaxResultCategory">
+                                            <!-- End Range Slider -->
+                                            <div class="mt-1 text-gray-111 d-flex mb-4">
+                                                <span class="mr-0dot5">{{__('general.price')}}: </span>
+                                                <span>{{ getCurrency('symbol') }} </span>
+                                                <span id="rangeSliderExample3MinResultCategory">{{$minPrice}}</span>
+                                                <span class="mx-0dot5"> — </span>
+                                                <span>{{ getCurrency('symbol') }} </span>
+                                                <span id="rangeSliderExample3MaxResultCategory">{{$maxPrice}}</span>
+                                            </div>
+                                            <button class="btn px-4 btn-primary-dark-w py-2 rounded-lg text-white" id="priceFilterBtn">{{__('general.search_button')}}</button>
+                                        </div>
+                                    </div>
+                                @endif
+                                @foreach($category->attributes as $attribute)
+                                    <div class="mb-6">
+                                        <div class="border-bottom border-color-1 mb-5">
+                                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">{{$attribute->key}}</h3>
+                                        </div>
+                                        <div class="border-bottom pb-4 mb-4 attr-container">
+                                            @foreach($attribute->values as $value)
+                                                <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input filter-checkboxes" value="{{$value->id}}" id="{{$attribute->key . '_' . $value->value}}">
+                                                        <label class="custom-control-label" for="{{$attribute->key . '_' . $value->value}}">{{$value->value}}</label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <div class="mb-6">
+                                    <div class="border-bottom border-color-1 mb-5">
+                                        <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">{{__('general.categories')}}</h3>
+                                    </div>
+                                    <div class="border-bottom pb-4 mb-4 attr-container">
+                                        @foreach($category->getSiblings() as $sibling)
+                                            <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                                                <div class="custom-control custom-checkbox">
+                                                    <a @if($sibling->id == $category->id) style="font-weight: bold" @endif href="{{route('front.category', [generatedNestedSlug($sibling->ancestors()->pluck('slug')->toArray(), $sibling->slug)])}}" class="custom-control-label">{{$sibling->name}}
+                                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($sibling->products)}})</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                @if(count($tags))
+                                    <div class="mb-6 d-none">
+                                        <div class="border-bottom border-color-1 mb-5">
+                                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">{{__('general.search_tags')}}</h3>
+                                        </div>
+                                        <div class="border-bottom pb-4 mb-4 attr-container">
+                                            @foreach($tags as $tag)
+                                                <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <a href="{{route('front.tag', [$tag->slug])}}" class="custom-control-label">{{$tag->name}}
+                                                            <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($tag->products)}})</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-none d-xl-block col-xl-3 col-wd-2gdot5">
                     @if(!is_company())
                     <div class="mb-6">
                         <div class="range-slider bg-gray-3 p-3">
@@ -113,6 +203,7 @@
                     </div>
                     @endif
                 </div>
+
                 <div class="col-xl-9 col-wd-9gdot5">
                     @if(count($category->children))
                     <div class="mb-6 bg-gray-7">
