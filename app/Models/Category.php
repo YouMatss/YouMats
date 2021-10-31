@@ -79,7 +79,9 @@ class Category extends Model implements Sortable, HasMedia
             return $this->hasManyThrough(Product::class, self::class, 'parent_id')
                 ->where('active', 1)->orderBy('updated_at', 'desc');
         }
-        return $this->hasMany(Product::class)->where('active', 1)->orderBy('updated_at', 'desc');
+        return $this->hasMany(Product::class)
+            ->where('active', 1)
+            ->orderBy('updated_at', 'desc');
     }
 
     /**

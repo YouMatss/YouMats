@@ -21,7 +21,8 @@ class CategoryController extends Controller
         $data['category'] = Category::whereSlug($slug)->firstOrFail();
 
 //        $city = City::where('name', 'LIKE', '%'.$this->getCityByLocation().'%')->first();
-        $data['products'] = $data['category']->products()
+
+//        $data['products'] = $data['category']->products()
 //            ->join('vendors', 'vendors.id', '=', 'products.vendor_id')
 //            ->join('vendor_branches', 'vendor_branches.vendor_id', '=', 'vendors.id')
 //            ->leftJoin('cities', function($join) use($city) {
@@ -29,12 +30,13 @@ class CategoryController extends Controller
 //            })
 //            ->limit(2)
 //            ->orderBy('cities.id', 'ASC')
-            ->paginate(20);
+//            ->paginate(20);
 
-//        dd($data['products']->get());
+        $data['products'] = $this->getProductsByCategoryId($data['category']->id, 20);
 
         $data['parent'] = $data['category']->parent;
         $data['children'] = $data['category']->children;
+
         if(isset($data['parent'])) {
             $data['tags'] = $data['category']->tags();
             $data['category']->load('attributes', 'attributes.values');
@@ -77,5 +79,14 @@ class CategoryController extends Controller
             }
         }
         return null;
+    }
+
+    private function getProductsByCategoryId($category_id, $limit = 20) {
+        $categories_ids = Category::descendantsAndSelf($category_id)->pluck('id');
+        return Product::whereIn('category_id', $categories_ids)
+            ->where('active', 1)
+            ->orderBy('views', 'desc')
+            ->orderBy('updated_at', 'desc')
+            ->paginate($limit);
     }
 }
