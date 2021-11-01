@@ -237,7 +237,7 @@
             </div>
         </div>
     </div>
-    @if(Session::has('city'))
+    @if(is_individual())
         @include('front.layouts.partials.change_city')
     @endif
 @endsection

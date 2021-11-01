@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Front\Category;
 
+use App\Helpers\Classes\CollectionPaginate;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\City;
 use App\Models\Product;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Session;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
-use Stevebauman\Location\Facades\Location;
 
 class CategoryController extends Controller
 {
@@ -19,18 +16,6 @@ class CategoryController extends Controller
         $slug = end($parsedSlug);
 
         $data['category'] = Category::whereSlug($slug)->firstOrFail();
-
-//        $city = City::where('name', 'LIKE', '%'.$this->getCityByLocation().'%')->first();
-
-//        $data['products'] = $data['category']->products()
-//            ->join('vendors', 'vendors.id', '=', 'products.vendor_id')
-//            ->join('vendor_branches', 'vendor_branches.vendor_id', '=', 'vendors.id')
-//            ->leftJoin('cities', function($join) use($city) {
-//                $join->on( 'cities.id', '=', $city->id);
-//            })
-//            ->limit(2)
-//            ->orderBy('cities.id', 'ASC')
-//            ->paginate(20);
 
         $data['products'] = $this->getProductsByCategoryId($data['category']->id, 20);
 
@@ -51,7 +36,6 @@ class CategoryController extends Controller
 
     public function filter($category_id) {
         $data['category'] = Category::findorfail($category_id);
-        $data['city_location'] = $this->getCityByLocation();
         $data['products'] = QueryBuilder::for(Product::class)
             ->allowedFilters([
                 'attributes',
@@ -69,24 +53,16 @@ class CategoryController extends Controller
         return view('front.category.productsContainer')->with($data)->render();
     }
 
-    public function getCityByLocation() {
-        $ip = Request::ip();
-        $location = Location::get($ip);
-        if($location) {
-            $city = City::where('name', 'LIKE', '%'.$location->cityName.'%')->first();
-            if($city) {
-                return $location->cityName;
-            }
-        }
-        return null;
-    }
-
     private function getProductsByCategoryId($category_id, $limit = 20) {
-        $categories_ids = Category::descendantsAndSelf($category_id)->pluck('id');
-        return Product::whereIn('category_id', $categories_ids)
+        $children_categories_ids = Category::descendantsAndSelf($category_id)->pluck('id');
+
+        $products = Product::whereIn('category_id', $children_categories_ids)
             ->where('active', 1)
-            ->orderBy('views', 'desc')
-            ->orderBy('updated_at', 'desc')
-            ->paginate($limit);
+            ->get()
+            ->sortByDesc('updated_at')
+            ->sortByDesc('views')
+            ->sortByDesc('delivery');
+
+        return CollectionPaginate::paginate($products, $limit);
     }
 }
