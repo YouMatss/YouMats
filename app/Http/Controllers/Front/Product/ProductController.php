@@ -25,7 +25,7 @@ class ProductController extends Controller
         abort_if(!$data['product'], 404);
 
         if(Session::has('city')) {
-            $data['delivery'] = $data['product']->delivery(Session::get('city')->id);
+            $data['delivery'] = $data['product']->delivery;
             $data['delivery_cities'] = $data['product']->delivery_cities();
         }
 

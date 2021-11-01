@@ -7,6 +7,7 @@ use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Session;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
@@ -27,7 +28,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      *
      * @var array
      */
-    protected $appends = ['image_url'];
+    protected $appends = ['image_url', 'delivery'];
 
     public function getMetaTitleAttribute() {
         if(!isset($this->getTranslations('meta_title')[app()->getLocale()]))
@@ -72,11 +73,11 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return $this->vendor->select('latitude', 'longitude')->first();
     }
 
-    public function delivery($current_city = null) {
+    public function getDeliveryAttribute() {
         if($this->specific_shipping) {
             if($this->shipping_prices) {
                 foreach (json_decode($this->shipping_prices, true) as $shipping) {
-                    if($shipping['cities'] == $current_city) {
+                    if($shipping['cities'] == Session::get('city')->id) {
                         return $shipping;
                     }
                 }
@@ -92,7 +93,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         if (isset($this->shipping)) {
             if($this->shipping->cities_prices) {
                 foreach ($this->shipping->cities_prices as $shipping) {
-                    if($shipping['cities'] == $current_city) {
+                    if($shipping['cities'] == Session::get('city')->id) {
                         return $shipping;
                     }
                 }

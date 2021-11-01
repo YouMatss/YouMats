@@ -1,5 +1,5 @@
 <div class="d-block d-md-flex flex-center-between mb-3 rtl">
-    <spane class="font-size-25 mb-2 mb-md-0"></spane>
+    <span class="font-size-25 mb-2 mb-md-0"></span>
     <input type="hidden" value="{{$category->id}}" id="categoryIdContainer">
     <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}} {{__('general.of')}} {{$products->total()}} {{__('general.results')}}</p>
 </div>
@@ -24,12 +24,12 @@
             </li>
         </ul>
     </div>
+    @if(is_individual())
     <div>
-        @if(Session::has('city'))
-            {{__('general.city_location_text')}}: {{Session::get('city')->name}}
-            (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>)
-        @endif
+        {{__('general.city_location_text')}}: {{(Session::get('city')->name) ?? __('general.all_cities')}}
+        (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>)
     </div>
+    @endif
     <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
         <a class="text-gray-30 font-size-20 mr-2" href="{{$products->previousPageUrl()}}">←</a>
         <b>{{$products->currentPage()}} </b> &nbsp; {{__('general.of')}} {{$products->lastPage()}}

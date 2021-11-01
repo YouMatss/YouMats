@@ -40,3 +40,10 @@ if (!function_exists('setCity')) {
             Session::put('city', $city);
     }
 }
+
+if (!function_exists('getCity')) {
+    function getCity() {
+        if(Session::has('city'))
+            return Session::get('city');
+    }
+}

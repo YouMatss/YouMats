@@ -35,7 +35,7 @@ class CartController extends Controller
      */
     public function add(Request $request, Product $product): JsonResponse
     {
-        $deliveryIsExist = $product->delivery(Session::get('city')->id);
+        $deliveryIsExist = $product->delivery;
         $delivery = 0;
         if(!is_null($deliveryIsExist)) {
             $delivery = round($deliveryIsExist['price'] / getCurrency('rate'), 2);
