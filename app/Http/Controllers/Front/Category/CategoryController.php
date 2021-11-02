@@ -11,13 +11,15 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
 {
+    private int $pagination_limit = 20;
+
     public function index($slug) {
         $parsedSlug = explode('/', $slug);
         $slug = end($parsedSlug);
 
         $data['category'] = Category::whereSlug($slug)->firstOrFail();
 
-        $data['products'] = $this->getProductsByCategoryId($data['category']->id, 20);
+        $data['products'] = $this->getProductsByCategoryId($data['category']->id, $this->pagination_limit);
 
         $data['parent'] = $data['category']->parent;
         $data['children'] = $data['category']->children;
@@ -36,19 +38,23 @@ class CategoryController extends Controller
 
     public function filter($category_id) {
         $data['category'] = Category::findorfail($category_id);
-        $data['products'] = QueryBuilder::for(Product::class)
+        $children_categories_ids = Category::descendantsAndSelf($category_id)->pluck('id');
+
+        $products = QueryBuilder::for(Product::class)
             ->allowedFilters([
                 'attributes',
                 AllowedFilter::scope('price_from'),
                 AllowedFilter::scope('price_to')
             ])
-            ->where([
-                'active' => 1,
-                'category_id' => $category_id
-            ])
-            ->orderBy('updated_at', 'DESC')
-            ->with('category'/*, 'vendor', 'vendor.branches'*/)
-            ->paginate(20);
+            ->with('category')
+            ->where('active', 1)
+            ->whereIn('category_id', $children_categories_ids)
+            ->get()
+            ->sortByDesc('updated_at')
+            ->sortByDesc('views')
+            ->sortByDesc('delivery');
+
+        $data['products'] = CollectionPaginate::paginate($products, $this->pagination_limit);
 
         return view('front.category.productsContainer')->with($data)->render();
     }
