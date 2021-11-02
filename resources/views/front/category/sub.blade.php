@@ -88,6 +88,7 @@
                                         </div>
                                     </div>
                                 @endforeach
+                                @if(count($category->getSiblings()))
                                 <div class="mb-6">
                                     <div class="border-bottom border-color-1 mb-5">
                                         <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">{{__('general.categories')}}</h3>
@@ -104,6 +105,7 @@
                                         @endforeach
                                     </div>
                                 </div>
+                                @endif
                                 @if(count($tags))
                                     <div class="mb-6 d-none">
                                         <div class="border-bottom border-color-1 mb-5">
@@ -160,14 +162,15 @@
                             @foreach($attribute->values as $value)
                             <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input filter-checkboxes" value="{{$value->id}}" id="{{$attribute->key . '_' . $value->value}}">
-                                    <label class="custom-control-label" for="{{$attribute->key . '_' . $value->value}}">{{$value->value}}</label>
+                                    <input type="checkbox" class="custom-control-input filter-checkboxes" value="{{$value->id}}" id="{{$attribute->id . '_' . $value->id}}">
+                                    <label class="custom-control-label" for="{{$attribute->id . '_' . $value->id}}">{{$value->value}}</label>
                                 </div>
                             </div>
                             @endforeach
                         </div>
                     </div>
                     @endforeach
+                    @if(count($category->getSiblings()))
                     <div class="mb-6">
                         <div class="border-bottom border-color-1 mb-5">
                             <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">{{__('general.categories')}}</h3>
@@ -184,6 +187,7 @@
                             @endforeach
                         </div>
                     </div>
+                    @endif
                     @if(count($tags))
                     <div class="mb-6 d-none">
                         <div class="border-bottom border-color-1 mb-5">

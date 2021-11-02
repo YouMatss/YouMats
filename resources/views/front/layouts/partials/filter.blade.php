@@ -8,12 +8,11 @@
         });
     }
     function arrangeData() {
-        let priceFrom, priceTo, attributesCheckboxes, checkedAttributes, categoryId, url;
+        let priceFrom, priceTo, attributesCheckboxes, checkedAttributes, url;
 
         priceFrom = parseInt($("#rangeSliderExample3MinResultCategory").html());
         priceTo = parseInt($("#rangeSliderExample3MaxResultCategory").html());
         attributesCheckboxes = $(".filter-checkboxes:checkbox");
-        // categoryId = $("#categoryIdContainer").val();
         checkedAttributes = [];
 
         attributesCheckboxes.each(function() {
@@ -24,7 +23,6 @@
         })
 
         url = `{{route('category.filter', [$category->id])}}?filter[attributes]=${checkedAttributes}`;
-        {{--url = `{{ env('APP_URL')}}/filter/${categoryId}?filter[attributes]=${checkedAttributes}`;--}}
 
         if(priceFrom > 0)
             url += `&filter[price_from]=${priceFrom}`;
