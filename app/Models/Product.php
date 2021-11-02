@@ -77,7 +77,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         if($this->specific_shipping) {
             if($this->shipping_prices) {
                 foreach (json_decode($this->shipping_prices, true) as $shipping) {
-                    if($shipping['cities'] == Session::get('city')->id) {
+                    if(Session::has('city') && $shipping['cities'] == Session::get('city')->id) {
                         return $shipping;
                     }
                 }
@@ -93,7 +93,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         if (isset($this->shipping)) {
             if($this->shipping->cities_prices) {
                 foreach ($this->shipping->cities_prices as $shipping) {
-                    if($shipping['cities'] == Session::get('city')->id) {
+                    if(Session::has('city') && $shipping['cities'] == Session::get('city')->id) {
                         return $shipping;
                     }
                 }
