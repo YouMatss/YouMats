@@ -421,3 +421,8 @@ h3.font-size-24 {
 .ti_rtl h2 ,.ti_rtl p{
     text-align: right;
 }
+
+
+#Description ul{
+    direction: rtl;
+}
