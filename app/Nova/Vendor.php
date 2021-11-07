@@ -96,6 +96,8 @@ class Vendor extends Resource
                 ->defaultZoom(8)
                 ->defaultLatitude(24.7136)
                 ->defaultLongitude(46.6753)
+                ->searchProvider('google')
+                ->searchProviderKey(env('NOVA_GOOGLE_MAPS_API_KEY'))
                 ->hideFromIndex(),
 
             Text::make('Facebook', 'facebook_url')

@@ -58,6 +58,8 @@ class Trip extends Resource
                 ->latitude('pickup_latitude')
                 ->defaultLongitude(46.6753)
                 ->longitude('pickup_longitude')
+                ->searchProvider('google')
+                ->searchProviderKey(env('NOVA_GOOGLE_MAPS_API_KEY'))
                 ->hideFromIndex(),
 
             MapMarker::make('Destination Location')
@@ -66,6 +68,8 @@ class Trip extends Resource
                 ->latitude('destination_latitude')
                 ->defaultLongitude(46.6753)
                 ->longitude('destination_longitude')
+                ->searchProvider('google')
+                ->searchProviderKey(env('NOVA_GOOGLE_MAPS_API_KEY'))
                 ->hideFromIndex(),
 
             Number::make('Distance')
