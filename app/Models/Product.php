@@ -28,7 +28,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      *
      * @var array
      */
-    protected $appends = ['image_url', 'delivery'];
+    protected $appends = ['image_url', 'delivery', 'contacts'];
 
     public function getMetaTitleAttribute() {
         if(!isset($this->getTranslations('meta_title')[app()->getLocale()]))
@@ -73,6 +73,9 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return $this->vendor->select('latitude', 'longitude')->first();
     }
 
+    /**
+     * @return array|mixed|null
+     */
     public function getDeliveryAttribute() {
         if($this->specific_shipping) {
             if($this->shipping_prices) {
@@ -109,6 +112,9 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return null;
     }
 
+    /**
+     * @return string|null
+     */
     public function delivery_cities() {
         $cities = [];
         if($this->specific_shipping) {
@@ -134,6 +140,22 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         if(count($cities))
             return City::whereIn('id', $cities)->get();
         return null;
+    }
+
+    public function getContactsAttribute() {
+        if(isset($this->vendor->contacts)) {
+            foreach ($this->vendor->contacts as $contact) {
+                if($contact['with'] != 'company' && Session::has('city')) {
+                    foreach ($contact['cities'] as $city) {
+                        if($city == Session::get('city')->id) {
+                            return 1;
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
+        return 0;
     }
 
     /**

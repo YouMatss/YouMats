@@ -6,6 +6,7 @@ use App\Helpers\Classes\CollectionPaginate;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Collection;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -65,9 +66,13 @@ class CategoryController extends Controller
         $products = Product::whereIn('category_id', $children_categories_ids)
             ->where('active', 1)
             ->get()
-            ->sortByDesc('updated_at')
-            ->sortByDesc('views')
-            ->sortByDesc('delivery');
+            ->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
+                return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
+                    return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
+                        return $collection->sortByDesc('updated_at');
+                    })->ungroup();
+                })->ungroup();
+            })->ungroup();
 
         return CollectionPaginate::paginate($products, $limit);
     }
