@@ -135,3 +135,21 @@ if(!function_exists('generatedNestedSlug')) {
         return implode('/', $array) . '/' . $slug;
     }
 }
+
+if (!\Illuminate\Support\Collection::hasMacro('ungroup')) {
+    /**
+     * Ungroup a previously grouped collection (grouped by {@see Collection::groupBy()})
+     */
+    \Illuminate\Support\Collection::macro('ungroup', function () {
+        // create a new collection to use as the collection where the other collections are merged into
+        $newCollection = \Illuminate\Support\Collection::make([]);
+        // $this is the current collection ungroup() has been called on
+        // binding $this is common in JS, but this was the first I had run across it in PHP
+        $this->each(function ($item) use (&$newCollection) {
+            // use merge to combine the collections
+            $newCollection = $newCollection->merge($item);
+        });
+
+        return $newCollection;
+    });
+}
