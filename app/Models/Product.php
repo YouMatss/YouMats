@@ -145,7 +145,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     public function getContactsAttribute() {
         if(isset($this->vendor->contacts)) {
             foreach ($this->vendor->contacts as $contact) {
-                if($contact['with'] != 'company' && Session::has('city')) {
+                if($contact['with'] != 'company' && Session::has('city') && isset($contact['cities'])) {
                     foreach ($contact['cities'] as $city) {
                         if($city == Session::get('city')->id) {
                             return 1;
