@@ -15,6 +15,8 @@ class CategoryController extends Controller
     private int $pagination_limit = 20;
 
     public function index($slug) {
+        setCityLocation();
+
         $parsedSlug = explode('/', $slug);
         $slug = end($parsedSlug);
 
