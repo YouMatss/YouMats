@@ -44,6 +44,11 @@
 
 <!-- Toastr JS -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    toastr.options = {
+        "positionClass": "toast-top-center",
+    }
+</script>
 <!-- Socket.io -->
 <script src="https://cdn.socket.io/4.0.0/socket.io.min.js" integrity="sha384-DkkWv9oJFWLIydBXXjkBWnG1/fuVhw8YPBq37uvvD6WSYRFRqr21eY5Dg9ZhmWdy" crossorigin="anonymous"></script>
 
@@ -168,17 +173,15 @@
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: { _token: '{{ csrf_token() }}' }
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    quantity: btn.parent().siblings('.cart-quantity').val()
+                }
             })
             .done(function(response) {
                 $('.cartCount').html(response.count);
                 $('.cartTotal').html(response.total);
                 toastr.success(response.message);
-                btn.css('background-color', 'green');
-                btn.css('border-color', 'green');
-                btn.find('i').removeClass('fa-file-alt');
-                btn.find('i').removeClass('ec ec-add-to-cart');
-                btn.find('i').addClass('fa fa-check');
             })
             .fail(function(response) {
                 toastr.error(response);

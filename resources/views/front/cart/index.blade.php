@@ -115,7 +115,7 @@
                                                         @csrf
                                                         <label class="sr-only">{{ __('cart.coupon_code') }}</label>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" name="code" placeholder="Coupon code" id="couponCode" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
+                                                            <input type="text" class="form-control" name="code" placeholder="{{ __('cart.coupon_code') }}" id="couponCode" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
                                                             <div class="input-group-append">
                                                                 <input type="submit" class="btn btn-block btn-dark px-4" value="{{ __('cart.apply_coupon') }}" />
                                                             </div>

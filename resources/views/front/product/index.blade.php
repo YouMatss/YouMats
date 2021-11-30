@@ -1,16 +1,16 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>{{$product->meta_title}}</title>
-    <meta name="description" content="{{$product->meta_desc}}">
+    <title>{{$product->meta_title ?? $product->name}}</title>
+    <meta name="description" content="{{$product->meta_desc ?? $product->short_desc}}">
     <meta name="keywords" content="{{$product->meta_keywords}}">
     <meta property="og:url" content="{{url()->current()}}" />
-    <meta property="og:title" content="{{$product->meta_title}}" />
-    <meta property="og:description" content="{{$product->meta_desc}}" />
+    <meta property="og:title" content="{{$product->meta_title ?? $product->name}}" />
+    <meta property="og:description" content="{{$product->meta_desc ?? $product->short_desc}}" />
     <meta property="og:image" content="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
-    <meta name="twitter:title" content="{{$product->meta_title}}">
-    <meta name="twitter:description" content="{{$product->meta_desc}}">
+    <meta name="twitter:title" content="{{$product->meta_title ?? $product->name}}">
+    <meta name="twitter:description" content="{{$product->meta_desc ?? $product->short_desc}}">
     <meta name="twitter:image" content="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}">
 @endsection
 @section('content')
@@ -49,14 +49,15 @@
                             </div>
                         @endif
                     </div>
-
+                    @if(count($product->getMedia(PRODUCT_PATH)) > 1)
                     <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off" data-infinite="true" data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav">
                         @foreach($product->getMedia(PRODUCT_PATH) as $thumb)
                         <div class="js-slide" style="cursor: pointer;">
-                            <img class="img-fluid" src="{{$thumb->getFullUrl('thumb')}}" alt="{{$thumb->img_alt ?? ''}}" title="{{$thumb->img_title ?? ''}}">
+                            <img class="img-fluid" src="{{$thumb->getFullUrl()}}" alt="{{$thumb->img_alt ?? ''}}" title="{{$thumb->img_title ?? ''}}">
                         </div>
                         @endforeach
                     </div>
+                    @endif
                 </div>
                 <div class="col-md-6 col-lg-4 col-xl-4 mb-md-6 mb-lg-0">
                     <div class="mb-2">
@@ -108,16 +109,22 @@
                                 @if(isset($delivery))
                                     <div>
                                         <span>{{__('product.delivery_to_your_city')}}: <b>{{Session::get('city')->name}}</b></span>
-                                        <button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
+                                        <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
                                         <br/>
-                                        <span>{{__('general.price')}}: <b>{{getCurrency('symbol')}} {{round($delivery['price'] * getCurrency('rate'), 2)}}</b></span> <br/>
-                                        <span>{{__('general.time')}}: <b>{{$delivery['time'] . ' ' . $delivery['format']}}</b></span>
+                                        <span>{{__('product.delivery_price')}}:
+                                            @if($delivery['price'] > 0)
+                                            <b>{{getCurrency('symbol')}} {{round($delivery['price'] * getCurrency('rate'), 2)}}</b>
+                                            @else
+                                            <b>{{__('product.delivery_free')}}</b>
+                                            @endif
+                                        </span> <br/>
+                                        <span>{{__('product.delivery_time')}}: <b>{{$delivery['time']}} {{($delivery['format'] == 'hours') ? __('product.delivery_hours') : __('product.delivery_days') }}</b></span>
                                     </div>
                                 @else
                                     <div>
                                         <span style="color:#ff0000;">{{__('product.no_delivery')}}: {{Session::get('city')->name}}</span>
                                         @if(!is_null($delivery_cities))
-                                        <button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
+                                        <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
                                         @endif
                                     </div>
                                 @endif
@@ -142,7 +149,13 @@
 
 
                             @if(!Auth::guard('vendor')->check())
-                                {!! cartOrChat($product) !!}
+                                @if($product->price || $product->delivery)
+                                    {!! cartOrChat($product) !!}
+                                @else
+                                    <a class="cart-chat-category btn-primary transition-3d-hover" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">
+                                        {{$product->category->name}}
+                                    </a>
+                                @endif
                                 <div class="flex-content-center flex-wrap">
                                     <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i>{{__('product.wishlist')}}</a>
                                 </div>
@@ -177,7 +190,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="mx-md-4 pt-1 ti_rtl">
+                        <div class="mx-md-4 pt-1 ti_rtl rtl">
                             <h2 class="font-size-24 mb-3">{{ __('product.description') }}</h2>
                             {!! $product->desc !!}
                             <div class="row">
@@ -248,7 +261,7 @@
                                                     <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->formatted_price}}</div>
                                                     @endif
                                                 </div>
-                                                {!! cartOrChat($product) !!}
+                                                {!! cartOrChat($r_product) !!}
                                             </div>
                                         </div>
                                         @if(!Auth::guard('vendor')->check())

@@ -213,17 +213,17 @@
                                                     <img class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, '')['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                                 </a>
                                             </div>
-                                            <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    @if((!is_company()) && $bs_product->price)
-                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$bs_product->formatted_price}}</div>
-                                                    @endif
-                                                </div>
-                                                {!! cartOrChat($bs_product) !!}
-                                            </div>
                                         </div>
                                         @if(!Auth::guard('vendor')->check())
                                             <div class="product-item__footer">
+{{--                                                <div class="product-price">--}}
+{{--                                                    @if($bs_product->type == 'product' && (!is_company()) && $bs_product->price)--}}
+{{--                                                        <div class="text-gray-100">{{getCurrency('symbol')}} {{$bs_product->formatted_price}}</div>--}}
+{{--                                                    @endif--}}
+{{--                                                </div>--}}
+{{--                                                <div>--}}
+{{--                                                    {!! cartOrChat($bs_product) !!}--}}
+{{--                                                </div>--}}
                                                 <div class="border-top pt-2 flex-center-between flex-wrap">
                                                     <a data-url="{{ route('wishlist.add', ['product' => $bs_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
                                                 </div>
@@ -280,12 +280,12 @@
                                                 <img class="img-fluid" src="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
-                                        <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price">
-                                                @if((!is_company()) && $i_product->price)
+                                        <div class="product-price">
+                                            @if($i_product->type == 'product' && (!is_company()) && $i_product->price)
                                                 <div class="text-gray-100">{{getCurrency('symbol')}} {{$i_product->formatted_price}}</div>
-                                                @endif
-                                            </div>
+                                            @endif
+                                        </div>
+                                        <div>
                                             {!! cartOrChat($i_product) !!}
                                         </div>
                                     </div>
@@ -369,12 +369,12 @@
                                             <img class="img-fluid" src="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                         </a>
                                     </div>
-                                    <div class="flex-center-between mb-1">
-                                        <div class="prodcut-price">
-                                            @if((!is_company()) && $ii_product->price)
+                                    <div class="product-price">
+                                        @if($ii_product->type == 'product' && (!is_company()) && $ii_product->price)
                                             <div class="text-gray-100">{{getCurrency('symbol')}} {{$ii_product->formatted_price}}</div>
-                                            @endif
-                                        </div>
+                                        @endif
+                                    </div>
+                                    <div>
                                         {!! cartOrChat($ii_product) !!}
                                     </div>
                                 </div>
@@ -431,12 +431,12 @@
                                                 <img class="img-fluid" src="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
-                                        <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price">
-                                                @if((!is_company()) && $iii_product->price)
+                                        <div class="product-price">
+                                            @if($iii_product->type == 'product' && (!is_company()) && $iii_product->price)
                                                 <div class="text-gray-100">{{getCurrency('symbol')}} {{$iii_product->formatted_price}}</div>
-                                                @endif
-                                            </div>
+                                            @endif
+                                        </div>
+                                        <div>
                                             {!! cartOrChat($iii_product) !!}
                                         </div>
                                     </div>
@@ -493,12 +493,12 @@
                                                 <img class="img-fluid" src="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
-                                        <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price">
-                                                @if((!is_company()) && $iv_product->price)
+                                        <div class="product-price">
+                                            @if($iv_product->type == 'product' && (!is_company()) && $iv_product->price)
                                                 <div class="text-gray-100">{{getCurrency('symbol')}} {{$iv_product->formatted_price}}</div>
-                                                @endif
-                                            </div>
+                                            @endif
+                                        </div>
+                                        <div>
                                             {!! cartOrChat($iv_product) !!}
                                         </div>
                                     </div>

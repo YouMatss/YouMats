@@ -43,7 +43,7 @@ class CartController extends Controller
         Cart::instance('cart')->add(
             $product->id,
             $product->name,
-            1,
+            $request->quantity,
             round($product->price / getCurrency('rate'), 2),
             [],
             ($delivery / round($product->price / getCurrency('rate'), 2)) * 100

@@ -50,7 +50,7 @@ function doTheMagic(url, callback = 'default') {
                                         <div class="text-gray-100">{{ getCurrency('symbol') }} ${value.price}</div>
                                     </div>
                                     <div class="d-none d-xl-block product-add-cart searchCartDiv-${value.id}">
-                                        <button data-url="{{ env('APP_URL') }}/cart/add/${value.id}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                        <button data-url="{{ env('APP_URL') }}/cart/add/${value.id}" class="btn-add-cart cart-chat-category btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +78,7 @@ function doTheMagic(url, callback = 'default') {
                                             <div class="text-gray-100">{{ getCurrency('symbol') }} ${value.price}</div>
                                         </div>
                                         <div class="prodcut-add-cart searchCartDiv-${value.id}">
-                                            <button data-url="{{ env('APP_URL') }}/cart/add/${value.id}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
+                                            <button data-url="{{ env('APP_URL') }}/cart/add/${value.id}" class="btn-add-cart cart-chat-category btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
                                         </div>
                                     </div>
                                 </div>

@@ -166,7 +166,7 @@
                             @endif
                             @if(auth()->guard('admin')->check())
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                    <span class="badge badge-danger">{{__('general.login_as_admin')}}</span>
+                                    <a href="{{url('/admin_panel')}}" target="_blank" class="badge badge-danger">{{__('general.login_as_admin')}}</a>
                                 </li>
                             @endif
                             @if(is_company() || auth()->guard('vendor')->check())

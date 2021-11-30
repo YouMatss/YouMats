@@ -6,6 +6,7 @@ use App\Helpers\Classes\CollectionPaginate;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -50,12 +51,17 @@ class CategoryController extends Controller
                 AllowedFilter::scope('price_to')
             ])
             ->with('category')
-            ->where('active', 1)
             ->whereIn('category_id', $children_categories_ids)
+            ->where('active', '1')
             ->get()
-            ->sortByDesc('updated_at')
-            ->sortByDesc('views')
-            ->sortByDesc('delivery');
+            ->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
+                return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
+                    return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
+                        return $collection->sortByDesc('updated_at');
+                    })->ungroup();
+                })->ungroup();
+            })->ungroup()
+            ->unique();
 
         $data['products'] = CollectionPaginate::paginate($products, $this->pagination_limit);
 
@@ -64,9 +70,8 @@ class CategoryController extends Controller
 
     private function getProductsByCategoryId($category_id, $limit = 20) {
         $children_categories_ids = Category::descendantsAndSelf($category_id)->pluck('id');
-
         $products = Product::whereIn('category_id', $children_categories_ids)
-            ->where('active', 1)
+            ->where('active', '1')
             ->get()
             ->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
                 return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
@@ -74,7 +79,8 @@ class CategoryController extends Controller
                         return $collection->sortByDesc('updated_at');
                     })->ungroup();
                 })->ungroup();
-            })->ungroup();
+            })->ungroup()
+            ->unique();
 
         return CollectionPaginate::paginate($products, $limit);
     }
