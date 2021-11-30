@@ -9,6 +9,7 @@ return [
         'order',
         'vendor',
         'cart',
+        'checkout',
         'contact',
         'footer',
         'breadcrumb',

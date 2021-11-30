@@ -25,9 +25,10 @@
         </ul>
     </div>
     @if(is_individual())
-    <div>
+    <div class="rtl">
         {{__('general.city_location_text')}}: {{(Session::get('city')->name) ?? __('general.all_cities')}}
-        (<button type="button" class="choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>)
+        <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
+        {{__('general.category_word_after_change_city_button')}}
     </div>
     @endif
     <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
@@ -58,7 +59,7 @@
     </div>
 </div>
 <!-- End Tab Content -->
-<nav class="d-md-flex justify-content-between align-items-center border-top pt-3" aria-label="Page navigation example">
+<nav class="rtl d-md-flex justify-content-between align-items-center border-top pt-3" aria-label="Page navigation example">
     <ul class="pagination mb-0 pagination-shop justify-content-center justify-content-md-start">
         {{$products->links()}}
     </ul>

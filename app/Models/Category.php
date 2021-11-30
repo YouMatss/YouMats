@@ -85,14 +85,14 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function vendors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function vendors(): \Illuminate\Database\Eloquent\Builder
     {
         return $this->belongsToMany(Vendor::class, Product::class)
             ->join('categories', 'categories.id', 'products.category_id')
             ->orWhere('categories.parent_id', $this->id)
-            ->distinct('vendors.id');
+            ->distinct()->get()->unique()->toQuery();
     }
 
     /**

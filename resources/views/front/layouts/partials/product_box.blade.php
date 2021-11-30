@@ -31,12 +31,12 @@
             @if(auth()->guard('admin')->check())
                 <div class="text-gray-20 mb-2 font-size-12">{{__('general.vendor')}}: {{$product->vendor->name}}</div>
             @endif
-            <div class="flex-center-between mb-1">
-                <div class="prodcut-price">
-                    @if($product->type == 'product' && (!is_company()) && $product->price)
-                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->formatted_price}}</div>
-                    @endif
-                </div>
+            <div class="product-price">
+                @if($product->type == 'product' && (!is_company()) && $product->price)
+                <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->formatted_price}}</div>
+                @endif
+            </div>
+            <div>
                 {!! cartOrChat($product) !!}
             </div>
         </div>

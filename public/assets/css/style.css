@@ -947,12 +947,12 @@
     overflow-y: scroll;
 }
 .choose_city {
-    background: transparent;
-    border: 0;
-    color: #003f91;
+    border-radius: 6.1875rem !important;
+    box-shadow: 0 0 0 !important;
+    display: inline-block;
+    background-color: #e6e6e6;
+    color: #fff;
 }
-
-
 .product-item__title a{
     min-height: 4.50rem;
 }

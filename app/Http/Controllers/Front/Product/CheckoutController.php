@@ -107,7 +107,7 @@ class CheckoutController extends Controller
         $coupon = Cart::instance('cart')->search(function($cartItem, $rowItem) {
             return $cartItem->id == 'discount';
         });
-        $total = round(Cart::instance('cart')->total());
+        $total = round(parseNumber(Cart::instance('cart')->total()));
 
         //Append default values to the data.
         $data['payment_status'] = 'pending';

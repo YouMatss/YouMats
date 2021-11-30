@@ -24,7 +24,7 @@
                 <!-- Card -->
                 <div class="card border-0">
                     <div id="shopCartHeadingOne" class="alert alert-primary mb-0 text-white" role="alert">
-                        {{ __('Returning customer?') }} <a href="#" class="alert-link collapsed text-white" data-toggle="collapse" data-target="#shopCartOne" aria-expanded="false" aria-controls="shopCartOne">Click here to login</a>
+                        {{ __('checkout.returning_customer') }} <a href="#" class="alert-link collapsed text-white" data-toggle="collapse" data-target="#shopCartOne" aria-expanded="false" aria-controls="shopCartOne">{{__('checkout.login')}}</a>
                     </div>
                     <div id="shopCartOne" class="border border-top-0 collapse {{ ($errors->email || $errors->password) ? 'show' : '' }}" aria-labelledby="shopCartHeadingOne" data-parent="#shopCartAccordion" style="">
                         <div class="container">
@@ -109,7 +109,7 @@
             <!-- Card -->
             <div class="card border-0">
                 <div id="shopCartHeadingTwo" class="alert alert-primary mb-0 text-white" role="alert">
-                    {{__('general.have_coupon')}} <a href="#" class="alert-link text-white" data-toggle="collapse" data-target="#shopCartTwo" aria-expanded="false" aria-controls="shopCartTwo">Click here to enter your code</a>
+                    {{__('checkout.have_coupon')}} <a href="#" class="alert-link text-white" data-toggle="collapse" data-target="#shopCartTwo" aria-expanded="false" aria-controls="shopCartTwo">{{__('checkout.enter_code')}}</a>
                 </div>
                 <div id="shopCartTwo" class="collapse border border-top-0" aria-labelledby="shopCartHeadingTwo" data-parent="#shopCartAccordion1" style="">
                     <div class="container">
@@ -122,7 +122,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" @if($coupon) disabled @endif name="code" value="@if($coupon) {{ $coupon->name }} @else {{ old('code') }} @endif" placeholder="Coupon code" id="couponCode" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
                                         <div class="input-group-append">
-                                            <input type="submit" class="btn btn-block btn-dark px-4" @if($coupon) disabled @endif value="Apply coupon" />
+                                            <input type="submit" class="btn btn-block btn-dark px-4" @if($coupon) disabled @endif value="{{__('checkout.coupon_button')}}" />
                                         </div>
                                     </div>
                                 </form>
@@ -146,7 +146,7 @@
                             <div class="p-4 mb-4 checkout-table">
                                 <!-- Title -->
                                 <div class="border-bottom border-color-1 mb-5">
-                                    <h3 class="section-title mb-0 pb-2 font-size-25">Your {{ is_company() ? 'quote' : 'order' }}</h3>
+                                    <h3 class="section-title mb-0 pb-2 font-size-25">{{ is_company() ? __('checkout.your_quote') : __('checkout.your_order') }}</h3>
                                 </div>
                                 <!-- End Title -->
 
@@ -154,9 +154,9 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th class="product-name">{{__('general.product')}}</th>
+                                        <th class="product-name">{{__('checkout.product')}}</th>
                                         @if(!is_company())
-                                            <th class="product-total">{{ __('cart.total') }}</th>
+                                            <th class="product-total">{{ __('checkout.total') }}</th>
                                         @endif
                                     </tr>
                                     </thead>
@@ -173,20 +173,20 @@
                                     @if(!is_company())
                                         <tfoot>
                                         <tr>
-                                            <th>{{ __('cart.subtotal') }}</th>
-                                            <td>{{ __('general.sar') . ' ' . Cart::subtotal() }}</td>
+                                            <th>{{ __('checkout.subtotal') }}</th>
+                                            <td style="width: 100px">{{ __('general.sar') . ' ' . Cart::subtotal() }}</td>
                                         </tr>
                                         <tr>
-                                            <th>{{ __('cart.shipping') }}</th>
-                                            <td>{{ __('general.sar') . ' ' . Cart::tax() }}</td>
+                                            <th>{{ __('checkout.shipping') }}</th>
+                                            <td style="width: 100px">{{ __('general.sar') . ' ' . Cart::tax() }}</td>
                                         </tr>
                                         <tr>
-                                            <th>{{ __('cart.total') }}</th>
-                                            <td><strong>{{ __('general.sar') . ' ' . Cart::total() }}</strong></td>
+                                            <th>{{ __('checkout.total') }}</th>
+                                            <td style="width: 100px"><strong>{{ __('general.sar') . ' ' . Cart::total() }}</strong></td>
                                         </tr>
                                         <tr>
-                                            <th>{{ __('cart.payment_total') }}</th>
-                                            <td><strong>{{ __('general.sar') . ' ' . round(Cart::total()) }}</strong></td>
+                                            <th>{{ __('checkout.payment_total') }}</th>
+                                            <td style="width: 100px"><strong>{{ __('general.sar') . ' ' . round(parseNumber(Cart::total())) }}</strong></td>
                                         </tr>
                                         </tfoot>
                                     @endif
@@ -221,7 +221,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" @if(old('terms')) checked @endif type="checkbox" name="terms" value="true" id="defaultCheck10" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
                                         <label class="form-check-label form-label" for="defaultCheck10">
-                                            I have read and agree to the website <a href="#" class="text-blue">terms and conditions </a>
+                                            <a href="#" class="text-blue">{{__('checkout.terms_conditions')}}</a>
                                             <span class="text-danger">*</span>
                                         </label>
                                         @error('terms')
@@ -233,9 +233,9 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary-dark-w btn-block btn-pill font-size-20 mb-3 py-3">
                                     @if(is_company())
-                                        Get Quote
+                                        {{__('checkout.get_quote')}}
                                     @else
-                                        Place order
+                                        {{__('checkout.place_order')}}
                                     @endif
                                 </button>
                             </div>
@@ -248,11 +248,11 @@
                     <div class="pb-7 mb-7">
                         <!-- Title -->
                         <div class="border-bottom border-color-1 mb-5">
-                            <h3 class="section-title mb-0 pb-2 font-size-25">Billing details</h3>
+                            <h3 class="section-title mb-0 pb-2 font-size-25">{{__('checkout.billing_details')}}</h3>
                         </div>
                         <!-- End Title -->
                         <!-- Billing Form -->
-                        <div class="js-form-message form-group mb-5">
+                        <div class="js-form-message form-group mb-5 rtl">
                             @if(!auth()->guard('web')->check() && !session()->has('userType'))
                                 <div class="row">
                                     <div class="col-md-6">
@@ -275,12 +275,12 @@
                                 @enderror
                             @endif
                         </div>
-                        <div class="row">
+                        <div class="row rtl">
                             <div class="col-md-6">
                                 <!-- Input -->
                                 <div class="js-form-message mb-6">
                                     <label class="form-label">
-                                        Name
+                                        {{__('checkout.name')}}
                                         <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->name ?? old('name') }}" name="name" required="" data-msg="Please enter your frist name." data-error-class="u-has-error" data-success-class="u-has-success" autocomplete="off">
@@ -296,9 +296,9 @@
                                     <!-- Input -->
                                     <div class="js-form-message mb-6">
                                         <label class="form-label">
-                                            Phone
+                                            {{__('checkout.phone')}}
                                         </label>
-                                        <input type="tel" class="form-control phoneNumber" value="{{ Auth::guard('web')->user()->phone ?? old('phone_number') }}" name="phone_number" aria-label="Phone Number" data-msg="Please enter a phone number." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <input type="tel" class="form-control phoneNumber" value="{{ Auth::guard('web')->user()->phone ?? old('phone_number') }}" name="phone_number" aria-label="Phone Number" data-msg="{{__('checkout.phone_msg')}}" data-error-class="u-has-error" data-success-class="u-has-success">
                                         @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -311,7 +311,7 @@
                                 <!-- Input -->
                                 <div class="js-form-message mb-6">
                                     <label class="form-label">
-                                        {{ is_company() ? 'Delivery Address' : 'Address' }}
+                                        {{ is_company() ? __('checkout.delivery_address') : __('checkout.address') }}
                                         <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->address ?? old('address') }}" name="address" aria-label="470 Lucy Forks" required="" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
@@ -328,7 +328,7 @@
                                     <!-- Input -->
                                     <div class="js-form-message mb-6">
                                         <label class="form-label">
-                                            Building No.
+                                            {{__('checkout.building_number')}}
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="number" class="form-control" value="{{ old('building_number') }}" name="building_number" aria-label="470 Lucy Forks" required="" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
@@ -344,7 +344,7 @@
                                     <!-- Input -->
                                     <div class="js-form-message mb-6">
                                         <label class="form-label">
-                                            Street
+                                            {{__('checkout.street')}}
                                         </label>
                                         <input type="text" class="form-control" value="{{ old('street') }}" name="street" aria-label="470 Lucy Forks" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
                                         @error('street')
@@ -359,7 +359,7 @@
                                     <!-- Input -->
                                     <div class="js-form-message mb-6">
                                         <label class="form-label">
-                                            District
+                                            {{__('checkout.district')}}
                                         </label>
                                         <input type="text" class="form-control" value="{{ old('district') }}" name="district" aria-label="470 Lucy Forks" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
                                         @error('district')
@@ -374,12 +374,12 @@
                                     <!-- Input -->
                                     <div class="js-form-message mb-6">
                                         <label class="form-label">
-                                            City
+                                            {{__('checkout.city')}}
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="dropdown bootstrap-select form-control js-select dropdown-select">
-                                            <select class="form-control js-select selectpicker dropdown-select" name="city" required="" data-msg="Please select city." data-error-class="u-has-error" data-success-class="u-has-success" data-live-search="true" data-style="form-control border-color-1 font-weight-normal" tabindex="-98">
-                                                <option value="">Select city</option>
+                                            <select class="form-control js-select selectpicker dropdown-select" name="city" required data-msg="{{__('checkout.select_city')}}" data-error-class="u-has-error" data-success-class="u-has-success" data-live-search="true" data-style="form-control border-color-1 font-weight-normal" tabindex="-98">
+                                                <option value="">{{__('checkout.select_city')}}</option>
                                                 @foreach($cities as $city)
                                                     <option value="{{ $city->id }}" @if($city->id == old('city')) selected @endif>{{ $city->name }}</option>
                                                 @endforeach
@@ -398,7 +398,7 @@
                                 <!-- Input -->
                                 <div class="js-form-message mb-6">
                                     <label class="form-label">
-                                        Email address
+                                        {{__('checkout.email')}}
                                         <span class="text-danger">*</span>
                                     </label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ Auth::guard('web')->user()->email ?? old('email') }}" name="email" aria-label="jackwayley@gmail.com" required="" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
@@ -415,7 +415,7 @@
                                     <!-- Input -->
                                     <div class="js-form-message mb-6">
                                         <label class="form-label">
-                                            Delivery Time
+                                            {{__('checkout.delivery_time')}}
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="row">
@@ -428,9 +428,9 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <select class="form-control" name="delivery_time_unit">
-                                                    <option value="day" @if(old('delivery_time_unit') == 'day') selected @endif>Day</option>
-                                                    <option value="week" @if(old('delivery_time_unit') == 'week') selected @endif>Week</option>
-                                                    <option value="month" @if(old('delivery_time_unit') == 'month') selected @endif>Month</option>
+                                                    <option value="day" @if(old('delivery_time_unit') == 'day') selected @endif>{{__('checkout.day')}}</option>
+                                                    <option value="week" @if(old('delivery_time_unit') == 'week') selected @endif>{{__('checkout.week')}}</option>
+                                                    <option value="month" @if(old('delivery_time_unit') == 'month') selected @endif>{{__('checkout.month')}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -473,7 +473,7 @@
                                 <div class="col-md-6">
                                     <div class="js-form-message form-group py-5">
                                         <label class="form-label" for="signinSrPasswordExample1">
-                                            Create account password
+                                            {{ __('checkout.password')}}
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="password" class="form-control" name="password" id="signinSrPasswordExample1" placeholder="********" aria-label="********" required="" data-msg="Enter password." data-error-class="u-has-error" data-success-class="u-has-success">
@@ -487,7 +487,7 @@
                                 <div class="col-md-6">
                                     <div class="js-form-message form-group py-5">
                                         <label class="form-label" for="signinSrPasswordExample1">
-                                            Confirm account password
+                                            {{ __('checkout.confirm_password')}}
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="password" class="form-control" name="password_confirmation" id="signinSrPasswordExample2" placeholder="********" aria-label="********" required="" data-msg="Enter password." data-error-class="u-has-error" data-success-class="u-has-success">
@@ -503,11 +503,11 @@
                         <!-- Input -->
                         <div class="js-form-message mb-6">
                             <label class="form-label">
-                                {{ is_company() ? 'quote' : 'order' }} notes (optional)
+                                {{ is_company() ? __('checkout.quote_notes') : __('checkout.order_notes') }}
                             </label>
 
                             <div class="input-group">
-                                <textarea class="form-control p-5" rows="4" name="notes" placeholder="Notes about your {{ is_company() ? 'quote' : 'order' }}, e.g. special notes for delivery.">{{old('notes')}}</textarea>
+                                <textarea class="form-control p-5" rows="4" name="notes" placeholder="{{__('checkout.notes_placeholder')}}">{{old('notes')}}</textarea>
                             </div>
                         </div>
                         <!-- End Input -->

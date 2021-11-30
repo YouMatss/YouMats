@@ -33783,20 +33783,20 @@ blockquote:not(.blockquote) p {
   Buttons
 ------------------------------------*/
 /* Add cart btn */
-.btn-add-cart {
-  width: 2.188rem;
-  height: 2.188rem;
-  background-color: #e6e6e6;
-  color: #fff;
-  display: -ms-flexbox;
-  display: flex !important;
-  -ms-flex-align: center;
+.cart-chat-category {
+    margin: 10px auto !important;
+    padding: 10px 0;
+    width: 100%;
+    background-color: #e6e6e6;
+    color: #fff;
+    display: -ms-flexbox;
+    display: flex !important;
+    -ms-flex-align: center;
       align-items: center;
-  -ms-flex-pack: center;
+    -ms-flex-pack: center;
       justify-content: center;
-  border-radius: 6.1875rem !important;
-  margin-top: 0 !important;
-  box-shadow: 0 0 0 !important;
+    border-radius: 6.1875rem !important;
+    box-shadow: 0 0 0 !important;
 }
 .btn-remove-wishlist {
     width: 2.188rem;
@@ -33812,16 +33812,16 @@ blockquote:not(.blockquote) p {
     border-radius: 6.1875rem;
 }
 
-.btn-add-cart i {
+.cart-chat-category i {
   font-size: 1.25rem;
 }
 
-.btn-add-cart:hover {
+.cart-chat-category:hover {
   background-color: #003f91;
   color: #fff;
 }
 
-.btn-add-cart__wide {
+.cart-chat-category__wide {
   width: auto;
   background-color: #003f91;
   padding: 0 1rem;
@@ -33830,7 +33830,7 @@ blockquote:not(.blockquote) p {
   height: 2.313rem;
 }
 
-.btn-add-cart__wide:hover {
+.cart-chat-category__wide:hover {
   background-color: #333e48;
   box-shadow: 0 4px 11px rgba(51, 62, 72, 0.25) !important;
 }
@@ -35089,12 +35089,13 @@ blockquote:not(.blockquote) p {
   width: 100%;
 }
 
-.prodcut-price {
-  font-size: 1.00012rem;
+.product-price {
+    font-size: 1.00012rem;
+    text-align: center;
 }
 
 @media (min-width: 992px) {
-  .prodcut-price {
+  .product-price {
     font-size: 1.25038rem;
   }
 }

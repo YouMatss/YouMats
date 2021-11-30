@@ -12,6 +12,7 @@
     <meta name="twitter:title" content="{{$category->meta_title}}">
     <meta name="twitter:description" content="{{$category->meta_desc}}">
     <meta name="twitter:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}">
+    <link rel="canonical" href="{{url()->current()}}" />
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">

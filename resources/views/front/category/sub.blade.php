@@ -12,6 +12,7 @@
     <meta name="twitter:title" content="{{$category->meta_title}}">
     <meta name="twitter:description" content="{{$category->meta_desc}}">
     <meta name="twitter:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}">
+    <link rel="canonical" href="{{url()->current()}}" />
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
@@ -139,7 +140,8 @@
                                    data-extra-classes="u-range-slider u-range-slider-indicator u-range-slider-grid"
                                    data-type="double" data-grid="false" data-hide-from-to="true" data-prefix="{{ getCurrency('symbol') }}"
                                    data-min="{{$minPrice}}" data-max="{{$maxPrice}}" data-from="{{$minPrice}}" data-to="{{$maxPrice}}"
-                                   data-result-min="#rangeSliderExample3MinResultCategory" data-result-max="#rangeSliderExample3MaxResultCategory">
+                                   data-result-min="#rangeSliderExample3MinResultCategory"
+                                   data-result-max="#rangeSliderExample3MaxResultCategory">
                             <!-- End Range Slider -->
                             <div class="mt-1 text-gray-111 d-flex mb-4">
                                 <span class="mr-0dot5">{{__('general.price')}}: </span>
