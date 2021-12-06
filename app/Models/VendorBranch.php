@@ -18,28 +18,9 @@ class VendorBranch extends Model
      */
     protected $translatable = ['name'];
 
-
-    /*
-   Provide the Location value to the Nova field
-   */
-    public function getLocationAttribute()
-    {
-        return (object) [
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude
-        ];
-    }
-
-    /*
-    Transform the returned value from the Nova field
-    */
-    public function setLocationAttribute($value)
-    {
-        $latitude = round(object_get($value, 'latitude'), 7);
-        $longitude = round(object_get($value, 'longitude'), 7);
-        $this->attributes['latitude'] = $latitude;
-        $this->attributes['longitude'] = $longitude;
-    }
+    protected $casts = [
+        'location'           => 'array'
+    ];
 
     /**
      * @return BelongsTo

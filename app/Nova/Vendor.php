@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Acm\NovaGmap\NovaGmap;
 use App\Helpers\Nova\Fields;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
@@ -14,6 +13,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Mauricewijnia\NovaMapsAddress\MapsAddress;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 
@@ -92,7 +92,12 @@ class Vendor extends Resource
             ])->displayUsingLabels()->hideFromIndex()
                 ->rules([...NULLABLE_STRING_VALIDATION, 'In:factory,distributor,wholesales,retail']),
 
-            NovaGmap::make('Location')
+            MapsAddress::make(__('Location'), 'location')
+                ->zoom(11)
+                ->center(['lat' => 24.7136, 'lng' => 46.6753])
+                ->types(['establishment'])
+                ->scriptUrlParams(['language' => 'ar'])
+                ->mapOptions(['fullscreenControl' => true, 'mapTypeControl' => true])
                 ->hideFromIndex(),
 
             Text::make('Facebook', 'facebook_url')
