@@ -1,129 +1,88 @@
 @extends('front.layouts.master')
 @section('metaTags')
     <title>{{env('APP_NAME')}} | {{__('general.payment')}}</title>
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
+
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
 
-    <style type="text/css">
-        button.loading span {
-            color: transparent;
-        }
-    </style>
+    <link rel="stylesheet" href="{{front_url()}}/assets/css/payment.css">
 @endsection
 @section('content')
-<div id="app" class="flex-col w-screen container mx-auto flex items-center justify-center my-6">
-    <div class="max-w-lg w-full flex items-center mb-4">
-        <ul class="w-full flex-1 max-w-lg border border-gray-200 rounded-md">
-            @foreach($cartItems as $item)
-                @if($item->model->type == 'product')
-                <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
-                    <div class="w-0 flex-1 flex items-center">
-                        <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
-                        </svg>
-                        <span class="ml-2 flex-1 w-0 truncate">
-                            {{$item->name}} <b>({{$item->qty . 'x' . $item->price}})</b>
-                        </span>
+<div class="payment-box rtl">
+<div id="app" class="card mt-50 mb-50">
+    <div class="card-title"> {{__('checkout.payment_title')}} </div>
+    <form> <span id="card-header">{{__('checkout.product_list')}}</span>
+        @foreach($cartItems as $item)
+            @if($item->model->type == 'product')
+                <div class="row row-1">
+{{--                    <div class="col-2"><img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
+                    <div class="col-9">
+                        {{$item->name}} <b>({{$item->qty . 'x' . $item->price}})</b>
                     </div>
-                    <div class="ml-4 flex-shrink-0">
-                        <span class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
-                            {{__('general.sar')}} {{$item->qty*$item->price}}
-                        </span>
+                    <div class="col-3 d-flex justify-content-center">
+                        {{__('general.sar')}} {{$item->qty*$item->price}}
                     </div>
-                </li>
-                @endif
-            @endforeach
-            <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
-                <div class="w-0 flex-1 flex items-center">
-                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="ml-2 flex-1 w-0 truncate"><b>{{ __('cart.shipping') }}</b></span>
                 </div>
-                <div class="ml-4 flex-shrink-0">
-                <span class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
-                    {{__('general.sar')}} {{\Cart::tax()}}
-                </span>
-                </div>
-            </li>
-            <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
-                <div class="w-0 flex-1 flex items-center">
-                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="ml-2 flex-1 w-0 truncate"><b>{{ __('cart.total') }}</b></span>
-                </div>
-                <div class="ml-4 flex-shrink-0">
-                <span class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
-                    {{__('general.sar')}} @{{amount}}
-                </span>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="w-full max-w-lg">
-        <div class="flex flex-wrap -mx-3">
-            <div class="w-full px-3 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Hold Name
-                </label>
-                <input v-model="hold_name" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" :class="{'border-red-500': errors['hold_name']}" id="grid-first-name" type="text" placeholder="Jane Doe" />
-                <p class="text-red-500 text-xs italic" v-if="errors['hold_name']">
-                    @{{errors['hold_name'][0]}}
-                </p>
+            @endif
+        @endforeach
+        <div class="row row-1">
+{{--            <div class="col-2"><img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
+            <div class="col-9">
+                {{ __('cart.shipping') }}
+            </div>
+            <div class="col-3 d-flex justify-content-center">
+                {{__('general.sar')}} {{\Cart::tax()}}
             </div>
         </div>
-        <div class="flex flex-wrap -mx-3">
-            <div class="w-full px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                    Card Number
-                </label>
-                <input v-model="card_number" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="****************" :class="{'border-red-500': errors['card_number']}" />
-                <p class="text-red-500 text-xs italic" v-if="errors['card_number']">
-                    @{{errors['card_number'][0]}}
-                </p>
+        <div class="row row-1">
+{{--            <div class="col-2"><img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
+            <div class="col-9">
+                {{ __('cart.total') }}
+            </div>
+            <div class="col-3 d-flex justify-content-center">
+                {{__('general.sar') . ' ' .round(parseNumber(Cart::total()))}}
             </div>
         </div>
-        <div class="flex flex-wrap -mx-3 mb-2">
-            <div class="w-full md:w-2/3 px-3 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
-                    Expiration Date
-                </label>
-                <input v-mask="'##/##'" v-model="expiration_date" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="07/21" :class="{'border-red-500': errors['expiration_date']}" />
+        <span id="card-header">{{__('checkout.payment_card')}}</span>
+        <div class="row-1">
+            <div class="row row-2"> <span id="card-inner">{{__('checkout.holder_name')}}</span> </div>
+            <div class="row row-2"> <input v-model="hold_name" :class="{'border-red-500': errors['hold_name']}" id="grid-first-name" type="text" placeholder="Mohamed"> </div>
+            <p class="text-red-500 text-xs italic" v-if="errors['hold_name']">
+                @{{errors['hold_name'][0]}}
+            </p>
+        </div>
+        <div class="row three">
+            <div class="col-7">
+                <div class="row-1">
+                    <div class="row row-2"> <span id="card-inner">{{__('checkout.card_number')}}</span> </div>
+                    <div class="row row-2">
+                    <input type="text" v-mask="'####-####-####-####'" v-model="card_number" :class="{'border-red-500': errors['card_number']}" id="grid-password" placeholder="1234-1234-1234-1234"> </div>
+                    <p class="text-red-500 text-xs italic" v-if="errors['card_number']">
+                        @{{errors['card_number'][0]}}
+                    </p>
+                </div>
+            </div>
+            <div class="col-2">
+                <input type="text" v-mask="'##/##'" v-model="expiration_date" :class="{'border-red-500': errors['expiration_date']}" id="grid-city" placeholder="Exp.">
                 <p class="text-red-500 text-xs italic" v-if="errors['expiration_year'] || errors['expiration_month']">
-                    @{{errors['expiration_year'][0] ||
-                    errors['expiration_month'][0] }}
+                    @{{errors['expiration_year'][0] || errors['expiration_month'][0] }}
                 </p>
             </div>
-
-            <div class="w-full md:w-1/3 px-3 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-                    CVC
-                </label>
-                <input v-model="cvc" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="123" :class="{'border-red-500': errors['cvc']}" />
+            <div class="col-2">
+                <input type="text" v-mask="'###'" v-model="cvc" id="grid-zip" :class="{'border-red-500': errors['cvc']}" placeholder="CVV">
                 <p class="text-red-500 text-xs italic" v-if="errors['cvc']">
                     @{{errors['cvc'][0]}}
                 </p>
             </div>
         </div>
-
-        <div class="mt-4">
-            <button @click="submitForm" :disabled="loading" :class="{'loading': loading}" class="group relative w-full items-center flex justify-center py-3 px-4 border border-transparent leading-tight font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                <svg v-if="loading" version="1.1" class="position absolute w-12 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
-                    <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
-                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite" />
-                    </path>
-                </svg>
-                <span>
-                    SUBMIT
-                </span>
-            </button>
-        </div>
-    </div>
+        <button @click="submitForm" :disabled="loading" :class="{'loading': loading}" class="btn d-flex mx-auto">
+            <b v-if="loading">{{__('checkout.loading')}}</b>
+            <b>{{__('checkout.payment_submit_button')}}</b>
+        </button>
+    </form>
+</div>
 </div>
 <script>
     Vue.directive("mask", VueMask.VueMaskDirective);
@@ -135,11 +94,14 @@
             email: "info@youmats.com",
             cvc: "",
             card_number: "",
-            amount: {{round($cart->total())}},
+            amount: {{round(parseNumber($cart->total()))}},
             errors: {},
             loading: false,
         },
         computed: {
+            card_number_filter() {
+                return _.replace(this.card_number, /-/g, "");
+            },
             expiration_date_after() {
                 return _.replace(this.expiration_date, "/", "");
             },
@@ -155,7 +117,7 @@
                 this.loading = true;
                 let endpoint = "{{route('payment.submit')}}"
                 let {
-                    card_number,
+                    card_number_filter,
                     expiration_year,
                     expiration_month,
                     cvc,
@@ -165,7 +127,7 @@
                 } = this;
                 axios
                     .post(endpoint, {
-                        card_number,
+                        card_number_filter,
                         expiration_year,
                         expiration_month,
                         cvc,
@@ -184,7 +146,7 @@
                         );
                         const params = {
                             card_holder_name: this.hold_name,
-                            card_number,
+                            card_number: `${this.card_number_filter}`,
                             expiry_date: `${this.expiration_year}${this.expiration_month}`,
                             card_security_code: cvc,
                         };
