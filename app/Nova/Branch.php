@@ -2,13 +2,11 @@
 
 namespace App\Nova;
 
-use Acm\NovaGmap\NovaGmap;
-use GeneaLabs\NovaMapMarkerField\MapMarker;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
+use Mauricewijnia\NovaMapsAddress\MapsAddress;
 
 class Branch extends Resource
 {
@@ -74,7 +72,12 @@ class Branch extends Resource
             Text::make('Address')
                 ->rules(REQUIRED_STRING_VALIDATION),
 
-            NovaGmap::make('Location')
+            MapsAddress::make(__('Location'), 'location')
+                ->zoom(11)
+                ->center(['lat' => 24.7136, 'lng' => 46.6753])
+                ->types(['establishment'])
+                ->scriptUrlParams(['language' => 'ar'])
+                ->mapOptions(['fullscreenControl' => true, 'mapTypeControl' => true])
                 ->hideFromIndex(),
         ];
     }

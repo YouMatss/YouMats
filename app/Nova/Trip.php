@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Textarea;
+use Mauricewijnia\NovaMapsAddress\MapsAddress;
 use Nikaia\Rating\Rating;
 
 class Trip extends Resource
@@ -53,10 +54,20 @@ class Trip extends Resource
             BelongsTo::make('User')->withoutTrashed(),
             BelongsTo::make('Driver')->withoutTrashed()->nullable(),
 
-            NovaGmap::make('Pickup Location')
+            MapsAddress::make('Pickup Location')
+                ->zoom(11)
+                ->center(['lat' => 24.7136, 'lng' => 46.6753])
+                ->types(['establishment'])
+                ->scriptUrlParams(['language' => 'ar'])
+                ->mapOptions(['fullscreenControl' => true, 'mapTypeControl' => true])
                 ->hideFromIndex(),
 
-            NovaGmap::make('Destination Location')
+            MapsAddress::make('Destination Location')
+                ->zoom(11)
+                ->center(['lat' => 24.7136, 'lng' => 46.6753])
+                ->types(['establishment'])
+                ->scriptUrlParams(['language' => 'ar'])
+                ->mapOptions(['fullscreenControl' => true, 'mapTypeControl' => true])
                 ->hideFromIndex(),
 
             Number::make('Distance')
