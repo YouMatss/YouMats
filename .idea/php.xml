@@ -221,6 +221,9 @@
       <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-translatable" />
       <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/whitecube/nova-google-maps" />
+      <path value="$PROJECT_DIR$/vendor/mauricewijnia/nova-maps-address" />
+      <path value="$PROJECT_DIR$/vendor/adamcmoore/nova-gmap" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

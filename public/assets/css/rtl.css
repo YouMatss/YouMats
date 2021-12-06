@@ -426,3 +426,20 @@ h3.font-size-24 {
 #Description ul{
     direction: rtl;
 }
+
+.payment-box {
+    text-align: right;
+}
+
+.checkout-table {
+    text-align: right !important;
+}
+
+.checkout-table .product-name {
+    text-align: right !important;
+}
+
+.checkout-table .checkout-left{
+    text-align: left !important;
+}
+
