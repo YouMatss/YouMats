@@ -2,11 +2,11 @@
 
 namespace App\Nova;
 
+use Acm\NovaGmap\NovaGmap;
 use App\Helpers\Nova\Fields;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Drobee\NovaSluggable\SluggableText;
-use GeneaLabs\NovaMapMarkerField\MapMarker;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
@@ -92,12 +92,7 @@ class Vendor extends Resource
             ])->displayUsingLabels()->hideFromIndex()
                 ->rules([...NULLABLE_STRING_VALIDATION, 'In:factory,distributor,wholesales,retail']),
 
-            MapMarker::make('Location')
-                ->defaultZoom(8)
-                ->defaultLatitude(24.7136)
-                ->defaultLongitude(46.6753)
-                ->searchProvider('google')
-                ->searchProviderKey(env('NOVA_GOOGLE_MAPS_API_KEY'))
+            NovaGmap::make('Location')
                 ->hideFromIndex(),
 
             Text::make('Facebook', 'facebook_url')

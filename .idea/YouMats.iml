@@ -224,6 +224,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/optimistdigital/nova-translatable" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/exporter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/whitecube/nova-google-maps" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mauricewijnia/nova-maps-address" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/adamcmoore/nova-gmap" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

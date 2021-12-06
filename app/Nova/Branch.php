@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acm\NovaGmap\NovaGmap;
 use GeneaLabs\NovaMapMarkerField\MapMarker;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -73,12 +74,7 @@ class Branch extends Resource
             Text::make('Address')
                 ->rules(REQUIRED_STRING_VALIDATION),
 
-            MapMarker::make('Location')
-                ->defaultZoom(8)
-                ->defaultLatitude(24.7136)
-                ->defaultLongitude(46.6753)
-                ->searchProvider('google')
-                ->searchProviderKey(env('NOVA_GOOGLE_MAPS_API_KEY'))
+            NovaGmap::make('Location')
                 ->hideFromIndex(),
         ];
     }

@@ -84,10 +84,7 @@ class Category extends Model implements Sortable, HasMedia
             ->orderBy('updated_at', 'desc');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function vendors(): \Illuminate\Database\Eloquent\Builder
+    public function vendors()
     {
         return $this->belongsToMany(Vendor::class, Product::class)
             ->join('categories', 'categories.id', 'products.category_id')

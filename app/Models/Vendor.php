@@ -64,7 +64,6 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         $this->attributes['longitude'] = $longitude;
     }
 
-
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);
