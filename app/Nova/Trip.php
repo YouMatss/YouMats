@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Acm\NovaGmap\NovaGmap;
 use GeneaLabs\NovaMapMarkerField\MapMarker;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -52,24 +53,10 @@ class Trip extends Resource
             BelongsTo::make('User')->withoutTrashed(),
             BelongsTo::make('Driver')->withoutTrashed()->nullable(),
 
-            MapMarker::make('Pickup Location')
-                ->defaultZoom(8)
-                ->defaultLatitude(24.7136)
-                ->latitude('pickup_latitude')
-                ->defaultLongitude(46.6753)
-                ->longitude('pickup_longitude')
-                ->searchProvider('google')
-                ->searchProviderKey(env('NOVA_GOOGLE_MAPS_API_KEY'))
+            NovaGmap::make('Pickup Location')
                 ->hideFromIndex(),
 
-            MapMarker::make('Destination Location')
-                ->defaultZoom(8)
-                ->defaultLatitude(24.7136)
-                ->latitude('destination_latitude')
-                ->defaultLongitude(46.6753)
-                ->longitude('destination_longitude')
-                ->searchProvider('google')
-                ->searchProviderKey(env('NOVA_GOOGLE_MAPS_API_KEY'))
+            NovaGmap::make('Destination Location')
                 ->hideFromIndex(),
 
             Number::make('Distance')

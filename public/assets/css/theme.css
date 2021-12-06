@@ -33783,10 +33783,18 @@ blockquote:not(.blockquote) p {
   Buttons
 ------------------------------------*/
 /* Add cart btn */
+
+.cart-quantity{
+    width: 85%;
+    margin: 10px auto;
+    height: 35px;
+    padding: 12px 15px;
+}
+
 .cart-chat-category {
     margin: 10px auto !important;
-    padding: 10px 0;
-    width: 100%;
+    padding: 5px 0;
+    width: 85%;
     background-color: #e6e6e6;
     color: #fff;
     display: -ms-flexbox;

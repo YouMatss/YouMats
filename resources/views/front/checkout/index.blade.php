@@ -16,7 +16,7 @@
 @section('content')
     <div class="container">
         <div class="mb-5">
-            <h1 class="text-center">{{ __(is_company() ? 'checkout.get_quote_price' : 'checkout.checkout') }}</h1>
+            <h1 class="text-center">{{ is_company() ? __('checkout.get_quote_price') : __('checkout.checkout_title') }}</h1>
         </div>
         @if(!Auth::guard('web')->check())
             <!-- Accordion -->
@@ -151,12 +151,12 @@
                                 <!-- End Title -->
 
                                 <!-- Product Content -->
-                                <table class="table">
+                                <table class="checkout-table table rtl">
                                     <thead>
                                     <tr>
                                         <th class="product-name">{{__('checkout.product')}}</th>
                                         @if(!is_company())
-                                            <th class="product-total">{{ __('checkout.total') }}</th>
+                                            <th class="product-total checkout-left">{{ __('checkout.total') }}</th>
                                         @endif
                                     </tr>
                                     </thead>
@@ -165,7 +165,7 @@
                                             <tr class="cart_item">
                                                 <td>{{ $item->name }} <b>({{ $item->qty }} x {{__('general.sar') . ' ' . $item->price}})</b> </td>
                                                 @if(!is_company())
-                                                    <td>{{ __('general.sar') . ' ' . $item->qty * $item->price }}</td>
+                                                    <td class="checkout-left">{{ __('general.sar') . ' ' . $item->qty * $item->price }}</td>
                                                 @endif
                                             </tr>
                                         @endforeach
@@ -174,19 +174,19 @@
                                         <tfoot>
                                         <tr>
                                             <th>{{ __('checkout.subtotal') }}</th>
-                                            <td style="width: 100px">{{ __('general.sar') . ' ' . Cart::subtotal() }}</td>
+                                            <td class="checkout-left" style="width: 100px">{{ __('general.sar') . ' ' . Cart::subtotal() }}</td>
                                         </tr>
                                         <tr>
                                             <th>{{ __('checkout.shipping') }}</th>
-                                            <td style="width: 100px">{{ __('general.sar') . ' ' . Cart::tax() }}</td>
+                                            <td class="checkout-left" style="width: 100px">{{ __('general.sar') . ' ' . Cart::tax() }}</td>
                                         </tr>
                                         <tr>
                                             <th>{{ __('checkout.total') }}</th>
-                                            <td style="width: 100px"><strong>{{ __('general.sar') . ' ' . Cart::total() }}</strong></td>
+                                            <td class="checkout-left" style="width: 100px"><strong>{{ __('general.sar') . ' ' . Cart::total() }}</strong></td>
                                         </tr>
                                         <tr>
                                             <th>{{ __('checkout.payment_total') }}</th>
-                                            <td style="width: 100px"><strong>{{ __('general.sar') . ' ' . round(parseNumber(Cart::total())) }}</strong></td>
+                                            <td class="checkout-left" style="width: 100px"><strong>{{ __('general.sar') . ' ' . round(parseNumber(Cart::total())) }}</strong></td>
                                         </tr>
                                         </tfoot>
                                     @endif

@@ -57,7 +57,7 @@ if (!function_exists('getCityNameById')) {
 
 if (!function_exists('cartOrChat')) {
     function cartOrChat($product) {
-        $chat = '<div><a href="'. route('chat.user.conversations', [$product->vendor_id]) .'"
+        $chat = '<div><a target="_blank" href="https://wa.me/'. $product->phone() .'"
                     class="cart-chat-category btn-primary transition-3d-hover">
                         <i class="fa fa-comments"></i> &nbsp;' . __("general.chat_button") . '
                     </a>
@@ -76,7 +76,7 @@ if (!function_exists('cartOrChat')) {
             if (is_company() || ($product->type == 'product' && $product->price > 0 && $product->delivery)) {
                 return $cart;
             } else {
-                if($product->price || $product->delivery)
+                if(($product->price || $product->delivery) && $product->phone())
                     return $chat;
             }
         }

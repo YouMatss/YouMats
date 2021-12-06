@@ -42,6 +42,28 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         'contacts'          => 'array'
     ];
 
+    /*
+	Provide the Location value to the Nova field
+	*/
+    public function getLocationAttribute()
+    {
+        return (object) [
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude
+        ];
+    }
+
+    /*
+    Transform the returned value from the Nova field
+    */
+    public function setLocationAttribute($value)
+    {
+        $latitude = round(object_get($value, 'latitude'), 7);
+        $longitude = round(object_get($value, 'longitude'), 7);
+        $this->attributes['latitude'] = $latitude;
+        $this->attributes['longitude'] = $longitude;
+    }
+
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')
             ->width(200)->height(200);

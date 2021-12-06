@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Route;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -22,8 +23,21 @@ class CategoryController extends Controller
         $slug = end($parsedSlug);
 
         $data['category'] = Category::whereSlug($slug)->firstOrFail();
+        $children_categories_ids = Category::descendantsAndSelf($data['category']->id)->pluck('id');
 
-        $data['products'] = $this->getProductsByCategoryId($data['category']->id, $this->pagination_limit);
+        $products = Product::whereIn('category_id', $children_categories_ids)
+            ->where('active', '1')
+            ->get()
+            ->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
+                return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
+                    return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
+                        return $collection->sortByDesc('updated_at');
+                    })->ungroup();
+                })->ungroup();
+            })->ungroup()
+            ->unique();
+
+        $data['products'] = CollectionPaginate::paginate($products, $this->pagination_limit);
 
         $data['parent'] = $data['category']->parent;
         $data['children'] = $data['category']->children;
@@ -31,8 +45,8 @@ class CategoryController extends Controller
         if(isset($data['parent'])) {
             $data['tags'] = $data['category']->tags();
             $data['category']->load('attributes', 'attributes.values');
-            $data['minPrice'] = $data['products']->min('price');
-            $data['maxPrice'] = $data['products']->max('price');
+            $data['minPrice'] = $products->min('price');
+            $data['maxPrice'] = $products->max('price');
 
             return view('front.category.sub')->with($data);
         } else {
@@ -64,24 +78,9 @@ class CategoryController extends Controller
             ->unique();
 
         $data['products'] = CollectionPaginate::paginate($products, $this->pagination_limit);
+        $data['products']->withPath(route('front.category', [generatedNestedSlug($data['category']->ancestors()->pluck('slug')->toArray(), $data['category']->slug)]));
+        $data['products']->withQueryString();
 
         return view('front.category.productsContainer')->with($data)->render();
-    }
-
-    private function getProductsByCategoryId($category_id, $limit = 20) {
-        $children_categories_ids = Category::descendantsAndSelf($category_id)->pluck('id');
-        $products = Product::whereIn('category_id', $children_categories_ids)
-            ->where('active', '1')
-            ->get()
-            ->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
-                return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
-                    return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
-                        return $collection->sortByDesc('updated_at');
-                    })->ungroup();
-                })->ungroup();
-            })->ungroup()
-            ->unique();
-
-        return CollectionPaginate::paginate($products, $limit);
     }
 }

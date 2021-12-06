@@ -158,6 +158,12 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return 0;
     }
 
+    public function phone() {
+        if(isset($this->vendor->contacts[0]['phone']))
+            return $this->vendor->contacts[0]['phone'];
+        return null;
+    }
+
     /**
      * @return BelongsTo
      */

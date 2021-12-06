@@ -426,3 +426,7 @@ h3.font-size-24 {
 #Description ul{
     direction: rtl;
 }
+
+.payment-box {
+    text-align: right;
+}

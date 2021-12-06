@@ -122,7 +122,7 @@
                                     </div>
                                 @else
                                     <div>
-                                        <span style="color:#ff0000;">{{__('product.no_delivery')}}: {{Session::get('city')->name}}</span>
+                                        <span style="color:#ff0000;margin-bottom: 10px;display: inline-block;">{{__('product.no_delivery')}}: {{Session::get('city')->name}}</span>
                                         @if(!is_null($delivery_cities))
                                         <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
                                         @endif
@@ -153,7 +153,7 @@
                                     {!! cartOrChat($product) !!}
                                 @else
                                     <a class="cart-chat-category btn-primary transition-3d-hover" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">
-                                        {{$product->category->name}}
+                                        {{__('product.category_href')}}
                                     </a>
                                 @endif
                                 <div class="flex-content-center flex-wrap">
