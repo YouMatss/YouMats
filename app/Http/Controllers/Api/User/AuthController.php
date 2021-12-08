@@ -27,6 +27,7 @@ class AuthController extends Controller
         $token = $user->createToken('authToken')->accessToken;
 
         return (new UserResource($user))->additional([
+            'player_id' => $login['player_id'],
             'token' => $token
         ]);
     }
@@ -47,7 +48,8 @@ class AuthController extends Controller
         $token = $user->createToken('authToken')->accessToken;
 
         return (new UserResource($user))->additional([
-            'token' => $token,
+            'player_id' => $data['player_id'],
+            'token' => $token
         ]);
     }
 
