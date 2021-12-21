@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Front\Vendor\Admin\BranchController;
+use App\Http\Controllers\Front\Vendor\Admin\IndexController;
+use App\Http\Controllers\Front\Vendor\Admin\OrderController;
+use App\Http\Controllers\Front\Vendor\Admin\ProductController;
+use App\Http\Controllers\Front\Vendor\Admin\SippingGroupController;
 use Illuminate\Support\Facades\Route;
 
 //Actions routes
@@ -23,30 +28,51 @@ Route::group([
         });
     });
 
-//    Route::group(['prefix' => 'chat', 'namespace' => 'Chat', 'as' => 'chat.'], function () {
-//        Route::get('user/conversations/{vendor_id}', 'MessageController@userConversations')->name('user.conversations');
-//        Route::get('vendor/conversations/{user_id}', 'MessageController@vendorConversations')->name('vendor.conversations');
-//        Route::post('send_message', 'MessageController@sendMessage')->name('send_message');
-//    });
+    Route::group(['prefix' => 'chat', 'namespace' => 'Chat', 'as' => 'chat.'], function () {
+        Route::get('user/conversations/{vendor_id}', 'MessageController@userConversations')->name('user.conversations');
+        Route::get('vendor/conversations/{user_id}', 'MessageController@vendorConversations')->name('vendor.conversations');
+        Route::post('send_message', 'MessageController@sendMessage')->name('send_message');
+    });
 
-    //Vendor Auth Routes
+    // Vendor Routes
     Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor', 'as' => 'vendor.'], function () {
-
         Auth::routes(['verify' => true]);
 
-        Route::get('edit', 'IndexController@edit')->name('edit');
-        Route::patch('update', 'IndexController@update')->name('update');
-        Route::patch('update-shipping-prices', 'IndexController@updateShippingPrices')->name('updateShippingPrices');
-        Route::delete('license/{vendor}/media/{media}', 'IndexController@deleteLicense')->name('deleteLicense');
-        Route::post('branch', 'IndexController@addBranch')->name('addBranch');
-        Route::delete('{branch}/branch', 'IndexController@deleteBranch')->name('deleteBranch');
-        Route::get('product', 'ProductController@create')->name('addProduct');
-        Route::post('product', 'ProductController@store')->name('storeProduct');
-        Route::get('product/{product}/edit', 'ProductController@edit')->name('editProduct');
-        Route::patch('product/{product}/update', 'ProductController@update')->name('updateProduct');
-        Route::delete('/product/{product}/media/{media}', 'ProductController@deleteImage')->name('deleteImage');
-        Route::get('{vendor_slug}', 'IndexController@show')->name('show');
+        Route::get('dashboard', [IndexController::class, 'dashboard'])->name('dashboard');
+
+        Route::get('edit', [IndexController::class, 'edit'])->name('edit');
+        Route::patch('update', [IndexController::class, 'update'])->name('update');
+
+        Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+            Route::get('/', [ProductController::class, 'index'])->name('index');
+            Route::get('/create', [ProductController::class, 'create'])->name('create');
+            Route::post('/store', [ProductController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [ProductController::class, 'update'])->name('update');
+            Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+        });
+        Route::group(['prefix' => 'branch', 'as' => 'branch.'], function () {
+            Route::get('/', [BranchController::class, 'index'])->name('index');
+            Route::get('/create', [BranchController::class, 'create'])->name('create');
+            Route::post('/store', [BranchController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [BranchController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [BranchController::class, 'update'])->name('update');
+            Route::delete('/delete/{id}', [BranchController::class, 'delete'])->name('delete');
+        });
+        Route::group(['prefix' => 'shipping-group', 'as' => 'shipping-group.'], function () {
+            Route::get('/', [SippingGroupController::class, 'index'])->name('index');
+            Route::get('/create', [SippingGroupController::class, 'create'])->name('create');
+            Route::post('/store', [SippingGroupController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [SippingGroupController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [SippingGroupController::class, 'update'])->name('update');
+            Route::delete('/delete/{id}', [SippingGroupController::class, 'delete'])->name('delete');
+        });
+
+        Route::get('order', [OrderController::class, 'index'])->name('order.index');
+        Route::get('order/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
+        Route::post('order/update/{order_id}', [OrderController::class, 'update'])->name('order.update');
     });
+    // Vendor Routes
 
     //Cart Routes
     Route::group(['prefix' => 'cart', 'namespace' => 'Product'], function() {
@@ -77,6 +103,7 @@ Route::group([
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/products', 'Product\ProductController@all')->name('front.product.all');
     Route::get('/partners', 'Vendor\IndexController@index')->name('vendor.index');
+    Route::get('/partners/{vendor_slug}', 'Vendor\IndexController@show')->name('vendor.show');
     Route::get('/team', 'Team\IndexController@index')->name('front.team.index');
     Route::get('/FAQs', 'Common\PageController@faqs')->name('front.faqs.page');
     Route::get('/contact-us', 'Common\PageController@contactUs')->name('front.contact.page');
@@ -84,12 +111,6 @@ Route::group([
     Route::post('/contact-us', 'Common\PageController@contactUsRequest')->name('front.contact.request');
     Route::post('/subscribe', 'Common\MiscController@subscribeRequest')->name('front.subscribe.request');
     Route::post('/inquire', 'Common\MiscController@inquireRequest')->name('front.inquire.request');
-
-    // Vendor Order Routes (Auth/Verified protected)
-    Route::group(['prefix' => 'order', 'namespace' => 'Product', 'middleware' => 'auth:vendor, verified:vendor.verification.notice'], function() {
-        Route::get('/{order}/get', 'OrderController@get')->name('order.get');
-        Route::patch('/vendor/{vendor}/update', 'OrderController@vendorUpdate')->name('vendor.order.update');
-    });
 
     Route::get('/page/{slug}', 'Common\PageController@page')->name('front.page.index');
     Route::get('/search', 'Product\ProductController@search')->name('products.search');
