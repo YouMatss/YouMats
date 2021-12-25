@@ -49,8 +49,7 @@ class IndexController extends Controller
     public function edit(Request $request)
     {
         $data['vendor'] = Auth::guard('vendor')->user();
-//        $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
-//        $data['items'] = $data['vendor']->order_items;
+        $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
 
         return view('vendorAdmin.edit')->with($data);
     }

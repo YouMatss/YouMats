@@ -18,6 +18,8 @@
 <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/daterangepicker/daterangepicker.css">
 <!-- summernote -->
 <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/summernote/summernote-bs4.min.css">
+<!-- Select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @if(\LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
     <!-- Bootstrap 4 RTL -->
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">

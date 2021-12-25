@@ -38,8 +38,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tags">{{__('vendorAdmin.tags')}}</label>
-                                    <select class="form-control" multiple name="tags" id="tags">
-                                        <option value="" selected disabled>{{__('vendorAdmin.tags_placeholder')}}</option>
+                                    <select class="form-control tags-select" multiple="multiple" name="tags[]" id="tags">
                                         @foreach($tags as $tag)
                                             <option value="{{$tag->id}}">{{$tag->name}}</option>
                                         @endforeach
@@ -87,117 +86,112 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="logo">{{__('vendorAdmin.logo')}}</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" name="logo" class="custom-file-input" id="logo">
-                                                    <label class="custom-file-label">{{__('vendorAdmin.choose_file')}}</label>
-                                                </div>
-                                            </div>
-                                            <div class="mt-1">
-                                                <img class="img-thumbnail" width="200" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}">
-                                            </div>
+                                            <label for="cost">{{__('vendorAdmin.cost')}}</label>
+                                            <input type="number" class="form-control" name="cost" id="cost" min="0" step="0.01">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="cover">{{__('vendorAdmin.cover')}}</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" name="cover" class="custom-file-input" id="cover">
-                                                    <label class="custom-file-label">{{__('vendorAdmin.choose_file')}}</label>
-                                                </div>
-                                            </div>
-                                            <div class="mt-1">
-                                                <img class="img-thumbnail" width="200" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER)['url'] }}">
-                                            </div>
+                                            <label for="price">{{__('vendorAdmin.price')}}</label>
+                                            <input type="number" class="form-control" name="price" id="price" min="0" step="0.01">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="licenses">{{__('vendorAdmin.licenses')}}</label>
+                                    <label for="stock">{{__('vendorAdmin.stock')}}</label>
+                                    <input type="number" class="form-control" name="stock" id="stock" min="0" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="unit">{{__('vendorAdmin.unit')}}</label>
+                                    <select class="form-control" name="unit_id" id="unit">
+                                        <option selected disabled>{{__('vendorAdmin.unit_placeholder')}}</option>
+                                        @foreach($units as $unit)
+                                            <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="min_quantity">{{__('vendorAdmin.min_quantity')}}</label>
+                                    <input type="number" class="form-control" name="min_quantity" id="min_quantity" min="1" step="1">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sku">{{__('vendorAdmin.sku')}}</label>
+                                    <input type="text" class="form-control" name="SKU" id="sku">
+                                </div>
+
+                                <hr/>
+
+                                <div class="form-group">
+                                    <label for="gallery">{{__('vendorAdmin.gallery')}}</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" multiple name="licenses" class="custom-file-input" id="licenses">
-                                            <label class="custom-file-label">{{__('vendorAdmin.choose_file')}}</label>
+                                            <input type="file" multiple name="gallery" class="custom-file-input" id="gallery">
+                                            <label class="custom-file-label">{{__('vendorAdmin.choose_images')}}</label>
                                         </div>
-                                    </div>
-                                    <div class="mt-1">
-                                        @foreach($vendor->getMedia(VENDOR_PATH) as $license)
-                                            <img class="img-thumbnail" width="200" src="{{ $license->getUrl() }}">
-                                        @endforeach
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="location">{{__('vendorAdmin.location')}}</label>
-                                    {!! generate_map() !!}
-                                    <input type="hidden" class="lat" value="{{$vendor->latitude}}" readonly name="latitude" required>
-                                    <input type="hidden" class="lng" value="{{$vendor->longitude}}" readonly name="longitude" required>
-                                </div>
+                                <hr/>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="facebook">{{__('vendorAdmin.facebook')}}</label>
-                                            <input type="url" class="form-control" name="facebook"
-                                                   id="facebook" value="{{$vendor->facebook}}">
-                                        </div>
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">{{__('vendorAdmin.shipping')}}</h3>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="card-body">
                                         <div class="form-group">
-                                            <label for="twitter">{{__('vendorAdmin.twitter')}}</label>
-                                            <input type="url" class="form-control" name="twitter"
-                                                   id="twitter" value="{{$vendor->twitter}}">
+                                            <label for="shipping">{{__('vendorAdmin.shipping')}}</label>
+                                            <select id="shipping" class="form-control" name="shipping_id">
+                                                <option value="" selected disabled>{{__('vendorAdmin.shipping_placeholder')}}</option>
+                                                @foreach($vendor->shippings as $shipping)
+                                                    <option value="{{$shipping->id}}">{{$shipping->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="youtube">{{__('vendorAdmin.youtube')}}</label>
-                                            <input type="url" class="form-control" name="youtube"
-                                                   id="youtube" value="{{$vendor->youtube}}">
+                                            <label for="specific">{{__('vendorAdmin.specific_shipping')}}</label>
+                                            <input type="checkbox" class="form-control" id="specific" name="specific_shipping">
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="instagram">{{__('vendorAdmin.instagram')}}</label>
-                                            <input type="url" class="form-control" name="instagram"
-                                                   id="instagram" value="{{$vendor->instagram}}">
+                                        <div class="card card-dark" id="specific_shipping">
+                                            <div class="card-header">
+                                                <h3 class="card-title">{{__('vendorAdmin.specific_shipping')}}</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <label>{{__('vendorAdmin.specific_shipping_terms')}}</label>
+                                                <div class="row">
+                                                    <div class="col-md-12" id="clone-container"></div>
+                                                    <div class="col-md-12">
+                                                        <button type="button" id="clone-add" class="btn btn-primary btn-block">{{__('vendorAdmin.add')}}</button>
+                                                    </div>
+                                                </div>
+
+                                                <hr/>
+                                                <div class="card card-dark">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">{{__('vendorAdmin.default_for_all_cities') . ' ' . __('vendorAdmin.optional')}}</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label for="price">{{__('vendorAdmin.price')}}</label>
+                                                            <input type="number" class="form-control" id="price" name="default_price" min="0" step="0.05" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="time">{{__('vendorAdmin.time')}}</label>
+                                                            <input type="number" class="form-control" id="time" name="default_time" min="1" step="1" />
+                                                        </div>
+                                                        <div class="form-group">
+                                            <label for="format">{{__('vendorAdmin.format')}}</label>
+                                            <select class="form-control" id="format" name="default_format">
+                                                <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
+                                                <option value="hour">{{__('vendorAdmin.hour')}}</option>
+                                                <option value="day">{{__('vendorAdmin.day')}}</option>
+                                            </select>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="pinterest">{{__('vendorAdmin.pinterest')}}</label>
-                                            <input type="url" class="form-control" name="pinterest"
-                                                   id="pinterest" value="{{$vendor->pinterest}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="website">{{__('vendorAdmin.website')}}</label>
-                                            <input type="url" class="form-control" name="website"
-                                                   id="website" value="{{$vendor->website}}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="password">{{__('vendorAdmin.password')}}</label>
-                                            <input type="password" class="form-control" name="password"
-                                                   id="password" placeholder="{{__('vendorAdmin.password_leave_it_blank')}}" ">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="password_confirmation">{{__('vendorAdmin.password_confirmation')}}</label>
-                                            <input type="password" class="form-control" name="password_confirmation"
-                                                   id="password_confirmation">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -212,4 +206,68 @@
             </div>
         </div>
     </section>
+@endsection
+@section('js_additional')
+<script>
+    $(document).ready(function() {
+        var clone_element = `<div class="clone-element">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="cities">{{__('vendorAdmin.cities')}}</label>
+                            <select class="form-control" id="cities" name="cities[]">
+                                <option value="" disabled selected>{{__('vendorAdmin.cities_placeholder')}}</option>
+                                @foreach($cities as $city)
+                                    <option value="{{$city->id}}">{{$city->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="price">{{__('vendorAdmin.price')}}</label>
+                            <input type="number" class="form-control" id="price" name="price[]" min="0" step="0.05" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="time">{{__('vendorAdmin.time')}}</label>
+                            <input type="number" class="form-control" id="time" name="time[]" min="1" step="1" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="format">{{__('vendorAdmin.format')}}</label>
+                            <select class="form-control" id="format" name="format[]">
+                                <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
+                                <option value="hour">{{__('vendorAdmin.hour')}}</option>
+                                <option value="day">{{__('vendorAdmin.day')}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                <div class="form-group">
+                    <label>{{__('vendorAdmin.remove')}}</label>
+                    <button class="form-control btn btn-danger btn-xs clone-remove">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+                </div>
+            </div>`;
+        $('#clone-add').on('click', function () {
+            $('#clone-container').append(clone_element);
+        });
+        $(document).on('click', '.clone-remove', function () {
+            $(this).closest('.clone-element').remove();
+        });
+        $('.tags-select').select2({
+            placeholder: "{{__('vendorAdmin.tags_placeholder')}}"
+        });
+        $('#specific_shipping').hide();
+        $('#specific').on('change', function () {
+            $('#specific_shipping').toggle();
+        });
+    });
+</script>
 @endsection

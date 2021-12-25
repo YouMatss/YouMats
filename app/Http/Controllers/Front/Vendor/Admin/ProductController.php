@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Front\Vendor\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attribute;
+use App\Models\City;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Tag;
@@ -44,8 +46,22 @@ class ProductController extends Controller
         $data['tags'] = Tag::all();
         $data['categories'] = Category::all();
         $data['units'] = Unit::orderby('sort')->get();
+        $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
 
         return view('vendorAdmin.product.create')->with($data);
+    }
+
+    public function edit($id)
+    {
+        $data['vendor'] = Auth::guard('vendor')->user();
+        $data['product'] = Product::where('vendor_id', $data['vendor']->id)->firstorfail();
+        $data['attributes'] = Attribute::where('category_id', $data['product']->category_id)->get();
+        $data['tags'] = Tag::all();
+        $data['categories'] = Category::all();
+        $data['units'] = Unit::orderby('sort')->get();
+        $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
+
+        return view('vendorAdmin.product.edit')->with($data);
     }
 
     /**
@@ -152,31 +168,6 @@ class ProductController extends Controller
         return redirect()->route('vendor.edit')
         ->with([
             'custom_success' => __('Product has been added.')
-        ]);
-    }
-
-    /**
-     * @param Vendor $vendor
-     * @param Product $product
-     * @return Application|Factory|View
-     */
-    public function edit(Product $product)
-    {
-        $vendor = Auth::guard('vendor')->user();
-
-        if(!$vendor->active)
-            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
-
-        if($product->vendor_id !== $vendor->id)
-            return back()->with(['custom_warning' => __('You do not have permissions to edit this product.')]);
-
-        $categories = Category::all();
-        $units = Unit::orderBy('sort')->get();
-
-        return view('front.vendor.product.edit', [
-            'product' => $product,
-            'categories' => $categories,
-            'units' => $units
         ]);
     }
 

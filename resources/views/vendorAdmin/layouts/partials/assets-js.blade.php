@@ -32,4 +32,8 @@
 <script src="{{asset('vendorAdminAssets')}}/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('vendorAdminAssets')}}/dist/js/pages/dashboard.js"></script>
+<!-- Select 2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- Ckeditor -->
+<script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 @yield('js_additional')
