@@ -227,6 +227,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/whitecube/nova-google-maps" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mauricewijnia/nova-maps-address" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/adamcmoore/nova-gmap" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ladumor/one-signal" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

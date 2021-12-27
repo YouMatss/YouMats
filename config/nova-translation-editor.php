@@ -12,6 +12,7 @@ return [
         'checkout',
         'contact',
         'footer',
+        'vendorAdmin',
         'breadcrumb',
         'novaSettings'
     ],
