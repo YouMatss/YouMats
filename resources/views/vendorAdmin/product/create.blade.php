@@ -154,7 +154,7 @@
                                             <label for="specific">{{__('vendorAdmin.specific_shipping')}}</label>
                                             <input type="checkbox" class="form-control" id="specific" name="specific_shipping">
                                         </div>
-                                        <div class="card card-dark" id="specific_shipping">
+                                        <div class="card card-gray" id="specific_shipping">
                                             <div class="card-header">
                                                 <h3 class="card-title">{{__('vendorAdmin.specific_shipping')}}</h3>
                                             </div>
@@ -168,7 +168,7 @@
                                                 </div>
 
                                                 <hr/>
-                                                <div class="card card-dark">
+                                                <div class="card card-gray">
                                                     <div class="card-header">
                                                         <h3 class="card-title">{{__('vendorAdmin.default_for_all_cities') . ' ' . __('vendorAdmin.optional')}}</h3>
                                                     </div>

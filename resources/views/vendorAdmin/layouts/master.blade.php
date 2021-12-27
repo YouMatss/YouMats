@@ -18,8 +18,8 @@
         @yield('content')
     </div>
     <footer class="main-footer">
-        <strong>Copyright &copy; {{date('Y')}}</strong>
-        All rights reserved.
+        <strong>{{__('vendorAdmin.copyright')}} &copy; {{date('Y')}}</strong>
+        {{__('vendorAdmin.all_rights_reserved')}}.
         <div class="float-right d-none d-sm-inline-block">
             <img width="100" src="{{ Storage::url(nova_get_setting('logo')) }}" />
         </div>

@@ -1,6 +1,6 @@
 @extends('vendorAdmin.layouts.master')
 @section('title')
-    <title>{{__('vendorAdmin.create_product')}}</title>
+    <title>{{__('vendorAdmin.edit_product')}}</title>
 @endsection
 @section('content')
     <section class="content pt-2">
@@ -9,7 +9,7 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">{{__('vendorAdmin.create_product')}}</h3>
+                            <h3 class="card-title">{{__('vendorAdmin.edit_product')}}</h3>
                         </div>
                         <form>
                             <div class="card-body">
@@ -40,7 +40,7 @@
                                     <label for="tags">{{__('vendorAdmin.tags')}}</label>
                                     <select class="form-control tags-select" multiple="multiple" name="tags[]" id="tags">
                                         @foreach($tags as $tag)
-                                            <option value="{{$tag->id}}" @if(in_array($tag, $product->tags->toArray())) selected @endif>{{$tag->name}}</option>
+                                            <option value="{{$tag->id}}" @if(in_array($tag->id, $product->tags->pluck('id')->toArray())) selected @endif>{{$tag->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -151,47 +151,95 @@
                                             <select id="shipping" class="form-control" name="shipping_id">
                                                 <option value="" selected disabled>{{__('vendorAdmin.shipping_placeholder')}}</option>
                                                 @foreach($vendor->shippings as $shipping)
-                                                    <option value="{{$shipping->id}}">{{$shipping->name}}</option>
+                                                    <option value="{{$shipping->id}}" @if($shipping->id == $product->shipping_id) selected @endif>{{$shipping->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="specific">{{__('vendorAdmin.specific_shipping')}}</label>
-                                            <input type="checkbox" class="form-control" id="specific" name="specific_shipping">
+                                            <input type="checkbox" class="form-control" id="specific" name="specific_shipping" @if($product->specific_shipping) checked @endif>
                                         </div>
-                                        <div class="card card-dark" id="specific_shipping">
+                                        <div class="card card-gray" id="specific_shipping">
                                             <div class="card-header">
                                                 <h3 class="card-title">{{__('vendorAdmin.specific_shipping')}}</h3>
                                             </div>
                                             <div class="card-body">
                                                 <label>{{__('vendorAdmin.specific_shipping_terms')}}</label>
                                                 <div class="row">
-                                                    <div class="col-md-12" id="clone-container"></div>
+                                                    <div class="col-md-12" id="clone-container">
+                                                        @foreach(json_decode($product->shipping_prices) as $shipping_price)
+                                                            <div class="clone-element">
+                                                                <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label for="cities">{{__('vendorAdmin.cities')}}</label>
+                                                                            <select class="form-control" id="cities" name="cities[]">
+                                                                                <option value="" disabled selected>{{__('vendorAdmin.cities_placeholder')}}</option>
+                                                                                @foreach($cities as $city)
+                                                                                    <option value="{{$city->id}}" @if($shipping_price->cities == $city->id) selected @endif>{{$city->name}}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label for="price">{{__('vendorAdmin.price')}}</label>
+                                                                            <input type="number" class="form-control" id="price" name="price[]" min="0" step="0.05" value="{{$shipping_price->price}}" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="time">{{__('vendorAdmin.time')}}</label>
+                                                                            <input type="number" class="form-control" id="time" name="time[]" min="1" step="1" value="{{$shipping_price->time}}" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label for="format">{{__('vendorAdmin.format')}}</label>
+                                                                            <select class="form-control" id="format" name="format[]">
+                                                                                <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
+                                                                                <option value="hour" @if($shipping_price->format == 'hour') selected @endif>{{__('vendorAdmin.hour')}}</option>
+                                                                                <option value="day" @if($shipping_price->format == 'day') selected @endif>{{__('vendorAdmin.day')}}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                        <div class="form-group">
+                                                                            <label>{{__('vendorAdmin.remove')}}</label>
+                                                                            <button class="form-control btn btn-danger btn-xs clone-remove">
+                                                                                <i class="fas fa-trash"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
                                                     <div class="col-md-12">
                                                         <button type="button" id="clone-add" class="btn btn-primary btn-block">{{__('vendorAdmin.add')}}</button>
                                                     </div>
                                                 </div>
 
                                                 <hr/>
-                                                <div class="card card-dark">
+                                                <div class="card card-gray">
                                                     <div class="card-header">
                                                         <h3 class="card-title">{{__('vendorAdmin.default_for_all_cities') . ' ' . __('vendorAdmin.optional')}}</h3>
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label for="price">{{__('vendorAdmin.price')}}</label>
-                                                            <input type="number" class="form-control" id="price" name="default_price" min="0" step="0.05" />
+                                                            <input type="number" class="form-control" id="price" name="default_price" min="0" step="0.05" value="{{$product->default_price}}" />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="time">{{__('vendorAdmin.time')}}</label>
-                                                            <input type="number" class="form-control" id="time" name="default_time" min="1" step="1" />
+                                                            <input type="number" class="form-control" id="time" name="default_time" min="1" step="1" value="{{$product->default_time}}" />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="format">{{__('vendorAdmin.format')}}</label>
                                                             <select class="form-control" id="format" name="default_format">
                                                                 <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
-                                                                <option value="hour">{{__('vendorAdmin.hour')}}</option>
-                                                                <option value="day">{{__('vendorAdmin.day')}}</option>
+                                                                <option value="hour" @if($product->default_format == 'hour') selected @endif>{{__('vendorAdmin.hour')}}</option>
+                                                                <option value="day" @if($product->default_format == 'day') selected @endif>{{__('vendorAdmin.day')}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -212,7 +260,7 @@
                                                 @foreach($attributes as $attribute)
                                                     <optgroup label="{{$attribute->key}}">
                                                         @foreach($attribute->values as $value)
-                                                            <option value="{{$value->value}}" @if(in_array($value->value, json_decode($product->attributes))) selected @endif>{{$value->value}}</option>
+                                                            <option value="{{$value->value}}" @if(in_array($value->id, json_decode($product->attributes))) selected @endif>{{$value->value}}</option>
                                                         @endforeach
                                                     </optgroup>
                                                 @endforeach
@@ -243,14 +291,14 @@
                             <select class="form-control" id="cities" name="cities[]">
                                 <option value="" disabled selected>{{__('vendorAdmin.cities_placeholder')}}</option>
                                 @foreach($cities as $city)
-            <option value="{{$city->id}}">{{$city->name}}</option>
+                                    <option value="{{$city->id}}">{{$city->name}}</option>
                                 @endforeach
-            </select>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="form-group">
-            <label for="price">{{__('vendorAdmin.price')}}</label>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="price">{{__('vendorAdmin.price')}}</label>
                             <input type="number" class="form-control" id="price" name="price[]" min="0" step="0.05" />
                         </div>
                     </div>
@@ -292,7 +340,9 @@
             $('#attributes').select2({
                 placeholder: "{{__('vendorAdmin.attributes_placeholder')}}"
             });
-            $('#specific_shipping').hide();
+            @if(!$product->specific_shipping)
+                $('#specific_shipping').hide();
+            @endif
             $('#specific').on('change', function () {
                 $('#specific_shipping').toggle();
             });

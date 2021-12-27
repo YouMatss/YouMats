@@ -18,7 +18,7 @@
                                     <input type="text" class="form-control" name="name" id="name">
                                 </div>
 
-                                <div class="card card-dark">
+                                <div class="card card-gray">
                                     <div class="card-header">
                                         <h3 class="card-title">{{__('vendorAdmin.specific_shipping_terms')}}</h3>
                                     </div>
@@ -32,7 +32,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card card-dark">
+                                <div class="card card-gray">
                                     <div class="card-header">
                                         <h3 class="card-title">{{__('vendorAdmin.default_for_all_cities') . ' ' . __('vendorAdmin.optional')}}</h3>
                                     </div>
