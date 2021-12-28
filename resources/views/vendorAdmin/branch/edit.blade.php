@@ -7,8 +7,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card card-primary">
-                        <div class="card-header">
+                    <div class="card">
+                        <div class="card-header card-youmats">
                             <h3 class="card-title">{{__('vendorAdmin.edit_branch')}} ({{$branch->name}})</h3>
                         </div>
                         <form>
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-youmats">Submit</button>
                             </div>
                         </form>
                     </div>

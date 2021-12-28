@@ -49,7 +49,6 @@ Route::group([
             Route::post('/store', [ProductController::class, 'store'])->name('store');
             Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
             Route::put('/update/{id}', [ProductController::class, 'update'])->name('update');
-            Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
         });
         Route::group(['prefix' => 'branch', 'as' => 'branch.'], function () {
             Route::get('/', [BranchController::class, 'index'])->name('index');
@@ -70,7 +69,7 @@ Route::group([
 
         Route::get('order', [OrderController::class, 'index'])->name('order.index');
         Route::get('order/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
-        Route::post('order/update/{order_id}', [OrderController::class, 'update'])->name('order.update');
+        Route::post('order/update', [OrderController::class, 'update'])->name('order.update');
     });
     // Vendor Routes
 

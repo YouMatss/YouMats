@@ -231,7 +231,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <!-- The add button -->
-                                                <button type="button" class="r-btnAdd btn btn-sm btn-primary">{{ __('vendor.add_contact') }} +</button>
+                                                <button type="button" class="r-btnAdd btn btn-sm btn-youmats">{{ __('vendor.add_contact') }} +</button>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3">
@@ -253,7 +253,7 @@
                                                     @if(!count($vendor->getMedia(VENDOR_PATH)))
                                                         <div class="col-sm-2 imgUp">
                                                             <div class="imagePreview"></div>
-                                                            <label class="btn btn-primary">
+                                                            <label class="btn btn-youmats">
                                                                 {{ __('vendor.choose_a_file') }} <input type="file" name="licenses[]" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
                                                             </label>
                                                         </div><!-- col-2 -->
@@ -373,7 +373,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-6">
-                                                <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i> {{ __('general.save_changes') }}</button>
+                                                <button type="submit" class="btn btn-youmats-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i> {{ __('general.save_changes') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -455,12 +455,12 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-6">
-                                                <button type="button" class="btn btn-primary-dark-w px-5 text-white mr-2 btn_clone_add"> <i class="fas fa-plus"></i> {{ __('vendor.add_price') }}</button>
+                                                <button type="button" class="btn btn-youmats-dark-w px-5 text-white mr-2 btn_clone_add"> <i class="fas fa-plus"></i> {{ __('vendor.add_price') }}</button>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-6">
-                                                <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i>
+                                                <button type="submit" class="btn btn-youmats-dark-w px-5 text-white mr-2"> <i class="fas fa-save"></i>
                                                     {{ __('general.save_changes') }}</button>
                                             </div>
                                         </div>
@@ -483,7 +483,7 @@
                         </div>
                         <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
                             @if($vendor->active)
-                                <a href="{{ route('vendor.addProduct') }}" class="btn btn-primary-dark-w px-5 text-white mr-2">
+                                <a href="{{ route('vendor.addProduct') }}" class="btn btn-youmats-dark-w px-5 text-white mr-2">
                                     {{ __('vendor.add_product') }}
                                 </a>
                             @endif
@@ -525,7 +525,7 @@
                                                         </div>
                                                     @endif
                                                     @if($vendor->active)
-                                                        <a href="{{ route('vendor.editProduct', ['product' => $product]) }}" class="btn btn-primary-dark-w px-5 text-white mr-2">
+                                                        <a href="{{ route('vendor.editProduct', ['product' => $product]) }}" class="btn btn-youmats-dark-w px-5 text-white mr-2">
                                                             {{ __('Edit Product') }}
                                                         </a>
                                                     @endif
@@ -544,7 +544,7 @@
                             <div class="container">
                                 @if($vendor->active)
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary-dark-w px-5 text-white mr-2" data-toggle="modal" data-target="#branchModal">
+                                <button type="button" class="btn btn-youmats-dark-w px-5 text-white mr-2" data-toggle="modal" data-target="#branchModal">
                                     {{ __('vendor.add_branch') }}
                                 </button>
                                 <!-- Modal -->
@@ -608,7 +608,7 @@
                                                 <input type="hidden" class="lat" readonly name="latitude" required>
                                                 <input type="hidden" class="lng" readonly name="longitude" required>
                                                 </div>
-                                                <button id="addBranchBtn" class="btn btn-primary-dark-w px-5 text-white" style="cursor:pointer;">{{ __('general.save_changes') }}</button>
+                                                <button id="addBranchBtn" class="btn btn-youmats-dark-w px-5 text-white" style="cursor:pointer;">{{ __('general.save_changes') }}</button>
                                             </form>
                                         </div>
                                         </div>
@@ -673,7 +673,7 @@
                                                         </div>
                                                     </li>
                                                     <li class="row mt-5">
-                                                        <a class="btn btn-primary btn-block" href="{{ route('vendor.deleteBranch', ['branch' => $branch]) }}"
+                                                        <a class="btn btn-youmats btn-block" href="{{ route('vendor.deleteBranch', ['branch' => $branch]) }}"
                                                            onclick="event.preventDefault();
                                                             document.getElementById('delete-branch-{{ $branch->id }}').submit();">
                                                             {{ __('general.delete') }}
@@ -917,7 +917,7 @@
                                                                         </div>
                                                                     </li>
                                                                     <div class="col-md-12">
-                                                                        <button type="submit" class="btn btn-primary-dark-w px-5 text-white mr-2"> <i class="fas fa-paper-plane"></i>
+                                                                        <button type="submit" class="btn btn-youmats-dark-w px-5 text-white mr-2"> <i class="fas fa-paper-plane"></i>
                                                                             {{ __('general.submit') }} </button>
                                                                     </div>
                                                                 </ul>
@@ -1025,7 +1025,7 @@
 
         // upload Licenses
         $(".imgAdd").click(function(){
-            $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-2 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input name="licenses[]" type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
+            $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-2 imgUp"><div class="imagePreview"></div><label class="btn btn-youmats">Upload<input name="licenses[]" type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
         });
         $(document).on("click", "i.del" , function() {
             $(this).parent().remove();

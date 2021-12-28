@@ -17,6 +17,22 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                <i class="fas fa-globe"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                    <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                       class="dropdown-item {{$localeCode}}" hreflang="{{ $localeCode }}">
+                        <i class="fas fa-language"></i> {{ $properties['native'] }}
+                    </a>
+                    @if(!$loop->last)
+                    <div class="dropdown-divider"></div>
+                    @endif
+                @endforeach
+            </div>
+        </li>
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                 <i class="fas fa-expand-arrows-alt"></i>

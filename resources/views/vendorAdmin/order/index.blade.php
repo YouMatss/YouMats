@@ -5,8 +5,8 @@
 @section('content')
     <div class="pt-2">
         <div class="col-md-12">
-            <div class="card card-primary">
-                <div class="card-header">
+            <div class="card">
+                <div class="card-header card-youmats">
                     <h3 class="card-title">{{__('vendorAdmin.products')}}</h3>
                 </div>
                 <div class="card-body">
@@ -58,7 +58,7 @@
                                 </td>
                                 <td>{{date('d M Y H:i A', strtotime($item->order->created_at))}}</td>
                                 <td>
-                                    <a href="{{route('vendor.order.edit', [$item->order->id])}}" class="btn btn-warning btn-xs">{{__('vendorAdmin.edit_button')}}</a>
+                                    <a href="{{route('vendor.order.edit', [$item->order->id])}}" class="btn btn-youmats btn-xs">{{__('vendorAdmin.edit_button')}}</a>
                                 </td>
                             </tr>
                         @endforeach

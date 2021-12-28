@@ -7,8 +7,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-primary">
-                    <div class="card-header">
+                <div class="card">
+                    <div class="card-header card-youmats">
                         <h3 class="card-title">{{__('vendorAdmin.edit_info')}}</h3>
                     </div>
                     <form>
@@ -40,8 +40,8 @@
                                        id="address" value="{{$vendor->address}}">
                             </div>
 
-                            <div class="card card-info">
-                                <div class="card-header">
+                            <div class="card">
+                                <div class="card-header card-youmats">
                                     <h3 class="card-title">{{__('vendorAdmin.contacts')}}</h3>
                                 </div>
                                 <div class="card-body">
@@ -102,7 +102,7 @@
                                             @endforeach
                                         </div>
                                         <div class="col-md-12">
-                                            <button type="button" id="clone-add" class="btn btn-primary btn-block">{{__('vendorAdmin.add')}}</button>
+                                            <button type="button" id="clone-add" class="btn btn-youmats btn-block">{{__('vendorAdmin.add')}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +239,7 @@
 
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-youmats">Submit</button>
                         </div>
                     </form>
                 </div>
