@@ -5,13 +5,13 @@
 @section('content')
     <div class="pt-2">
         <div class="col-md-12">
-            <div class="card card-primary">
-                <div class="card-header">
+            <div class="card">
+                <div class="card-header card-youmats">
                     <h3 class="card-title">{{__('vendorAdmin.shipping_groups')}}</h3>
                 </div>
                 <div class="card-body">
                     <div class="float-right">
-                        <a href="{{route('vendor.shipping-group.create')}}" class="btn btn-sm mb-3 btn-primary">{{__('vendorAdmin.add_button')}}</a>
+                        <a href="{{route('vendor.shipping-group.create')}}" class="btn btn-sm mb-3 btn-youmats">{{__('vendorAdmin.add_button')}}</a>
                     </div>
                     <table class="table table-bordered table-striped" style="width: 100%">
                         <thead>
@@ -33,7 +33,7 @@
                                     <td>{{$shipping_price->default_time}}</td>
                                     <td>{{$shipping_price->default_format}}</td>
                                     <td>
-                                        <a href="{{route('vendor.shipping-group.edit', [$shipping_price->id])}}" class="btn btn-warning btn-xs">{{__('vendorAdmin.edit_button')}}</a>
+                                        <a href="{{route('vendor.shipping-group.edit', [$shipping_price->id])}}" class="btn btn-youmats btn-xs">{{__('vendorAdmin.edit_button')}}</a>
                                         <a href="{{route('vendor.shipping-group.delete', [$shipping_price->id])}}" class="btn btn-danger btn-xs">{{__('vendorAdmin.delete_button')}}</a>
                                     </td>
                                 </tr>

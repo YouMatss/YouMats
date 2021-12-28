@@ -26,5 +26,6 @@
     </footer>
 </div>
 @include('vendorAdmin.layouts.partials.assets-js')
+@include('vendorAdmin.layouts.partials.alerts')
 </body>
 </html>

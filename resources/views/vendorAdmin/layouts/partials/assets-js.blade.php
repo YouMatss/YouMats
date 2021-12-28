@@ -36,4 +36,6 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- Ckeditor -->
 <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+<!-- Toastr -->
+<script src="{{ asset('vendorAdminAssets') }}/plugins/toastr/toastr.min.js" type="text/javascript"></script>
 @yield('js_additional')

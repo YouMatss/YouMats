@@ -7,55 +7,59 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">{{__('vendorAdmin.edit_order')}} ({{$item->order->order_id}})</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>{{__('vendorAdmin.payment_status')}}</label><br/>
-                                        <label class="badge
-                                        @if($item->payment_status == 'pending')
-                                            badge-warning
-                                        @elseif($item->payment_status == 'refunded')
-                                            badge-danger
-                                        @elseif($item->payment_status == 'completed')
-                                            badge-success
-                                        @endif
-                                        ">
-                                            {{$item->payment_status}}
-                                        </label>
+                    <div class="card">
+                        <form method="post" action="{{route('vendor.order.update')}}">
+                            {{csrf_field()}}
+                            <input type="hidden" name="item_id" value="{{$item->id}}" />
+                            <div class="card-header card-youmats">
+                                <h3 class="card-title">{{__('vendorAdmin.edit_order')}} ({{$item->order->order_id}})</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{__('vendorAdmin.payment_status')}}</label><br/>
+                                            <label class="badge
+                                            @if($item->payment_status == 'pending')
+                                                badge-warning
+                                            @elseif($item->payment_status == 'refunded')
+                                                badge-danger
+                                            @elseif($item->payment_status == 'completed')
+                                                badge-success
+                                            @endif
+                                            ">
+                                                {{$item->payment_status}}
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="status">{{__('vendorAdmin.status')}}</label>
-                                        <select id="status" class="form-control" name="status">
-                                            <option value="pending" @if($item->status == 'pending') selected @endif>{{__('vendorAdmin.pending')}}</option>
-                                            <option value="shipping" @if($item->status == 'shipping') selected @endif>{{__('vendorAdmin.shipping')}}</option>
-                                            <option value="completed" @if($item->status == 'completed') selected @endif>{{__('vendorAdmin.completed')}}</option>
-                                            <option value="refused" @if($item->status == 'refused') selected @endif>{{__('vendorAdmin.refused')}}</option>
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="status">{{__('vendorAdmin.status')}}</label>
+                                            <select id="status" class="form-control" name="status">
+                                                <option value="pending" @if($item->status == 'pending') selected @endif>{{__('vendorAdmin.pending')}}</option>
+                                                <option value="shipping" @if($item->status == 'shipping') selected @endif>{{__('vendorAdmin.shipping')}}</option>
+                                                <option value="completed" @if($item->status == 'completed') selected @endif>{{__('vendorAdmin.completed')}}</option>
+                                                <option value="refused" @if($item->status == 'refused') selected @endif>{{__('vendorAdmin.refused')}}</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="refused_note">{{__('vendorAdmin.refused_note')}}</label>
-                                        <textarea id="refused_note" name="refused_note" class="form-control">{{$item->refused_note}}</textarea>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="refused_note">{{__('vendorAdmin.refused_note')}}</label>
+                                            <textarea id="refused_note" name="refused_note" class="form-control">{{$item->refused_note}}</textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-youmats">Submit</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="card card-info">
-                        <div class="card-header">
+                    <div class="card">
+                        <div class="card-header card-youmats">
                             <h3 class="card-title">{{__('vendorAdmin.user_info')}}</h3>
                         </div>
                         <div class="card-body">
@@ -127,8 +131,8 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="card card-gray">
-                        <div class="card-header">
+                    <div class="card">
+                        <div class="card-header card-youmats">
                             <h3 class="card-title">{{__('vendorAdmin.product_details')}}</h3>
                         </div>
                         <div class="card-body">
@@ -158,8 +162,8 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="card card-warning">
-                        <div class="card-header">
+                    <div class="card">
+                        <div class="card-header card-youmats">
                             <h3 class="card-title">{{__('vendorAdmin.payment_info')}}</h3>
                         </div>
                         <div class="card-body">
