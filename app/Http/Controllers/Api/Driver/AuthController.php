@@ -25,6 +25,10 @@ class AuthController extends Controller
             return response(['message' => 'Invalid login credentials.'], 400);
         }
         $driver = Auth::guard('driver')->user();
+        if(!$driver->active) {
+            Auth::guard('driver')->logout();
+            return response(['message' => __('messages.not_active_yet')], 400);
+        }
         $token = $driver->createToken('authToken')->accessToken;
 
         return (new DriverResource($driver))->additional([
@@ -40,15 +44,18 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'active' => '0'
         ]);
 
-        $driver = Auth::guard('driver')->loginUsingId($driver->id);
-        $token = $driver->createToken('authToken')->accessToken;
+        return response()->json(['message' => __('messages.wait_for_approve')]);
 
-        return (new DriverResource($driver))->additional([
-            'token' => $token,
-        ]);
+//        $driver = Auth::guard('driver')->loginUsingId($driver->id);
+//        $token = $driver->createToken('authToken')->accessToken;
+//
+//        return (new DriverResource($driver))->additional([
+//            'token' => $token,
+//        ]);
     }
 
     public function password_forgot(ForgetPasswordRequest $request) {
