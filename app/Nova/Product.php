@@ -91,6 +91,11 @@ class Product extends Resource
             BelongsTo::make('Unit')
                 ->hideFromIndex()->nullable(),
 
+            Number::make('Minimum Order Quantity', 'min_quantity')
+                ->rules(NULLABLE_INTEGER_VALIDATION)
+                ->default(1)->min(1)
+                ->hideFromIndex(),
+
             Text::make('SKU', 'SKU')
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION)

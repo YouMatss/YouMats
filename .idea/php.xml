@@ -224,6 +224,7 @@
       <path value="$PROJECT_DIR$/vendor/whitecube/nova-google-maps" />
       <path value="$PROJECT_DIR$/vendor/mauricewijnia/nova-maps-address" />
       <path value="$PROJECT_DIR$/vendor/adamcmoore/nova-gmap" />
+      <path value="$PROJECT_DIR$/vendor/ladumor/one-signal" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

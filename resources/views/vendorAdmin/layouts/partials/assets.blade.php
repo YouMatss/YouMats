@@ -1,0 +1,45 @@
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Tempusdominus Bootstrap 4 -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<!-- iCheck -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- JQVMap -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/jqvmap/jqvmap.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/adminlte.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/daterangepicker/daterangepicker.css">
+<!-- summernote -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/summernote/summernote-bs4.min.css">
+<!-- Select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<!-- Toastr -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/toastr/toastr.css">
+<style>
+    .card-youmats {
+        background: #003f91 !important;
+        color: #FFF;
+    }
+    .btn-youmats {
+        background-color: #003f91;
+        border-color: #003f91;
+        color: #FFF;
+        box-shadow: none;
+    }
+    .btn-youmats:hover {
+        color: #FFF;
+    }
+</style>
+@if(\LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+    <!-- Bootstrap 4 RTL -->
+    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
+    <!-- Custom style for RTL -->
+    <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/rtl-vendor-admin.css">
+@endif
