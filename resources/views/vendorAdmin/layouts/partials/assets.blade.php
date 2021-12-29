@@ -24,12 +24,12 @@
 <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/toastr/toastr.css">
 <style>
     .card-youmats {
-        background: #003f91 !important;
+        background: #4099DE !important;
         color: #FFF;
     }
     .btn-youmats {
-        background-color: #003f91;
-        border-color: #003f91;
+        background-color: #4099DE;
+        border-color: #4099DE;
         color: #FFF;
         box-shadow: none;
     }
