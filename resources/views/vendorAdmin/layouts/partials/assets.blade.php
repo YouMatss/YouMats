@@ -22,21 +22,8 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <!-- Toastr -->
 <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/toastr/toastr.css">
-<style>
-    .card-youmats {
-        background: #4099DE !important;
-        color: #FFF;
-    }
-    .btn-youmats {
-        background-color: #4099DE;
-        border-color: #4099DE;
-        color: #FFF;
-        box-shadow: none;
-    }
-    .btn-youmats:hover {
-        color: #FFF;
-    }
-</style>
+<!-- Custom Style -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom.css">
 @if(\LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
     <!-- Bootstrap 4 RTL -->
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">

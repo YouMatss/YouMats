@@ -30,7 +30,11 @@
                                     <td>{{$branch->city->name}}</td>
                                     <td>
                                         <a href="{{route('vendor.branch.edit', [$branch->id])}}" class="btn btn-youmats btn-xs">{{__('vendorAdmin.edit_button')}}</a>
-                                        <a href="{{route('vendor.branch.delete', [$branch->id])}}" class="btn btn-danger btn-xs">{{__('vendorAdmin.delete_button')}}</a>
+                                        <form style="display: inline-block" method="post" action="{{route('vendor.branch.delete', [$branch->id])}}">
+                                            {{csrf_field()}}
+                                            {{method_field('DELETE')}}
+                                            <button class="btn btn-danger btn-xs" type="submit">{{__('vendorAdmin.delete_button')}}</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

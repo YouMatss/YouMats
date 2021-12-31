@@ -11,7 +11,8 @@
                         <div class="card-header card-youmats">
                             <h3 class="card-title">{{__('vendorAdmin.create_shipping_group')}}</h3>
                         </div>
-                        <form>
+                        <form action="{{route('vendor.shipping-group.store')}}" method="post">
+                            {{csrf_field()}}
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">{{__('vendorAdmin.name')}}</label>

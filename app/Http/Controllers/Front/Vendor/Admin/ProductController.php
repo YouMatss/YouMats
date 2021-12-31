@@ -43,7 +43,6 @@ class ProductController extends Controller
     public function create()
     {
         $data['vendor'] = Auth::guard('vendor')->user();
-        $data['tags'] = Tag::all();
         $data['categories'] = Category::all();
         $data['units'] = Unit::orderby('sort')->get();
         $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
@@ -55,8 +54,6 @@ class ProductController extends Controller
     {
         $data['vendor'] = Auth::guard('vendor')->user();
         $data['product'] = Product::where('vendor_id', $data['vendor']->id)->firstorfail();
-        $data['attributes'] = Attribute::where('category_id', $data['product']->category_id)->get();
-        $data['tags'] = Tag::all();
         $data['categories'] = Category::all();
         $data['units'] = Unit::orderby('sort')->get();
         $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();

@@ -34,7 +34,11 @@
                                     <td>{{$shipping_price->default_format}}</td>
                                     <td>
                                         <a href="{{route('vendor.shipping-group.edit', [$shipping_price->id])}}" class="btn btn-youmats btn-xs">{{__('vendorAdmin.edit_button')}}</a>
-                                        <a href="{{route('vendor.shipping-group.delete', [$shipping_price->id])}}" class="btn btn-danger btn-xs">{{__('vendorAdmin.delete_button')}}</a>
+                                        <form style="display: inline-block" method="post" action="{{route('vendor.shipping-group.delete', [$shipping_price->id])}}">
+                                            {{csrf_field()}}
+                                            {{method_field('DELETE')}}
+                                            <button class="btn btn-danger btn-xs" type="submit">{{__('vendorAdmin.delete_button')}}</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

@@ -36,26 +36,17 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="tags">{{__('vendorAdmin.tags')}}</label>
-                                    <select class="form-control tags-select" multiple="multiple" name="tags[]" id="tags">
-                                        @foreach($tags as $tag)
-                                            <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="short_desc_ar">{{__('vendorAdmin.short_desc_ar')}}</label>
-                                            <textarea id="short_desc_ar" class="form-control" name="short_desc_ar"></textarea>
+                                            <textarea id="short_desc_ar" class="form-control ckeditor" name="short_desc_ar"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="short_desc_en">{{__('vendorAdmin.short_desc_en')}}</label>
-                                            <textarea id="short_desc_en" class="form-control" name="short_desc_en"></textarea>
+                                            <textarea id="short_desc_en" class="form-control ckeditor" name="short_desc_en"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -63,13 +54,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="desc_ar">{{__('vendorAdmin.desc_ar')}}</label>
-                                            <textarea id="desc_ar" rows="5" class="form-control" name="desc_ar"></textarea>
+                                            <textarea id="desc_ar" rows="5" class="form-control ckeditor" name="desc_ar"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="desc_en">{{__('vendorAdmin.desc_en')}}</label>
-                                            <textarea id="desc_en" rows="5" class="form-control" name="desc_en"></textarea>
+                                            <textarea id="desc_en" rows="5" class="form-control ckeditor" name="desc_en"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -182,13 +173,13 @@
                                                             <input type="number" class="form-control" id="time" name="default_time" min="1" step="1" />
                                                         </div>
                                                         <div class="form-group">
-                                            <label for="format">{{__('vendorAdmin.default_format')}}</label>
-                                            <select class="form-control" id="format" name="default_format">
-                                                <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
-                                                <option value="hour">{{__('vendorAdmin.hour')}}</option>
-                                                <option value="day">{{__('vendorAdmin.day')}}</option>
-                                            </select>
-                                        </div>
+                                                            <label for="format">{{__('vendorAdmin.default_format')}}</label>
+                                                            <select class="form-control" id="format" name="default_format">
+                                                                <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
+                                                                <option value="hour">{{__('vendorAdmin.hour')}}</option>
+                                                                <option value="day">{{__('vendorAdmin.day')}}</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -260,9 +251,6 @@
         });
         $(document).on('click', '.clone-remove', function () {
             $(this).closest('.clone-element').remove();
-        });
-        $('.tags-select').select2({
-            placeholder: "{{__('vendorAdmin.tags_placeholder')}}"
         });
         $('#specific_shipping').hide();
         $('#specific').on('change', function () {

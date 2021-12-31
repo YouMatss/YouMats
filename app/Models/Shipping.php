@@ -10,6 +10,8 @@ class Shipping extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     protected $casts = [
         'cities_prices' => 'array'
     ];

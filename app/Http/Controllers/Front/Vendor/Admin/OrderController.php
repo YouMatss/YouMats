@@ -12,7 +12,6 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        parent::__construct();
         $this->middleware('auth:vendor');
         //If you would like to add "vendor verification middleware":
         $this->middleware('verified:vendor.verification.notice');
