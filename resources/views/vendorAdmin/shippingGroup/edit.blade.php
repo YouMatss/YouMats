@@ -11,7 +11,9 @@
                         <div class="card-header card-youmats">
                             <h3 class="card-title">{{__('vendorAdmin.edit_shipping_group')}} ({{$shipping->name}})</h3>
                         </div>
-                        <form>
+                        <form action="{{route('vendor.shipping-group.update', [$shipping->id])}}" method="post">
+                            {{csrf_field()}}
+                            {{method_field('PUT')}}
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">{{__('vendorAdmin.name')}}</label>

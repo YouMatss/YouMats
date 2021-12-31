@@ -64,10 +64,10 @@ class Branch extends Resource
                 ->rules(REQUIRED_STRING_VALIDATION),
 
             Text::make('Fax')
-                ->rules(REQUIRED_STRING_VALIDATION),
+                ->rules(NULLABLE_STRING_VALIDATION),
 
             Text::make('Website')
-                ->rules(REQUIRED_STRING_VALIDATION),
+                ->rules(NULLABLE_STRING_VALIDATION),
 
             Text::make('Address')
                 ->rules(REQUIRED_STRING_VALIDATION),

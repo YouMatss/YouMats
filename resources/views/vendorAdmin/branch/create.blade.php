@@ -11,7 +11,8 @@
                         <div class="card-header card-youmats">
                             <h3 class="card-title">{{__('vendorAdmin.create_branch')}}</h3>
                         </div>
-                        <form>
+                        <form action="{{route('vendor.branch.store')}}" method="post">
+                            {{csrf_field()}}
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">{{__('vendorAdmin.name')}}</label>
@@ -28,7 +29,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">{{__('vendorAdmin.phone')}}</label>
-                                    <input type="text" class="form-control" name="phone" id="phone">
+                                    <input type="text" class="form-control" name="phone_number" id="phone">
                                 </div>
                                 <div class="form-group">
                                     <label for="fax">{{__('vendorAdmin.fax')}}</label>
@@ -60,6 +61,6 @@
     </section>
 @endsection
 @section('js_additional')
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{env('NOVA_MAPS_ADDRESS_KEY')}}&libraries=places&sensor=false"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{env('NOVA_MAPS_ADDRESS_KEY')}}&libraries=places&sensor=false"></script>
     <script src="{{front_url()}}/assets/js/map.js"></script>
 @endsection

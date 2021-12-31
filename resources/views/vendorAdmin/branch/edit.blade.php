@@ -11,7 +11,9 @@
                         <div class="card-header card-youmats">
                             <h3 class="card-title">{{__('vendorAdmin.edit_branch')}} ({{$branch->name}})</h3>
                         </div>
-                        <form>
+                        <form action="{{route('vendor.branch.update', [$branch->id])}}" method="post">
+                            {{csrf_field()}}
+                            {{method_field('PUT')}}
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">{{__('vendorAdmin.name')}}</label>
@@ -65,6 +67,6 @@
     </section>
 @endsection
 @section('js_additional')
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{env('NOVA_MAPS_ADDRESS_KEY')}}&libraries=places&sensor=false"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{env('NOVA_MAPS_ADDRESS_KEY')}}&libraries=places&sensor=false"></script>
     <script src="{{front_url()}}/assets/js/map.js"></script>
 @endsection

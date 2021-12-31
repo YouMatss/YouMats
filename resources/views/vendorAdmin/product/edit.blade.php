@@ -36,14 +36,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="tags">{{__('vendorAdmin.tags')}}</label>
-                                    <select class="form-control tags-select" multiple="multiple" name="tags[]" id="tags">
-                                        @foreach($tags as $tag)
-                                            <option value="{{$tag->id}}" @if(in_array($tag->id, $product->tags->pluck('id')->toArray())) selected @endif>{{$tag->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -248,27 +240,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="card">
-                                    <div class="card-header card-youmats">
-                                        <h3 class="card-title">{{__('vendorAdmin.attributes')}}</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="attributes">{{__('vendorAdmin.attributes')}}</label>
-                                            <select class="form-control" multiple="multiple" id="attributes" name="attributes[]">
-                                                @foreach($attributes as $attribute)
-                                                    <optgroup label="{{$attribute->key}}">
-                                                        @foreach($attribute->values as $value)
-                                                            <option value="{{$value->value}}" @if(in_array($value->id, json_decode($product->attributes))) selected @endif>{{$value->value}}</option>
-                                                        @endforeach
-                                                    </optgroup>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-youmats">Submit</button>
@@ -333,12 +304,6 @@
             });
             $(document).on('click', '.clone-remove', function () {
                 $(this).closest('.clone-element').remove();
-            });
-            $('.tags-select').select2({
-                placeholder: "{{__('vendorAdmin.tags_placeholder')}}"
-            });
-            $('#attributes').select2({
-                placeholder: "{{__('vendorAdmin.attributes_placeholder')}}"
             });
             @if(!$product->specific_shipping)
                 $('#specific_shipping').hide();
