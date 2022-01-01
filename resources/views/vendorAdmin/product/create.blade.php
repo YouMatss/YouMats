@@ -11,7 +11,8 @@
                         <div class="card-header card-youmats">
                             <h3 class="card-title">{{__('vendorAdmin.create_product')}}</h3>
                         </div>
-                        <form>
+                        <form action="{{route('vendor.product.store')}}" method="post">
+                            {{csrf_field()}}
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">

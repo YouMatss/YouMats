@@ -41,7 +41,7 @@ Route::group([
         Route::get('dashboard', [IndexController::class, 'dashboard'])->name('dashboard');
 
         Route::get('edit', [IndexController::class, 'edit'])->name('edit');
-        Route::patch('update', [IndexController::class, 'update'])->name('update');
+        Route::put('update', [IndexController::class, 'update'])->name('update');
 
         Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
             Route::get('/', [ProductController::class, 'index'])->name('index');

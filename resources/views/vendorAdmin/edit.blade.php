@@ -11,7 +11,9 @@
                     <div class="card-header card-youmats">
                         <h3 class="card-title">{{__('vendorAdmin.edit_info')}}</h3>
                     </div>
-                    <form>
+                    <form action="{{route('vendor.update')}}" method="post" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        {{method_field('PUT')}}
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -53,25 +55,25 @@
                                                         <div class="col-md-2">
                                                             <div class="form-group">
                                                                 <label for="person_name">{{__('vendorAdmin.person_name')}}</label>
-                                                                <input type="text" class="form-control" id="person_name" name="person_name[]" value="{{$row['person_name']}}" />
+                                                                <input type="text" class="form-control" id="person_name" name="contacts_person_name[]" value="{{$row['person_name']}}" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <div class="form-group">
                                                                 <label for="c_email">{{__('vendorAdmin.email')}}</label>
-                                                                <input type="email" class="form-control" id="c_email" name="email[]" value="{{$row['email']}}" />
+                                                                <input type="email" class="form-control" id="c_email" name="contacts_email[]" value="{{$row['email']}}" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <div class="form-group">
                                                                 <label for="c_phone">{{__('vendorAdmin.phone')}}</label>
-                                                                <input type="text" class="form-control" id="c_phone" name="phone[]" value="{{$row['phone']}}" />
+                                                                <input type="text" class="form-control" id="c_phone" name="contacts_phone[]" value="{{$row['phone']}}" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <div class="form-group">
                                                                 <label for="cities">{{__('vendorAdmin.cities')}}</label>
-                                                                <select class="form-control select2-cities" multiple="multiple" id="cities" name="cities[]">
+                                                                <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[]">
                                                                     @foreach($cities as $city)
                                                                         <option value="{{$city->id}}" @if($row['cities'] == $city->id) selected @endif>{{$city->name}}</option>
                                                                     @endforeach
@@ -81,7 +83,7 @@
                                                         <div class="col-md-2">
                                                             <div class="form-group">
                                                                 <label for="c_with">{{__('vendorAdmin.with')}}</label>
-                                                                <select class="form-control" id="c_with" name="with[]">
+                                                                <select class="form-control" id="c_with" name="contacts_with[]">
                                                                     <option value="" disabled selected>{{__('vendorAdmin.with_placeholder')}}</option>
                                                                     <option value="individual" @if($row['with'] == 'individual') selected @endif>{{__('vendorAdmin.individual')}}</option>
                                                                     <option value="company" @if($row['with'] == 'company') selected @endif>{{__('vendorAdmin.company')}}</option>
@@ -154,7 +156,7 @@
                                 <label for="licenses">{{__('vendorAdmin.licenses')}}</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" multiple name="licenses" class="custom-file-input" id="licenses">
+                                        <input type="file" multiple name="licenses[]" class="custom-file-input" id="licenses">
                                         <label class="custom-file-label">{{__('vendorAdmin.choose_file')}}</label>
                                     </div>
                                 </div>
@@ -176,15 +178,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="facebook">{{__('vendorAdmin.facebook')}}</label>
-                                        <input type="url" class="form-control" name="facebook"
-                                               id="facebook" value="{{$vendor->facebook}}">
+                                        <input type="url" class="form-control" name="facebook_url"
+                                               id="facebook" value="{{$vendor->facebook_url}}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="twitter">{{__('vendorAdmin.twitter')}}</label>
-                                        <input type="url" class="form-control" name="twitter"
-                                               id="twitter" value="{{$vendor->twitter}}">
+                                        <input type="url" class="form-control" name="twitter_url"
+                                               id="twitter" value="{{$vendor->twitter_url}}">
                                     </div>
                                 </div>
                             </div>
@@ -192,15 +194,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="youtube">{{__('vendorAdmin.youtube')}}</label>
-                                        <input type="url" class="form-control" name="youtube"
-                                               id="youtube" value="{{$vendor->youtube}}">
+                                        <input type="url" class="form-control" name="youtube_url"
+                                               id="youtube" value="{{$vendor->youtube_url}}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="instagram">{{__('vendorAdmin.instagram')}}</label>
-                                        <input type="url" class="form-control" name="instagram"
-                                               id="instagram" value="{{$vendor->instagram}}">
+                                        <input type="url" class="form-control" name="instagram_url"
+                                               id="instagram" value="{{$vendor->instagram_url}}">
                                     </div>
                                 </div>
                             </div>
@@ -208,15 +210,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="pinterest">{{__('vendorAdmin.pinterest')}}</label>
-                                        <input type="url" class="form-control" name="pinterest"
-                                               id="pinterest" value="{{$vendor->pinterest}}">
+                                        <input type="url" class="form-control" name="pinterest_url"
+                                               id="pinterest" value="{{$vendor->pinterest_url}}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="website">{{__('vendorAdmin.website')}}</label>
-                                        <input type="url" class="form-control" name="website"
-                                               id="website" value="{{$vendor->website}}">
+                                        <input type="url" class="form-control" name="website_url"
+                                               id="website" value="{{$vendor->website_url}}">
                                     </div>
                                 </div>
                             </div>
@@ -225,7 +227,7 @@
                                     <div class="form-group">
                                         <label for="password">{{__('vendorAdmin.password')}}</label>
                                         <input type="password" class="form-control" name="password"
-                                               id="password" placeholder="{{__('vendorAdmin.password_leave_it_blank')}}" ">
+                                               id="password" placeholder="{{__('vendorAdmin.password_leave_it_blank')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -261,25 +263,25 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="person_name">{{__('vendorAdmin.person_name')}}</label>
-                            <input type="text" class="form-control" id="person_name" name="person_name[]"/>
+                            <input type="text" class="form-control" id="person_name" name="contacts_person_name[]"/>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="c_email">{{__('vendorAdmin.email')}}</label>
-                            <input type="email" class="form-control" id="c_email" name="email[]" />
+                            <input type="email" class="form-control" id="c_email" name="contacts_email[]" />
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="c_phone">{{__('vendorAdmin.phone')}}</label>
-                            <input type="text" class="form-control" id="c_phone" name="phone[]" />
+                            <input type="text" class="form-control" id="c_phone" name="contacts_phone[]" />
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="cities">{{__('vendorAdmin.cities')}}</label>
-                            <select class="form-control select2-cities" multiple="multiple" id="cities" name="cities[]">
+                            <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[]">
                                 @foreach($cities as $city)
                                     <option value="{{$city->id}}">{{$city->name}}</option>
                                 @endforeach
@@ -289,7 +291,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="c_with">{{__('vendorAdmin.with')}}</label>
-                            <select class="form-control" id="c_with" name="with[]">
+                            <select class="form-control" id="c_with" name="contacts_with[]">
                                 <option value="" disabled selected>{{__('vendorAdmin.with_placeholder')}}</option>
                                 <option value="individual">{{__('vendorAdmin.individual')}}</option>
                                 <option value="company">{{__('vendorAdmin.company')}}</option>

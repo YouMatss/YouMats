@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{route('home')}}" class="brand-link">
         <img src="{{ Storage::url(nova_get_setting('logo')) }}" alt="{{env('APP_NAME')}}"
              class="brand-image">
         <span class="brand-text font-weight-light">&nbsp;</span>
@@ -35,7 +35,7 @@
                         <p>{{__('vendorAdmin.edit_info')}}</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-layer-group"></i>
                         <p>
@@ -58,7 +58,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-code-branch"></i>
                         <p>
@@ -81,7 +81,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-truck"></i>
                         <p>
@@ -104,7 +104,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-receipt"></i>
                         <p>
