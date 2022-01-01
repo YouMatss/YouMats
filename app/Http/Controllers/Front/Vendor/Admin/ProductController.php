@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Vendor\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Vendor\ProductRequest;
 use App\Models\Attribute;
 use App\Models\City;
 use App\Models\Product;
@@ -27,9 +28,9 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        parent::__construct();
-
         $this->middleware('auth:vendor');
+
+        //If you would like to add "vendor verification middleware":
         $this->middleware('verified:vendor.verification.notice');
     }
 
@@ -59,28 +60,6 @@ class ProductController extends Controller
         $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
 
         return view('vendorAdmin.product.edit')->with($data);
-    }
-
-    /**
-     * @param Request $request
-     * @return array
-     */
-    protected function validateRequest(Request $request): array
-    {
-        return $request->validate([
-            'name_en' => REQUIRED_STRING_VALIDATION,
-            'name_ar' => REQUIRED_STRING_VALIDATION,
-            'category_id' => REQUIRED_NUMERIC_VALIDATION,
-            'type' => 'required|in:product,service',
-            'price' => 'required_if:type,product|numeric',
-            'stock' => 'required_if:type,product|numeric',
-            'unit_id' => 'integer|exists:units,id',
-            'rate' => REQUIRED_NUMERIC_VALIDATION,
-            'short_desc_en' => NULLABLE_TEXT_VALIDATION,
-            'short_desc_ar' => NULLABLE_TEXT_VALIDATION,
-            'desc_en' => NULLABLE_TEXT_VALIDATION,
-            'desc_ar' => NULLABLE_TEXT_VALIDATION
-        ]);
     }
 
     /**
@@ -126,16 +105,12 @@ class ProductController extends Controller
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function store(Request $request): RedirectResponse
+    public function store(ProductRequest $request): RedirectResponse
     {
+        $data = $request->validated();
         $vendor = Auth::guard('vendor')->user();
 
-        if(!$vendor->active)
-            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
-
-        $this->validateRequest($request);
-
-        $slug = Str::slug($request->name_en, '-');
+        $slug = Str::slug($data['name_en'], '-');
 
         $request->validate([
             'gallery' => 'required|array',
