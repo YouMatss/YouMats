@@ -8,7 +8,7 @@
     float: right;
 }
 .content-wrapper, .main-footer, .main-header {
-    margin-left: 0px;
+    margin-left: 0 !important;
     margin-right: 250px;
 }
 .mr-auto-navbav{
@@ -61,4 +61,20 @@
     .sidebar-open .main-sidebar, .sidebar-open .main-sidebar::before {
         margin-right: 0;
     }
+}
+.navbar-nav{
+    margin-left: 0 !important;
+}
+.card-header {
+    color: #FFF;
+    text-align: right !important;
+}
+.card-header .card-title {
+    float: right;
+}
+.user-panel .info a{
+    color: #c2c7d0;
+}
+.user-panel .info a:hover{
+    color: #c2c7d0;
 }
