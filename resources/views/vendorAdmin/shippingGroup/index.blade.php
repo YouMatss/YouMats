@@ -11,9 +11,9 @@
                 </div>
                 <div class="card-body">
                     <div class="float-right">
-                        <a href="{{route('vendor.shipping-group.create')}}" class="btn btn-sm mb-3 btn-youmats">{{__('vendorAdmin.add_button')}}</a>
+                        <a href="{{route('vendor.shipping-group.create')}}" class="btn btn-sm mb-3 btn-youmats">{{__('vendorAdmin.add_button_shipping')}}</a>
                     </div>
-                    <table class="table table-bordered table-striped" style="width: 100%">
+                    <table class="table" style="width: 100%">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>

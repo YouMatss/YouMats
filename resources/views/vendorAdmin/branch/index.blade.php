@@ -11,14 +11,17 @@
                 </div>
                 <div class="card-body">
                     <div class="float-right">
-                        <a href="{{route('vendor.branch.create')}}" class="btn btn-sm mb-3 btn-youmats">{{__('vendorAdmin.add_button')}}</a>
+                        <a href="{{route('vendor.branch.create')}}" class="btn btn-sm mb-3 btn-youmats">{{__('vendorAdmin.add_button_branch')}}</a>
                     </div>
-                    <table class="table table-bordered table-striped" style="width: 100%">
+                    <table class="table" style="width: 100%">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-center">{{__('vendorAdmin.name')}}</th>
                                 <th class="text-center">{{__('vendorAdmin.city')}}</th>
+                                <th class="text-center">{{__('vendorAdmin.phone')}}</th>
+                                <th class="text-center">{{__('vendorAdmin.fax')}}</th>
+                                <th class="text-center">{{__('vendorAdmin.address')}}</th>
                                 <th class="text-center">{{__('vendorAdmin.actions')}}</th>
                             </tr>
                         </thead>
@@ -28,6 +31,9 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$branch->name}}</td>
                                     <td>{{$branch->city->name}}</td>
+                                    <td>{{$branch->phone_number}}</td>
+                                    <td>{{$branch->fax}}</td>
+                                    <td>{{$branch->address}}</td>
                                     <td>
                                         <a href="{{route('vendor.branch.edit', [$branch->id])}}" class="btn btn-youmats btn-xs">{{__('vendorAdmin.edit_button')}}</a>
                                         <form style="display: inline-block" method="post" action="{{route('vendor.branch.delete', [$branch->id])}}">

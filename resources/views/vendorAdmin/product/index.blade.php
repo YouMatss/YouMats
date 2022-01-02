@@ -13,7 +13,7 @@
                     <div class="float-right">
                         <a href="{{route('vendor.product.create')}}" class="btn btn-sm mb-3 btn-youmats">{{__('vendorAdmin.add_button')}}</a>
                     </div>
-                    <table class="table table-bordered table-striped" style="width: 100%">
+                    <table class="table" style="width: 100%">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
@@ -34,6 +34,9 @@
                                     <td>{{$product->views}}</td>
                                     <td>
                                         <a href="{{route('vendor.product.edit', [$product->id])}}" class="btn btn-youmats btn-xs">{{__('vendorAdmin.edit_button')}}</a>
+                                        @if($product->active)
+                                        <a target="_blank" href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="btn btn-success btn-xs">{{__('vendorAdmin.view_front')}}</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

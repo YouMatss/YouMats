@@ -37,7 +37,7 @@
                                             <label for="status">{{__('vendorAdmin.status')}}</label>
                                             <select id="status" class="form-control" name="status">
                                                 <option value="pending" @if($item->status == 'pending') selected @endif>{{__('vendorAdmin.pending')}}</option>
-                                                <option value="shipping" @if($item->status == 'shipping') selected @endif>{{__('vendorAdmin.shipping')}}</option>
+                                                <option value="shipping" @if($item->status == 'shipping') selected @endif>{{__('vendorAdmin.shipping_option')}}</option>
                                                 <option value="completed" @if($item->status == 'completed') selected @endif>{{__('vendorAdmin.completed')}}</option>
                                                 <option value="refused" @if($item->status == 'refused') selected @endif>{{__('vendorAdmin.refused')}}</option>
                                             </select>
