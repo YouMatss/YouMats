@@ -71,7 +71,7 @@ class ProductController extends Controller
 
         $data['active'] = 0;
 
-        if($data['specific_shipping']) {
+        if(isset($data['specific_shipping']) && $data['specific_shipping']) {
             $data['specific_shipping'] = '1';
         } else {
             $data['specific_shipping'] = '0';
@@ -130,7 +130,7 @@ class ProductController extends Controller
         //Deactivate the product.
         $data['active'] = 0;
 
-        if($data['specific_shipping']) {
+        if(isset($data['specific_shipping']) && $data['specific_shipping']) {
             $data['specific_shipping'] = '1';
         } else {
             $data['specific_shipping'] = '0';
