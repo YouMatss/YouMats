@@ -47,7 +47,7 @@
                         <li class="nav-item">
                             <a href="{{route('vendor.product.create')}}" class="nav-link">
                                 <i class="fa fa-plus nav-icon"></i>
-                                <p>{{__('vendorAdmin.add_new')}}</p>
+                                <p>{{__('vendorAdmin.add_new_product')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -70,7 +70,7 @@
                         <li class="nav-item">
                             <a href="{{route('vendor.branch.create')}}" class="nav-link">
                                 <i class="fa fa-plus nav-icon"></i>
-                                <p>{{__('vendorAdmin.add_new')}}</p>
+                                <p>{{__('vendorAdmin.add_new_branch')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -93,7 +93,7 @@
                         <li class="nav-item">
                             <a href="{{route('vendor.shipping-group.create')}}" class="nav-link">
                                 <i class="fa fa-plus nav-icon"></i>
-                                <p>{{__('vendorAdmin.add_new')}}</p>
+                                <p>{{__('vendorAdmin.add_new_shipping')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">

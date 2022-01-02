@@ -38,6 +38,11 @@ class IndexController extends Controller
 
     public function dashboard() {
         $data['vendor'] = Auth::guard('vendor')->user();
+        $data['products'] = count($data['vendor']->products);
+        $data['branches'] = count($data['vendor']->branches);
+        $data['shippingGroups'] = count($data['vendor']->shippings);
+        $data['contacts'] = count($data['vendor']->contacts);
+        $data['orders'] = count($data['vendor']->order_items);
 
         return view('vendorAdmin.dashboard')->with($data);
     }

@@ -10,7 +10,7 @@
                     <h3 class="card-title">{{__('vendorAdmin.products')}}</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped" style="width: 100%">
+                    <table class="table" style="width: 100%">
                         <thead>
                         <tr>
                             <th class="text-center">{{__('vendorAdmin.order_id')}}</th>
