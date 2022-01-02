@@ -13,70 +13,48 @@
                             {{csrf_field()}}
                             {{method_field('PUT')}}
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name-ar">{{__('vendorAdmin.name_ar')}}</label>
-                                            <input type="text" class="form-control" name="name_ar" id="name-ar" value="{{$product->getTranslation('name','ar')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name-en">{{__('vendorAdmin.name_en')}}</label>
-                                            <input type="text" class="form-control" name="name_en" id="name-en" value="{{$product->getTranslation('name','en')}}">
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="name-ar">{{__('vendorAdmin.name_ar')}}</label>
+                                    <input type="text" class="form-control" name="name_ar" id="name-ar" value="{{$product->getTranslation('name','ar')}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name-en">{{__('vendorAdmin.name_en')}}</label>
+                                    <input type="text" class="form-control" name="name_en" id="name-en" value="{{$product->getTranslation('name','en')}}">
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="category">{{__('vendorAdmin.category')}}</label>
-                                            <select class="form-control" id="category">
-                                                <option value="" selected disabled>{{__('vendorAdmin.category_placeholder')}}</option>
-                                                @foreach($categories as $category)
-                                                    <option value="{{$category->id}}" @if($selected_category == $category->id) selected @endif>{{$category->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="subCategory">{{__('vendorAdmin.subCategory')}}</label>
-                                            <select class="form-control" name="category_id" id="subCategory">
-                                                <option value="" selected disabled>{{__('vendorAdmin.subCategory_placeholder')}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="category">{{__('vendorAdmin.category')}}</label>
+                                    <select class="form-control" id="category">
+                                        <option value="" selected disabled>{{__('vendorAdmin.category_placeholder')}}</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}" @if($selected_category == $category->id) selected @endif>{{$category->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="short_desc_ar">{{__('vendorAdmin.short_desc_ar')}}</label>
-                                            <textarea id="short_desc_ar" class="form-control ckeditor" name="short_desc_ar">{{ $product->getTranslation('short_desc','ar') }}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="short_desc_en">{{__('vendorAdmin.short_desc_en')}}</label>
-                                            <textarea id="short_desc_en" class="form-control ckeditor" name="short_desc_en">{{ $product->getTranslation('short_desc','en') }}</textarea>
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="subCategory">{{__('vendorAdmin.subCategory')}}</label>
+                                    <select class="form-control" name="category_id" id="subCategory">
+                                        <option value="" selected disabled>{{__('vendorAdmin.subCategory_placeholder')}}</option>
+                                    </select>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="desc_ar">{{__('vendorAdmin.desc_ar')}}</label>
-                                            <textarea id="desc_ar" class="form-control ckeditor" name="desc_ar">{{$product->getTranslation('desc','ar')}}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="desc_en">{{__('vendorAdmin.desc_en')}}</label>
-                                            <textarea id="desc_en" class="form-control ckeditor" name="desc_en">{{$product->getTranslation('desc','en')}}</textarea>
-                                        </div>
-                                    </div>
+
+                                <div class="form-group">
+                                    <label for="short_desc_ar">{{__('vendorAdmin.short_desc_ar')}}</label>
+                                    <textarea id="short_desc_ar" class="form-control ckeditor" name="short_desc_ar">{{ $product->getTranslation('short_desc','ar') }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="short_desc_en">{{__('vendorAdmin.short_desc_en')}}</label>
+                                    <textarea id="short_desc_en" class="form-control ckeditor" name="short_desc_en">{{ $product->getTranslation('short_desc','en') }}</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="desc_ar">{{__('vendorAdmin.desc_ar')}}</label>
+                                    <textarea id="desc_ar" class="form-control ckeditor" name="desc_ar">{{$product->getTranslation('desc','ar')}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="desc_en">{{__('vendorAdmin.desc_en')}}</label>
+                                    <textarea id="desc_en" class="form-control ckeditor" name="desc_en">{{$product->getTranslation('desc','en')}}</textarea>
                                 </div>
 
                                 <div class="form-group">
@@ -88,19 +66,13 @@
                                     </select>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="cost">{{__('vendorAdmin.cost')}}</label>
-                                            <input type="number" class="form-control" name="cost" id="cost" min="0" step="0.01" value="{{$product->cost}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="price">{{__('vendorAdmin.price')}}</label>
-                                            <input type="number" class="form-control" name="price" id="price" min="0" step="0.01" value="{{$product->price}}">
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="cost">{{__('vendorAdmin.cost')}}</label>
+                                    <input type="number" class="form-control" name="cost" id="cost" min="0" step="0.01" value="{{$product->cost}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">{{__('vendorAdmin.price')}}</label>
+                                    <input type="number" class="form-control" name="price" id="price" min="0" step="0.01" value="{{$product->price}}">
                                 </div>
 
                                 <div class="form-group">
