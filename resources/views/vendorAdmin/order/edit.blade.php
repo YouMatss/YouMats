@@ -7,13 +7,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <h4>{{__('vendorAdmin.edit_order')}} ({{$item->order->order_id}})</h4>
                     <div class="card">
                         <form method="post" action="{{route('vendor.order.update')}}">
                             {{csrf_field()}}
                             <input type="hidden" name="item_id" value="{{$item->id}}" />
-                            <div class="card-header card-youmats">
-                                <h3 class="card-title">{{__('vendorAdmin.edit_order')}} ({{$item->order->order_id}})</h3>
-                            </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -50,18 +48,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
                                 <button type="submit" class="btn btn-youmats">Submit</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <h4>{{__('vendorAdmin.user_info')}}</h4>
                     <div class="card">
-                        <div class="card-header card-youmats">
-                            <h3 class="card-title">{{__('vendorAdmin.user_info')}}</h3>
-                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -131,10 +125,8 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <h4>{{__('vendorAdmin.product_details')}}</h4>
                     <div class="card">
-                        <div class="card-header card-youmats">
-                            <h3 class="card-title">{{__('vendorAdmin.product_details')}}</h3>
-                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -162,10 +154,8 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <h4>{{__('vendorAdmin.payment_info')}}</h4>
                     <div class="card">
-                        <div class="card-header card-youmats">
-                            <h3 class="card-title">{{__('vendorAdmin.payment_info')}}</h3>
-                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">

@@ -7,10 +7,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <h4>{{__('vendorAdmin.edit_product')}}</h4>
                     <div class="card">
-                        <div class="card-header card-youmats">
-                            <h3 class="card-title">{{__('vendorAdmin.edit_product')}}</h3>
-                        </div>
                         <form action="{{route('vendor.product.update', [$product->id])}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
                             {{method_field('PUT')}}
@@ -264,8 +262,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
                                 <button type="submit" class="btn btn-youmats">Submit</button>
                             </div>
                         </form>
