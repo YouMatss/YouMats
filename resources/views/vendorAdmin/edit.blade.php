@@ -238,7 +238,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-youmats">Submit</button>
@@ -311,6 +310,9 @@
             </div>`;
             $('#clone-add').on('click', function () {
                 $('#clone-container').append(clone_element);
+                $('.select2-cities').select2({
+                    placeholder: "{{__('vendorAdmin.cities_placeholder')}}"
+                });
             });
             $(document).on('click', '.clone-remove', function () {
                 $(this).closest('.clone-element').remove();

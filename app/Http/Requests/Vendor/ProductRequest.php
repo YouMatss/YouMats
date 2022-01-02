@@ -23,19 +23,50 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $commonRules = [
             'name_en' => REQUIRED_STRING_VALIDATION,
             'name_ar' => REQUIRED_STRING_VALIDATION,
             'category_id' => REQUIRED_NUMERIC_VALIDATION,
-            'type' => 'required|in:product,service',
-            'price' => 'required_if:type,product|numeric',
-            'stock' => 'required_if:type,product|numeric',
-            'unit_id' => 'integer|exists:units,id',
-            'rate' => REQUIRED_NUMERIC_VALIDATION,
             'short_desc_en' => NULLABLE_TEXT_VALIDATION,
             'short_desc_ar' => NULLABLE_TEXT_VALIDATION,
             'desc_en' => NULLABLE_TEXT_VALIDATION,
-            'desc_ar' => NULLABLE_TEXT_VALIDATION
+            'desc_ar' => NULLABLE_TEXT_VALIDATION,
+            'type' => 'required|in:product,service',
+            'cost' => 'required_if:type,product|numeric',
+            'price' => 'required_if:type,product|numeric',
+            'stock' => 'required_if:type,product|numeric',
+            'unit_id' => 'integer|exists:units,id',
+            'min_quantity' => NULLABLE_INTEGER_VALIDATION,
+            'SKU' => NULLABLE_STRING_VALIDATION,
+
+            'shipping_id' => [...NULLABLE_INTEGER_VALIDATION, ...['exists:shippings,id']],
+            'specific_shipping' => NULLABLE_STRING_VALIDATION,
+            'shipping_cities' => ARRAY_VALIDATION,
+            'shipping_cities.*' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:cities,id']],
+            'shipping_price' => ARRAY_VALIDATION,
+            'shipping_price.*' => REQUIRED_NUMERIC_VALIDATION,
+            'shipping_time' => ARRAY_VALIDATION,
+            'shipping_time.*' => REQUIRED_INTEGER_VALIDATION,
+            'shipping_format' => ARRAY_VALIDATION,
+            'shipping_format.*' => [...REQUIRED_STRING_VALIDATION, ...['In:hour,day']],
+            'default_price' => NULLABLE_NUMERIC_VALIDATION,
+            'default_time' => NULLABLE_INTEGER_VALIDATION,
+            'default_format' => [...NULLABLE_STRING_VALIDATION, ...['In:hour,day']],
         ];
+        switch ($this->method()) {
+            case 'POST':
+                return array_merge($commonRules, [
+                    'gallery' => REQUIRED_ARRAY_VALIDATION,
+                    'gallery.*' => REQUIRED_IMAGE_VALIDATION,
+                ]);
+                break;
+            case 'PUT':
+                return array_merge($commonRules, [
+                    'gallery' => ARRAY_VALIDATION,
+                    'gallery.*' => NULLABLE_IMAGE_VALIDATION,
+                ]);
+                break;
+        }
+        return $commonRules;
     }
 }

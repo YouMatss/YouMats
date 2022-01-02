@@ -19,6 +19,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -44,58 +45,11 @@ class ProductController extends Controller
     public function create()
     {
         $data['vendor'] = Auth::guard('vendor')->user();
-        $data['categories'] = Category::all();
+        $data['categories'] = Category::whereIsRoot()->get();
         $data['units'] = Unit::orderby('sort')->get();
         $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
 
         return view('vendorAdmin.product.create')->with($data);
-    }
-
-    public function edit($id)
-    {
-        $data['vendor'] = Auth::guard('vendor')->user();
-        $data['product'] = Product::where('vendor_id', $data['vendor']->id)->firstorfail();
-        $data['categories'] = Category::all();
-        $data['units'] = Unit::orderby('sort')->get();
-        $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
-
-        return view('vendorAdmin.product.edit')->with($data);
-    }
-
-    /**
-     * @param Request $request
-     * @param Product $product
-     */
-    protected function setProduct(Request $request, Product $product)
-    {
-        $slug = Str::slug($request->name_en, '-');
-        $product->category_id = $request->category_id;
-        $product->slug = $slug;
-        $product->type = $request->type;
-        $product->rate = $request->rate;
-        $product->unit_id = $request->unit_id;
-
-        //Generate translations
-        $product->setTranslation('name', 'en', $request->name_en);
-        $product->setTranslation('name', 'ar', $request->name_ar);
-        $product->setTranslation('desc', 'en', $request->desc_en);
-        $product->setTranslation('desc', 'ar', $request->desc_ar);
-        $product->setTranslation('meta_title', 'en', $request->name_en);
-        $product->setTranslation('meta_title', 'ar', $request->name_ar);
-        $product->setTranslation('meta_desc', 'en', $request->name_en);
-        $product->setTranslation('meta_desc', 'ar', $request->name_ar);
-        $product->setTranslation('meta_keywords', 'en', $request->name_en);
-        $product->setTranslation('meta_keywords', 'ar', $request->name_ar);
-        $product->setTranslation('short_desc', 'en', $request->short_desc_en);
-        $product->setTranslation('short_desc', 'ar', $request->short_desc_ar);
-
-
-        //If it's a product let's set the price/stock/unit!
-        if($request->type == 'product') {
-            $product->cost = $request->cost;
-            $product->price = $request->price;
-            $product->stock = $request->stock;
-        }
     }
 
     /**
@@ -108,128 +62,121 @@ class ProductController extends Controller
     public function store(ProductRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $vendor = Auth::guard('vendor')->user();
+        $data['vendor_id'] = Auth::guard('vendor')->id();
 
-        $slug = Str::slug($data['name_en'], '-');
+        $data['slug'] = Str::slug($data['name_en'], '-') . rand(100, 999);
 
-        $request->validate([
-            'gallery' => 'required|array',
-            'gallery.*' => REQUIRED_IMAGE_VALIDATION
-        ]);
+        if(Product::whereSlug($data['slug'])->exists())
+            $data['slug'] = Str::slug($data['name_en'], '-') . rand(100, 999);
 
-        if(Product::whereSlug($slug)->exists())
-            return back()->with(['custom_error' => __('Slug already exists. Change the name.')])->withInput($request->except('_token'));
+        $data['active'] = 0;
 
-        $product = new Product();
-        //Generate SKU
-        $product->sku = Str::sku($request->name_en, '-');
-        $product->vendor_id = $vendor->id;
-        $product->best_seller = 0;
-        $product->active = 0;
+        if($data['specific_shipping']) {
+            $data['specific_shipping'] = '1';
+        } else {
+            $data['specific_shipping'] = '0';
+        }
 
-        $this->setProduct($request, $product);
+        $data['name'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
+        $data['desc'] = ['en' => $data['desc_en'], 'ar' => $data['desc_ar']];
+        $data['short_desc'] = ['en' => $data['short_desc_en'], 'ar' => $data['short_desc_ar']];
+        $data['meta_title'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
+        $data['meta_desc'] = ['en' => $data['short_desc_en'], 'ar' => $data['short_desc_ar']];
+        $data['meta_keywords'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
+
+        if(isset($data['shipping_cities'])) {
+            for ($i=0;$i<count($data['shipping_cities']);$i++) {
+                $data['shipping_prices'][] = [
+                    'cities' => $data['shipping_cities'][$i],
+                    'price' => $data['shipping_price'][$i],
+                    'time' => $data['shipping_time'][$i],
+                    'format' => $data['shipping_format'][$i],
+                ];
+            }
+        } else {
+            $data['shipping_prices'] = [];
+        }
+
+        $product = Product::create($data);
 
         //Add gallery to the product
-        foreach($request->gallery as $image) {
+        foreach($data['gallery'] as $image) {
             $product->addMedia($image)->toMediaCollection(PRODUCT_PATH);
         }
 
-        //Save the product
-        $product->save();
-
-        return redirect()->route('vendor.edit')
-        ->with([
-            'custom_success' => __('Product has been added.')
-        ]);
+        Session::flash('success', __('vendorAdmin.success_store_product'));
+        return redirect()->route('vendor.product.index');
     }
 
-    /**
-     * @param Request $request
-     * @param Vendor $vendor
-     * @param Product $product
-     * @return RedirectResponse
-     */
-    public function update(Request $request, Product $product): RedirectResponse
+    public function edit($id)
     {
-        $vendor = Auth::guard('vendor')->user();
+        $data['vendor'] = Auth::guard('vendor')->user();
+        $data['product'] = Product::where('id', $id)->where('vendor_id', $data['vendor']->id)->firstorfail();
+        $data['categories'] = Category::whereIsRoot()->get();
+        $data['units'] = Unit::orderby('sort')->get();
+        $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
+        $data['selected_category'] = Category::findorfail($data['product']->category_id)->parent_id;
 
-        if(!$vendor->active)
-            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
+        return view('vendorAdmin.product.edit')->with($data);
+    }
 
-        if($product->vendor_id !== $vendor->id)
-            return back()->with(['custom_warning' => __('You do not have permissions to edit this product.')]);
+    public function update(ProductRequest $request, $product_id)
+    {
+        $data = $request->validated();
+        $vendor_id = Auth::guard('vendor')->id();
 
-        $this->validateRequest($request);
-
-        $data = $this->validate($request, [
-            'cities' => ARRAY_VALIDATION,
-            'cities.*' => 'required|integer|exists:cities,id',
-            'price_shipping' => ARRAY_VALIDATION,
-            'price_shipping.*' => REQUIRED_INTEGER_VALIDATION,
-            'time' => ARRAY_VALIDATION,
-            'time.*' => REQUIRED_INTEGER_VALIDATION,
-            'format' => ARRAY_VALIDATION,
-            'format.*' => 'required|string|In:hour,day',
-        ]);
-
-        if($product->SKU != $request->sku) {
-            $request->validate([
-                'sku' => 'required|string|unique:products'
-            ]);
-
-            $product->SKU = $request->sku;
-        }
-
-        $this->setProduct($request, $product);
+        $product = Product::where('id', $product_id)->where('vendor_id', $vendor_id)->firstorfail();
 
         //Deactivate the product.
-        $product->active = 0;
+        $data['active'] = 0;
 
-        $product->save();
+        if($data['specific_shipping']) {
+            $data['specific_shipping'] = '1';
+        } else {
+            $data['specific_shipping'] = '0';
+        }
+
+        if(isset($data['shipping_cities'])) {
+            for ($i=0;$i<count($data['shipping_cities']);$i++) {
+                $data['shipping_prices'][] = [
+                    'cities' => $data['shipping_cities'][$i],
+                    'price' => $data['shipping_price'][$i],
+                    'time' => $data['shipping_time'][$i],
+                    'format' => $data['shipping_format'][$i],
+                ];
+            }
+        } else {
+            $data['shipping_prices'] = [];
+        }
+
+        $product->update($data);
 
         //Add gallery to the product
-        if(isset($request->gallery))
-            foreach($request->gallery as $image) {
+        if(isset($data['gallery']))
+            foreach($data['gallery'] as $image) {
                 $product->addMedia($image)->toMediaCollection(PRODUCT_PATH);
             }
 
-        $shippingPrices = [];
-
-        for ($i=0;$i<count($data['cities']);$i++) {
-            $shippingPrices[$i]['cities'] = $data['cities'][$i];
-            $shippingPrices[$i]['price'] = $data['price_shipping'][$i];
-            $shippingPrices[$i]['time'] = $data['time'][$i];
-            $shippingPrices[$i]['format'] = $data['format'][$i];
-        }
-
-        $product->update([
-            'shipping_prices' => $shippingPrices
-        ]);
-
-        return redirect()->back()->with([
-            'custom_success' => __('Product has been updated.')
-        ]);
+        Session::flash('success', __('vendorAdmin.success_update_product'));
+        return redirect()->back();
     }
 
-    /**
-     * @param Product $product
-     * @param Media $media
-     * @return JsonResponse|RedirectResponse
-     * @throws Exception
-     */
-    public function deleteImage(Product $product, Media $media)
+    public function deleteImage(Product $product, Media $image)
     {
-        if(!Auth::guard('vendor')->user()->active)
-            return redirect()->route('vendor.edit')->with(['custom_warning' => __('You do not have permissions to access this page')]);
+        $vendor_id = Auth::guard('vendor')->id();
 
-        if(count($product->getMedia(PRODUCT_PATH)) === 1)
-            return response()->json(['status' => false, 'message' => __('You cannot delete the only image of this product.')]);
+        if($product->vendor_id != $vendor_id || $image->model_id != $product->id || $image->model_type != 'App\Models\Product') {
+            Session::flash('error', __('vendorAdmin.something_went_wrong'));
+            return redirect()->back();
+        }
+        if(count($product->getMedia(PRODUCT_PATH)) <= 1) {
+            Session::flash('error', __('vendorAdmin.cannot_delete_only_image'));
+            return redirect()->back();
+        }
 
-        $media::where('model_id', $product->id)
-                ->where('model_type', 'App\Models\Product')
-                ->where('id', $media->id)
-                ->delete();
+        $product->deleteMedia($image->id);
 
-        return response()->json(['status' => true, 'message' => __('Image has been removed.')]);
+        Session::flash('success', __('vendorAdmin.success_image_removed'));
+        return redirect()->back();
     }
 }

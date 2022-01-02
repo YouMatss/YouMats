@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front\Vendor\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Vendor\VendorRequest;
+use App\Models\Category;
 use App\Models\City;
 use App\Models\Vendor;
 use App\Models\VendorBranch;
@@ -111,5 +112,20 @@ class IndexController extends Controller
 
         Session::flash('success', __('vendorAdmin.success_update_vendor'));
         return redirect()->back();
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function getSubCategories(Request $request) {
+        $data = $this->validate($request, [
+            'category_id' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:categories,id']]
+        ]);
+
+        $subCategories = Category::where('parent_id', $data['category_id'])->orderBy('sort')->pluck('name', 'id');
+
+        return response()->json($subCategories);
     }
 }

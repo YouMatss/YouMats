@@ -21,6 +21,8 @@ class Product extends Model implements Sortable, HasMedia, Buyable
 {
     use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, BelongsToThrough;
 
+    protected $guarded = ['id'];
+
     public $translatable = ['name', 'desc', 'short_desc', 'meta_title', 'meta_keywords', 'meta_desc'];
 
     /**

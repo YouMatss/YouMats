@@ -43,12 +43,15 @@ Route::group([
         Route::get('edit', [IndexController::class, 'edit'])->name('edit');
         Route::put('update', [IndexController::class, 'update'])->name('update');
 
+        Route::get('getSubCategories', [IndexController::class, 'getSubCategories'])->name('category.getSub');
+
         Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
             Route::get('/', [ProductController::class, 'index'])->name('index');
             Route::get('/create', [ProductController::class, 'create'])->name('create');
             Route::post('/store', [ProductController::class, 'store'])->name('store');
             Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
             Route::put('/update/{id}', [ProductController::class, 'update'])->name('update');
+            Route::get('/deleteImage/{product}/{image}', [ProductController::class, 'deleteImage'])->name('deleteImage');
         });
         Route::group(['prefix' => 'branch', 'as' => 'branch.'], function () {
             Route::get('/', [BranchController::class, 'index'])->name('index');
