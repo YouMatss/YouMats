@@ -7,10 +7,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <h4>{{__('vendorAdmin.edit_branch')}} ({{$branch->name}})</h4>
                     <div class="card">
-                        <div class="card-header card-youmats">
-                            <h3 class="card-title">{{__('vendorAdmin.edit_branch')}} ({{$branch->name}})</h3>
-                        </div>
                         <form action="{{route('vendor.branch.update', [$branch->id])}}" method="post">
                             {{csrf_field()}}
                             {{method_field('PUT')}}
@@ -55,8 +53,6 @@
                                     <input type="hidden" value="{{$branch->latitude}}" class="lat" readonly name="latitude" required>
                                     <input type="hidden" value="{{$branch->longitude}}" class="lng" readonly name="longitude" required>
                                 </div>
-                            </div>
-                            <div class="card-footer">
                                 <button type="submit" class="btn btn-youmats">Submit</button>
                             </div>
                         </form>
@@ -67,6 +63,6 @@
     </section>
 @endsection
 @section('js_additional')
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{env('NOVA_MAPS_ADDRESS_KEY')}}&libraries=places&sensor=false"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{env('NOVA_MAPS_ADDRESS_KEY')}}&libraries=places&sensor=false"></script>
     <script src="{{front_url()}}/assets/js/map.js"></script>
 @endsection

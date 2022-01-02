@@ -7,10 +7,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <h4>{{__('vendorAdmin.edit_shipping_group')}} ({{$shipping->name}})</h4>
                     <div class="card">
-                        <div class="card-header card-youmats">
-                            <h3 class="card-title">{{__('vendorAdmin.edit_shipping_group')}} ({{$shipping->name}})</h3>
-                        </div>
                         <form action="{{route('vendor.shipping-group.update', [$shipping->id])}}" method="post">
                             {{csrf_field()}}
                             {{method_field('PUT')}}
@@ -105,9 +103,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="card-footer">
                                 <button type="submit" class="btn btn-youmats">Submit</button>
                             </div>
                         </form>

@@ -7,10 +7,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <h4>{{__('vendorAdmin.create_shipping_group')}}</h4>
                     <div class="card">
-                        <div class="card-header card-youmats">
-                            <h3 class="card-title">{{__('vendorAdmin.create_shipping_group')}}</h3>
-                        </div>
                         <form action="{{route('vendor.shipping-group.store')}}" method="post">
                             {{csrf_field()}}
                             <div class="card-body">
@@ -56,9 +54,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="card-footer">
                                 <button type="submit" class="btn btn-youmats">Submit</button>
                             </div>
                         </form>

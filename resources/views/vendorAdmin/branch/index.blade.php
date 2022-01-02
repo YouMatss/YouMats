@@ -5,14 +5,12 @@
 @section('content')
     <div class="pt-2">
         <div class="col-md-12">
+            <h4>{{__('vendorAdmin.branches')}}</h4>
+            <div class="text-right">
+                <a href="{{route('vendor.branch.create')}}" class="btn btn-sm mb-3 btn-youmats">{{__('vendorAdmin.add_button_branch')}}</a>
+            </div>
             <div class="card">
-                <div class="card-header card-youmats">
-                    <h3 class="card-title">{{__('vendorAdmin.branches')}}</h3>
-                </div>
                 <div class="card-body">
-                    <div class="float-right">
-                        <a href="{{route('vendor.branch.create')}}" class="btn btn-sm mb-3 btn-youmats">{{__('vendorAdmin.add_button_branch')}}</a>
-                    </div>
                     <table class="table" style="width: 100%">
                         <thead>
                             <tr>
