@@ -6,173 +6,164 @@
     <section class="content pt-2">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mb-2">
                     <h4>{{__('vendorAdmin.create_product')}}</h4>
+                    <form action="{{route('vendor.product.store')}}" method="post" enctype="multipart/form-data">
                     <div class="card">
-                        <form action="{{route('vendor.product.store')}}" method="post" enctype="multipart/form-data">
-                            {{csrf_field()}}
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="name-ar">{{__('vendorAdmin.name_ar')}}</label>
-                                    <input type="text" class="form-control" name="name_ar" id="name-ar" value="{{old('name-ar')}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="name-en">{{__('vendorAdmin.name_en')}}</label>
-                                    <input type="text" class="form-control" name="name_en" id="name-en" value="{{old('name-en')}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="category">{{__('vendorAdmin.category')}}</label>
-                                    <select class="form-control" id="category">
-                                        <option value="" selected disabled>{{__('vendorAdmin.category_placeholder')}}</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="subCategory">{{__('vendorAdmin.subCategory')}}</label>
-                                    <select class="form-control" name="category_id" id="subCategory">
-                                        <option value="" selected disabled>{{__('vendorAdmin.subCategory_placeholder')}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="short_desc_ar">{{__('vendorAdmin.short_desc_ar')}}</label>
-                                    <textarea id="short_desc_ar" class="form-control ckeditor" name="short_desc_ar">{{old('short_desc_ar')}}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="short_desc_en">{{__('vendorAdmin.short_desc_en')}}</label>
-                                    <textarea id="short_desc_en" class="form-control ckeditor" name="short_desc_en">{{old('short_desc_en')}}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="desc_ar">{{__('vendorAdmin.desc_ar')}}</label>
-                                    <textarea id="desc_ar" rows="5" class="form-control ckeditor" name="desc_ar">{{old('desc_ar')}}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="desc_en">{{__('vendorAdmin.desc_en')}}</label>
-                                    <textarea id="desc_en" rows="5" class="form-control ckeditor" name="desc_en">{{old('desc_en')}}</textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="type">{{__('vendorAdmin.type')}}</label>
-                                    <select class="form-control" name="type" id="type">
-                                        <option selected disabled>{{__('vendorAdmin.type_placeholder')}}</option>
-                                        <option value="product" @if(old('type') == 'product') selected @endif>{{__('vendorAdmin.type_product')}}</option>
-                                        <option value="service" @if(old('type') == 'service') selected @endif>{{__('vendorAdmin.type_service')}}</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="cost">{{__('vendorAdmin.cost')}}</label>
-                                    <input type="number" class="form-control" name="cost" id="cost" min="0" step="0.01" value="{{old('cost')}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="price">{{__('vendorAdmin.price')}}</label>
-                                    <input type="number" class="form-control" name="price" id="price" min="0" step="0.01" value="{{old('price')}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="stock">{{__('vendorAdmin.stock')}}</label>
-                                    <input type="number" class="form-control" name="stock" id="stock" min="0" step="1" value="{{old('stock')}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="unit">{{__('vendorAdmin.unit')}}</label>
-                                    <select class="form-control" name="unit_id" id="unit">
-                                        <option selected disabled>{{__('vendorAdmin.unit_placeholder')}}</option>
-                                        @foreach($units as $unit)
-                                            <option value="{{$unit->id}}" @if(old('unit_id') == $unit->id) selected @endif>{{$unit->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="min_quantity">{{__('vendorAdmin.min_quantity')}}</label>
-                                    <input type="number" class="form-control" name="min_quantity" id="min_quantity" min="1" step="1" value="{{old('min_quantity')}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="sku">{{__('vendorAdmin.sku')}}</label>
-                                    <input type="text" class="form-control" name="SKU" id="sku" value="{{old('SKU')}}">
-                                </div>
-
-                                <hr/>
-
-                                <div class="form-group">
-                                    <label for="gallery">{{__('vendorAdmin.gallery')}}</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" multiple name="gallery[]" class="custom-file-input" id="gallery">
-                                            <label class="custom-file-label">{{__('vendorAdmin.choose_images')}}</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr/>
-
-                                <div class="card">
-                                    <div class="card-header card-youmats">
-                                        <h3 class="card-title">{{__('vendorAdmin.shipping')}}</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="shipping">{{__('vendorAdmin.shipping')}}</label>
-                                            <select id="shipping" class="form-control" name="shipping_id">
-                                                <option value="" selected disabled>{{__('vendorAdmin.shipping_placeholder')}}</option>
-                                                @foreach($vendor->shippings as $shipping)
-                                                    <option value="{{$shipping->id}}" @if(old('shipping_id') == $shipping->id) selected @endif>{{$shipping->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="specific">{{__('vendorAdmin.specific_shipping')}}</label>
-                                            <input type="checkbox" class="form-control" id="specific" name="specific_shipping" @if(old('specific_shipping')) checked @endif>
-                                        </div>
-                                        <div class="card" id="specific_shipping">
-                                            <div class="card-header card-youmats">
-                                                <h3 class="card-title">{{__('vendorAdmin.specific_shipping')}}</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <label>{{__('vendorAdmin.specific_shipping_terms')}}</label>
-                                                <div class="row">
-                                                    <div class="col-md-12" id="clone-container"></div>
-                                                    <div class="col-md-12">
-                                                        <button type="button" id="clone-add" class="btn btn-youmats btn-block">{{__('vendorAdmin.add')}}</button>
-                                                    </div>
-                                                </div>
-
-                                                <hr/>
-                                                <div class="card">
-                                                    <div class="card-header card-youmats">
-                                                        <h3 class="card-title">{{__('vendorAdmin.default_for_all_cities') . ' ' . __('vendorAdmin.optional')}}</h3>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="form-group">
-                                                            <label for="price">{{__('vendorAdmin.default_price')}}</label>
-                                                            <input type="number" class="form-control" id="price" name="default_price" min="0" step="0.05" value="{{old('default_price')}}" />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="time">{{__('vendorAdmin.default_time')}}</label>
-                                                            <input type="number" class="form-control" id="time" name="default_time" min="1" step="1" value="{{old('default_time')}}" />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="format">{{__('vendorAdmin.default_format')}}</label>
-                                                            <select class="form-control" id="format" name="default_format">
-                                                                <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
-                                                                <option value="hour" @if(old('default_format') == 'hour') selected @endif>{{__('vendorAdmin.hour')}}</option>
-                                                                <option value="day" @if(old('default_format') == 'day') selected @endif>{{__('vendorAdmin.day')}}</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-youmats">Submit</button>
+                        {{csrf_field()}}
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="name-ar">{{__('vendorAdmin.name_ar')}}</label>
+                                <input type="text" class="form-control" name="name_ar" id="name-ar" value="{{old('name-ar')}}">
                             </div>
-                        </form>
+                            <div class="form-group">
+                                <label for="name-en">{{__('vendorAdmin.name_en')}}</label>
+                                <input type="text" class="form-control" name="name_en" id="name-en" value="{{old('name-en')}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="category">{{__('vendorAdmin.category')}}</label>
+                                <select class="form-control" id="category">
+                                    <option value="" selected disabled>{{__('vendorAdmin.category_placeholder')}}</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="subCategory">{{__('vendorAdmin.subCategory')}}</label>
+                                <select class="form-control" name="category_id" id="subCategory">
+                                    <option value="" selected disabled>{{__('vendorAdmin.subCategory_placeholder')}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="short_desc_ar">{{__('vendorAdmin.short_desc_ar')}}</label>
+                                <textarea id="short_desc_ar" class="form-control ckeditor" name="short_desc_ar">{{old('short_desc_ar')}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="short_desc_en">{{__('vendorAdmin.short_desc_en')}}</label>
+                                <textarea id="short_desc_en" class="form-control ckeditor" name="short_desc_en">{{old('short_desc_en')}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="desc_ar">{{__('vendorAdmin.desc_ar')}}</label>
+                                <textarea id="desc_ar" rows="5" class="form-control ckeditor" name="desc_ar">{{old('desc_ar')}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="desc_en">{{__('vendorAdmin.desc_en')}}</label>
+                                <textarea id="desc_en" rows="5" class="form-control ckeditor" name="desc_en">{{old('desc_en')}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="type">{{__('vendorAdmin.type')}}</label>
+                                <select class="form-control" name="type" id="type">
+                                    <option selected disabled>{{__('vendorAdmin.type_placeholder')}}</option>
+                                    <option value="product" @if(old('type') == 'product') selected @endif>{{__('vendorAdmin.type_product')}}</option>
+                                    <option value="service" @if(old('type') == 'service') selected @endif>{{__('vendorAdmin.type_service')}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="cost">{{__('vendorAdmin.cost')}}</label>
+                                <input type="number" class="form-control" name="cost" id="cost" min="0" step="0.01" value="{{old('cost')}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">{{__('vendorAdmin.price')}}</label>
+                                <input type="number" class="form-control" name="price" id="price" min="0" step="0.01" value="{{old('price')}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="stock">{{__('vendorAdmin.stock')}}</label>
+                                <input type="number" class="form-control" name="stock" id="stock" min="0" step="1" value="{{old('stock')}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="unit">{{__('vendorAdmin.unit')}}</label>
+                                <select class="form-control" name="unit_id" id="unit">
+                                    <option selected disabled>{{__('vendorAdmin.unit_placeholder')}}</option>
+                                    @foreach($units as $unit)
+                                        <option value="{{$unit->id}}" @if(old('unit_id') == $unit->id) selected @endif>{{$unit->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="min_quantity">{{__('vendorAdmin.min_quantity')}}</label>
+                                <input type="number" class="form-control" name="min_quantity" id="min_quantity" min="1" step="1" value="{{old('min_quantity')}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="sku">{{__('vendorAdmin.sku')}}</label>
+                                <input type="text" class="form-control" name="SKU" id="sku" value="{{old('SKU')}}">
+                            </div>
+                        </div>
                     </div>
+                    <h4>{{__('vendorAdmin.gallery')}}</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="gallery">{{__('vendorAdmin.gallery')}}</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" multiple name="gallery[]" class="custom-file-input" id="gallery">
+                                        <label class="custom-file-label">{{__('vendorAdmin.choose_images')}}</label>
+                                    </div>
+                                </div>
+                                <div class="mt-1 temp-img-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>{{__('vendorAdmin.shipping')}}</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="shipping">{{__('vendorAdmin.shipping')}}</label>
+                                <select id="shipping" class="form-control" name="shipping_id">
+                                    <option value="" selected disabled>{{__('vendorAdmin.shipping_placeholder')}}</option>
+                                    @foreach($vendor->shippings as $shipping)
+                                        <option value="{{$shipping->id}}" @if(old('shipping_id') == $shipping->id) selected @endif>{{$shipping->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="specific">{{__('vendorAdmin.specific_shipping')}}</label>
+                                <input type="checkbox" class="form-control" id="specific" name="specific_shipping" @if(old('specific_shipping')) checked @endif>
+                            </div>
+                            <div class="card" id="specific_shipping">
+                                <div class="card-header card-youmats">
+                                    <h3 class="card-title">{{__('vendorAdmin.specific_shipping')}}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <label>{{__('vendorAdmin.specific_shipping_terms')}}</label>
+                                    <div class="row">
+                                        <div class="col-md-12" id="clone-container"></div>
+                                        <div class="col-md-12">
+                                            <button type="button" id="clone-add" class="btn btn-youmats btn-block">{{__('vendorAdmin.add')}}</button>
+                                        </div>
+                                    </div>
+
+                                    <hr/>
+                                    <div class="card">
+                                        <div class="card-header card-youmats">
+                                            <h3 class="card-title">{{__('vendorAdmin.default_for_all_cities') . ' ' . __('vendorAdmin.optional')}}</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="price">{{__('vendorAdmin.default_price')}}</label>
+                                                <input type="number" class="form-control" id="price" name="default_price" min="0" step="0.05" value="{{old('default_price')}}" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="time">{{__('vendorAdmin.default_time')}}</label>
+                                                <input type="number" class="form-control" id="time" name="default_time" min="1" step="1" value="{{old('default_time')}}" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="format">{{__('vendorAdmin.default_format')}}</label>
+                                                <select class="form-control" id="format" name="default_format">
+                                                    <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
+                                                    <option value="hour" @if(old('default_format') == 'hour') selected @endif>{{__('vendorAdmin.hour')}}</option>
+                                                    <option value="day" @if(old('default_format') == 'day') selected @endif>{{__('vendorAdmin.day')}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-youmats">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -241,6 +232,24 @@
 
         $('#category').change(function () {
             getSubCategories($(this).val());
+        });
+
+        // Multiple images preview in browser
+        var imagesPreview = function(input, placeToInsertImagePreview) {
+            if (input.files) {
+                var filesAmount = input.files.length;
+                $('div.temp-img-container').html('');
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        $($.parseHTML('<img style="border-color: #F00;" class="img-thumbnail" width="200">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    }
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        };
+        $('#gallery').on('change', function() {
+            imagesPreview(this, 'div.temp-img-container');
         });
 
     });

@@ -6,10 +6,10 @@
 <section class="content pt-2">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mb-2">
                 <h4>{{__('vendorAdmin.edit_info')}}</h4>
-                <div class="card">
-                    <form action="{{route('vendor.update')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('vendor.update')}}" method="post" enctype="multipart/form-data">
+                    <div class="card">
                         {{csrf_field()}}
                         {{method_field('PUT')}}
                         <div class="card-body">
@@ -33,75 +33,6 @@
                                 <input type="text" class="form-control" name="address"
                                        id="address" value="{{$vendor->address}}">
                             </div>
-
-                            <div class="card">
-                                <div class="card-header card-youmats">
-                                    <h3 class="card-title">{{__('vendorAdmin.contacts')}}</h3>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-12" id="clone-container">
-                                            @foreach($vendor->contacts as $row)
-                                                <div class="clone-element">
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label for="person_name">{{__('vendorAdmin.person_name')}}</label>
-                                                                <input type="text" class="form-control" id="person_name" name="contacts_person_name[]" value="{{$row['person_name']}}" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label for="c_email">{{__('vendorAdmin.email')}}</label>
-                                                                <input type="email" class="form-control" id="c_email" name="contacts_email[]" value="{{$row['email']}}" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label for="c_phone">{{__('vendorAdmin.phone')}}</label>
-                                                                <input type="text" class="form-control" id="c_phone" name="contacts_phone[]" value="{{$row['phone']}}" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label for="cities">{{__('vendorAdmin.cities')}}</label>
-                                                                <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[]">
-                                                                    @foreach($cities as $city)
-                                                                        <option value="{{$city->id}}" @if($row['cities'] == $city->id) selected @endif>{{$city->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label for="c_with">{{__('vendorAdmin.with')}}</label>
-                                                                <select class="form-control" id="c_with" name="contacts_with[]">
-                                                                    <option value="" disabled selected>{{__('vendorAdmin.with_placeholder')}}</option>
-                                                                    <option value="individual" @if($row['with'] == 'individual') selected @endif>{{__('vendorAdmin.individual')}}</option>
-                                                                    <option value="company" @if($row['with'] == 'company') selected @endif>{{__('vendorAdmin.company')}}</option>
-                                                                    <option value="both" @if($row['with'] == 'both') selected @endif>{{__('vendorAdmin.both')}}</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label>{{__('vendorAdmin.remove')}}</label>
-                                                                <button class="form-control btn btn-danger btn-xs clone-remove">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button type="button" id="clone-add" class="btn btn-youmats btn-block">{{__('vendorAdmin.add')}}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="form-group">
                                 <label for="type">{{__('vendorAdmin.type')}}</label>
                                 <select class="form-control" name="type" id="type">
@@ -112,6 +43,76 @@
                                     <option value="retail" @if($vendor->type == 'retail') selected @endif>{{__('vendor.type_retail')}}</option>
                                 </select>
                             </div>
+                        </div>
+                    </div>
+                    <h4>{{__('vendorAdmin.contacts')}}</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12" id="clone-container">
+                                    @foreach($vendor->contacts as $row)
+                                        <div class="clone-element">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label for="person_name">{{__('vendorAdmin.person_name')}}</label>
+                                                        <input type="text" class="form-control" id="person_name" name="contacts_person_name[]" value="{{$row['person_name']}}" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label for="c_email">{{__('vendorAdmin.email')}}</label>
+                                                        <input type="email" class="form-control" id="c_email" name="contacts_email[]" value="{{$row['email']}}" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label for="c_phone">{{__('vendorAdmin.phone')}}</label>
+                                                        <input type="text" class="form-control" id="c_phone" name="contacts_phone[]" value="{{$row['phone']}}" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label for="cities">{{__('vendorAdmin.cities')}}</label>
+                                                        <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[]">
+                                                            @foreach($cities as $city)
+                                                                <option value="{{$city->id}}" @if($row['cities'] == $city->id) selected @endif>{{$city->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label for="c_with">{{__('vendorAdmin.with')}}</label>
+                                                        <select class="form-control" id="c_with" name="contacts_with[]">
+                                                            <option value="" disabled selected>{{__('vendorAdmin.with_placeholder')}}</option>
+                                                            <option value="individual" @if($row['with'] == 'individual') selected @endif>{{__('vendorAdmin.individual')}}</option>
+                                                            <option value="company" @if($row['with'] == 'company') selected @endif>{{__('vendorAdmin.company')}}</option>
+                                                            <option value="both" @if($row['with'] == 'both') selected @endif>{{__('vendorAdmin.both')}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label>{{__('vendorAdmin.remove')}}</label>
+                                                        <button class="form-control btn btn-danger btn-xs clone-remove">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="button" id="clone-add" class="btn btn-youmats btn-block">{{__('vendorAdmin.add')}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>{{__('vendorAdmin.gallery')}}</h4>
+                    <div class="card">
+                        <div class="card-body">
                             <div class="form-group">
                                 <label for="logo">{{__('vendorAdmin.logo')}}</label>
                                 <div class="input-group">
@@ -144,20 +145,29 @@
                                         <label class="custom-file-label">{{__('vendorAdmin.choose_file')}}</label>
                                     </div>
                                 </div>
+                                <div class="mt-1 temp-img-container"></div>
                                 <div class="mt-1">
                                     @foreach($vendor->getMedia(VENDOR_PATH) as $license)
                                     <img class="img-thumbnail" width="200" src="{{ $license->getUrl() }}">
                                     @endforeach
                                 </div>
                             </div>
-
+                        </div>
+                    </div>
+                    <h4>{{__('vendorAdmin.location')}}</h4>
+                    <div class="card">
+                        <div class="card-body">
                             <div class="form-group">
                                 <label for="location">{{__('vendorAdmin.location')}}</label>
                                 {!! generate_map() !!}
                                 <input type="hidden" class="lat" value="{{$vendor->latitude}}" readonly name="latitude" required>
                                 <input type="hidden" class="lng" value="{{$vendor->longitude}}" readonly name="longitude" required>
                             </div>
-
+                        </div>
+                    </div>
+                    <h4>{{__('vendorAdmin.social_media')}}</h4>
+                    <div class="card">
+                        <div class="card-body">
                             <div class="form-group">
                                 <label for="facebook">{{__('vendorAdmin.facebook')}}</label>
                                 <input type="url" class="form-control" name="facebook_url"
@@ -168,7 +178,6 @@
                                 <input type="url" class="form-control" name="twitter_url"
                                        id="twitter" value="{{$vendor->twitter_url}}">
                             </div>
-
                             <div class="form-group">
                                 <label for="youtube">{{__('vendorAdmin.youtube')}}</label>
                                 <input type="url" class="form-control" name="youtube_url"
@@ -189,6 +198,11 @@
                                 <input type="url" class="form-control" name="website_url"
                                        id="website" value="{{$vendor->website_url}}">
                             </div>
+                        </div>
+                    </div>
+                    <h4>{{__('vendorAdmin.password')}}</h4>
+                    <div class="card">
+                        <div class="card-body">
                             <div class="form-group">
                                 <label for="password">{{__('vendorAdmin.password')}}</label>
                                 <input type="password" class="form-control" name="password"
@@ -199,10 +213,10 @@
                                 <input type="password" class="form-control" name="password_confirmation"
                                        id="password_confirmation">
                             </div>
-                            <button type="submit" class="btn btn-youmats">Submit</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <button type="submit" class="btn btn-youmats">Submit</button>
+                </form>
             </div>
         </div>
     </div>
@@ -275,6 +289,24 @@
             });
             $(document).on('click', '.clone-remove', function () {
                 $(this).closest('.clone-element').remove();
+            });
+
+            // Multiple images preview in browser
+            var imagesPreview = function(input, placeToInsertImagePreview) {
+                if (input.files) {
+                    var filesAmount = input.files.length;
+                    $('div.temp-img-container').html('');
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            $($.parseHTML('<img style="border-color: #F00;" class="img-thumbnail" width="200">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+            $('#licenses').on('change', function() {
+                imagesPreview(this, 'div.temp-img-container');
             });
         });
     </script>

@@ -6,10 +6,10 @@
     <section class="content pt-2">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mb-2">
                     <h4>{{__('vendorAdmin.create_branch')}}</h4>
-                    <div class="card">
-                        <form action="{{route('vendor.branch.store')}}" method="post">
+                    <form action="{{route('vendor.branch.store')}}" method="post">
+                        <div class="card">
                             {{csrf_field()}}
                             <div class="card-body">
                                 <div class="form-group">
@@ -47,10 +47,10 @@
                                     <input type="hidden" class="lat" readonly name="latitude" required>
                                     <input type="hidden" class="lng" readonly name="longitude" required>
                                 </div>
-                                <button type="submit" class="btn btn-youmats">Submit</button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                       <button type="submit" class="btn btn-youmats">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
