@@ -6,10 +6,10 @@
     <section class="content pt-2">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mb-2">
                     <h4>{{__('vendorAdmin.edit_branch')}} ({{$branch->name}})</h4>
-                    <div class="card">
-                        <form action="{{route('vendor.branch.update', [$branch->id])}}" method="post">
+                    <form action="{{route('vendor.branch.update', [$branch->id])}}" method="post">
+                        <div class="card">
                             {{csrf_field()}}
                             {{method_field('PUT')}}
                             <div class="card-body">
@@ -53,10 +53,10 @@
                                     <input type="hidden" value="{{$branch->latitude}}" class="lat" readonly name="latitude" required>
                                     <input type="hidden" value="{{$branch->longitude}}" class="lng" readonly name="longitude" required>
                                 </div>
-                                <button type="submit" class="btn btn-youmats">Submit</button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <button type="submit" class="btn btn-youmats">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -11,19 +11,19 @@
 .btn-youmats:hover {
     color: #FFF;
 }
-.card-body {
-    padding-left: 3rem;
-    padding-right: 3rem;
-}
-.container-fluid {
-    padding-right: 60px;
-    padding-left: 60px;
-}
-.form-group {
-    margin-bottom: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-}
+/*.card-body {*/
+/*    padding-left: 3rem;*/
+/*    padding-right: 3rem;*/
+/*}*/
+/*.container-fluid {*/
+/*    padding-right: 60px;*/
+/*    padding-left: 60px;*/
+/*}*/
+/*.form-group {*/
+/*    margin-bottom: 2rem;*/
+/*    padding-left: 2rem;*/
+/*    padding-right: 2rem;*/
+/*}*/
 .absolute-image {
     position: absolute;
     top: 10px;

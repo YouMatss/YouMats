@@ -6,10 +6,10 @@
     <section class="content pt-2">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mb-2">
                     <h4>{{__('vendorAdmin.edit_order')}} ({{$item->order->order_id}})</h4>
-                    <div class="card">
-                        <form method="post" action="{{route('vendor.order.update')}}">
+                    <form method="post" action="{{route('vendor.order.update')}}">
+                        <div class="card">
                             {{csrf_field()}}
                             <input type="hidden" name="item_id" value="{{$item->id}}" />
                             <div class="card-body">
@@ -48,10 +48,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-youmats">Submit</button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <button type="submit" class="btn btn-youmats">Submit</button>
+                    </form>
                 </div>
                 <div class="col-md-12">
                     <h4>{{__('vendorAdmin.user_info')}}</h4>

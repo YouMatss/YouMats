@@ -6,58 +6,52 @@
     <section class="content pt-2">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mb-2">
                     <h4>{{__('vendorAdmin.create_shipping_group')}}</h4>
-                    <div class="card">
-                        <form action="{{route('vendor.shipping-group.store')}}" method="post">
+                    <form action="{{route('vendor.shipping-group.store')}}" method="post">
+                        <div class="card">
                             {{csrf_field()}}
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">{{__('vendorAdmin.name')}}</label>
                                     <input type="text" class="form-control" name="name" id="name">
                                 </div>
-
-                                <div class="card">
-                                    <div class="card-header card-youmats">
-                                        <h3 class="card-title">{{__('vendorAdmin.specific_shipping_terms')}}</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-12" id="clone-container"></div>
-                                            <div class="col-md-12">
-                                                <button type="button" id="clone-add" class="btn btn-youmats btn-block">{{__('vendorAdmin.add')}}</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card">
-                                    <div class="card-header card-youmats">
-                                        <h3 class="card-title">{{__('vendorAdmin.default_for_all_cities') . ' ' . __('vendorAdmin.optional')}}</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="price">{{__('vendorAdmin.default_price')}}</label>
-                                            <input type="number" class="form-control" id="price" name="default_price" min="0" step="0.05" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="time">{{__('vendorAdmin.default_time')}}</label>
-                                            <input type="number" class="form-control" id="time" name="default_time" min="1" step="1" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="format">{{__('vendorAdmin.default_format')}}</label>
-                                            <select class="form-control" id="format" name="default_format">
-                                                <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
-                                                <option value="hour">{{__('vendorAdmin.hour')}}</option>
-                                                <option value="day">{{__('vendorAdmin.day')}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-youmats">Submit</button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <h4>{{__('vendorAdmin.specific_shipping_terms')}}</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12" id="clone-container"></div>
+                                    <div class="col-md-12">
+                                        <button type="button" id="clone-add" class="btn btn-youmats btn-block">{{__('vendorAdmin.add')}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>{{__('vendorAdmin.default_for_all_cities') . ' ' . __('vendorAdmin.optional')}}</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="price">{{__('vendorAdmin.default_price')}}</label>
+                                    <input type="number" class="form-control" id="price" name="default_price" min="0" step="0.05" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="time">{{__('vendorAdmin.default_time')}}</label>
+                                    <input type="number" class="form-control" id="time" name="default_time" min="1" step="1" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="format">{{__('vendorAdmin.default_format')}}</label>
+                                    <select class="form-control" id="format" name="default_format">
+                                        <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
+                                        <option value="hour">{{__('vendorAdmin.hour')}}</option>
+                                        <option value="day">{{__('vendorAdmin.day')}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-youmats">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>

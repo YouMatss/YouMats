@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front\Vendor\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Vendor\ProductRequest;
+use App\Models\Admin;
 use App\Models\Attribute;
 use App\Models\City;
 use App\Models\Product;
@@ -11,6 +12,9 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Unit;
 use App\Models\Vendor;
+use App\Notifications\OrderCreated;
+use App\Notifications\ProductCreated;
+use App\Notifications\ProductUpdated;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -52,14 +56,7 @@ class ProductController extends Controller
         return view('vendorAdmin.product.create')->with($data);
     }
 
-    /**
-     * @param Request $request
-     * @param Vendor $vendor
-     * @return RedirectResponse
-     * @throws FileDoesNotExist
-     * @throws FileIsTooBig
-     */
-    public function store(ProductRequest $request): RedirectResponse
+    public function store(ProductRequest $request)
     {
         $data = $request->validated();
         $data['vendor_id'] = Auth::guard('vendor')->id();
@@ -99,6 +96,9 @@ class ProductController extends Controller
 
         $product = Product::create($data);
 
+        foreach(Admin::all() as $admin)
+            $admin->notify(new ProductCreated(Auth::guard('vendor')->user(), $product));
+
         //Add gallery to the product
         foreach($data['gallery'] as $image) {
             $product->addMedia($image)->toMediaCollection(PRODUCT_PATH);
@@ -130,6 +130,10 @@ class ProductController extends Controller
         //Deactivate the product.
         $data['active'] = 0;
 
+        $data['name'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
+        $data['desc'] = ['en' => $data['desc_en'], 'ar' => $data['desc_ar']];
+        $data['short_desc'] = ['en' => $data['short_desc_en'], 'ar' => $data['short_desc_ar']];
+
         if(isset($data['specific_shipping']) && $data['specific_shipping']) {
             $data['specific_shipping'] = '1';
         } else {
@@ -150,6 +154,9 @@ class ProductController extends Controller
         }
 
         $product->update($data);
+
+        foreach(Admin::all() as $admin)
+            $admin->notify(new ProductUpdated(Auth::guard('vendor')->user(), $product));
 
         //Add gallery to the product
         if(isset($data['gallery']))
