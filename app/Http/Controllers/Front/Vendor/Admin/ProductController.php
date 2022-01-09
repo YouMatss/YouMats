@@ -41,7 +41,7 @@ class ProductController extends Controller
 
     public function index() {
         $data['vendor'] = Auth::guard('vendor')->user();
-        $data['products'] = $data['vendor']->products()->paginate(10);
+        $data['products'] = $data['vendor']->products;
 
         return view('vendorAdmin.product.index')->with($data);
     }
@@ -116,6 +116,8 @@ class ProductController extends Controller
         $data['units'] = Unit::orderby('sort')->get();
         $data['cities'] = City::where('country_id', $data['vendor']->country_id)->get();
         $data['selected_category'] = Category::findorfail($data['product']->category_id)->parent_id;
+        $data['attributes'] = Attribute::with('values')
+            ->where('category_id', $data['product']->category_id)->get();
 
         return view('vendorAdmin.product.edit')->with($data);
     }

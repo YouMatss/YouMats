@@ -39,6 +39,9 @@ class ProductRequest extends FormRequest
             'min_quantity' => NULLABLE_INTEGER_VALIDATION,
             'SKU' => NULLABLE_STRING_VALIDATION,
 
+            'attributes' => ARRAY_VALIDATION,
+            'attributes.*' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:attribute_values,id']],
+
             'shipping_id' => [...NULLABLE_INTEGER_VALIDATION, ...['exists:shippings,id']],
             'specific_shipping' => NULLABLE_STRING_VALIDATION,
             'shipping_cities' => ARRAY_VALIDATION,

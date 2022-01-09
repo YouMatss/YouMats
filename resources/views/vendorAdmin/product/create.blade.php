@@ -12,13 +12,25 @@
                     <div class="card">
                         {{csrf_field()}}
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="name-ar">{{__('vendorAdmin.name_ar')}}</label>
-                                <input type="text" class="form-control" name="name_ar" id="name-ar" value="{{old('name-ar')}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="name-en">{{__('vendorAdmin.name_en')}}</label>
-                                <input type="text" class="form-control" name="name_en" id="name-en" value="{{old('name-en')}}">
+                            <nav>
+                                <div class="nav nav-languages" id="nav-tab" role="tablist">
+                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-name"
+                                           data-toggle="tab" href="#nav-{{$localeCode}}-name" role="tab" aria-controls="nav-{{$localeCode}}-name" aria-selected="false">{{ $properties['native'] }}</a>
+                                    @endforeach
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <div class="tab-pane fade @if($loop->first) show active @endif"
+                                         id="nav-{{$localeCode}}-name" role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-name">
+                                        <div class="form-group">
+                                            <label for="name-{{$localeCode}}">{{__('vendorAdmin.name')}}</label>
+                                            <input type="text" class="form-control" name="name_{{$localeCode}}"
+                                                   id="name-{{$localeCode}}" value="{{old('name-'.$localeCode)}}">
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="form-group">
                                 <label for="category">{{__('vendorAdmin.category')}}</label>
@@ -35,21 +47,47 @@
                                     <option value="" selected disabled>{{__('vendorAdmin.subCategory_placeholder')}}</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="short_desc_ar">{{__('vendorAdmin.short_desc_ar')}}</label>
-                                <textarea id="short_desc_ar" class="form-control ckeditor" name="short_desc_ar">{{old('short_desc_ar')}}</textarea>
+                            <nav>
+                                <div class="nav nav-languages" id="nav-tab" role="tablist">
+                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-short-desc"
+                                           data-toggle="tab" href="#nav-{{$localeCode}}-short-desc" role="tab" aria-controls="nav-{{$localeCode}}-short-desc" aria-selected="false">{{ $properties['native'] }}</a>
+                                    @endforeach
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <div class="tab-pane fade @if($loop->first) show active @endif" id="nav-{{$localeCode}}-short-desc"
+                                         role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-short-desc">
+                                        <div class="form-group">
+                                            <label for="short_desc_{{$localeCode}}">{{__('vendorAdmin.short_desc')}}</label>
+                                            <textarea id="short_desc_{{$localeCode}}" class="form-control ckeditor" name="short_desc_{{$localeCode}}">
+                                                {{old('short_desc_'.$localeCode)}}
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            <div class="form-group">
-                                <label for="short_desc_en">{{__('vendorAdmin.short_desc_en')}}</label>
-                                <textarea id="short_desc_en" class="form-control ckeditor" name="short_desc_en">{{old('short_desc_en')}}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="desc_ar">{{__('vendorAdmin.desc_ar')}}</label>
-                                <textarea id="desc_ar" rows="5" class="form-control ckeditor" name="desc_ar">{{old('desc_ar')}}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="desc_en">{{__('vendorAdmin.desc_en')}}</label>
-                                <textarea id="desc_en" rows="5" class="form-control ckeditor" name="desc_en">{{old('desc_en')}}</textarea>
+                            <nav>
+                                <div class="nav nav-languages" id="nav-tab" role="tablist">
+                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-desc"
+                                           data-toggle="tab" href="#nav-{{$localeCode}}-desc" role="tab" aria-controls="nav-{{$localeCode}}-desc" aria-selected="false">{{ $properties['native'] }}</a>
+                                    @endforeach
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <div class="tab-pane fade @if($loop->first) show active @endif" id="nav-{{$localeCode}}-desc"
+                                         role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-desc">
+                                        <div class="form-group">
+                                            <label for="desc_{{$localeCode}}">{{__('vendorAdmin.desc')}}</label>
+                                            <textarea id="desc_{{$localeCode}}" rows="5" class="form-control ckeditor" name="desc_{{$localeCode}}">
+                                                {{old('desc_'.$localeCode)}}
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="form-group">
                                 <label for="type">{{__('vendorAdmin.type')}}</label>
@@ -102,6 +140,14 @@
                                     </div>
                                 </div>
                                 <div class="mt-1 temp-img-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>{{__('vendorAdmin.attributes')}}</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <select id="attributes" multiple name="attributes[]"></select>
                             </div>
                         </div>
                     </div>
@@ -230,8 +276,18 @@
             $('#specific_shipping').toggle();
         });
 
+        $('#attributes').select2({
+            theme: 'classic',
+            width: '100%',
+            placeholder: "{{__('vendorAdmin.attributes_placeholder')}}"
+        });
+
         $('#category').change(function () {
             getSubCategories($(this).val());
+        });
+
+        $('#subCategory').change(function () {
+            getAttributes($(this).val());
         });
 
         // Multiple images preview in browser
@@ -263,9 +319,33 @@
             subCategoryElement.html('');
             subCategoryElement.append(`<option value="" selected disabled>{{__('vendorAdmin.subCategory_placeholder')}}</option>`);
             $.each(response, function(key, value){
-                subCategoryElement.append(`
-                    <option value="`+key+`">`+value+`</option>
-                `);
+                subCategoryElement.append(`<option value="`+key+`">`+value+`</option>`);
+            });
+        });
+    }
+    function getAttributes(subCategory_id) {
+        var attributes = $('#attributes'),
+            locale = "{{\Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale()}}";
+        $.ajax({
+            type: 'GET',
+            url: "{{route('vendor.category.getAttr')}}",
+            data: { subCategory_id: subCategory_id }
+        }).done(function(response){
+            attributes.html('');
+            $.each(response, function(i, attr){
+                if(locale == 'ar') {
+                    attributes.append(`<optgroup label="`+attr.key.ar+`">`);
+                    $.each(attr.values, function(i, value) {
+                        attributes.append(`<option value="`+value.id+`">`+value.value.ar+`</option>`);
+                    });
+                    attributes.append(`</optgroup>`);
+                } else if(locale == 'en') {
+                    attributes.append(`<optgroup label="`+attr.key.en+`">`);
+                    $.each(attr.values, function(i, value) {
+                        attributes.append(`<option value="`+value.id+`">`+value.value.en+`</option>`);
+                    });
+                    attributes.append(`</optgroup>`);
+                }
             });
         });
     }

@@ -36,6 +36,27 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- Ckeditor -->
 <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{asset('vendorAdminAssets')}}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{asset('vendorAdminAssets')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('vendorAdminAssets')}}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{asset('vendorAdminAssets')}}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="{{asset('vendorAdminAssets')}}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{asset('vendorAdminAssets')}}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="{{asset('vendorAdminAssets')}}/plugins/jszip/jszip.min.js"></script>
+<script src="{{asset('vendorAdminAssets')}}/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="{{asset('vendorAdminAssets')}}/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="{{asset('vendorAdminAssets')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="{{asset('vendorAdminAssets')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="{{asset('vendorAdminAssets')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- Toastr -->
 <script src="{{ asset('vendorAdminAssets') }}/plugins/toastr/toastr.min.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "lengthChange": true
+            // "buttons": ["csv", "excel", "pdf", "print"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+</script>
 @yield('js_additional')
