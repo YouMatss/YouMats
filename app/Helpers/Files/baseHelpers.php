@@ -63,12 +63,16 @@ if (!function_exists('cartOrChat')) {
                     </a>
                 </div>';
         $icon = is_company() ? 'fa fa-file-alt': 'ec ec-add-to-cart';
-
+        $cart_word = __("general.add_to_cart");
+        if(is_company()) {
+            $cart_word = __("general.add_to_quote");
+        }
+        
         $cart = '<input class="cart-quantity form-control" type="number" min="1" value="1" />
             <div class="prodcut-add-cart">
                 <button data-url="' . route('cart.add', ['product' => $product]) . '"
                     class="btn-add-cart cart-chat-category btn-primary transition-3d-hover">
-                    <i class="' . $icon .'"></i> &nbsp;' . __("general.add_to_cart") . '
+                    <i class="' . $icon .'"></i> &nbsp;' . $cart_word . '
                 </button>
             </div>';
 
