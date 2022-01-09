@@ -33,5 +33,5 @@
     <!-- Bootstrap 4 RTL -->
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
     <!-- Custom style for RTL -->
-    <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/rtl.css">
+    <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/rtl-vendor.css">
 @endif
