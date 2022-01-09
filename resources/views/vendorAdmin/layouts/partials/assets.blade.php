@@ -33,4 +33,4 @@
     <!-- Custom style for RTL -->
     <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/rtl.css">
 @endif
-<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom.css">
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-vendor.css">
