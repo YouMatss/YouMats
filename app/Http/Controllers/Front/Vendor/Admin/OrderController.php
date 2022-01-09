@@ -19,7 +19,7 @@ class OrderController extends Controller
 
     public function index() {
         $data['vendor'] = Auth::guard('vendor')->user();
-        $data['items'] = $data['vendor']->order_items()->paginate(10);
+        $data['items'] = $data['vendor']->order_items;
 
         return view('vendorAdmin.order.index')->with($data);
     }

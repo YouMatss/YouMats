@@ -13,15 +13,23 @@
                         {{csrf_field()}}
                         {{method_field('PUT')}}
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="name-ar">{{__('vendorAdmin.name_ar')}}</label>
-                                <input type="text" class="form-control" name="name_ar"
-                                       id="name-ar" value="{{$vendor->getTranslation('name','ar')}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="name-en">{{__('vendorAdmin.name_en')}}</label>
-                                <input type="text" class="form-control" name="name_en"
-                                       id="name-en" value="{{$vendor->getTranslation('name','en')}}">
+                            <nav>
+                                <div class="nav nav-languages" id="nav-tab" role="tablist">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab" data-toggle="tab" href="#nav-{{$localeCode}}" role="tab" aria-controls="nav-{{$localeCode}}" aria-selected="false">{{ $properties['native'] }}</a>
+                                @endforeach
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <div class="tab-pane fade @if($loop->first) show active @endif" id="nav-{{$localeCode}}" role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab">
+                                    <div class="form-group">
+                                        <label for="name-{{$localeCode}}">{{__('vendorAdmin.name')}}</label>
+                                        <input type="text" class="form-control" name="name_{{$localeCode}}"
+                                               id="name-{{$localeCode}}" value="{{$vendor->getTranslation('name', $localeCode)}}">
+                                    </div>
+                                </div>
+                                @endforeach
                             </div>
                             <div class="form-group">
                                 <label for="email">{{__('vendorAdmin.main_email')}}</label>
@@ -50,7 +58,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12" id="clone-container">
-                                    @foreach($vendor->contacts as $row)
+                                    @foreach($vendor->contacts as $key => $row)
                                         <div class="clone-element">
                                             <div class="row">
                                                 <div class="col-md-2">
@@ -74,9 +82,9 @@
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="cities">{{__('vendorAdmin.cities')}}</label>
-                                                        <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[]">
+                                                        <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[{{$key}}][]">
                                                             @foreach($cities as $city)
-                                                                <option value="{{$city->id}}" @if($row['cities'] == $city->id) selected @endif>{{$city->name}}</option>
+                                                                <option value="{{$city->id}}" @if(in_array($city->id, $row['cities'])) selected @endif>{{$city->name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

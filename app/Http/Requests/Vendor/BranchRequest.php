@@ -24,7 +24,8 @@ class BranchRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => REQUIRED_STRING_VALIDATION,
+            'name_en' => REQUIRED_STRING_VALIDATION,
+            'name_ar' => REQUIRED_STRING_VALIDATION,
             'city_id' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:cities,id']],
             'phone_number' => REQUIRED_STRING_VALIDATION,
             'fax' => NULLABLE_STRING_VALIDATION,

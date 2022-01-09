@@ -13,10 +13,23 @@
                             {{csrf_field()}}
                             {{method_field('PUT')}}
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="name">{{__('vendorAdmin.name')}}</label>
-                                    <input type="text" class="form-control" name="name"
-                                           id="name" value="{{$branch->name}}">
+                                <nav>
+                                    <div class="nav nav-languages" id="nav-tab" role="tablist">
+                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab" data-toggle="tab" href="#nav-{{$localeCode}}" role="tab" aria-controls="nav-{{$localeCode}}" aria-selected="false">{{ $properties['native'] }}</a>
+                                        @endforeach
+                                    </div>
+                                </nav>
+                                <div class="tab-content" id="nav-tabContent">
+                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        <div class="tab-pane fade @if($loop->first) show active @endif" id="nav-{{$localeCode}}" role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab">
+                                            <div class="form-group">
+                                                <label for="name-{{$localeCode}}">{{__('vendorAdmin.name')}}</label>
+                                                <input type="text" class="form-control" name="name_{{$localeCode}}"
+                                                       id="name-{{$localeCode}}" value="{{$branch->getTranslation('name', $localeCode)}}">
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <div class="form-group">
                                     <label for="city">{{__('vendorAdmin.city')}}</label>

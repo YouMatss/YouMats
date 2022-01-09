@@ -11,7 +11,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <table class="table" style="width: 100%">
+                    <table id="example1" class="table" style="width: 100%">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
@@ -40,9 +40,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="mt-3">
-                        {{$products->links()}}
-                    </div>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@ class SippingGroupController extends Controller
 
     public function index() {
         $data['vendor'] = Auth::guard('vendor')->user();
-        $data['shipping_prices'] = $data['vendor']->shippings()->paginate(10);
+        $data['shipping_prices'] = $data['vendor']->shippings;
 
         return view('vendorAdmin.shippingGroup.index')->with($data);
     }

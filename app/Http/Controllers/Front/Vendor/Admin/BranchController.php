@@ -20,7 +20,7 @@ class BranchController extends Controller
 
     public function index() {
         $data['vendor'] = Auth::guard('vendor')->user();
-        $data['branches'] = $data['vendor']->branches()->paginate(10);
+        $data['branches'] = $data['vendor']->branches;
 
         return view('vendorAdmin.branch.index')->with($data);
     }
@@ -37,6 +37,9 @@ class BranchController extends Controller
         $vendor_id = Auth::guard('vendor')->id();
 
         $data['vendor_id'] = $vendor_id;
+
+        $data['name'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
+
         VendorBranch::create($data);
 
         Session::flash('success', __('vendorAdmin.success_store_branch'));
@@ -59,6 +62,8 @@ class BranchController extends Controller
         $vendor_id = Auth::guard('vendor')->id();
 
         $branch = VendorBranch::where('id', $branch_id)->where('vendor_id', $vendor_id)->firstorfail();
+
+        $data['name'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
 
         $branch->update($data);
 

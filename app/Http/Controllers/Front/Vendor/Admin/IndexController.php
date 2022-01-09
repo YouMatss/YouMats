@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front\Vendor\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Vendor\VendorRequest;
+use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Vendor;
@@ -93,12 +94,14 @@ class IndexController extends Controller
 
         if(isset($data['contacts_person_name'])) {
             for ($i=0;$i<count($data['contacts_person_name']);$i++) {
+                if(!is_array($data['contacts_cities'][$i])) {
+                    $data['contacts_cities'][$i] = [$data['contacts_cities'][$i]];
+                }
                 $data['contacts'][] = [
                     'person_name' => $data['contacts_person_name'][$i],
                     'email' => $data['contacts_email'][$i],
                     'phone' => $data['contacts_phone'][$i],
-                    'cities' => 1,
-//                    'cities' => $data['contacts_cities'][$i],
+                    'cities' => $data['contacts_cities'][$i],
                     'with' => $data['contacts_with'][$i],
                 ];
             }
@@ -132,5 +135,22 @@ class IndexController extends Controller
         $subCategories = Category::where('parent_id', $data['category_id'])->orderBy('sort')->pluck('name', 'id');
 
         return response()->json($subCategories);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function getAttributes(Request $request): JsonResponse
+    {
+        $data = $this->validate($request, [
+            'subCategory_id' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:categories,id']]
+        ]);
+
+        $attributes = Attribute::with('values')->where('category_id', $data['subCategory_id'])
+            ->orderBy('sort')->get();
+
+        return response()->json($attributes);
     }
 }

@@ -44,6 +44,7 @@ Route::group([
         Route::put('update', [IndexController::class, 'update'])->name('update');
 
         Route::get('getSubCategories', [IndexController::class, 'getSubCategories'])->name('category.getSub');
+        Route::get('getAttributes', [IndexController::class, 'getAttributes'])->name('category.getAttr');
 
         Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
             Route::get('/', [ProductController::class, 'index'])->name('index');
