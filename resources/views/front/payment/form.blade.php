@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="{{front_url()}}/assets/css/payment.css">
 @endsection
 @section('content')
-<div class="payment-box rtl">
+<div class="payment-box">
 <div id="app" class="card mt-50 mb-50">
     <div class="card-title"> {{__('checkout.payment_title')}} </div>
     <form> <span id="card-header">{{__('checkout.product_list')}}</span>
         @foreach($cartItems as $item)
             @if($item->model->type == 'product')
-                <div class="row row-1">
+                <div class="row row-1 rtl">
 {{--                    <div class="col-2"><img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
                     <div class="col-9">
                         {{$item->name}} <b>({{$item->qty . 'x' . $item->price}})</b>
@@ -27,7 +27,7 @@
                 </div>
             @endif
         @endforeach
-        <div class="row row-1">
+        <div class="row row-1 rtl">
 {{--            <div class="col-2"><img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
             <div class="col-9">
                 {{ __('cart.shipping') }}
@@ -36,7 +36,7 @@
                 {{__('general.sar')}} {{\Cart::tax()}}
             </div>
         </div>
-        <div class="row row-1">
+        <div class="row row-1 rtl">
 {{--            <div class="col-2"><img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
             <div class="col-9">
                 {{ __('cart.total') }}
@@ -45,36 +45,49 @@
                 {{__('general.sar') . ' ' .round(parseNumber(Cart::total()))}}
             </div>
         </div>
-        <span id="card-header">{{__('checkout.payment_card')}}</span>
+        <span id="card-header rtl">{{__('checkout.payment_card')}}</span>
         <div class="row-1">
             <div class="row row-2"> <span id="card-inner">{{__('checkout.holder_name')}}</span> </div>
-            <div class="row row-2"> <input v-model="hold_name" :class="{'border-red-500': errors['hold_name']}" id="grid-first-name" type="text" placeholder="Mohamed"> </div>
+            <div class="row row-2"> <input v-model="hold_name" :class="{'border-red-500': errors['hold_name']}" id="grid-first-name" type="text" placeholder="Your name"> </div>
             <p class="text-red-500 text-xs italic" v-if="errors['hold_name']">
                 @{{errors['hold_name'][0]}}
             </p>
         </div>
-        <div class="row three">
-            <div class="col-7">
+        <div class="row-1">
+            <div style="position: relative">
+                <div class="row row-2"> <span id="card-inner">{{__('checkout.card_number')}}</span> </div>
+                <div class="row row-2">
+                    <div class="card-type"></div>
+                    <input type="text"
+                           v-model="card_number"
+                           :class="{'border-red-500': errors['card_number']}"
+                           id="grid-password" placeholder="0000 0000 0000 0000"
+                           onkeyup="$cc.validate(event)">
+                    <div class="card-valid">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+            </div>
+            <p class="text-red-500 text-xs italic" v-if="errors['card_number']">
+                @{{errors['card_number'][0]}}
+            </p>
+        </div>
+        <div class="row">
+            <div style="width: 48%;margin-right: 4%;">
                 <div class="row-1">
-                    <div class="row row-2"> <span id="card-inner">{{__('checkout.card_number')}}</span> </div>
-                    <div class="row row-2">
-                    <input type="text" v-mask="'####-####-####-####'" v-model="card_number" :class="{'border-red-500': errors['card_number']}" id="grid-password" placeholder="1234-1234-1234-1234"> </div>
-                    <p class="text-red-500 text-xs italic" v-if="errors['card_number']">
-                        @{{errors['card_number'][0]}}
+                    <input type="text" v-mask="'##/##'" v-model="expiration_date" :class="{'border-red-500': errors['expiration_date']}" id="grid-city" placeholder="Exp.">
+                    <p class="text-red-500 text-xs italic" v-if="errors['expiration_year'] || errors['expiration_month']">
+                        @{{errors['expiration_year'][0] || errors['expiration_month'][0] }}
                     </p>
                 </div>
             </div>
-            <div class="col-2">
-                <input type="text" v-mask="'##/##'" v-model="expiration_date" :class="{'border-red-500': errors['expiration_date']}" id="grid-city" placeholder="Exp.">
-                <p class="text-red-500 text-xs italic" v-if="errors['expiration_year'] || errors['expiration_month']">
-                    @{{errors['expiration_year'][0] || errors['expiration_month'][0] }}
-                </p>
-            </div>
-            <div class="col-2">
-                <input type="text" v-mask="'###'" v-model="cvc" id="grid-zip" :class="{'border-red-500': errors['cvc']}" placeholder="CVV">
-                <p class="text-red-500 text-xs italic" v-if="errors['cvc']">
-                    @{{errors['cvc'][0]}}
-                </p>
+            <div style="width: 48%;">
+                <div class="row-1">
+                    <input type="text" v-mask="'###'" v-model="cvc" id="grid-zip" :class="{'border-red-500': errors['cvc']}" placeholder="CVV">
+                    <p class="text-red-500 text-xs italic" v-if="errors['cvc']">
+                        @{{errors['cvc'][0]}}
+                    </p>
+                </div>
             </div>
         </div>
         <button @click="submitForm" :disabled="loading" :class="{'loading': loading}" class="btn d-flex mx-auto">
@@ -84,6 +97,8 @@
     </form>
 </div>
 </div>
+<link rel="stylesheet" href="{{front_url()}}/assets/css/cardValidator.css" />
+<script src="{{front_url()}}/assets/js/cardValidator.js" type="text/javascript"></script>
 <script>
     Vue.directive("mask", VueMask.VueMaskDirective);
     new Vue({

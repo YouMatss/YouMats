@@ -238,6 +238,19 @@
                                         {{__('checkout.place_order')}}
                                     @endif
                                 </button>
+                                @if(!is_company())
+                                    <div class="text-md rtl">
+                                        <span class="d-inline-block p-1">
+                                            <img class="max-width-6" src="{{asset('assets/img')}}/mada.png">
+                                        </span>
+                                        <span class="d-inline-block p-1">
+                                            <img class="max-width-5" src="{{asset('assets/img')}}/patment-icon_1.png">
+                                        </span>
+                                        <span class="d-inline-block p-1">
+                                            <img class="max-width-5" src="{{asset('assets/img')}}/patment-icon_2.png">
+                                        </span>
+                                    </div>
+                                @endif
                             </div>
                             <!-- End Order Summary -->
                         </div>
