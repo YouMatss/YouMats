@@ -100,11 +100,11 @@
                         <div class="card p-5 border-width-2 border-color-1 borders-radius-17">
                             @if(!is_company())
                                 <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">
-{{--                                    @if($product->stock)--}}
-{{--                                        <span class="text-green font-weight-bold">{{$product->stock}} in stock</span>--}}
-{{--                                    @else--}}
+                                    @if($product->stock && $product->stock >= $product->min_quantity)
                                         <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
-{{--                                    @endif--}}
+                                    @else
+                                        <span class="text-red font-weight-bold">{{__('product.out_of_stock')}}</span>
+                                    @endif
                                 </div>
                                 @if(isset($delivery))
                                     <div>
@@ -261,7 +261,7 @@
                                                     <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->formatted_price}}</div>
                                                     @endif
                                                 </div>
-                                                {!! cartOrChat($r_product) !!}
+                                                {!! cartOrChat($r_product, false) !!}
                                             </div>
                                         </div>
                                         @if(!Auth::guard('vendor')->check())

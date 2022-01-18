@@ -28,13 +28,21 @@ class CartController extends Controller
         return view('front.cart.index', ['items' => $cart]);
     }
 
-    /**
-     * @param Request $request
-     * @param Product $product
-     * @return JsonResponse
-     */
-    public function add(Request $request, Product $product): JsonResponse
+    public function add(Request $request, Product $product)
     {
+        $min_quantity = $product->min_quantity;
+        $stock = $product->stock;
+        $quantity = $request->quantity;
+
+        if(!isset($quantity))
+            $quantity = 1;
+
+        if($quantity < $min_quantity)
+            $quantity = $min_quantity;
+
+        if($quantity > $stock)
+            return response()->json(['message' => __('messages.out_of_stock')]);
+
         $deliveryIsExist = $product->delivery;
         $delivery = 0;
         if(!is_null($deliveryIsExist)) {
@@ -43,7 +51,7 @@ class CartController extends Controller
         Cart::instance('cart')->add(
             $product->id,
             $product->name,
-            $request->quantity,
+            $quantity,
             round($product->price / getCurrency('rate'), 2),
             [],
             ($delivery / round($product->price / getCurrency('rate'), 2)) * 100

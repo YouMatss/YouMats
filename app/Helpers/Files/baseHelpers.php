@@ -56,32 +56,53 @@ if (!function_exists('getCityNameById')) {
 }
 
 if (!function_exists('cartOrChat')) {
-    function cartOrChat($product) {
+    function cartOrChat($product, $is_quantity = true) {
         $chat = '<div><a target="_blank" href="https://wa.me/'. $product->phone() .'"
                     class="cart-chat-category btn-primary transition-3d-hover">
                         <i class="fa fa-comments"></i> &nbsp;' . __("general.chat_button") . '
                     </a>
                 </div>';
-        $icon = is_company() ? 'fa fa-file-alt': 'ec ec-add-to-cart';
-        $cart_word = __("general.add_to_cart");
-        if(is_company()) {
-            $cart_word = __("general.add_to_quote");
-        }
-        
-        $cart = '<input class="cart-quantity form-control" type="number" min="1" value="1" />
+
+        $icon = is_company() ? 'fa fa-file-alt' : 'ec ec-add-to-cart';
+        $cart_word = is_company() ? __("general.add_to_quote") : __("general.add_to_cart");
+
+        if($is_quantity) {
+            $cart = '<input class="cart-quantity form-control" type="number" min="'.$product->min_quantity.'" value="'.$product->min_quantity.'" />
             <div class="prodcut-add-cart">
                 <button data-url="' . route('cart.add', ['product' => $product]) . '"
                     class="btn-add-cart cart-chat-category btn-primary transition-3d-hover">
                     <i class="' . $icon .'"></i> &nbsp;' . $cart_word . '
                 </button>
             </div>';
+        } else {
+            $cart = '<div class="prodcut-add-cart">
+                <button data-url="' . route('cart.add', ['product' => $product]) . '"
+                    class="btn-add-cart cart-chat-category btn-primary transition-3d-hover">
+                    <i class="' . $icon .'"></i> &nbsp;' . $cart_word . '
+                </button>
+            </div>';
+        }
+
+        $view = '<div><a href="'.route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug]).'"
+                    class="cart-chat-category btn-primary transition-3d-hover">
+                        <i class="fa fa-eye"></i> &nbsp;' . __("general.view_product") . '
+                    </a>
+                </div>';
 
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
-            if (is_company() || ($product->type == 'product' && $product->price > 0 && $product->delivery)) {
+            if (is_company()) {
+                return $cart;
+            } elseif($product->type == 'product' && $product->price > 0 && $product->delivery) {
+                if($product->stock && $product->stock < $product->min_quantity) {
+                    return $view;
+                }
                 return $cart;
             } else {
-                if(($product->price || $product->delivery) && $product->phone())
+                if(($product->price || $product->delivery) && $product->phone()) {
                     return $chat;
+                } else {
+                    return $view;
+                }
             }
         }
         return;
