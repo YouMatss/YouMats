@@ -286,7 +286,7 @@
                                             @endif
                                         </div>
                                         <div>
-                                            {!! cartOrChat($i_product) !!}
+                                            {!! cartOrChat($i_product, false) !!}
                                         </div>
                                     </div>
                                     <div class="product-item__footer">
@@ -375,7 +375,7 @@
                                         @endif
                                     </div>
                                     <div>
-                                        {!! cartOrChat($ii_product) !!}
+                                        {!! cartOrChat($ii_product, false) !!}
                                     </div>
                                 </div>
                                 @if(!Auth::guard('vendor')->check())
@@ -437,7 +437,7 @@
                                             @endif
                                         </div>
                                         <div>
-                                            {!! cartOrChat($iii_product) !!}
+                                            {!! cartOrChat($iii_product, false) !!}
                                         </div>
                                     </div>
                                     @if(!Auth::guard('vendor')->check())
@@ -499,7 +499,7 @@
                                             @endif
                                         </div>
                                         <div>
-                                            {!! cartOrChat($iv_product) !!}
+                                            {!! cartOrChat($iv_product, false) !!}
                                         </div>
                                     </div>
                                     @if(!Auth::guard('vendor')->check())

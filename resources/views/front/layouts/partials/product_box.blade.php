@@ -37,7 +37,7 @@
                 @endif
             </div>
             <div>
-                {!! cartOrChat($product) !!}
+                {!! cartOrChat($product, false) !!}
             </div>
         </div>
         @if(!Auth::guard('vendor')->check())
@@ -100,7 +100,7 @@
                     </div>
                     @if(!Auth::guard('vendor')->check())
                         <div class="flex-horizontal-center justify-content-between justify-content-wd-center flex-wrap border-top pt-3">
-                            {!! cartOrChat($product) !!}
+                            {!! cartOrChat($product, false) !!}
                             @if(Request::route()->getName() != 'wishlist.index')
                                 <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
                             @else

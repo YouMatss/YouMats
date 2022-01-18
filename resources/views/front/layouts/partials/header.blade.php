@@ -169,7 +169,7 @@
                                     <a href="{{url('/admin_panel')}}" target="_blank" class="badge badge-danger">{{__('general.login_as_admin')}}</a>
                                 </li>
                             @endif
-                            @if(is_company() || auth()->guard('vendor')->check())
+                            @if(is_company())
                                 <li class="btn_iffer_price list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                     <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
                                         {{__('general.get_quote')}}
