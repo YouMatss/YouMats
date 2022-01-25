@@ -19,14 +19,18 @@ class CarDriverListResource extends JsonResource
             'driver' => [
                 'id' => $this->driver->id,
                 'name' => $this->driver->name,
+                'email' => $this->email,
                 'phone' => $this->phone,
                 'phone2' => $this->phone2,
+                'whatsapp' => $this->whatsapp,
                 'driver_photo' => $this->getFirstMediaUrl(DRIVER_PHOTO),
             ],
-            'type' => $this->type->name,
             'model' => $this->model,
+            'type' => new CarTypeResource($this->type),
             'license_no' => $this->license_no,
-            'car_photo' => $this->getFirstMediaUrl(CAR_PHOTO),
+            'max_load' => $this->max_load,
+            'price_per_kilo' => $this->price_per_kilo,
+            'car_photo' => $this->getFirstMediaUrl(CAR_PHOTO)
         ];
     }
 }

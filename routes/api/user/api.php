@@ -10,8 +10,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('password/reset', 'AuthController@password_reset');
     Route::post('profile/update', 'AuthController@profile_update');
 
-//    Route::get('notifications/{player_id}', 'GeneralController@getAllNotifications');
-//    Route::get('push/notification', 'GeneralController@pushNotifications');
+    Route::get('notifications/{player_id}', 'GeneralController@getAllNotifications');
 
     Route::post('make-request', 'TripController@makeRequest');
     Route::post('pick-driver', 'TripController@pickDriver');

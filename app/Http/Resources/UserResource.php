@@ -24,7 +24,8 @@ class UserResource extends JsonResource
             'phone2' => $this->phone2,
             'address' => $this->address,
             'address2' => $this->address2,
-            'rate' => $this->rate()
+            'rate' => $this->rate(),
+            'reviews' => $this->reviews(),
         ];
     }
 }

@@ -113,4 +113,12 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
         return $this->trips()->avg('user_rate');
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function reviews(): \Illuminate\Support\Collection
+    {
+        return $this->trips()->pluck('user_review');
+    }
+
 }

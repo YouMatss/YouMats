@@ -12,9 +12,9 @@ class GeneralController extends Controller
         return nova_get_settings(['facebook', 'twitter']);
     }
 
-//    public function getAllNotifications() {
-//        return OneSignal::getNotifications();
-//    }
+    public function getAllNotifications() {
+        return OneSignal::getNotifications();
+    }
 
 //    public function pushNotifications() {
 //        $user_id = Auth::guard('api')->id();
