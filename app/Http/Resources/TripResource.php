@@ -22,7 +22,9 @@ class TripResource extends JsonResource
             'status' => $this->status_value($this->status),
             'started_at' => $this->started_at,
             'user_rate' => $this->user_rate,
+            'user_review' => $this->user_review,
             'driver_rate' => $this->driver_rate,
+            'driver_review' => $this->driver_review
         ];
     }
 

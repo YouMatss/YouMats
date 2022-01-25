@@ -42,7 +42,7 @@ class TripController extends Controller {
 
         return (new TripResource($trip))->additional([
             'available_cars' => CarDriverListResource::collection($cars),
-            'estimated_price' => array_sum($avgPrice) / count($avgPrice),
+            'estimated_price' => round(array_sum($avgPrice) / count($avgPrice)),
             'cars_available' => count($cars)
         ]);
     }

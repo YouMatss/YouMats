@@ -18,16 +18,16 @@ use Illuminate\Support\Facades\Response;
 class AuthController extends Controller
 {
     public function login(LoginRequest $request) {
-        $login = $request->validated();
+        $data = $request->validated();
 
-        if (!Auth::attempt($login)) {
-            return response(['message' => 'Invalid login credentials.'], 400);
+        if (!Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+            return response(['message' => 'Invalid login credentials.'], 401);
         }
         $user = Auth::user();
         $token = $user->createToken('authToken')->accessToken;
 
         return (new UserResource($user))->additional([
-            'player_id' => $login['player_id'],
+            'player_id' => $data['player_id'],
             'token' => $token
         ]);
     }
@@ -42,6 +42,7 @@ class AuthController extends Controller
             'phone' => $data['phone'],
             'address' => $data['address'],
             'password' => Hash::make($data['password']),
+            'player_id' => $data['player_id']
         ]);
 
         $user = Auth::loginUsingId($user->id);
