@@ -11,6 +11,8 @@ Route::middleware('auth:driver-api')->group(function () {
     Route::post('profile/update', 'AuthController@profile_update');
     Route::post('profile/update-photos', 'AuthController@updatePhotos');
 
+    Route::get('notifications/{player_id}', 'GeneralController@getAllNotifications');
+
     Route::group(['prefix' => 'car'], function () {
         Route::get('/', 'CarController@index');
         Route::post('/store', 'CarController@store');

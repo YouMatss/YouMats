@@ -98,14 +98,18 @@
                 <div class="mx-md-auto mx-lg-0 col-md-6 col-lg-4 col-xl-3">
                     <div class="mb-2">
                         <div class="card p-5 border-width-2 border-color-1 borders-radius-17">
-                            @if(!is_company())
-                                <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">
+                            <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">
+                                @if(is_company())
+                                    <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
+                                @else
                                     @if($product->stock && $product->stock >= $product->min_quantity)
                                         <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
                                     @else
                                         <span class="text-red font-weight-bold">{{__('product.out_of_stock')}}</span>
                                     @endif
-                                </div>
+                                @endif
+                            </div>
+                            @if(!is_company())
                                 @if(isset($delivery))
                                     <div>
                                         <span>{{__('product.delivery_to_your_city')}}: <b>{{Session::get('city')->name}}</b></span>
@@ -149,7 +153,7 @@
 
 
                             @if(!Auth::guard('vendor')->check())
-                                @if($product->price || $product->delivery)
+                                @if(is_company() || $product->price || $product->delivery)
                                     {!! cartOrChat($product) !!}
                                 @else
                                     <a class="cart-chat-category btn-primary transition-3d-hover" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">
