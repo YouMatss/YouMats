@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Front\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
+use Brick\Math\Exception\DivisionByZeroException;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -40,7 +41,7 @@ class CartController extends Controller
         if($quantity < $min_quantity)
             $quantity = $min_quantity;
 
-        if($quantity > $stock)
+        if((!is_company()) && $quantity > $stock)
             return response()->json(['message' => __('messages.out_of_stock')]);
 
         $deliveryIsExist = $product->delivery;
@@ -48,13 +49,20 @@ class CartController extends Controller
         if(!is_null($deliveryIsExist)) {
             $delivery = round($deliveryIsExist['price'] / getCurrency('rate'), 2);
         }
+
+        try {
+            $deliveryCalc = ($delivery / round($product->price / getCurrency('rate'), 2)) * 100;
+        } catch (\Exception $e) {
+            $deliveryCalc = 0;
+        }
+
         Cart::instance('cart')->add(
             $product->id,
             $product->name,
             $quantity,
             round($product->price / getCurrency('rate'), 2),
             [],
-            ($delivery / round($product->price / getCurrency('rate'), 2)) * 100
+            $deliveryCalc
         )->associate($product);
         return response()->json(['message' => __(is_company() ? 'product.added_to_quote_list' : 'product.added_to_cart'),
             'cart' => Cart::content(),

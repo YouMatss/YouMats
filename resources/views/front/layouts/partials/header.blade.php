@@ -58,26 +58,26 @@
                                 </div>
                             </li>
 
-                            @if(is_guest() && \Illuminate\Support\Facades\Session::get('userType'))
-                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
-                                <div class="d-flex align-items-center">
-                                    <!-- Language -->
-                                    <div class="position-relative">
-                                        <a id="userTypeDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#userTypeDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-                                        <span class="d-sm-inline-flex align-items-center">
-                                            <i class="ec ec-user mr-1"></i>
-                                            {{\Illuminate\Support\Facades\Session::get('userTypeTranslation')[LaravelLocalization::getCurrentLocale()]}}
-                                        </span>
-                                        </a>
-                                        <div id="userTypeDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="userTypeDropdownInvoker2">
-                                            <a class="dropdown-item" href="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
-                                            <a class="dropdown-item" href="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
-                                        </div>
-                                    </div>
-                                    <!-- End Language -->
-                                </div>
-                            </li>
-                            @endif
+{{--                            @if(is_guest() && \Illuminate\Support\Facades\Session::get('userType'))--}}
+{{--                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">--}}
+{{--                                <div class="d-flex align-items-center">--}}
+{{--                                    <!-- Language -->--}}
+{{--                                    <div class="position-relative">--}}
+{{--                                        <a id="userTypeDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#userTypeDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">--}}
+{{--                                        <span class="d-sm-inline-flex align-items-center">--}}
+{{--                                            <i class="ec ec-user mr-1"></i>--}}
+{{--                                            {{\Illuminate\Support\Facades\Session::get('userTypeTranslation')[LaravelLocalization::getCurrentLocale()]}}--}}
+{{--                                        </span>--}}
+{{--                                        </a>--}}
+{{--                                        <div id="userTypeDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="userTypeDropdownInvoker2">--}}
+{{--                                            <a class="dropdown-item" href="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>--}}
+{{--                                            <a class="dropdown-item" href="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <!-- End Language -->--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            @endif--}}
 
                             @if(Auth::guard('web')->check() && !Auth::guard('vendor')->check())
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
@@ -135,11 +135,8 @@
                                                 <span class="d-sm-inline-flex align-items-center"> <i class="ec ec-user mr-1"></i>{{__('general.user_register')}}</span>
                                             </a>
                                             <div id="registerDropDown" class="dropdown-menu dropdown-unfold" aria-labelledby="registerDropDownInvoker">
-                                                <a href="{{route('register')}}" class="dropdown-item">
-                                                     {{__('general.user_register')}}
-                                                </a>
-                                                <a href="{{route('vendor.register')}}" class="dropdown-item">{{__('general.vendor_register')}}
-                                                </a>
+                                                <a href="{{route('register')}}" class="dropdown-item">{{__('general.user_register')}}</a>
+                                                <a href="{{route('vendor.register')}}" class="dropdown-item">{{__('general.vendor_register')}}</a>
                                             </div>
                                         </div>
                                         <!-- End Register -->

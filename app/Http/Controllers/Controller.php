@@ -13,6 +13,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class Controller extends BaseController
@@ -27,6 +28,16 @@ class Controller extends BaseController
         $data['pages'] = Page::orderBy('sort')->get();
         $data['footer_categories'] = Category::where('show_in_footer', '1')->orderBy('created_at', 'desc');
         $data['FAQs'] = FAQ::orderBy('sort')->get();
+
+        $translation = [
+            'company' => [
+                'ar' => 'شركه',
+                'en' => 'Company'
+            ]
+        ];
+
+        Session::put('userType', 'company');
+        Session::put('userTypeTranslation', $translation['company']);
 
         View::share($data);
         Config::set($config);
