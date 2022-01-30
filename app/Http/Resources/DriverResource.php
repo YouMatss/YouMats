@@ -27,7 +27,8 @@ class DriverResource extends JsonResource
             'driver_photo' => $this->getImages(DRIVER_PHOTO),
             'driver_id' => $this->getImages(DRIVER_ID),
             'driver_license' => $this->getImages(DRIVER_LICENSE),
-            'car' => new CarResource($this->car)
+            'car' => new CarResource($this->car),
+            'active' => $this->active,
         ];
     }
 

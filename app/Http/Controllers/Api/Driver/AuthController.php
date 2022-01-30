@@ -48,14 +48,14 @@ class AuthController extends Controller
             'active' => '0'
         ]);
 
-        return response()->json(['message' => __('messages.wait_for_approve')]);
+        $driver = Auth::guard('driver')->loginUsingId($driver->id);
+        $token = $driver->createToken('authToken')->accessToken;
 
-//        $driver = Auth::guard('driver')->loginUsingId($driver->id);
-//        $token = $driver->createToken('authToken')->accessToken;
-//
-//        return (new DriverResource($driver))->additional([
-//            'token' => $token,
-//        ]);
+        return (new DriverResource($driver))->additional([
+            'token' => $token,
+        ]);
+
+//        return response()->json(['message' => __('messages.wait_for_approve')]);
     }
 
     public function password_forgot(ForgetPasswordRequest $request) {
