@@ -163,7 +163,9 @@
                                     <tbody>
                                         @foreach($cartItems as $item)
                                             <tr class="cart_item">
-                                                <td>{{ $item->name }} <b>({{ $item->qty }} x {{__('general.sar') . ' ' . $item->price}})</b> </td>
+                                                <td>{{ $item->name }}
+                                                    <b>({{ $item->qty }} @if(!is_company()) x {{__('general.sar') . ' ' . $item->price}} @endif )</b>
+                                                </td>
                                                 @if(!is_company())
                                                     <td class="checkout-left">{{ __('general.sar') . ' ' . $item->qty * $item->price }}</td>
                                                 @endif
