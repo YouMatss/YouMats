@@ -11,13 +11,13 @@
 
         <!-- Google Analytics -->
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SVGRD6XD6P"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J03ZH2LNSG"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-SVGRD6XD6P');
+            gtag('config', 'G-J03ZH2LNSG');
         </script>
 
         <!-- Google web master -->
@@ -50,7 +50,7 @@
         </main>
         @include('front.layouts.partials.footer')
         @include('front.layouts.partials.assets_js')
-{{--        @include('front.layouts.partials.welcome-popup')--}}
+        @include('front.layouts.partials.welcome-popup')
         @include('front.layouts.partials.search')
         @stack('chat')
     </body>

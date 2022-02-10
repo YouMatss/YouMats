@@ -32,28 +32,6 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      */
     protected $appends = ['image_url', 'delivery', 'contacts'];
 
-    public function getMetaTitleAttribute() {
-        if(!isset($this->getTranslations('meta_title')[app()->getLocale()]))
-            return;
-        if(empty($this->getTranslations('meta_title')[app()->getLocale()]))
-            return $this->getTranslations('name')[app()->getLocale()];
-        return $this->getTranslations('meta_title')[app()->getLocale()];
-    }
-    public function getMetaDescAttribute() {
-        if(!isset($this->getTranslations('meta_desc')[app()->getLocale()]))
-            return;
-        if(empty($this->getTranslations('meta_desc')[app()->getLocale()]))
-            return $this->getTranslations('short_desc')[app()->getLocale()];
-        return $this->getTranslations('meta_desc')[app()->getLocale()];
-    }
-    public function getMetaKeywordsAttribute() {
-        if(!isset($this->getTranslations('meta_keywords')[app()->getLocale()]))
-            return;
-        if(empty($this->getTranslations('meta_keywords')[app()->getLocale()]))
-            return $this->getTranslations('name')[app()->getLocale()];
-        return $this->getTranslations('meta_keywords')[app()->getLocale()];
-    }
-
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')->width(200)->height(200);
         $this->addMediaConversion('cropper')->performOnCollections(PRODUCT_PATH);
@@ -251,18 +229,10 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      * @param $price
      * @return mixed
      */
-    public function scopePriceFrom($query, $price)
+    public function scopePrice($query, $price)
     {
-        return $query->where('price', '>=', $price);
-    }
-
-    /**
-     * @param $query
-     * @param $price
-     * @return mixed
-     */
-    public function scopePriceTo($query, $price)
-    {
-        return $query->where('price', '<=', $price);
+        $prices = explode(';', $price);
+        return $query->where('price', '>=', $prices[0])
+                    ->where('price', '<=', $prices[1]);
     }
 }

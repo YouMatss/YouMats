@@ -22,17 +22,6 @@ class MiscController extends Controller
         return;
     }
 
-    public function changeCity(Request $request) {
-        try {
-            setCity($request->city_id);
-        } catch (\Exception $e) {
-            $output['status'] = 0;
-        }
-        $output['status'] = 1;
-        echo json_encode($output);
-        return;
-    }
-
     public function subscribeRequest(Request $request) {
         $data = $this->validate($request, [
             'email' => 'email|unique:subscribers,email'

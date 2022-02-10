@@ -1,8 +1,6 @@
 <div class="modal fade change_city_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <form id="city_button">
-                {{csrf_field()}}
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">{{__('general.select_city_title')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -10,7 +8,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <select name="city_id" class="form-control">
+                    <select id="city_select" class="form-control">
                         <option value="" selected disabled>{{__('general.select_city')}}</option>
                         @if(isset($delivery_cities) && $delivery_cities != 'all' && count($delivery_cities))
                             @foreach($delivery_cities as $d_city_loop)
@@ -25,9 +23,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('general.close')}}</button>
-                    <button type="submit" class="btn btn-primary" style="border-radius: 25px;margin-top: 0">{{__('general.choose')}}</button>
+                    <button type="button" id="city_submit" class="btn btn-primary" style="border-radius: 25px;margin-top: 0">{{__('general.choose')}}</button>
                 </div>
-            </form>
         </div>
     </div>
 </div>

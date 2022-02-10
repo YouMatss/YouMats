@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Route;
 
 //Actions routes
 Route::post('changeCurrency', 'Common\MiscController@changeCurrency')->name('front.currencySwitch');
-Route::post('changeCity', 'Common\MiscController@changeCity')->name('front.citySwitch');
 Route::get('introduce/{type}', 'Common\MiscController@introduce')->name('front.introduce');
 
 Route::group([
@@ -117,7 +116,6 @@ Route::group([
 
     Route::get('/page/{slug}', 'Common\PageController@page')->name('front.page.index');
     Route::get('/search', 'Product\ProductController@search')->name('products.search');
-    Route::get('/filter/{category_id}', 'Category\CategoryController@filter')->name('category.filter');
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
 
     Route::get('/{categories_slug}/{slug}/i', 'Product\ProductController@index')

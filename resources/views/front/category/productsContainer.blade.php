@@ -1,7 +1,16 @@
 <div class="d-block d-md-flex flex-center-between mb-3 rtl">
-    <span class="font-size-25 mb-2 mb-md-0"></span>
-    <input type="hidden" value="{{$category->id}}" id="categoryIdContainer">
-    <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}} {{__('general.of')}} {{$products->total()}} {{__('general.results')}}</p>
+    <div class="text-left">
+        <span class="font-size-25 mb-2 mb-md-0"></span>
+        <input type="hidden" value="{{$category->id}}" id="categoryIdContainer">
+        <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}} {{__('general.of')}} {{$products->total()}} {{__('general.results')}}</p>
+    </div>
+    <div class="text-right">
+        <select class="form-control form-control-sm" id="sort_select">
+            <option selected value="">{{__('general.sort_placeholder')}}</option>
+            <option value="-price" @if(request()->input('sort') == '-price') selected @endif>{{__('general.sort_price_high')}}</option>
+            <option value="price" @if(request()->input('sort') == 'price') selected @endif>{{__('general.sort_price_low')}}</option>
+        </select>
+    </div>
 </div>
 
 <!-- Shop-control-bar -->
