@@ -14,73 +14,66 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
 {
-    private int $pagination_limit = 20;
-
-    public function index($slug) {
+    public function index($slug, Request $request) {
         setCityLocation();
 
         $parsedSlug = explode('/', $slug);
         $slug = end($parsedSlug);
 
         $data['category'] = Category::whereSlug($slug)->firstOrFail();
-        $children_categories_ids = Category::descendantsAndSelf($data['category']->id)->pluck('id');
-
-        $products = Product::whereIn('category_id', $children_categories_ids)
-            ->where('active', '1')
-            ->get()
-            ->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
-                return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
-                    return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
-                        return $collection->sortByDesc('updated_at');
-                    })->ungroup();
-                })->ungroup();
-            })->ungroup()
-            ->unique();
-
-        $data['products'] = CollectionPaginate::paginate($products, $this->pagination_limit);
 
         $data['parent'] = $data['category']->parent;
         $data['children'] = $data['category']->children;
 
         if(isset($data['parent'])) {
-            $data['tags'] = $data['category']->tags();
-            $data['category']->load('attributes', 'attributes.values');
+            $children_categories_ids = Category::descendantsAndSelf($data['category']->id)->pluck('id');
+
+            if(isset($request->filter['vendor_branches.city_id'])){
+                setCity($request->filter['vendor_branches.city_id']);
+            }
+
+            $products = QueryBuilder::for(Product::class)
+                ->whereIn('category_id', $children_categories_ids)
+                ->where('products.active', '1')
+                ->select('products.*');
+
             $data['minPrice'] = $products->min('price');
             $data['maxPrice'] = $products->max('price');
+
+            $products->join('vendors', 'vendors.id', 'products.vendor_id')
+                ->join('vendor_branches', 'vendor_branches.vendor_id', 'vendors.id')
+                ->allowedFilters([
+                    AllowedFilter::partial('attributes', null, true, ','),
+                    AllowedFilter::scope('price'),
+                    AllowedFilter::exact('vendor_branches.city_id', null, false)
+                ]);
+
+            if(isset($request->sort)) {
+                $filter = $products->allowedSorts('price')
+                    ->with('category')
+                    ->get()->unique();
+            } else {
+                $filter = $products->with('category')
+                    ->get()
+                    ->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
+                        return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
+                            return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
+                                return $collection->sortByDesc('updated_at');
+                            })->ungroup();
+                        })->ungroup();
+                    })->ungroup()
+                    ->unique();
+            }
+
+            $data['products'] = CollectionPaginate::paginate($filter, 20);
+            $data['products']->withPath(url()->current())->withQueryString();
+
+            $data['tags'] = $data['category']->tags();
+            $data['category']->load('attributes', 'attributes.values');
 
             return view('front.category.sub')->with($data);
         } else {
             return view('front.category.index')->with($data);
         }
-    }
-
-    public function filter($category_id) {
-        $data['category'] = Category::findorfail($category_id);
-        $children_categories_ids = Category::descendantsAndSelf($category_id)->pluck('id');
-
-        $products = QueryBuilder::for(Product::class)
-            ->allowedFilters([
-                'attributes',
-                AllowedFilter::scope('price_from'),
-                AllowedFilter::scope('price_to')
-            ])
-            ->with('category')
-            ->whereIn('category_id', $children_categories_ids)
-            ->where('active', '1')
-            ->get()
-            ->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
-                return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
-                    return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
-                        return $collection->sortByDesc('updated_at');
-                    })->ungroup();
-                })->ungroup();
-            })->ungroup()
-            ->unique();
-
-        $data['products'] = CollectionPaginate::paginate($products, $this->pagination_limit);
-        $data['products']->withPath(route('front.category', [generatedNestedSlug($data['category']->ancestors()->pluck('slug')->toArray(), $data['category']->slug)]));
-        $data['products']->withQueryString();
-
-        return view('front.category.productsContainer')->with($data)->render();
     }
 }

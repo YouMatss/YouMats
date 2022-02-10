@@ -1,17 +1,19 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>YouMats | {{ $vendor->name }}</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <title>{{(!empty($vendor->meta_title)) ? $vendor->meta_title : $vendor->name}}</title>
+    <meta name="description" content="{{(!empty($vendor->meta_desc)) ? $vendor->meta_desc : $vendor->name}}">
+    <meta name="keywords" content="{{$vendor->meta_keywords}}">
     <meta property="og:url" content="{{url()->current()}}" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:image" content="" />
+    <meta property="og:title" content="{{(!empty($vendor->meta_title)) ? $vendor->meta_title : $vendor->name}}" />
+    <meta property="og:description" content="{{(!empty($vendor->meta_desc)) ? $vendor->meta_desc : $vendor->name}}" />
+    <meta property="og:image" content="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
-    <meta name="twitter:title" content="">
-    <meta name="twitter:description" content="">
-    <meta name="twitter:image" content="">
+    <meta name="twitter:title" content="{{(!empty($vendor->meta_title)) ? $vendor->meta_title : $vendor->name}}">
+    <meta name="twitter:description" content="{{(!empty($vendor->meta_desc)) ? $vendor->meta_desc : $vendor->name}}">
+    <meta name="twitter:image" content="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}">
+    <link rel="canonical" href="{{url()->current()}}" />
+    {!! $vendor->schema !!}
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">

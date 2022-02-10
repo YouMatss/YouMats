@@ -189,13 +189,10 @@
       <path value="$PROJECT_DIR$/vendor/stevebauman/location" />
       <path value="$PROJECT_DIR$/vendor/devinweb/payment" />
       <path value="$PROJECT_DIR$/vendor/drobee/nova-sluggable" />
-      <path value="$PROJECT_DIR$/vendor/coreproc/nova-echo" />
-      <path value="$PROJECT_DIR$/vendor/coreproc/nova-notification-feed" />
       <path value="$PROJECT_DIR$/vendor/symfony/routing" />
       <path value="$PROJECT_DIR$/vendor/nette/schema" />
       <path value="$PROJECT_DIR$/vendor/nette/utils" />
       <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
-      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
       <path value="$PROJECT_DIR$/vendor/laravel/serializable-closure" />
       <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
@@ -205,7 +202,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/mime" />
       <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
       <path value="$PROJECT_DIR$/vendor/symfony/process" />
@@ -225,6 +221,7 @@
       <path value="$PROJECT_DIR$/vendor/mauricewijnia/nova-maps-address" />
       <path value="$PROJECT_DIR$/vendor/adamcmoore/nova-gmap" />
       <path value="$PROJECT_DIR$/vendor/ladumor/one-signal" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

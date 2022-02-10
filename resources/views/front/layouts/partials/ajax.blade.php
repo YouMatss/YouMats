@@ -36,24 +36,6 @@
             return false;
         });
 
-        // Change City
-        $('#city_button').submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: "{{route('front.citySwitch')}}",
-                data: $(this).serialize(),
-                dataType: 'json',
-                success: function (data) {
-                    if (typeof (data.status) != "undefined" && data.status != 0) {
-                        window.location.href = "{{ \Request::fullUrl() }}";
-                    } else {
-                        return false;
-                    }
-                }
-            });
-        });
-
         // subscribeForm Request
         $("#subscribeForm").submit(function (e) {
             e.preventDefault();

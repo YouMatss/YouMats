@@ -1,17 +1,34 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>{{$product->meta_title ?? $product->name}}</title>
-    <meta name="description" content="{{$product->meta_desc ?? $product->short_desc}}">
+    <title>{{(!empty($product->meta_title)) ? $product->meta_title : $product->name}}</title>
+    <meta name="description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : $product->short_desc}}">
     <meta name="keywords" content="{{$product->meta_keywords}}">
     <meta property="og:url" content="{{url()->current()}}" />
-    <meta property="og:title" content="{{$product->meta_title ?? $product->name}}" />
-    <meta property="og:description" content="{{$product->meta_desc ?? $product->short_desc}}" />
+    <meta property="og:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : $product->name}}" />
+    <meta property="og:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : $product->short_desc}}" />
     <meta property="og:image" content="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
-    <meta name="twitter:title" content="{{$product->meta_title ?? $product->name}}">
-    <meta name="twitter:description" content="{{$product->meta_desc ?? $product->short_desc}}">
+    <meta name="twitter:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : $product->name}}">
+    <meta name="twitter:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : $product->short_desc}}">
     <meta name="twitter:image" content="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}">
+    {!! $product->schema !!}
+    <script>
+        ga('require', 'ec');
+        ga('ec:addImpression', {
+            'id': '{{$product->SKU}}',
+            'name': '{{$product->name}}',
+            'category': '{{$product->category->name}}',
+            'brand': '{{$product->vendor->name}}',
+        });
+        ga('ec:addProduct', {
+            'id': '{{$product->SKU}}',
+            'name': '{{$product->name}}',
+            'category': '{{$product->category->name}}',
+            'brand': '{{$product->vendor->name}}',
+        });
+        ga('ec:setAction', 'detail');
+    </script>
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">

@@ -1,18 +1,19 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>{{$category->meta_title}}</title>
-    <meta name="description" content="{{$category->meta_desc}}">
+    <title>{{(!empty($category->meta_title)) ? $category->meta_title : $category->title}}</title>
+    <meta name="description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : $category->short_desc}}">
     <meta name="keywords" content="{{$category->meta_keywords}}">
     <meta property="og:url" content="{{url()->current()}}" />
-    <meta property="og:title" content="{{$category->meta_title}}" />
-    <meta property="og:description" content="{{$category->meta_desc}}" />
+    <meta property="og:title" content="{{(!empty($category->meta_title)) ? $category->meta_title : $category->title}}" />
+    <meta property="og:description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : $category->short_desc}}" />
     <meta property="og:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
-    <meta name="twitter:title" content="{{$category->meta_title}}">
-    <meta name="twitter:description" content="{{$category->meta_desc}}">
+    <meta name="twitter:title" content="{{(!empty($category->meta_title)) ? $category->meta_title : $category->title}}">
+    <meta name="twitter:description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : $category->short_desc}}">
     <meta name="twitter:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}">
     <link rel="canonical" href="{{url()->current()}}" />
+    {!! $category->schema !!}
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
