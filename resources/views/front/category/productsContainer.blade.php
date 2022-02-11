@@ -4,6 +4,7 @@
         <input type="hidden" value="{{$category->id}}" id="categoryIdContainer">
         <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}} {{__('general.of')}} {{$products->total()}} {{__('general.results')}}</p>
     </div>
+    @if(is_individual())
     <div class="text-right">
         <select class="form-control form-control-sm" id="sort_select">
             <option selected value="">{{__('general.sort_placeholder')}}</option>
@@ -11,6 +12,7 @@
             <option value="price" @if(request()->input('sort') == 'price') selected @endif>{{__('general.sort_price_low')}}</option>
         </select>
     </div>
+    @endif
 </div>
 
 <!-- Shop-control-bar -->
@@ -41,9 +43,21 @@
     </div>
     @endif
     <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
-        <a class="text-gray-30 font-size-20 mr-2" href="{{$products->previousPageUrl()}}">←</a>
+        <a class="text-gray-30 font-size-20 mr-2" href="{{$products->previousPageUrl()}}">
+            @if(app()->getLocale() == 'ar')
+                &nbsp;→&nbsp;
+            @else
+                &nbsp;←&nbsp;
+            @endif
+        </a>
         <b>{{$products->currentPage()}} </b> &nbsp; {{__('general.of')}} {{$products->lastPage()}}
-        <a class="text-gray-30 font-size-20 ml-2" href="{{$products->nextPageUrl()}}">→</a>
+        <a class="text-gray-30 font-size-20 ml-2" href="{{$products->nextPageUrl()}}">
+            @if(app()->getLocale() == 'ar')
+                &nbsp;←&nbsp;
+            @else
+                &nbsp;→&nbsp;
+            @endif
+        </a>
     </nav>
 </div>
 <!-- End Shop-control-bar -->
@@ -52,18 +66,22 @@
 <div class="tab-content rtl" id="pills-tabContent">
     <div class="tab-pane fade pt-2 show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab" data-target-group="groups">
         <ul class="row list-unstyled products-group no-gutters" id="categoryProductGrid">
-            @foreach($products as $product)
+            @forelse($products as $product)
                 <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
                     @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'grid'])
                 </li>
-            @endforeach
+            @empty
+                 <p class="alert alert-warning alert-block w-100">{{__('general.no_data')}}</p>
+            @endforelse
         </ul>
     </div>
     <div class="tab-pane fade pt-2" id="list-view" role="tabpanel" aria-labelledby="list-view-tab" data-target-group="groups">
         <ul class="d-block list-unstyled products-group prodcut-list-view-small" id="categoryProductList">
-            @foreach($products as $product)
+            @forelse($products as $product)
                 @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'list'])
-            @endforeach
+            @empty
+                <p class="alert alert-warning alert-block w-100">{{__('general.no_data')}}</p>
+            @endforelse
         </ul>
     </div>
 </div>

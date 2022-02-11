@@ -28,8 +28,8 @@ class CategoryController extends Controller
         if(isset($data['parent'])) {
             $children_categories_ids = Category::descendantsAndSelf($data['category']->id)->pluck('id');
 
-            if(isset($request->filter['vendor_branches.city_id'])){
-                setCity($request->filter['vendor_branches.city_id']);
+            if(isset($request->filter['city'])){
+                setCity($request->filter['city']);
             }
 
             $products = QueryBuilder::for(Product::class)
@@ -41,14 +41,22 @@ class CategoryController extends Controller
             $data['maxPrice'] = $products->max('price');
 
             $products->join('vendors', 'vendors.id', 'products.vendor_id')
-                ->join('vendor_branches', 'vendor_branches.vendor_id', 'vendors.id')
-                ->allowedFilters([
+                ->join('vendor_branches', 'vendor_branches.vendor_id', 'vendors.id');
+
+            if(is_individual()) {
+                $products->allowedFilters([
                     AllowedFilter::partial('attributes', null, true, ','),
                     AllowedFilter::scope('price'),
-                    AllowedFilter::exact('vendor_branches.city_id', null, false)
+                    AllowedFilter::exact('city', 'vendor_branches.city_id', false)
                 ]);
+            } else {
+                $products->allowedFilters([
+                    AllowedFilter::partial('attributes', null, true, ','),
+                    AllowedFilter::scope('price'),
+                ]);
+            }
 
-            if(isset($request->sort)) {
+            if(isset($request->sort) && is_individual()) {
                 $filter = $products->allowedSorts('price')
                     ->with('category')
                     ->get()->unique();
