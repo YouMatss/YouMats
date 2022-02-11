@@ -41,7 +41,7 @@ class CategoryController extends Controller
             $data['maxPrice'] = $products->max('price');
 
             $products->join('vendors', 'vendors.id', 'products.vendor_id')
-                ->join('vendor_branches', 'vendor_branches.vendor_id', 'vendors.id');
+                ->leftJoin('vendor_branches', 'vendor_branches.vendor_id', 'vendors.id');
 
             if(is_individual()) {
                 $products->allowedFilters([
