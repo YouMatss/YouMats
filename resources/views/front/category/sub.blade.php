@@ -50,8 +50,8 @@
                                    data-extra-classes="u-range-slider u-range-slider-indicator u-range-slider-grid"
                                    data-type="double" data-grid="false" data-hide-from-to="true" data-prefix="{{ getCurrency('symbol') }}"
                                    data-min="{{$minPrice}}" data-max="{{$maxPrice}}"
-                                   data-from="{{explode(';', request()->input('filter.price'))[0]}}"
-                                   data-to="{{explode(';', request()->input('filter.price'))[1]}}" name="price"
+                                   data-from="{{(explode(';', request()->input('filter.price'))[0]) ?? $minPrice}}"
+                                   data-to="{{(explode(';', request()->input('filter.price'))[1]) ?? $maxPrice}}" name="price"
                                    data-result-min="#rangeSliderExample3MinResultCategory"
                                    data-result-max="#rangeSliderExample3MaxResultCategory">
                             <!-- End Range Slider -->
@@ -181,7 +181,7 @@
                     href += '&filter[price]=' + $('#price_range').val();
                 }
                 if($('#city_select').val()) {
-                    href += '&filter[vendor_branches.city_id]=' + $('#city_select').val();
+                    href += '&filter[city]=' + $('#city_select').val();
                 }
                 if($('#sort_select').val()) {
                     href += '&sort=' + $('#sort_select').val();
