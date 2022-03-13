@@ -29,7 +29,7 @@ class MakeRequestRequest extends FormRequest
             'destination_latitude' => 'required',
             'destination_longitude' => 'required',
             'car_type_id' => 'required|exists:car_types,id',
-            'pickup_date' => 'required|timestamp'
+            'pickup_date' => 'required|date'
         ];
     }
 }

@@ -73,7 +73,7 @@ class Trip extends Resource
             Number::make('Distance')
                 ->rules(REQUIRED_NUMERIC_VALIDATION)
                 ->min(0)
-                ->step(0.1)
+                ->step(0.01)
                 ->help('In KiloMeter'),
 
             Currency::make('Price')
@@ -90,9 +90,10 @@ class Trip extends Resource
             Select::make('Status')->options([
                 '0' => 'Pending',
                 '1' => 'In progress',
-                '2' => 'Completed'
+                '2' => 'Completed',
+                '3' => 'Canceled'
             ])->displayUsingLabels()
-                ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:0,1,2'])),
+                ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:0,1,2,3'])),
 
             DateTime::make('Pickup Date')
                 ->nullable()
