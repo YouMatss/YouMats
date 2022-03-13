@@ -20,6 +20,7 @@ class TripResource extends JsonResource
             'price' => round($this->price, 2),
             'driver_status' => $this->driver_status_value($this->driver_status),
             'status' => $this->status_value($this->status),
+            'pickup_date' => $this->pickup_date,
             'started_at' => $this->started_at,
             'user_rate' => $this->user_rate,
             'user_review' => $this->user_review,

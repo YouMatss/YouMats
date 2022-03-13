@@ -12,11 +12,14 @@ class Trip extends Model
 
     protected $guarded = ['id'];
 
-    protected $dates = ['started_at'];
+    protected $dates = [
+        'pickup_date',
+        'started_at'
+    ];
 
     protected $casts = [
-        'pickup_location'           => 'array',
-        'destination_location'           => 'array'
+        'pickup_location' => 'array',
+        'destination_location' => 'array'
     ];
 
     public function user() {

@@ -28,7 +28,8 @@ class MakeRequestRequest extends FormRequest
             'pickup_longitude' => 'required',
             'destination_latitude' => 'required',
             'destination_longitude' => 'required',
-            'car_type_id' => 'required|exists:car_types,id'
+            'car_type_id' => 'required|exists:car_types,id',
+            'pickup_date' => 'required|timestamp'
         ];
     }
 }
