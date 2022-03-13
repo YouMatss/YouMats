@@ -135,9 +135,7 @@ class TripController extends Controller {
         $trip = Trip::where([
             'user_id' => $user_id,
             'id' => $trip_id,
-            'driver_status' => '1',
-            'status' => '1'
-        ])->first();
+        ])->where('status', '!=', '2')->first();
 
         if($trip) {
             $trip->update([
@@ -153,7 +151,7 @@ class TripController extends Controller {
             ], 200);
         }
 
-        return response()->json(['message' => 'Request dosn\'t exists.'], 400);
+        return response()->json(['message' => 'Request doesn\'t exists.'], 400);
     }
 
     public function carTypes() {

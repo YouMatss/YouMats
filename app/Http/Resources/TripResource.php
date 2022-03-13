@@ -18,8 +18,10 @@ class TripResource extends JsonResource
             'destination_longitude' => $this->destination_longitude,
             'distance' => round($this->distance, 2),
             'price' => round($this->price, 2),
-            'driver_status' => $this->driver_status_value($this->driver_status),
-            'status' => $this->status_value($this->status),
+            'driver_status' => $this->driver_status,
+            'status' => $this->status,
+//            'driver_status' => $this->driver_status_value($this->driver_status),
+//            'status' => $this->status_value($this->status),
             'pickup_date' => $this->pickup_date,
             'started_at' => $this->started_at,
             'user_rate' => $this->user_rate,
@@ -32,8 +34,7 @@ class TripResource extends JsonResource
     private function driver_status_value($status) {
         $values = [
             '0' => 'Pending',
-            '1' => 'Accepted',
-            '2' => 'Refused'
+            '1' => 'Accepted'
         ];
         return $values[$status];
     }
@@ -41,7 +42,8 @@ class TripResource extends JsonResource
         $values = [
             '0' => 'Pending',
             '1' => 'In progress',
-            '2' => 'Completed'
+            '2' => 'Completed',
+            '3' => 'Canceled'
         ];
         return $values[$status];
     }
