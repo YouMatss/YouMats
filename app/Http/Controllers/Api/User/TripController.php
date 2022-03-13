@@ -35,6 +35,7 @@ class TripController extends Controller {
             'pickup_longitude' => $data['pickup_longitude'],
             'destination_latitude' => $data['destination_latitude'],
             'destination_longitude' => $data['destination_longitude'],
+            'pickup_date' => $data['pickup_date'],
             'distance' => $distance,
             'driver_status' => '0',
             'status' => '0'

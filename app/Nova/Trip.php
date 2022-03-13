@@ -94,6 +94,10 @@ class Trip extends Resource
             ])->displayUsingLabels()
                 ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:0,1,2'])),
 
+            DateTime::make('Pickup Date')
+                ->nullable()
+                ->hideFromIndex(),
+
             DateTime::make('Started At')
                 ->nullable()
                 ->hideFromIndex(),
