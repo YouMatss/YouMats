@@ -43,12 +43,12 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::prefix('api/driver')
-                ->middleware('api')
+                ->middleware(['api', 'verifyLanguage'])
                 ->namespace($this->namespaceApiDriver)
                 ->group(base_path('routes/api/driver/api.php'));
 
             Route::prefix('api/user')
-                ->middleware('api')
+                ->middleware(['api', 'verifyLanguage'])
                 ->namespace($this->namespaceApiUser)
                 ->group(base_path('routes/api/user/api.php'));
 
