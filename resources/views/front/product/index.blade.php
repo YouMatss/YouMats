@@ -129,7 +129,7 @@
                             @if(!is_company())
                                 @if(isset($delivery))
                                     <div>
-                                        <span>{{__('product.delivery_to_your_city')}}: <b>{{Session::get('city')->name}}</b></span>
+                                        <span>{{__('product.delivery_to_your_city')}}: <b>{{getCurrentCityName()}}</b></span>
                                         <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
                                         <br/>
                                         <span>{{__('product.delivery_price')}}:
@@ -143,7 +143,7 @@
                                     </div>
                                 @else
                                     <div>
-                                        <span style="color:#ff0000;margin-bottom: 10px;display: inline-block;">{{__('product.no_delivery')}}: {{Session::get('city')->name}}</span>
+                                        <span style="color:#ff0000;margin-bottom: 10px;display: inline-block;">{{__('product.no_delivery')}}: {{getCurrentCityName()}}</span>
                                         @if(!is_null($delivery_cities))
                                         <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
                                         @endif

@@ -10,6 +10,8 @@
             <option selected value="">{{__('general.sort_placeholder')}}</option>
             <option value="-price" @if(request()->input('sort') == '-price') selected @endif>{{__('general.sort_price_high')}}</option>
             <option value="price" @if(request()->input('sort') == 'price') selected @endif>{{__('general.sort_price_low')}}</option>
+            <option value="-delivery" @if(request()->input('sort') == '-delivery') selected @endif>{{__('general.sort_delivery_high')}}</option>
+            <option value="delivery" @if(request()->input('sort') == 'delivery') selected @endif>{{__('general.sort_delivery_low')}}</option>
         </select>
     </div>
     @endif
@@ -37,7 +39,7 @@
     </div>
     @if(is_individual())
     <div class="rtl">
-        {{__('general.city_location_text')}}: {{(Session::get('city')->name) ?? __('general.all_cities')}}
+        {{__('general.city_location_text')}}: {{(getCurrentCityName()) ?? __('general.all_cities')}}
         <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
         {{__('general.category_word_after_change_city_button')}}
     </div>
