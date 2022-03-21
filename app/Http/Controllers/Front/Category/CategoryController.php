@@ -48,7 +48,7 @@ class CategoryController extends Controller
                     AllowedFilter::partial('attributes', null, true, ','),
                     AllowedFilter::scope('price')
                 ]);
-            } else {
+            } elseif(Session::has('city')) {
                 $products->allowedFilters([
                     AllowedFilter::partial('attributes', null, true, ','),
                     AllowedFilter::scope('price'),

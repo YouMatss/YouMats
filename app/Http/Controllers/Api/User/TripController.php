@@ -139,11 +139,11 @@ class TripController extends Controller {
 
         if($trip) {
             $trip->update([
-                'driver_id' => null,
-                'driver_status' => '0',
-                'status' => '0',
-                'started_at' => null,
-                'price' => null
+//                'driver_id' => null,
+//                'driver_status' => '0',
+                'status' => '3',
+//                'started_at' => null,
+//                'price' => null
             ]);
             return response()->json([
                 'message' => 'Trip Cancelled Successfully.',

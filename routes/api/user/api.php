@@ -22,9 +22,9 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::get('trips/count', 'TripController@tripsCount');
-    Route::get('trips/{type}/{count?}', 'TripController@trips');
     Route::get('trips_details/{trip_id}', 'TripController@tripDetails');
     Route::post('trips/{trip_id}/cancel', 'TripController@tripCancel');
+    Route::get('trips/{type}/{count?}', 'TripController@trips');
 });
 
 Route::get('/car_types', 'TripController@carTypes');
