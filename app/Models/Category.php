@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
 use Kalnoy\Nestedset\NodeTrait;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -21,6 +20,10 @@ class Category extends Model implements Sortable, HasMedia
     use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, CascadeSoftDeletes, NodeTrait;
 
     public $translatable = ['name', 'title', 'desc', 'short_desc', 'meta_title', 'meta_keywords', 'meta_desc'];
+
+    protected $casts = [
+        'template' => 'array'
+    ];
 
     protected $dates = ['deleted_at'];
 

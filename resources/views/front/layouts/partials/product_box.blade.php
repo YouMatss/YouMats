@@ -28,7 +28,7 @@
                 <p class="mb-1">{!! $product->short_desc !!}</p>
             </div>
             <div class="text-gray-20 mb-2 font-size-12">{{__('general.sku')}}: {{$product->SKU}}</div>
-            @if(auth()->guard('admin')->check())
+            @if(auth()->guard('admin')->check() && isset($product->vendor))
                 <div class="text-gray-20 mb-2 font-size-12">{{__('general.vendor')}}: {{$product->vendor->name}}</div>
             @endif
             <div class="product-price">
@@ -73,7 +73,7 @@
                         {!! $product->short_desc !!}
                     </div>
                     <div class="text-gray-20 mb-2 font-size-12">{{__('general.sku')}}: {{$product->SKU}}</div>
-                    @if(auth()->guard('admin')->check())
+                    @if(auth()->guard('admin')->check() && isset($product->vendor))
                         <div class="text-gray-20 mb-2 font-size-12">{{__('general.vendor')}}: {{$product->vendor->name}}</div>
                     @endif
                     <div class="mb-3 d-none d-md-block">
