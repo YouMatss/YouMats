@@ -39,28 +39,10 @@ class CategoryController extends Controller
         $data['minPrice'] = $products->min('price');
         $data['maxPrice'] = $products->max('price');
 
-        $products->join('vendors', 'vendors.id', 'products.vendor_id')
-            ->leftJoin('vendor_branches', 'vendor_branches.vendor_id', 'vendors.id');
-
-        if(is_individual()) {
-            if(Session::has('city') && Session::get('city') == 'all') {
-                $products->allowedFilters([
-                    AllowedFilter::partial('attributes', null, true, ','),
-                    AllowedFilter::scope('price')
-                ]);
-            } elseif(Session::has('city')) {
-                $products->allowedFilters([
-                    AllowedFilter::partial('attributes', null, true, ','),
-                    AllowedFilter::scope('price'),
-                    AllowedFilter::exact('city', 'vendor_branches.city_id', false)
-                ]);
-            }
-        } else {
-            $products->allowedFilters([
-                AllowedFilter::partial('attributes', null, true, ','),
-                AllowedFilter::scope('price'),
-            ]);
-        }
+        $products->allowedFilters([
+            AllowedFilter::partial('attributes', null, true, ','),
+            AllowedFilter::scope('price'),
+        ]);
 
         if(isset($request->sort) && is_individual()) {
             $filter = $products->allowedSorts([
