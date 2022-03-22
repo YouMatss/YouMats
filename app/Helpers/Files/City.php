@@ -1,17 +1,42 @@
 <?php
 
-use Illuminate\Support\Facades\Session;
 use App\Models\City;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
+use Stevebauman\Location\Facades\Location;
 
 if (!function_exists('setDefaultCity')) {
     function setDefaultCity() {
-        Session::put('city', 'all');
+        Session::put('city', 1);
+    }
+}
+
+if (!function_exists('setCityLocation')) {
+    function setCityLocation() {
+        if (!Session::has('city')) {
+            try {
+                $ip = Request::ip();
+                $location = Location::get($ip);
+                if ($location) {
+                    $city = City::where('name', 'LIKE', '%' . $location->cityName . '%')->pluck('id');
+                    if ($city) {
+                        Session::put('city', $city->id);
+                    } else {
+                        setDefaultCity();
+                    }
+                } else {
+                    setDefaultCity();
+                }
+            } catch (\Exception $e) {
+                setDefaultCity();
+            }
+        }
     }
 }
 
 if (!function_exists('setCity')) {
     function setCity($city_id) {
-        if(City::find($city_id) || $city_id == 'all')
+        if(City::find($city_id))
             Session::put('city', $city_id);
     }
 }
