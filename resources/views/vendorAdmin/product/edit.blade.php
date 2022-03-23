@@ -27,6 +27,9 @@
                                              id="nav-{{$localeCode}}-name" role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-name">
                                             <div class="form-group">
                                                 <label for="name-{{$localeCode}}">{{__('vendorAdmin.name')}}</label>
+
+                                                <div id="template"></div>
+
                                                 <input type="text" class="form-control" name="name_{{$localeCode}}"
                                                        id="name-{{$localeCode}}" value="{{$product->getTranslation('name',$localeCode)}}">
                                             </div>
@@ -361,6 +364,7 @@
 
             $('#subCategory').change(function () {
                 getAttributes($(this).val());
+                getTemplateForTitle($(this).val());
             });
 
             $('.absolute-image').click(function() {
@@ -429,6 +433,17 @@
                         attributes.append(`</optgroup>`);
                     }
                 });
+            });
+        }
+        function getTemplateForTitle(subCategory_id) {
+            var template = $('#template');
+            $.ajax({
+                type: 'GET',
+                url: "{{route('vendor.category.getTemplate')}}",
+                data: { subCategory_id: subCategory_id }
+            }).done(function(response){
+                template.html('');
+                console.log(response);
             });
         }
     </script>

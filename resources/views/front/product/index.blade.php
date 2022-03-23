@@ -19,13 +19,13 @@
             'id': '{{$product->SKU}}',
             'name': '{{$product->name}}',
             'category': '{{$product->category->name}}',
-            'brand': '{{$product->vendor->name}}',
+            {{--'brand': '{{$product->vendor->name}}',--}}
         });
         ga('ec:addProduct', {
             'id': '{{$product->SKU}}',
             'name': '{{$product->name}}',
             'category': '{{$product->category->name}}',
-            'brand': '{{$product->vendor->name}}',
+{{--            'brand': '{{$product->vendor->name}}',--}}
         });
         ga('ec:setAction', 'detail');
     </script>
@@ -91,6 +91,7 @@
                                     @endfor
                                     {{$product->rate}}
                                 </div>
+                                &nbsp;
                                 <span class="text-secondary font-size-13">({{$product->views}} {{__('product.views')}})</span>
                             </a>
                         </div>
@@ -107,7 +108,7 @@
 
                         <p>{!! $product->short_desc !!}</p>
                         <div><strong>{{__('general.sku')}}</strong>: {{$product->SKU}}</div>
-                        @if(auth()->guard('admin')->check())
+                        @if(auth()->guard('admin')->check() && isset($product->vendor->name))
                             <div><strong>{{__('general.vendor')}}</strong>: {{$product->vendor->name}}</div>
                         @endif
                     </div>

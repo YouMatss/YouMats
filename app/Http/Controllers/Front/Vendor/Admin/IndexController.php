@@ -153,4 +153,14 @@ class IndexController extends Controller
 
         return response()->json($attributes);
     }
+
+    public function getTemplate(Request $request) {
+        $data = $this->validate($request, [
+            'subCategory_id' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:categories,id']]
+        ]);
+
+        $template = Category::where('id', $data['subCategory_id'])->pluck('template');
+
+        return response()->json($template);
+    }
 }
