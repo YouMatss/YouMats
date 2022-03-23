@@ -33,7 +33,7 @@ class CategoryController extends Controller
 
         $products = QueryBuilder::for(Product::class)
             ->whereIn('category_id', $children_categories_ids)
-            ->where('products.active', '1')
+            ->where('products.active', true)
             ->select('products.*');
 
         $data['minPrice'] = $products->min('price');
@@ -56,8 +56,10 @@ class CategoryController extends Controller
                 ->get()
                 ->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
                     return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
-                        return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
-                            return $collection->sortByDesc('updated_at');
+                        return $collection->sortBy('price')->groupBy(fn ($product) => (int) $product->price)->map(function (Collection $collection) {
+                            return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
+                                return $collection->sortByDesc('updated_at');
+                            })->ungroup();
                         })->ungroup();
                     })->ungroup();
                 })->ungroup()
