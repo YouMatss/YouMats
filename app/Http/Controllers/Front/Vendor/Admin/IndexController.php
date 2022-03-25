@@ -161,6 +161,6 @@ class IndexController extends Controller
 
         $template = Category::where('id', $data['subCategory_id'])->pluck('template');
 
-        return response()->json($template);
+        return response()->json($template[0]);
     }
 }

@@ -27,6 +27,7 @@ define('QUOTE_ATTACHMENT', 'quote');
 
 
 // define validation
+define('REQUIRED_VALIDATION', ['required']);
 define('NULLABLE_VALIDATION', ['nullable']);
 // String
 define('REQUIRED_STRING_VALIDATION', ['required', 'string', 'max:191']);

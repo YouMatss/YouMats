@@ -11,8 +11,8 @@ if (!function_exists('setDefaultCity')) {
     }
 }
 
-if (!function_exists('setCityLocation')) {
-    function setCityLocation() {
+if (!function_exists('setCityUsingLocation')) {
+    function setCityUsingLocation() {
         if (!Session::has('city')) {
             try {
                 $ip = Request::ip();
