@@ -97,7 +97,7 @@ class Category extends Resource
             Toggle::make(__('Show in footer'), 'show_in_footer')->falseColor('#bacad6')->editableIndex(),
 
             new Panel('Template For Title', [
-                Heading::make('Instructions: + => for input, * => for dropdown, Ex for dropdown: *Orientation(Horizontal-Vertical)'),
+                Heading::make('Instructions: + => for input, - => for dropdown, Ex for dropdown: -Orientation-Horizontal-Vertical'),
                 SimpleRepeatable::make('Template', 'template', [
                     Text::make('Word')->rules(NULLABLE_STRING_VALIDATION)->translatable(),
                 ])->canAddRows(true)->canDeleteRows(true),

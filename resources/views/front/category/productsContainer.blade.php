@@ -39,7 +39,7 @@
     </div>
     @if(is_individual())
     <div class="rtl">
-        {{__('general.city_location_text')}}: {{(getCurrentCityName()) ?? __('general.all_cities')}}
+        {{__('general.city_location_text')}}: {{getCurrentCityName()}}
         <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
         {{__('general.category_word_after_change_city_button')}}
     </div>

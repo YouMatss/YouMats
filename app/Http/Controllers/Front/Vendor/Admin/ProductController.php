@@ -74,7 +74,12 @@ class ProductController extends Controller
             $data['specific_shipping'] = '0';
         }
 
-        $data['name'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
+        if(gettype($data['name_en']) == 'array') {
+            $data['name'] = ['en' => implode(' ', $data['name_en']), 'ar' => implode(' ', $data['name_ar'])];
+            $data['temp_name'] = ['en' => implode('-', $data['name_en']), 'ar' => implode('-', $data['name_ar'])];
+        } else {
+            $data['name'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
+        }
         $data['desc'] = ['en' => $data['desc_en'], 'ar' => $data['desc_ar']];
         $data['short_desc'] = ['en' => $data['short_desc_en'], 'ar' => $data['short_desc_ar']];
         $data['meta_title'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
@@ -132,7 +137,12 @@ class ProductController extends Controller
         //Deactivate the product.
         $data['active'] = 0;
 
-        $data['name'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
+        if(gettype($data['name_en']) == 'array') {
+            $data['name'] = ['en' => implode(' ', $data['name_en']), 'ar' => implode(' ', $data['name_ar'])];
+            $data['temp_name'] = ['en' => implode('-', $data['name_en']), 'ar' => implode('-', $data['name_ar'])];
+        } else {
+            $data['name'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
+        }
         $data['desc'] = ['en' => $data['desc_en'], 'ar' => $data['desc_ar']];
         $data['short_desc'] = ['en' => $data['short_desc_en'], 'ar' => $data['short_desc_ar']];
 

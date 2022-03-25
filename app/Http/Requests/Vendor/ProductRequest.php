@@ -24,8 +24,10 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         $commonRules = [
-            'name_en' => REQUIRED_STRING_VALIDATION,
-            'name_ar' => REQUIRED_STRING_VALIDATION,
+            'name_en' => REQUIRED_VALIDATION,
+            'name_en.*' => NULLABLE_STRING_VALIDATION,
+            'name_ar' => REQUIRED_VALIDATION,
+            'name_ar.*' => NULLABLE_STRING_VALIDATION,
             'category_id' => REQUIRED_NUMERIC_VALIDATION,
             'short_desc_en' => NULLABLE_TEXT_VALIDATION,
             'short_desc_ar' => NULLABLE_TEXT_VALIDATION,
