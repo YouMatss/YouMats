@@ -29,6 +29,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string|null
      */
      protected $namespace = 'App\Http\Controllers\Front';
+     protected $namespaceApi = 'App\Http\Controllers\Api';
      protected $namespaceApiUser = 'App\Http\Controllers\Api\User';
      protected $namespaceApiDriver = 'App\Http\Controllers\Api\Driver';
 
@@ -51,6 +52,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware(['api', 'verifyLanguage'])
                 ->namespace($this->namespaceApiUser)
                 ->group(base_path('routes/api/user/api.php'));
+
+            Route::prefix('api')
+                ->middleware('api')
+                ->namespace($this->namespaceApi)
+                ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
                 ->namespace($this->namespace)

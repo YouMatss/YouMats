@@ -16,11 +16,12 @@ use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
+use Maher\TemplateTitle\TemplateTitle;
+use Maher\TitleTemplate\TitleTemplate;
 use Nikaia\Rating\Rating;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
@@ -44,6 +45,11 @@ class Product extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
+            TitleTemplate::make('Name')
+                ->hideFromIndex()
+                ->endpoint('/api/getTemplate/'.$this->category_id)
+                ->translatable(),
 
             SluggableText::make('Name')
                 ->slug($request->isUpdateOrUpdateAttachedRequest() ? 'DONOTUPDATE' : 'Slug')

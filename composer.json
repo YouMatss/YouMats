@@ -11,6 +11,14 @@
         {
             "type": "path",
             "url": "./nova"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/TitleTemplate"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/TitleTemplate"
         }
     ],
     "require": {
@@ -71,7 +79,8 @@
         "waynestate/nova-ckeditor4-field": "^0.7.0",
         "whitecube/nova-google-maps": "^0.0.1",
         "yassi/nova-nested-form": "^3.0",
-        "ziffdavis/nova-nestedset": "^0.0.1"
+        "ziffdavis/nova-nestedset": "^0.0.1",
+        "maher/title-template": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
