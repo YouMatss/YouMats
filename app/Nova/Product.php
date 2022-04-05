@@ -48,7 +48,7 @@ class Product extends Resource
 
             TitleTemplate::make('Name')
                 ->hideFromIndex()
-                ->endpoint('/api/getTemplate/'.$this->category_id)
+                ->endpoint('/api/getTemplate/'.$this->id)
                 ->translatable(),
 
             SluggableText::make('Name')

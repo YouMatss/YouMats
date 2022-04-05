@@ -424,6 +424,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -435,11 +455,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             fields: [],
-            template: {}
+            template: null,
+            tempName: null
         };
     },
     mounted: function mounted() {
-        this.getTemplate();
+        this.loadData();
     },
 
     methods: {
@@ -449,13 +470,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setInitialValue: function setInitialValue() {
             this.value = this.field.value || '';
         },
-        getTemplate: function getTemplate() {
+        loadData: function loadData() {
             var _this = this;
 
             axios.get(this.field.endpoint).then(function (response) {
-                if (response.data.template != null) {
-                    _this.template = response.data.template;
-                }
+                if (response.data.template != null && response.data.template != '') _this.template = JSON.parse(response.data.template);
+                if (response.data.temp_name) _this.tempName = response.data.temp_name.en.split('-');
             });
         },
 
@@ -26822,20 +26842,114 @@ var render = function() {
       }
     },
     [
-      _vm._l(_vm.template, function(item, index) {
-        return _c("template", { slot: "field" }, [
-          _c("input", {
-            staticClass: "w-full form-control form-input form-input-bordered",
-            class: _vm.errorClasses,
-            attrs: {
-              id: _vm.field.name,
-              type: "text",
-              placeholder: _vm.field.name
-            },
-            domProps: { value: item }
-          })
-        ])
-      })
+      _c(
+        "template",
+        { slot: "field" },
+        [
+          _vm.template == null
+            ? _c("input", {
+                staticClass:
+                  "w-full form-control form-input form-input-bordered",
+                class: _vm.errorClasses,
+                attrs: { type: "text", placeholder: _vm.field.name },
+                domProps: { value: _vm.value }
+              })
+            : _vm._l(_vm.template, function(item, index) {
+                return _c("div", { staticClass: "inline-block" }, [
+                  item.word.en.split("")[0] == "+"
+                    ? _c("div", [
+                        _c("input", {
+                          staticClass:
+                            "form-control form-input form-input-bordered inline-block w-auto mx-1",
+                          class: _vm.errorClasses,
+                          attrs: {
+                            type: "text",
+                            placeholder: item.word.en.substr(1)
+                          },
+                          domProps: { value: _vm.tempName[index] }
+                        })
+                      ])
+                    : item.word.en.split("")[0] == "-"
+                    ? _c("div", [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.tempName[index],
+                                expression: "tempName[index]"
+                              }
+                            ],
+                            staticClass:
+                              "form-control form-input form-input-bordered inline-block w-auto mx-1",
+                            class: _vm.errorClasses,
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.tempName,
+                                  index,
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "", selected: "", disabled: "" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(item.word.en.substr(1).split("-")[0])
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(
+                              item.word.en
+                                .substr(1)
+                                .split("-")
+                                .slice(1),
+                              function(optionItem) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: optionItem } },
+                                  [_vm._v(_vm._s(optionItem))]
+                                )
+                              }
+                            )
+                          ],
+                          2
+                        )
+                      ])
+                    : _c("div", [
+                        _c("input", {
+                          attrs: { type: "hidden" },
+                          domProps: { value: item.word.en }
+                        }),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "mx-1" }, [
+                          _vm._v(_vm._s(item.word.en))
+                        ])
+                      ])
+                ])
+              })
+        ],
+        2
+      )
     ],
     2
   )

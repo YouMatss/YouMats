@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Product;
 
 class TemplateController extends Controller
 {
     /**
-     * @param $category_id
-     * @return \Illuminate\Http\JsonResponse
+     * @param $product_id
+     * @return mixed
      */
-    public function get($category_id) {
-        return Category::select('template')->findorfail($category_id);
+    public function get($product_id) {
+        return Product::where('products.id', $product_id)->join('categories', 'categories.id', '=', 'products.category_id')
+                ->firstorfail(['products.temp_name', 'categories.template']);
     }
+
 }
