@@ -46,10 +46,15 @@ class Product extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
+            BelongsTo::make('Category')->hideWhenUpdating()->hideWhenCreating(),
+            NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
+
+            BelongsTo::make('Vendor')
+                ->withoutTrashed()->searchable(),
+
             TitleTemplate::make('Name')
-                ->hideFromIndex()
-                ->endpoint('/api/getTemplate/'.$this->id)
-                ->translatable(),
+                ->endpoint('/api/loadData/'.$this->id)
+                ->hideFromIndex(),
 
             SluggableText::make('Name')
                 ->slug($request->isUpdateOrUpdateAttachedRequest() ? 'DONOTUPDATE' : 'Slug')
@@ -59,12 +64,6 @@ class Product extends Resource
             Text::make('Name', 'name', fn() =>
                 '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
             )->asHtml()->onlyOnIndex(),
-
-            BelongsTo::make('Category')->hideWhenUpdating()->hideWhenCreating(),
-            NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
-
-            BelongsTo::make('Vendor')
-                ->withoutTrashed()->searchable(),
 
             BelongsToManyField::make('Tags')
                 ->optionsLabel('translated_name')->hideFromIndex(),

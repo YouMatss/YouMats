@@ -6,28 +6,33 @@
                    class="w-full form-control form-input form-input-bordered"
                    :class="errorClasses"
                    :placeholder="field.name"
-                   :value="value"
-            />
-            <div v-else v-for="(item, index) in template" class="inline-block">
-                <div v-if="item.word.en.split('')[0] == '+'">
-                    <input
-                        type="text"
-                        class="form-control form-input form-input-bordered inline-block w-auto mx-1"
-                        :class="errorClasses"
-                        :placeholder="item.word.en.substr(1)"
-                        :value="tempName[index]"
-                    />
+                   :value="value" />
+            <div v-else v-for="(localeData, locale) in locales" class="my-2"
+                 :style="[locale == 'ar' ? {arabicStyle} : {}]">
+                <div v-for="(item, index) in template" class="inline-block">
+                    <div v-if="item.word[locale].split('')[0] == '+'">
+                        <input
+                            type="text"
+                            class="form-control form-input form-input-bordered inline-block w-auto mx-1 mb-1"
+                            :class="errorClasses"
+                            :placeholder="item.word[locale].substr(1)"
+                            :value="[tempName[locale].split('-')[index] == null ? tempName[locale].split('-')[index] : {}]" />
+                    </div>
+                    <div v-else-if="item.word[locale].split('')[0] == '-'">
+                        <select v-model="[tempName[locale].split('-')[index] == null ? tempName[locale].split('-')[index] : {}]" class="form-control form-input form-input-bordered inline-block w-auto mx-1 mb-1" :class="errorClasses">
+                            <option value="" disabled>{{item.word[locale].substr(1).split('-')[0]}}</option>
+                            <option v-for="optionItem in item.word[locale].substr(1).split('-').slice(1)" :value="optionItem">{{optionItem}}</option>
+                        </select>
+                    </div>
+                    <div v-else-if="item.word[locale].split('')[0] != null">
+                        <input
+                            type="text"
+                            class="form-control form-input form-input-bordered inline-block w-auto mx-1 mb-1"
+                            readonly
+                            :value="item.word[locale]" />
+                    </div>
                 </div>
-                <div v-else-if="item.word.en.split('')[0] == '-'">
-                    <select v-model="tempName[index]" class="form-control form-input form-input-bordered inline-block w-auto mx-1" :class="errorClasses">
-                        <option value="" selected disabled>{{item.word.en.substr(1).split('-')[0]}}</option>
-                        <option v-for="optionItem in item.word.en.substr(1).split('-').slice(1)" :value="optionItem">{{optionItem}}</option>
-                    </select>
-                </div>
-                <div v-else>
-                    <input type="hidden" :value="item.word.en">
-                    <label class="mx-1">{{item.word.en}}</label>
-                </div>
+                <hr/>
             </div>
         </template>
     </default-field>
@@ -44,8 +49,10 @@ export default {
     data() {
         return {
             fields: [],
+            localeEndpoint : '/api/loadLocales',
             template: null,
-            tempName: null
+            tempName: null,
+            locales: []
         }
     },
     mounted() {
@@ -65,8 +72,13 @@ export default {
                     if(response.data.template != null && response.data.template != '')
                         this.template = JSON.parse(response.data.template);
                     if(response.data.temp_name)
-                        this.tempName = response.data.temp_name.en.split('-');
+                        this.tempName = response.data.temp_name;
                 });
+
+            axios.get(this.localeEndpoint)
+                .then(response => {
+                    this.locales = response.data;
+                })
         },
 
         /**
@@ -76,6 +88,13 @@ export default {
             formData.append(this.field.attribute, this.value || '')
         },
     },
-    computed: {}
+    computed: {
+        arabicStyle() {
+            return {
+                border_bottom: '2px solid #7c858e',
+                direction: 'rtl'
+            };
+        }
+    }
 }
 </script>

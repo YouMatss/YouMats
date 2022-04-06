@@ -13,18 +13,6 @@ class TitleTemplate extends Field
      */
     public $component = 'title-template';
 
-
-    /**
-     * @param $temp
-     * @return TitleTemplate
-     */
-    public function temp($temp)
-    {
-        return $this->withMeta([
-            'temp' => $temp
-        ]);
-    }
-
     /**
      * @param $endpoint
      * @return TitleTemplate

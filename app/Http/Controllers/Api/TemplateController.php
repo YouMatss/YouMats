@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class TemplateController extends Controller
 {
@@ -11,9 +12,16 @@ class TemplateController extends Controller
      * @param $product_id
      * @return mixed
      */
-    public function get($product_id) {
+    public function loadData($product_id) {
         return Product::where('products.id', $product_id)->join('categories', 'categories.id', '=', 'products.category_id')
                 ->firstorfail(['products.temp_name', 'categories.template']);
+    }
+
+    /**
+     * @return array
+     */
+    public function loadLocales() {
+        return LaravelLocalization::getSupportedLocales();
     }
 
 }

@@ -444,6 +444,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -455,8 +460,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             fields: [],
+            localeEndpoint: '/api/loadLocales',
             template: null,
-            tempName: null
+            tempName: null,
+            locales: []
         };
     },
     mounted: function mounted() {
@@ -475,7 +482,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get(this.field.endpoint).then(function (response) {
                 if (response.data.template != null && response.data.template != '') _this.template = JSON.parse(response.data.template);
-                if (response.data.temp_name) _this.tempName = response.data.temp_name.en.split('-');
+                if (response.data.temp_name) _this.tempName = response.data.temp_name;
+            });
+
+            axios.get(this.localeEndpoint).then(function (response) {
+                _this.locales = response.data;
             });
         },
 
@@ -487,7 +498,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             formData.append(this.field.attribute, this.value || '');
         }
     },
-    computed: {}
+    computed: {
+        arabicStyle: function arabicStyle() {
+            return {
+                border_bottom: '2px solid #7c858e',
+                direction: 'rtl'
+            };
+        }
+    }
 });
 
 /***/ }),
@@ -26826,143 +26844,9 @@ if (hadRuntime) {
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "default-field",
-    {
-      attrs: {
-        field: _vm.field,
-        errors: _vm.errors,
-        "show-help-text": _vm.showHelpText
-      }
-    },
-    [
-      _c(
-        "template",
-        { slot: "field" },
-        [
-          _vm.template == null
-            ? _c("input", {
-                staticClass:
-                  "w-full form-control form-input form-input-bordered",
-                class: _vm.errorClasses,
-                attrs: { type: "text", placeholder: _vm.field.name },
-                domProps: { value: _vm.value }
-              })
-            : _vm._l(_vm.template, function(item, index) {
-                return _c("div", { staticClass: "inline-block" }, [
-                  item.word.en.split("")[0] == "+"
-                    ? _c("div", [
-                        _c("input", {
-                          staticClass:
-                            "form-control form-input form-input-bordered inline-block w-auto mx-1",
-                          class: _vm.errorClasses,
-                          attrs: {
-                            type: "text",
-                            placeholder: item.word.en.substr(1)
-                          },
-                          domProps: { value: _vm.tempName[index] }
-                        })
-                      ])
-                    : item.word.en.split("")[0] == "-"
-                    ? _c("div", [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.tempName[index],
-                                expression: "tempName[index]"
-                              }
-                            ],
-                            staticClass:
-                              "form-control form-input form-input-bordered inline-block w-auto mx-1",
-                            class: _vm.errorClasses,
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.tempName,
-                                  index,
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              {
-                                attrs: { value: "", selected: "", disabled: "" }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(item.word.en.substr(1).split("-")[0])
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(
-                              item.word.en
-                                .substr(1)
-                                .split("-")
-                                .slice(1),
-                              function(optionItem) {
-                                return _c(
-                                  "option",
-                                  { domProps: { value: optionItem } },
-                                  [_vm._v(_vm._s(optionItem))]
-                                )
-                              }
-                            )
-                          ],
-                          2
-                        )
-                      ])
-                    : _c("div", [
-                        _c("input", {
-                          attrs: { type: "hidden" },
-                          domProps: { value: item.word.en }
-                        }),
-                        _vm._v(" "),
-                        _c("label", { staticClass: "mx-1" }, [
-                          _vm._v(_vm._s(item.word.en))
-                        ])
-                      ])
-                ])
-              })
-        ],
-        2
-      )
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c023248a", module.exports)
-  }
-}
+throw new Error("Module build failed: SyntaxError: Unexpected token (1:1598)\n    at Parser.pp$4.raise (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:2757:13)\n    at Parser.pp.unexpected (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:647:8)\n    at Parser.pp.expect (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:641:26)\n    at Parser.pp$3.parseMaybeConditional (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:1955:10)\n    at Parser.pp$3.parseMaybeAssign (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:1925:19)\n    at Parser.pp$3.parseExprList (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:2663:20)\n    at Parser.pp$3.parseExprAtom (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:2175:26)\n    at Parser.<anonymous> (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:6003:24)\n    at Parser.parseExprAtom (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:6129:31)\n    at Parser.pp$3.parseExprSubscripts (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:2047:19)\n    at Parser.pp$3.parseMaybeUnary (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:2024:17)\n    at Parser.pp$3.parseExprOps (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:1966:19)\n    at Parser.pp$3.parseMaybeConditional (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:1949:19)\n    at Parser.pp$3.parseMaybeAssign (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:1925:19)\n    at Parser.pp$3.parseExprList (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:2663:20)\n    at Parser.pp$3.parseSubscripts (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:2075:29)\n    at Parser.pp$3.parseExprSubscripts (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:2050:21)\n    at Parser.pp$3.parseMaybeUnary (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:2024:17)\n    at Parser.pp$3.parseExprOps (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:1966:19)\n    at Parser.pp$3.parseMaybeConditional (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:1949:19)\n    at Parser.pp$3.parseMaybeAssign (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:1925:19)\n    at Parser.pp$3.parseExpression (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:1896:19)\n    at Parser.pp$1.parseStatement (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:815:45)\n    at Parser.parseStatement (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:6116:31)\n    at Parser.pp$1.parseBlock (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:1112:23)\n    at Parser.pp$3.parseFunctionBody (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:2600:22)\n    at Parser.pp$1.parseFunction (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:1219:8)\n    at Parser.pp$3.parseExprAtom (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:2184:17)\n    at Parser.<anonymous> (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:6003:24)\n    at Parser.parseExprAtom (C:\\xampp\\htdocs\\SeoEra\\youmats\\nova-components\\TitleTemplate\\node_modules\\vue-template-es2015-compiler\\buble.js:6129:31)");
 
 /***/ }),
 /* 13 */
