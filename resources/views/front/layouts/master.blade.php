@@ -53,13 +53,5 @@
         @include('front.layouts.partials.welcome-popup')
         @include('front.layouts.partials.search')
         @stack('chat')
-        <div>
-            <div id="whatsapp_support_service">
-                <whatsapp-support
-                    :server_base_url="'https://wchat.infixlive.com/'"
-                    :token="'9mqzhw2xukjofiaaccffpy599de1v8h2ockjq5jnqyenr3whg9z3spdibwzvtysh'"
-                ></whatsapp-support>
-            </div><script src="https://wchat.infixlive.com/public/js/app.js"></script>
-        </div>
     </body>
 </html>

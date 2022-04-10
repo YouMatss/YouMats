@@ -20,7 +20,6 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
-use Maher\TemplateTitle\TemplateTitle;
 use Maher\TitleTemplate\TitleTemplate;
 use Nikaia\Rating\Rating;
 use OptimistDigital\MultiselectField\Multiselect;
@@ -46,6 +45,10 @@ class Product extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
+            Text::make('Name', 'name', fn() =>
+                '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
+            )->asHtml()->onlyOnIndex(),
+
             BelongsTo::make('Category')->hideWhenUpdating()->hideWhenCreating(),
             NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
 
@@ -54,16 +57,13 @@ class Product extends Resource
 
             TitleTemplate::make('Name')
                 ->endpoint('/api/loadData/'.$this->id)
+//                ->translatable()
                 ->hideFromIndex(),
 
-            SluggableText::make('Name')
-                ->slug($request->isUpdateOrUpdateAttachedRequest() ? 'DONOTUPDATE' : 'Slug')
-                ->sortable()->translatable()->hideFromIndex()
-                ->rules(REQUIRED_STRING_VALIDATION),
-
-            Text::make('Name', 'name', fn() =>
-                '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
-            )->asHtml()->onlyOnIndex(),
+//            SluggableText::make('Name')
+//                ->slug($request->isUpdateOrUpdateAttachedRequest() ? 'DONOTUPDATE' : 'Slug')
+//                ->sortable()->translatable()->hideFromIndex()
+//                ->rules(REQUIRED_STRING_VALIDATION),
 
             BelongsToManyField::make('Tags')
                 ->optionsLabel('translated_name')->hideFromIndex(),
