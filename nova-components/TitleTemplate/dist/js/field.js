@@ -473,7 +473,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.get(this.field.endpoint).then(function (response) {
-                _this.withoutTemplateValue = response.data.name;
+                if (response.data) {
+                    _this.withoutTemplateValue = response.data.name;
+                }
                 if (response.data.template != null && response.data.template != '') {
                     _this.template = JSON.parse(response.data.template);
                     _this.tempName = {
@@ -495,7 +497,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         * Fill the given FormData object with the field's internal value.
         */
         fill: function fill(formData) {
-            if (this.tempName) formData.append(this.field.attribute, JSON.stringify(this.tempName) || '');else formData.append(this.field.attribute, JSON.stringify(this.withoutTemplateValue) || '');
+            if (this.tempName) formData.append(this.field.attribute, JSON.stringify(this.tempName) || '');else formData.append('withoutTemplate', JSON.stringify(this.withoutTemplateValue) || '');
         }
     }
 });

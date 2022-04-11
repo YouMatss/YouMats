@@ -3,7 +3,6 @@
 namespace Maher\TitleTemplate;
 
 use Laravel\Nova\Fields\Field;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class TitleTemplate extends Field
 {
@@ -36,21 +35,18 @@ class TitleTemplate extends Field
      */
     protected function fillAttributeFromRequest($request, $requestAttribute, $model, $attribute)
     {
-        if ($request->exists($requestAttribute))
-        {
-            dd(count(json_decode($request->name, true)));
-
-            if(json_decode($request->name)) {
-                foreach (json_decode($request->name) as $key => $item) {
-                    $name[$key] = implode(' ', $item);
-                    $tempName[$key] = implode('-', $item);
-                }
-
-                $model->name = $name;
-                $model->temp_name = $tempName;
-            } else {
-                $model->{$attribute} = $request[$requestAttribute];
+        if ($request->exists($requestAttribute)) {
+            foreach (json_decode($request->name) as $key => $item) {
+                $name[$key] = implode(' ', $item);
+                $tempName[$key] = implode('-', $item);
             }
+            $model->name = $name;
+            $model->temp_name = $tempName;
+        } elseif(isset($request->withoutTemplate)) {
+            foreach(json_decode($request->withoutTemplate) as $key => $item) {
+                $withoutTemplate[$key] = $item;
+            }
+            $model->name = $withoutTemplate;
         }
     }
 }

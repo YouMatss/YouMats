@@ -61,7 +61,9 @@ export default {
         loadData() {
             axios.get(this.field.endpoint)
                 .then(response => {
-                    this.withoutTemplateValue = response.data.name;
+                    if(response.data) {
+                        this.withoutTemplateValue = response.data.name;
+                    }
                     if(response.data.template != null && response.data.template != '') {
                         this.template = JSON.parse(response.data.template);
                         this.tempName = {
@@ -85,7 +87,7 @@ export default {
             if(this.tempName)
                 formData.append(this.field.attribute, JSON.stringify(this.tempName) || '')
             else
-                formData.append(this.field.attribute, JSON.stringify(this.withoutTemplateValue) || '')
+                formData.append('withoutTemplate', JSON.stringify(this.withoutTemplateValue) || '')
         },
     }
 }

@@ -6,7 +6,6 @@ use App\Helpers\Nova\Fields;
 use Benjacho\BelongsToManyField\BelongsToManyField;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
-use Drobee\NovaSluggable\SluggableText;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -57,7 +56,6 @@ class Product extends Resource
 
             TitleTemplate::make('Name')
                 ->endpoint('/api/loadData/'.$this->id)
-//                ->translatable()
                 ->hideFromIndex(),
 
 //            SluggableText::make('Name')
