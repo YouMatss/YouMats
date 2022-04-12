@@ -49,7 +49,7 @@ class Product extends Resource
             )->asHtml()->onlyOnIndex(),
 
             BelongsTo::make('Category')/*->hideWhenUpdating()*//*->hideWhenCreating()*/,
-//            NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
+            NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
 
             BelongsTo::make('Vendor')
                 ->withoutTrashed()->searchable(),

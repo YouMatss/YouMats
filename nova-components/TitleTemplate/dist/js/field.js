@@ -450,10 +450,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             fields: [],
-            withoutTemplateValue: null,
+            locales: ['ar', 'en'],
             template: null,
             tempName: null,
-            locales: ['ar', 'en'],
+            withoutTemplateValue: null,
             category: null
         };
     },
@@ -462,6 +462,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         this.watchedComponents.forEach(function (component) {
             var attribute = 'value';
+            // nova-nested-tree-attach-many
             if (component.field.component === 'belongs-to-field') {
                 attribute = 'selectedResource';
             }
@@ -507,8 +508,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             };
                         }
                     } else {
-                        if (response.data) {
-                            _this3.withoutTemplateValue = response.data.name;
+                        _this3.template = null;
+                        if (response.data.name) {
+                            _this3.withoutTemplateValue = {
+                                'ar': response.data.name.ar,
+                                'en': response.data.name.en
+                            };
+                        } else {
+                            _this3.withoutTemplateValue = {
+                                'ar': null,
+                                'en': null
+                            };
                         }
                     }
                 });

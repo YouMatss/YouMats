@@ -39,16 +39,17 @@ export default {
     data() {
         return {
             fields: [],
-            withoutTemplateValue: null,
+            locales: ['ar', 'en'],
             template: null,
             tempName: null,
-            locales: ['ar', 'en'],
+            withoutTemplateValue: null,
             category: null
         }
     },
     mounted() {
         this.watchedComponents.forEach(component => {
             let attribute = 'value'
+            // nova-nested-tree-attach-many
             if(component.field.component === 'belongs-to-field') {
                 attribute = 'selectedResource';
             }
@@ -94,8 +95,17 @@ export default {
                                 }
                             }
                         } else {
-                            if (response.data) {
-                                this.withoutTemplateValue = response.data.name;
+                            this.template = null;
+                            if(response.data.name) {
+                                this.withoutTemplateValue = {
+                                    'ar': response.data.name.ar,
+                                    'en': response.data.name.en
+                                }
+                            } else {
+                                this.withoutTemplateValue = {
+                                    'ar': null,
+                                    'en': null
+                                }
                             }
                         }
                     })

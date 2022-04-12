@@ -21,8 +21,8 @@ class TemplateController extends Controller
         }
         if((!is_null($product_id) && $product_id != 'null')) {
             $product = Product::where('id', $product_id)->firstorfail(['name', 'temp_name']);
-            $data['name'] = $product->name;
-            $data['temp_name'] = $product->temp_name;
+            $data['name'] = $product->getTranslations('name');
+            $data['temp_name'] = $product->getTranslations('temp_name');
         }
 
         return response()->json($data);
