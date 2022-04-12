@@ -439,8 +439,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -455,41 +453,77 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             withoutTemplateValue: null,
             template: null,
             tempName: null,
-            locales: ['ar', 'en']
+            locales: ['ar', 'en'],
+            category: null
         };
     },
     mounted: function mounted() {
-        this.loadData();
+        var _this = this;
+
+        this.watchedComponents.forEach(function (component) {
+            var attribute = 'value';
+            if (component.field.component === 'belongs-to-field') {
+                attribute = 'selectedResource';
+            }
+            component.$watch(attribute, function (value) {
+                _this.category = value && attribute === 'selectedResource' ? value.value : value;
+                _this.updateResults();
+            }, { immediate: true });
+        });
     },
 
+    computed: {
+        watchedComponents: function watchedComponents() {
+            var _this2 = this;
+
+            return this.$parent.$children.filter(function (component) {
+                return _this2.isWatchingComponent(component);
+            });
+        },
+        endpoint: function endpoint() {
+            return this.field.endpoint.replace('{' + this.field.category + '}', this.category ? this.category : '').replace('{product}', this.resourceId ? this.resourceId : null);
+        }
+    },
     methods: {
+        isWatchingComponent: function isWatchingComponent(component) {
+            return component.field !== undefined && component.field.attribute === this.field.category;
+        },
+        updateResults: function updateResults() {
+            var _this3 = this;
+
+            if (this.notWatching() || this.category != null && this.category !== '') {
+                Nova.request().get(this.endpoint).then(function (response) {
+                    if (response.data.template != null && response.data.template != '') {
+                        _this3.template = response.data.template;
+                        if (response.data.temp_name) {
+                            _this3.tempName = {
+                                'ar': response.data.temp_name.ar.split('-'),
+                                'en': response.data.temp_name.en.split('-')
+                            };
+                        } else {
+                            _this3.tempName = {
+                                'ar': new Array(_this3.template.length).fill(null),
+                                'en': new Array(_this3.template.length).fill(null)
+                            };
+                        }
+                    } else {
+                        if (response.data) {
+                            _this3.withoutTemplateValue = response.data.name;
+                        }
+                    }
+                });
+            }
+        },
+        notWatching: function notWatching() {
+            return this.field.category === undefined;
+        },
+
+
         /*
         * Set the initial, internal value for the field.
         */
         setInitialValue: function setInitialValue() {
             this.value = this.field.value || '';
-        },
-        loadData: function loadData() {
-            var _this = this;
-
-            axios.get(this.field.endpoint).then(function (response) {
-                if (response.data) {
-                    _this.withoutTemplateValue = response.data.name;
-                }
-                if (response.data.template != null && response.data.template != '') {
-                    _this.template = JSON.parse(response.data.template);
-                    _this.tempName = {
-                        'ar': new Array(_this.template.length).fill(null),
-                        'en': new Array(_this.template.length).fill(null)
-                    };
-                    if (response.data.temp_name) {
-                        _this.tempName = {
-                            'ar': response.data.temp_name.ar.split('-'),
-                            'en': response.data.temp_name.en.split('-')
-                        };
-                    }
-                }
-            });
         },
 
 

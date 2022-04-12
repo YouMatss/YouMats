@@ -48,14 +48,15 @@ class Product extends Resource
                 '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
             )->asHtml()->onlyOnIndex(),
 
-            BelongsTo::make('Category')->hideWhenUpdating()->hideWhenCreating(),
-            NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
+            BelongsTo::make('Category')/*->hideWhenUpdating()*//*->hideWhenCreating()*/,
+//            NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
 
             BelongsTo::make('Vendor')
                 ->withoutTrashed()->searchable(),
 
             TitleTemplate::make('Name')
-                ->endpoint('/api/loadData/'.$this->id)
+                ->category('category')
+                ->endpoint('/api/loadData/{category}/product/{product}')
                 ->hideFromIndex(),
 
 //            SluggableText::make('Name')

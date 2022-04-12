@@ -11,4 +11,11 @@ class CategoryObserver
 //            $category->slug = $category->name;
 //        $category->save();
 //    }
+
+    public function updating(Category $category) {
+        if($category->isDirty('template')){
+            $category->allProducts()->update(['temp_name' => null]);
+        }
+    }
+
 }

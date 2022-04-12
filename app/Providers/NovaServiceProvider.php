@@ -82,9 +82,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new Panel('Social Media Links', $this->socialFields()),
             new Panel('Media', $this->generalMedia()),
         ]);
-//        Nova::serving(function () {
-//            CategoryModel::observe(CategoryObserver::class);
-//        });
+        Nova::serving(function () {
+            CategoryModel::observe(CategoryObserver::class);
+        });
     }
 
     protected function routes()

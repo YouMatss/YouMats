@@ -14,6 +14,17 @@ class TitleTemplate extends Field
     public $component = 'title-template';
 
     /**
+     * @param $category
+     * @return TitleTemplate
+     */
+    public function category($category)
+    {
+        return $this->withMeta([
+            'category' => $category
+        ]);
+    }
+
+    /**
      * @param $endpoint
      * @return TitleTemplate
      */

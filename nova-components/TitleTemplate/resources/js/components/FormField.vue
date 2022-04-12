@@ -18,11 +18,9 @@
                         </select>
                     </div>
                     <div v-else-if="item.word[locale].split('')[0] != null">
-                        <input
-                            type="text"
-                            class="form-control form-input form-input-bordered inline-block w-auto mx-1 mb-1"
-                            readonly
-                            v-model="tempName[locale][index] = item.word[locale]" />
+                        <input type="text" readonly
+                               class="form-control form-input form-input-bordered inline-block w-auto mx-1 mb-1"
+                               v-model="tempName[locale][index] = item.word[locale]" />
                     </div>
                 </div>
             </div>
@@ -44,40 +42,75 @@ export default {
             withoutTemplateValue: null,
             template: null,
             tempName: null,
-            locales: ['ar', 'en']
+            locales: ['ar', 'en'],
+            category: null
         }
     },
     mounted() {
-        this.loadData()
+        this.watchedComponents.forEach(component => {
+            let attribute = 'value'
+            if(component.field.component === 'belongs-to-field') {
+                attribute = 'selectedResource';
+            }
+            component.$watch(attribute, (value) => {
+                this.category = (value && attribute === 'selectedResource') ? value.value : value;
+                this.updateResults();
+            }, { immediate: true });
+        });
+    },
+    computed: {
+        watchedComponents() {
+            return this.$parent.$children.filter(component => {
+                return this.isWatchingComponent(component);
+            })
+        },
+
+        endpoint() {
+            return this.field.endpoint
+                .replace('{'+ this.field.category +'}', this.category ? this.category : '')
+                .replace('{product}', this.resourceId ? this.resourceId : null)
+        },
     },
     methods: {
+        isWatchingComponent(component) {
+            return component.field !== undefined && component.field.attribute === this.field.category;
+        },
+
+        updateResults() {
+            if(this.notWatching() || (this.category != null && this.category !== '')) {
+                Nova.request().get(this.endpoint)
+                    .then(response => {
+                        if (response.data.template != null && response.data.template != '') {
+                            this.template = response.data.template;
+                            if (response.data.temp_name) {
+                                this.tempName = {
+                                    'ar': response.data.temp_name.ar.split('-'),
+                                    'en': response.data.temp_name.en.split('-')
+                                }
+                            } else {
+                                this.tempName = {
+                                    'ar': new Array(this.template.length).fill(null),
+                                    'en': new Array(this.template.length).fill(null)
+                                }
+                            }
+                        } else {
+                            if (response.data) {
+                                this.withoutTemplateValue = response.data.name;
+                            }
+                        }
+                    })
+            }
+        },
+
+        notWatching() {
+            return this.field.category === undefined;
+        },
+
         /*
         * Set the initial, internal value for the field.
         */
         setInitialValue() {
             this.value = this.field.value || ''
-        },
-
-        loadData() {
-            axios.get(this.field.endpoint)
-                .then(response => {
-                    if(response.data) {
-                        this.withoutTemplateValue = response.data.name;
-                    }
-                    if(response.data.template != null && response.data.template != '') {
-                        this.template = JSON.parse(response.data.template);
-                        this.tempName = {
-                            'ar': new Array(this.template.length).fill(null),
-                            'en': new Array(this.template.length).fill(null)
-                        }
-                        if(response.data.temp_name) {
-                            this.tempName = {
-                                'ar': response.data.temp_name.ar.split('-'),
-                                'en': response.data.temp_name.en.split('-')
-                            }
-                        }
-                    }
-                })
         },
 
         /**
