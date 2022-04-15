@@ -197,7 +197,6 @@
       <path value="$PROJECT_DIR$/vendor/maxmind-db/reader" />
       <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-sortable" />
       <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-multiselect-field" />
-      <path value="$PROJECT_DIR$/vendor/orlyapps/nova-belongsto-depend" />
       <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-translatable" />
       <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
@@ -225,6 +224,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/vendor/dillingham/nova-items-field" />
+      <path value="$PROJECT_DIR$/vendor/maher/title-template" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

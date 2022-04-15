@@ -452,7 +452,13 @@
                             name = '{{$product->getTranslation('temp_name', $localeCode)}}',
                             splitName = name.split('-');
                         if(word == '') return;
+
+                        console.log(name);
+
                         if(firstLetter == '+') {
+                            if(splitName[index] == undefined) {
+                                splitName[index] = '';
+                            }
                             template.append(`<input type="text" class="form-control d-inline-block w-auto mx-1"
                                     name="name_{{$localeCode}}[`+index+`]" value="`+splitName[index]+`"
                                     placeholder="`+word.substr(1)+`">`

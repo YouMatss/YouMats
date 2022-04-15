@@ -50,6 +50,13 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     /**
+     * @return HasMany
+     */
+    public function allProducts() {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
      * @return HasMany|\Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function products()
