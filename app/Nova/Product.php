@@ -24,8 +24,10 @@ use Nikaia\Rating\Rating;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
+use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
 use Waynestate\Nova\CKEditor;
+use ZiffDavis\Nova\Nestedset\Fields\NestedsetSelect;
 
 class Product extends Resource
 {
@@ -48,11 +50,12 @@ class Product extends Resource
                 '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
             )->asHtml()->onlyOnIndex(),
 
-            BelongsTo::make('Category')/*->hideWhenUpdating()*//*->hideWhenCreating()*/,
-            NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
+//            BelongsTo::make('Category')->hideWhenCreating()->hideWhenUpdating(),
+//            NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
 
-            BelongsTo::make('Vendor')
-                ->withoutTrashed()->searchable(),
+            NestedsetSelect::make('Category')->placeholder('Select Category'),
+
+            BelongsTo::make('Vendor')->withoutTrashed()->searchable(),
 
             TitleTemplate::make('Name')
                 ->category('category')

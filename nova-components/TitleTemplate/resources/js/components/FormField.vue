@@ -8,17 +8,17 @@
                 <div v-else v-for="(item, index) in template" class="my-2 inline-block">
                     <div v-if="item.word[locale].split('')[0] == '+'">
                         <input type="text" class="form-control form-input form-input-bordered inline-block w-auto mx-1 mb-1" :class="errorClasses"
-                               :placeholder="item.word[locale].substr(1)"
+                               :placeholder="item.word[locale].substr(1)" required
                                 v-model="tempName[locale][index]" />
                     </div>
                     <div v-else-if="item.word[locale].split('')[0] == '-'">
-                        <select v-model="tempName[locale][index]" class="form-control form-input form-input-bordered inline-block w-auto mx-1 mb-1" :class="errorClasses">
+                        <select v-model="tempName[locale][index]" required class="form-control form-input form-input-bordered inline-block w-auto mx-1 mb-1" :class="errorClasses">
                             <option value="null" disabled>{{item.word[locale].substr(1).split('-')[0]}}</option>
                             <option v-for="optionItem in item.word[locale].substr(1).split('-').slice(1)" :value="optionItem">{{optionItem}}</option>
                         </select>
                     </div>
                     <div v-else-if="item.word[locale].split('')[0] != null">
-                        <input type="text" readonly
+                        <input type="text" readonly required
                                class="form-control form-input form-input-bordered inline-block w-auto mx-1 mb-1"
                                v-model="tempName[locale][index] = item.word[locale]" />
                     </div>

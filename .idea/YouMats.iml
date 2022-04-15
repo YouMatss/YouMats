@@ -115,7 +115,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/optimistdigital/nova-sortable" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/optimistdigital/nova-translatable" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/optimistdigital/nova-translations-loader" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/orlyapps/nova-belongsto-depend" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/constant_time_encoding" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/sodium_compat" />
