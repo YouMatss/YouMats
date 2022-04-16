@@ -44,9 +44,9 @@
                 <div class="info_main_vendor">
                     <h3>{{ $vendor->name }}</h3>
                     @if(isset($vendor->type))
-                    <label style="font-weight: bold">{{ucfirst($vendor->type)}}</label>
+                    <label style="font-weight: bold">{{__("general.$vendor->type")}}</label>
                     @endif
-                    <p>{{ __('Started') . ' ' . $vendor->created_at->format('d/m/Y') }}</p>
+                    <p>{{ __('general.started') . ' ' . $vendor->created_at->format('d/m/Y') }}</p>
                 </div>
             </div>
         </div>
@@ -155,7 +155,7 @@
                             </ul>
                             {{ $products->links() }}
                         @else
-                            <h4>{{ __('You do not have products') }}</h4>
+                            <h4>{{ __('general.no_products') }}</h4>
                         @endif
                     </div>
                     <div class="tab-pane fade" id="Jpills-three-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
@@ -173,7 +173,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-xl-4">
-                                        <h5 class="font-size-14 font-weight-bold mb-3">{{ __('Main Information') }}</h5>
+                                        <h5 class="font-size-14 font-weight-bold mb-3">{{ __('general.main_info') }}</h5>
                                         <div class="">
                                             <ul class="list-unstyled-branches mb-6">
                                                 <li class="row">

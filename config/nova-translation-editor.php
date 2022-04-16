@@ -13,6 +13,7 @@ return [
         'contact',
         'footer',
         'vendorAdmin',
+        'profile',
         'breadcrumb',
         'novaSettings'
     ],

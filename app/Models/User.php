@@ -42,7 +42,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
     }
 
     public function orders() {
-        return $this->hasMany(Order::class)->with('items');
+        return $this->hasMany(Order::class)->with('items')->orderBy('id', 'desc');
     }
 
     /**
@@ -50,7 +50,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
      */
     public function quotes(): HasMany
     {
-        return $this->hasMany(Quote::class)->with('items');
+        return $this->hasMany(Quote::class)->with('items')->orderBy('id', 'desc');
     }
 
     /**

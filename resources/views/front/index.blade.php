@@ -285,9 +285,9 @@
                                                 <div class="text-gray-100">{{getCurrency('symbol')}} {{$i_product->formatted_price}}</div>
                                             @endif
                                         </div>
-                                        <div>
-                                            {!! cartOrChat($i_product, false) !!}
-                                        </div>
+{{--                                        <div>--}}
+{{--                                            {!! cartOrChat($i_product, false) !!}--}}
+{{--                                        </div>--}}
                                     </div>
                                     <div class="product-item__footer">
                                         @if(!Auth::guard('vendor')->check())
@@ -374,9 +374,9 @@
                                             <div class="text-gray-100">{{getCurrency('symbol')}} {{$ii_product->formatted_price}}</div>
                                         @endif
                                     </div>
-                                    <div>
-                                        {!! cartOrChat($ii_product, false) !!}
-                                    </div>
+{{--                                    <div>--}}
+{{--                                        {!! cartOrChat($ii_product, false) !!}--}}
+{{--                                    </div>--}}
                                 </div>
                                 @if(!Auth::guard('vendor')->check())
                                     <div class="product-item__footer">
@@ -436,9 +436,9 @@
                                                 <div class="text-gray-100">{{getCurrency('symbol')}} {{$iii_product->formatted_price}}</div>
                                             @endif
                                         </div>
-                                        <div>
-                                            {!! cartOrChat($iii_product, false) !!}
-                                        </div>
+{{--                                        <div>--}}
+{{--                                            {!! cartOrChat($iii_product, false) !!}--}}
+{{--                                        </div>--}}
                                     </div>
                                     @if(!Auth::guard('vendor')->check())
                                         <div class="product-item__footer">
@@ -498,9 +498,9 @@
                                                 <div class="text-gray-100">{{getCurrency('symbol')}} {{$iv_product->formatted_price}}</div>
                                             @endif
                                         </div>
-                                        <div>
-                                            {!! cartOrChat($iv_product, false) !!}
-                                        </div>
+{{--                                        <div>--}}
+{{--                                            {!! cartOrChat($iv_product, false) !!}--}}
+{{--                                        </div>--}}
                                     </div>
                                     @if(!Auth::guard('vendor')->check())
                                         <div class="product-item__footer">

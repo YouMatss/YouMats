@@ -53,7 +53,7 @@ class Product extends Resource
 //            BelongsTo::make('Category')->hideWhenCreating()->hideWhenUpdating(),
 //            NestedTreeAttachManyField::make('Category', 'category', Category::class)->useSingleSelect(),
 
-            NestedsetSelect::make('Category')->placeholder('Select Category'),
+            NestedsetSelect::make('Category'),
 
             BelongsTo::make('Vendor')->withoutTrashed()->searchable(),
 

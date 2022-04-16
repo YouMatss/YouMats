@@ -11,23 +11,23 @@
                     <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}">
                 </a>
             </div>
-            <div class="mb-3">
-                <a class="d-inline-flex align-items-center small font-size-14">
-                    <div class="text-warning mr-2">
-                        @for($i=1;$i<=$product->rate;$i++)
-                            <small class="fas fa-star"></small>
-                        @endfor
-                        @for($i=5;$i>$product->rate;$i--)
-                            <small class="far fa-star text-muted"></small>
-                        @endfor
-                    </div>
-                    {{--<span class="text-secondary">(40)</span>--}}
-                </a>
-            </div>
+{{--            <div class="mb-3">--}}
+{{--                <a class="d-inline-flex align-items-center small font-size-14">--}}
+{{--                    <div class="text-warning mr-2">--}}
+{{--                        @for($i=1;$i<=$product->rate;$i++)--}}
+{{--                            <small class="fas fa-star"></small>--}}
+{{--                        @endfor--}}
+{{--                        @for($i=5;$i>$product->rate;$i--)--}}
+{{--                            <small class="far fa-star text-muted"></small>--}}
+{{--                        @endfor--}}
+{{--                    </div>--}}
+{{--                    --}}{{--<span class="text-secondary">(40)</span>--}}
+{{--                </a>--}}
+{{--            </div>--}}
             <div class="font-size-12 p-0 text-gray-110 mb-4 productDesc">
                 <p class="mb-1">{!! $product->short_desc !!}</p>
             </div>
-            <div class="text-gray-20 mb-2 font-size-12">{{__('general.sku')}}: {{$product->SKU}}</div>
+{{--            <div class="text-gray-20 mb-2 font-size-12">{{__('general.sku')}}: {{$product->SKU}}</div>--}}
             @if(auth()->guard('admin')->check() && isset($product->vendor))
                 <div class="text-gray-20 mb-2 font-size-12">{{__('general.vendor')}}: {{$product->vendor->name}}</div>
             @endif
@@ -72,23 +72,23 @@
                     <div class="font-size-12 p-0 mb-4 d-none d-md-block">
                         {!! $product->short_desc !!}
                     </div>
-                    <div class="text-gray-20 mb-2 font-size-12">{{__('general.sku')}}: {{$product->SKU}}</div>
+{{--                    <div class="text-gray-20 mb-2 font-size-12">{{__('general.sku')}}: {{$product->SKU}}</div>--}}
                     @if(auth()->guard('admin')->check() && isset($product->vendor))
                         <div class="text-gray-20 mb-2 font-size-12">{{__('general.vendor')}}: {{$product->vendor->name}}</div>
                     @endif
-                    <div class="mb-3 d-none d-md-block">
-                        <a class="d-inline-flex align-items-center small font-size-14" href="#">
-                            <div class="text-warning mr-2">
-                                @for($i=1;$i<=$product->rate;$i++)
-                                    <small class="fas fa-star"></small>
-                                @endfor
-                                @for($i=5;$i>$product->rate;$i--)
-                                    <small class="far fa-star text-muted"></small>
-                                @endfor
-                            </div>
+{{--                    <div class="mb-3 d-none d-md-block">--}}
+{{--                        <a class="d-inline-flex align-items-center small font-size-14" href="#">--}}
+{{--                            <div class="text-warning mr-2">--}}
+{{--                                @for($i=1;$i<=$product->rate;$i++)--}}
+{{--                                    <small class="fas fa-star"></small>--}}
+{{--                                @endfor--}}
+{{--                                @for($i=5;$i>$product->rate;$i--)--}}
+{{--                                    <small class="far fa-star text-muted"></small>--}}
+{{--                                @endfor--}}
+{{--                            </div>--}}
 {{--                            <span class="text-secondary">(40)</span>--}}
-                        </a>
-                    </div>
+{{--                        </a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
             <div class="product-item__footer col-md-3 d-md-block">

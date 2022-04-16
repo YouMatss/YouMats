@@ -90,9 +90,9 @@
                 </div>
             </div>
         </div>
-        <button @click="submitForm" :disabled="loading" :class="{'loading': loading}" class="btn d-flex mx-auto">
+        <button @click="submitForm" :disabled="loading" :class="{'loading': loading}" class="btn d-flex mx-auto" style="cursor: pointer">
             <b v-if="loading">{{__('checkout.loading')}}</b>
-            <b>{{__('checkout.payment_submit_button')}}</b>
+            <b v-else>{{__('checkout.payment_submit_button')}}</b>
         </button>
     </form>
 </div>

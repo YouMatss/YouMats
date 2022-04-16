@@ -443,3 +443,10 @@ h3.font-size-24 {
     text-align: left !important;
 }
 
+.text-right{
+    text-align: left !important;
+}
+
+.text-left{
+    text-align: right !important;
+}

@@ -23,7 +23,7 @@
             <div id="shopCartAccordion" class="accordion rounded mb-5">
                 <!-- Card -->
                 <div class="card border-0">
-                    <div id="shopCartHeadingOne" class="alert alert-primary mb-0 text-white" role="alert">
+                    <div id="shopCartHeadingOne" class="alert alert-primary mb-0 text-white text-left" role="alert">
                         {{ __('checkout.returning_customer') }} <a href="#" class="alert-link collapsed text-white" data-toggle="collapse" data-target="#shopCartOne" aria-expanded="false" aria-controls="shopCartOne">{{__('checkout.login')}}</a>
                     </div>
                     <div id="shopCartOne" class="border border-top-0 collapse {{ ($errors->email || $errors->password) ? 'show' : '' }}" aria-labelledby="shopCartHeadingOne" data-parent="#shopCartAccordion" style="">
@@ -33,13 +33,12 @@
                                     <!-- Form -->
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
-
-                                        <div class="row">
-                                            <div class="mb-4">
-                                                <h1 class="text-center col-md-12">{{ __('auth.login') }}</h1>
-                                            </div>
-                                        </div>
-                                        <div class="row">
+{{--                                        <div class="row">--}}
+{{--                                            <div class="mb-4">--}}
+{{--                                                <h1 class="text-center col-md-12">{{ __('auth.login') }}</h1>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+                                        <div class="row pt-3">
                                             <div class="col-md-12">
                                                 <div class="js-form-message form-group mb-5">
                                                     <label class="form-label" for="email">{{ __('auth.email') }}</label>
@@ -61,18 +60,14 @@
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                     @enderror
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="remember">
+                                                            {{ __('auth.remember_me') }}
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-12">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="remember">
-                                                        {{ __('auth.remember_me') }}
-                                                    </label>
-                                                </div>
-                                            </div>
-
 
                                             <div class="col-md-12">
                                                 <div class="mb-3">
@@ -108,7 +103,7 @@
         <div id="shopCartAccordion1" class="accordion rounded mb-6">
             <!-- Card -->
             <div class="card border-0">
-                <div id="shopCartHeadingTwo" class="alert alert-primary mb-0 text-white" role="alert">
+                <div id="shopCartHeadingTwo" class="alert alert-primary mb-0 text-white text-left" role="alert">
                     {{__('checkout.have_coupon')}} <a href="#" class="alert-link text-white" data-toggle="collapse" data-target="#shopCartTwo" aria-expanded="false" aria-controls="shopCartTwo">{{__('checkout.enter_code')}}</a>
                 </div>
                 <div id="shopCartTwo" class="collapse border border-top-0" aria-labelledby="shopCartHeadingTwo" data-parent="#shopCartAccordion1" style="">
@@ -118,9 +113,9 @@
                                 <!-- Apply coupon Form -->
                                 <form class="js-focus-state" action="{{ route('apply.coupon') }}" method="POST">
                                     @csrf
-                                    <label class="sr-only">{{ __('Coupon code') }}</label>
+                                    <label class="sr-only">{{__('checkout.enter_code')}}</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" @if($coupon) disabled @endif name="code" value="@if($coupon) {{ $coupon->name }} @else {{ old('code') }} @endif" placeholder="Coupon code" id="couponCode" aria-label="Coupon code" aria-describedby="subscribeButtonExample2" required>
+                                        <input type="text" class="form-control" placeholder="{{__('checkout.enter_code')}}" @if($coupon) disabled @endif name="code" @if($coupon) value="{{ $coupon->name }}" @else value="{{ old('code') }}" @endif id="couponCode" required>
                                         <div class="input-group-append">
                                             <input type="submit" class="btn btn-block btn-dark px-4" @if($coupon) disabled @endif value="{{__('checkout.coupon_button')}}" />
                                         </div>
@@ -138,128 +133,8 @@
 
         <form class="js-validate" novalidate="novalidate" action="{{ route('checkout') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="row">
-                <div class="col-lg-5 order-lg-2 mb-7 mb-lg-0">
-                    <div class="pl-lg-3 ">
-                        <div class="bg-gray-1 rounded-lg">
-                            <!-- Order Summary -->
-                            <div class="p-4 mb-4 checkout-table">
-                                <!-- Title -->
-                                <div class="border-bottom border-color-1 mb-5">
-                                    <h3 class="section-title mb-0 pb-2 font-size-25">{{ is_company() ? __('checkout.your_quote') : __('checkout.your_order') }}</h3>
-                                </div>
-                                <!-- End Title -->
-
-                                <!-- Product Content -->
-                                <table class="checkout-table table rtl">
-                                    <thead>
-                                    <tr>
-                                        <th class="product-name">{{__('checkout.product')}}</th>
-                                        @if(!is_company())
-                                            <th class="product-total checkout-left">{{ __('checkout.total') }}</th>
-                                        @endif
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($cartItems as $item)
-                                            <tr class="cart_item">
-                                                <td>{{ $item->name }}
-                                                    <b>({{ $item->qty }} @if(!is_company()) x {{__('general.sar') . ' ' . $item->price}} @endif )</b>
-                                                </td>
-                                                @if(!is_company())
-                                                    <td class="checkout-left">{{ __('general.sar') . ' ' . $item->qty * $item->price }}</td>
-                                                @endif
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                    @if(!is_company())
-                                        <tfoot>
-                                        <tr>
-                                            <th>{{ __('checkout.subtotal') }}</th>
-                                            <td class="checkout-left" style="width: 100px">{{ __('general.sar') . ' ' . Cart::subtotal() }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>{{ __('checkout.shipping') }}</th>
-                                            <td class="checkout-left" style="width: 100px">{{ __('general.sar') . ' ' . Cart::tax() }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>{{ __('checkout.total') }}</th>
-                                            <td class="checkout-left" style="width: 100px"><strong>{{ __('general.sar') . ' ' . Cart::total() }}</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <th>{{ __('checkout.payment_total') }}</th>
-                                            <td class="checkout-left" style="width: 100px"><strong>{{ __('general.sar') . ' ' . round(parseNumber(Cart::total())) }}</strong></td>
-                                        </tr>
-                                        </tfoot>
-                                    @endif
-                                </table>
-                                @if(!is_company())
-                                    <!-- End Product Content -->
-                                    <div class="border-top border-width-3 border-color-1 pt-3 mb-3">
-                                        <!-- Basics Accordion -->
-                                        <div id="basicsAccordion1">
-                                            @foreach($paymentGateways as $gateway)
-                                                <div class="border-bottom border-color-1 border-dotted-bottom">
-                                                    <div class="p-3" id="basicsHeadingOne">
-                                                        <div class="custom-control custom-radio">
-                                                            <input type="radio" id="gateway-{{$gateway->id}}" class="custom-control-input" name="payment_method" value="{{ $gateway->value }}" checked>
-                                                            <label class="custom-control-label form-label" for="gateway-{{$gateway->id}}">
-                                                                {{ $gateway->name }}
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                            @error('payment_method')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <!-- End Basics Accordion -->
-                                    </div>
-                                @endif
-                                <div class="form-group d-flex align-items-center justify-content-between px-3 mb-5">
-                                    <div class="form-check">
-                                        <input class="form-check-input" @if(old('terms')) checked @endif type="checkbox" name="terms" value="true" id="defaultCheck10" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
-                                        <label class="form-check-label form-label" for="defaultCheck10">
-                                            <a href="#" class="text-blue">{{__('checkout.terms_conditions')}}</a>
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        @error('terms')
-                                        <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary-dark-w btn-block btn-pill font-size-20 mb-3 py-3">
-                                    @if(is_company())
-                                        {{__('checkout.get_quote')}}
-                                    @else
-                                        {{__('checkout.place_order')}}
-                                    @endif
-                                </button>
-                                @if(!is_company())
-                                    <div class="text-md rtl">
-                                        <span class="d-inline-block p-1">
-                                            <img class="max-width-6" src="{{asset('assets/img')}}/mada.png">
-                                        </span>
-                                        <span class="d-inline-block p-1">
-                                            <img class="max-width-5" src="{{asset('assets/img')}}/patment-icon_1.png">
-                                        </span>
-                                        <span class="d-inline-block p-1">
-                                            <img class="max-width-5" src="{{asset('assets/img')}}/patment-icon_2.png">
-                                        </span>
-                                    </div>
-                                @endif
-                            </div>
-                            <!-- End Order Summary -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-7 order-lg-1">
+            <div class="row rtl">
+                <div class="col-lg-7">
                     <div class="pb-7 mb-7">
                         <!-- Title -->
                         <div class="border-bottom border-color-1 mb-5">
@@ -284,7 +159,7 @@
                                     </div>
                                 </div>
                                 @error('type')
-                                    <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -308,20 +183,22 @@
                                 <!-- End Input -->
                             </div>
                             <div class="col-md-6">
-                                    <!-- Input -->
-                                    <div class="js-form-message mb-6">
-                                        <label class="form-label">
-                                            {{__('checkout.phone')}}
-                                        </label>
-                                        <input type="tel" class="form-control phoneNumber" value="{{ Auth::guard('web')->user()->phone ?? old('phone_number') }}" name="phone_number" aria-label="Phone Number" data-msg="{{__('checkout.phone_msg')}}" data-error-class="u-has-error" data-success-class="u-has-success">
-                                        @error('phone_number')
-                                        <span class="invalid-feedback" role="alert">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        {{__('checkout.phone')}}
+                                    </label>
+                                    <input type="tel" class="form-control phoneNumber text-center"
+                                           value="{{ Auth::guard('web')->user()->phone ?? old('phone_number') }}"
+                                           name="phone_number" aria-label="Phone Number" data-error-class="u-has-error" data-success-class="u-has-success">
+                                    @error('phone_number')
+                                    <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                        @enderror
-                                    </div>
-                                    <!-- End Input -->
+                                    @enderror
                                 </div>
+                                <!-- End Input -->
+                            </div>
                             <div class="col-md-6">
                                 <!-- Input -->
                                 <div class="js-form-message mb-6">
@@ -450,10 +327,10 @@
                                             </div>
                                         </div>
                                         @error('delivery_time')
-                                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
                                         @error('delivery_time_unit')
-                                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
                                     </div>
                                     <!-- End Input -->
@@ -466,7 +343,7 @@
                                     <input type="file" name="attachments[]" class="form-control" multiple />
 
                                     @error('attachments')
-                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                     @enderror
                                 </div>
                                 <div class="col-md-12 mb-3">
@@ -514,9 +391,9 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
-                        <!-- Input -->
-                        <div class="js-form-message mb-6">
+                    @endif
+                    <!-- Input -->
+                        <div class="js-form-message mb-6 text-left rtl">
                             <label class="form-label">
                                 {{ is_company() ? __('checkout.quote_notes') : __('checkout.order_notes') }}
                             </label>
@@ -526,6 +403,125 @@
                             </div>
                         </div>
                         <!-- End Input -->
+                    </div>
+                </div>
+                <div class="col-lg-5 mb-7 mb-lg-0">
+                    <div class="pl-lg-3 ">
+                        <div class="bg-gray-1 rounded-lg">
+                            <!-- Order Summary -->
+                            <div class="p-4 mb-4 checkout-table">
+                                <!-- Title -->
+                                <div class="border-bottom border-color-1 mb-5">
+                                    <h3 class="section-title mb-0 pb-2 font-size-25">{{ is_company() ? __('checkout.your_quote') : __('checkout.your_order') }}</h3>
+                                </div>
+                                <!-- End Title -->
+
+                                <!-- Product Content -->
+                                <table class="checkout-table table rtl">
+                                    <thead>
+                                    <tr>
+                                        <th class="product-name">{{__('checkout.product')}}</th>
+                                        @if(!is_company())
+                                            <th class="product-total checkout-left">{{ __('checkout.total') }}</th>
+                                        @endif
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($cartItems as $item)
+                                            <tr class="cart_item">
+                                                <td>{{ $item->name }}
+                                                    <b>({{ $item->qty }}) @if(!is_company()) x ({{__('general.sar') . ' ' . $item->price}}) @endif</b>
+                                                </td>
+                                                @if(!is_company())
+                                                    <td class="checkout-left">{{ __('general.sar') . ' ' . $item->qty * $item->price }}</td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                    @if(!is_company())
+                                        <tfoot>
+                                        <tr>
+                                            <th>{{ __('checkout.subtotal') }}</th>
+                                            <td class="checkout-left" style="width: 100px">{{ __('general.sar') . ' ' . Cart::subtotal() }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ __('checkout.shipping') }}</th>
+                                            <td class="checkout-left" style="width: 100px">{{ __('general.sar') . ' ' . Cart::tax() }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ __('checkout.total') }}</th>
+                                            <td class="checkout-left" style="width: 100px"><strong>{{ __('general.sar') . ' ' . Cart::total() }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ __('checkout.payment_total') }}</th>
+                                            <td class="checkout-left" style="width: 100px"><strong>{{ __('general.sar') . ' ' . round(parseNumber(Cart::total())) }}</strong></td>
+                                        </tr>
+                                        </tfoot>
+                                    @endif
+                                </table>
+                                @if(!is_company())
+                                    <!-- End Product Content -->
+                                    <div class="border-top border-width-3 border-color-1 pt-3 mb-3">
+                                        <!-- Basics Accordion -->
+                                        <div id="basicsAccordion1">
+                                            @foreach($paymentGateways as $gateway)
+                                                <div class="border-bottom border-color-1 border-dotted-bottom">
+                                                    <div class="p-3" id="basicsHeadingOne">
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" id="gateway-{{$gateway->id}}" class="custom-control-input" name="payment_method" value="{{ $gateway->value }}" checked>
+                                                            <label class="custom-control-label form-label" for="gateway-{{$gateway->id}}">
+                                                                {{ $gateway->name }}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            @error('payment_method')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <!-- End Basics Accordion -->
+                                    </div>
+                                @endif
+                                <div class="form-group text-left">
+                                    <div class="form-check">
+                                        <input class="form-check-input" @if(old('terms')) checked @endif type="checkbox" name="terms" value="true" id="defaultCheck10" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <label class="form-check-label form-label rtl" for="defaultCheck10">
+                                            <a href="#" class="text-blue">{{__('checkout.terms_conditions')}}</a>
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        @error('terms')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary-dark-w btn-block btn-pill font-size-20 mb-3 py-3">
+                                    @if(is_company())
+                                        {{__('checkout.get_quote')}}
+                                    @else
+                                        {{__('checkout.place_order')}}
+                                    @endif
+                                </button>
+                                @if(!is_company())
+                                    <div class="text-md rtl">
+                                        <span class="d-inline-block p-1">
+                                            <img class="max-width-6" src="{{asset('assets/img')}}/mada.png">
+                                        </span>
+                                        <span class="d-inline-block p-1">
+                                            <img class="max-width-5" src="{{asset('assets/img')}}/patment-icon_1.png">
+                                        </span>
+                                        <span class="d-inline-block p-1">
+                                            <img class="max-width-5" src="{{asset('assets/img')}}/patment-icon_2.png">
+                                        </span>
+                                    </div>
+                                @endif
+                            </div>
+                            <!-- End Order Summary -->
+                        </div>
                     </div>
                 </div>
             </div>

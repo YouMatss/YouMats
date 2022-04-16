@@ -28,13 +28,13 @@
                     </div>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="list-view-tab" data-toggle="pill" href="#list-view" role="tab" aria-controls="list-view" aria-selected="true">
-                    <div class="d-md-flex justify-content-md-center align-items-md-center">
-                        <i class="fa fa-th-list"></i>
-                    </div>
-                </a>
-            </li>
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" id="list-view-tab" data-toggle="pill" href="#list-view" role="tab" aria-controls="list-view" aria-selected="true">--}}
+{{--                    <div class="d-md-flex justify-content-md-center align-items-md-center">--}}
+{{--                        <i class="fa fa-th-list"></i>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </li>--}}
         </ul>
     </div>
     @if(is_individual())
@@ -77,15 +77,15 @@
             @endforelse
         </ul>
     </div>
-    <div class="tab-pane fade pt-2" id="list-view" role="tabpanel" aria-labelledby="list-view-tab" data-target-group="groups">
-        <ul class="d-block list-unstyled products-group prodcut-list-view-small" id="categoryProductList">
-            @forelse($products as $product)
-                @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'list'])
-            @empty
-                <p class="alert alert-warning alert-block w-100">{{__('general.no_data')}}</p>
-            @endforelse
-        </ul>
-    </div>
+{{--    <div class="tab-pane fade pt-2" id="list-view" role="tabpanel" aria-labelledby="list-view-tab" data-target-group="groups">--}}
+{{--        <ul class="d-block list-unstyled products-group prodcut-list-view-small" id="categoryProductList">--}}
+{{--            @forelse($products as $product)--}}
+{{--                @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'list'])--}}
+{{--            @empty--}}
+{{--                <p class="alert alert-warning alert-block w-100">{{__('general.no_data')}}</p>--}}
+{{--            @endforelse--}}
+{{--        </ul>--}}
+{{--    </div>--}}
 </div>
 <!-- End Tab Content -->
 <nav class="rtl d-md-flex justify-content-between align-items-center border-top pt-3" aria-label="Page navigation example">

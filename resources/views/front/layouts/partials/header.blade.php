@@ -90,10 +90,10 @@
                                             </span>
                                         </a>
                                         <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
-                                            <a class="dropdown-item" href="{{route('front.user.profile')}}">Profile</a>
-                                            <form class="dropdown-item" style="cursor: pointer" action="{{route('logout')}}" method="POST">
+                                            <a class="dropdown-item" href="{{route('front.user.profile')}}">{{__('general.profile')}}</a>
+                                            <form class="dropdown-item inline-block p-0" style="cursor: pointer" action="{{route('logout')}}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="dropdown-item">Logout</button>
+                                                <button type="submit" class="dropdown-item">{{__('general.logout')}}</button>
                                             </form>
                                         </div>
                                     </div>
@@ -115,7 +115,7 @@
                                             <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
                                                 <a class="dropdown-item" href="{{ route('vendor.product.index') }}">{{__('general.profile')}}</a>
                                                 <a class="dropdown-item" href="{{ route('chat.vendor.conversations', [1]) }}">{{__('general.messages')}}</a>
-                                                <form class="dropdown-item" style="cursor: pointer" action="{{route('vendor.logout')}}" method="POST">
+                                                <form class="dropdown-item inline-block p-0" style="cursor: pointer" action="{{route('vendor.logout')}}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="dropdown-item">{{__('general.logout')}}</button>
                                                 </form>
