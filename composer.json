@@ -15,10 +15,6 @@
         {
             "type": "path",
             "url": "./nova-components/TitleTemplate"
-        },
-        {
-            "type": "path",
-            "url": "./nova-components/TitleTemplate"
         }
     ],
     "require": {

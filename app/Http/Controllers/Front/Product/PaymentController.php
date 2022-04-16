@@ -17,8 +17,7 @@ class PaymentController extends Controller
 
     public function form() {
         try {
-            $data['order'] = Order::whereOrderId(Cache::get('order_id'))->first();
-            abort_if(!$data['order'],401);
+            $data['order'] = Order::whereOrderId(Cache::get('order_id'))->firstorfail();
 
             $data['cart'] = Cart::instance('cart');
             $data['cartItems'] = $data['cart']->search(function($cartItems) {
@@ -27,7 +26,7 @@ class PaymentController extends Controller
 
             return view('front.payment.form')->with($data);
         } catch (\Exception $exception) {
-            abort(401);
+            return redirect()->route('home');
         }
 
     }
@@ -39,10 +38,9 @@ class PaymentController extends Controller
 
     public function success() {
         try {
-            $data['order'] = Order::whereOrderId(Cache::get('order_id'))->first();
-            abort_if(!$data['order'],401);
+            $data['order'] = Order::whereOrderId(Cache::get('order_id'))->firstorfail();
 
-            $data['cart'] = Cart::instance('cart');
+            $data['cart'] = Cart::instance('cart'); 
             $data['cartItems'] = $data['cart']->search(function($cartItems) {
                 return true;
             });
@@ -61,19 +59,18 @@ class PaymentController extends Controller
 
             //Clear the cart!
             Cart::instance('cart')->destroy();
-            Cache::forget('order_id');
 
-            Mail::to(Auth::guard('web')->user())->send(new OrderPlaced($data['order']));
+//            Mail::to(Auth::guard('web')->user())->send(new OrderPlaced($data['order']));
 
             return view('front.payment.success')->with($data);
         } catch (\Exception $exception) {
-            abort(401);
+            return redirect()->route('home');
         }
     }
 
     public function error() {
         try {
-            $data['order'] = Order::whereOrderId(Cache::get('order_id'))->first();
+            $data['order'] = Order::whereOrderId(Cache::get('order_id'))->firstorfail();
 
             $data['cart'] = Cart::instance('cart');
             $data['cartItems'] = $data['cart']->search(function($cartItems) {
@@ -82,7 +79,7 @@ class PaymentController extends Controller
 
             return view('front.payment.error')->with($data);
         } catch (\Exception $exception) {
-            abort(401);
+            return redirect()->route('home');
         }
     }
 }

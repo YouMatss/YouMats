@@ -173,8 +173,8 @@ button.loading span {
 
 .payment-box .btn {
     width: 100%;
-    background-color: rgb(65, 202, 127);
-    border-color: rgb(65, 202, 127);
+    background-color: #003f91;
+    border-color: #003f91;
     color: white;
     justify-content: center;
     padding: 2vh 0;
