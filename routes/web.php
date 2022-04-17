@@ -8,6 +8,7 @@ use App\Http\Controllers\Front\Vendor\Admin\SippingGroupController;
 use Illuminate\Support\Facades\Route;
 
 //Actions routes
+Route::post('changeCity', 'Common\MiscController@changeCity')->name('front.changeCity');
 Route::post('changeCurrency', 'Common\MiscController@changeCurrency')->name('front.currencySwitch');
 Route::get('introduce/{type}', 'Common\MiscController@introduce')->name('front.introduce');
 

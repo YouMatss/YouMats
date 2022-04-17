@@ -22,6 +22,14 @@ class MiscController extends Controller
         return;
     }
 
+    public function changeCity(Request $request) {
+        $data = $this->validate($request, [
+            'city_id' => [REQUIRED_INTEGER_VALIDATION, ...['exists:cities,id']]
+        ]);
+        setCity($data['city_id']);
+        return response()->json(['message' => 'Done']);
+    }
+
     public function subscribeRequest(Request $request) {
         $data = $this->validate($request, [
             'email' => 'email|unique:subscribers,email'

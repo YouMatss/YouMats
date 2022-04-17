@@ -82,15 +82,15 @@
                         <h2 class="font-size-25 text-lh-1dot2">{{$product->name}}</h2>
                         <div class="mb-2">
                             <a class="d-inline-flex align-items-center small font-size-15 text-lh-1">
-                                <div class="text-warning mr-2">
-                                    @for($i=1;$i<=$product->rate;$i++)
-                                        <small class="fas fa-star"></small>
-                                    @endfor
-                                    @for($i=5;$i>$product->rate;$i--)
-                                        <small class="far fa-star text-muted"></small>
-                                    @endfor
-                                    {{$product->rate}}
-                                </div>
+{{--                                <div class="text-warning mr-2">--}}
+{{--                                    @for($i=1;$i<=$product->rate;$i++)--}}
+{{--                                        <small class="fas fa-star"></small>--}}
+{{--                                    @endfor--}}
+{{--                                    @for($i=5;$i>$product->rate;$i--)--}}
+{{--                                        <small class="far fa-star text-muted"></small>--}}
+{{--                                    @endfor--}}
+{{--                                    {{$product->rate}}--}}
+{{--                                </div>--}}
                                 &nbsp;
                                 <span class="text-secondary font-size-13">({{$product->views}} {{__('product.views')}})</span>
                             </a>
@@ -107,7 +107,7 @@
                         {{--</div>--}}
 
                         <p>{!! $product->short_desc !!}</p>
-                        <div><strong>{{__('general.sku')}}</strong>: {{$product->SKU}}</div>
+{{--                        <div><strong>{{__('general.sku')}}</strong>: {{$product->SKU}}</div>--}}
                         @if(auth()->guard('admin')->check() && isset($product->vendor->name))
                             <div><strong>{{__('general.vendor')}}</strong>: {{$product->vendor->name}}</div>
                         @endif
@@ -131,7 +131,6 @@
                                 @if(isset($delivery))
                                     <div>
                                         <span>{{__('product.delivery_to_your_city')}}: <b>{{getCurrentCityName()}}</b></span>
-                                        <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
                                         <br/>
                                         <span>{{__('product.delivery_price')}}:
                                             @if($delivery['price'] > 0)
@@ -139,8 +138,10 @@
                                             @else
                                             <b>{{__('product.delivery_free')}}</b>
                                             @endif
-                                        </span> <br/>
+                                        </span>
+                                        <br/>
                                         <span>{{__('product.delivery_time')}}: <b>{{$delivery['time']}} {{($delivery['format'] == 'hours') ? __('product.delivery_hours') : __('product.delivery_days') }}</b></span>
+                                        <button type="button" class="btn btn-block btn-xs btn-primary mt-2 choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
                                     </div>
                                 @else
                                     <div>
@@ -174,9 +175,7 @@
                                 @if(is_company() || $product->price || $product->delivery)
                                     {!! cartOrChat($product) !!}
                                 @else
-                                    <a class="cart-chat-category btn-primary transition-3d-hover" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">
-                                        {{__('product.category_href')}}
-                                    </a>
+                                    <a class="cart-chat-category btn-primary transition-3d-hover" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{__('product.category_href')}}</a>
                                 @endif
                                 <div class="flex-content-center flex-wrap">
                                     <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i>{{__('product.wishlist')}}</a>
@@ -283,7 +282,7 @@
                                                     <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->formatted_price}}</div>
                                                     @endif
                                                 </div>
-                                                {!! cartOrChat($r_product, false) !!}
+{{--                                                {!! cartOrChat($r_product, false) !!}--}}
                                             </div>
                                         </div>
                                         @if(!Auth::guard('vendor')->check())
@@ -303,5 +302,5 @@
             </div>
         </div>
     </div>
-    @include('front.layouts.partials.change_city', ['delivery_cities' => $delivery_cities])
+    @include('front.layouts.partials.change_city', ['delivery_cities' => $delivery_cities, 'ajax' => true])
 @endsection

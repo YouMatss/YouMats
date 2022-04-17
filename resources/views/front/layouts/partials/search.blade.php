@@ -77,7 +77,7 @@ function doTheMagic(url, callback = 'default') {
                                         <div class="prodcut-price searchPrice-${value.id}">
                                             <div class="text-gray-100">{{ getCurrency('symbol') }} ${value.price}</div>
                                         </div>
-                                        <div class="prodcut-add-cart searchCartDiv-${value.id}">
+                                        <div class="searchCartDiv-${value.id}">
                                             <button data-url="{{ env('APP_URL') }}/cart/add/${value.id}" class="btn-add-cart cart-chat-category btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></button>
                                         </div>
                                     </div>

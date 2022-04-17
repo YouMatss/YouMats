@@ -450,3 +450,14 @@ h3.font-size-24 {
 .text-left{
     text-align: right !important;
 }
+
+.float-child-quantity {
+    float: right;
+}
+
+.float-child-cart {
+    margin-right: 2%;
+    margin-left: 0;
+    width: 18%;
+    float: right;
+}

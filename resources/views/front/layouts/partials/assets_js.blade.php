@@ -175,7 +175,7 @@
                 url: url,
                 data: {
                     _token: '{{ csrf_token() }}',
-                    quantity: btn.parent().siblings('.cart-quantity').val()
+                    quantity: btn.parent().siblings().find('.cart-quantity').val()
                 }
             })
             .done(function(response) {
