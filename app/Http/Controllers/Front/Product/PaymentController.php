@@ -40,7 +40,7 @@ class PaymentController extends Controller
         try {
             $data['order'] = Order::whereOrderId(Cache::get('order_id'))->firstorfail();
 
-            $data['cart'] = Cart::instance('cart'); 
+            $data['cart'] = Cart::instance('cart');
             $data['cartItems'] = $data['cart']->search(function($cartItems) {
                 return true;
             });

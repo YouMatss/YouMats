@@ -56,9 +56,9 @@ if (!function_exists('getCityNameById')) {
 }
 
 if (!function_exists('cartOrChat')) {
-    function cartOrChat($product, $is_quantity = true) {
+    function cartOrChat($product, $view_page = true) {
         $chat = '<div><a target="_blank" href="https://wa.me/'. $product->phone() .'"
-                    class="cart-chat-category btn-primary transition-3d-hover">
+                    class="cart-chat-category btn btn-primary transition-3d-hover">
                         <i class="fa fa-comments"></i> &nbsp;' . __("general.chat_button") . '
                     </a>
                 </div>';
@@ -66,25 +66,58 @@ if (!function_exists('cartOrChat')) {
         $icon = is_company() ? 'fa fa-file-alt' : 'ec ec-add-to-cart';
         $cart_word = is_company() ? __("general.add_to_quote") : __("general.add_to_cart");
 
-        if($is_quantity) {
-            $cart = '<input class="cart-quantity form-control" type="number" min="'.$product->min_quantity.'" value="'.$product->min_quantity.'" />
-            <div class="prodcut-add-cart">
+        if($view_page) {
+            $cart = '
+            <div class="border py-1 px-3 border-color-1">
+                <div class="js-quantity row align-items-center">
+                    <div class="col">
+                        <input class="cart-quantity js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" min="'.$product->min_quantity.'" value="'.$product->min_quantity.'">
+                    </div>
+                    <div class="col-auto pr-1">
+                        <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
+                            <small class="fas fa-minus btn-icon__inner"></small>
+                        </a>
+                        <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
+                            <small class="fas fa-plus btn-icon__inner"></small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div>
                 <button data-url="' . route('cart.add', ['product' => $product]) . '"
-                    class="btn-add-cart cart-chat-category btn-primary transition-3d-hover">
+                    class="btn-add-cart cart-chat-category btn btn-primary transition-3d-hover" style="cursor: pointer;">
                     <i class="' . $icon .'"></i> &nbsp;' . $cart_word . '
                 </button>
             </div>';
         } else {
-            $cart = '<div class="prodcut-add-cart">
-                <button data-url="' . route('cart.add', ['product' => $product]) . '"
-                    class="btn-add-cart cart-chat-category btn-primary transition-3d-hover">
-                    <i class="' . $icon .'"></i> &nbsp;' . $cart_word . '
-                </button>
+            $cart = '
+            <div class="float-container">
+                <div class="float-child-quantity">
+                    <div class="border py-1 px-3 border-color-1">
+                        <div class="js-quantity row align-items-center">
+                            <div class="col">
+                                <input class="cart-quantity js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" min="'.$product->min_quantity.'" value="'.$product->min_quantity.'">
+                            </div>
+                            <div class="col-auto pr-1">
+                                <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
+                                    <small class="fas fa-minus btn-icon__inner"></small>
+                                </a>
+                                <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
+                                    <small class="fas fa-plus btn-icon__inner"></small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="float-child-cart">
+                    <button data-url="' . route('cart.add', ['product' => $product]) . '"
+                        class="btn-add-cart cart-chat-category btn btn-primary transition-3d-hover"><i class="' . $icon .'"></i></button>
+                </div>
             </div>';
         }
 
         $view = '<div><a href="'.route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug]).'"
-                    class="cart-chat-category btn-primary transition-3d-hover">
+                    class="cart-chat-category btn btn-primary transition-3d-hover">
                         <i class="fa fa-eye"></i> &nbsp;' . __("general.view_product") . '
                     </a>
                 </div>';

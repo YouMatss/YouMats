@@ -947,7 +947,6 @@
     overflow-y: scroll;
 }
 .choose_city {
-    border-radius: 6.1875rem !important;
     box-shadow: 0 0 0 !important;
     display: inline-block;
     background-color: #e6e6e6;

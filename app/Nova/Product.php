@@ -70,7 +70,7 @@ class Product extends Resource
             BelongsToManyField::make('Tags')
                 ->optionsLabel('translated_name')->hideFromIndex(),
 
-            Textarea::make('Short Description', 'short_desc')
+            CKEditor::make('Short Description', 'short_desc')
                 ->hideFromIndex()->translatable()
                 ->rules(NULLABLE_TEXT_VALIDATION),
 
