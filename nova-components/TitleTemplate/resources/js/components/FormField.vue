@@ -1,5 +1,5 @@
 <template>
-    <default-field :field="field" :errors="errors" :show-help-text="showHelpText">
+    <default-field :field="field" :errors="errors" :show-help-text="showHelpText" :full-width-content="true">
         <template slot="field">
             <div v-for="locale in locales" :style="[locale == 'ar' ? {'border-bottom': '2px solid #7c858e', direction: 'rtl'} : {}]">
                 <input v-if="template == null"
