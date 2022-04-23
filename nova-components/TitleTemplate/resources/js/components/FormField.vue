@@ -18,7 +18,7 @@
                         </select>
                     </div>
                     <div v-else-if="item.word[locale].split('')[0] != null">
-                        <input type="text" readonly required
+                        <input type="text" readonly required :size="item.word[locale].length"
                                class="form-control form-input form-input-bordered inline-block w-auto mx-1 mb-1"
                                v-model="tempName[locale][index] = item.word[locale]" />
                     </div>
