@@ -27065,7 +27065,8 @@ var render = function() {
                               attrs: {
                                 type: "text",
                                 readonly: "",
-                                required: ""
+                                required: "",
+                                size: item.word[locale].length
                               },
                               domProps: {
                                 value: (_vm.tempName[locale][index] =
