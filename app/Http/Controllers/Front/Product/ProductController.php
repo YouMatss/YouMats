@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -58,28 +59,54 @@ class ProductController extends Controller
     }
 
     /**
-     * @return JsonResponse
+     * @return string
      */
-    public function search(): JsonResponse
+    public function search(): string
     {
-        $products = QueryBuilder::for(Product::class)
+        $data['selected_tags'] = [];
+        $data['selected_categories'] = [];
+
+        $search_products_by_name_only = QueryBuilder::for(Product::class)
+                        ->allowedFilters([AllowedFilter::custom('name', new FiltersJsonField)])
+                        ->where('active', true)->get();
+
+        $data['search_products'] = QueryBuilder::for(Product::class)
                         ->allowedFilters([
                             AllowedFilter::custom('name', new FiltersJsonField),
-                            AllowedFilter::scope('price_from'),
-                            AllowedFilter::scope('price_to'),
+                            AllowedFilter::scope('price'),
                             AllowedFilter::callback('has_tags', fn($query, $value) => $query->whereHas('tags', fn($query) => $query->whereIn('tags.id', $value))),
                             AllowedFilter::callback('has_categories', fn($query, $value) => $query->whereHas('category', fn($query) => $query->whereIn('categories.id', $value)))
                         ])
                         ->allowedIncludes(['tags', 'category'])
-                        ->where('active', 1)
-                        ->limit(30)
-                        ->get();
+                        ->where('active', true)
+                        ->limit(20)
+                        ->get()
+                        ->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
+                            return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
+                                return $collection->sortBy('price')->groupBy(fn ($product) => (int) $product->price)->map(function (Collection $collection) {
+                                    return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
+                                        return $collection->sortByDesc('updated_at');
+                                    })->ungroup();
+                                })->ungroup();
+                            })->ungroup();
+                        })->ungroup()
+                        ->unique();
 
-        foreach ($products as $product) {
-            $product['category_url'] = route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)]);
-            $product['url'] = route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug]);
+        foreach ($search_products_by_name_only as $product) {
+            if($product->tags)
+                foreach ($product->tags as $tag) {
+                    $data['search_tags'][$tag->id] = $tag;
+                }
+            $data['search_categories'][$product->category->id] = $product->category;
         }
 
-        return response()->json(['products' => $products, 'maxPrice' => $products->max('price')], 200);
+        if(isset($_GET['filter']['has_tags']))
+            $data['selected_tags'] = explode(',', $_GET['filter']['has_tags']);
+        if(isset($_GET['filter']['has_categories']))
+            $data['selected_categories'] = explode(',', $_GET['filter']['has_categories']);
+
+        $data['max_price'] = ceil($search_products_by_name_only->max('price'));
+
+        return view('front.layouts.partials.searchDiv')->with($data)->render();
     }
 }

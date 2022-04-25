@@ -10,6 +10,7 @@ return [
         'vendor',
         'cart',
         'checkout',
+        'search',
         'contact',
         'footer',
         'vendorAdmin',

@@ -499,10 +499,10 @@
 
         <div class="box_search_nav d-block d-lg-none">
             <div class="input-group">
-                <input type="search" autocomplete="off" class="fils_search_nav form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
+                <input type="search" autocomplete="off" class="fils_search_nav form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInputMobile" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
                 <div class="input-group-append">
                     <!-- End Select -->
-                    <button class="btn btn-dark height-40 py-2 px-3 rounded-right-pill" type="button" id="searchProductBtn">
+                    <button class="btn btn-primary height-40 py-2 px-3 mt-0 rounded-right-pill" type="button" id="searchProductBtnMobile">
                         <span class="ec ec-search font-size-24" id="searchButtonSpan"></span>
                     </button>
                 </div>
@@ -519,20 +519,14 @@
                             <div id="basicsAccordion">
                                 <div class="card border-0 rounded-0">
                                     <div class="card-header bg-primary rounded-0 card-collapse border-0" id="basicsHeadingOne">
-                                        <button type="button" class="btn-link btn-remove-focus btn-block d-flex card-btn py-3 text-lh-1 px-4 shadow-none btn-primary rounded-top-lg border-0 font-weight-bold text-gray-90 collapsed"
-                                                data-toggle="collapse"
-                                                data-target="#basicsCollapseOne"
-                                                aria-expanded="false"
-                                                aria-controls="basicsCollapseOne">
+                                        <button type="button" class="btn-link btn-remove-focus btn-block d-flex card-btn py-3 text-lh-1 px-4 shadow-none btn-primary rounded-top-lg border-0 font-weight-bold text-gray-90 collapsed" data-toggle="collapse" data-target="#basicsCollapseOne" aria-expanded="false" aria-controls="basicsCollapseOne">
                                             <span class="pl-1 text-gray-110">{{__('general.all_categories')}}</span>
                                             <span class="text-gray-110 ml-3">
                                                 <span class="ec ec-arrow-down-search"></span>
                                             </span>
                                         </button>
                                     </div>
-                                    <div id="basicsCollapseOne" class="collapse vertical-menu v1"
-                                         aria-labelledby="basicsHeadingOne"
-                                         data-parent="#basicsAccordion">
+                                    <div id="basicsCollapseOne" class="collapse vertical-menu v1" aria-labelledby="basicsHeadingOne" data-parent="#basicsAccordion">
                                         <div class="card-body p-0">
                                             <nav class="js-mega-menu navbar navbar-expand-xl u-header__navbar u-header__navbar--no-space hs-menu-initialized">
                                                 <div id="navBar" class="collapse navbar-collapse u-header__navbar-collapse">
@@ -615,32 +609,15 @@
                         </div>
                     </div>
                     <div class="col align-self-center">
-                        <!-- Search-Form -->
                         <label class="sr-only" for="searchProduct">{{__('general.search')}}</label>
                         <div class="input-group">
                             <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
                             <div class="input-group-append">
-                                <!-- End Select -->
                                 <button class="btn btn-dark height-40 py-2 px-3 rounded-right-pill" type="button" id="searchProductBtn">
                                     <span class="ec ec-search font-size-24" id="searchButtonSpan"></span>
                                 </button>
                             </div>
                         </div>
-                        <!-- End Search-Form -->
-                    </div>
-                    <div class="col align-self-center d-none" id="searchClassic">
-                        <!-- Search-Form -->
-                            <label class="sr-only" for="searchProduct">{{__('general.search')}}</label>
-                            <div class="input-group">
-                                <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInput" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
-                                <div class="input-group-append">
-                                    <!-- End Select -->
-                                    <button class="btn btn-dark height-40 py-2 px-3 rounded-right-pill" type="button" id="searchProductBtn">
-                                        <span class="ec ec-search font-size-24" id="searchButtonSpan"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        <!-- End Search-Form -->
                     </div>
                     <div class="col-md-auto align-self-center">
                         <div class="d-flex">
@@ -660,61 +637,9 @@
                 </div>
             </div>
         </div>
-
-        <div class="container d-none" id="searchDiv" style="position: relative">
-            <div class="close_search"><i class="fa fa-times"></i></div>
-            <div class="h_scroll">
-                <div class="container p-0">
-                    <div class="row">
-                        <div class="d-none d-xl-block col-xl-3 col-wd-2gdot5">
-                            <div class="block_search_check">
-                                <div id="attributeRegion"></div>
-                                <div class="range-slider">
-                                    <h4 class="font-size-14 mb-3 font-weight-bold">{{__('general.search_price')}}</h4>
-                                    <div id="priceRegion"></div>
-                                    <button type="submit" class="btn px-4 btn-primary-dark-w py-2 rounded-lg text-white" id="searchFilterBtn"><span id="searchFilterSpan"> {{ __('Filter') }}</span></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-9 col-wd-9gdot5">
-                            <div class="view_type_header">
-                                <div class="px-3 d-none d-xl-block">
-                                    <ul class="nav nav-tab-shop" id="pills-tab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="pills-one-example1-tab" data-toggle="pill" href="#pills-one-example1" role="tab" aria-controls="pills-one-example1" aria-selected="false">
-                                                <div class="d-md-flex justify-content-md-center align-items-md-center">
-                                                    <i class="fa fa-th"></i>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="pills-four-example1-tab" data-toggle="pill" href="#pills-four-example1" role="tab" aria-controls="pills-four-example1" aria-selected="true">
-                                                <div class="d-md-flex justify-content-md-center align-items-md-center">
-                                                    <i class="fa fa-th-list"></i>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="block_search_check">
-                                <div class="tab-content" id="pills-tabContent">
-                                    <div class="tab-pane fade pt-2 show active" id="pills-one-example1" role="tabpanel" aria-labelledby="pills-one-example1-tab" data-target-group="groups">
-                                        <ul class="row list-unstyled products-group no-gutters" id="searchRegionGrid">
-                                        </ul>
-                                    </div>
-                                    <div class="tab-pane fade pt-2" id="pills-four-example1" role="tabpanel" aria-labelledby="pills-four-example1-tab" data-target-group="groups">
-                                        <ul class="d-block list-unstyled products-group prodcut-list-view-small" id="searchRegionList">
-                                        </ul>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- End Shop Pagination -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-------- search div -------->
+        <div class="d-none" id="searchDiv">
+            @include('front.layouts.partials.searchDiv')
         </div>
     </div>
 </header>
