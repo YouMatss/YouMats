@@ -14,7 +14,7 @@ function doTheMagic(url) {
         url: url,
         type: 'GET',
         beforeSend: function () {
-            searchRegionGrid.html(`<div class="mx-auto mt-8"><i class="fa fa-spin fa-spinner fa-6x"></i></div>`);
+            searchRegionGrid.html(`<div class="mx-auto mt-8" style="margin-left: auto!important;"><i class="fa fa-spin fa-spinner fa-6x"></i></div>`);
             searchDiv.removeClass('d-none');
         },
         success: function (response) {
