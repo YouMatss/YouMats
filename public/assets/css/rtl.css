@@ -463,6 +463,6 @@ h3.font-size-24 {
 }
 
 .close_search{
-    right: 0;
+    right: auto;
     left: -35px;
 }
