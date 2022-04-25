@@ -461,3 +461,8 @@ h3.font-size-24 {
     width: 18%;
     float: right;
 }
+
+.close_search{
+    right: 0;
+    left: -35px;
+}
