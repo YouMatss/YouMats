@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Anaseqal\NovaImport\NovaImport;
 use App\Models\Category as CategoryModel;
+use App\Models\Vendor as VendorModel;
 use App\Nova\Admin;
 use App\Nova\Car;
 use App\Nova\CarType;
@@ -45,6 +46,7 @@ use App\Nova\Unit;
 use App\Nova\User;
 use App\Nova\Vendor;
 use App\Observers\CategoryObserver;
+use App\Observers\VendorObserver;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
 use Bernhardh\NovaTranslationEditor\NovaTranslationEditor;
@@ -78,12 +80,14 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         parent::boot();
         CategoryModel::fixTree();
         NovaSettings::addSettingsFields([
+            new Panel('General', $this->generalData()),
             new Panel('General SEO', $this->generalSeo()),
             new Panel('Social Media Links', $this->socialFields()),
             new Panel('Media', $this->generalMedia()),
         ]);
         Nova::serving(function () {
             CategoryModel::observe(CategoryObserver::class);
+            VendorModel::observe(VendorObserver::class);
         });
     }
 
@@ -361,6 +365,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'home_third_section' => $combinedName
                     ];
                 })->rules(NULLABLE_IMAGE_VALIDATION),
+        ];
+    }
+
+    private function generalData() {
+        return [
+            Text::make('Main Phone', 'phone')
+                ->rules(REQUIRED_STRING_VALIDATION),
         ];
     }
 
