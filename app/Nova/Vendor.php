@@ -13,6 +13,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Mauricewijnia\NovaMapsAddress\MapsAddress;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
@@ -72,6 +73,8 @@ class Vendor extends Resource
                   ->rules(REQUIRED_EMAIL_VALIDATION),
               Text::make('Phone', 'phone')
                   ->rules(REQUIRED_STRING_VALIDATION),
+              Textarea::make('Code', 'phone_code')
+                  ->readonly(),
               Multiselect::make('Cities', 'cities')
                   ->options(\App\Models\City::pluck('name', 'id'))
                   ->saveAsJSON(),

@@ -148,6 +148,18 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return null;
     }
 
+    public function phone_code() {
+        if(isset($this->vendor->contacts[0]['phone_code']))
+            return $this->vendor->contacts[0]['phone_code'];
+        return null;
+    }
+
+    public function whatsapp_message() {
+        $link = route('front.product', [generatedNestedSlug($this->category->ancestors()->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
+        $phone_code = $this->phone_code();
+        return $link . '%0A%0A' . $phone_code;
+    }
+
     /**
      * @return BelongsTo
      */
