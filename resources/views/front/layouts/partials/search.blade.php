@@ -1,11 +1,11 @@
 <script>
 let xhr,
     timer,
-    timeoutVal = 300,
-    searchDiv = $("#searchDiv"),
-    searchRegionGrid = $('#searchRegionGrid');
+    timeoutVal = 300;
 
 function doTheMagic(url) {
+    let searchDiv = $("#searchDiv"),
+        searchRegionGrid = $('#searchRegionGrid');
     url += '&include=tags,tagsCount,category,categoryCount';
     if(xhr && xhr.readyState != 4) {
         xhr.abort();
@@ -72,8 +72,10 @@ $(document).on('ready', function () {
 
     $(document).on('keyup', '#searchProductInput', function(e) {
         window.clearTimeout(timer);
-        let searchText = $("#searchProductInput").val();
-        if (e.keyCode == 13 || (searchText.length > 2 && ((e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 97 && e.keyCode <= 122) || e.keyCode == 8))) {
+        let searchText = $("#searchProductInput").val(),
+            codes = [9, 16, 17, 18, 19, 20, 27, 33, 35, 36, 37, 38, 39, 40, 44, 45, 91, 92, 93, 112,
+                    113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 144, 145, 182, 183];
+        if (e.keyCode == 13 || (searchText.length > 2 && $.inArray(e.keyCode, codes) == -1)) {
             timer = window.setTimeout(() => {
                 doTheMagic("{{ route('products.search') }}?filter[name]=" + searchText);
             }, timeoutVal);

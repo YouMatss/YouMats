@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Product;
 
 use App\Helpers\Filters\FiltersJsonField;
+use App\Helpers\Filters\FiltersKeywordField;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;

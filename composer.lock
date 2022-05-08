@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "019d3c7106da50829e2017e75bfee306",
+    "content-hash": "8a9c906821668007eb1a0ed645beea32",
     "packages": [
         {
             "name": "adamcmoore/nova-gmap",
@@ -1011,51 +1011,6 @@
                 "source": "https://github.com/dcasia/collapsible-resource-manager/tree/v1.4.2"
             },
             "time": "2022-02-05T17:07:28+00:00"
-        },
-        {
-            "name": "dillingham/nova-items-field",
-            "version": "0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dillingham/nova-items-field.git",
-                "reference": "c93dc293cecee867111cb27ad79b3daad5f77682"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dillingham/nova-items-field/zipball/c93dc293cecee867111cb27ad79b3daad5f77682",
-                "reference": "c93dc293cecee867111cb27ad79b3daad5f77682",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "NovaItemsField\\FieldServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "NovaItemsField\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Nova field to handle array columns",
-            "keywords": [
-                "laravel",
-                "nova"
-            ],
-            "support": {
-                "issues": "https://github.com/dillingham/nova-items-field/issues",
-                "source": "https://github.com/dillingham/nova-items-field/tree/0.6"
-            },
-            "time": "2020-09-16T21:22:17+00:00"
         },
         {
             "name": "dmitrybubyakin/nova-medialibrary-field",

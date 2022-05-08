@@ -12,8 +12,8 @@ class VendorObserver
             $newContacts = [];
             foreach ($vendor->contacts as $contact) {
                 $phone = $contact['phone'];
-                $encrypter = new Encrypter('kingOfSuppliersA', 'aes-128-gcm');
-                $contact['phone_code'] = $encrypter->encrypt($phone);
+                $encrypter = new Encrypter('kingOfSuppliersAkingOfSuppliersA', 'AES-256-CBC');
+                $contact['phone_code'] = $encrypter->encryptString($phone);
                 $newContacts[] = $contact;
             }
             $vendor->contacts = $newContacts;
@@ -25,8 +25,8 @@ class VendorObserver
             $newContacts = [];
             foreach ($vendor->contacts as $contact) {
                 $phone = $contact['phone'];
-                $encrypter = new Encrypter('kingOfSuppliersA', 'aes-128-gcm');
-                $contact['phone_code'] = $encrypter->encrypt($phone);
+                $encrypter = new Encrypter('kingOfSuppliersAkingOfSuppliersA', 'AES-256-CBC');
+                $contact['phone_code'] = $encrypter->encryptString($phone);
                 $newContacts[] = $contact;
             }
             $vendor->contacts = $newContacts;
