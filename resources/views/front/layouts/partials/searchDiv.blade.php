@@ -87,7 +87,7 @@
                                                 @include('front.layouts.partials.product_box', ['product' => $search_product, 'view' => 'grid'])
                                             </div>
                                         @empty
-                                            <div class="alert alert-warning col-12 pl-2">{{ __('search.no_records') }}</div>
+                                            <div class="alert alert-warning col-12 pl-2 text-left">{{ __('search.no_records') }}</div>
                                         @endforelse
                                     @endif
                                 </ul>

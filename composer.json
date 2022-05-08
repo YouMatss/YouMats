@@ -30,7 +30,6 @@
         "davidpiesse/nova-toggle": "^0.0.8",
         "devinweb/payment": "^1.0",
         "digital-creative/collapsible-resource-manager": "^1.2",
-        "dillingham/nova-items-field": "^0.6.0",
         "dmitrybubyakin/nova-medialibrary-field": "^3.2",
         "drobee/nova-sluggable": "^1.2",
         "dyrynda/laravel-cascade-soft-deletes": "^4.1",

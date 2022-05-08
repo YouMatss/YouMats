@@ -223,7 +223,6 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
-      <path value="$PROJECT_DIR$/vendor/dillingham/nova-items-field" />
       <path value="$PROJECT_DIR$/vendor/maher/title-template" />
     </include_path>
   </component>

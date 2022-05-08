@@ -23,7 +23,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
 
     protected $guarded = ['id'];
 
-    public $translatable = ['name', 'temp_name', 'desc', 'short_desc', 'meta_title', 'meta_keywords', 'meta_desc'];
+    public $translatable = ['name', 'temp_name', 'desc', 'short_desc', 'search_keywords', 'meta_title', 'meta_keywords', 'meta_desc'];
 
     /**
      * The accessors to append to the model's array form.
@@ -31,6 +31,10 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      * @var array
      */
     protected $appends = ['image_url', 'delivery', 'contacts'];
+
+//    public $casts = [
+//        'search_keywords' => 'array',
+//    ];
 
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')->width(200)->height(200);
@@ -156,7 +160,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
 
     public function whatsapp_message() {
         $link = route('front.product', [generatedNestedSlug($this->category->ancestors()->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
-        $phone_code = $this->phone_code();
+        $phone_code = ';;' . $this->phone_code() . ';;';
         return $link . '%0A%0A' . $phone_code;
     }
 

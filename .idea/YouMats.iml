@@ -29,7 +29,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/devinweb/payment" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dflydev/dot-access-data" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/digital-creative/collapsible-resource-manager" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/dillingham/nova-items-field" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dmitrybubyakin/nova-medialibrary-field" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/dbal" />

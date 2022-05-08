@@ -13,6 +13,7 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -21,12 +22,14 @@ use Laravel\Nova\Panel;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use Maher\TitleTemplate\TitleTemplate;
 use Nikaia\Rating\Rating;
+use NovaItemsField\Items;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
 use Waynestate\Nova\CKEditor;
+use Whitecube\NovaFlexibleContent\Flexible;
 use ZiffDavis\Nova\Nestedset\Fields\NestedsetSelect;
 
 class Product extends Resource
@@ -204,6 +207,13 @@ class Product extends Resource
                     ->placeholder('Choose Attributes Values')
                     ->hideFromIndex(),
             ])),
+
+            new Panel('Search Keywords', [
+                Heading::make("Instructions: Set every keyword in one line"),
+                Textarea::make('Search Keywords')
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->translatable(),
+            ]),
 
             Fields::SEO(static::$model,'products'),
         ];

@@ -3,15 +3,26 @@
     <title>{{(!empty($product->meta_title)) ? $product->meta_title : $product->name}}</title>
     <meta name="description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : $product->short_desc}}">
     <meta name="keywords" content="{{$product->meta_keywords}}">
+
     <meta property="og:url" content="{{url()->current()}}" />
+    <meta property="og:site_name" content="Youmats Building Materials">
     <meta property="og:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : $product->name}}" />
     <meta property="og:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : $product->short_desc}}" />
-    <meta property="og:image" content="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" itemprop="image" content="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" />
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@YouMats">
+    <meta name="twitter:site" content="@youmats">
+    <meta name="twitter:creator" content="@youmats">
     <meta name="twitter:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : $product->name}}">
     <meta name="twitter:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : $product->short_desc}}">
     <meta name="twitter:image" content="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}">
+    <meta name="twitter:image:width" content="800">
+    <meta name="twitter:image:height" content="418">
+
     {!! $product->schema !!}
     <script>
         ga('require', 'ec');
