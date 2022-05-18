@@ -64,6 +64,7 @@ class Shipping extends Resource
                         return $collection;
                     })->displayUsingLabels()->placeholder('Choose City')->rules(['required', 'integer']),
                     Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+                    Number::make('Up To', 'upTo')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1),
                     Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1)->step(1),
                     Select::make('Format')->options([
                         'hour' => 'Hour',
@@ -75,6 +76,8 @@ class Shipping extends Resource
             new Panel('Default for all cities (Optional)', [
                 Currency::make('Price', 'default_price')->rules(NULLABLE_NUMERIC_VALIDATION)->min(0)->step(0.05)
                     ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
+                Number::make('Up To', 'default_upTo')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1)
+                    ->help('If leave it blank, it means you have set the price for any quantity & If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
                 Number::make('Time', 'default_time')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1)
                     ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
                 Select::make('Format', 'default_format')->options([
