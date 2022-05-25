@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                         </div>
-                       <button type="submit" class="btn btn-youmats">Submit</button>
+                       <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.submit')}}</button>
                     </form>
                 </div>
             </div>

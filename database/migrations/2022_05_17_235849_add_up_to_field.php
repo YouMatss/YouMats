@@ -15,12 +15,14 @@ class AddUpToField extends Migration
     {
         Schema::table('shippings', function (Blueprint $table) {
             $table->after('default_price', function (Blueprint $t) {
-                $t->integer('default_upTo')->nullable();
+                $t->integer('default_from')->nullable();
+                $t->integer('default_to')->nullable();
             });
         });
         Schema::table('products', function (Blueprint $table) {
             $table->after('default_price', function (Blueprint $t) {
-                $t->integer('default_upTo')->nullable();
+                $t->integer('default_from')->nullable();
+                $t->integer('default_to')->nullable();
             });
         });
     }

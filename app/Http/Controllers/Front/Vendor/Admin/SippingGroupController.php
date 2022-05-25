@@ -43,6 +43,8 @@ class SippingGroupController extends Controller
                 $data['cities_prices'][] = [
                     'cities' => $data['cities'][$i],
                     'price' => $data['price'][$i],
+                    'from' => $data['from'][$i] ?? null,
+                    'to' => $data['to'][$i] ?? null,
                     'time' => $data['time'][$i],
                     'format' => $data['format'][$i],
                 ];
@@ -76,6 +78,8 @@ class SippingGroupController extends Controller
                 $data['cities_prices'][] = [
                     'cities' => $data['cities'][$i],
                     'price' => $data['price'][$i],
+                    'from' => $data['from'][$i] ?? null,
+                    'to' => $data['to'][$i] ?? null,
                     'time' => $data['time'][$i],
                     'format' => $data['format'][$i],
                 ];

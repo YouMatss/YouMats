@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Custom Style -->
-<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-vendor.css">
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-vendor-before.css">
 <!-- RTL Style -->
 @if(\LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
     <!-- Bootstrap 4 RTL -->
@@ -35,3 +35,5 @@
     <!-- Custom style for RTL -->
     <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/rtl-vendor.css">
 @endif
+<!-- Custom Style -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-vendor-after.css">

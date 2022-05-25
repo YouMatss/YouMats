@@ -167,7 +167,8 @@ class Product extends Resource
                             return $collection;
                         })->displayUsingLabels()->placeholder('Choose City')->rules(['required', 'integer']),
                         Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
-                        Number::make('Up To', 'upTo')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1),
+                        Number::make('From', 'from')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1),
+                        Number::make('To', 'to')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1),
                         Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1)->step(1),
                         Select::make('Format')->options([
                             'hour' => 'Hour',
@@ -177,7 +178,9 @@ class Product extends Resource
                     Heading::make('Default for all cities (Optional)'),
                     Currency::make('Price', 'default_price')->rules(NULLABLE_NUMERIC_VALIDATION)->min(0)->step(0.05)
                         ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
-                    Number::make('Up To', 'default_upTo')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1)
+                    Number::make('From', 'default_from')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1)
+                        ->help('If leave it blank, it means you have set the price for any quantity & If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
+                    Number::make('To', 'default_to')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1)
                         ->help('If leave it blank, it means you have set the price for any quantity & If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
                     Number::make('Time', 'default_time')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1)
                         ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),

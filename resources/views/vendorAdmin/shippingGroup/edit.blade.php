@@ -27,7 +27,7 @@
                                     @foreach($shipping->cities_prices as $row)
                                         <div class="clone-element">
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="cities">{{__('vendorAdmin.cities')}}</label>
                                                         <select class="form-control" id="cities" name="cities[]">
@@ -38,10 +38,22 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="price">{{__('vendorAdmin.price')}}</label>
                                                         <input type="number" class="form-control" id="price" name="price[]" min="0" step="0.05" value="{{$row['price']}}" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <div class="form-group">
+                                                        <label for="from">{{__('vendorAdmin.from')}}</label>
+                                                        <input type="number" class="form-control" id="from" name="from[]" min="1" step="1" value="{{$row['from']}}" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <div class="form-group">
+                                                        <label for="to">{{__('vendorAdmin.to')}}</label>
+                                                        <input type="number" class="form-control" id="to" name="to[]" min="1" step="1" value="{{$row['to']}}" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
@@ -50,7 +62,7 @@
                                                         <input type="number" class="form-control" id="time" name="time[]" min="1" step="1" value="{{$row['time']}}" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="format">{{__('vendorAdmin.format')}}</label>
                                                         <select class="form-control" id="format" name="format[]">
@@ -60,7 +72,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label>{{__('vendorAdmin.remove')}}</label>
                                                         <button class="form-control btn btn-danger btn-xs clone-remove">
@@ -86,6 +98,14 @@
                                             <input type="number" class="form-control" id="price" name="default_price" min="0" step="0.05" value="{{$shipping->default_price}}" />
                                         </div>
                                         <div class="form-group">
+                                            <label for="from">{{__('vendorAdmin.default_from')}}</label>
+                                            <input type="number" class="form-control" id="from" name="default_from" min="1" step="1" value="{{$shipping->default_from}}" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="to">{{__('vendorAdmin.default_to')}}</label>
+                                            <input type="number" class="form-control" id="to" name="default_to" min="1" step="1" value="{{$shipping->default_to}}" />
+                                        </div>
+                                        <div class="form-group">
                                             <label for="time">{{__('vendorAdmin.default_time')}}</label>
                                             <input type="number" class="form-control" id="time" name="default_time" min="1" step="1" value="{{$shipping->default_time}}" />
                                         </div>
@@ -99,7 +119,7 @@
                                         </div>
                                     </div>
                                 </div>
-                    <button type="submit" class="btn btn-youmats">Submit</button>
+                    <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.submit')}}</button>
                     </form>
                 </div>
             </div>
@@ -111,7 +131,7 @@
         $(document).ready(function () {
             var clone_element = `<div class="clone-element">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="cities">{{__('vendorAdmin.cities')}}</label>
                             <select class="form-control" id="cities" name="cities[]">
@@ -122,10 +142,22 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="price">{{__('vendorAdmin.price')}}</label>
                             <input type="number" class="form-control" id="price" name="price[]" min="0" step="0.05" />
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="from">{{__('vendorAdmin.from')}}</label>
+                            <input type="number" class="form-control" id="from" name="from[]" min="1" step="1" />
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="to">{{__('vendorAdmin.to')}}</label>
+                            <input type="number" class="form-control" id="to" name="to[]" min="1" step="1" />
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -134,7 +166,7 @@
                             <input type="number" class="form-control" id="time" name="time[]" min="1" step="1" />
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="format">{{__('vendorAdmin.format')}}</label>
                             <select class="form-control" id="format" name="format[]">
@@ -144,7 +176,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                 <div class="form-group">
                     <label>{{__('vendorAdmin.remove')}}</label>
                     <button class="form-control btn btn-danger btn-xs clone-remove">
