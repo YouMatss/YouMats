@@ -44,7 +44,7 @@ class CartController extends Controller
         if((!is_company()) && $quantity > $stock)
             return response()->json(['message' => __('messages.out_of_stock')]);
 
-        $deliveryIsExist = $product->delivery;
+        $deliveryIsExist = getDelivery($product, $quantity);
         $delivery = 0;
         if(!is_null($deliveryIsExist)) {
             $delivery = round($deliveryIsExist['price'] / getCurrency('rate'), 2);

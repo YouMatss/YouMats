@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Session;
+
 if (!function_exists('front_url')) {
     function front_url() {
         return url('/');
@@ -216,4 +218,49 @@ if (!\Illuminate\Support\Collection::hasMacro('ungroup')) {
 
 function parseNumber($number) {
     return floatval(preg_replace('/[^\d.]/', '', $number));
+}
+
+if (!function_exists('getDelivery')) {
+    function getDelivery($product, $quantity) {
+        if($product->specific_shipping) {
+            if($product->shipping_prices) {
+                foreach ($product->shipping_prices as $shipping) {
+                    if(Session::has('city') && $shipping['cities'] == Session::get('city')
+                        && $shipping['from'] <= $quantity && $shipping['to'] >= $quantity) {
+                        $shipping['price'] = (string)$shipping['price'];
+                        return $shipping;
+                    }
+                }
+            }
+            if(isset($product->default_price) && isset($product->default_time) && isset($product->default_format)) {
+                return [
+                    'price' => (string)$product->default_price,
+                    'from' => $product->default_from,
+                    'to' => $product->default_to,
+                    'time' => $product->default_time,
+                    'format' => $product->default_format,
+                ];
+            }
+        }
+        if (isset($product->shipping)) {
+            if($product->shipping->cities_prices) {
+                foreach ($product->shipping->cities_prices as $shipping) {
+                    if(Session::has('city') && $shipping['cities'] == Session::get('city')) {
+                        $shipping['price'] = (string)$shipping['price'];
+                        return $shipping;
+                    }
+                }
+            }
+            if($product->shipping->default_price && $product->shipping->default_time && $product->shipping->default_format) {
+                return [
+                    'price' => (string)$product->shipping->default_price,
+                    'from' => $product->default_from,
+                    'to' => $product->default_to,
+                    'time' => $product->shipping->default_time,
+                    'format' => $product->shipping->default_format,
+                ];
+            }
+        }
+        return null;
+    }
 }

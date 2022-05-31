@@ -18,7 +18,7 @@ class CreateShippingsTable extends Migration
             $table->unsignedBigInteger('vendor_id')->index();
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('name');
-            $table->integer('default_price')->nullable();
+            $table->float('default_price')->nullable();
             $table->integer('default_time')->nullable();
             $table->string('default_format')->nullable();
 

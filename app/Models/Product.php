@@ -16,6 +16,7 @@ use Spatie\Translatable\HasTranslations;
 use Znck\Eloquent\Traits\BelongsToThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use function GuzzleHttp\Psr7\str;
 
 class Product extends Model implements Sortable, HasMedia, Buyable
 {
@@ -32,9 +33,10 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      */
     protected $appends = ['image_url', 'delivery', 'contacts'];
 
-//    public $casts = [
-//        'search_keywords' => 'array',
-//    ];
+    protected $casts = [
+        'shipping_prices' => 'array',
+        'shipping_prices.*.price' => 'string'
+    ];
 
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')->width(200)->height(200);
@@ -63,15 +65,18 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     public function getDeliveryAttribute() {
         if($this->specific_shipping) {
             if($this->shipping_prices) {
-                foreach (json_decode($this->shipping_prices, true) as $shipping) {
+                foreach ($this->shipping_prices as $shipping) {
                     if(Session::has('city') && $shipping['cities'] == Session::get('city')) {
+                        $shipping['price'] = (string)$shipping['price'];
                         return $shipping;
                     }
                 }
             }
             if(isset($this->default_price) && isset($this->default_time) && isset($this->default_format)) {
                 return [
-                    'price' => $this->default_price,
+                    'price' => (string)$this->default_price,
+                    'from' => $this->default_from,
+                    'to' => $this->default_to,
                     'time' => $this->default_time,
                     'format' => $this->default_format,
                 ];
@@ -81,13 +86,16 @@ class Product extends Model implements Sortable, HasMedia, Buyable
             if($this->shipping->cities_prices) {
                 foreach ($this->shipping->cities_prices as $shipping) {
                     if(Session::has('city') && $shipping['cities'] == Session::get('city')) {
+                        $shipping['price'] = (string)$shipping['price'];
                         return $shipping;
                     }
                 }
             }
             if($this->shipping->default_price && $this->shipping->default_time && $this->shipping->default_format) {
                 return [
-                    'price' => $this->shipping->default_price,
+                    'price' => (string)$this->shipping->default_price,
+                    'from' => $this->default_from,
+                    'to' => $this->default_to,
                     'time' => $this->shipping->default_time,
                     'format' => $this->shipping->default_format,
                 ];
@@ -103,7 +111,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         $cities = [];
         if($this->specific_shipping) {
             if($this->shipping_prices) {
-                foreach (json_decode($this->shipping_prices, true) as $shipping) {
+                foreach ($this->shipping_prices as $shipping) {
                     $cities[] = $shipping['cities'];
                 }
             }

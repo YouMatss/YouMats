@@ -15,7 +15,7 @@ class AddShippingsToProducts extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->after('shipping_prices', function (Blueprint $t) {
-                $t->integer('default_price')->nullable();
+                $t->float('default_price')->nullable();
                 $t->integer('default_time')->nullable();
                 $t->string('default_format')->nullable();
             });
