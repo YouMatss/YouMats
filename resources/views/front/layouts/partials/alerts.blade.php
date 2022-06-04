@@ -1,4 +1,4 @@
-<script>
+<script defer>
     @if(Session::has('custom_error'))
         toastr.error("{{ Session::get('custom_error') }}", "Error!");
     @endif

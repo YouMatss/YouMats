@@ -170,7 +170,7 @@ class Vendor extends Resource
             Toggle::make('Active')
                 ->falseColor('#bacad6')->editableIndex(),
 
-            Toggle::make('Featured', 'isFeatured')
+            Toggle::make('Featured', 'isFeatured')->sortable()
                 ->falseColor('#bacad6')->editableIndex(),
 
             Password::make('Password')->onlyOnForms()

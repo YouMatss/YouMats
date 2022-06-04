@@ -13,7 +13,7 @@
                         <li @if($loop_vendor->id == $vendor->id) class="active" @endif>
                             <a href="{{route('chat.user.conversations', [$loop_vendor->id])}}">
                                 <div class="online_sdtu user-status-icon user-icon-vendor_{{$loop_vendor->id}}" id="userStatusHead{{$loop_vendor->id}}"></div>
-                                <img width="55px" height="55px" src="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
+                                <img loading="lazy" width="55px" height="55px" src="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                                 <div>
                                     <h2>{{$loop_vendor->name}}</h2>
                                     <span class="time_send">
@@ -38,7 +38,7 @@
                 <div class="main_chat">
                     <header>
                         <div class="online_sdtu_head user-status-icon user-icon-vendor_{{$vendor->id}}" id="userStatusHead{{$vendor->id}}"></div>
-                        <img width="55px" height="55px" src="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
+                        <img loading="lazy" width="55px" height="55px" src="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                         <div>
                             <h2>{{$vendor->name}}</h2>
                             <h3>already {{$vendor->count_messages($auth_user->id)}} messages</h3>
@@ -53,7 +53,7 @@
                                         <h3 title="{{date('d/m/Y h:i A', strtotime($message->created_at))}}">{{date('h:i A', strtotime($message->created_at))}}</h3>
                                         <h2>{{$auth_user->name}}</h2>
                                         <span class="status status_peaple">
-                                            <img src="{{$auth_user->getFirstMediaUrlOrDefault(USER_PROFILE)['url']}}">
+                                            <img loading="lazy" src="{{$auth_user->getFirstMediaUrlOrDefault(USER_PROFILE)['url']}}">
                                         </span>
                                     </div>
                                     <div class="triangle"></div>
@@ -63,7 +63,7 @@
                                 <li class="you">
                                     <div class="entete">
                                         <span class="status status_peaple">
-                                            <img src="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}">
+                                            <img loading="lazy" src="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}">
                                         </span>
                                         <h2 class="ml-3">{{$vendor->name}}</h2>
                                         <h3 title="{{date('d/m/Y h:i A', strtotime($message->created_at))}}">{{date('h:i A', strtotime($message->created_at))}}</h3>
@@ -162,7 +162,7 @@
                                 <h3 title="`+ getCurrentDateTime() +`">` + getCurrentTime() + `</h3>
                                 <h2>` + name + `</h2>
                                 <span class="status status_peaple">
-                                    <img src="` + image + `">
+                                    <img loading="lazy" src="` + image + `">
                                 </span>
                             </div>
                             <div class="triangle"></div>
@@ -177,7 +177,7 @@
                     `<li class="you">
                         <div class="entete">
                             <span class="status status_peaple">
-                                <img width="30px" height="30px" src="` + image + `">
+                                <img loading="lazy" width="30px" height="30px" src="` + image + `">
                             </span>
                             <h2 class="ml-3">` + name + `</h2>
                             <h3 title="` + dateFormat(message.created_at) + `">` + timeFormat(message.created_at) + `</h3>

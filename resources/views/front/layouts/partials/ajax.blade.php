@@ -1,4 +1,4 @@
-<script>
+<script defer>
     document.addEventListener('DOMContentLoaded', function() {
 
         $(".showPassword").click(function(e) {

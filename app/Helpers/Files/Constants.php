@@ -49,8 +49,8 @@ define('NULLABLE_NUMERIC_VALIDATION', ['nullable', 'numeric']);
 define('NULLABLE_PASSWORD_VALIDATION', ['nullable', 'string', 'min:8', 'confirmed']);
 
 // Image
-define('REQUIRED_IMAGE_VALIDATION', ['required', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:2048']);
-define('NULLABLE_IMAGE_VALIDATION', ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:2048']);
+define('REQUIRED_IMAGE_VALIDATION', ['required', 'image', 'mimes:jpg,jpeg,png,gif,svg,webp', 'max:2048']);
+define('NULLABLE_IMAGE_VALIDATION', ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,svg,webp', 'max:2048']);
 
 define('REQUIRED_PDF_VALIDATION', ['required', 'file', 'mimes:pdf', 'max:4096']);
 define('NULLABLE_PDF_VALIDATION', ['nullable', 'file', 'mimes:pdf', 'max:4096']);

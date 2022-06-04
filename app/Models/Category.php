@@ -41,6 +41,11 @@ class Category extends Model implements Sortable, HasMedia
         $this->addMediaConversion('cropper')->performOnCollections(CATEGORY_COVER);
     }
 
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection(CATEGORY_PATH)->singleFile();
+        $this->addMediaCollection(CATEGORY_COVER)->singleFile();
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

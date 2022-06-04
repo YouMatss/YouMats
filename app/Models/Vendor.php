@@ -44,11 +44,14 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     ];
 
     public function registerAllMediaConversions(): void {
-        $this->addMediaConversion('thumb')
-            ->width(200)->height(200);
+        $this->addMediaConversion('thumb')->width(200)->height(200);
+        $this->addMediaConversion('cropper')->performOnCollections(VENDOR_LOGO);
+        $this->addMediaConversion('cropper')->performOnCollections(VENDOR_COVER);
+    }
 
-        $this->addMediaConversion('cropper')
-            ->performOnCollections(VENDOR_COVER);
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection(VENDOR_LOGO)->singleFile();
+        $this->addMediaCollection(VENDOR_COVER)->singleFile();
     }
 
     public function sendPasswordResetNotification($token)

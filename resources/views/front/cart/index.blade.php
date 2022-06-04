@@ -59,9 +59,9 @@
                                     </td>
                                     <td class="d-md-table-cell img_cart_view">
                                         @if($item->model)
-                                            <a href="#"><img class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
+                                            <a href="#"><img loading="lazy" class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
                                         @else
-                                            <img class="img-fluid max-width-100 p-1 border border-color-1" src="/assets/img/default_logo.jpg" />
+                                            <img loading="lazy" class="img-fluid max-width-100 p-1 border border-color-1" src="/assets/img/default_logo.jpg" />
                                         @endif
                                     </td>
 

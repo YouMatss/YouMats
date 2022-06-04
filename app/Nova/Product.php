@@ -120,7 +120,7 @@ class Product extends Resource
             Toggle::make('Active')
                 ->falseColor('#bacad6')->editableIndex(),
 
-            Toggle::make('Best Seller')
+            Toggle::make('Best Seller')->sortable()
                 ->falseColor('#bacad6')->editableIndex(),
 
             Number::make('Views')

@@ -32,9 +32,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <img src="{{ $user->getFirstMediaUrlOrDefault(USER_COVER)['url'] }}" class="photo_cover_vendor">
+                    <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_COVER)['url'] }}" class="photo_cover_vendor">
                 </div>
-                <img src="{{ $user->getFirstMediaUrlOrDefault(USER_PROFILE)['url'] }}" class="photo_profile_vendor">
+                <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_PROFILE)['url'] }}" class="photo_profile_vendor">
             </div>
         </div>
         <div class="row">
@@ -73,12 +73,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="box_img_v">
-                                                <img src="{{ $user->getFirstMediaUrlOrDefault(USER_COVER)['url'] }}" class="photo_cover_vendor">
+                                                <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_COVER)['url'] }}" class="photo_cover_vendor">
                                             </div>
                                         </div>
                                         <div class="col-md-3 ml-auto">
                                             <div class="box_img_profile">
-                                                <img src="{{ $user->getFirstMediaUrlOrDefault(USER_PROFILE)['url'] }}" class="photo_cover_vendor">
+                                                <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_PROFILE)['url'] }}" class="photo_cover_vendor">
                                             </div>
                                         </div>
 
@@ -210,7 +210,7 @@
                                                 </div>
                                                 <div class="box">
                                                     @foreach($user->getMedia(COMPANY_PATH) as $license)
-                                                        <img src="{{$license->getFullUrl()}}" class="img-thumbnail" width="100px" />
+                                                        <img loading="lazy" src="{{$license->getFullUrl()}}" class="img-thumbnail" width="100px" />
                                                     @endforeach
                                                 </div>
                                             </div>
