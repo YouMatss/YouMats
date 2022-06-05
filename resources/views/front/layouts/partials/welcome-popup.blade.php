@@ -20,8 +20,10 @@
 
 @if(!\Illuminate\Support\Facades\Session::get('userType'))
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#myModal').modal({backdrop: 'static', keyboard: false});
+    document.addEventListener('DOMContentLoaded', function() {
+        $(document).ready(function() {
+            $('#myModal').modal({backdrop: 'static', keyboard: false});
+        });
     });
 </script>
 @endif

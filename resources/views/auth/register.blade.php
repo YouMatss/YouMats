@@ -173,41 +173,43 @@
     </div>
 @endsection
 @section('extraScripts')
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
-    <script src="{{front_url()}}/assets/js/map.js"></script>
+    <script defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
+    <script defer src="{{front_url()}}/assets/js/map.js"></script>
     <script>
-        $(function(){
-            $('#registerAsIndividual').attr('checked', 'checked');
-        });
-        $('.select_reg').on('click', function () {
-            $('.select_reg').removeClass('active');
-            $(this).addClass('active');
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            $(function(){
+                $('#registerAsIndividual').attr('checked', 'checked');
+            });
+            $('.select_reg').on('click', function () {
+                $('.select_reg').removeClass('active');
+                $(this).addClass('active');
+            });
 
-        $(document).ready(function() {
-            $("ul.nav-tab > li > a").on('shown.bs.tab', function(e) {
-                window.location.hash = $(e.target).attr('id');
-            })
+            $(document).ready(function() {
+                $("ul.nav-tab > li > a").on('shown.bs.tab', function(e) {
+                    window.location.hash = $(e.target).attr('id');
+                })
 
-            $("#registerAsCompany").click(function(e){
-                $("#documents").html('');
-                $("#passwordConfirm").after(`
-                    <div class="col-md-12" id="documents">
-                        <div class="js-form-message form-group mb-5">
-                            <label class="form-label" >{{ __('auth.documents') }} <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" name="files[]" required multiple/>
+                $("#registerAsCompany").click(function(e){
+                    $("#documents").html('');
+                    $("#passwordConfirm").after(`
+                        <div class="col-md-12" id="documents">
+                            <div class="js-form-message form-group mb-5">
+                                <label class="form-label" >{{ __('auth.documents') }} <span class="text-danger">*</span></label>
+                                <input type="file" class="form-control" name="files[]" required multiple/>
+                            </div>
                         </div>
-                    </div>
-                `);
-            });
+                    `);
+                });
 
-            $("#registerAsIndividual").click(function(e){
-                let documents = $("#documents");
-                documents.remove();
-            });
+                $("#registerAsIndividual").click(function(e){
+                    let documents = $("#documents");
+                    documents.remove();
+                });
 
-            let hash = window.location.hash;
-            $('ul.nav-tab a[id="'+ hash + '"]').tab('show');
+                let hash = window.location.hash;
+                $('ul.nav-tab a[id="'+ hash + '"]').tab('show');
+            });
         });
     </script>
 @endsection

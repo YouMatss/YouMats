@@ -233,45 +233,47 @@
 @endsection
 @section('extraScripts')
     <script type="text/javascript">
-        $(".btn-add-cart").on('click', function(){
-            let url = $(this).data('url');
+        document.addEventListener('DOMContentLoaded', function() {
+            $(".btn-add-cart").on('click', function(){
+                let url = $(this).data('url');
 
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: { _token: '{{ csrf_token() }}' }
-            })
-            .done(function(response) {
-                $('#cartCount').html(response.count);
-                $('#cartTotal').html(response.total);
-                toastr.success(response.message);
-            })
-            .fail(function(response) {
-                toastr.error(response.responseJSON.message);
-            })
-        })
-
-        $(".btn-add-wishlist").on('click', function(){
-            let url = $(this).data('url');
-
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: { _token: '{{ csrf_token() }}' }
-            })
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: { _token: '{{ csrf_token() }}' }
+                })
                 .done(function(response) {
-                    if(response.status)
-                        toastr.success(response.message);
-                    else
-                        toastr.warning(response.message)
-
-
-                    console.log(response);
+                    $('#cartCount').html(response.count);
+                    $('#cartTotal').html(response.total);
+                    toastr.success(response.message);
                 })
                 .fail(function(response) {
                     toastr.error(response.responseJSON.message);
                 })
-        })
+            });
+
+            $(".btn-add-wishlist").on('click', function(){
+                let url = $(this).data('url');
+
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: { _token: '{{ csrf_token() }}' }
+                })
+                    .done(function(response) {
+                        if(response.status)
+                            toastr.success(response.message);
+                        else
+                            toastr.warning(response.message)
+
+
+                        console.log(response);
+                    })
+                    .fail(function(response) {
+                        toastr.error(response.responseJSON.message);
+                    })
+            });
+        });
     </script>
 @endsection
 

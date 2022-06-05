@@ -212,32 +212,34 @@
     </div>
 @endsection
 @section('extraScripts')
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
-    <script src="{{front_url()}}/assets/js/map.js"></script>
+    <script defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
+    <script defer src="{{front_url()}}/assets/js/map.js"></script>
     <script>
-        // upload Licenses
-        $(".imgAdd").click(function(){
-            $(this).closest(".row").find('.imgAdd').before('<div class="col-md-3 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input name="licenses[]" type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
-        });
-        $(document).on("click", "i.del" , function() {
-            $(this).parent().remove();
-        });
-        $(function() {
-            $(document).on("change",".uploadFile", function()
-            {
-                var uploadFile = $(this);
-                var files = !!this.files ? this.files : [];
-                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+        document.addEventListener('DOMContentLoaded', function() {
+            // upload Licenses
+            $(".imgAdd").click(function(){
+                $(this).closest(".row").find('.imgAdd').before('<div class="col-md-3 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input name="licenses[]" type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
+            });
+            $(document).on("click", "i.del" , function() {
+                $(this).parent().remove();
+            });
+            $(function() {
+                $(document).on("change",".uploadFile", function()
+                {
+                    var uploadFile = $(this);
+                    var files = !!this.files ? this.files : [];
+                    if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
 
-                if (/^image/.test( files[0].type)){ // only image file
-                    var reader = new FileReader(); // instance of the FileReader
-                    reader.readAsDataURL(files[0]); // read the local file
+                    if (/^image/.test( files[0].type)){ // only image file
+                        var reader = new FileReader(); // instance of the FileReader
+                        reader.readAsDataURL(files[0]); // read the local file
 
-                    reader.onloadend = function(){ // set image data as background of div
-                        //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
-                        uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+                        reader.onloadend = function(){ // set image data as background of div
+                            //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                            uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+                        }
                     }
-                }
+                });
             });
         });
     </script>

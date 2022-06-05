@@ -39,7 +39,7 @@
 {{--<script defer src="{{front_url()}}/assets/js/components/hs.go-to.js"></script>--}}
 {{--<script defer src="{{front_url()}}/assets/js/components/hs.selectpicker.js"></script>--}}
 
-<script async src="{{mix('/assets/js/app.min.js')}}"></script>
+<script defer src="{{mix('/assets/js/app.min.js')}}"></script>
 
 <!-- moment -->
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
@@ -48,19 +48,26 @@
 <!-- Toastr JS -->
 <script defer src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script defer>
-    toastr.options = {
-        "positionClass": "toast-top-center",
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        toastr.options = {
+            "positionClass": "toast-top-center",
+        }
+    });
 </script>
 <!-- Socket.io -->
 <script defer src="https://cdn.socket.io/4.0.0/socket.io.min.js" integrity="sha384-DkkWv9oJFWLIydBXXjkBWnG1/fuVhw8YPBq37uvvD6WSYRFRqr21eY5Dg9ZhmWdy" crossorigin="anonymous"></script>
 
 @if(is_company())
 <script defer>
-    (function(w,d,u){
-        var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/60000|0);
-        var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
-    })(window,document,'https://cdn.bitrix24.com/b12855593/crm/site_button/loader_1_sdm5a9.js');
+    document.addEventListener('DOMContentLoaded', function() {
+        (function (w, d, u) {
+            var s = d.createElement('script');
+            s.async = true;
+            s.src = u + '?' + (Date.now() / 60000 | 0);
+            var h = d.getElementsByTagName('script')[0];
+            h.parentNode.insertBefore(s, h);
+        })(window, document, 'https://cdn.bitrix24.com/b12855593/crm/site_button/loader_1_sdm5a9.js');
+    });
 </script>
 @endif
 

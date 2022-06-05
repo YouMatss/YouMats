@@ -178,53 +178,54 @@
 @endsection
 @section('extraScripts')
     <script>
-        $('.deleteCart').on('click', function() {
-            let url = $(this).data('url'),
-                button = $(this);
-
-            $.ajax({
-                type: 'DELETE',
-                url: url,
-                data: { _token: '{{ csrf_token() }}' }
-            })
-            .done(function(response) {
-                if(response.status) {
-                    if(response.count === 0)
-                        window.location.reload();
-
-                    $('.cartCount').html(response.count);
-                    $('.cartTotal').html(response.total);
-                    $('#total').html(response.total);
-                    $('#tax').html(response.tax);
-                    $('#subtotal').html(response.subtotal);
-                    button.closest('tr').remove();
-                }
-            })
-            .fail(function(response) {
-                console.log(response);
-            })
-        });
-
-        $('#updateCart').on('click', function() {
-            let url = '{{ route('cart.update') }}';
-
-            $(".js-result").each(function(i, el) {
-                let qty = $(this).val(),
-                    rowId = $(this).attr('row_id');
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.deleteCart').on('click', function() {
+                let url = $(this).data('url'),
+                    button = $(this);
 
                 $.ajax({
-                    type: 'PATCH',
+                    type: 'DELETE',
                     url: url,
-                    data: {_token: "{{ csrf_token() }}", qty: qty, rowId: rowId }
+                    data: { _token: '{{ csrf_token() }}' }
                 })
                 .done(function(response) {
+                    if(response.status) {
+                        if(response.count === 0)
+                            window.location.reload();
+
+                        $('.cartCount').html(response.count);
+                        $('.cartTotal').html(response.total);
+                        $('#total').html(response.total);
+                        $('#tax').html(response.tax);
+                        $('#subtotal').html(response.subtotal);
+                        button.closest('tr').remove();
+                    }
+                })
+                .fail(function(response) {
                     console.log(response);
                 })
             });
 
-            //Reload the page. instead of updating data of the whole page!
-            window.location.reload();
-        });
+            $('#updateCart').on('click', function() {
+                let url = '{{ route('cart.update') }}';
 
+                $(".js-result").each(function(i, el) {
+                    let qty = $(this).val(),
+                        rowId = $(this).attr('row_id');
+
+                    $.ajax({
+                        type: 'PATCH',
+                        url: url,
+                        data: {_token: "{{ csrf_token() }}", qty: qty, rowId: rowId }
+                    })
+                    .done(function(response) {
+                        console.log(response);
+                    })
+                });
+
+                //Reload the page. instead of updating data of the whole page!
+                window.location.reload();
+            });
+        });
     </script>
 @endsection

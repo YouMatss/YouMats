@@ -31,23 +31,25 @@
 @if(isset($ajax))
 @section('extraScripts')
 <script>
-    $(document).on('ready', function () {
-        $(document).on('click', '#city_submit', function () {
-            $.ajax({
-                type: 'POST',
-                url: "{{route('front.changeCity')}}",
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    city_id: $('#city_select').val()
-                }
+    document.addEventListener('DOMContentLoaded', function() {
+        $(document).on('ready', function () {
+            $(document).on('click', '#city_submit', function () {
+                $.ajax({
+                    type: 'POST',
+                    url: "{{route('front.changeCity')}}",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        city_id: $('#city_select').val()
+                    }
+                })
+                .done(function(response) {
+                    location.reload();
+                })
+                .fail(function(response) {
+                    console.log(response);
+                })
             })
-            .done(function(response) {
-                location.reload();
-            })
-            .fail(function(response) {
-                console.log(response);
-            })
-        })
+        });
     });
 </script>
 @endsection

@@ -16,6 +16,9 @@
 
 <link rel="stylesheet" href="{{mix('/assets/css/app.min.css')}}">
 
+{{--<link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">--}}
+{{--<noscript><link rel="stylesheet" href="styles.css"></noscript>--}}
+
 @if(\LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
     <link rel="stylesheet" href="{{mix('/assets/css/rtl.min.css')}}">
 {{--    <link rel="stylesheet" href="{{ front_url() }}/assets/css/rtl.css">--}}

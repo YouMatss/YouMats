@@ -163,36 +163,48 @@
 @endsection
 @section('extraScripts')
     <script>
-        $(document).on('ready', function () {
-            function getAttributesIds(checkboxName) {
-                let checkBoxes = document.getElementsByName(checkboxName);
-                let ids = Array.prototype.slice.call(checkBoxes)
-                    .filter(ch => ch.checked==true)
-                    .map(ch => ch.value);
-                return ids;
-            }
-            function filterResults () {
-                let attributesIds = getAttributesIds("attributes");
-                let href = '?';
-                if(attributesIds.length) {
-                    href += 'filter[attributes]=' + attributesIds;
-                }
-                if($('#price_range').val()) {
-                    href += '&filter[price]=' + $('#price_range').val();
-                }
-                if($('#city_select').val()) {
-                    href += '&filter[city]=' + $('#city_select').val();
-                }
-                if($('#sort_select').val()) {
-                    href += '&sort=' + $('#sort_select').val();
+        document.addEventListener('DOMContentLoaded', function() {
+            $(document).on('ready', function () {
+                function getAttributesIds(checkboxName) {
+                    let checkBoxes = document.getElementsByName(checkboxName);
+                    let ids = Array.prototype.slice.call(checkBoxes)
+                        .filter(ch => ch.checked == true)
+                        .map(ch => ch.value);
+                    return ids;
                 }
 
-                document.location.href = href;
-            }
-            $(document).on('change', '.filter-checkboxes', function() {filterResults();});
-            $(document).on('click', '#priceFilterBtn', function() {filterResults();});
-            $(document).on('click', '#city_submit', function () {filterResults();})
-            $(document).on('change', '#sort_select', function () {filterResults();})
+                function filterResults() {
+                    let attributesIds = getAttributesIds("attributes");
+                    let href = '?';
+                    if (attributesIds.length) {
+                        href += 'filter[attributes]=' + attributesIds;
+                    }
+                    if ($('#price_range').val()) {
+                        href += '&filter[price]=' + $('#price_range').val();
+                    }
+                    if ($('#city_select').val()) {
+                        href += '&filter[city]=' + $('#city_select').val();
+                    }
+                    if ($('#sort_select').val()) {
+                        href += '&sort=' + $('#sort_select').val();
+                    }
+
+                    document.location.href = href;
+                }
+
+                $(document).on('change', '.filter-checkboxes', function () {
+                    filterResults();
+                });
+                $(document).on('click', '#priceFilterBtn', function () {
+                    filterResults();
+                });
+                $(document).on('click', '#city_submit', function () {
+                    filterResults();
+                })
+                $(document).on('change', '#sort_select', function () {
+                    filterResults();
+                })
+            });
         });
     </script>
 @endsection

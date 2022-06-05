@@ -108,13 +108,15 @@
 @endsection
 @section('extraScripts')
     <script>
-        $(document).ready(function() {
-            $("ul.nav-tab > li > a").on('shown.bs.tab', function(e) {
-                window.location.hash = $(e.target).attr('id');
-            })
+        document.addEventListener('DOMContentLoaded', function() {
+            $(document).ready(function() {
+                $("ul.nav-tab > li > a").on('shown.bs.tab', function(e) {
+                    window.location.hash = $(e.target).attr('id');
+                })
 
-            let hash = window.location.hash;
-            $('ul.nav-tab a[id="'+ hash + '"]').tab('show');
+                let hash = window.location.hash;
+                $('ul.nav-tab a[id="'+ hash + '"]').tab('show');
+            });
         });
     </script>
 @endsection

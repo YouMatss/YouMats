@@ -529,19 +529,21 @@
     </div>
 @endsection
 @section('extraScripts')
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
-    <script src="{{front_url()}}/assets/js/map.js"></script>
+    <script defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
+    <script defer src="{{front_url()}}/assets/js/map.js"></script>
     <script>
-        $(function(){
-            @if(!is_company())
-            $('#registerAsIndividual').attr('checked', 'checked');
-            @elseif(is_company())
-            $('#registerAsCompany').attr('checked', 'checked');
-            @endif
-        });
-        $('.select_reg').on('click', function () {
-            $('.select_reg').removeClass('active');
-            $(this).addClass('active');
+        document.addEventListener('DOMContentLoaded', function() {
+            $(function(){
+                @if(!is_company())
+                $('#registerAsIndividual').attr('checked', 'checked');
+                @elseif(is_company())
+                $('#registerAsCompany').attr('checked', 'checked');
+                @endif
+            });
+            $('.select_reg').on('click', function () {
+                $('.select_reg').removeClass('active');
+                $(this).addClass('active');
+            });
         });
     </script>
 @endsection
