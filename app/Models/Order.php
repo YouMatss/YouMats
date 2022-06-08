@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes, HasFactory, CascadeSoftDeletes;
 
     protected $dates = ['transaction_date'];
 
     protected $guarded = [];
+
+    protected $cascadeDeletes = ['items'];
 
     public function getTotalPriceAttribute($value) {
         return round($value * getCurrency('rate'), 2);

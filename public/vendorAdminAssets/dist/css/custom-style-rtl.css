@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body.new--style--custom{
+    font-family: 'Noto Kufi Arabic', sans-serif !important;
+}
+
+
+.btn--vend{
+    float: left !important;
+}
+
+body.new--style--custom div.dataTables_wrapper div.dataTables_filter {
+    text-align: left;
+}
+
+body.new--style--custom div.dataTables_wrapper div.dataTables_filter input {
+    margin: 0 10px 0 0 !important;
+}
+
+body.new--style--custom .navbar-badge {
+    right: -5px;
+}
+
+body.new--style--custom .user-panel .image {
+    float: right !important;
+}
+body.new--style--custom .user-panel .info {
+    float: right !important;
+}
+body.new--style--custom [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {
+    padding: 10px 30px 10px 0 !important;
+}
+
+body.new--style--custom .content-wrapper,
+body.new--style--custom .main-footer,
+body.new--style--custom .main-header {
+    margin-right: 13.75rem;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+    float: right;
+}

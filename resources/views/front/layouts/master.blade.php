@@ -31,7 +31,6 @@
         <link rel="shortcut icon" href="favicon.ico">
 
         @include('front.layouts.partials.assets')
-        @include('front.layouts.partials.assets_js')
     </head>
     <body>
         <!-- Google Tag Manager (noscript) -->
@@ -52,6 +51,7 @@
         @include('front.layouts.partials.footer')
         @include('front.layouts.partials.welcome-popup')
         @include('front.layouts.partials.search')
+        @include('front.layouts.partials.assets_js')
         @stack('chat')
     </body>
 </html>

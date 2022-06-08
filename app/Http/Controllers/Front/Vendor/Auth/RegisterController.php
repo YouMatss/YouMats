@@ -89,7 +89,7 @@ class RegisterController extends Controller
             'latitude' => NULLABLE_STRING_VALIDATION,
             'longitude' => NULLABLE_STRING_VALIDATION,
             'licenses' => ARRAY_VALIDATION,
-            'licenses.*' => REQUIRED_IMAGE_VALIDATION,
+            'licenses.*' => REQUIRED_FILE_VALIDATION,
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
     }

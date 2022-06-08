@@ -1,6 +1,6 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>YouMats | Register</title>
+    <title>{{env('APP_NAME')}} | {{__('auth.register')}}</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta property="og:url" content="{{url()->current()}}" />
@@ -20,7 +20,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{__('general.home')}}</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('Register') }}</li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('auth.register') }}</li>
                     </ol>
                 </nav>
             </div>
@@ -80,7 +80,7 @@
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="phone" class="form-label">{{ __('auth.phone') }} <span class="text-danger">*</span></label>
                                                 <div class="input-group mb-3">
-                                                    <input type="tel" class="form-control phoneNumber @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required>
+                                                    <input type="tel" class="form-control phoneNumber @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required dir="ltr">
                                                 </div>
                                                 @error('phone')
                                                 <span class="invalid-feedback" role="alert">
@@ -230,13 +230,20 @@
                     var files = !!this.files ? this.files : [];
                     if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
 
+                    var reader = new FileReader(); // instance of the FileReader
                     if (/^image/.test( files[0].type)){ // only image file
-                        var reader = new FileReader(); // instance of the FileReader
                         reader.readAsDataURL(files[0]); // read the local file
 
                         reader.onloadend = function(){ // set image data as background of div
                             //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
                             uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+                        }
+                    } else {
+                        reader.readAsDataURL(files[0]); // read the local file
+
+                        reader.onloadend = function(){ // set image data as background of div
+                            //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                            uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url('/public/assets/img/default_logo.jpg')");
                         }
                     }
                 });

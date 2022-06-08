@@ -296,7 +296,7 @@
         var imagesPreview = function(input, placeToInsertImagePreview) {
             if (input.files) {
                 var filesAmount = input.files.length;
-                $('div.temp-img-container').html('');
+                // $('div.temp-img-container').html('');
                 for (i = 0; i < filesAmount; i++) {
                     var reader = new FileReader();
                     reader.onload = function(event) {
@@ -370,7 +370,7 @@
                         firstLetter = word.split('')[0];
                     if(firstLetter == '+') {
                         template.append(`<input type="text" class="form-control d-inline-block w-auto mx-1"
-                                    name="name_{{$localeCode}}_[`+index+`]"
+                                    name="name_{{$localeCode}}[`+index+`]"
                                     placeholder="`+word.substr(1)+`">`
                         );
                     } else if(firstLetter == '-') {
@@ -379,11 +379,11 @@
                         split.splice(1).forEach(function (value) {
                             options += `<option value="`+value+`">`+value+`</option>`;
                         });
-                        template.append(`<select class="form-control d-inline-block w-auto mx-1" name="name_{{$localeCode}}_[`+index+`]">
+                        template.append(`<select class="form-control d-inline-block w-auto mx-1" name="name_{{$localeCode}}[`+index+`]">
                                         <option value="" disabled selected>`+split[0]+`</option>`+options+`</select>`);
                     } else {
                         template.append(`
-                            <input type="hidden" name="name_{{$localeCode}}_[`+index+`]" value="`+word+`" >
+                            <input type="hidden" name="name_{{$localeCode}}[`+index+`]" value="`+word+`" >
                             <label class="mx-1">`+word+`</label>
                         `);
                     }

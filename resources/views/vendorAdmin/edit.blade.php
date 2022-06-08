@@ -156,7 +156,13 @@
                                 <div class="mt-1 temp-img-container"></div>
                                 <div class="mt-1">
                                     @foreach($vendor->getMedia(VENDOR_PATH) as $license)
-                                    <img class="img-thumbnail" width="200" src="{{ $license->getUrl() }}">
+                                        @if(substr($license->mime_type, 0, 5) == 'image')
+                                            <img class="img-thumbnail" width="200" src="{{ $license->getUrl() }}">
+                                        @else
+                                            <a href="{{ $license->getUrl() }}" target="_blank">
+                                                <img class="img-thumbnail" width="200" src="{{front_url().'/assets/img/default_logo.jpg'}}">
+                                            </a>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>
@@ -303,7 +309,7 @@
             var imagesPreview = function(input, placeToInsertImagePreview) {
                 if (input.files) {
                     var filesAmount = input.files.length;
-                    $('div.temp-img-container').html('');
+                    // $('div.temp-img-container').html('');
                     for (i = 0; i < filesAmount; i++) {
                         var reader = new FileReader();
                         reader.onload = function(event) {

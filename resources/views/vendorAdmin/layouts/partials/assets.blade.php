@@ -34,6 +34,9 @@
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
     <!-- Custom style for RTL -->
     <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/rtl-vendor.css">
+    <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-style-rtl.css">
+
 @endif
 <!-- Custom Style -->
 <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-vendor-after.css">
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-style.css">

@@ -37,6 +37,7 @@ class CreateOrderItemsTable extends Migration
             $table->smallInteger('quantity');
             $table->double('price');
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

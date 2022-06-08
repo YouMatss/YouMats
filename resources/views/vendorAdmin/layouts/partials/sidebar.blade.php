@@ -35,12 +35,12 @@
                         <p>{{__('vendorAdmin.edit_info')}}</p>
                     </a>
                 </li>
-                <li class="nav-item menu-open">
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-layer-group"></i>
                         <p>
                             {{__('vendorAdmin.products')}}
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fas fa-plus"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -58,12 +58,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item menu-open">
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-code-branch"></i>
                         <p>
                             {{__('vendorAdmin.branches')}}
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fas fa-plus"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -81,12 +81,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item menu-open">
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-truck"></i>
                         <p>
                             {{__('vendorAdmin.shipping_groups')}}
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fas fa-plus"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -104,12 +104,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item menu-open">
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-receipt"></i>
                         <p>
                             {{__('vendorAdmin.orders')}}
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fas fa-plus"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">

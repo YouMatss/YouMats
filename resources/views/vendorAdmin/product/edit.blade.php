@@ -195,7 +195,7 @@
                                         <label>{{__('vendorAdmin.specific_shipping_terms')}}</label>
                                         <div class="row">
                                             <div class="col-md-12" id="clone-container">
-                                                @if(json_decode($product->shipping_prices))
+                                            @if(json_decode($product->shipping_prices))
                                                 @foreach(json_decode($product->shipping_prices) as $shipping_price)
                                                     <div class="clone-element">
                                                         <div class="row">
@@ -372,7 +372,7 @@
             var imagesPreview = function(input, placeToInsertImagePreview) {
                 if (input.files) {
                     var filesAmount = input.files.length;
-                    $('div.temp-img-container').html('');
+                    // $('div.temp-img-container').html('');
                     for (i = 0; i < filesAmount; i++) {
                         var reader = new FileReader();
                         reader.onload = function(event) {

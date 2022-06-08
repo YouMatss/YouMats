@@ -6,7 +6,7 @@
     @yield('title')
     @include('vendorAdmin.layouts.partials.assets')
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed new--style--custom">
 <div class="wrapper">
     <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__shake" src="{{ Storage::url(nova_get_setting('logo')) }}"

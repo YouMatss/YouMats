@@ -38,7 +38,7 @@ mix.scripts([
         'public/assets/js/components/hs.selectpicker.js'
     ], 'public/assets/js/app.min.js')
     .styles([
-        // 'public/assets/vendor/font-awesome/css/fontawesome-all.min.css',
+        'public/assets/vendor/font-awesome/css/fontawesome-all.min.css',
         'public/assets/css/font-electro.css',
         'public/assets/vendor/animate.css/animate.min.css',
         'public/assets/vendor/hs-megamenu/src/hs.megamenu.css',
