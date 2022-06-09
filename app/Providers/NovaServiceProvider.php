@@ -38,6 +38,7 @@ use App\Nova\PaymentGateway;
 use App\Nova\Product;
 use App\Nova\Quote;
 use App\Nova\Slider;
+use App\Nova\Subscribe;
 use App\Nova\Subscriber;
 use App\Nova\Tag;
 use App\Nova\Team;
@@ -193,6 +194,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'expanded' => false,
                         'resources' => [
                             Vendor::class,
+                            Subscribe::class,
                             Membership::class
                         ]
                     ]),

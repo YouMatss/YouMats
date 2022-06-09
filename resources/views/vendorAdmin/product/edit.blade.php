@@ -177,7 +177,7 @@
                                 <div class="form-group">
                                     <label for="shipping">{{__('vendorAdmin.shipping')}}</label>
                                     <select id="shipping" class="form-control" name="shipping_id">
-                                        <option value="" selected disabled>{{__('vendorAdmin.shipping_placeholder')}}</option>
+                                        <option value="" selected>{{__('vendorAdmin.shipping_placeholder')}}</option>
                                         @foreach($vendor->shippings as $shipping)
                                             <option value="{{$shipping->id}}" @if($shipping->id == $product->shipping_id) selected @endif>{{$shipping->name}}</option>
                                         @endforeach

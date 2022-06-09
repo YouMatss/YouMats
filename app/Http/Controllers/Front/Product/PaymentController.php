@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Front\Product;
 
 use App\Http\Controllers\Controller;
-use App\Mail\OrderPlaced;
 use App\Models\Order;
 use Devinweb\Payment\Facades\Payment;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -28,7 +25,6 @@ class PaymentController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('home');
         }
-
     }
 
     public function submit() {

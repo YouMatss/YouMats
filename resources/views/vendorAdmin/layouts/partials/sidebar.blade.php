@@ -23,6 +23,14 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                @if($vendor->membership->id == 1)
+                <li class="nav-item">
+                    <a href="{{route('vendor.subscribe.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-star text-success"></i>
+                        <p class="text-success">{{__('vendorAdmin.upgrade_your_membership')}}</p>
+                    </a>
+                </li>
+                @endif
                 <li class="nav-item">
                     <a href="{{route('vendor.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>

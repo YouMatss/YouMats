@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 
 class Membership extends Resource
@@ -38,16 +36,26 @@ class Membership extends Resource
                 ->min(0)
                 ->step(0.05),
 
-            Text::make('Available Days', 'days')
-                ->rules(REQUIRED_STRING_VALIDATION),
-
-            Number::make('Product Limit')
-                ->min(0)
-                ->rules(REQUIRED_INTEGER_VALIDATION),
-
             HasMany::make('Vendors'),
-
         ];
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public static function authorizedToCreate(Request $request): bool
+    {
+        return false;
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function authorizedToDelete(Request $request): bool
+    {
+        return false;
     }
 
     public function cards(Request $request)

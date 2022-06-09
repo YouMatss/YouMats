@@ -3,7 +3,7 @@
     <title>{{__('vendorAdmin.create_product')}}</title>
 @endsection
 @section('content')
-    <section class="content pt-2">
+    <section class="content content-vendor-edit pt-2">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mb-2">
@@ -12,120 +12,173 @@
                     <div class="card">
                         {{csrf_field()}}
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="category">{{__('vendorAdmin.category')}}</label>
-                                <select class="form-control" id="category">
-                                    <option value="" selected disabled>{{__('vendorAdmin.category_placeholder')}}</option>
-                                    @foreach($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="subCategory">{{__('vendorAdmin.subCategory')}}</label>
-                                <select class="form-control" name="category_id" id="subCategory">
-                                    <option value="" selected disabled>{{__('vendorAdmin.subCategory_placeholder')}}</option>
-                                </select>
-                            </div>
-                            <nav>
-                                <div class="nav nav-languages" id="nav-tab" role="tablist">
-                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                        <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-name"
-                                           data-toggle="tab" href="#nav-{{$localeCode}}-name" role="tab" aria-controls="nav-{{$localeCode}}-name" aria-selected="false">{{ $properties['native'] }}</a>
-                                    @endforeach
-                                </div>
-                            </nav>
-                            <div class="tab-content" id="nav-tabContent">
-                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                    <div class="tab-pane fade @if($loop->first) show active @endif"
-                                         id="nav-{{$localeCode}}-name" role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-name">
-                                        <div class="form-group">
-                                            <label for="name-{{$localeCode}}">{{__('vendorAdmin.name')}}</label>
-                                            <div id="template-{{$localeCode}}">
-                                                <input type="text" class="form-control" name="name_{{$localeCode}}" id="name-{{$localeCode}}" value="{{old('name-'.$localeCode)}}">
-                                            </div>
-                                        </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="category">{{__('vendorAdmin.category')}}</label>
+                                        <select class="form-control" id="category">
+                                            <option value="" selected disabled>{{__('vendorAdmin.category_placeholder')}}</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                @endforeach
-                            </div>
-                            <nav>
-                                <div class="nav nav-languages" id="nav-tab" role="tablist">
-                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                        <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-short-desc"
-                                           data-toggle="tab" href="#nav-{{$localeCode}}-short-desc" role="tab" aria-controls="nav-{{$localeCode}}-short-desc" aria-selected="false">{{ $properties['native'] }}</a>
-                                    @endforeach
                                 </div>
-                            </nav>
-                            <div class="tab-content" id="nav-tabContent">
-                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                    <div class="tab-pane fade @if($loop->first) show active @endif" id="nav-{{$localeCode}}-short-desc"
-                                         role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-short-desc">
-                                        <div class="form-group">
-                                            <label for="short_desc_{{$localeCode}}">{{__('vendorAdmin.short_desc')}}</label>
-                                            <textarea id="short_desc_{{$localeCode}}" class="form-control ckeditor" name="short_desc_{{$localeCode}}">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="subCategory">{{__('vendorAdmin.subCategory')}}</label>
+                                        <select class="form-control" name="category_id" id="subCategory">
+                                            <option value="" selected disabled>{{__('vendorAdmin.subCategory_placeholder')}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <nav>
+                                        <div class="nav nav-languages" id="nav-tab" role="tablist">
+                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-name"
+                                                   data-toggle="tab" href="#nav-{{$localeCode}}-name" role="tab" aria-controls="nav-{{$localeCode}}-name" aria-selected="false">{{ $properties['native'] }}</a>
+                                            @endforeach
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="tab-content" id="nav-tabContent">
+                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            <div class="tab-pane fade @if($loop->first) show active @endif"
+                                                 id="nav-{{$localeCode}}-name" role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-name">
+                                                <div class="form-group">
+                                                    <label for="name-{{$localeCode}}">{{__('vendorAdmin.name')}}</label>
+                                                    <div id="template-{{$localeCode}}">
+                                                        <input type="text" class="form-control" name="name_{{$localeCode}}" id="name-{{$localeCode}}" value="{{old('name-'.$localeCode)}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <nav>
+                                        <div class="nav nav-languages" id="nav-tab" role="tablist">
+                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-short-desc"
+                                                   data-toggle="tab" href="#nav-{{$localeCode}}-short-desc" role="tab" aria-controls="nav-{{$localeCode}}-short-desc" aria-selected="false">{{ $properties['native'] }}</a>
+                                            @endforeach
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="tab-content" id="nav-tabContent">
+                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            <div class="tab-pane fade @if($loop->first) show active @endif" id="nav-{{$localeCode}}-short-desc"
+                                                 role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-short-desc">
+                                                <div class="form-group">
+                                                    <label for="short_desc_{{$localeCode}}">{{__('vendorAdmin.short_desc')}}</label>
+                                                    <textarea id="short_desc_{{$localeCode}}" class="form-control ckeditor" name="short_desc_{{$localeCode}}">
                                                 {{old('short_desc_'.$localeCode)}}
                                             </textarea>
-                                        </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
-                            </div>
-                            <nav>
-                                <div class="nav nav-languages" id="nav-tab" role="tablist">
-                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                        <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-desc"
-                                           data-toggle="tab" href="#nav-{{$localeCode}}-desc" role="tab" aria-controls="nav-{{$localeCode}}-desc" aria-selected="false">{{ $properties['native'] }}</a>
-                                    @endforeach
                                 </div>
-                            </nav>
-                            <div class="tab-content" id="nav-tabContent">
-                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                    <div class="tab-pane fade @if($loop->first) show active @endif" id="nav-{{$localeCode}}-desc"
-                                         role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-desc">
-                                        <div class="form-group">
-                                            <label for="desc_{{$localeCode}}">{{__('vendorAdmin.desc')}}</label>
-                                            <textarea id="desc_{{$localeCode}}" rows="5" class="form-control ckeditor" name="desc_{{$localeCode}}">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <nav>
+                                        <div class="nav nav-languages" id="nav-tab" role="tablist">
+                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-desc"
+                                                   data-toggle="tab" href="#nav-{{$localeCode}}-desc" role="tab" aria-controls="nav-{{$localeCode}}-desc" aria-selected="false">{{ $properties['native'] }}</a>
+                                            @endforeach
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="tab-content" id="nav-tabContent">
+                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            <div class="tab-pane fade @if($loop->first) show active @endif" id="nav-{{$localeCode}}-desc"
+                                                 role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-desc">
+                                                <div class="form-group">
+                                                    <label for="desc_{{$localeCode}}">{{__('vendorAdmin.desc')}}</label>
+                                                    <textarea id="desc_{{$localeCode}}" rows="5" class="form-control ckeditor" name="desc_{{$localeCode}}">
                                                 {{old('desc_'.$localeCode)}}
                                             </textarea>
-                                        </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="type">{{__('vendorAdmin.type')}}</label>
-                                <select class="form-control" name="type" id="type">
-                                    <option selected disabled>{{__('vendorAdmin.type_placeholder')}}</option>
-                                    <option value="product" @if(old('type') == 'product') selected @endif>{{__('vendorAdmin.type_product')}}</option>
-                                    <option value="service" @if(old('type') == 'service') selected @endif>{{__('vendorAdmin.type_service')}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="cost">{{__('vendorAdmin.cost')}}</label>
-                                <input type="number" class="form-control" name="cost" id="cost" min="0" step="0.01" value="{{old('cost')}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="price">{{__('vendorAdmin.price')}}</label>
-                                <input type="number" class="form-control" name="price" id="price" min="0" step="0.01" value="{{old('price')}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="stock">{{__('vendorAdmin.stock')}}</label>
-                                <input type="number" class="form-control" name="stock" id="stock" min="0" step="1" value="{{old('stock')}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="unit">{{__('vendorAdmin.unit')}}</label>
-                                <select class="form-control" name="unit_id" id="unit">
-                                    <option selected disabled>{{__('vendorAdmin.unit_placeholder')}}</option>
-                                    @foreach($units as $unit)
-                                        <option value="{{$unit->id}}" @if(old('unit_id') == $unit->id) selected @endif>{{$unit->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="min_quantity">{{__('vendorAdmin.min_quantity')}}</label>
-                                <input type="number" class="form-control" name="min_quantity" id="min_quantity" min="1" step="1" value="{{old('min_quantity')}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="sku">{{__('vendorAdmin.sku')}}</label>
-                                <input type="text" class="form-control" name="SKU" id="sku" value="{{old('SKU')}}">
+
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="type">{{__('vendorAdmin.type')}}</label>
+                                        <select class="form-control" name="type" id="type">
+                                            <option selected disabled>{{__('vendorAdmin.type_placeholder')}}</option>
+                                            <option value="product" @if(old('type') == 'product') selected @endif>{{__('vendorAdmin.type_product')}}</option>
+                                            <option value="service" @if(old('type') == 'service') selected @endif>{{__('vendorAdmin.type_service')}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="cost">{{__('vendorAdmin.cost')}}</label>
+                                        <input type="number" class="form-control" name="cost" id="cost" min="0" step="0.01" value="{{old('cost')}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="price">{{__('vendorAdmin.price')}}</label>
+                                        <input type="number" class="form-control" name="price" id="price" min="0" step="0.01" value="{{old('price')}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="stock">{{__('vendorAdmin.stock')}}</label>
+                                        <input type="number" class="form-control" name="stock" id="stock" min="0" step="1" value="{{old('stock')}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="unit">{{__('vendorAdmin.unit')}}</label>
+                                        <select class="form-control" name="unit_id" id="unit">
+                                            <option selected disabled>{{__('vendorAdmin.unit_placeholder')}}</option>
+                                            @foreach($units as $unit)
+                                                <option value="{{$unit->id}}" @if(old('unit_id') == $unit->id) selected @endif>{{$unit->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="min_quantity">{{__('vendorAdmin.min_quantity')}}</label>
+                                        <input type="number" class="form-control" name="min_quantity" id="min_quantity" min="1" step="1" value="{{old('min_quantity')}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="sku">{{__('vendorAdmin.sku')}}</label>
+                                        <input type="text" class="form-control" name="SKU" id="sku" value="{{old('SKU')}}">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -158,7 +211,7 @@
                             <div class="form-group">
                                 <label for="shipping">{{__('vendorAdmin.shipping')}}</label>
                                 <select id="shipping" class="form-control" name="shipping_id">
-                                    <option value="" selected disabled>{{__('vendorAdmin.shipping_placeholder')}}</option>
+                                    <option value="" selected>{{__('vendorAdmin.shipping_placeholder')}}</option>
                                     @foreach($vendor->shippings as $shipping)
                                         <option value="{{$shipping->id}}" @if(old('shipping_id') == $shipping->id) selected @endif>{{$shipping->name}}</option>
                                     @endforeach
@@ -292,23 +345,27 @@
             getTemplateForTitle($(this).val());
         });
 
+        let filesList = [];
+
         // Multiple images preview in browser
-        var imagesPreview = function(input, placeToInsertImagePreview) {
+        let imagesPreview = function(input, placeToInsertImagePreview) {
             if (input.files) {
-                var filesAmount = input.files.length;
-                // $('div.temp-img-container').html('');
-                for (i = 0; i < filesAmount; i++) {
-                    var reader = new FileReader();
+                filesList.push(...input.files);
+                let filesAmount = filesList.length;
+                $('div.temp-img-container').html('');
+                for (let i = 0; i < filesAmount; i++) {
+                    let reader = new FileReader();
                     reader.onload = function(event) {
                         $($.parseHTML('<img style="border-color: #F00;" class="img-thumbnail" width="200">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
                     }
-                    reader.readAsDataURL(input.files[i]);
+                    reader.readAsDataURL(filesList[i]);
                 }
             }
         };
         $('#gallery').on('change', function() {
             imagesPreview(this, 'div.temp-img-container');
         });
+
 
     });
     function getSubCategories(category_id) {
