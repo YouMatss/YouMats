@@ -3,19 +3,26 @@
     <title>{{__('vendorAdmin.create_shipping_group')}}</title>
 @endsection
 @section('content')
-    <section class="content pt-2">
+    <section class="content content-vendor-edit pt-2">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mb-2">
+
                     <h4>{{__('vendorAdmin.create_shipping_group')}}</h4>
+
+
                     <form action="{{route('vendor.shipping-group.store')}}" method="post">
                         <div class="card">
                             {{csrf_field()}}
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="name">{{__('vendorAdmin.name')}}</label>
-                                    <input type="text" class="form-control" name="name" id="name">
-                                </div>
+                               <div class="row">
+                                   <div class="col-md-12">
+                                       <div class="form-group">
+                                           <label for="name">{{__('vendorAdmin.name')}}</label>
+                                           <input type="text" class="form-control" name="name" id="name">
+                                       </div>
+                                   </div>
+                               </div>
                             </div>
                         </div>
                         <h4>{{__('vendorAdmin.specific_shipping_terms')}}</h4>
@@ -68,7 +75,7 @@
 @section('js_additional')
 <script>
     $(document).ready(function () {
-        var clone_element = `<div class="clone-element">
+        var clone_element = `<div class="clone-element clone-element-add-contact">
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
@@ -105,7 +112,7 @@
                             <input type="number" class="form-control" id="time" name="time[]" min="1" step="1" />
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="format">{{__('vendorAdmin.format')}}</label>
                             <select class="form-control" id="format" name="format[]">
@@ -115,7 +122,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <div class="form-group">
                             <label>{{__('vendorAdmin.remove')}}</label>
                             <button class="form-control btn btn-danger btn-xs clone-remove">

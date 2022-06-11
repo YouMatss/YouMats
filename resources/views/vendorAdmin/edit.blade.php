@@ -73,37 +73,37 @@
                             <div class="row">
                                 <div class="col-md-12" id="clone-container">
                                     @foreach($vendor->contacts as $key => $row)
-                                        <div class="clone-element">
+                                        <div class="clone-element clone-element-add-contact">
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label for="person_name">{{__('vendorAdmin.person_name')}}</label>
                                                         <input type="text" class="form-control" id="person_name" name="contacts_person_name[]" value="{{$row['person_name']}}" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="c_email">{{__('vendorAdmin.email')}}</label>
                                                         <input type="email" class="form-control" id="c_email" name="contacts_email[]" value="{{$row['email']}}" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="c_phone">{{__('vendorAdmin.phone')}}</label>
                                                         <input type="text" class="form-control" id="c_phone" name="contacts_phone[]" value="{{$row['phone']}}" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="cities">{{__('vendorAdmin.cities')}}</label>
-                                                        <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[{{$key}}][]">
+                                                        <select class="form-control select2-cities" data-select2-id="select2-{{$loop->index}}" multiple="multiple" id="cities" name="contacts_cities[{{$key}}][]">
                                                             @foreach($cities as $city)
                                                                 <option value="{{$city->id}}" @if(in_array($city->id, $row['cities'])) selected @endif>{{$city->name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="c_with">{{__('vendorAdmin.with')}}</label>
                                                         <select class="form-control" id="c_with" name="contacts_with[]">
@@ -114,7 +114,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-1">
                                                     <div class="form-group">
                                                         <label>{{__('vendorAdmin.remove')}}</label>
                                                         <button class="form-control btn-remove-add btn btn-danger btn-xs clone-remove">
@@ -126,7 +126,7 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-2">
                                     <button type="button" id="clone-add" class="btn btn-youmats btn-block">{{__('vendorAdmin.add')}}</button>
                                 </div>
                             </div>
@@ -297,60 +297,62 @@
             $('.select2-cities').select2({
                 placeholder: "{{__('vendorAdmin.cities_placeholder')}}"
             });
-            var clone_element = `<div class="clone-element">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="person_name">{{__('vendorAdmin.person_name')}}</label>
-                            <input type="text" class="form-control" id="person_name" name="contacts_person_name[]"/>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="c_email">{{__('vendorAdmin.email')}}</label>
-                            <input type="email" class="form-control" id="c_email" name="contacts_email[]" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="c_phone">{{__('vendorAdmin.phone')}}</label>
-                            <input type="text" class="form-control" id="c_phone" name="contacts_phone[]" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="cities">{{__('vendorAdmin.cities')}}</label>
-                            <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[]">
-                                @foreach($cities as $city)
-                                    <option value="{{$city->id}}">{{$city->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="c_with">{{__('vendorAdmin.with')}}</label>
-                            <select class="form-control" id="c_with" name="contacts_with[]">
-                                <option value="" disabled selected>{{__('vendorAdmin.with_placeholder')}}</option>
-                                <option value="individual">{{__('vendorAdmin.individual')}}</option>
-                                <option value="company">{{__('vendorAdmin.company')}}</option>
-                                <option value="both">{{__('vendorAdmin.both')}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>{{__('vendorAdmin.remove')}}</label>
-                            <button class="form-control btn-remove-add btn btn-danger btn-xs clone-remove">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
             $('#clone-add').on('click', function () {
+                let clone_element = `<div class="clone-element clone-element-add-contact">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="person_name">{{__('vendorAdmin.person_name')}}</label>
+                                            <input type="text" class="form-control" id="person_name" name="contacts_person_name[]"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="c_email">{{__('vendorAdmin.email')}}</label>
+                                            <input type="email" class="form-control" id="c_email" name="contacts_email[]" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="c_phone">{{__('vendorAdmin.phone')}}</label>
+                                            <input type="text" class="form-control" id="c_phone" name="contacts_phone[]" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="cities">{{__('vendorAdmin.cities')}}</label>
+                                            <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[]">
+                                                @foreach($cities as $city)
+                                                    <option value="{{$city->id}}">{{$city->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="c_with">{{__('vendorAdmin.with')}}</label>
+                                                    <select class="form-control" id="c_with" name="contacts_with[]">
+                                                        <option value="" disabled selected>{{__('vendorAdmin.with_placeholder')}}</option>
+                                                        <option value="individual">{{__('vendorAdmin.individual')}}</option>
+                                                        <option value="company">{{__('vendorAdmin.company')}}</option>
+                                                        <option value="both">{{__('vendorAdmin.both')}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="form-group">
+                                                    <label>{{__('vendorAdmin.remove')}}</label>
+                                                    <button class="form-control btn-remove-add btn btn-danger btn-xs clone-remove">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                let random_number = Math.floor(Math.random() * 101);
+                $('.select2-cities').addClass('select2-'+random_number);
                 $('#clone-container').append(clone_element);
-                $('.select2-cities').select2({
+                $('.select2-'+random_number).select2({
                     placeholder: "{{__('vendorAdmin.cities_placeholder')}}"
                 });
             });

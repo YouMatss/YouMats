@@ -27,7 +27,7 @@ class SubScribeController extends Controller
         $data['vendor'] = Auth::guard('vendor')->user();
         $data['membership'] = Membership::findorfail($this->membership_id);
 
-        if($data['vendor']->membership->id != 1)
+        if($data['vendor']->current_subscribe)
             return redirect()->back();
 
         return view('vendorAdmin.subscribe.index')->with($data);
@@ -54,11 +54,6 @@ class SubScribeController extends Controller
         try {
             $data['vendor'] = Auth::guard('vendor')->user();
             $data['membership'] = Membership::findorfail($this->membership_id);
-
-
-            $data['vendor']->update([
-                'membership_id' => $this->membership_id
-            ]);
 
             Subscribe::create([
                 'vendor_id' => $data['vendor']->id,

@@ -11,13 +11,13 @@
                     <h4 class="tit_main_v">{{__('vendorAdmin.products')}}</h4>
                 </div>
                 <div class="col-md-6">
-                    <a href="{{route('vendor.product.create')}}" class="btn btn-sm mb-3 btn-youmats btn--vend"> <i class="fa fa-plus"></i> {{__('vendorAdmin.add_button')}}</a>
+                    <a href="{{route('vendor.product.create')}}" class="btn btn-sm mb-3 btn-youmats tit-head-branch btn--vend"> <i class="fa fa-plus"></i> {{__('vendorAdmin.add_button')}}</a>
                 </div>
             </div>
 
 
 
-            <div class="card card--vendor">
+            <div class="card card--vendor edit-head-table-vendor">
                 <div class="card-body">
                     <table id="example1" class="table" style="width: 100%">
                         <thead>

@@ -16,10 +16,6 @@ class CreateVendorsTable extends Migration
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('membership_id')->unsigned()->index();
-            $table->foreign('membership_id')->references('id')->on('memberships')
-                ->onDelete('NO ACTION')->onUpdate('CASCADE');
-
             $table->bigInteger('country_id')->unsigned()->index();
             $table->foreign('country_id')->references('id')->on('countries')
                 ->onDelete('NO ACTION')->onUpdate('CASCADE');

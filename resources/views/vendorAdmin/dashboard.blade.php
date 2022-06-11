@@ -25,6 +25,20 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                @if($vendor->current_subscribe)
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="far fa-star text-success"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">{{__('vendorAdmin.subscribe_expiry_date')}}</span>
+                            <span class="info-box-number" style="font-size: 14px">{{date('F d,Y', strtotime($vendor->current_subscribe->expiry_date))}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                @endif
                 <div class="col-md-3 col-sm-6 col-12">
                     <div class="info-box">
                         <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
@@ -77,8 +91,6 @@
                     <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
-            </div>
-            <div class="row">
                 <div class="col-md-3 col-sm-6 col-12">
                     <div class="info-box bg-info">
                         <span class="info-box-icon"><i class="fas fa-layer-group"></i></span>
@@ -145,8 +157,6 @@
                     <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
-            </div>
-            <div class="row">
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="info-box">
                         <span class="info-box-icon bg-gray"><i class="far fa-flag"></i></span>

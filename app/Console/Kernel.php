@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Models\Subscribe;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +26,27 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
         $schedule->command('backup:run')->daily()->at('01:00');
+
+        $schedule->call(function () {
+            $subscribes = Subscribe::whereDate('expiry_date', '>=', now())->get();
+            $now = Carbon::now();
+
+            foreach ($subscribes as $subscribe) {
+                $subscribe_expiry_date = Carbon::parse($subscribe->expiry_date);
+                $diff = $subscribe_expiry_date->diffInDays($now);
+                if($diff < 7) {
+                    // Send Mail
+                }
+            }
+
+        })->dailyAt('13:00');
+
+    }
+
+    protected function scheduleTimezone()
+    {
+        return 'Asia/Riyadh';
     }
 
     /**

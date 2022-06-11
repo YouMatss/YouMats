@@ -5,12 +5,18 @@
 @section('content')
     <div class="pt-2">
         <div class="col-md-12">
-            <h4>{{__('vendorAdmin.products')}}</h4>
-            <div class="card">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="tit_main_v">{{__('vendorAdmin.products')}}</h4>
+                </div>
+            </div>
+
+            <div class="card card--vendor edit-head-table-vendor">
                 <div class="card-body">
                     <table id="example1" class="table" style="width: 100%">
                         <thead>
-                        <tr>
+                        <tr class="head--table--vendor">
                             <th class="text-center">{{__('vendorAdmin.order_id')}}</th>
                             <th class="text-center">{{__('vendorAdmin.name')}}</th>
                             <th class="text-center">{{__('vendorAdmin.price')}}</th>
@@ -26,7 +32,7 @@
                                 <td>{{$item->order->order_id}}</td>
                                 <td>{{$item->order->name}}</td>
                                 <td>{{$item->price}}</td>
-                                <td>
+                                <td class="btn-ship">
                                     <label class="badge
                                     @if($item->status == 'pending')
                                         badge-warning
@@ -41,7 +47,7 @@
                                         {{$item->status}}
                                     </label>
                                 </td>
-                                <td>
+                                <td class="btn-pain">
                                     <label class="badge
                                     @if($item->payment_status == 'pending')
                                         badge-warning

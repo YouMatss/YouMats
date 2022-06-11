@@ -23,7 +23,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @if($vendor->membership->id == 1)
+                @if(!$vendor->current_subscribe)
                 <li class="nav-item">
                     <a href="{{route('vendor.subscribe.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-star text-success"></i>

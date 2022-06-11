@@ -9,6 +9,7 @@ use Drobee\NovaSluggable\SluggableText;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
@@ -34,11 +35,6 @@ class Vendor extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-
-            BelongsTo::make('Membership')
-                ->showCreateRelationButton()
-                ->hideFromIndex()
-                ->withoutTrashed(),
 
             BelongsTo::make('Country')
                 ->showCreateRelationButton()
@@ -182,6 +178,7 @@ class Vendor extends Resource
             HasMany::make('Products'),
             HasMany::make('Branches'),
             HasMany::make('Shippings'),
+            HasOne::make('Subscribes'),
         ];
     }
 

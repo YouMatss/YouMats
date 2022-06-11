@@ -153,7 +153,7 @@ class Product extends Resource
                 Select::make('Shipping', 'shipping_id')
                     ->options(function () {
                         return \App\Models\Shipping::where('vendor_id', $this->vendor_id)->pluck('name', 'id');
-                    })->placeholder('Choose shipping group')
+                    })->placeholder('Choose shipping group')->nullable()->displayUsingLabels()
                     ->hideFromIndex()->hideWhenCreating(),
                 Boolean::make('Specific shipping', 'specific_shipping')->hideFromIndex()->nullable(),
                 NovaDependencyContainer::make([

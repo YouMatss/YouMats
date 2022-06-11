@@ -101,7 +101,6 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $vendor = Vendor::create([
-            'membership_id' => env('MEMBERSHIP_ID', 1),
             'country_id' => $data['country_id'],
             'name' => $data['name_en'],
             'email' => $data['email'],

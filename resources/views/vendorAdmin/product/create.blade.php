@@ -229,7 +229,7 @@
                                     <label>{{__('vendorAdmin.specific_shipping_terms')}}</label>
                                     <div class="row">
                                         <div class="col-md-12" id="clone-container"></div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-2">
                                             <button type="button" id="clone-add" class="btn btn-youmats btn-block">{{__('vendorAdmin.add')}}</button>
                                         </div>
                                     </div>
@@ -272,7 +272,7 @@
 @section('js_additional')
 <script>
     $(document).ready(function() {
-        var clone_element = `<div class="clone-element">
+        var clone_element = `<div class="clone-element clone-element-add-contact">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -285,7 +285,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="price">{{__('vendorAdmin.price')}}</label>
                             <input type="number" class="form-control" id="price" name="shipping_price[]" min="0" step="0.05" />
@@ -297,7 +297,7 @@
                             <input type="number" class="form-control" id="time" name="shipping_time[]" min="1" step="1" />
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="format">{{__('vendorAdmin.format')}}</label>
                             <select class="form-control" id="format" name="shipping_format[]">
@@ -441,7 +441,7 @@
                     } else {
                         template.append(`
                             <input type="hidden" name="name_{{$localeCode}}[`+index+`]" value="`+word+`" >
-                            <label class="mx-1">`+word+`</label>
+                            <label class="mx-1 w-auto">`+word+`</label>
                         `);
                     }
                 });

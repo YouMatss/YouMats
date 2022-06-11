@@ -87,7 +87,7 @@ body.new--style--custom [class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link:
 
 
 body.new--style--custom .navbar-light .navbar-nav .nav-link {
-    color: rgb(0 0 0);
+    color: rgb(125 141 159);
     font-weight: 500;
 }
 
@@ -112,8 +112,8 @@ body.new--style--custom .navbar-light .navbar-nav .nav-link {
 }
 
 body.new--style--custom .btn-youmats {
-    background-color: #003f91;
-    border-color: #003f91;
+    background-color: #4099de;
+    border-color: #4099de;
 
 }
 
@@ -209,9 +209,143 @@ body.new--style--custom .info-box .info-box-text, .info-box .progress-descriptio
 }
 
 body.new--style--custom .info-box .info-box-number {
-    color: #000;
+    color: #626f80;
 }
 
 body.new--style--custom .content-header h1 {
     font-size: 20px;
+}
+
+.content-vendor-edit .card{
+    background-color: #fff;
+    -webkit-box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%);
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%);
+    border-radius: 0.5rem;
+}
+
+body.new--style--custom .form-control{
+    background-color: #fff;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    color: #7c858e;
+    height: calc(45px + 2px);
+    border-radius: 15px;
+    border: 1px solid #bacad6;
+    float: left;
+    width: 50%;
+    margin: 0 0 45px 0;
+}
+
+
+body.new--style--custom .input-group{
+    width: 50%;
+}
+
+body.new--style--custom .clone-element .form-control{
+    width: 75%;
+}
+
+body.new--style--custom label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: normal;
+    color: #626f80;
+    float: left;
+    width: 15%;
+    margin: 10px 0 0 15px;
+    font-size: 15px;
+}
+
+body.new--style--custom .edit-head-table-vendor label:not(.form-check-label):not(.custom-file-label){
+    width: auto;
+    float: none;
+    margin: 15px 0 15px 0;
+}
+
+body.new--style--custom .edit-head-table-vendor div.dataTables_wrapper div.dataTables_filter input {
+    margin: -5px 15px 0 0;
+}
+
+body.new--style--custom .edit-head-table-vendor .form-control {
+    width: auto;
+    display: inline-block;
+    margin: -10px 10px 0 0;
+    min-width: 75px;
+}
+
+body.new--style--custom .clone-element label:not(.form-check-label):not(.custom-file-label) {
+    width: 20%;
+}
+
+.mar-left-15{
+    margin-left: 16%;
+}
+.mar-left-15 img{
+    height: auto;
+    width: 150px;
+}
+body.new--style--custom .select2-container .select2-selection--multiple {
+    min-height: 45px;
+    border-radius: 15px !important;
+    border: 1px solid #ced4da !important;
+}
+body.new--style--custom .clone-element .form-control.btn-remove-add{
+    background: #f00;
+    color: #fff;
+    width: 130px;
+    border-radius: 35px;
+    border: 0;
+}
+
+
+body.new--style--custom .content-vendor-edit h4{
+    font-size: 22px;
+    margin: 20px 0;
+    display: block;
+    color: #404b5a;
+}
+
+body.new--style--custom .content-vendor-edit .form-group{
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    padding: 40px 0 0 0;
+    margin: 0 0 0 0;
+}
+
+
+.clone-element-add-contact{
+
+}
+body.new--style--custom .content-vendor-edit .clone-element-add-contact .form-group {
+    overflow: hidden;
+    border-bottom: 0;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+body.new--style--custom .clone-element.clone-element-add-contact label:not(.form-check-label):not(.custom-file-label) {
+    width: 100%;
+    padding: 0;
+    margin: 10px 0 10px 0;
+    font-weight: bold;
+}
+body.new--style--custom .clone-element.clone-element-add-contact .form-control {
+    width: 100%;
+}
+
+.tit-head-branch{
+    float: right;
+}
+
+td.btn-ship label{
+    margin: 0 !important;
+    background: #ddd;
+    color: #000 !important;
+    font-size: 12px !important;
+    padding: 5px 15px;
+}
+
+td.btn-pain label{
+    margin: 0 !important;
+    background: #647283;
+    color: #fff !important;
+    font-size: 12px !important;
+    padding: 5px 15px;
 }

@@ -11,6 +11,8 @@ class Subscribe extends Model
 
     protected $guarded = ['id'];
 
+    protected $dates = ['expiry_date'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
