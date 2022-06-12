@@ -93,8 +93,17 @@
                                                         <span>{{ $contact['phone'] }}</span><br/>
                                                         <label style="font-weight: bold">{{__('vendor.email')}}: </label>
                                                         <span>{{ $contact['email'] }}</span><br/>
-                                                        <label style="font-weight: bold">{{__('vendor.position')}}: </label>
-                                                        <span>{{ $contact['position'] }}</span>
+                                                        <label style="font-weight: bold">{{__('vendor.cities')}}: </label>
+                                                        <span>
+                                                            @foreach($contact['cities'] as $city)
+                                                                {{\App\Models\City::find($city)->name}}
+                                                                @if(!$loop->last)
+                                                                    -
+                                                                @endif
+                                                            @endforeach
+                                                        </span><br/>
+                                                        <label style="font-weight: bold">{{__('vendor.with')}}: </label>
+                                                        <span>{{ __('vendor.'.$contact['with']) }}</span>
                                                     </td>
                                                 </tr>
                                             @endforeach

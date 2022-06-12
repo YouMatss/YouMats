@@ -47,13 +47,13 @@
                                                 <div class="col-md-1">
                                                     <div class="form-group">
                                                         <label for="from">{{__('vendorAdmin.from')}}</label>
-                                                        <input type="number" class="form-control" id="from" name="from[]" min="1" step="1" value="{{$row['from']}}" />
+                                                        <input type="number" class="form-control" id="from" name="from[]" min="1" step="1" value="{{$row['from'] ?? ''}}" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-1">
                                                     <div class="form-group">
                                                         <label for="to">{{__('vendorAdmin.to')}}</label>
-                                                        <input type="number" class="form-control" id="to" name="to[]" min="1" step="1" value="{{$row['to']}}" />
+                                                        <input type="number" class="form-control" id="to" name="to[]" min="1" step="1" value="{{$row['to'] ?? ''}}" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
