@@ -183,8 +183,14 @@
 
 
                             @if(!Auth::guard('vendor')->check())
-                                @if(is_company() || $product->price || $product->delivery)
+                                @if(is_company())
                                     {!! cartOrChat($product) !!}
+                                @elseif($product->vendor->current_subscribe)
+                                    @if($product->price || $product->delivery)
+                                        {!! cartOrChat($product) !!}
+                                    @else
+                                        <a class="cart-chat-category btn-primary transition-3d-hover" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{__('product.category_href')}}</a>
+                                    @endif
                                 @else
                                     <a class="cart-chat-category btn-primary transition-3d-hover" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{__('product.category_href')}}</a>
                                 @endif

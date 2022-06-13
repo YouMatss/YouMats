@@ -127,6 +127,8 @@ if (!function_exists('cartOrChat')) {
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company()) {
                 return $cart;
+            } elseif(!$product->vendor->current_subscribe) {
+                return $view;
             } elseif($product->type == 'product' && $product->price > 0 && $product->delivery) {
                 if($product->stock && $product->stock < $product->min_quantity) {
                     return $view;

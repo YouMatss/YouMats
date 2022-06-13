@@ -16,7 +16,8 @@ return [
         'vendorAdmin',
         'profile',
         'breadcrumb',
-        'novaSettings'
+        'novaSettings',
+        'mails'
     ],
     'languages' => [
         'en', 'ar'

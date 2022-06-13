@@ -38,7 +38,7 @@
                     {{__('checkout.holder_name')}}
                 </div>
                 <div class="col-3 d-flex justify-content-center">
-                    {{ Request::get('customer_name') }}
+                    {{ isset($request['customer_name']) ? $request['customer_name'] : '' }}
                 </div>
             </div>
             <div class="row row-1">
@@ -46,7 +46,7 @@
                     {{__('checkout.card_number')}}
                 </div>
                 <div class="col-3 d-flex justify-content-center">
-                    {{ Request::get('card_number') }}
+                    {{ isset($request['card_number']) ? $request['card_number'] : '' }}
                 </div>
             </div>
             <div class="row row-1">
@@ -54,7 +54,7 @@
                     {{__('checkout.amount')}}
                 </div>
                 <div class="col-3 d-flex justify-content-center">
-                    {{__('general.sar')}} {{ Request::get('amount')/100 }}
+                    {{__('general.sar')}} {{ isset($request['amount']) ? $request['amount']/100 : '' }}
                 </div>
             </div>
             <div class="row row-1">
@@ -62,7 +62,7 @@
                     {{__('checkout.status')}}
                 </div>
                 <div class="col-3 d-flex justify-content-center">
-                    {{ Request::get('response_message') }}
+                    {{ isset($request['response_message']) ? $request['response_message'] : '' }}
                 </div>
             </div>
             <div class="row row-1">
@@ -70,7 +70,7 @@
                     {{__('checkout.merchant_reference')}}
                 </div>
                 <div class="col-3 d-flex justify-content-center">
-                    {{ Request::get('merchant_reference') }}
+                    {{ isset($request['merchant_reference']) ? $request['merchant_reference'] : '' }}
                 </div>
             </div>
         </form>

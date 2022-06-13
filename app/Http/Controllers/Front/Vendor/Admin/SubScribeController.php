@@ -9,6 +9,7 @@ use App\Models\Subscribe;
 use Carbon\Carbon;
 use Devinweb\Payment\Facades\Payment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class SubScribeController extends Controller
 {
@@ -52,12 +53,16 @@ class SubScribeController extends Controller
 
     public function success() {
         try {
+            $data['request'] = Session::get('request');
+            if(!$data['request'])
+                return redirect()->route('home');
+
             $data['vendor'] = Auth::guard('vendor')->user();
             $data['membership'] = Membership::findorfail($this->membership_id);
 
             Subscribe::create([
                 'vendor_id' => $data['vendor']->id,
-                'membership_id' => $this->membership_id,
+                'membership_id' => $data['membership']->id,
                 'expiry_date' => Carbon::now()->addMonth(),
                 'price' => $data['membership']->price,
             ]);
@@ -70,6 +75,11 @@ class SubScribeController extends Controller
 
     public function error() {
         try {
+            $data['request'] = Session::get('request');
+
+            if(!$data['request'])
+                return redirect()->route('home');
+
             $data['vendor'] = Auth::guard('vendor')->user();
             $data['membership'] = Membership::findorfail($this->membership_id);
 

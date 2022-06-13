@@ -100,7 +100,7 @@
         },
         computed: {
             card_number_filter() {
-                return _.replace(this.card_number, /-/g, "");
+                return _.replace(this.card_number, / /g, "");
             },
             expiration_date_after() {
                 return _.replace(this.expiration_date, "/", "");

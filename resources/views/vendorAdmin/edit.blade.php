@@ -96,7 +96,7 @@
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="cities">{{__('vendorAdmin.cities')}}</label>
-                                                        <select class="form-control select2-cities" data-select2-id="select2-{{$loop->index}}" multiple="multiple" id="cities" name="contacts_cities[{{$key}}][]">
+                                                        <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[{{$key}}][]">
                                                             @foreach($cities as $city)
                                                                 <option value="{{$city->id}}" @if(in_array($city->id, $row['cities'])) selected @endif>{{$city->name}}</option>
                                                             @endforeach
@@ -349,12 +349,10 @@
                                             </div>
                                         </div>
                                     </div>`;
-                let random_number = Math.floor(Math.random() * 101);
-                $('.select2-cities').addClass('select2-'+random_number);
                 $('#clone-container').append(clone_element);
-                $('.select2-'+random_number).select2({
-                    placeholder: "{{__('vendorAdmin.cities_placeholder')}}"
-                });
+                {{--$('.select2-cities').destroy('select2').select2({--}}
+                {{--    placeholder: "{{__('vendorAdmin.cities_placeholder')}}"--}}
+                {{--});--}}
             });
             $(document).on('click', '.clone-remove', function () {
                 $(this).closest('.clone-element').remove();
