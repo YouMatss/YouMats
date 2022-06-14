@@ -56,8 +56,10 @@ class ProductController extends Controller
         return view('vendorAdmin.product.create')->with($data);
     }
 
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
+        dd($request->all());
+
         $data = $request->validated();
         $data['vendor_id'] = Auth::guard('vendor')->id();
 

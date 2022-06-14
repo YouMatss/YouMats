@@ -154,6 +154,16 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         }
     }
 
+    /**
+     * @return int
+     */
+    public function getSubscribeAttribute() {
+        if($this->vendor->current_subscribe) {
+            return 1;
+        }
+        return 0;
+    }
+
     public function phone() {
         if(isset($this->vendor->contacts[0]['phone']))
             return $this->vendor->contacts[0]['phone'];

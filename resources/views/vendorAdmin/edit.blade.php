@@ -96,7 +96,7 @@
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="cities">{{__('vendorAdmin.cities')}}</label>
-                                                        <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[{{$key}}][]">
+                                                        <select class="form-control select2-cities" data-select2-id="select2-city-{{$loop->index}}" multiple="multiple" id="cities" name="contacts_cities[{{$key}}][]">
                                                             @foreach($cities as $city)
                                                                 <option value="{{$city->id}}" @if(in_array($city->id, $row['cities'])) selected @endif>{{$city->name}}</option>
                                                             @endforeach
@@ -350,9 +350,11 @@
                                         </div>
                                     </div>`;
                 $('#clone-container').append(clone_element);
-                {{--$('.select2-cities').destroy('select2').select2({--}}
-                {{--    placeholder: "{{__('vendorAdmin.cities_placeholder')}}"--}}
-                {{--});--}}
+                $('#clone-container').find(".select2-cities").each(function(index) {
+                    $(this).attr('data-select2-id', index).select2({
+                        placeholder: "{{__('vendorAdmin.cities_placeholder')}}"
+                    });
+                });
             });
             $(document).on('click', '.clone-remove', function () {
                 $(this).closest('.clone-element').remove();

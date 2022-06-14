@@ -356,7 +356,9 @@
                 for (let i = 0; i < filesAmount; i++) {
                     let reader = new FileReader();
                     reader.onload = function(event) {
-                        $($.parseHTML('<img style="border-color: #F00;" class="img-thumbnail" width="200">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        $($.parseHTML('<img style="border-color: #F00;" class="img-thumbnail" width="200">'))
+                            .attr('src', event.target.result)
+                            .appendTo('div.temp-img-container');
                     }
                     reader.readAsDataURL(filesList[i]);
                 }

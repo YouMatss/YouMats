@@ -82,11 +82,13 @@ class ProductController extends Controller
                         ->where('active', true)
                         ->limit(20)
                         ->get()
-                        ->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
-                            return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
-                                return $collection->sortBy('price')->groupBy(fn ($product) => (int) $product->price)->map(function (Collection $collection) {
-                                    return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
-                                        return $collection->sortByDesc('updated_at');
+                        ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
+                            return $collection->sortByDesc('delivery')->groupBy('delivery')->map(function (Collection $collection) {
+                                return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
+                                    return $collection->sortBy('price')->groupBy(fn ($product) => (int) $product->price)->map(function (Collection $collection) {
+                                        return $collection->sortByDesc('views')->groupBy('views')->map(function (Collection $collection) {
+                                            return $collection->sortByDesc('updated_at');
+                                        })->ungroup();
                                     })->ungroup();
                                 })->ungroup();
                             })->ungroup();
