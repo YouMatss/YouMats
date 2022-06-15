@@ -44,6 +44,7 @@ class IndexController extends Controller
         $data['shippingGroups'] = count($data['vendor']->shippings);
         $data['contacts'] = count($data['vendor']->contacts);
         $data['orders'] = count($data['vendor']->order_items);
+        $data['quotes'] = count($data['vendor']->quote_items);
 
         return view('vendorAdmin.dashboard')->with($data);
     }

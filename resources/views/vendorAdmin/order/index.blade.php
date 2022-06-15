@@ -1,6 +1,6 @@
 @extends('vendorAdmin.layouts.master')
 @section('title')
-    <title>{{__('vendorAdmin.products')}}</title>
+    <title>{{__('vendorAdmin.orders')}}</title>
 @endsection
 @section('content')
     <div class="pt-2">
@@ -8,7 +8,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h4 class="tit_main_v">{{__('vendorAdmin.products')}}</h4>
+                    <h4 class="tit_main_v">{{__('vendorAdmin.orders')}}</h4>
                 </div>
             </div>
 

@@ -273,50 +273,50 @@
 <script>
     $(document).ready(function() {
         var clone_element = `<div class="clone-element clone-element-add-contact">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="cities">{{__('vendorAdmin.cities')}}</label>
-                            <select class="form-control" id="cities" name="shipping_cities[]">
-                                <option value="" disabled selected>{{__('vendorAdmin.cities_placeholder')}}</option>
-                                @foreach($cities as $city)
-                                    <option value="{{$city->id}}">{{$city->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="cities">{{__('vendorAdmin.cities')}}</label>
+                        <select class="form-control" id="cities" name="shipping_cities[]">
+                            <option value="" disabled selected>{{__('vendorAdmin.cities_placeholder')}}</option>
+                            @foreach($cities as $city)
+                                <option value="{{$city->id}}">{{$city->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="price">{{__('vendorAdmin.price')}}</label>
-                            <input type="number" class="form-control" id="price" name="shipping_price[]" min="0" step="0.05" />
-                        </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="price">{{__('vendorAdmin.price')}}</label>
+                        <input type="number" class="form-control" id="price" name="shipping_price[]" min="0" step="0.05" />
                     </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="time">{{__('vendorAdmin.time')}}</label>
-                            <input type="number" class="form-control" id="time" name="shipping_time[]" min="1" step="1" />
-                        </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="time">{{__('vendorAdmin.time')}}</label>
+                        <input type="number" class="form-control" id="time" name="shipping_time[]" min="1" step="1" />
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="format">{{__('vendorAdmin.format')}}</label>
-                            <select class="form-control" id="format" name="shipping_format[]">
-                                <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
-                                <option value="hour">{{__('vendorAdmin.hour')}}</option>
-                                <option value="day">{{__('vendorAdmin.day')}}</option>
-                            </select>
-                        </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="format">{{__('vendorAdmin.format')}}</label>
+                        <select class="form-control" id="format" name="shipping_format[]">
+                            <option value="" disabled selected>{{__('vendorAdmin.format_placeholder')}}</option>
+                            <option value="hour">{{__('vendorAdmin.hour')}}</option>
+                            <option value="day">{{__('vendorAdmin.day')}}</option>
+                        </select>
                     </div>
-                    <div class="col-md-1">
-                <div class="form-group">
-                    <label>{{__('vendorAdmin.remove')}}</label>
-                    <button class="form-control btn btn-danger btn-xs clone-remove">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label>{{__('vendorAdmin.remove')}}</label>
+                        <button class="form-control btn btn-danger btn-xs clone-remove">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-                </div>
-            </div>`;
+        </div>`;
         $('#clone-add').on('click', function () {
             $('#clone-container').append(clone_element);
         });
@@ -348,7 +348,7 @@
         let filesList = [];
 
         // Multiple images preview in browser
-        let imagesPreview = function(input, placeToInsertImagePreview) {
+        let imagesPreview = function(input) {
             if (input.files) {
                 filesList.push(...input.files);
                 let filesAmount = filesList.length;
@@ -356,7 +356,7 @@
                 for (let i = 0; i < filesAmount; i++) {
                     let reader = new FileReader();
                     reader.onload = function(event) {
-                        $($.parseHTML('<img style="border-color: #F00;" class="img-thumbnail" width="200">'))
+                        $($.parseHTML('<img style="border-color: #F00;margin: 2px" class="img-thumbnail" width="200">'))
                             .attr('src', event.target.result)
                             .appendTo('div.temp-img-container');
                     }
@@ -365,10 +365,8 @@
             }
         };
         $('#gallery').on('change', function() {
-            imagesPreview(this, 'div.temp-img-container');
+            imagesPreview(this);
         });
-
-
     });
     function getSubCategories(category_id) {
         var subCategoryElement = $('#subCategory');

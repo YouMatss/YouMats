@@ -4,6 +4,7 @@ use App\Http\Controllers\Front\Vendor\Admin\BranchController;
 use App\Http\Controllers\Front\Vendor\Admin\IndexController;
 use App\Http\Controllers\Front\Vendor\Admin\OrderController;
 use App\Http\Controllers\Front\Vendor\Admin\ProductController;
+use App\Http\Controllers\Front\Vendor\Admin\QuoteController;
 use App\Http\Controllers\Front\Vendor\Admin\SippingGroupController;
 use App\Http\Controllers\Front\Vendor\Admin\SubScribeController;
 use Illuminate\Support\Facades\Route;
@@ -84,6 +85,10 @@ Route::group([
         Route::get('order', [OrderController::class, 'index'])->name('order.index');
         Route::get('order/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
         Route::post('order/update', [OrderController::class, 'update'])->name('order.update');
+
+        Route::get('quote', [QuoteController::class, 'index'])->name('quote.index');
+        Route::get('quote/view/{id}', [QuoteController::class, 'view'])->name('quote.view');
+//        Route::post('quote/update', [QuoteController::class, 'update'])->name('quote.update');
     });
     // Vendor Routes
 

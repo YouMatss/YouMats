@@ -109,6 +109,14 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->hasMany(OrderItem::class)->orderBy('id', 'desc');
     }
 
+    /**
+     * @return HasMany
+     */
+    public function quote_items(): HasMany
+    {
+        return $this->hasMany(QuoteItem::class)->orderBy('id', 'desc');
+    }
+
     public function getPhoneAttribute($value) {
         return '+966' . trim($value, '+966');
     }

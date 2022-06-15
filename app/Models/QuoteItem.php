@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class QuoteItem extends Model
 {
@@ -14,4 +15,13 @@ class QuoteItem extends Model
     public function product() {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function quote(): BelongsTo
+    {
+        return $this->belongsTo(Quote::class);
+    }
+
 }

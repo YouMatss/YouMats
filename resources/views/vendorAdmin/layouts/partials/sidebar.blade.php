@@ -129,6 +129,25 @@
                         </li>
                     </ul>
                 </li>
+                @if($vendor->current_subscribe)
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-hand-holding-usd"></i>
+                        <p>
+                            {{__('vendorAdmin.quotes')}}
+                            <i class="right fas fa-plus"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('vendor.quote.index')}}" class="nav-link">
+                                <i class="fa fa-border-all nav-icon"></i>
+                                <p>{{__('vendorAdmin.view_all')}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
             </ul>
         </nav>
     </div>
