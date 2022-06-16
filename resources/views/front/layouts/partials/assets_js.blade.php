@@ -189,7 +189,11 @@
             }).done(function(response) {
                 $('.cartCount').html(response.count);
                 $('.cartTotal').html(response.total);
-                toastr.success(response.message);
+                if(response.success) {
+                    toastr.success(response.message);
+                } else {
+                    toastr.error(response.message);
+                }
             }).fail(function(response) {
                 toastr.error(response);
             })

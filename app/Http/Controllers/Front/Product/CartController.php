@@ -42,7 +42,10 @@ class CartController extends Controller
             $quantity = $min_quantity;
 
         if((!is_company()) && $quantity > $stock)
-            return response()->json(['message' => __('messages.out_of_stock')]);
+            return response()->json([
+                'message' => __('messages.out_of_stock'),
+                'success' => false
+            ]);
 
         $deliveryIsExist = getDelivery($product, $quantity);
         $delivery = 0;
@@ -64,10 +67,13 @@ class CartController extends Controller
             [],
             $deliveryCalc
         )->associate($product);
-        return response()->json(['message' => __(is_company() ? 'product.added_to_quote_list' : 'product.added_to_cart'),
+        return response()->json([
+            'message' => __(is_company() ? 'product.added_to_quote_list' : 'product.added_to_cart'),
+            'success' => true,
             'cart' => Cart::content(),
             'total' => getCurrency('code') . ' ' . Cart::total(),
-            'count' => Cart::count()]);
+            'count' => Cart::count()
+        ]);
     }
 
     /**

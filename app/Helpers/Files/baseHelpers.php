@@ -86,7 +86,7 @@ if (!function_exists('cartOrChat')) {
                 </div>
             </div>
             <div>
-                <button data-url="' . route('cart.add', ['product' => $product]) . '"
+                <button type="button" data-url="' . route('cart.add', ['product' => $product]) . '"
                     class="btn-add-cart cart-chat-category btn btn-primary transition-3d-hover" style="cursor: pointer;">
                     <i class="' . $icon .'"></i> &nbsp;' . $cart_word . '
                 </button>
@@ -112,7 +112,7 @@ if (!function_exists('cartOrChat')) {
                     </div>
                 </div>
                 <div class="float-child-cart">
-                    <button data-url="' . route('cart.add', ['product' => $product]) . '"
+                    <button type="button" data-url="' . route('cart.add', ['product' => $product]) . '"
                         class="btn-add-cart cart-chat-category btn btn-primary transition-3d-hover"><i class="' . $icon .'"></i></button>
                 </div>
             </div>';
