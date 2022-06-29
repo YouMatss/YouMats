@@ -22,9 +22,6 @@
                             <tr class="head--table--vendor">
                                 <th class="text-center">#</th>
                                 <th class="text-center">{{__('vendorAdmin.name')}}</th>
-                                <th class="text-center">{{__('vendorAdmin.price')}}</th>
-                                <th class="text-center">{{__('vendorAdmin.time')}}</th>
-                                <th class="text-center">{{__('vendorAdmin.format')}}</th>
                                 <th class="text-center">{{__('vendorAdmin.actions')}}</th>
                             </tr>
                         </thead>
@@ -33,9 +30,6 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$shipping_price->name}}</td>
-                                    <td>{{$shipping_price->default_price}}</td>
-                                    <td>{{$shipping_price->default_time}}</td>
-                                    <td>{{$shipping_price->default_format}}</td>
                                     <td>
                                         <a href="{{route('vendor.shipping-group.edit', [$shipping_price->id])}}" class="btn btn-youmats btn-xs">{{__('vendorAdmin.edit_button')}}</a>
                                         <form style="display: inline-block" method="post" action="{{route('vendor.shipping-group.delete', [$shipping_price->id])}}">

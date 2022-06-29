@@ -5,7 +5,6 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
-use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -59,7 +58,7 @@ class Shipping extends Resource
                 Flexible::make('Prices')
                     ->addLayout('Cars', 'cars', [
                         Text::make('Car Type', 'car_type')->rules(REQUIRED_STRING_VALIDATION),
-                        SimpleRepeatable::make('cities', 'cities', [
+                        SimpleRepeatable::make('Cities', 'cities', [
                             Select::make('City')->options(function () {
                                 $collection = [];
                                 $data = \App\Models\City::with('country')->get();

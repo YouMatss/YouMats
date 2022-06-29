@@ -61,10 +61,17 @@ class ProductController extends Controller
         $data = $request->validated();
         $data['vendor_id'] = Auth::guard('vendor')->id();
 
-        $data['slug'] = Str::slug(implode(' ', $data['name_en']), '-') . rand(100, 999);
-
-        if(Product::whereSlug($data['slug'])->exists())
+        if(gettype($data['name_en']) == 'array') {
             $data['slug'] = Str::slug(implode(' ', $data['name_en']), '-') . rand(100, 999);
+
+            if (Product::whereSlug($data['slug'])->exists())
+                $data['slug'] = Str::slug(implode(' ', $data['name_en']), '-') . rand(100, 999);
+        } else {
+            $data['slug'] = Str::slug($data['name_en'], '-') . rand(100, 999);
+
+            if (Product::whereSlug($data['slug'])->exists())
+                $data['slug'] = Str::slug($data['name_en'], '-') . rand(100, 999);
+        }
 
         $data['active'] = 0;
 
