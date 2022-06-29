@@ -90,7 +90,7 @@
                 <div class="col-md-6 col-lg-4 col-xl-4 mb-md-6 mb-lg-0">
                     <div class="mb-2">
                         <a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{$product->category->name}}</a>
-                        <h2 class="font-size-25 text-lh-1dot2">{{$product->name}}</h2>
+                        <h2 class="font-size-25" style="line-height: 1.6">{{$product->name}}</h2>
                         <div class="mb-2">
                             <a class="d-inline-flex align-items-center small font-size-15 text-lh-1">
 {{--                                <div class="text-warning mr-2">--}}
@@ -151,7 +151,7 @@
                                             @endif
                                         </span>
                                         <br/>
-                                        <span>{{__('product.delivery_time')}}: <b>{{$delivery['time']}} {{($delivery['format'] == 'hours') ? __('product.delivery_hours') : __('product.delivery_days') }}</b></span>
+                                        <span>{{__('product.delivery_time')}}: <b>{{$delivery['time']}} {{($delivery['format'] == 'hour') ? __('product.delivery_hours') : __('product.delivery_days') }}</b></span>
                                         <button type="button" class="btn btn-block btn-xs btn-primary mt-2 choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
                                     </div>
                                 @else

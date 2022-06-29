@@ -223,6 +223,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/vyuldashev/nova-permission" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/waynestate/nova-ckeditor4-field" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/whitecube/nova-flexible-content" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/whitecube/nova-google-maps" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yassi/nova-nested-form" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ziffdavis/nova-nestedset" />

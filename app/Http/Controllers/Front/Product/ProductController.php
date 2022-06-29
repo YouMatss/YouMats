@@ -3,16 +3,13 @@
 namespace App\Http\Controllers\Front\Product;
 
 use App\Helpers\Filters\FiltersJsonField;
-use App\Helpers\Filters\FiltersKeywordField;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -21,7 +18,7 @@ class ProductController extends Controller
 {
     public function index($categories_slug, $slug) {
         $data['product'] = Product::with('category', 'tags', 'vendor')
-            ->where(['slug' => $slug, 'active' => 1])->first();
+            ->where(['slug' => $slug, 'active' => true])->first();
         abort_if(!$data['product'], 404);
 
         if(Session::has('city')) {
@@ -30,7 +27,6 @@ class ProductController extends Controller
         }
 
         $data['product']->views++;
-
         $data['product']->save();
 
         $data['related_products'] = Product::with('category')
@@ -48,7 +44,7 @@ class ProductController extends Controller
      */
     public function all(Request $request)
     {
-        $query = Product::where('active', 1)->orderBy('sort');
+        $query = Product::where('active', true)->orderBy('sort');
 
         if($request->has('search'))
             $query->where("name->en", 'like', '%'. $request->search . '%')

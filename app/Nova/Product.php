@@ -13,7 +13,6 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -22,12 +21,9 @@ use Laravel\Nova\Panel;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use Maher\TitleTemplate\TitleTemplate;
 use Nikaia\Rating\Rating;
-use NovaItemsField\Items;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
-use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
-use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
 use Waynestate\Nova\CKEditor;
 use Whitecube\NovaFlexibleContent\Flexible;
 use ZiffDavis\Nova\Nestedset\Fields\NestedsetSelect;
@@ -102,7 +98,7 @@ class Product extends Resource
                 ->hideFromIndex()->nullable(),
 
             Number::make('Minimum Order Quantity', 'min_quantity')
-                ->rules(NULLABLE_INTEGER_VALIDATION)
+                ->rules(REQUIRED_INTEGER_VALIDATION)
                 ->default(1)->min(1)
                 ->hideFromIndex(),
 
@@ -157,38 +153,24 @@ class Product extends Resource
                     ->hideFromIndex()->hideWhenCreating(),
                 Boolean::make('Specific shipping', 'specific_shipping')->hideFromIndex()->nullable(),
                 NovaDependencyContainer::make([
-                    SimpleRepeatable::make('Shipping Prices', 'shipping_prices', [
-                        Select::make('Cities')->options(function () {
-                            $collection = [];
-                            $data = \App\Models\City::with('country')->get();
-                            foreach ($data as $row) {
-                                $collection[$row->id] = ['label' => $row->name, 'group' => $row->country->name];
-                            }
-                            return $collection;
-                        })->displayUsingLabels()->placeholder('Choose City')->rules(['required', 'integer']),
-                        Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
-                        Number::make('From', 'from')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1),
-                        Number::make('To', 'to')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1),
-                        Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1)->step(1),
-                        Select::make('Format')->options([
-                            'hour' => 'Hour',
-                            'day' => 'Day'
-                        ])->rules(['required', 'in:hour,day']),
-                    ]),
-                    Heading::make('Default for all cities (Optional)'),
-                    Currency::make('Price', 'default_price')->rules(NULLABLE_NUMERIC_VALIDATION)->min(0)->step(0.05)
-                        ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
-                    Number::make('From', 'default_from')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1)
-                        ->help('If leave it blank, it means you have set the price for any quantity & If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
-                    Number::make('To', 'default_to')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1)
-                        ->help('If leave it blank, it means you have set the price for any quantity & If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
-                    Number::make('Time', 'default_time')->rules(NULLABLE_INTEGER_VALIDATION)->min(1)->step(1)
-                        ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
-                    Select::make('Format', 'default_format')->options([
-                        'hour' => 'Hour',
-                        'day' => 'Day'
-                    ])->rules(['nullable', 'in:hour,day'])
-                        ->help('If leave it blank, that\'s mean you are not shipping to other/all cities except selected in specific terms above'),
+                    Flexible::make('Shipping Prices', 'shipping_prices')
+                        ->addLayout('Cars', 'cars', [
+                            Text::make('Car Type', 'car_type')->rules(REQUIRED_STRING_VALIDATION),
+                            SimpleRepeatable::make('cities', 'cities', [
+                                Select::make('City')->options(function () {
+                                    $collection = [];
+                                    $data = \App\Models\City::with('country')->get();
+                                    foreach ($data as $row) {
+                                        $collection[$row->id] = ['label' => $row->name, 'group' => $row->country->name];
+                                    }
+                                    return $collection;
+                                })->displayUsingLabels()->placeholder('Choose City')->rules(['required', 'integer']),
+                                Number::make('Quantity')->rules(REQUIRED_INTEGER_VALIDATION)->min(1)->step(1),
+                                Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+                                Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1)->step(1),
+                                Select::make('Format')->options(['hour' => 'Hour', 'day' => 'Day'])->rules(['required', 'in:hour,day']),
+                            ]),
+                        ]),
                 ])->dependsOn('specific_shipping', true),
             ])),
 

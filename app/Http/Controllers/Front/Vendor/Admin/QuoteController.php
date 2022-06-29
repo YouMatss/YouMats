@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Front\Vendor\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Vendor\OrderRequest;
-use App\Models\OrderItem;
 use App\Models\QuoteItem;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class QuoteController extends Controller
 {

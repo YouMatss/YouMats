@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\Classes\Shipping as ShippingHelper;
 use Illuminate\Support\Facades\Session;
 
 if (!function_exists('front_url')) {
@@ -224,45 +225,19 @@ function parseNumber($number) {
 
 if (!function_exists('getDelivery')) {
     function getDelivery($product, $quantity) {
-        if($product->specific_shipping) {
-            if($product->shipping_prices) {
-                foreach ($product->shipping_prices as $shipping) {
-                    if(Session::has('city') && $shipping['cities'] == Session::get('city')
-                        && $shipping['from'] <= $quantity && $shipping['to'] >= $quantity) {
-                        $shipping['price'] = (string)$shipping['price'];
-                        return $shipping;
-                    }
+        try {
+            $remap_shipping = [];
+            if($product->specific_shipping && $product->shipping_prices) {
+                $remap_shipping = ShippingHelper::remap($product->shipping_prices);
+            } elseif(isset($product->shipping) && $product->shipping->prices) {
+                $remap_shipping = ShippingHelper::remap($product->shipping->prices);
+            }
+            foreach ($remap_shipping as $city => $shipping) {
+                if(Session::has('city') && $city == Session::get('city')) {
+                    return ShippingHelper::result(ShippingHelper::getBestPrice($shipping, $quantity));
                 }
             }
-            if(isset($product->default_price) && isset($product->default_time) && isset($product->default_format)) {
-                return [
-                    'price' => (string)$product->default_price,
-                    'from' => $product->default_from,
-                    'to' => $product->default_to,
-                    'time' => $product->default_time,
-                    'format' => $product->default_format,
-                ];
-            }
-        }
-        if (isset($product->shipping)) {
-            if($product->shipping->cities_prices) {
-                foreach ($product->shipping->cities_prices as $shipping) {
-                    if(Session::has('city') && $shipping['cities'] == Session::get('city')) {
-                        $shipping['price'] = (string)$shipping['price'];
-                        return $shipping;
-                    }
-                }
-            }
-            if($product->shipping->default_price && $product->shipping->default_time && $product->shipping->default_format) {
-                return [
-                    'price' => (string)$product->shipping->default_price,
-                    'from' => $product->default_from,
-                    'to' => $product->default_to,
-                    'time' => $product->shipping->default_time,
-                    'format' => $product->shipping->default_format,
-                ];
-            }
-        }
-        return null;
+            return null;
+        } catch (\Exception $e) {}
     }
 }
