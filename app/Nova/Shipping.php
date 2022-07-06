@@ -10,7 +10,6 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Panel;
-use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use Whitecube\NovaFlexibleContent\Flexible;
 
 class Shipping extends Resource
@@ -58,21 +57,22 @@ class Shipping extends Resource
                 Flexible::make('Prices')
                     ->addLayout('Cars', 'cars', [
                         Text::make('Car Type', 'car_type')->rules(REQUIRED_STRING_VALIDATION),
-                        SimpleRepeatable::make('Cities', 'cities', [
-                            Select::make('City')->options(function () {
-                                $collection = [];
-                                $data = \App\Models\City::with('country')->get();
-                                foreach ($data as $row) {
-                                    $collection[$row->id] = ['label' => $row->name, 'group' => $row->country->name];
-                                }
-                                return $collection;
-                            })->displayUsingLabels()->placeholder('Choose City')->rules(['required', 'integer']),
-                            Number::make('Quantity')->rules(REQUIRED_INTEGER_VALIDATION)->min(1)->step(1),
-                            Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
-                            Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1)->step(1),
-                            Select::make('Format')->options(['hour' => 'Hour', 'day' => 'Day'])->rules(['required', 'in:hour,day']),
-                        ]),
-                    ]),
+                        Flexible::make('Cities')
+                            ->addLayout('Cities', 'cities', [
+                                Select::make('City')->options(function () {
+                                    $collection = [];
+                                    $data = \App\Models\City::with('country')->get();
+                                    foreach ($data as $row) {
+                                        $collection[$row->id] = ['label' => $row->name, 'group' => $row->country->name];
+                                    }
+                                    return $collection;
+                                })->displayUsingLabels()->placeholder('Choose City')->rules(['required', 'integer']),
+                                Number::make('Quantity')->rules(REQUIRED_INTEGER_VALIDATION)->min(1)->step(1),
+                                Currency::make('Price')->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
+                                Number::make('Time')->rules(REQUIRED_INTEGER_VALIDATION)->min(1)->step(1),
+                                Select::make('Format')->options(['hour' => 'Hour', 'day' => 'Day'])->rules(['required', 'in:hour,day']),
+                            ]),
+                    ])
             ])
         ];
     }

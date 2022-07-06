@@ -185,7 +185,7 @@
                             @if(!Auth::guard('vendor')->check())
                                 @if(is_company())
                                     {!! cartOrChat($product) !!}
-                                @elseif($product->vendor->current_subscribe)
+                                @elseif($product->vendor->current_subscribe && in_array($product->vendor->current_subscribe->membership_id, [env('INDIVIDUAL_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))
                                     @if($product->price || $product->delivery)
                                         {!! cartOrChat($product) !!}
                                     @else

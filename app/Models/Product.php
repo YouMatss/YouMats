@@ -65,7 +65,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         try {
             $remap_shipping = [];
             if($this->specific_shipping && $this->shipping_prices) {
-                $remap_shipping = ShippingHelper::remap($this->shipping_prices);
+                $remap_shipping = ShippingHelper::remap($this->shipping_prices, false);
             } elseif(isset($this->shipping) && $this->shipping->prices) {
                 $remap_shipping = ShippingHelper::remap($this->shipping->prices);
             }
@@ -96,7 +96,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
                 if ($this->shipping->prices) {
                     foreach ($this->shipping->prices as $shipping) {
                         foreach ($shipping['attributes']['cities'] as $city) {
-                            $cities[] = $city['city'];
+                            $cities[] = $city['attributes']['city'];
                         }
                     }
                 }

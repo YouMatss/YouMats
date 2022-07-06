@@ -18,7 +18,7 @@ class QuoteController extends Controller
     public function index() {
         $data['vendor'] = Auth::guard('vendor')->user();
 
-        if(!$data['vendor']->current_subscribe)
+        if(!($data['vendor']->current_subscribe && in_array($data['vendor']->current_subscribe->membership_id, [env('COMPANY_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')])))
             return redirect()->route('vendor.dashboard');
 
         $data['items'] = $data['vendor']->quote_items;
@@ -29,7 +29,7 @@ class QuoteController extends Controller
     public function view($id) {
         $data['vendor'] = Auth::guard('vendor')->user();
 
-        if(!$data['vendor']->current_subscribe)
+        if(!($data['vendor']->current_subscribe && in_array($data['vendor']->current_subscribe->membership_id, [env('COMPANY_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')])))
             return redirect()->route('vendor.dashboard');
 
         $data['item'] = QuoteItem::with('quote')->where('quote_id', $id)

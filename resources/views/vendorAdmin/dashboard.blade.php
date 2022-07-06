@@ -31,8 +31,8 @@
                         <span class="info-box-icon bg-info"><i class="far fa-star text-success"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">{{__('vendorAdmin.subscribe_expiry_date')}}</span>
-                            <span class="info-box-number" style="font-size: 14px">{{date('F d,Y', strtotime($vendor->current_subscribe->expiry_date))}}</span>
+                            <span class="info-box-text">{{\App\Models\Membership::findorfail($vendor->current_subscribe->membership_id)->name}}</span>
+                            <span class="info-box-number" style="font-size: 14px">{{__('vendorAdmin.subscribe_expiry_date') . ': ' . date('F d,Y', strtotime($vendor->current_subscribe->expiry_date))}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>

@@ -6,17 +6,31 @@ namespace App\Helpers\Classes;
 
 class Shipping
 {
-    public static function remap($shipping_prices) {
+    public static function remap($shipping_prices, $flexible = true) {
         $arr = [];
-        foreach ($shipping_prices as $price) {
-            foreach ($price['attributes']['cities'] as $city) {
-                $arr[$city['city']][] = [
-                    'car' => $price['attributes']['car_type'],
-                    'quantity' => $city['quantity'],
-                    'price' => $city['price'],
-                    'time' => $city['time'],
-                    'format' => $city['format']
-                ];
+        if($flexible) {
+            foreach ($shipping_prices as $price) {
+                foreach ($price['attributes']['cities'] as $city) {
+                    $arr[$city['attributes']['city']][] = [
+                        'car' => $price['attributes']['car_type'],
+                        'quantity' => $city['attributes']['quantity'],
+                        'price' => $city['attributes']['price'],
+                        'time' => $city['attributes']['time'],
+                        'format' => $city['attributes']['format']
+                    ];
+                }
+            }
+        } else {
+            foreach ($shipping_prices as $price) {
+                foreach ($price['attributes']['cities'] as $city) {
+                    $arr[$city['city']][] = [
+                        'car' => $price['attributes']['car_type'],
+                        'quantity' => $city['quantity'],
+                        'price' => $city['price'],
+                        'time' => $city['time'],
+                        'format' => $city['format']
+                    ];
+                }
             }
         }
         return $arr;

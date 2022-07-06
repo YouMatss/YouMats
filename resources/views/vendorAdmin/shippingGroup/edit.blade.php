@@ -268,7 +268,6 @@
             $(document).on('click', '.clone-remove-cities', function () {
                 $(this).closest('.clone-element-cities').remove();
             });
-
         });
     </script>
 @endsection

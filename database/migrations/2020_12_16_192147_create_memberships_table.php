@@ -18,6 +18,7 @@ class CreateMembershipsTable extends Migration
 
             $table->text('name');
             $table->double('price');
+            $table->text('desc')->nullable();
             $table->integer('sort');
 
             $table->softDeletes();

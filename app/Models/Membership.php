@@ -14,13 +14,9 @@ class Membership extends Model implements Sortable
 {
     use SoftDeletes, HasFactory, SortableTrait, HasTranslations, CascadeSoftDeletes;
 
-    public $translatable = ['name'];
+    public $translatable = ['name', 'desc'];
 
     protected $dates = ['deleted_at'];
 
     protected $cascadeDeletes = ['vendors'];
-
-    public function vendors() {
-        return $this->hasMany(Vendor::class);
-    }
 }

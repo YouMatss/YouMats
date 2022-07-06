@@ -3,10 +3,12 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 
 class Membership extends Resource
@@ -31,12 +33,15 @@ class Membership extends Resource
                 ->translatable()
                 ->rules(REQUIRED_STRING_VALIDATION),
 
+            Textarea::make('Description', 'desc')
+                ->hideFromIndex()
+                ->translatable()
+                ->rules(NULLABLE_TEXT_VALIDATION),
+
             Currency::make('Price')
                 ->rules(REQUIRED_NUMERIC_VALIDATION)
                 ->min(0)
                 ->step(0.05),
-
-            HasMany::make('Vendors'),
         ];
     }
 

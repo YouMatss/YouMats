@@ -23,14 +23,12 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @if(!$vendor->current_subscribe)
                 <li class="nav-item">
                     <a href="{{route('vendor.subscribe.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-star text-success"></i>
                         <p class="text-success">{{__('vendorAdmin.upgrade_your_membership')}}</p>
                     </a>
                 </li>
-                @endif
                 <li class="nav-item">
                     <a href="{{route('vendor.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -129,7 +127,7 @@
                         </li>
                     </ul>
                 </li>
-                @if($vendor->current_subscribe)
+                @if($vendor->current_subscribe && in_array($vendor->current_subscribe->membership_id, [env('COMPANY_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-hand-holding-usd"></i>

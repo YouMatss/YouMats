@@ -9,6 +9,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">{{__('vendorAdmin.subscribe_title')}}</h1>
+                    <p>{{__('vendorAdmin.membership_price')}}</p>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -24,26 +25,32 @@
     <section class="content content-vendor-edit pt-2">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12 mb-2">
+                @foreach($memberships as $membership)
+                <div class="col-md-4 mb-2">
                     <form action="{{route('vendor.subscribe.upgrade')}}" method="get" enctype="multipart/form-data">
+                        <input type="hidden" name="membership_id" value="{{$membership->id}}">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p>{!! __('vendorAdmin.subscribe_text') !!}</p>
+                                        <p><strong>{{$membership->name . ' (' . $membership->price . ' ' . getCurrency('symbol') . ')'}}</strong></p>
                                     </div>
                                     <div class="col-md-12">
-                                        <span>{{__('vendorAdmin.membership_price')}}:</span>
-                                        <strong>{{$membership->name . ' (' . $membership->price . ' ' . getCurrency('symbol') . ')'}}</strong>
+                                        <span>{!! $membership->desc !!}</span>
                                     </div>
                                     <div class="col-md-12 mt-2">
-                                        <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.subscribe_now')}}</button>
+                                        @if($current_subscribe_id == $membership->id)
+                                            <button type="button" class="btn btn-success" disabled>{{__('vendorAdmin.already_subscribed')}}</button>
+                                        @else
+                                            <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.subscribe_now')}}</button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
+                @endforeach
             </div>
         </div>
     </section>
