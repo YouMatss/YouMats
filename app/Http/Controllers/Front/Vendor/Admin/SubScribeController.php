@@ -8,6 +8,7 @@ use App\Models\Membership;
 use App\Models\Subscribe;
 use Carbon\Carbon;
 use Devinweb\Payment\Facades\Payment;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -77,6 +78,7 @@ class SubScribeController extends Controller
                 'price' => $data['membership']->price,
             ]);
 
+
 //            $arrData = [
 //                'command' => env('PAYFORT_COMMAND'),
 //                'access_code' => env('PAYFORT_ACCESS_CODE'),
@@ -121,5 +123,15 @@ class SubScribeController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('home');
         }
+    }
+
+    public function cancel() {
+        $data['vendor'] = Auth::guard('vendor')->user();
+
+        $data['vendor']->current_subscribe->update([
+            'expiry_date' => Carbon::yesterday()
+        ]);
+
+        return redirect()->back();
     }
 }

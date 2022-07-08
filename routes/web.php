@@ -49,6 +49,7 @@ Route::group([
             Route::get('/', [SubScribeController::class, 'index'])->name('index');
             Route::get('/upgrade', [SubScribeController::class, 'upgrade'])->name('upgrade');
             Route::post('/submit-payment', [SubScribeController::class, 'submit'])->name('submit');
+            Route::post('/cancel-subscribe', [SubScribeController::class, 'cancel'])->name('cancel');
             Route::get('/success', [SubScribeController::class, 'success'])->name('success');
             Route::get('/error', [SubScribeController::class, 'error'])->name('error');
         });

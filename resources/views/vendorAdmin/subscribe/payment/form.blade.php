@@ -75,6 +75,7 @@
                 </div>
             </div>
         </div>
+        <span id="card-header">{{__('checkout.save_card_notes')}}</span>
         <button @click="submitForm" :disabled="loading" :class="{'loading': loading}" class="btn d-flex mx-auto" style="cursor: pointer">
             <b v-if="loading">{{__('checkout.loading')}}</b>
             <b v-else>{{__('checkout.payment_submit_button')}}</b>
@@ -91,7 +92,7 @@
         data: {
             expiration_date: "",
             hold_name: "",
-            email: "info@youmats.com",
+            email: "{{optional(auth('vendor')->user())->email ?? 'info@youmats.com'}}",
             cvc: "",
             card_number: "",
             amount: {{round($membership->price)}},
