@@ -12,6 +12,7 @@
     <meta name="twitter:title" content="{{$page->meta_title}}">
     <meta name="twitter:description" content="{{$page->meta_desc}}">
     <meta name="twitter:image" content="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['url']}}">
+    {!! $page->schema !!}
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
@@ -32,7 +33,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <img src="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['url']}}" alt="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['alt']}}" title="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['title']}}">
+                    <img loading="lazy" src="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['url']}}" alt="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['alt']}}" title="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['title']}}">
                 </div>
             </div>
         </div>
@@ -47,7 +48,7 @@
         <div class="row">
             <div class="col-md-4 mb-4 mb-md-0">
                 <div class="card mb-3 border-0 text-center rounded-0">
-                    <img class="img-fluid mb-3" src="{{ Storage::url(nova_get_setting('logo')) }}" alt="Card image cap">
+                    <img loading="lazy" class="img-fluid mb-3" src="{{ Storage::url(nova_get_setting('logo')) }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="font-size-18 font-weight-semi-bold mb-3">What we really do?</h5>
                         <p class="text-gray-90 max-width-334 mx-auto">Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus.</p>
@@ -56,7 +57,7 @@
             </div>
             <div class="col-md-4 mb-4 mb-md-0">
                 <div class="card mb-3 border-0 text-center rounded-0">
-                    <img class="img-fluid mb-3" src="{{ Storage::url(nova_get_setting('logo')) }}" alt="Card image cap">
+                    <img loading="lazy" class="img-fluid mb-3" src="{{ Storage::url(nova_get_setting('logo')) }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="font-size-18 font-weight-semi-bold mb-3">Our Vision</h5>
                         <p class="text-gray-90 max-width-334 mx-auto">Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus.</p>
@@ -65,7 +66,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card mb-3 border-0 text-center rounded-0">
-                    <img class="img-fluid mb-3" src="{{ Storage::url(nova_get_setting('logo')) }}" alt="Card image cap">
+                    <img loading="lazy" class="img-fluid mb-3" src="{{ Storage::url(nova_get_setting('logo')) }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="font-size-18 font-weight-semi-bold mb-3">History of the Company</h5>
                         <p class="text-gray-90 max-width-334 mx-auto">Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus.</p>

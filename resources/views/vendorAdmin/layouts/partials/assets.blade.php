@@ -27,11 +27,16 @@
 <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Custom Style -->
-<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-vendor.css">
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-vendor-before.css">
 <!-- RTL Style -->
 @if(\LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
     <!-- Bootstrap 4 RTL -->
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
     <!-- Custom style for RTL -->
     <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/rtl-vendor.css">
+    <link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-style-rtl.css">
+
 @endif
+<!-- Custom Style -->
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-vendor-after.css">
+<link rel="stylesheet" href="{{asset('vendorAdminAssets')}}/dist/css/custom-style.css">

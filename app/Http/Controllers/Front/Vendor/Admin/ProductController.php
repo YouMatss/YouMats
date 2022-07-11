@@ -61,10 +61,17 @@ class ProductController extends Controller
         $data = $request->validated();
         $data['vendor_id'] = Auth::guard('vendor')->id();
 
-        $data['slug'] = Str::slug($data['name_en'], '-') . rand(100, 999);
+        if(gettype($data['name_en']) == 'array') {
+            $data['slug'] = Str::slug(implode(' ', $data['name_en']), '-') . rand(100, 999);
 
-        if(Product::whereSlug($data['slug'])->exists())
+            if (Product::whereSlug($data['slug'])->exists())
+                $data['slug'] = Str::slug(implode(' ', $data['name_en']), '-') . rand(100, 999);
+        } else {
             $data['slug'] = Str::slug($data['name_en'], '-') . rand(100, 999);
+
+            if (Product::whereSlug($data['slug'])->exists())
+                $data['slug'] = Str::slug($data['name_en'], '-') . rand(100, 999);
+        }
 
         $data['active'] = 0;
 
@@ -77,26 +84,35 @@ class ProductController extends Controller
         if(gettype($data['name_en']) == 'array') {
             $data['name'] = ['en' => implode(' ', $data['name_en']), 'ar' => implode(' ', $data['name_ar'])];
             $data['temp_name'] = ['en' => implode('-', $data['name_en']), 'ar' => implode('-', $data['name_ar'])];
+            $data['meta_title'] = ['en' => implode(' ', $data['name_en']), 'ar' => implode(' ', $data['name_ar'])];
+            $data['meta_keywords'] = ['en' => implode(' ', $data['name_en']), 'ar' => implode(' ', $data['name_ar'])];
         } else {
             $data['name'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
+            $data['meta_title'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
+            $data['meta_keywords'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
         }
         $data['desc'] = ['en' => $data['desc_en'], 'ar' => $data['desc_ar']];
         $data['short_desc'] = ['en' => $data['short_desc_en'], 'ar' => $data['short_desc_ar']];
-        $data['meta_title'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
         $data['meta_desc'] = ['en' => $data['short_desc_en'], 'ar' => $data['short_desc_ar']];
-        $data['meta_keywords'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
 
-        if(isset($data['shipping_cities'])) {
-            for ($i=0;$i<count($data['shipping_cities']);$i++) {
-                $data['shipping_prices'][] = [
-                    'cities' => $data['shipping_cities'][$i],
-                    'price' => $data['shipping_price'][$i],
-                    'time' => $data['shipping_time'][$i],
-                    'format' => $data['shipping_format'][$i],
-                ];
+        if(isset($data['cars'])) {
+            foreach ($data['cars'] as $key => $car) {
+                $data['shipping_prices'][$key]['layout'] = 'cars';
+                $data['shipping_prices'][$key]['key'] = Str::random(16);
+                $data['shipping_prices'][$key]['attributes']['car_type'] = $car['car_type'];
+                unset($car['car_type']);
+                foreach ($car as $city) {
+                    $data['shipping_prices'][$key]['attributes']['cities'][] = $city;
+                }
             }
         } else {
-            $data['shipping_prices'] = [];
+            $data['shipping_prices'] = null;
+        }
+
+        if(isset($data['attributes'])) {
+            $data['attributes'] = '[' . implode(',', $data['attributes']) . ']';
+        } else {
+            $data['attributes'] = '[]';
         }
 
         $product = Product::create($data);
@@ -152,17 +168,22 @@ class ProductController extends Controller
             $data['specific_shipping'] = '0';
         }
 
-        if(isset($data['shipping_cities'])) {
-            for ($i=0;$i<count($data['shipping_cities']);$i++) {
-                $data['shipping_prices'][] = [
-                    'cities' => $data['shipping_cities'][$i],
-                    'price' => $data['shipping_price'][$i],
-                    'time' => $data['shipping_time'][$i],
-                    'format' => $data['shipping_format'][$i],
-                ];
+        if(isset($data['cars'])) {
+            foreach ($data['cars'] as $key => $car) {
+                $data['shipping_prices'][$key]['layout'] = 'cars';
+                $data['shipping_prices'][$key]['key'] = Str::random(16);
+                $data['shipping_prices'][$key]['attributes']['car_type'] = $car['car_type'];
+                unset($car['car_type']);
+                foreach ($car as $city) {
+                    $data['shipping_prices'][$key]['attributes']['cities'][] = $city;
+                }
             }
         } else {
-            $data['shipping_prices'] = [];
+            $data['shipping_prices'] = null;
+        }
+
+        if(!isset($data['attributes'])) {
+            $data['attributes'] = [];
         }
 
         $product->update($data);

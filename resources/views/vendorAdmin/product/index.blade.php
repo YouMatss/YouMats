@@ -5,15 +5,23 @@
 @section('content')
     <div class="pt-2">
         <div class="col-md-12">
-            <h4>{{__('vendorAdmin.products')}}</h4>
-            <div class="text-right">
-                <a href="{{route('vendor.product.create')}}" class="btn btn-sm mb-3 btn-youmats">{{__('vendorAdmin.add_button')}}</a>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="tit_main_v">{{__('vendorAdmin.products')}}</h4>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{route('vendor.product.create')}}" class="btn btn-sm mb-3 btn-youmats tit-head-branch btn--vend"> <i class="fa fa-plus"></i> {{__('vendorAdmin.add_button')}}</a>
+                </div>
             </div>
-            <div class="card">
+
+
+
+            <div class="card card--vendor edit-head-table-vendor">
                 <div class="card-body">
                     <table id="example1" class="table" style="width: 100%">
                         <thead>
-                            <tr>
+                            <tr class="head--table--vendor">
                                 <th class="text-center">#</th>
                                 <th class="text-center">{{__('vendorAdmin.name')}}</th>
                                 <th class="text-center">{{__('vendorAdmin.category')}}</th>

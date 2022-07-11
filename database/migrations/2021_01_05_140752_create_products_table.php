@@ -45,6 +45,13 @@ class CreateProductsTable extends Migration
             $table->tinyInteger('active')->default(1);
             $table->integer('views')->default(1);
 
+            $table->bigInteger('shipping_id')->unsigned()->index()->nullable();
+            $table->foreign('shipping_id')->references('id')->on('shippings')
+                ->onDelete('CASCADE')->onUpdate('CASCADE');
+
+            $table->boolean('specific_shipping')->default(0);
+            $table->json('shipping_prices')->nullable();
+
             $table->string('slug')->unique();
             $table->text('meta_title')->nullable();
             $table->text('meta_desc')->nullable();

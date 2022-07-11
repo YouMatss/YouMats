@@ -10,13 +10,9 @@
             <div class="modal-body">
                 <select id="city_select" class="form-control">
                     <option value="" selected disabled>{{__('general.select_city')}}</option>
-                    @if(isset($delivery_cities) && $delivery_cities != 'all' && count($delivery_cities))
+                    @if(isset($delivery_cities) && count($delivery_cities))
                         @foreach($delivery_cities as $d_city_loop)
                             <option value="{{$d_city_loop->id}}" @if(Session::has('city') && $d_city_loop->id == Session::get('city')) selected @endif>{{$d_city_loop->name}}</option>
-                        @endforeach
-                    @else
-                        @foreach(\App\Models\City::all() as $city_loop)
-                            <option value="{{$city_loop->id}}" @if(Session::has('city') && $city_loop->id == Session::get('city')) selected @endif>{{$city_loop->name}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -31,23 +27,25 @@
 @if(isset($ajax))
 @section('extraScripts')
 <script>
-    $(document).on('ready', function () {
-        $(document).on('click', '#city_submit', function () {
-            $.ajax({
-                type: 'POST',
-                url: "{{route('front.changeCity')}}",
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    city_id: $('#city_select').val()
-                }
+    document.addEventListener('DOMContentLoaded', function() {
+        $(document).on('ready', function () {
+            $(document).on('click', '#city_submit', function () {
+                $.ajax({
+                    type: 'POST',
+                    url: "{{route('front.changeCity')}}",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        city_id: $('#city_select').val()
+                    }
+                })
+                .done(function(response) {
+                    location.reload();
+                })
+                .fail(function(response) {
+                    console.log(response);
+                })
             })
-            .done(function(response) {
-                location.reload();
-            })
-            .fail(function(response) {
-                console.log(response);
-            })
-        })
+        });
     });
 </script>
 @endsection

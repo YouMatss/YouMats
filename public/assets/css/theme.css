@@ -37512,9 +37512,10 @@ blockquote:not(.blockquote) p {
   color:#000;
 }
 
-.slick-slide img {
-  max-height: 420px;
-  width: 100%;
+.slick-slide-img-content {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center;
 }
 
 .cat {
@@ -37679,11 +37680,13 @@ blockquote:not(.blockquote) p {
 
 }
 
-.img_cat_home img{
-  height: 150px;
-  width: 150px;
+.img_cat_home {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
 
 .img_main_block{
   height: 307px;

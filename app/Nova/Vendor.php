@@ -9,6 +9,7 @@ use Drobee\NovaSluggable\SluggableText;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
@@ -34,11 +35,6 @@ class Vendor extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-
-            BelongsTo::make('Membership')
-                ->showCreateRelationButton()
-                ->hideFromIndex()
-                ->withoutTrashed(),
 
             BelongsTo::make('Country')
                 ->showCreateRelationButton()
@@ -66,26 +62,26 @@ class Vendor extends Resource
                 ->rules(NULLABLE_STRING_VALIDATION)
                 ->hideFromIndex(),
 
-           SimpleRepeatable::make('Contacts', 'contacts', [
-              Text::make('Person Name', 'person_name')
-                  ->rules(REQUIRED_STRING_VALIDATION),
-              Text::make('Email', 'email')
-                  ->rules(REQUIRED_EMAIL_VALIDATION),
-              Text::make('Phone', 'phone')
-                  ->rules(REQUIRED_STRING_VALIDATION),
-              Textarea::make('Code', 'phone_code')
-                  ->readonly(),
-              Multiselect::make('Cities', 'cities')
-                  ->options(\App\Models\City::pluck('name', 'id'))
-                  ->saveAsJSON(),
-              Select::make('With?', 'with')
-                  ->options([
-                      'individual' => 'Individual',
-                      'company' => 'Company',
-                      'both' => 'Both'
-                  ])
-                  ->rules(REQUIRED_STRING_VALIDATION),
-           ]),
+            SimpleRepeatable::make('Contacts', 'contacts', [
+                Text::make('Person Name', 'person_name')
+                    ->rules(REQUIRED_STRING_VALIDATION),
+                Text::make('Email', 'email')
+                    ->rules(REQUIRED_EMAIL_VALIDATION),
+                Text::make('Phone', 'phone')
+                    ->rules(REQUIRED_STRING_VALIDATION),
+                Text::make('Code', 'phone_code')
+                    ->readonly(),
+                Multiselect::make('Cities', 'cities')
+                    ->options(\App\Models\City::pluck('name', 'id'))
+                    ->saveAsJSON(),
+                Select::make('With?', 'with')
+                    ->options([
+                        'individual' => 'Individual',
+                        'company' => 'Company',
+                        'both' => 'Both'
+                    ])
+                    ->rules(REQUIRED_STRING_VALIDATION),
+            ]),
 
             Select::make('Type')->options([
                 'factory' => 'Factory',
@@ -170,7 +166,7 @@ class Vendor extends Resource
             Toggle::make('Active')
                 ->falseColor('#bacad6')->editableIndex(),
 
-            Toggle::make('Featured', 'isFeatured')
+            Toggle::make('Featured', 'isFeatured')->sortable()
                 ->falseColor('#bacad6')->editableIndex(),
 
             Password::make('Password')->onlyOnForms()
@@ -182,6 +178,7 @@ class Vendor extends Resource
             HasMany::make('Products'),
             HasMany::make('Branches'),
             HasMany::make('Shippings'),
+            HasOne::make('Subscribes'),
         ];
     }
 

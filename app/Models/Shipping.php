@@ -13,7 +13,7 @@ class Shipping extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'cities_prices' => 'array'
+        'prices' => 'json'
     ];
 
     /**

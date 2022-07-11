@@ -25,6 +25,20 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                @if($vendor->current_subscribe)
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="far fa-star text-success"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">{{\App\Models\Membership::findorfail($vendor->current_subscribe->membership_id)->name}}</span>
+                            <span class="info-box-number" style="font-size: 14px">{{__('vendorAdmin.subscribe_expiry_date') . ': ' . date('F d,Y', strtotime($vendor->current_subscribe->expiry_date))}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                @endif
                 <div class="col-md-3 col-sm-6 col-12">
                     <div class="info-box">
                         <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
@@ -77,8 +91,6 @@
                     <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
-            </div>
-            <div class="row">
                 <div class="col-md-3 col-sm-6 col-12">
                     <div class="info-box bg-info">
                         <span class="info-box-icon"><i class="fas fa-layer-group"></i></span>
@@ -87,7 +99,7 @@
                             <span class="info-box-text">{{__('vendorAdmin.products')}}</span>
                             <span class="info-box-number">{{$products}}</span>
                             <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
+                                <div class="progress-bar" style="width: {{rand(5,10)}}0%"></div>
                             </div>
                         </div>
                         <!-- /.info-box-content -->
@@ -104,7 +116,7 @@
                             <span class="info-box-number">{{$branches}}</span>
 
                             <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
+                                <div class="progress-bar" style="width: {{rand(5,10)}}0%"></div>
                             </div>
                         </div>
                         <!-- /.info-box-content -->
@@ -121,7 +133,24 @@
                             <span class="info-box-number">{{$orders}}</span>
 
                             <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
+                                <div class="progress-bar" style="width: {{rand(5,10)}}0%"></div>
+                            </div>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bg-warning">
+                        <span class="info-box-icon"><i class="fas fa-hand-holding-usd"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">{{__('vendorAdmin.quotes')}}</span>
+                            <span class="info-box-number">{{$quotes}}</span>
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: {{rand(5,10)}}0%"></div>
                             </div>
                         </div>
                         <!-- /.info-box-content -->
@@ -137,7 +166,7 @@
                             <span class="info-box-text">{{__('vendorAdmin.shipping_groups')}}</span>
                             <span class="info-box-number">{{$shippingGroups}}</span>
                             <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
+                                <div class="progress-bar" style="width: {{rand(5,10)}}0%"></div>
                             </div>
                         </div>
                         <!-- /.info-box-content -->
@@ -145,8 +174,6 @@
                     <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
-            </div>
-            <div class="row">
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="info-box">
                         <span class="info-box-icon bg-gray"><i class="far fa-flag"></i></span>

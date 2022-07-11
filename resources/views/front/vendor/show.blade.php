@@ -34,9 +34,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER)['url'] }}" class="photo_cover_vendor">
+                    <img loading="lazy" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER)['url'] }}" class="photo_cover_vendor">
                 </div>
-                <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" class="photo_profile_vendor">
+                <img loading="lazy" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" class="photo_profile_vendor">
             </div>
         </div>
         <div class="row">
@@ -93,8 +93,17 @@
                                                         <span>{{ $contact['phone'] }}</span><br/>
                                                         <label style="font-weight: bold">{{__('vendor.email')}}: </label>
                                                         <span>{{ $contact['email'] }}</span><br/>
-                                                        <label style="font-weight: bold">{{__('vendor.position')}}: </label>
-                                                        <span>{{ $contact['position'] }}</span>
+                                                        <label style="font-weight: bold">{{__('vendor.cities')}}: </label>
+                                                        <span>
+                                                            @foreach($contact['cities'] as $city)
+                                                                {{\App\Models\City::find($city)->name}}
+                                                                @if(!$loop->last)
+                                                                    -
+                                                                @endif
+                                                            @endforeach
+                                                        </span><br/>
+                                                        <label style="font-weight: bold">{{__('vendor.with')}}: </label>
+                                                        <span>{{ __('vendor.'.$contact['with']) }}</span>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -231,47 +240,3 @@
         </div>
     </div>
 @endsection
-@section('extraScripts')
-    <script type="text/javascript">
-        $(".btn-add-cart").on('click', function(){
-            let url = $(this).data('url');
-
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: { _token: '{{ csrf_token() }}' }
-            })
-            .done(function(response) {
-                $('#cartCount').html(response.count);
-                $('#cartTotal').html(response.total);
-                toastr.success(response.message);
-            })
-            .fail(function(response) {
-                toastr.error(response.responseJSON.message);
-            })
-        })
-
-        $(".btn-add-wishlist").on('click', function(){
-            let url = $(this).data('url');
-
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: { _token: '{{ csrf_token() }}' }
-            })
-                .done(function(response) {
-                    if(response.status)
-                        toastr.success(response.message);
-                    else
-                        toastr.warning(response.message)
-
-
-                    console.log(response);
-                })
-                .fail(function(response) {
-                    toastr.error(response.responseJSON.message);
-                })
-        })
-    </script>
-@endsection
-

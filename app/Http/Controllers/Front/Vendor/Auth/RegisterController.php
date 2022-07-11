@@ -89,7 +89,7 @@ class RegisterController extends Controller
             'latitude' => NULLABLE_STRING_VALIDATION,
             'longitude' => NULLABLE_STRING_VALIDATION,
             'licenses' => ARRAY_VALIDATION,
-            'licenses.*' => REQUIRED_IMAGE_VALIDATION,
+            'licenses.*' => REQUIRED_FILE_VALIDATION,
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
     }
@@ -101,7 +101,6 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $vendor = Vendor::create([
-            'membership_id' => env('MEMBERSHIP_ID', 1),
             'country_id' => $data['country_id'],
             'name' => $data['name_en'],
             'email' => $data['email'],

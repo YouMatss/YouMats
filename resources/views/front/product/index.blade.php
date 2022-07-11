@@ -68,12 +68,12 @@
                         @if(count($product->getMedia(PRODUCT_PATH)))
                         @foreach($product->getMedia(PRODUCT_PATH) as $image)
                             <div class="js-slide">
-                                <img class="img-fluid" src="{{$image->getFullUrl()}}" alt="{{$image->img_alt ?? ''}}" title="{{$image->img_title ?? ''}}">
+                                <img loading="lazy" class="img-fluid" src="{{$image->getFullUrl()}}" alt="{{$image->img_alt ?? ''}}" title="{{$image->img_title ?? ''}}">
                             </div>
                         @endforeach
                         @else
                             <div class="js-slide">
-                                <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                                <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                             </div>
                         @endif
                     </div>
@@ -81,7 +81,7 @@
                     <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off" data-infinite="true" data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav">
                         @foreach($product->getMedia(PRODUCT_PATH) as $thumb)
                         <div class="js-slide" style="cursor: pointer;">
-                            <img class="img-fluid" src="{{$thumb->getFullUrl()}}" alt="{{$thumb->img_alt ?? ''}}" title="{{$thumb->img_title ?? ''}}">
+                            <img loading="lazy" class="img-fluid" src="{{$thumb->getFullUrl()}}" alt="{{$thumb->img_alt ?? ''}}" title="{{$thumb->img_title ?? ''}}">
                         </div>
                         @endforeach
                     </div>
@@ -90,7 +90,7 @@
                 <div class="col-md-6 col-lg-4 col-xl-4 mb-md-6 mb-lg-0">
                     <div class="mb-2">
                         <a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{$product->category->name}}</a>
-                        <h2 class="font-size-25 text-lh-1dot2">{{$product->name}}</h2>
+                        <h2 class="font-size-25" style="line-height: 1.6">{{$product->name}}</h2>
                         <div class="mb-2">
                             <a class="d-inline-flex align-items-center small font-size-15 text-lh-1">
 {{--                                <div class="text-warning mr-2">--}}
@@ -107,7 +107,7 @@
                             </a>
                         </div>
                         <a href="{{ route('home') }}" class="d-inline-block max-width-150 ml-n2 mb-2">
-                            <img class="img-fluid" src="{{ Storage::url(nova_get_setting('logo')) }}">
+                            <img loading="lazy" class="img-fluid" src="{{ Storage::url(nova_get_setting('logo')) }}">
                         </a>
                         {{--<div class="mb-2">--}}
                             {{--<ul class="font-size-14 pl-3 ml-1 text-gray-9">--}}
@@ -151,7 +151,7 @@
                                             @endif
                                         </span>
                                         <br/>
-                                        <span>{{__('product.delivery_time')}}: <b>{{$delivery['time']}} {{($delivery['format'] == 'hours') ? __('product.delivery_hours') : __('product.delivery_days') }}</b></span>
+                                        <span>{{__('product.delivery_time')}}: <b>{{$delivery['time']}} {{($delivery['format'] == 'hour') ? __('product.delivery_hours') : __('product.delivery_days') }}</b></span>
                                         <button type="button" class="btn btn-block btn-xs btn-primary mt-2 choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
                                     </div>
                                 @else
@@ -183,8 +183,14 @@
 
 
                             @if(!Auth::guard('vendor')->check())
-                                @if(is_company() || $product->price || $product->delivery)
+                                @if(is_company())
                                     {!! cartOrChat($product) !!}
+                                @elseif($product->vendor->current_subscribe && in_array($product->vendor->current_subscribe->membership_id, [env('INDIVIDUAL_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))
+                                    @if($product->price || $product->delivery)
+                                        {!! cartOrChat($product) !!}
+                                    @else
+                                        <a class="cart-chat-category btn-primary transition-3d-hover" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{__('product.category_href')}}</a>
+                                    @endif
                                 @else
                                     <a class="cart-chat-category btn-primary transition-3d-hover" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{__('product.category_href')}}</a>
                                 @endif
@@ -227,7 +233,7 @@
                             {!! $product->desc !!}
                             <div class="row">
                                 <div class="col-md-6 text-right">
-                                    <img class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                                    <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                                 </div>
                             </div>
                         </div>
@@ -284,7 +290,7 @@
                                             <h5 class="mb-1 product-item__title"><a href="{{route('front.product', [generatedNestedSlug($r_product->category->ancestors()->pluck('slug')->toArray(), $r_product->category->slug), $r_product->slug])}}" class="text-blue font-weight-bold">{{$r_product->name}}</a></h5>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [generatedNestedSlug($r_product->category->ancestors()->pluck('slug')->toArray(), $r_product->category->slug), $r_product->slug])}}" class="a_img_pro d-block text-center">
-                                                    <img class="img-fluid" src="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                                                    <img loading="lazy" class="img-fluid" src="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                                                 </a>
                                             </div>
                                             <div class="flex-center-between mb-1">

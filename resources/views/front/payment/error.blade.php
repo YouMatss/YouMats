@@ -20,7 +20,7 @@
             @foreach($cartItems as $item)
                 @if($item->model->type == 'product')
                     <div class="row row-1">
-                        {{--                    <div class="col-2"><img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
+                        {{--                    <div class="col-2"><img loading="lazy" class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
                         <div class="col-9">
                             {{$item->name}} <b>({{$item->qty . 'x' . $item->price}})</b>
                         </div>
@@ -31,7 +31,7 @@
                 @endif
             @endforeach
             <div class="row row-1">
-                {{--            <div class="col-2"><img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
+                {{--            <div class="col-2"><img loading="lazy" class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
                 <div class="col-9">
                     {{ __('cart.shipping') }}
                 </div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="row row-1">
-                {{--            <div class="col-2"><img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
+                {{--            <div class="col-2"><img loading="lazy" class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
                 <div class="col-9">
                     {{ __('cart.total') }}
                 </div>

@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Front\Product;
 
 use App\Http\Controllers\Controller;
-use App\Mail\OrderPlaced;
 use App\Models\Order;
 use Devinweb\Payment\Facades\Payment;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class PaymentController extends Controller
 {
@@ -28,7 +26,6 @@ class PaymentController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('home');
         }
-
     }
 
     public function submit() {
@@ -57,14 +54,16 @@ class PaymentController extends Controller
 
             $data['delivery'] = Cart::tax();
 
-            //Clear the cart!
+            // Clear the cart!
             Cart::instance('cart')->destroy();
+            // Clear Cache
+            Cache::forget('order_id');
 
 //            Mail::to(Auth::guard('web')->user())->send(new OrderPlaced($data['order']));
 
             return view('front.payment.success')->with($data);
         } catch (\Exception $exception) {
-            return redirect()->route('home');
+            return Redirect::route('vendor.subscribe.success')->with(['request' => request()->all()]);
         }
     }
 
@@ -77,9 +76,12 @@ class PaymentController extends Controller
                 return true;
             });
 
+            // Clear Cache
+            Cache::forget('order_id');
+
             return view('front.payment.error')->with($data);
         } catch (\Exception $exception) {
-            return redirect()->route('home');
+            return redirect()->route('vendor.subscribe.error')->with(['request' => request()->all()]);
         }
     }
 }

@@ -15,10 +15,10 @@ class CreateMembershipsTable extends Migration
     {
         Schema::create('memberships', function (Blueprint $table) {
             $table->id();
+
             $table->text('name');
             $table->double('price');
-            $table->string('days');
-            $table->integer('product_limit');
+            $table->text('desc')->nullable();
             $table->integer('sort');
 
             $table->softDeletes();

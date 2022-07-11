@@ -50,3 +50,6 @@
     color: #4099DE;
     border-bottom: 2px solid #4099DE;
 }
+tbody {
+    text-align: center;
+}

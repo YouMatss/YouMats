@@ -161,10 +161,12 @@ class CheckoutController extends Controller
                     'quote_id'      => $quote->id,
                     'product_id'    => $item->model->id,
                     'product_name'  => $item->model->name,
+                    'vendor_id'     => $item->model->vendor_id,
+                    'vendor_name'   => $item->model->vendor->name,
                     'quantity'      => $item->qty,
                 ]);
             }
-            $returnText = "Quote has been placed successfully.";
+            $returnText = __('checkout.quote_placed_successfully');
 
         } else if ($type == 'individual') {
             $order = Order::create($data);
@@ -186,7 +188,7 @@ class CheckoutController extends Controller
                         'price'         => $item->model->price
                     ]);
             }
-            $returnText = "Order has been placed successfully.";
+            $returnText = __('checkout.order_placed_successfully');
         }
 
         if(isset($order) && strtolower($order->payment_method) == 'online') {

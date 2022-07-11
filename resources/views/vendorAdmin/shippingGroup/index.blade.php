@@ -5,20 +5,23 @@
 @section('content')
     <div class="pt-2">
         <div class="col-md-12">
-            <h4>{{__('vendorAdmin.shipping_groups')}}</h4>
-            <div class="text-right">
-                <a href="{{route('vendor.shipping-group.create')}}" class="btn btn-sm mb-3 btn-youmats">{{__('vendorAdmin.add_button_shipping')}}</a>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="tit_main_v">{{__('vendorAdmin.shipping_groups')}}</h4>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{route('vendor.shipping-group.create')}}" class="btn btn-sm mb-3 btn-youmats tit-head-branch btn--vend">{{__('vendorAdmin.add_button_shipping')}}</a>
+                </div>
             </div>
-            <div class="card">
+
+            <div class="card card--vendor edit-head-table-vendor">
                 <div class="card-body">
                     <table id="example1" class="table" style="width: 100%">
                         <thead>
-                            <tr>
+                            <tr class="head--table--vendor">
                                 <th class="text-center">#</th>
                                 <th class="text-center">{{__('vendorAdmin.name')}}</th>
-                                <th class="text-center">{{__('vendorAdmin.price')}}</th>
-                                <th class="text-center">{{__('vendorAdmin.time')}}</th>
-                                <th class="text-center">{{__('vendorAdmin.format')}}</th>
                                 <th class="text-center">{{__('vendorAdmin.actions')}}</th>
                             </tr>
                         </thead>
@@ -27,9 +30,6 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$shipping_price->name}}</td>
-                                    <td>{{$shipping_price->default_price}}</td>
-                                    <td>{{$shipping_price->default_time}}</td>
-                                    <td>{{$shipping_price->default_format}}</td>
                                     <td>
                                         <a href="{{route('vendor.shipping-group.edit', [$shipping_price->id])}}" class="btn btn-youmats btn-xs">{{__('vendorAdmin.edit_button')}}</a>
                                         <form style="display: inline-block" method="post" action="{{route('vendor.shipping-group.delete', [$shipping_price->id])}}">

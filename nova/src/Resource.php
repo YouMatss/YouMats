@@ -151,7 +151,7 @@ abstract class Resource implements ArrayAccess, JsonSerializable, UrlRoutable
      *
      * @var bool
      */
-    public static $trafficCop = true;
+    public static $trafficCop = false;
 
     /**
      * Indicates whether Nova should prevent the user from leaving an unsaved form, losing their data.

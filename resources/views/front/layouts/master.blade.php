@@ -49,9 +49,9 @@
             @endif
         </main>
         @include('front.layouts.partials.footer')
-        @include('front.layouts.partials.assets_js')
         @include('front.layouts.partials.welcome-popup')
         @include('front.layouts.partials.search')
+        @include('front.layouts.partials.assets_js')
         @stack('chat')
     </body>
 </html>

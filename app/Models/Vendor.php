@@ -22,7 +22,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, HasTranslations, CascadeSoftDeletes, BelongsToThrough;
 
     protected $fillable = ['name', 'country_id', 'subCategory_id', 'email' , 'contacts', 'address', 'type', 'latitude', 'longitude',
-        'membership_id', 'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url', 'slug'];
+        'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url', 'slug'];
 
     protected $guard = 'vendor';
 
@@ -44,11 +44,14 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     ];
 
     public function registerAllMediaConversions(): void {
-        $this->addMediaConversion('thumb')
-            ->width(200)->height(200);
+        $this->addMediaConversion('thumb')->width(200)->height(200);
+        $this->addMediaConversion('cropper')->performOnCollections(VENDOR_LOGO);
+        $this->addMediaConversion('cropper')->performOnCollections(VENDOR_COVER);
+    }
 
-        $this->addMediaConversion('cropper')
-            ->performOnCollections(VENDOR_COVER);
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection(VENDOR_LOGO)->singleFile();
+        $this->addMediaCollection(VENDOR_COVER)->singleFile();
     }
 
     public function sendPasswordResetNotification($token)
@@ -65,8 +68,12 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->hasMany(Product::class);
     }
 
-    public function membership() {
-        return $this->belongsTo(Membership::class);
+    public function subscribes() {
+        return $this->hasMany(Subscribe::class)->orderByDesc('expiry_date');
+    }
+
+    public function current_subscribe() {
+        return $this->hasOne(Subscribe::class)->whereDate('expiry_date', '>', now());
     }
 
     public function country() {
@@ -100,6 +107,14 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     public function order_items(): HasMany
     {
         return $this->hasMany(OrderItem::class)->orderBy('id', 'desc');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function quote_items(): HasMany
+    {
+        return $this->hasMany(QuoteItem::class)->orderBy('id', 'desc');
     }
 
     public function getPhoneAttribute($value) {

@@ -59,9 +59,9 @@
                                     </td>
                                     <td class="d-md-table-cell img_cart_view">
                                         @if($item->model)
-                                            <a href="#"><img class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
+                                            <a href="#"><img loading="lazy" class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
                                         @else
-                                            <img class="img-fluid max-width-100 p-1 border border-color-1" src="/assets/img/default_logo.jpg" />
+                                            <img loading="lazy" class="img-fluid max-width-100 p-1 border border-color-1" src="/assets/img/default_logo.jpg" />
                                         @endif
                                     </td>
 
@@ -178,53 +178,54 @@
 @endsection
 @section('extraScripts')
     <script>
-        $('.deleteCart').on('click', function() {
-            let url = $(this).data('url'),
-                button = $(this);
-
-            $.ajax({
-                type: 'DELETE',
-                url: url,
-                data: { _token: '{{ csrf_token() }}' }
-            })
-            .done(function(response) {
-                if(response.status) {
-                    if(response.count === 0)
-                        window.location.reload();
-
-                    $('.cartCount').html(response.count);
-                    $('.cartTotal').html(response.total);
-                    $('#total').html(response.total);
-                    $('#tax').html(response.tax);
-                    $('#subtotal').html(response.subtotal);
-                    button.closest('tr').remove();
-                }
-            })
-            .fail(function(response) {
-                console.log(response);
-            })
-        });
-
-        $('#updateCart').on('click', function() {
-            let url = '{{ route('cart.update') }}';
-
-            $(".js-result").each(function(i, el) {
-                let qty = $(this).val(),
-                    rowId = $(this).attr('row_id');
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.deleteCart').on('click', function() {
+                let url = $(this).data('url'),
+                    button = $(this);
 
                 $.ajax({
-                    type: 'PATCH',
+                    type: 'DELETE',
                     url: url,
-                    data: {_token: "{{ csrf_token() }}", qty: qty, rowId: rowId }
+                    data: { _token: '{{ csrf_token() }}' }
                 })
                 .done(function(response) {
+                    if(response.status) {
+                        if(response.count === 0)
+                            window.location.reload();
+
+                        $('.cartCount').html(response.count);
+                        $('.cartTotal').html(response.total);
+                        $('#total').html(response.total);
+                        $('#tax').html(response.tax);
+                        $('#subtotal').html(response.subtotal);
+                        button.closest('tr').remove();
+                    }
+                })
+                .fail(function(response) {
                     console.log(response);
                 })
             });
 
-            //Reload the page. instead of updating data of the whole page!
-            window.location.reload();
-        });
+            $('#updateCart').on('click', function() {
+                let url = '{{ route('cart.update') }}';
 
+                $(".js-result").each(function(i, el) {
+                    let qty = $(this).val(),
+                        rowId = $(this).attr('row_id');
+
+                    $.ajax({
+                        type: 'PATCH',
+                        url: url,
+                        data: {_token: "{{ csrf_token() }}", qty: qty, rowId: rowId }
+                    })
+                    .done(function(response) {
+                        console.log(response);
+                    })
+                });
+
+                //Reload the page. instead of updating data of the whole page!
+                window.location.reload();
+            });
+        });
     </script>
 @endsection

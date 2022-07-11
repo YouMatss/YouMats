@@ -4,7 +4,9 @@ use App\Http\Controllers\Front\Vendor\Admin\BranchController;
 use App\Http\Controllers\Front\Vendor\Admin\IndexController;
 use App\Http\Controllers\Front\Vendor\Admin\OrderController;
 use App\Http\Controllers\Front\Vendor\Admin\ProductController;
+use App\Http\Controllers\Front\Vendor\Admin\QuoteController;
 use App\Http\Controllers\Front\Vendor\Admin\SippingGroupController;
+use App\Http\Controllers\Front\Vendor\Admin\SubScribeController;
 use Illuminate\Support\Facades\Route;
 
 //Actions routes
@@ -43,6 +45,15 @@ Route::group([
         Route::get('edit', [IndexController::class, 'edit'])->name('edit');
         Route::put('update', [IndexController::class, 'update'])->name('update');
 
+        Route::group(['prefix' => 'subscribe', 'as' => 'subscribe.'], function () {
+            Route::get('/', [SubScribeController::class, 'index'])->name('index');
+            Route::get('/upgrade', [SubScribeController::class, 'upgrade'])->name('upgrade');
+            Route::post('/submit-payment', [SubScribeController::class, 'submit'])->name('submit');
+            Route::post('/cancel-subscribe', [SubScribeController::class, 'cancel'])->name('cancel');
+            Route::get('/success', [SubScribeController::class, 'success'])->name('success');
+            Route::get('/error', [SubScribeController::class, 'error'])->name('error');
+        });
+
         Route::get('getSubCategories', [IndexController::class, 'getSubCategories'])->name('category.getSub');
         Route::get('getAttributes', [IndexController::class, 'getAttributes'])->name('category.getAttr');
         Route::get('getTemplate', [IndexController::class, 'getTemplate'])->name('category.getTemplate');
@@ -75,6 +86,10 @@ Route::group([
         Route::get('order', [OrderController::class, 'index'])->name('order.index');
         Route::get('order/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
         Route::post('order/update', [OrderController::class, 'update'])->name('order.update');
+
+        Route::get('quote', [QuoteController::class, 'index'])->name('quote.index');
+        Route::get('quote/view/{id}', [QuoteController::class, 'view'])->name('quote.view');
+//        Route::post('quote/update', [QuoteController::class, 'update'])->name('quote.update');
     });
     // Vendor Routes
 

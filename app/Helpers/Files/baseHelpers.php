@@ -1,5 +1,8 @@
 <?php
 
+use App\Helpers\Classes\Shipping as ShippingHelper;
+use Illuminate\Support\Facades\Session;
+
 if (!function_exists('front_url')) {
     function front_url() {
         return url('/');
@@ -84,7 +87,7 @@ if (!function_exists('cartOrChat')) {
                 </div>
             </div>
             <div>
-                <button data-url="' . route('cart.add', ['product' => $product]) . '"
+                <button type="button" data-url="' . route('cart.add', ['product' => $product]) . '"
                     class="btn-add-cart cart-chat-category btn btn-primary transition-3d-hover" style="cursor: pointer;">
                     <i class="' . $icon .'"></i> &nbsp;' . $cart_word . '
                 </button>
@@ -110,7 +113,7 @@ if (!function_exists('cartOrChat')) {
                     </div>
                 </div>
                 <div class="float-child-cart">
-                    <button data-url="' . route('cart.add', ['product' => $product]) . '"
+                    <button type="button" data-url="' . route('cart.add', ['product' => $product]) . '"
                         class="btn-add-cart cart-chat-category btn btn-primary transition-3d-hover"><i class="' . $icon .'"></i></button>
                 </div>
             </div>';
@@ -125,6 +128,8 @@ if (!function_exists('cartOrChat')) {
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company()) {
                 return $cart;
+            } elseif(!($product->vendor->current_subscribe && in_array($product->vendor->current_subscribe->membership_id, [env('INDIVIDUAL_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))) {
+                return $view;
             } elseif($product->type == 'product' && $product->price > 0 && $product->delivery) {
                 if($product->stock && $product->stock < $product->min_quantity) {
                     return $view;
@@ -216,4 +221,23 @@ if (!\Illuminate\Support\Collection::hasMacro('ungroup')) {
 
 function parseNumber($number) {
     return floatval(preg_replace('/[^\d.]/', '', $number));
+}
+
+if (!function_exists('getDelivery')) {
+    function getDelivery($product, $quantity) {
+        try {
+            $remap_shipping = [];
+            if($product->specific_shipping && $product->shipping_prices) {
+                $remap_shipping = ShippingHelper::remap($product->shipping_prices);
+            } elseif(isset($product->shipping) && $product->shipping->prices) {
+                $remap_shipping = ShippingHelper::remap($product->shipping->prices);
+            }
+            foreach ($remap_shipping as $city => $shipping) {
+                if(Session::has('city') && $city == Session::get('city')) {
+                    return ShippingHelper::result(ShippingHelper::getBestPrice($shipping, $quantity));
+                }
+            }
+            return null;
+        } catch (\Exception $e) {}
+    }
 }

@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Helpers\Classes\Shipping as ShippingHelper;
 use App\Helpers\Traits\DefaultImage;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Session;
 use Spatie\EloquentSortable\Sortable;
@@ -14,8 +17,6 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Znck\Eloquent\Traits\BelongsToThrough;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model implements Sortable, HasMedia, Buyable
 {
@@ -32,9 +33,9 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      */
     protected $appends = ['image_url', 'delivery', 'contacts'];
 
-//    public $casts = [
-//        'search_keywords' => 'array',
-//    ];
+    protected $casts = [
+        'shipping_prices' => 'array'
+    ];
 
     public function registerAllMediaConversions(): void {
         $this->addMediaConversion('thumb')->width(200)->height(200);
@@ -58,72 +59,52 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     }
 
     /**
-     * @return array|mixed|null
+     * @return array|null
      */
     public function getDeliveryAttribute() {
-        if($this->specific_shipping) {
-            if($this->shipping_prices) {
-                foreach (json_decode($this->shipping_prices, true) as $shipping) {
-                    if(Session::has('city') && $shipping['cities'] == Session::get('city')) {
-                        return $shipping;
-                    }
+        try {
+            $remap_shipping = [];
+            if($this->specific_shipping && $this->shipping_prices) {
+                $remap_shipping = ShippingHelper::remap($this->shipping_prices, false);
+            } elseif(isset($this->shipping) && $this->shipping->prices) {
+                $remap_shipping = ShippingHelper::remap($this->shipping->prices);
+            }
+            foreach ($remap_shipping as $city => $shipping) {
+                if(Session::has('city') && $city == Session::get('city')) {
+                    return ShippingHelper::result(ShippingHelper::getBestPrice($shipping, $this->min_quantity ?? 1));
                 }
             }
-            if(isset($this->default_price) && isset($this->default_time) && isset($this->default_format)) {
-                return [
-                    'price' => $this->default_price,
-                    'time' => $this->default_time,
-                    'format' => $this->default_format,
-                ];
-            }
-        }
-        if (isset($this->shipping)) {
-            if($this->shipping->cities_prices) {
-                foreach ($this->shipping->cities_prices as $shipping) {
-                    if(Session::has('city') && $shipping['cities'] == Session::get('city')) {
-                        return $shipping;
-                    }
-                }
-            }
-            if($this->shipping->default_price && $this->shipping->default_time && $this->shipping->default_format) {
-                return [
-                    'price' => $this->shipping->default_price,
-                    'time' => $this->shipping->default_time,
-                    'format' => $this->shipping->default_format,
-                ];
-            }
-        }
-        return null;
+            return null;
+        } catch (\Exception $e) {}
     }
 
     /**
      * @return string|null
      */
     public function delivery_cities() {
-        $cities = [];
-        if($this->specific_shipping) {
-            if($this->shipping_prices) {
-                foreach (json_decode($this->shipping_prices, true) as $shipping) {
-                    $cities[] = $shipping['cities'];
+        try {
+            $cities = [];
+            if ($this->specific_shipping) {
+                if ($this->shipping_prices) {
+                    foreach ($this->shipping_prices as $shipping) {
+                        foreach ($shipping['attributes']['cities'] as $city) {
+                            $cities[] = $city['city'];
+                        }
+                    }
+                }
+            } elseif (isset($this->shipping)) {
+                if ($this->shipping->prices) {
+                    foreach ($this->shipping->prices as $shipping) {
+                        foreach ($shipping['attributes']['cities'] as $city) {
+                            $cities[] = $city['attributes']['city'];
+                        }
+                    }
                 }
             }
-            if(isset($this->default_price) && isset($this->default_time) && isset($this->default_format)) {
-                return 'all';
-            }
-        }
-        if (isset($this->shipping)) {
-            if($this->shipping->cities_prices) {
-                foreach ($this->shipping->cities_prices as $shipping) {
-                    $cities[] = $shipping['cities'];
-                }
-            }
-            if($this->shipping->default_price && $this->shipping->default_time && $this->shipping->default_format) {
-                return 'all';
-            }
-        }
-        if(count($cities))
-            return City::whereIn('id', $cities)->get();
-        return null;
+            if (count($cities))
+                return City::whereIn('id', array_unique($cities))->get();
+            return null;
+        } catch (\Exception $e) {}
     }
 
     public function getContactsAttribute() {
@@ -144,6 +125,16 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         } catch (\Exception $e) {
             return 0;
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getSubscribeAttribute() {
+        if($this->vendor->current_subscribe) {
+            return 1;
+        }
+        return 0;
     }
 
     public function phone() {
