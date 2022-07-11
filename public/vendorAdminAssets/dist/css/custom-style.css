@@ -233,7 +233,7 @@ body.new--style--custom .form-control{
     border: 1px solid #bacad6;
     float: left;
     width: 50%;
-    margin: 0 0 45px 0;
+    margin: 0 0 10px 0;
 }
 
 
@@ -272,7 +272,7 @@ body.new--style--custom .edit-head-table-vendor .form-control {
 }
 
 body.new--style--custom .clone-element label:not(.form-check-label):not(.custom-file-label) {
-    width: 20%;
+    width: 100%;
 }
 
 .mar-left-15{
@@ -305,8 +305,7 @@ body.new--style--custom .content-vendor-edit h4{
 
 body.new--style--custom .content-vendor-edit .form-group{
     overflow: hidden;
-    border-bottom: 1px solid #eee;
-    padding: 40px 0 0 0;
+    padding: 0;
     margin: 0 0 0 0;
 }
 

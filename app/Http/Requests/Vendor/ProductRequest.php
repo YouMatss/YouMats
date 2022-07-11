@@ -46,17 +46,7 @@ class ProductRequest extends FormRequest
 
             'shipping_id' => [...NULLABLE_INTEGER_VALIDATION, ...['exists:shippings,id']],
             'specific_shipping' => NULLABLE_STRING_VALIDATION,
-            'shipping_cities' => ARRAY_VALIDATION,
-            'shipping_cities.*' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:cities,id']],
-            'shipping_price' => ARRAY_VALIDATION,
-            'shipping_price.*' => REQUIRED_NUMERIC_VALIDATION,
-            'shipping_time' => ARRAY_VALIDATION,
-            'shipping_time.*' => REQUIRED_INTEGER_VALIDATION,
-            'shipping_format' => ARRAY_VALIDATION,
-            'shipping_format.*' => [...REQUIRED_STRING_VALIDATION, ...['In:hour,day']],
-            'default_price' => NULLABLE_NUMERIC_VALIDATION,
-            'default_time' => NULLABLE_INTEGER_VALIDATION,
-            'default_format' => [...NULLABLE_STRING_VALIDATION, ...['In:hour,day']],
+            'cars' => ARRAY_VALIDATION
         ];
         switch ($this->method()) {
             case 'POST':

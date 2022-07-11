@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Shipping;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class SippingGroupController extends Controller
 {
@@ -33,24 +34,27 @@ class SippingGroupController extends Controller
     }
 
     public function store(ShippingGroupRequest $request) {
-        $data = $request->validated();
+        $data = $request->all();
         $vendor_id = Auth::guard('vendor')->id();
 
         $data['vendor_id'] = $vendor_id;
 
-        if(isset($data['cities'])) {
-            for ($i=0;$i<count($data['cities']);$i++) {
-                $data['cities_prices'][] = [
-                    'cities' => $data['cities'][$i],
-                    'price' => $data['price'][$i],
-                    'from' => $data['from'][$i] ?? null,
-                    'to' => $data['to'][$i] ?? null,
-                    'time' => $data['time'][$i],
-                    'format' => $data['format'][$i],
-                ];
+        if(isset($data['cars'])) {
+            foreach ($data['cars'] as $key => $car) {
+                $data['prices'][$key]['layout'] = 'cars';
+                $data['prices'][$key]['key'] = Str::random(16);
+                $data['prices'][$key]['attributes']['car_type'] = $car['car_type'];
+                unset($car['car_type']);
+                foreach ($car as $city) {
+                    $data['prices'][$key]['attributes']['cities'][] = [
+                        'layout' => 'cities',
+                        'key' => Str::random(16),
+                        'attributes' => $city
+                    ];
+                }
             }
         } else {
-            $data['cities_prices'] = [];
+            $data['prices'] = [];
         }
 
         Shipping::create($data);
@@ -68,24 +72,27 @@ class SippingGroupController extends Controller
     }
 
     public function update(ShippingGroupRequest $request, $shipping_id) {
-        $data = $request->validated();
+        $data = $request->all();
         $vendor_id = Auth::guard('vendor')->id();
 
         $shipping = Shipping::where('id', $shipping_id)->where('vendor_id', $vendor_id)->firstorfail();
 
-        if(isset($data['cities'])) {
-            for ($i=0;$i<count($data['cities']);$i++) {
-                $data['cities_prices'][] = [
-                    'cities' => $data['cities'][$i],
-                    'price' => $data['price'][$i],
-                    'from' => $data['from'][$i] ?? null,
-                    'to' => $data['to'][$i] ?? null,
-                    'time' => $data['time'][$i],
-                    'format' => $data['format'][$i],
-                ];
+        if(isset($data['cars'])) {
+            foreach ($data['cars'] as $key => $car) {
+                $data['prices'][$key]['layout'] = 'cars';
+                $data['prices'][$key]['key'] = Str::random(16);
+                $data['prices'][$key]['attributes']['car_type'] = $car['car_type'];
+                unset($car['car_type']);
+                foreach ($car as $city) {
+                    $data['prices'][$key]['attributes']['cities'][] = [
+                        'layout' => 'cities',
+                        'key' => Str::random(16),
+                        'attributes' => $city
+                    ];
+                }
             }
         } else {
-            $data['cities_prices'] = [];
+            $data['prices'] = [];
         }
 
         $shipping->update($data);

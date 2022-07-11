@@ -25,21 +25,7 @@ class ShippingGroupRequest extends FormRequest
     {
         return [
             'name' => REQUIRED_STRING_VALIDATION,
-            'cities' => ARRAY_VALIDATION,
-            'cities.*' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:cities,id']],
-            'price' => ARRAY_VALIDATION,
-            'price.*' => REQUIRED_NUMERIC_VALIDATION,
-            'from' => ARRAY_VALIDATION,
-            'from.*' => NULLABLE_INTEGER_VALIDATION,
-            'to' => ARRAY_VALIDATION,
-            'to.*' => NULLABLE_INTEGER_VALIDATION,
-            'time' => ARRAY_VALIDATION,
-            'time.*' => REQUIRED_INTEGER_VALIDATION,
-            'format' => ARRAY_VALIDATION,
-            'format.*' => [...REQUIRED_STRING_VALIDATION, ...['In:hour,day']],
-            'default_price' => NULLABLE_NUMERIC_VALIDATION,
-            'default_time' => NULLABLE_INTEGER_VALIDATION,
-            'default_format' => [...NULLABLE_STRING_VALIDATION, ...['In:hour,day']],
+            'cars' => ARRAY_VALIDATION
         ];
     }
 }

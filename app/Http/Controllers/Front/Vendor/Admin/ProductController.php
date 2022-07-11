@@ -95,14 +95,15 @@ class ProductController extends Controller
         $data['short_desc'] = ['en' => $data['short_desc_en'], 'ar' => $data['short_desc_ar']];
         $data['meta_desc'] = ['en' => $data['short_desc_en'], 'ar' => $data['short_desc_ar']];
 
-        if(isset($data['shipping_cities'])) {
-            for ($i=0;$i<count($data['shipping_cities']);$i++) {
-                $data['shipping_prices'][] = [
-                    'cities' => $data['shipping_cities'][$i],
-                    'price' => $data['shipping_price'][$i],
-                    'time' => $data['shipping_time'][$i],
-                    'format' => $data['shipping_format'][$i],
-                ];
+        if(isset($data['cars'])) {
+            foreach ($data['cars'] as $key => $car) {
+                $data['shipping_prices'][$key]['layout'] = 'cars';
+                $data['shipping_prices'][$key]['key'] = Str::random(16);
+                $data['shipping_prices'][$key]['attributes']['car_type'] = $car['car_type'];
+                unset($car['car_type']);
+                foreach ($car as $city) {
+                    $data['shipping_prices'][$key]['attributes']['cities'][] = $city;
+                }
             }
         } else {
             $data['shipping_prices'] = null;
@@ -167,14 +168,15 @@ class ProductController extends Controller
             $data['specific_shipping'] = '0';
         }
 
-        if(isset($data['shipping_cities'])) {
-            for ($i=0;$i<count($data['shipping_cities']);$i++) {
-                $data['shipping_prices'][] = [
-                    'cities' => $data['shipping_cities'][$i],
-                    'price' => $data['shipping_price'][$i],
-                    'time' => $data['shipping_time'][$i],
-                    'format' => $data['shipping_format'][$i],
-                ];
+        if(isset($data['cars'])) {
+            foreach ($data['cars'] as $key => $car) {
+                $data['shipping_prices'][$key]['layout'] = 'cars';
+                $data['shipping_prices'][$key]['key'] = Str::random(16);
+                $data['shipping_prices'][$key]['attributes']['car_type'] = $car['car_type'];
+                unset($car['car_type']);
+                foreach ($car as $city) {
+                    $data['shipping_prices'][$key]['attributes']['cities'][] = $city;
+                }
             }
         } else {
             $data['shipping_prices'] = null;
