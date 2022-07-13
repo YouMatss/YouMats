@@ -1,12 +1,10 @@
 <?php
 
-
 namespace App\Http\Controllers\Front\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
-use Brick\Math\Exception\DivisionByZeroException;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -14,19 +12,17 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     /**
-     * @param Request $request
      * @return Application|Factory|View
      */
-    public function show(Request $request)
+    public function show()
     {
-        $cart = Cart::instance('cart')->content();
+        $data['items'] = Cart::instance('cart')->content();
 
-        return view('front.cart.index', ['items' => $cart]);
+        return view('front.cart.index')->with($data);
     }
 
     public function add(Request $request, Product $product)
@@ -47,55 +43,22 @@ class CartController extends Controller
                 'success' => false
             ]);
 
-        $deliveryIsExist = getDelivery($product, $quantity);
-        $delivery = 0;
-        if(!is_null($deliveryIsExist)) {
-            $delivery = round($deliveryIsExist['price'] / getCurrency('rate'), 2);
-        }
-
-        try {
-            $deliveryCalc = ($delivery / round($product->price / getCurrency('rate'), 2)) * 100;
-        } catch (\Exception $e) {
-            $deliveryCalc = 0;
-        }
-
         Cart::instance('cart')->add(
             $product->id,
             $product->name,
             $quantity,
             round($product->price / getCurrency('rate'), 2),
             [],
-            $deliveryCalc
+            0
         )->associate($product);
+
         return response()->json([
             'message' => __(is_company() ? 'product.added_to_quote_list' : 'product.added_to_cart'),
             'success' => true,
-            'cart' => Cart::content(),
-            'total' => getCurrency('code') . ' ' . Cart::total(),
-            'count' => Cart::count()
+            'cart' => Cart::instance('cart')->content(),
+            'total' => getCurrency('code') . ' ' . cart_total(),
+            'count' => Cart::instance('cart')->count()
         ]);
-    }
-
-    /**
-     * @param Request $request
-     * @param $rowId
-     * @return JsonResponse
-     */
-    public function deleteItem(Request $request, $rowId): JsonResponse
-    {
-        Cart::instance('cart')->remove($rowId);
-
-        return response()->json(['status' => true, 'total' => getCurrency('code'). ' ' . Cart::total(), 'count' => Cart::count(), 'subtotal' => Cart::subtotal(), 'tax' => Cart::tax()]);
-    }
-
-    /**
-     * @return JsonResponse
-     */
-    public function destroy(): JsonResponse
-    {
-        Cart::instance('cart')->destroy();
-
-        return response()->json(['status' => true, 'message' => __('cart.cart_has_been_destroyed')]);
     }
 
     /**
@@ -107,6 +70,34 @@ class CartController extends Controller
         Cart::instance('cart')->update($request->rowId, $request->qty);
 
         return response()->json(['status' => true]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $rowId
+     * @return JsonResponse
+     */
+    public function deleteItem(Request $request, $rowId): JsonResponse
+    {
+        Cart::instance('cart')->remove($rowId);
+
+        return response()->json([
+            'status' => true,
+            'total' => getCurrency('code'). ' ' . Cart::total(),
+            'count' => Cart::count(),
+            'subtotal' => Cart::subtotal(),
+            'tax' => Cart::tax()
+        ]);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function destroy(): JsonResponse
+    {
+        Cart::instance('cart')->destroy();
+
+        return response()->json(['status' => true, 'message' => __('cart.cart_has_been_destroyed')]);
     }
 
     /**

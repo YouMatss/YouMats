@@ -19,10 +19,10 @@
                 <div class="row row-1 rtl">
 {{--                    <div class="col-2"><img loading="lazy" class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>--}}
                     <div class="col-9">
-                        {{$item->name}} <b>({{$item->qty . 'x' . $item->price}})</b>
+                        {{$item->name}} <b>({{$item->qty . 'x' . number_format($item->price, 2)}})</b>
                     </div>
                     <div class="col-3 d-flex justify-content-center">
-                        {{__('general.sar')}} {{$item->qty*$item->price}}
+                        {{__('general.sar') . ' ' . number_format($item->qty*$item->price, 2)}}
                     </div>
                 </div>
             @endif
@@ -33,7 +33,7 @@
                 {{ __('cart.shipping') }}
             </div>
             <div class="col-3 d-flex justify-content-center">
-                {{__('general.sar')}} {{\Cart::tax()}}
+                {{__('general.sar') . ' ' . cart_delivery() }}
             </div>
         </div>
         <div class="row row-1 rtl">
@@ -42,7 +42,7 @@
                 {{ __('cart.total') }}
             </div>
             <div class="col-3 d-flex justify-content-center">
-                {{__('general.sar') . ' ' .round(parseNumber(Cart::total()))}}
+                {{__('general.sar') . ' ' . cart_total()}}
             </div>
         </div>
         <span id="card-header rtl">{{__('checkout.payment_card')}}</span>
@@ -106,10 +106,10 @@
         data: {
             expiration_date: "",
             hold_name: "",
-            email: "info@youmats.com",
+            email: "{{auth('web')->user()->email ?? "info@youmats.com"}}",
             cvc: "",
             card_number: "",
-            amount: {{round(parseNumber($cart->total()))}},
+            amount: {{parseNumber($cart->total()) + parseNumber(cart_delivery())}},
             errors: {},
             loading: false,
         },

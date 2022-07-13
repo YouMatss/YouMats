@@ -430,10 +430,10 @@
                                         @foreach($cartItems as $item)
                                             <tr class="cart_item">
                                                 <td>{{ $item->name }}
-                                                    <b>({{ $item->qty }}) @if(!is_company()) x ({{__('general.sar') . ' ' . $item->price}}) @endif</b>
+                                                    <b>({{ $item->qty }}) @if(!is_company()) x ({{__('general.sar') . ' ' . number_format($item->price, 2)}}) @endif</b>
                                                 </td>
                                                 @if(!is_company())
-                                                    <td class="checkout-left">{{ __('general.sar') . ' ' . $item->qty * $item->price }}</td>
+                                                    <td class="checkout-left">{{ __('general.sar') . ' ' . number_format($item->qty * $item->price, 2) }}</td>
                                                 @endif
                                             </tr>
                                         @endforeach
@@ -446,15 +446,11 @@
                                         </tr>
                                         <tr>
                                             <th>{{ __('checkout.shipping') }}</th>
-                                            <td class="checkout-left" style="width: 100px">{{ __('general.sar') . ' ' . Cart::tax() }}</td>
+                                            <td class="checkout-left" style="width: 100px">{{ __('general.sar') . ' ' . cart_delivery() }}</td>
                                         </tr>
                                         <tr>
                                             <th>{{ __('checkout.total') }}</th>
-                                            <td class="checkout-left" style="width: 100px"><strong>{{ __('general.sar') . ' ' . Cart::total() }}</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <th>{{ __('checkout.payment_total') }}</th>
-                                            <td class="checkout-left" style="width: 100px"><strong>{{ __('general.sar') . ' ' . round(parseNumber(Cart::total())) }}</strong></td>
+                                            <td class="checkout-left" style="width: 100px"><strong>{{ __('general.sar') . ' ' . cart_total() }}</strong></td>
                                         </tr>
                                         </tfoot>
                                     @endif

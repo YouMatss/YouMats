@@ -52,7 +52,7 @@ class PaymentController extends Controller
                 'payment_status' => 'completed'
             ]);
 
-            $data['delivery'] = Cart::tax();
+            $data['delivery'] = cart_delivery();
 
             // Clear the cart!
             Cart::instance('cart')->destroy();

@@ -627,7 +627,7 @@
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12 cartCount">{{ Cart::instance('cart')->count() }}</span>
                                         @if(!is_company())
-                                            <span class="font-weight-bold font-size-16 text-gray-110 ml-3 cartTotal">{{ __('general.sar') . ' ' . Cart::instance('cart')->total() }}</span>
+                                            <span class="font-weight-bold font-size-16 text-gray-110 ml-3 cartTotal">{{ __('general.sar') . ' ' . cart_total() }}</span>
                                         @endif
                                     </a>
                                 </li>

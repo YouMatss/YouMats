@@ -1,6 +1,8 @@
 <?php
 
+use App\Helpers\Classes\Delivery;
 use App\Helpers\Classes\Shipping as ShippingHelper;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
 
 if (!function_exists('front_url')) {
@@ -240,4 +242,16 @@ if (!function_exists('getDelivery')) {
             return null;
         } catch (\Exception $e) {}
     }
+}
+
+function cart_delivery() {
+    $delivery = new Delivery(Cart::instance('cart')->content());
+
+    return number_format($delivery->get(), 2);
+}
+
+function cart_total() {
+    $delivery = new Delivery(Cart::instance('cart')->content());
+
+    return number_format(parseNumber(Cart::instance('cart')->total()) + $delivery->get(), 2);
 }
