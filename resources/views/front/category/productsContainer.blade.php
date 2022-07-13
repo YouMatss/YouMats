@@ -8,8 +8,10 @@
     <div class="text-right">
         <select class="form-control form-control-sm" id="sort_select">
             <option selected value="">{{__('general.sort_placeholder')}}</option>
+            <option value="is_price" @if(request()->input('sort') == 'is_price') selected @endif>{{__('general.sort_price_exist')}}</option>
             <option value="-price" @if(request()->input('sort') == '-price') selected @endif>{{__('general.sort_price_high')}}</option>
             <option value="price" @if(request()->input('sort') == 'price') selected @endif>{{__('general.sort_price_low')}}</option>
+            <option value="is_delivery" @if(request()->input('sort') == 'is_delivery') selected @endif>{{__('general.sort_delivery_exist')}}</option>
             <option value="-delivery" @if(request()->input('sort') == '-delivery') selected @endif>{{__('general.sort_delivery_high')}}</option>
             <option value="delivery" @if(request()->input('sort') == 'delivery') selected @endif>{{__('general.sort_delivery_low')}}</option>
         </select>

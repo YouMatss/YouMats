@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Front\Category;
 
 use App\Helpers\Classes\CollectionPaginate;
 use App\Helpers\Classes\ProductsSortDelivery;
+use App\Helpers\Classes\ProductsSortIsDelivery;
+use App\Helpers\Classes\ProductsSortPrice;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
@@ -45,8 +47,10 @@ class CategoryController extends Controller
 
         if(isset($request->sort) && is_individual()) {
             $filter = $products->allowedSorts([
+                    AllowedSort::custom('is_price', new ProductsSortPrice($products), 'price'),
                     'price',
-                    AllowedSort::custom('delivery', new ProductsSortDelivery($products), 'delivery')
+                    AllowedSort::custom('delivery', new ProductsSortDelivery($products), 'delivery'),
+                    AllowedSort::custom('is_delivery', new ProductsSortIsDelivery($products), 'delivery')
                 ])
                 ->with('category')
                 ->get()->unique();
