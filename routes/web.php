@@ -16,7 +16,7 @@ Route::get('introduce/{type}', 'Common\MiscController@introduce')->name('front.i
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => [ 'localizationRedirect' ]
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function(){
 
     //Auth (Verified/Authenticated) routes

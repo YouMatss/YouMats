@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front\Product;
 
+use App\Helpers\Classes\Shipping;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
@@ -43,6 +44,12 @@ class CartController extends Controller
                 'success' => false
             ]);
 
+        if(!Shipping::abilityOfQuantity($product, $quantity))
+            return response()->json([
+                'message' => __('messages.not_ability_quantity'),
+                'success' => false
+            ]);
+
         Cart::instance('cart')->add(
             $product->id,
             $product->name,
@@ -67,7 +74,19 @@ class CartController extends Controller
      */
     public function update(Request $request): JsonResponse
     {
-        Cart::instance('cart')->update($request->rowId, $request->qty);
+        $product = Product::findorfail($request->id);
+
+        $min_quantity = $product->min_quantity;
+        $stock = $product->stock;
+        $request_quantity = $request->qty;
+
+        if($request_quantity < $min_quantity)
+            return response()->json(['status' => false]);
+
+        if((!is_company()) && $request_quantity > $stock)
+            return response()->json(['status' => false]);
+
+        Cart::instance('cart')->update($request->rowId, $request_quantity);
 
         return response()->json(['status' => true]);
     }
@@ -83,10 +102,10 @@ class CartController extends Controller
 
         return response()->json([
             'status' => true,
-            'total' => getCurrency('code'). ' ' . Cart::total(),
+            'total' => getCurrency('code') . ' ' . cart_total(),
             'count' => Cart::count(),
-            'subtotal' => Cart::subtotal(),
-            'tax' => Cart::tax()
+            'subtotal' => getCurrency('code') . ' ' .Cart::subtotal(),
+            'delivery' => getCurrency('code') . ' ' .cart_delivery()
         ]);
     }
 
@@ -113,11 +132,11 @@ class CartController extends Controller
                     ->whereStatus(1)
                     ->first();
 
-        $total = Cart::instance('cart')->total();
-
         //Coupon doesn't exist. Lets return an error!
         if(!$coupon)
             return back()->with(['custom_error' => __('cart.coupon_code_doesnt_exist') ]);
+
+        $total = parseNumber(cart_total());
 
         //The total of the cart is less than the coupon starting price
         if($total < $coupon->price)

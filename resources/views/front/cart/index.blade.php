@@ -67,15 +67,19 @@
                                                 >
                                             </a>
                                         @else
-                                            <a href="{{route('front.product', [generatedNestedSlug($item->model->category->ancestors()->pluck('slug')->toArray(), $item->model->category->slug), $item->model->slug])}}">
-                                                <img loading="lazy" class="img-fluid max-width-100 p-1 border border-color-1" src="/assets/img/default_logo.jpg" />
-                                            </a>
+                                            <img loading="lazy" class="img-fluid max-width-100 p-1 border border-color-1" src="/assets/img/default_logo.jpg" />
                                         @endif
                                     </td>
 
-                                    <td data-title="{{ __('cart.product') }}">
-                                        <a href="{{route('front.product', [generatedNestedSlug($item->model->category->ancestors()->pluck('slug')->toArray(), $item->model->category->slug), $item->model->slug])}}" class="text-gray-90">{{ $item->name }}</a>
-                                    </td>
+                                    @if($item->model)
+                                        <td data-title="{{ __('cart.product') }}">
+                                            <a href="{{route('front.product', [generatedNestedSlug($item->model->category->ancestors()->pluck('slug')->toArray(), $item->model->category->slug), $item->model->slug])}}" class="text-gray-90">{{ $item->name }}</a>
+                                        </td>
+                                    @else
+                                        <td data-title="{{ __('cart.product') }}">
+                                            <a class="text-gray-90">{{ $item->name }}</a>
+                                        </td>
+                                    @endif
 
                                     @if($item->model)
                                         <td data-title="{{ __('cart.quantity') }}">
@@ -84,7 +88,7 @@
                                             <div class="border rounded-pill py-1 width-122 w-xl-80 px-3 border-color-1">
                                                 <div class="js-quantity row align-items-center">
                                                     <div class="col">
-                                                        <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" row_id="{{ $item->rowId }}" value="{{ $item->qty }}">
+                                                        <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" data-id="{{$item->id}}" data-row_id="{{ $item->rowId }}" value="{{ $item->qty }}">
                                                     </div>
                                                     <div class="col-auto pr-1">
                                                         <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
@@ -204,7 +208,7 @@
                         $('.cartCount').html(response.count);
                         $('.cartTotal').html(response.total);
                         $('#total').html(response.total);
-                        $('#tax').html(response.tax);
+                        $('#tax').html(response.delivery);
                         $('#subtotal').html(response.subtotal);
                         button.closest('tr').remove();
                     }
@@ -219,12 +223,13 @@
 
                 $(".js-result").each(function(i, el) {
                     let qty = $(this).val(),
-                        rowId = $(this).attr('row_id');
+                        id = $(this).data('id'),
+                        rowId = $(this).data('row_id');
 
                     $.ajax({
                         type: 'PATCH',
                         url: url,
-                        data: {_token: "{{ csrf_token() }}", qty: qty, rowId: rowId }
+                        data: {_token: "{{ csrf_token() }}", qty: qty, id: id, rowId: rowId}
                     })
                     .done(function(response) {
                         console.log(response);

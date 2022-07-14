@@ -2,23 +2,28 @@
 
 namespace App\Http\Controllers\Front\Vendor;
 
+use App\Helpers\Classes\CollectionPaginate;
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class IndexController extends Controller
 {
     /**
-     * @param Request $request
      * @return Application|Factory|View
      */
-    public function index(Request $request)
+    public function index()
     {
         // Get all vendors
-        $vendors = Vendor::paginate(21);
+        $vendors = Vendor::all()->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
+            return $collection->sortByDesc('id');
+        })->ungroup()->unique();
+
+        $vendors = CollectionPaginate::paginate($vendors, 21);
+        $vendors->withPath(url()->current())->withQueryString();
 
         // Return the vendors to the view.
         // So we can loop through

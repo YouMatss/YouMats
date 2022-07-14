@@ -37911,14 +37911,9 @@ section {
 }
 
 .cart-subtotal th ,.cart-subtotal td{
-  padding: 20px 0;
   border-top:0;
   border-bottom:1px solid #ecedf2;
 }
-
-
-
-
 
 @media (max-width: 767.98px) {
   .cat .container .box {
@@ -37934,12 +37929,9 @@ section {
 
   }
 
-
-
     .h_scroll {
         width: 92% !important;
     }
-
 
     .close_search{
         right: 10px !important;

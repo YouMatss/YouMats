@@ -176,8 +176,8 @@
                                     <input type="text" class="form-control" value="{{ Auth::guard('web')->user()->name ?? old('name') }}" name="name" required="" data-msg="Please enter your frist name." data-error-class="u-has-error" data-success-class="u-has-success" autocomplete="off">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                                 <!-- End Input -->
@@ -188,14 +188,54 @@
                                     <label class="form-label">
                                         {{__('checkout.phone')}}
                                     </label>
-                                    <input type="tel" class="form-control phoneNumber text-center"
+                                    <input type="tel" class="form-control phoneNumber text-center rtl"
                                            value="{{ Auth::guard('web')->user()->phone ?? old('phone_number') }}"
                                            name="phone_number" aria-label="Phone Number" data-error-class="u-has-error" data-success-class="u-has-success">
                                     @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
+                                </div>
+                                <!-- End Input -->
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        {{__('checkout.email')}}
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ Auth::guard('web')->user()->email ?? old('email') }}" name="email" aria-label="jackwayley@gmail.com" required="" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <!-- End Input -->
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        {{__('checkout.city')}}
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" value="{{\App\Models\City::find(Session::get('city'))->name ?? Session::get('city')}}" disabled readonly>
+{{--                                        <div class="dropdown bootstrap-select form-control js-select dropdown-select">--}}
+{{--                                            <select class="form-control js-select selectpicker dropdown-select" readonly name="city" required data-msg="{{__('checkout.select_city')}}" data-error-class="u-has-error" data-success-class="u-has-success" data-live-search="true" data-style="form-control border-color-1 font-weight-normal" tabindex="-98">--}}
+{{--                                                <option value="" disabled>{{__('checkout.select_city')}}</option>--}}
+{{--                                                @foreach($cities as $city)--}}
+{{--                                                    <option value="{{ $city->id }}" @if($city->id == Session::get('city')) selected @endif>{{ $city->name }}</option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
+{{--                                            @error('city')--}}
+{{--                                                <span class="invalid-feedback" role="alert">--}}
+{{--                                                    <strong>{{ $message }}</strong>--}}
+{{--                                                </span>--}}
+{{--                                            @enderror--}}
+{{--                                        </div>--}}
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -253,55 +293,16 @@
                                         <label class="form-label">
                                             {{__('checkout.district')}}
                                         </label>
-                                        <input type="text" class="form-control" value="{{ old('district') }}" name="district" aria-label="470 Lucy Forks" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                        <input type="text" class="form-control" value="{{ old('district') }}" name="district" data-msg="Please enter a valid address." data-error-class="u-has-error" data-success-class="u-has-success">
                                         @error('district')
                                         <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                     <!-- End Input -->
                                 </div>
-                                <div class="col-md-6">
-                                    <!-- Input -->
-                                    <div class="js-form-message mb-6">
-                                        <label class="form-label">
-                                            {{__('checkout.city')}}
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="dropdown bootstrap-select form-control js-select dropdown-select">
-                                            <select class="form-control js-select selectpicker dropdown-select" name="city" required data-msg="{{__('checkout.select_city')}}" data-error-class="u-has-error" data-success-class="u-has-success" data-live-search="true" data-style="form-control border-color-1 font-weight-normal" tabindex="-98">
-                                                <option value="">{{__('checkout.select_city')}}</option>
-                                                @foreach($cities as $city)
-                                                    <option value="{{ $city->id }}" @if($city->id == old('city')) selected @endif>{{ $city->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('city')
-                                            <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <!-- End Input -->
-                                </div>
                             @endif
-                            <div class="col-md-6">
-                                <!-- Input -->
-                                <div class="js-form-message mb-6">
-                                    <label class="form-label">
-                                        {{__('checkout.email')}}
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ Auth::guard('web')->user()->email ?? old('email') }}" name="email" aria-label="jackwayley@gmail.com" required="" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <!-- End Input -->
-                            </div>
                             @if(is_company())
                                 <div class="col-md-6">
                                     <!-- Input -->

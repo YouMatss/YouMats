@@ -23,6 +23,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 
 class CheckoutController extends Controller
@@ -110,6 +111,7 @@ class CheckoutController extends Controller
         $total = round(parseNumber(Cart::instance('cart')->total()));
 
         //Append default values to the data.
+        $data['city'] = Session::get('city') ?? null;
         $data['payment_status'] = 'pending';
         $data['status']   = 'pending';
         $data['coupon_code']    = $coupon[array_key_first(current($coupon))]->name ?? null;

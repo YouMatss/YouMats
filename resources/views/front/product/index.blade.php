@@ -143,7 +143,7 @@
                                     <div>
                                         <span>{{__('product.delivery_to_your_city')}}: <b>{{getCurrentCityName()}}</b></span>
                                         <br/>
-                                        <span>{{__('product.delivery_price')}}:
+                                        <span>{{__('product.delivery_price')}} {{$product->min_quantity}} {{__('product.piece')}}:
                                             @if($delivery['price'] > 0)
                                             <b>{{getCurrency('symbol')}} {{round($delivery['price'] * getCurrency('rate'), 2)}}</b>
                                             @else

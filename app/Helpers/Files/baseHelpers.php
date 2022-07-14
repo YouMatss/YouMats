@@ -230,7 +230,7 @@ if (!function_exists('getDelivery')) {
         try {
             $remap_shipping = [];
             if($product->specific_shipping && $product->shipping_prices) {
-                $remap_shipping = ShippingHelper::remap($product->shipping_prices);
+                $remap_shipping = ShippingHelper::remap($product->shipping_prices, false);
             } elseif(isset($product->shipping) && $product->shipping->prices) {
                 $remap_shipping = ShippingHelper::remap($product->shipping->prices);
             }

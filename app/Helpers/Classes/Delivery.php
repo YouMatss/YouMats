@@ -18,7 +18,7 @@ class Delivery
 
             $deliveryIsExist = getDelivery($product, $item->qty);
             if(!is_null($deliveryIsExist)) {
-                $delivery =+ round($deliveryIsExist['price'] / getCurrency('rate'), 2);
+                $delivery += round($deliveryIsExist['price'] / getCurrency('rate'), 2);
             }
         }
 
