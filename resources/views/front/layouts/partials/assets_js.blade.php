@@ -222,19 +222,13 @@
 
         $.each(inputs, function(key, value){
             window.intlTelInput(value, {
+                initialCountry: "sa",
+                nationalMode: true,
                 utilsScript: '{{front_url()}}/assets/js/utils.js',
-                formatOnDisplay: true,
-                // autoPlaceholder: true,
-                initialCountry: "auto",
-                hiddenInput: "phone",
+                preferredCountries: ['sa'],
                 separateDialCode: true,
-                autoPlaceholder: "polite",
-                geoIpLookup: function(success, failure) {
-                    $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-                        var countryCode = (resp && resp.country) ? resp.country : "sa";
-                        success(countryCode);
-                    });
-                }
+                formatOnDisplay: true,
+                hiddenInput: "phone"
             });
         });
 

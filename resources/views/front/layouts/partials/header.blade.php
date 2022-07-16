@@ -347,35 +347,40 @@
 
                                                         @if(!auth()->guard('vendor')->check() && !auth()->guard('web')->check())
                                                         <li class="u-has-submenu u-header-collapse__submenu">
-                                                                <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-7" data-target="#top-header-nav-7">
-                                                                    <span class="d-sm-inline-flex align-items-center"> <i class="ec ec-user mr-1"></i>{{__('general.user_register')}}</span>
-                                                                </a>
-                                                                <div id="top-header-nav-7" class="collapse" data-parent="#headerSidebarContent">
-                                                                    <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
-                                                                        <li>
-                                                                            <a href="{{route('register')}}" class="dropdown-item">
-                                                                                {{__('general.user_register')}}
-                                                                            </a>
-                                                                            <a href="{{route('vendor.register')}}" class="dropdown-item">{{__('general.vendor_register')}}
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
+                                                            <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-7" data-target="#top-header-nav-7">
+                                                                <span class="d-sm-inline-flex align-items-center"> <i class="ec ec-user mr-1"></i>{{__('general.user_register')}}</span>
+                                                            </a>
+                                                            <div id="top-header-nav-7" class="collapse" data-parent="#headerSidebarContent">
+                                                                <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
+                                                                    <li>
+                                                                        <a href="{{route('register')}}" class="dropdown-item">{{__('general.user_register')}}</a>
+                                                                        <a href="{{route('vendor.register')}}" class="dropdown-item">{{__('general.vendor_register')}}</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="u-has-submenu u-header-collapse__submenu">
+                                                            <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-login" data-target="#top-header-login">
+                                                                <span class="d-sm-inline-flex align-items-center"> <i class="ec ec-user mr-1"></i>{{__('general.user_login')}}</span>
+                                                            </a>
+                                                            <div id="top-header-login" class="collapse" data-parent="#headerSidebarContent">
+                                                                <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
+                                                                    <li>
+                                                                        <a href="{{route('login')}}" class="dropdown-item">{{__('general.user_login')}}</a>
+                                                                        <a href="{{route('vendor.login')}}" class="dropdown-item">{{__('general.vendor_login')}}</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
                                                         </li>
                                                         @endif
 
-                                                            @if(is_company() || auth()->guard('vendor')->check())
-                                                                <li class="btn_offer_price_nav u-has-submenu u-header-collapse__submenu">
-                                                                    <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
-                                                                        {{__('general.get_quote')}}
-                                                                    </a>
-                                                                </li>
-                                                            @endif
-
-
-
-
-
+                                                        @if(is_company() || auth()->guard('vendor')->check())
+                                                            <li class="btn_offer_price_nav u-has-submenu u-header-collapse__submenu">
+                                                                <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
+                                                                    {{__('general.get_quote')}}
+                                                                </a>
+                                                            </li>
+                                                        @endif
                                                 </ul>
                                                 <!-------- End Top header -------->
 
@@ -397,13 +402,8 @@
                                                     @endforeach
                                                 </ul>
                                                 <!-- End List -->
-
-
-
-
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

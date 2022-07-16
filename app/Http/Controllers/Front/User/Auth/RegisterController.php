@@ -19,6 +19,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -103,6 +104,8 @@ class RegisterController extends Controller
         if($data['type'] == 'company')
             foreach(Admin::all() as $admin)
                 $admin->notify(new CompanyRegistered($user));
+
+        Session::flash('custom_success', __('auth.user_register_successfully'));
 
         return $user;
     }

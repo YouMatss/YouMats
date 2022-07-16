@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    // todo: optimize this class
+
     /**
      * @return Application|Factory|View
      */
@@ -30,13 +32,65 @@ class CartController extends Controller
     {
         $min_quantity = $product->min_quantity;
         $stock = $product->stock;
+
+        $cart = Cart::instance('cart')->content();
+
+        foreach ($cart as $item) {
+            if($item->id == $product->id) {
+
+                $quantity = $request->quantity + $item->qty;
+
+                if(!isset($quantity))
+                    $quantity = $min_quantity ?? 1;
+
+                if($quantity < $min_quantity)
+                    return response()->json([
+                        'message' => __('messages.min_order_quantity_constrain'),
+                        'success' => false
+                    ]);
+
+                if((!is_company()) && $quantity > $stock)
+                    return response()->json([
+                        'message' => __('messages.out_of_stock'),
+                        'success' => false
+                    ]);
+
+//                if(!Shipping::abilityOfQuantity($product, $quantity))
+//                    return response()->json([
+//                        'message' => __('messages.not_ability_quantity'),
+//                        'success' => false
+//                    ]);
+
+                Cart::instance('cart')->add(
+                    $product->id,
+                    $product->name,
+                    $request->quantity,
+                    round($product->price / getCurrency('rate'), 2),
+                    [],
+                    0
+                )->associate($product);
+
+                return response()->json([
+                    'message' => __(is_company() ? 'product.added_to_quote_list' : 'product.added_to_cart'),
+                    'success' => true,
+                    'cart' => Cart::instance('cart')->content(),
+                    'total' => getCurrency('code') . ' ' . cart_total(),
+                    'count' => Cart::instance('cart')->count()
+                ]);
+
+            }
+        }
+
         $quantity = $request->quantity;
 
         if(!isset($quantity))
-            $quantity = 1;
+            $quantity = $min_quantity ?? 1;
 
         if($quantity < $min_quantity)
-            $quantity = $min_quantity;
+            return response()->json([
+                'message' => __('messages.min_order_quantity_constrain'),
+                'success' => false
+            ]);
 
         if((!is_company()) && $quantity > $stock)
             return response()->json([
@@ -44,11 +98,11 @@ class CartController extends Controller
                 'success' => false
             ]);
 
-        if(!Shipping::abilityOfQuantity($product, $quantity))
-            return response()->json([
-                'message' => __('messages.not_ability_quantity'),
-                'success' => false
-            ]);
+//        if(!Shipping::abilityOfQuantity($product, $quantity))
+//            return response()->json([
+//                'message' => __('messages.not_ability_quantity'),
+//                'success' => false
+//            ]);
 
         Cart::instance('cart')->add(
             $product->id,
@@ -78,6 +132,41 @@ class CartController extends Controller
 
         $min_quantity = $product->min_quantity;
         $stock = $product->stock;
+
+        $cart = Cart::instance('cart')->content();
+
+        foreach ($cart as $item) {
+            if($item->id == $product->id) {
+
+                $quantity = $request->quantity + $item->qty;
+
+                if(!isset($quantity))
+                    $quantity = $min_quantity ?? 1;
+
+                if($quantity < $min_quantity)
+                    return response()->json([
+                        'message' => __('messages.min_order_quantity_constrain'),
+                        'success' => false
+                    ]);
+
+                if((!is_company()) && $quantity > $stock)
+                    return response()->json([
+                        'message' => __('messages.out_of_stock'),
+                        'success' => false
+                    ]);
+
+//                if(!Shipping::abilityOfQuantity($product, $quantity))
+//                    return response()->json([
+//                        'message' => __('messages.not_ability_quantity'),
+//                        'success' => false
+//                    ]);
+
+                Cart::instance('cart')->update($request->rowId, $quantity);
+
+                return response()->json(['status' => true]);
+            }
+        }
+
         $request_quantity = $request->qty;
 
         if($request_quantity < $min_quantity)

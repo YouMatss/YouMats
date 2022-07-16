@@ -188,7 +188,7 @@
                                     <label class="form-label">
                                         {{__('checkout.phone')}}
                                     </label>
-                                    <input type="tel" class="form-control phoneNumber text-center rtl"
+                                    <input type="tel" class="form-control phoneNumber"
                                            value="{{ Auth::guard('web')->user()->phone ?? old('phone_number') }}"
                                            name="phone_number" aria-label="Phone Number" data-error-class="u-has-error" data-success-class="u-has-success">
                                     @error('phone_number')

@@ -231,6 +231,7 @@
                     if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
 
                     var reader = new FileReader(); // instance of the FileReader
+
                     if (/^image/.test( files[0].type)){ // only image file
                         reader.readAsDataURL(files[0]); // read the local file
 
@@ -243,7 +244,7 @@
 
                         reader.onloadend = function(){ // set image data as background of div
                             //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
-                            uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url('/public/assets/img/default_logo.jpg')");
+                            uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url('/public/assets/img/pdf.svg')");
                         }
                     }
                 });

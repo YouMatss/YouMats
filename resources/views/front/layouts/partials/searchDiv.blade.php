@@ -9,7 +9,7 @@
                             @if(isset($search_categories))
                             <div class="border-bottom mb-4">
                                 <h4 class="font-size-14 mb-3 font-weight-bold text-left">{{__('search.categories_title')}}</h4>
-                                @foreach($search_categories as $search_category)
+                                @foreach(array_slice($search_categories, 0, 5) as $search_category)
                                 <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input category" value="{{$search_category->id}}" @if(in_array($search_category->id, $selected_categories)) checked @endif id="cat-{{$search_category->id}}">

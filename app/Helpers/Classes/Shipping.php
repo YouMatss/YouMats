@@ -127,31 +127,31 @@ class Shipping
         ];
     }
 
-    public static function abilityOfQuantity(Product $product, $quantity) {
-        $cars = self::getCars($product, $quantity);
-
-        foreach ($cars as $car) {
-            $min_quantity_of_car = (int)floor($car['quantity'] / 2);
-            if($car['payload'] < $min_quantity_of_car) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private static function getCars(Product $product, $quantity) {
-        $remap_shipping = [];
-        if($product->specific_shipping && $product->shipping_prices) {
-            $remap_shipping = self::remap($product->shipping_prices, false);
-        } elseif(isset($product->shipping) && $product->shipping->prices) {
-            $remap_shipping = self::remap($product->shipping->prices);
-        }
-        foreach ($remap_shipping as $city => $shipping) {
-            if(Session::has('city') && $city == Session::get('city')) {
-                return self::getBestPrice($shipping, $quantity);
-            }
-        }
-        return null;
-    }
+//    public static function abilityOfQuantity(Product $product, $quantity) {
+//        $cars = self::getCars($product, $quantity);
+//
+//        foreach ($cars as $car) {
+//            $min_quantity_of_car = (int)floor($car['quantity'] / 2);
+//            if($car['payload'] < $min_quantity_of_car) {
+//                return false;
+//            }
+//        }
+//
+//        return true;
+//    }
+//
+//    private static function getCars(Product $product, $quantity) {
+//        $remap_shipping = [];
+//        if($product->specific_shipping && $product->shipping_prices) {
+//            $remap_shipping = self::remap($product->shipping_prices, false);
+//        } elseif(isset($product->shipping) && $product->shipping->prices) {
+//            $remap_shipping = self::remap($product->shipping->prices);
+//        }
+//        foreach ($remap_shipping as $city => $shipping) {
+//            if(Session::has('city') && $city == Session::get('city')) {
+//                return self::getBestPrice($shipping, $quantity);
+//            }
+//        }
+//        return null;
+//    }
 }

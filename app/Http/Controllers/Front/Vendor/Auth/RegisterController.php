@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -123,6 +124,8 @@ class RegisterController extends Controller
             }
 
         $vendor->save();
+
+        Session::flash('custom_success', __('auth.vendor_register_successfully'));
 
         return $vendor;
     }

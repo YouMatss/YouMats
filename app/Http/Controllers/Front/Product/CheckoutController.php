@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\CheckoutRequest;
 use App\Models\Admin;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -13,6 +14,7 @@ use App\Models\QuoteItem;
 use App\Models\User;
 use App\Notifications\OrderCreated;
 use App\Notifications\QuoteCreated;
+use App\Rules\PhoneNumberRule;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -59,28 +61,7 @@ class CheckoutController extends Controller
      */
     public function checkout(Request $request)
     {
-        //Validating the data.
-        $rules = [
-            'payment_method' => [...[NULLABLE_STRING_VALIDATION], 'In:Cash,Online', Rule::requiredIf(fn() => is_individual())],
-            'terms' => 'required|accepted',
-            'name' => REQUIRED_STRING_VALIDATION,
-            'phone_number' => REQUIRED_STRING_VALIDATION,
-            'address' => REQUIRED_STRING_VALIDATION,
-            'building_number' => NULLABLE_INTEGER_VALIDATION,
-            'street' => NULLABLE_STRING_VALIDATION,
-            'district' => NULLABLE_STRING_VALIDATION,
-            'city' => NULLABLE_INTEGER_VALIDATION,
-            'email' => REQUIRED_EMAIL_VALIDATION,
-            'notes' => NULLABLE_STRING_VALIDATION,
-            'notes.*.title' => NULLABLE_STRING_VALIDATION,
-            'delivery_time' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_company())],
-            'delivery_time_unit' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_company()), 'In:day,week,month'],
-            'attachments.*' => NULLABLE_FILE_VALIDATION,
-            'latitude' => NULLABLE_STRING_VALIDATION,
-            'longitude' => NULLABLE_STRING_VALIDATION
-        ];
-
-        $data = $request->validate($rules);
+        $data = $request->validated();
 
         //Let's create an account for him & login so we complete the order.
         if(!Auth::guard('web')->check()) {

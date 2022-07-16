@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -122,6 +124,9 @@ class Product extends Resource
             Number::make('Views')
                 ->hideWhenUpdating()->hideWhenCreating(),
 
+            DateTime::make('Creation Date', 'created_at')
+                ->onlyOnDetail(),
+
             (new Panel('Gallery', [
                 Medialibrary::make('Images', PRODUCT_PATH)->fields(function () {
                     return [
@@ -146,12 +151,14 @@ class Product extends Resource
             ])),
 
             (new Panel('Shipping Prices', [
-                Select::make('Shipping', 'shipping_id')
-                    ->options(function () {
-                        return \App\Models\Shipping::where('vendor_id', $this->vendor_id)->pluck('name', 'id');
-                    })->placeholder('Choose shipping group')->nullable()->displayUsingLabels()
-                    ->hideFromIndex()->hideWhenCreating(),
                 Boolean::make('Specific shipping', 'specific_shipping')->hideFromIndex()->nullable(),
+                NovaDependencyContainer::make([
+                    Select::make('Shipping', 'shipping_id')
+                        ->options(function () {
+                            return \App\Models\Shipping::where('vendor_id', $this->vendor_id)->pluck('name', 'id');
+                        })->placeholder('Choose shipping group')->nullable()->displayUsingLabels()
+                        ->hideFromIndex()->hideWhenCreating(),
+                ])->dependsOn('specific_shipping', false),
                 NovaDependencyContainer::make([
                     Flexible::make('Shipping Prices', 'shipping_prices')
                         ->addLayout('Cars', 'cars', [

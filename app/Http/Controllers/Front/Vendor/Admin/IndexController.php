@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Front\Vendor\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Vendor\VendorRequest;
+use App\Models\Admin;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Vendor;
 use App\Models\VendorBranch;
+use App\Notifications\OrderCreated;
+use App\Notifications\VendorUpdated;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -108,6 +111,18 @@ class IndexController extends Controller
             }
         } else {
             $data['contacts'] = [];
+        }
+
+        if(isset($data['licenses'])
+            || $data['name_en'] != $vendor->getTranslation('name', 'en')
+            || $data['name_ar'] != $vendor->getTranslation('name', 'ar')
+            || $data['email'] != $vendor->email
+            || $data['address'] != $vendor->address
+            || $data['type'] != $vendor->type) {
+            $data['active'] = false;
+
+            foreach(Admin::all() as $admin)
+                $admin->notify(new VendorUpdated($vendor));
         }
 
         $vendor->update($data);

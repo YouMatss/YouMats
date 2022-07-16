@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13822.251289930895!2d31.27496425!3d29.991991600000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1613394401101!5m2!1sen!2seg" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10262.180539739125!2d46.6281706288652!3d24.58130142668669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f1980f4b680ed%3A0xc0cf70a369cd9702!2z2YrZiNmF2KfYqtizIHwg2YXZiNmC2Lkg2YXZiNin2K8g2KfZhNio2YbYp9ihICIgWW91bWF0cywgQnVpbGRpbmcgTWF0ZXJpYWxzICI!5e0!3m2!1sen!2seg!4v1657921012003!5m2!1sen!2seg" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
                                         {{ __('contact.phone') }}
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" name="phone">
+                                    <input type="tel" class="form-control phoneNumber" name="phone">
                                 </div>
                                 <!-- End Input -->
                             </div>

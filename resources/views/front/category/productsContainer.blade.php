@@ -5,13 +5,15 @@
         <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}} {{__('general.of')}} {{$products->total()}} {{__('general.results')}}</p>
     </div>
     @if(is_individual())
+    <div class="custom-control custom-switch">
+        <input type="checkbox" name="is_price" class="custom-control-input" id="is_price" @if(request()->input('filter.is_price') == 'on') checked @endif>
+        <label class="custom-control-label" for="is_price">{{__('general.is_price')}}</label>
+    </div>
     <div class="text-right">
         <select class="form-control form-control-sm" id="sort_select">
             <option selected value="">{{__('general.sort_placeholder')}}</option>
-            <option value="is_price" @if(request()->input('sort') == 'is_price') selected @endif>{{__('general.sort_price_exist')}}</option>
             <option value="-price" @if(request()->input('sort') == '-price') selected @endif>{{__('general.sort_price_high')}}</option>
             <option value="price" @if(request()->input('sort') == 'price') selected @endif>{{__('general.sort_price_low')}}</option>
-            <option value="is_delivery" @if(request()->input('sort') == 'is_delivery') selected @endif>{{__('general.sort_delivery_exist')}}</option>
             <option value="-delivery" @if(request()->input('sort') == '-delivery') selected @endif>{{__('general.sort_delivery_high')}}</option>
             <option value="delivery" @if(request()->input('sort') == 'delivery') selected @endif>{{__('general.sort_delivery_low')}}</option>
         </select>
@@ -26,7 +28,7 @@
             <li class="nav-item">
                 <a class="nav-link active" id="grid-view-tab" data-toggle="pill" href="#grid-view" role="tab" aria-controls="grid-view" aria-selected="false">
                     <div class="d-md-flex justify-content-md-center align-items-md-center">
-                        <i class="fa fa-align-justify"></i>
+                        <i class="fa fa-th"></i>
                     </div>
                 </a>
             </li>
