@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Quote extends Model implements HasMedia
 {
-    use SoftDeletes, HasFactory, InteractsWithMedia;
+    use SoftDeletes, HasFactory, InteractsWithMedia, UnicodeJsonColumn;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 

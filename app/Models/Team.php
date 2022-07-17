@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\Traits\DefaultImage;
+use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,7 +15,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Team extends Model implements Sortable, HasMedia
 {
-    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage;
+    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, UnicodeJsonColumn;
 
     public $translatable = ['name', 'position', 'info'];
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Traits\UnicodeJsonColumn;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Membership extends Model implements Sortable
 {
-    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, CascadeSoftDeletes;
+    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, CascadeSoftDeletes, UnicodeJsonColumn;
 
     public $translatable = ['name', 'desc'];
 

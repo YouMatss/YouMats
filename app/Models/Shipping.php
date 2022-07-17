@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Shipping extends Model
 {
-    use HasFactory;
+    use HasFactory, UnicodeJsonColumn;
 
     protected $guarded = ['id'];
 

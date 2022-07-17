@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\Traits\DefaultImage;
+use App\Helpers\Traits\UnicodeJsonColumn;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
@@ -19,7 +20,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
 
 class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 {
-    use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, HasTranslations, CascadeSoftDeletes, BelongsToThrough;
+    use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, HasTranslations, CascadeSoftDeletes, BelongsToThrough, UnicodeJsonColumn;
 
     protected $fillable = ['name', 'country_id', 'subCategory_id', 'email' , 'contacts', 'address', 'type', 'latitude', 'longitude',
         'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url', 'slug', 'active'];

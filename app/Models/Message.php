@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    use HasFactory;
+    use HasFactory, UnicodeJsonColumn;
 
     protected $guarded = ['id'];
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\Traits\DefaultImage;
+use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +14,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Driver extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage;
+    use HasApiTokens, SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, UnicodeJsonColumn;
 
     protected $fillable = ['country_id', 'name', 'email', 'phone', 'phone2', 'whatsapp', 'email_verified_at', 'password', 'remember_token', 'active'];
 
