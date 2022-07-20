@@ -162,7 +162,7 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            {{ $products->links() }}
+                            {{ $products->onEachSide(0)->links() }}
                         @else
                             <h4>{{ __('general.no_products') }}</h4>
                         @endif
@@ -230,7 +230,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            {{ $branches->links() }}
+                            {{ $branches->onEachSide(0)->links() }}
                         @else
                             <h4>{{ __('vendor.no_branches') }}</h4>
                         @endif

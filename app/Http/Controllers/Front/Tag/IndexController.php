@@ -17,6 +17,8 @@ class IndexController extends Controller
 
         $data['products'] = $data['tag']->products()->paginate(10);
 
+        $tags_ids = [];
+
         foreach ($data['products'] as $product) {
             foreach ($product->tags as $tag) {
                 $tags_ids[] = $tag->id;

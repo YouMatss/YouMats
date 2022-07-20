@@ -94,6 +94,6 @@
 <!-- End Tab Content -->
 <nav class="rtl d-md-flex justify-content-between align-items-center border-top pt-3" aria-label="Page navigation example">
     <ul class="pagination mb-0 pagination-shop justify-content-center justify-content-md-start">
-        {{$products->links()}}
+        {{$products->onEachSide(0)->links()}}
     </ul>
 </nav>

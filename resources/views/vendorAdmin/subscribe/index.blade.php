@@ -59,7 +59,7 @@
             </div>
         </div>
     </section>
-    <form action="{{route('vendor.subscribe.cancel')}}" method="post" id="cancel_subscribe">
+    <form action="{{route('vendor.subscribe.cancel')}}" method="post" onsubmit="return confirm('{{__('vendorAdmin.cancel_notice')}}');" id="cancel_subscribe">
         {{csrf_field()}}
     </form>
 @endsection
