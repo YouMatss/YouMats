@@ -38,7 +38,7 @@
                         </li>
                     @endforeach
                 </ul>
-                {{ $vendors->links() }}
+                {{ $vendors->onEachSide(0)->links() }}
             </div>
         </div>
     </div>

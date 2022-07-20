@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Front\Vendor\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Vendor\SubScribeRequest;
+use App\Models\Admin;
 use App\Models\Membership;
 use App\Models\Subscribe;
+use App\Notifications\VendorSubscribeCanceled;
+use App\Notifications\VendorSubscribed;
+use App\Notifications\VendorUpdated;
 use Carbon\Carbon;
 use Devinweb\Payment\Facades\Payment;
 use Illuminate\Http\Request;
@@ -93,12 +97,15 @@ class SubScribeController extends Controller
                 ]);
             }
 
-            Subscribe::create([
+            $subscribe = Subscribe::create([
                 'vendor_id' => $data['vendor']->id,
                 'membership_id' => $data['membership']->id,
                 'expiry_date' => Carbon::now()->addMonth(),
                 'price' => $data['membership']->price,
             ]);
+
+            foreach(Admin::all() as $admin)
+                $admin->notify(new VendorSubscribed($data['vendor'], $data['membership'], $subscribe));
 
 //            $arrData = [
 //                'command' => 'PURCHASE',
@@ -147,10 +154,14 @@ class SubScribeController extends Controller
 
     public function cancel() {
         $data['vendor'] = Auth::guard('vendor')->user();
+        $subscribe = $data['vendor']->current_subscribe;
 
-        $data['vendor']->current_subscribe->update([
+        $subscribe->update([
             'expiry_date' => Carbon::yesterday()
         ]);
+
+        foreach(Admin::all() as $admin)
+            $admin->notify(new VendorSubscribeCanceled($data['vendor'], $subscribe));
 
         return redirect()->back();
     }

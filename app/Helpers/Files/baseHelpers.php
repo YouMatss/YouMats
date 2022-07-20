@@ -230,7 +230,8 @@ function parseNumber($number) {
 if (!function_exists('nova_get_setting_translate')) {
     function nova_get_setting_translate($settingKey)
     {
-        return json_decode(nova_get_setting($settingKey))->{app()->getLocale()} ?? nova_get_setting($settingKey);
+        $value = nova_get_setting($settingKey);
+        return json_decode($value)->{app()->getLocale()} ?? $value;
     }
 }
 
