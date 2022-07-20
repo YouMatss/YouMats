@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Front\Product;
 
+use App\Helpers\Classes\Delivery;
+use App\Helpers\Classes\Shipping;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CheckoutRequest;
 use App\Models\Admin;
@@ -56,10 +58,10 @@ class CheckoutController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param CheckoutRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function checkout(Request $request)
+    public function checkout(CheckoutRequest $request)
     {
         $data = $request->validated();
 
@@ -89,16 +91,21 @@ class CheckoutController extends Controller
         $coupon = Cart::instance('cart')->search(function($cartItem, $rowItem) {
             return $cartItem->id == 'discount';
         });
-        $total = round(parseNumber(Cart::instance('cart')->total()));
+
+        $subtotal = round(parseNumber(Cart::instance('cart')->total()));
+        $delivery = round(parseNumber(cart_delivery()));
+        $total = round(parseNumber(cart_total()));
 
         //Append default values to the data.
         $data['city'] = Session::get('city') ?? null;
         $data['payment_status'] = 'pending';
-        $data['status']   = 'pending';
-        $data['coupon_code']    = $coupon[array_key_first(current($coupon))]->name ?? null;
-        $data['total_price']    = $total;
-        $data['order_id']       = 'ORD-'. strtoupper(uniqid());
-        $data['user_id']        = Auth::guard('web')->user()->id;
+        $data['status'] = 'pending';
+        $data['coupon_code'] = $coupon[array_key_first(current($coupon))]->name ?? null;
+        $data['subtotal'] = $subtotal;
+        $data['delivery'] = $delivery;
+        $data['total_price'] = $total;
+        $data['order_id'] = 'ORD-'. strtoupper(uniqid());
+        $data['user_id'] = Auth::guard('web')->user()->id;
         unset($data['terms']);
         unset($data['type']);
         unset($data['password']);
@@ -122,7 +129,6 @@ class CheckoutController extends Controller
         $data['phone'] = $data['phone_number'];
         unset($data['phone_number']);
 
-
         //A company is ordering. So let's register all the order as service
         if($type == 'company') {
             $data['quote_no'] = 'QOT-'. strtoupper(uniqid());
@@ -132,7 +138,6 @@ class CheckoutController extends Controller
 
             foreach(Admin::all() as $admin)
                 $admin->notify(new QuoteCreated($user, $quote));
-
 
             if($request->has('attachments'))
                 foreach($data['attachments'] as $attachment)
@@ -168,7 +173,9 @@ class CheckoutController extends Controller
                         'status'        => 'pending',
                         'payment_status'=> 'pending',
                         'quantity'      => $item->qty,
-                        'price'         => $item->model->price
+                        'price'         => $item->model->price,
+                        'delivery'      => round(optional(getDelivery($item->model, $item->qty))['price'] / getCurrency('rate'), 2) ?? 0,
+                        'delivery_cars' => Shipping::getCars($item->model, $item->qty)
                     ]);
             }
             $returnText = __('checkout.order_placed_successfully');

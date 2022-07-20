@@ -29,7 +29,7 @@ class CheckoutRequest extends FormRequest
             'payment_method' => [...[NULLABLE_STRING_VALIDATION], 'In:Cash,Online', Rule::requiredIf(fn() => is_individual())],
             'terms' => 'required|accepted',
             'name' => REQUIRED_STRING_VALIDATION,
-            'phone' => ['required'/*, new PhoneNumberRule()*/],
+            'phone_number' => ['required'/*, new PhoneNumberRule()*/],
             'address' => REQUIRED_STRING_VALIDATION,
             'building_number' => NULLABLE_INTEGER_VALIDATION,
             'street' => NULLABLE_STRING_VALIDATION,

@@ -122,6 +122,19 @@ class CartController extends Controller
         ]);
     }
 
+    public function delivery_warning(Request $request, Product $product) {
+        $cart = Cart::instance('cart')->content();
+        $quantity = $request->quantity;
+
+        foreach ($cart as $item) {
+            if ($item->id == $product->id) {
+                $quantity = $request->quantity + $item->qty;
+            }
+        }
+
+        return response()->json(Shipping::abilityOfQuantity($product, $quantity));
+    }
+
     /**
      * @param Request $request
      * @return JsonResponse

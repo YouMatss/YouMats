@@ -136,20 +136,56 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>{{__('vendorAdmin.product_price')}}:</label> {{$item->price}}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
                                         <label>{{__('vendorAdmin.product_quantity')}}:</label> {{$item->quantity}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>{{__('vendorAdmin.product_total_price')}}:</label> {{$item->quantity * $item->price}}
+                                        <label>{{__('vendorAdmin.product_price')}}:</label> {{__('general.sar') . ' ' . $item->price}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{__('vendorAdmin.product_delivery')}}:</label> {{__('general.sar') . ' ' . $item->delivery}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{__('vendorAdmin.product_total_price')}}:</label> {{__('general.sar') . ' ' . (($item->quantity * $item->price) + $item->delivery)}}
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h4>{{__('vendorAdmin.shipping_details')}}</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-bordered table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>{{__('vendorAdmin.shipping_car')}}</th>
+                                        <th>{{__('vendorAdmin.shipping_quantity')}}</th>
+                                        <th>{{__('vendorAdmin.shipping_price')}}</th>
+                                        <th>{{__('vendorAdmin.shipping_time')}}</th>
+                                        <th>{{__('vendorAdmin.shipping_count')}}</th>
+                                        <th>{{__('vendorAdmin.shipping_payload')}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($item->delivery_cars as $car)
+                                        <tr>
+                                            <td>{{$car['car']}}</td>
+                                            <td>{{$car['quantity']}}</td>
+                                            <td>{{$car['price']}}</td>
+                                            <td>{{$car['time'] . ' ' . $car['format']}}</td>
+                                            <td>{{$car['count']}}</td>
+                                            <td>{{$car['payload']}}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

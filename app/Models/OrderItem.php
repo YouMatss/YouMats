@@ -12,6 +12,10 @@ class OrderItem extends Model
 {
     use HasFactory, SoftDeletes, UnicodeJsonColumn;
 
+    protected $casts = [
+        'delivery_cars' => 'array'
+    ];
+
     protected $guarded = [];
 
     public function product() {

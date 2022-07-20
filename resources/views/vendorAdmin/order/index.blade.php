@@ -31,7 +31,7 @@
                             <tr>
                                 <td>{{$item->order->order_id}}</td>
                                 <td>{{$item->order->name}}</td>
-                                <td>{{$item->price}}</td>
+                                <td>{{__('general.sar') . ' ' . ($item->price + $item->delivery)}}</td>
                                 <td class="btn-ship">
                                     <label class="badge
                                     @if($item->status == 'pending')

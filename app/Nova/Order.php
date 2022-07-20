@@ -119,6 +119,8 @@ class Order extends Resource
             Textarea::make('Notes')->rules(NULLABLE_TEXT_VALIDATION),
             Textarea::make('Refused Notes')->rules(NULLABLE_TEXT_VALIDATION),
 
+            Currency::make('Subtotal')->hideFromIndex()->rules(REQUIRED_NUMERIC_VALIDATION),
+            Currency::make('Delivery')->hideFromIndex()->rules(REQUIRED_NUMERIC_VALIDATION),
             Currency::make('Total Price')->rules(REQUIRED_NUMERIC_VALIDATION),
 
             HasMany::make('Order Items', 'items'),

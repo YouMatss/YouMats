@@ -97,6 +97,7 @@ Route::group([
     Route::group(['prefix' => 'cart', 'namespace' => 'Product'], function() {
         Route::get('/', 'CartController@show')->name('cart.show');
         Route::post('/add/{product}', 'CartController@add')->name('cart.add')->middleware('throttle:10,1');
+        Route::post('/delivery_warning/{product}', 'CartController@delivery_warning')->name('cart.delivery_warning');
         Route::delete('/delete/{rowId}', 'CartController@deleteItem')->name('cart.remove');
         Route::patch('/update', 'CartController@update')->name('cart.update')->middleware('throttle:10,1');
         Route::post('/coupon', 'CartController@applyCoupon')->name('apply.coupon');

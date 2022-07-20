@@ -171,7 +171,6 @@
                                                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="passwordInput" name="password" required autocomplete="new-password">
                                                     <span href="#" class="showPassword fa fa-eye" data-toggle="#passwordInput"></span>
                                                 </div>
-
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -187,6 +186,15 @@
                                                     <span href="#" class="showPassword fa fa-eye" data-toggle="#passwordConfirmInput"></span>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input class="checkModal" type="checkbox" name="contract" />&nbsp;
+                                            <label class="checkModal" style="cursor: pointer">{{__('auth.contract_check_label')}}</label>
+                                            @error('contract')
+                                            <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
@@ -210,12 +218,57 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="termsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="max-width: 1000px">
+            <div class="modal-content st_model_new">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{nova_get_setting_translate('vendor_terms_title')}}</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="modalText">
+                                {!! nova_get_setting_translate('vendor_terms_text') !!}
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="modalButton" data-dismiss="modal">{{nova_get_setting_translate('vendor_terms_button')}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('extraScripts')
+    <style>
+        .modalText{
+            overflow-y: auto;
+            max-height: 55vh;
+        }
+        .modalButton{
+            border-radius: 5px;
+            margin: 30px auto;
+            width: auto;
+            padding: 15px;
+            display: block;
+            border: 2px solid #003f91;
+            font-weight: bold;
+        }
+    </style>
     <script defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0jFnIKr5fjHZlmeY3QoiyelAGLrd-Fnc&libraries=places&sensor=false"></script>
     <script defer src="{{front_url()}}/assets/js/map.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            $(document).ready(function() {
+                $('.checkModal').on('click', function () {
+                    $('#termsModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                });
+            });
+
             // upload Licenses
             $(".imgAdd").click(function(){
                 $(this).closest(".row").find('.imgAdd').before('<div class="col-md-3 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input name="licenses[]" type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');

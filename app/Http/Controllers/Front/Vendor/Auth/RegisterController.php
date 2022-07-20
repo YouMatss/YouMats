@@ -91,7 +91,8 @@ class RegisterController extends Controller
             'longitude' => NULLABLE_STRING_VALIDATION,
             'licenses' => ARRAY_VALIDATION,
             'licenses.*' => REQUIRED_FILE_VALIDATION,
-            'password' => ['required', 'string', 'min:8', 'confirmed']
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'contract' => 'required'
         ]);
     }
 

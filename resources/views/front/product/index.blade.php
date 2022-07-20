@@ -24,22 +24,22 @@
     <meta name="twitter:image:height" content="418">
 
     {!! $product->schema !!}
-    <script>
-        ga('require', 'ec');
-        ga('ec:addImpression', {
-            'id': '{{$product->SKU}}',
-            'name': '{{$product->name}}',
-            'category': '{{$product->category->name}}',
-            {{--'brand': '{{$product->vendor->name}}',--}}
-        });
-        ga('ec:addProduct', {
-            'id': '{{$product->SKU}}',
-            'name': '{{$product->name}}',
-            'category': '{{$product->category->name}}',
+{{--    <script>--}}
+{{--        ga('require', 'ec');--}}
+{{--        ga('ec:addImpression', {--}}
+{{--            'id': '{{$product->SKU}}',--}}
+{{--            'name': '{{$product->name}}',--}}
+{{--            'category': '{{$product->category->name}}',--}}
+{{--            --}}{{--'brand': '{{$product->vendor->name}}',--}}
+{{--        });--}}
+{{--        ga('ec:addProduct', {--}}
+{{--            'id': '{{$product->SKU}}',--}}
+{{--            'name': '{{$product->name}}',--}}
+{{--            'category': '{{$product->category->name}}',--}}
 {{--            'brand': '{{$product->vendor->name}}',--}}
-        });
-        ga('ec:setAction', 'detail');
-    </script>
+{{--        });--}}
+{{--        ga('ec:setAction', 'detail');--}}
+{{--    </script>--}}
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
