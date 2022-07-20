@@ -14,6 +14,10 @@
                         @foreach($delivery_cities as $d_city_loop)
                             <option value="{{$d_city_loop->id}}" @if(Session::has('city') && $d_city_loop->id == Session::get('city')) selected @endif>{{$d_city_loop->name}}</option>
                         @endforeach
+                    @else
+                        @foreach(\App\Models\City::all() as $city_loop)
+                            <option value="{{$city_loop->id}}" @if(Session::has('city') && $city_loop->id == Session::get('city')) selected @endif>{{$city_loop->name}}</option>
+                        @endforeach
                     @endif
                 </select>
             </div>

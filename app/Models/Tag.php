@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
 
 class Tag extends Model {
-    use SoftDeletes, HasFactory, HasTranslations;
+    use SoftDeletes, HasFactory, HasTranslations, UnicodeJsonColumn;
 
     public $translatable = ['name', 'desc', 'meta_title', 'meta_desc', 'meta_keywords'];
 

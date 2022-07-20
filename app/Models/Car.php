@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\Traits\DefaultImage;
+use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,7 +13,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Car extends Model implements HasMedia
 {
-    use SoftDeletes, HasFactory, HasTranslations, InteractsWithMedia, DefaultImage;
+    use SoftDeletes, HasFactory, HasTranslations, InteractsWithMedia, DefaultImage, UnicodeJsonColumn;
 
     protected $fillable = ['driver_id', 'type_id', 'name', 'model', 'license_no', 'max_load', 'price_per_kilo', 'active'];
 

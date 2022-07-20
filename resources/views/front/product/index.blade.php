@@ -24,22 +24,22 @@
     <meta name="twitter:image:height" content="418">
 
     {!! $product->schema !!}
-    <script>
-        ga('require', 'ec');
-        ga('ec:addImpression', {
-            'id': '{{$product->SKU}}',
-            'name': '{{$product->name}}',
-            'category': '{{$product->category->name}}',
-            {{--'brand': '{{$product->vendor->name}}',--}}
-        });
-        ga('ec:addProduct', {
-            'id': '{{$product->SKU}}',
-            'name': '{{$product->name}}',
-            'category': '{{$product->category->name}}',
+{{--    <script>--}}
+{{--        ga('require', 'ec');--}}
+{{--        ga('ec:addImpression', {--}}
+{{--            'id': '{{$product->SKU}}',--}}
+{{--            'name': '{{$product->name}}',--}}
+{{--            'category': '{{$product->category->name}}',--}}
+{{--            --}}{{--'brand': '{{$product->vendor->name}}',--}}
+{{--        });--}}
+{{--        ga('ec:addProduct', {--}}
+{{--            'id': '{{$product->SKU}}',--}}
+{{--            'name': '{{$product->name}}',--}}
+{{--            'category': '{{$product->category->name}}',--}}
 {{--            'brand': '{{$product->vendor->name}}',--}}
-        });
-        ga('ec:setAction', 'detail');
-    </script>
+{{--        });--}}
+{{--        ga('ec:setAction', 'detail');--}}
+{{--    </script>--}}
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
@@ -143,7 +143,7 @@
                                     <div>
                                         <span>{{__('product.delivery_to_your_city')}}: <b>{{getCurrentCityName()}}</b></span>
                                         <br/>
-                                        <span>{{__('product.delivery_price')}}:
+                                        <span>{{__('product.delivery_price')}} {{$product->min_quantity}} {{__('product.piece')}}:
                                             @if($delivery['price'] > 0)
                                             <b>{{getCurrency('symbol')}} {{round($delivery['price'] * getCurrency('rate'), 2)}}</b>
                                             @else
@@ -181,11 +181,10 @@
                                 </div>
                             </div>
 
-
                             @if(!Auth::guard('vendor')->check())
                                 @if(is_company())
                                     {!! cartOrChat($product) !!}
-                                @elseif($product->vendor->current_subscribe && in_array($product->vendor->current_subscribe->membership_id, [env('INDIVIDUAL_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))
+                                @elseif(optional($product->vendor)->current_subscribe && in_array($product->vendor->current_subscribe->membership_id, [env('INDIVIDUAL_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))
                                     @if($product->price || $product->delivery)
                                         {!! cartOrChat($product) !!}
                                     @else

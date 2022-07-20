@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -90,7 +91,8 @@ class RegisterController extends Controller
             'longitude' => NULLABLE_STRING_VALIDATION,
             'licenses' => ARRAY_VALIDATION,
             'licenses.*' => REQUIRED_FILE_VALIDATION,
-            'password' => ['required', 'string', 'min:8', 'confirmed']
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'contract' => 'required'
         ]);
     }
 
@@ -110,7 +112,7 @@ class RegisterController extends Controller
             'latitude' => $data['latitude'],
             'longitude' => $data['longitude'],
             'password' => Hash::make($data['password']),
-            'slug' => $data['name_en'] . rand(1,9)
+            'slug' => $data['name_en'] . rand(1,99)
         ]);
 
         $vendor->setTranslation('name', 'en', $data['name_en']);
@@ -123,6 +125,8 @@ class RegisterController extends Controller
             }
 
         $vendor->save();
+
+        Session::flash('custom_success', __('auth.vendor_register_successfully'));
 
         return $vendor;
     }

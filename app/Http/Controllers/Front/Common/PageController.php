@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Common;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\ContactRequest;
 use App\Models\Contact;
 use App\Models\FAQ;
 use App\Models\Page;
@@ -24,18 +25,13 @@ class PageController extends Controller
         return view('front.pages.contact');
     }
 
-    public function contactUsRequest(Request $request) {
-        $data = $this->validate($request, [
-            'name' => REQUIRED_STRING_VALIDATION,
-            'email' => REQUIRED_EMAIL_VALIDATION,
-            'phone' => REQUIRED_STRING_VALIDATION,
-            'message' => NULLABLE_TEXT_VALIDATION
-        ]);
+    public function contactUsRequest(ContactRequest $request) {
+        $data = $request->validated();
 
         try {
             $contact = Contact::create($data);
             if($contact) {
-                $message = 'You request submitted successfully.';
+                $message = __('messages.contact_added');
 //                Email::sendEmailForms($contact, $message);
             }
         } catch (\Exception $e) {

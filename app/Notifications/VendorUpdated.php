@@ -2,24 +2,26 @@
 
 namespace App\Notifications;
 
-use App\Models\User;
+use App\Models\Vendor;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CompanyRegistered extends Notification
+class VendorUpdated extends Notification
 {
     use Queueable;
 
-    private User $user;
+    private Vendor $vendor;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(Vendor $vendor)
     {
-        $this->user = $user;
+        $this->vendor = $vendor;
     }
 
     /**
@@ -44,9 +46,9 @@ class CompanyRegistered extends Notification
     public function toArray($notifiable)
     {
         return \Mirovit\NovaNotifications\Notification::make()
-            ->info('A new company was registered.')
-            ->subtitle('There is a new company in the system - ' . $this->user->name . '!')
-            ->routeDetail('vendors', $this->user->slug)
+            ->info('A vendor has been updated sensitive data.')
+            ->subtitle('There is a vendor edit in the system - Vendor Name:' . $this->vendor->name . '!')
+            ->routeDetail('vendors', $this->vendor->id)
             ->toArray();
     }
 }

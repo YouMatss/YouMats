@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Traits\UnicodeJsonColumn;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use SoftDeletes, HasFactory, CascadeSoftDeletes;
+    use SoftDeletes, HasFactory, CascadeSoftDeletes, UnicodeJsonColumn;
 
     protected $dates = ['transaction_date'];
 

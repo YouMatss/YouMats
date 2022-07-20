@@ -55,19 +55,31 @@
                             @foreach($items as $item)
                                 <tr>
                                     <td class="text-center close_cart_new">
-                                        <a style="cursor: pointer" class="deleteCart" data-url="{{ route('cart.remove', ['rowId' => $item->rowId]) }}" class="text-gray-32 font-size-26">×</a>
+                                        <a style="cursor: pointer" data-url="{{ route('cart.remove', ['rowId' => $item->rowId]) }}" class="text-gray-32 font-size-26 deleteCart">×</a>
                                     </td>
                                     <td class="d-md-table-cell img_cart_view">
                                         @if($item->model)
-                                            <a href="#"><img loading="lazy" class="img-fluid max-width-100 p-1 border border-color-1" src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"></a>
+                                            <a href="{{route('front.product', [generatedNestedSlug($item->model->category->ancestors()->pluck('slug')->toArray(), $item->model->category->slug), $item->model->slug])}}">
+                                                <img loading="lazy" class="img-fluid max-width-100 p-1 border border-color-1"
+                                                     src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}"
+                                                     alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"
+                                                     title="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}"
+                                                >
+                                            </a>
                                         @else
                                             <img loading="lazy" class="img-fluid max-width-100 p-1 border border-color-1" src="/assets/img/default_logo.jpg" />
                                         @endif
                                     </td>
 
-                                    <td data-title="{{ __('cart.product') }}">
-                                        <a href="#" class="text-gray-90">{{ $item->name }}</a>
-                                    </td>
+                                    @if($item->model)
+                                        <td data-title="{{ __('cart.product') }}">
+                                            <a href="{{route('front.product', [generatedNestedSlug($item->model->category->ancestors()->pluck('slug')->toArray(), $item->model->category->slug), $item->model->slug])}}" class="text-gray-90">{{ $item->name }}</a>
+                                        </td>
+                                    @else
+                                        <td data-title="{{ __('cart.product') }}">
+                                            <a class="text-gray-90">{{ $item->name }}</a>
+                                        </td>
+                                    @endif
 
                                     @if($item->model)
                                         <td data-title="{{ __('cart.quantity') }}">
@@ -76,7 +88,7 @@
                                             <div class="border rounded-pill py-1 width-122 w-xl-80 px-3 border-color-1">
                                                 <div class="js-quantity row align-items-center">
                                                     <div class="col">
-                                                        <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" row_id="{{ $item->rowId }}" value="{{ $item->qty }}">
+                                                        <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" data-id="{{$item->id}}" data-row_id="{{ $item->rowId }}" value="{{ $item->qty }}">
                                                     </div>
                                                     <div class="col-auto pr-1">
                                                         <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
@@ -96,10 +108,10 @@
 
                                     @if(!is_company())
                                         <td data-title="{{__('cart.price')}}">
-                                            <span class="">{{__('general.sar') . ' ' . $item->price }}</span>
+                                            <span class="">{{__('general.sar') . ' ' . number_format($item->price, 2) }}</span>
                                         </td>
                                         <td data-title="{{__('cart.total')}}">
-                                            <span class="">{{__('general.sar') . ' ' . $item->subtotal }}</span>
+                                            <span class="">{{__('general.sar') . ' ' . number_format($item->subtotal, 2) }}</span>
                                         </td>
                                     @endif
                                 </tr>
@@ -151,11 +163,11 @@
                             </tr>
                             <tr class="shipping">
                                 <th>{{ __('cart.shipping') }}</th>
-                                <td data-title="tax"><span class="amount" id="tax">{{ __('general.sar') . ' ' . Cart::tax() }}</span></td>
+                                <td data-title="tax"><span class="amount" id="tax">{{ __('general.sar') . ' ' . cart_delivery() }}</span></td>
                             </tr>
                             <tr class="order-total">
                                 <th>{{ __('cart.total') }}</th>
-                                <td data-title="Total"><strong><span class="amount" id="total">{{ __('general.sar') . ' ' . Cart::total() }}</span></strong></td>
+                                <td data-title="Total"><strong><span class="amount" id="total">{{ __('general.sar') . ' ' . cart_total() }}</span></strong></td>
                             </tr>
                             </tbody>
                         </table>
@@ -196,7 +208,7 @@
                         $('.cartCount').html(response.count);
                         $('.cartTotal').html(response.total);
                         $('#total').html(response.total);
-                        $('#tax').html(response.tax);
+                        $('#tax').html(response.delivery);
                         $('#subtotal').html(response.subtotal);
                         button.closest('tr').remove();
                     }
@@ -211,12 +223,13 @@
 
                 $(".js-result").each(function(i, el) {
                     let qty = $(this).val(),
-                        rowId = $(this).attr('row_id');
+                        id = $(this).data('id'),
+                        rowId = $(this).data('row_id');
 
                     $.ajax({
                         type: 'PATCH',
                         url: url,
-                        data: {_token: "{{ csrf_token() }}", qty: qty, rowId: rowId }
+                        data: {_token: "{{ csrf_token() }}", qty: qty, id: id, rowId: rowId}
                     })
                     .done(function(response) {
                         console.log(response);

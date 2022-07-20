@@ -179,6 +179,9 @@
                     if (attributesIds.length) {
                         href += 'filter[attributes]=' + attributesIds;
                     }
+                    if ($('#is_price').is(':checked')) {
+                        href += '&filter[is_price]=' + $('#is_price').val();
+                    }
                     if ($('#price_range').val()) {
                         href += '&filter[price]=' + $('#price_range').val();
                     }
@@ -202,6 +205,9 @@
                     filterResults();
                 })
                 $(document).on('change', '#sort_select', function () {
+                    filterResults();
+                })
+                $(document).on('change', '#is_price', function () {
                     filterResults();
                 })
             });

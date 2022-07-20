@@ -1,8 +1,9 @@
 <?php
 
-
 namespace App\Helpers\Classes;
 
+use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 
 class Shipping
 {
@@ -46,6 +47,7 @@ class Shipping
             $rest_quantity = (int)fmod($quantity, $cheapest_car['quantity']);
 
             $cheapest_car['count'] = $car_count;
+            $cheapest_car['payload'] = $quantity - $rest_quantity;
             $selected_cars[] = $cheapest_car;
 
             if($rest_quantity > 0) {
@@ -56,13 +58,14 @@ class Shipping
         } elseif($quantity < $cheapest_car_quantity) {
             $cheapest_car = self::getCheapestCarBySpecificQuantity($cars, $quantity);
             $car_count = intdiv($quantity, $cheapest_car['quantity']);
-            if($car_count == 0) {
+            $rest_quantity = (int)fmod($quantity, $cheapest_car['quantity']);
+            if($car_count == 0 || $rest_quantity == 0) {
                 $car_count = 1;
                 $cheapest_car['count'] = $car_count;
+                $cheapest_car['payload'] = $quantity;
                 $selected_cars[] = $cheapest_car;
                 return $selected_cars;
             } else {
-                $rest_quantity = (int)fmod($quantity, $cheapest_car['quantity']);
                 return self::getBestPrice($cars, $rest_quantity, $selected_cars);
             }
         }
@@ -124,4 +127,36 @@ class Shipping
         ];
     }
 
+    public static function abilityOfQuantity(Product $product, $quantity) {
+        $cars = self::getCars($product, $quantity);
+
+        $data['status'] = true;
+
+        foreach ($cars as $car) {
+            $min_quantity_of_car = (int)floor($car['quantity'] / 2);
+            if($car['payload'] < $min_quantity_of_car) {
+                $data['status'] = false;
+                $data['message'] = __('product.shipping_warning_first_sentence')
+                    . ' ' . $car['quantity'] . ' '
+                    . __('product.shipping_warning_second_sentence') . ' ' . $car['payload']/$car['count'];
+            }
+        }
+
+        return $data;
+    }
+
+    public static function getCars(Product $product, $quantity, $stringify = false) {
+        $remap_shipping = [];
+        if($product->specific_shipping && $product->shipping_prices) {
+            $remap_shipping = self::remap($product->shipping_prices, false);
+        } elseif(isset($product->shipping) && $product->shipping->prices) {
+            $remap_shipping = self::remap($product->shipping->prices);
+        }
+        foreach ($remap_shipping as $city => $shipping) {
+            if(Session::has('city') && $city == Session::get('city')) {
+                return self::getBestPrice($shipping, $quantity);
+            }
+        }
+        return null;
+    }
 }

@@ -175,24 +175,59 @@
         $.HSCore.components.HSSelectPicker.init('.js-select');
 
         //HANDLE CART
-        $(document).on('click', '.btn-add-cart', function(){
+        $(document).on('click', '.btn-add-cart', function() {
             let url  = $(this).data('url'),
+                delivery_url  = $(this).data('delivery-url'),
                 btn = $(this);
 
             $.ajax({
                 type: 'POST',
-                url: url,
+                url: delivery_url,
                 data: {
                     _token: '{{ csrf_token() }}',
                     quantity: btn.parent().siblings().find('.cart-quantity').val()
                 }
             }).done(function(response) {
-                $('.cartCount').html(response.count);
-                $('.cartTotal').html(response.total);
-                if(response.success) {
-                    toastr.success(response.message);
+                if(!response.status) {
+                    if(confirm(response.message)) {
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                quantity: btn.parent().siblings().find('.cart-quantity').val()
+                            }
+                        }).done(function(response) {
+                            $('.cartCount').html(response.count);
+                            $('.cartTotal').html(response.total);
+                            if(response.success) {
+                                toastr.success(response.message);
+                            } else {
+                                toastr.error(response.message);
+                            }
+                        }).fail(function(response) {
+                            toastr.error(response);
+                        })
+                    }
                 } else {
-                    toastr.error(response.message);
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            quantity: btn.parent().siblings().find('.cart-quantity').val()
+                        }
+                    }).done(function(response) {
+                        $('.cartCount').html(response.count);
+                        $('.cartTotal').html(response.total);
+                        if(response.success) {
+                            toastr.success(response.message);
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    }).fail(function(response) {
+                        toastr.error(response);
+                    })
                 }
             }).fail(function(response) {
                 toastr.error(response);
@@ -222,19 +257,13 @@
 
         $.each(inputs, function(key, value){
             window.intlTelInput(value, {
+                initialCountry: "sa",
+                nationalMode: true,
                 utilsScript: '{{front_url()}}/assets/js/utils.js',
-                formatOnDisplay: true,
-                // autoPlaceholder: true,
-                initialCountry: "auto",
-                hiddenInput: "phone",
+                preferredCountries: ['sa'],
                 separateDialCode: true,
-                autoPlaceholder: "polite",
-                geoIpLookup: function(success, failure) {
-                    $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-                        var countryCode = (resp && resp.country) ? resp.country : "sa";
-                        success(countryCode);
-                    });
-                }
+                formatOnDisplay: true,
+                hiddenInput: "phone"
             });
         });
 

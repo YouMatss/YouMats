@@ -466,3 +466,7 @@ h3.font-size-24 {
     right: auto;
     left: -35px;
 }
+
+.iti--separate-dial-code input[type=text], .iti--separate-dial-code input[type=tel] {
+    text-align: left !important;
+}

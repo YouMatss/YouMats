@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\Classes\Shipping as ShippingHelper;
 use App\Helpers\Traits\DefaultImage;
+use App\Helpers\Traits\UnicodeJsonColumn;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +21,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
 
 class Product extends Model implements Sortable, HasMedia, Buyable
 {
-    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, BelongsToThrough;
+    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, BelongsToThrough, UnicodeJsonColumn;
 
     protected $guarded = ['id'];
 
@@ -131,7 +132,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      * @return int
      */
     public function getSubscribeAttribute() {
-        if($this->vendor->current_subscribe) {
+        if(isset($this->vendor->current_subscribe)) {
             return 1;
         }
         return 0;

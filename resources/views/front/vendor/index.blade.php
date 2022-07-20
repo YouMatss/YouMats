@@ -22,7 +22,7 @@
                 <div class="d-flex justify-content-between align-items-center border-bottom border-color-1 flex-lg-nowrap flex-wrap mb-4 rtl">
                     <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('vendor.logos') }}</h3>
                 </div>
-                <ul class="row list-unstyled products-group no-gutters mb-6">
+                <ul class="row list-unstyled products-group no-gutters mb-6 rtl">
                     @foreach($vendors as $vendor)
                         <li class="col-6 col-md-2 col-xl-1gdot7 product-item">
                             <div class="product-item__outer h-100 w-100">

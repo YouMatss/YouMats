@@ -1,6 +1,8 @@
 <?php
 
+use App\Helpers\Classes\Delivery;
 use App\Helpers\Classes\Shipping as ShippingHelper;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
 
 if (!function_exists('front_url')) {
@@ -88,6 +90,7 @@ if (!function_exists('cartOrChat')) {
             </div>
             <div>
                 <button type="button" data-url="' . route('cart.add', ['product' => $product]) . '"
+                    data-delivery-url="'. route('cart.delivery_warning', ['product' => $product]) .'"
                     class="btn-add-cart cart-chat-category btn btn-primary transition-3d-hover" style="cursor: pointer;">
                     <i class="' . $icon .'"></i> &nbsp;' . $cart_word . '
                 </button>
@@ -114,6 +117,7 @@ if (!function_exists('cartOrChat')) {
                 </div>
                 <div class="float-child-cart">
                     <button type="button" data-url="' . route('cart.add', ['product' => $product]) . '"
+                        data-delivery-url="'. route('cart.delivery_warning', ['product' => $product]) .'"
                         class="btn-add-cart cart-chat-category btn btn-primary transition-3d-hover"><i class="' . $icon .'"></i></button>
                 </div>
             </div>';
@@ -223,12 +227,19 @@ function parseNumber($number) {
     return floatval(preg_replace('/[^\d.]/', '', $number));
 }
 
+if (!function_exists('nova_get_setting_translate')) {
+    function nova_get_setting_translate($settingKey)
+    {
+        return json_decode(nova_get_setting($settingKey))->{app()->getLocale()} ?? nova_get_setting($settingKey);
+    }
+}
+
 if (!function_exists('getDelivery')) {
     function getDelivery($product, $quantity) {
         try {
             $remap_shipping = [];
             if($product->specific_shipping && $product->shipping_prices) {
-                $remap_shipping = ShippingHelper::remap($product->shipping_prices);
+                $remap_shipping = ShippingHelper::remap($product->shipping_prices, false);
             } elseif(isset($product->shipping) && $product->shipping->prices) {
                 $remap_shipping = ShippingHelper::remap($product->shipping->prices);
             }
@@ -240,4 +251,23 @@ if (!function_exists('getDelivery')) {
             return null;
         } catch (\Exception $e) {}
     }
+}
+
+function cart_delivery() {
+    $delivery = 0;
+    $cart = Cart::instance('cart')->content();
+    foreach ($cart as $item) {
+        $product = $item->model;
+
+        $deliveryIsExist = getDelivery($product, $item->qty);
+        if(!is_null($deliveryIsExist)) {
+            $delivery += round($deliveryIsExist['price'] / getCurrency('rate'), 2);
+        }
+    }
+
+    return number_format($delivery, 2);
+}
+
+function cart_total() {
+    return number_format(parseNumber(Cart::instance('cart')->total()) + cart_delivery(), 2);
 }

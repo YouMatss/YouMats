@@ -38,29 +38,12 @@
 
                     <!-- Shop-control-bar -->
                     <div class="bg-gray-1 flex-center-between borders-radius-9 py-1 rtl">
-                        <div class="d-xl-none">
-                            <!-- Account Sidebar Toggle Button -->
-                            <a id="sidebarNavToggler1" class="btn btn-sm py-1 font-weight-normal" role="button"
-                               aria-controls="sidebarContent1"
-                               aria-haspopup="true"
-                               aria-expanded="false"
-                               data-unfold-event="click"
-                               data-unfold-hide-on-scroll="false"
-                               data-unfold-target="#sidebarContent1"
-                               data-unfold-type="css-animation"
-                               data-unfold-animation-in="fadeInLeft"
-                               data-unfold-animation-out="fadeOutLeft"
-                               data-unfold-duration="500">
-                                <i class="fas fa-sliders-h"></i> <span class="ml-1">{{ __('product.filters') }}</span>
-                            </a>
-                            <!-- End Account Sidebar Toggle Button -->
-                        </div>
                         <div class="px-3 d-none d-xl-block">
                             <ul class="nav nav-tab-shop" id="pills-tab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="grid-view-tab" data-toggle="pill" href="#grid-view" role="tab" aria-controls="grid-view" aria-selected="false">
                                         <div class="d-md-flex justify-content-md-center align-items-md-center">
-                                            <i class="fa fa-align-justify"></i>
+                                            <i class="fa fa-th"></i>
                                         </div>
                                     </a>
                                 </li>
@@ -73,11 +56,29 @@
 {{--                                </li>--}}
                             </ul>
                         </div>
+                        @if(is_individual())
+                            <div class="rtl">
+                                {{__('general.city_location_text')}}: {{getCurrentCityName()}}
+                                <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
+                                {{__('general.category_word_after_change_city_button')}}
+                            </div>
+                        @endif
                         <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
-                            <form method="post" class="min-width-50 mr-1">
-                                <input size="2" min="1" max="3" step="1" type="number" class="form-control text-center px-2 height-35" value="1">
-                            </form> {{__('general.of')}} 3
-                            <a class="text-gray-30 font-size-20 ml-2" href="#">→</a>
+                            <a class="text-gray-30 font-size-20 mr-2" href="{{$products->previousPageUrl()}}">
+                                @if(app()->getLocale() == 'ar')
+                                    &nbsp;→&nbsp;
+                                @else
+                                    &nbsp;←&nbsp;
+                                @endif
+                            </a>
+                            <b>{{$products->currentPage()}} </b> &nbsp; {{__('general.of')}} {{$products->lastPage()}}
+                            <a class="text-gray-30 font-size-20 ml-2" href="{{$products->nextPageUrl()}}">
+                                @if(app()->getLocale() == 'ar')
+                                    &nbsp;←&nbsp;
+                                @else
+                                    &nbsp;→&nbsp;
+                                @endif
+                            </a>
                         </nav>
                     </div>
                     <!-- End Shop-control-bar -->
@@ -115,4 +116,26 @@
             </div>
         </div>
     </div>
+    @if(is_individual())
+        @include('front.layouts.partials.change_city')
+    @endif
+@endsection
+@section('extraScripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        $(document).on('ready', function () {
+            function filterResults() {
+                let href = '?';
+                if ($('#city_select').val()) {
+                    href += '&filter[city]=' + $('#city_select').val();
+                }
+                document.location.href = href;
+            }
+
+            $(document).on('click', '#city_submit', function () {
+                filterResults();
+            })
+        });
+    });
+</script>
 @endsection

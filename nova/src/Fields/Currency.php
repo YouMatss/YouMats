@@ -71,7 +71,7 @@ class Currency extends Number
     {
         parent::__construct($name, $attribute, $resolveCallback);
 
-        $this->locale = config('app.locale', 'en');
+        $this->locale = 'en';
         $this->currency = config('nova.currency', 'USD');
 
         $this->step($this->getStepValue());

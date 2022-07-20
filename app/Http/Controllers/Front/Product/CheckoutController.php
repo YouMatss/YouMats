@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Front\Product;
 
+use App\Helpers\Classes\Delivery;
+use App\Helpers\Classes\Shipping;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\CheckoutRequest;
 use App\Models\Admin;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -13,6 +16,7 @@ use App\Models\QuoteItem;
 use App\Models\User;
 use App\Notifications\OrderCreated;
 use App\Notifications\QuoteCreated;
+use App\Rules\PhoneNumberRule;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -23,6 +27,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 
 class CheckoutController extends Controller
@@ -53,33 +58,12 @@ class CheckoutController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param CheckoutRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function checkout(Request $request)
+    public function checkout(CheckoutRequest $request)
     {
-        //Validating the data.
-        $rules = [
-            'payment_method' => [...[NULLABLE_STRING_VALIDATION], 'In:Cash,Online', Rule::requiredIf(fn() => is_individual())],
-            'terms' => 'required|accepted',
-            'name' => REQUIRED_STRING_VALIDATION,
-            'phone_number' => REQUIRED_STRING_VALIDATION,
-            'address' => REQUIRED_STRING_VALIDATION,
-            'building_number' => NULLABLE_INTEGER_VALIDATION,
-            'street' => NULLABLE_STRING_VALIDATION,
-            'district' => NULLABLE_STRING_VALIDATION,
-            'city' => NULLABLE_INTEGER_VALIDATION,
-            'email' => REQUIRED_EMAIL_VALIDATION,
-            'notes' => NULLABLE_STRING_VALIDATION,
-            'notes.*.title' => NULLABLE_STRING_VALIDATION,
-            'delivery_time' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_company())],
-            'delivery_time_unit' => [...[NULLABLE_STRING_VALIDATION], Rule::requiredIf(fn() => is_company()), 'In:day,week,month'],
-            'attachments.*' => NULLABLE_FILE_VALIDATION,
-            'latitude' => NULLABLE_STRING_VALIDATION,
-            'longitude' => NULLABLE_STRING_VALIDATION
-        ];
-
-        $data = $request->validate($rules);
+        $data = $request->validated();
 
         //Let's create an account for him & login so we complete the order.
         if(!Auth::guard('web')->check()) {
@@ -107,15 +91,21 @@ class CheckoutController extends Controller
         $coupon = Cart::instance('cart')->search(function($cartItem, $rowItem) {
             return $cartItem->id == 'discount';
         });
-        $total = round(parseNumber(Cart::instance('cart')->total()));
+
+        $subtotal = round(parseNumber(Cart::instance('cart')->total()));
+        $delivery = round(parseNumber(cart_delivery()));
+        $total = round(parseNumber(cart_total()));
 
         //Append default values to the data.
+        $data['city'] = Session::get('city') ?? null;
         $data['payment_status'] = 'pending';
-        $data['status']   = 'pending';
-        $data['coupon_code']    = $coupon[array_key_first(current($coupon))]->name ?? null;
-        $data['total_price']    = $total;
-        $data['order_id']       = 'ORD-'. strtoupper(uniqid());
-        $data['user_id']        = Auth::guard('web')->user()->id;
+        $data['status'] = 'pending';
+        $data['coupon_code'] = $coupon[array_key_first(current($coupon))]->name ?? null;
+        $data['subtotal'] = $subtotal;
+        $data['delivery'] = $delivery;
+        $data['total_price'] = $total;
+        $data['order_id'] = 'ORD-'. strtoupper(uniqid());
+        $data['user_id'] = Auth::guard('web')->user()->id;
         unset($data['terms']);
         unset($data['type']);
         unset($data['password']);
@@ -139,7 +129,6 @@ class CheckoutController extends Controller
         $data['phone'] = $data['phone_number'];
         unset($data['phone_number']);
 
-
         //A company is ordering. So let's register all the order as service
         if($type == 'company') {
             $data['quote_no'] = 'QOT-'. strtoupper(uniqid());
@@ -149,7 +138,6 @@ class CheckoutController extends Controller
 
             foreach(Admin::all() as $admin)
                 $admin->notify(new QuoteCreated($user, $quote));
-
 
             if($request->has('attachments'))
                 foreach($data['attachments'] as $attachment)
@@ -185,7 +173,9 @@ class CheckoutController extends Controller
                         'status'        => 'pending',
                         'payment_status'=> 'pending',
                         'quantity'      => $item->qty,
-                        'price'         => $item->model->price
+                        'price'         => $item->model->price,
+                        'delivery'      => round(optional(getDelivery($item->model, $item->qty))['price'] / getCurrency('rate'), 2) ?? 0,
+                        'delivery_cars' => Shipping::getCars($item->model, $item->qty)
                     ]);
             }
             $returnText = __('checkout.order_placed_successfully');

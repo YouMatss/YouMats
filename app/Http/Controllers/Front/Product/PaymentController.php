@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Front\Product;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderPlaced;
 use App\Models\Order;
 use Devinweb\Payment\Facades\Payment;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class PaymentController extends Controller
@@ -52,7 +55,7 @@ class PaymentController extends Controller
                 'payment_status' => 'completed'
             ]);
 
-            $data['delivery'] = Cart::tax();
+            $data['delivery'] = cart_delivery();
 
             // Clear the cart!
             Cart::instance('cart')->destroy();

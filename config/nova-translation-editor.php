@@ -17,7 +17,11 @@ return [
         'profile',
         'breadcrumb',
         'novaSettings',
-        'mails'
+        'mails',
+        'passwords',
+        'validation',
+        'pagination',
+        'verify'
     ],
     'languages' => [
         'en', 'ar'

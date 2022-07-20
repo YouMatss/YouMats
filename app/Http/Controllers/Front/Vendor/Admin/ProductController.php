@@ -41,7 +41,7 @@ class ProductController extends Controller
 
     public function index() {
         $data['vendor'] = Auth::guard('vendor')->user();
-        $data['products'] = $data['vendor']->products;
+        $data['products'] = $data['vendor']->products->sortByDesc('id');
 
         return view('vendorAdmin.product.index')->with($data);
     }

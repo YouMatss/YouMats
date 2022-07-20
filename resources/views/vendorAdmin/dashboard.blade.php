@@ -58,7 +58,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">{{__('vendorAdmin.type')}}</span>
-                            <span class="info-box-number">{{$vendor->type}}</span>
+                            <span class="info-box-number">{{__('vendorAdmin.' . strtolower($vendor->type))}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>

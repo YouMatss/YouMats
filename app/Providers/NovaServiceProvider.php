@@ -73,6 +73,7 @@ use OptimistDigital\NovaSettings\NovaSettings;
 use Richardkeep\NovaTimenow\NovaTimenow;
 use Spatie\BackupTool\BackupTool;
 use Vyuldashev\NovaPermission\NovaPermissionTool;
+use Waynestate\Nova\CKEditor;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -85,7 +86,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new Panel('General SEO', $this->generalSeo()),
             new Panel('Social Media Links', $this->socialFields()),
             new Panel('Media', $this->generalMedia()),
-        ]);
+        ], [], 'General');
+        NovaSettings::addSettingsFields([
+            new Panel('Vendor Terms', $this->vendorTerms())
+        ], [], 'Vendor Terms');
         Nova::serving(function () {
             CategoryModel::observe(CategoryObserver::class);
             VendorModel::observe(VendorObserver::class);
@@ -394,6 +398,21 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             Code::make('Home Schema', 'home_schema')
                 ->rules(NULLABLE_TEXT_VALIDATION),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function vendorTerms(): array
+    {
+        return [
+            Text::make('Title', 'vendor_terms_title')
+                ->rules(REQUIRED_STRING_VALIDATION)->translatable(),
+            CKEditor::make('Text', 'vendor_terms_text')
+                ->rules(REQUIRED_TEXT_VALIDATION)->translatable(),
+            Text::make('Button', 'vendor_terms_button')
+                ->rules(REQUIRED_STRING_VALIDATION)->translatable(),
         ];
     }
 }

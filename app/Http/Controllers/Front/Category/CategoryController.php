@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Front\Category;
 
 use App\Helpers\Classes\CollectionPaginate;
+use App\Helpers\Classes\PriceFilter;
 use App\Helpers\Classes\ProductsSortDelivery;
+use App\Helpers\Classes\ProductsSortIsDelivery;
+use App\Helpers\Classes\ProductsSortPrice;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Session;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -42,12 +44,13 @@ class CategoryController extends Controller
         $products->allowedFilters([
             AllowedFilter::partial('attributes', null, true, ','),
             AllowedFilter::scope('price'),
+            AllowedFilter::custom('is_price', new PriceFilter())
         ]);
 
         if(isset($request->sort) && is_individual()) {
             $filter = $products->allowedSorts([
                     'price',
-                    AllowedSort::custom('delivery', new ProductsSortDelivery($products), 'delivery')
+                    AllowedSort::custom('delivery', new ProductsSortDelivery($products), 'delivery'),
                 ])
                 ->with('category')
                 ->get()->unique();

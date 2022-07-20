@@ -1,12 +1,11 @@
 <?php
 
-
 namespace App\Http\Controllers\Front\Product;
 
+use App\Helpers\Classes\Shipping;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
-use Brick\Math\Exception\DivisionByZeroException;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -14,32 +13,84 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+    // todo: optimize this class
+
     /**
-     * @param Request $request
      * @return Application|Factory|View
      */
-    public function show(Request $request)
+    public function show()
     {
-        $cart = Cart::instance('cart')->content();
+        $data['items'] = Cart::instance('cart')->content();
 
-        return view('front.cart.index', ['items' => $cart]);
+        return view('front.cart.index')->with($data);
     }
 
     public function add(Request $request, Product $product)
     {
         $min_quantity = $product->min_quantity;
         $stock = $product->stock;
+
+        $cart = Cart::instance('cart')->content();
+
+        foreach ($cart as $item) {
+            if($item->id == $product->id) {
+
+                $quantity = $request->quantity + $item->qty;
+
+                if(!isset($quantity))
+                    $quantity = $min_quantity ?? 1;
+
+                if($quantity < $min_quantity)
+                    return response()->json([
+                        'message' => __('messages.min_order_quantity_constrain'),
+                        'success' => false
+                    ]);
+
+                if((!is_company()) && $quantity > $stock)
+                    return response()->json([
+                        'message' => __('messages.out_of_stock'),
+                        'success' => false
+                    ]);
+
+//                if(!Shipping::abilityOfQuantity($product, $quantity))
+//                    return response()->json([
+//                        'message' => __('messages.not_ability_quantity'),
+//                        'success' => false
+//                    ]);
+
+                Cart::instance('cart')->add(
+                    $product->id,
+                    $product->name,
+                    $request->quantity,
+                    round($product->price / getCurrency('rate'), 2),
+                    [],
+                    0
+                )->associate($product);
+
+                return response()->json([
+                    'message' => __(is_company() ? 'product.added_to_quote_list' : 'product.added_to_cart'),
+                    'success' => true,
+                    'cart' => Cart::instance('cart')->content(),
+                    'total' => getCurrency('code') . ' ' . cart_total(),
+                    'count' => Cart::instance('cart')->count()
+                ]);
+
+            }
+        }
+
         $quantity = $request->quantity;
 
         if(!isset($quantity))
-            $quantity = 1;
+            $quantity = $min_quantity ?? 1;
 
         if($quantity < $min_quantity)
-            $quantity = $min_quantity;
+            return response()->json([
+                'message' => __('messages.min_order_quantity_constrain'),
+                'success' => false
+            ]);
 
         if((!is_company()) && $quantity > $stock)
             return response()->json([
@@ -47,17 +98,11 @@ class CartController extends Controller
                 'success' => false
             ]);
 
-        $deliveryIsExist = getDelivery($product, $quantity);
-        $delivery = 0;
-        if(!is_null($deliveryIsExist)) {
-            $delivery = round($deliveryIsExist['price'] / getCurrency('rate'), 2);
-        }
-
-        try {
-            $deliveryCalc = ($delivery / round($product->price / getCurrency('rate'), 2)) * 100;
-        } catch (\Exception $e) {
-            $deliveryCalc = 0;
-        }
+//        if(!Shipping::abilityOfQuantity($product, $quantity))
+//            return response()->json([
+//                'message' => __('messages.not_ability_quantity'),
+//                'success' => false
+//            ]);
 
         Cart::instance('cart')->add(
             $product->id,
@@ -65,15 +110,87 @@ class CartController extends Controller
             $quantity,
             round($product->price / getCurrency('rate'), 2),
             [],
-            $deliveryCalc
+            0
         )->associate($product);
+
         return response()->json([
             'message' => __(is_company() ? 'product.added_to_quote_list' : 'product.added_to_cart'),
             'success' => true,
-            'cart' => Cart::content(),
-            'total' => getCurrency('code') . ' ' . Cart::total(),
-            'count' => Cart::count()
+            'cart' => Cart::instance('cart')->content(),
+            'total' => getCurrency('code') . ' ' . cart_total(),
+            'count' => Cart::instance('cart')->count()
         ]);
+    }
+
+    public function delivery_warning(Request $request, Product $product) {
+        $cart = Cart::instance('cart')->content();
+        $quantity = $request->quantity;
+
+        foreach ($cart as $item) {
+            if ($item->id == $product->id) {
+                $quantity = $request->quantity + $item->qty;
+            }
+        }
+
+        return response()->json(Shipping::abilityOfQuantity($product, $quantity));
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function update(Request $request): JsonResponse
+    {
+        $product = Product::findorfail($request->id);
+
+        $min_quantity = $product->min_quantity;
+        $stock = $product->stock;
+
+        $cart = Cart::instance('cart')->content();
+
+        foreach ($cart as $item) {
+            if($item->id == $product->id) {
+
+                $quantity = $request->quantity + $item->qty;
+
+                if(!isset($quantity))
+                    $quantity = $min_quantity ?? 1;
+
+                if($quantity < $min_quantity)
+                    return response()->json([
+                        'message' => __('messages.min_order_quantity_constrain'),
+                        'success' => false
+                    ]);
+
+                if((!is_company()) && $quantity > $stock)
+                    return response()->json([
+                        'message' => __('messages.out_of_stock'),
+                        'success' => false
+                    ]);
+
+//                if(!Shipping::abilityOfQuantity($product, $quantity))
+//                    return response()->json([
+//                        'message' => __('messages.not_ability_quantity'),
+//                        'success' => false
+//                    ]);
+
+                Cart::instance('cart')->update($request->rowId, $quantity);
+
+                return response()->json(['status' => true]);
+            }
+        }
+
+        $request_quantity = $request->qty;
+
+        if($request_quantity < $min_quantity)
+            return response()->json(['status' => false]);
+
+        if((!is_company()) && $request_quantity > $stock)
+            return response()->json(['status' => false]);
+
+        Cart::instance('cart')->update($request->rowId, $request_quantity);
+
+        return response()->json(['status' => true]);
     }
 
     /**
@@ -85,7 +202,13 @@ class CartController extends Controller
     {
         Cart::instance('cart')->remove($rowId);
 
-        return response()->json(['status' => true, 'total' => getCurrency('code'). ' ' . Cart::total(), 'count' => Cart::count(), 'subtotal' => Cart::subtotal(), 'tax' => Cart::tax()]);
+        return response()->json([
+            'status' => true,
+            'total' => getCurrency('code') . ' ' . cart_total(),
+            'count' => Cart::count(),
+            'subtotal' => getCurrency('code') . ' ' .Cart::subtotal(),
+            'delivery' => getCurrency('code') . ' ' .cart_delivery()
+        ]);
     }
 
     /**
@@ -96,17 +219,6 @@ class CartController extends Controller
         Cart::instance('cart')->destroy();
 
         return response()->json(['status' => true, 'message' => __('cart.cart_has_been_destroyed')]);
-    }
-
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function update(Request $request): JsonResponse
-    {
-        Cart::instance('cart')->update($request->rowId, $request->qty);
-
-        return response()->json(['status' => true]);
     }
 
     /**
@@ -122,11 +234,11 @@ class CartController extends Controller
                     ->whereStatus(1)
                     ->first();
 
-        $total = Cart::instance('cart')->total();
-
         //Coupon doesn't exist. Lets return an error!
         if(!$coupon)
             return back()->with(['custom_error' => __('cart.coupon_code_doesnt_exist') ]);
+
+        $total = parseNumber(cart_total());
 
         //The total of the cart is less than the coupon starting price
         if($total < $coupon->price)

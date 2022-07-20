@@ -44,13 +44,24 @@ class ProductController extends Controller
      */
     public function all(Request $request)
     {
-        $query = Product::where('active', true)->orderBy('sort');
+        if(isset($request->filter['city'])) {
+            setCity($request->filter['city']);
+        }
+
+        $products = QueryBuilder::for(Product::class)
+            ->where('products.active', true);
 
         if($request->has('search'))
-            $query->where("name->en", 'like', '%'. $request->search . '%')
+            $products->where("name->en", 'like', '%'. $request->search . '%')
                 ->orWhere("name->ar", 'like', '%'. $request->search .'%');
 
-        $data['products'] = $query->paginate(20);
+        if(isset($request->sort) && is_individual()) {
+            $data['products'] = $products->paginate(20);
+        } else {
+            $data['products'] = $products->paginate(20);
+        }
+
+        $data['products']->withPath(url()->current())->withQueryString();
 
         return view('front.product.all')->with($data);
     }
@@ -76,7 +87,7 @@ class ProductController extends Controller
                         ])
                         ->allowedIncludes(['tags', 'category'])
                         ->where('active', true)
-                        ->limit(20)
+                        ->limit(15)
                         ->get()
                         ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
                             return $collection->shuffle();
