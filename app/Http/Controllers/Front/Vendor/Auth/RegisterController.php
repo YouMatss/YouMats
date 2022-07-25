@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Vendor\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewRegister;
 use App\Models\Country;
 use App\Providers\RouteServiceProvider;
 use App\Models\Vendor;
@@ -20,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -125,6 +127,12 @@ class RegisterController extends Controller
             }
 
         $vendor->save();
+
+        if($vendor)
+            Mail::to([
+                'mohamedmaher055@gmail.com',
+                'info@youmats.com'
+            ])->send(new NewRegister($vendor));
 
         Session::flash('custom_success', __('auth.vendor_register_successfully'));
 

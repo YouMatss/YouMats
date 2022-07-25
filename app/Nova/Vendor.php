@@ -8,6 +8,7 @@ use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Drobee\NovaSluggable\SluggableText;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
@@ -168,6 +169,9 @@ class Vendor extends Resource
 
             Toggle::make('Featured', 'isFeatured')->sortable()
                 ->falseColor('#bacad6')->editableIndex(),
+
+            Date::make('Signup Date', 'created_at')
+                ->sortable()->exceptOnForms(),
 
             Password::make('Password')->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')

@@ -69,14 +69,17 @@ class Category extends Model implements Sortable, HasMedia
     {
         if($this->isRoot()) {
             return $this->hasManyThrough(Product::class, self::class, 'parent_id')
-                ->where('active', 1)->orderBy('updated_at', 'desc');
+                ->where('products.active', 1)->orderBy('products.updated_at', 'desc');
         }
         return $this->hasMany(Product::class)
-            ->where('active', 1)
-            ->orderBy('updated_at', 'desc');
+            ->where('products.active', 1)
+            ->orderBy('products.updated_at', 'desc');
     }
 
-    public function vendors()
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function vendors(): \Illuminate\Database\Eloquent\Builder
     {
         return $this->belongsToMany(Vendor::class, Product::class)
             ->join('categories', 'categories.id', 'products.category_id')

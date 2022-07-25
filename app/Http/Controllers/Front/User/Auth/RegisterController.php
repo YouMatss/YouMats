@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\User\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewRegister;
 use App\Models\Admin;
 use App\Models\Country;
 use App\Providers\RouteServiceProvider;
@@ -19,6 +20,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -104,6 +106,12 @@ class RegisterController extends Controller
         if($data['type'] == 'company')
             foreach(Admin::all() as $admin)
                 $admin->notify(new CompanyRegistered($user));
+
+        if($user)
+            Mail::to([
+                'mohamedmaher055@gmail.com',
+                'info@youmats.com'
+            ])->send(new NewRegister($user));
 
         Session::flash('custom_success', __('auth.user_register_successfully'));
 
