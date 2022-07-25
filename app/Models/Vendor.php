@@ -125,22 +125,9 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->hasMany(QuoteItem::class)->orderBy('id', 'desc');
     }
 
-    public function getPhoneAttribute($value) {
-        return '+966' . trim($value, '+966');
-    }
-    public function getPhone2Attribute($value) {
-        return '+966' . trim($value, '+966');
-    }
-    public function getWhatsappPhoneAttribute($value) {
-        return '+966' . trim($value, '+966');
-    }
-    public function setPhone2Attribute($value) {
-        $this->attributes['phone2'] = '+966' . ltrim($value, '+966');
-    }
-    public function setWhatsappPhoneAttribute($value) {
-        $this->attributes['whatsapp_phone'] = '+966' . ltrim($value, '+966');
-    }
-
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function users_conversations() {
         return ($this->belongsToMany(User::class, 'user_messages',
             'sender_id','receiver_id')->where('sender_type', 'vendor')->get()->collect()->unique())
@@ -149,6 +136,10 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
             ->unique('id');
     }
 
+    /**
+     * @param $user_id
+     * @return \Illuminate\Support\Collection
+     */
     private function messages($user_id) {
         return ($this->hasMany(UserMessage::class, 'sender_id')
             ->with('message')->where([
@@ -160,10 +151,18 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
             ])->get()->collect());
     }
 
+    /**
+     * @param $user_id
+     * @return mixed
+     */
     public function last_message($user_id) {
         return $this->messages($user_id)->sortBy('created_at')->last()->message;
     }
 
+    /**
+     * @param $user_id
+     * @return int
+     */
     public function count_messages($user_id) {
         return count($this->messages($user_id));
     }

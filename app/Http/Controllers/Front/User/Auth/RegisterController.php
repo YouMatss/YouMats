@@ -9,6 +9,7 @@ use App\Models\Country;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Notifications\CompanyRegistered;
+use App\Rules\PhoneNumberRule;
 use App\Rules\TopLevelEmailDomainValidator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Foundation\Application;
@@ -76,7 +77,7 @@ class RegisterController extends Controller
             'type' => ['required', 'string', 'In:individual,company'],
             'name' => ['required', 'string', 'max:191'],
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users', new TopLevelEmailDomainValidator()],
-            'phone' => ['nullable', 'string', 'max:191'],
+            'phone' => ['nullable', new PhoneNumberRule()],
             'address' => ['nullable', 'string', 'max:191'],
             'latitude' => NULLABLE_STRING_VALIDATION,
             'longitude' => NULLABLE_STRING_VALIDATION,

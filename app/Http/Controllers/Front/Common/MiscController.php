@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Common;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\InquireRequest;
 use App\Models\Contact;
 use App\Models\Inquire;
 use App\Models\Subscriber;
@@ -55,15 +56,8 @@ class MiscController extends Controller
         ]);
     }
 
-    public function inquireRequest(Request $request) {
-        $data = $this->validate($request, [
-            'company_name' => REQUIRED_STRING_VALIDATION,
-            'name' => REQUIRED_STRING_VALIDATION,
-            'email' => REQUIRED_EMAIL_VALIDATION,
-            'phone' => REQUIRED_STRING_VALIDATION,
-            'message' => NULLABLE_TEXT_VALIDATION,
-            'file' => NULLABLE_FILE_VALIDATION
-        ]);
+    public function inquireRequest(InquireRequest $request) {
+        $data = $request->validated();
 
         try {
             $contact = Inquire::create($data);
@@ -87,23 +81,11 @@ class MiscController extends Controller
     }
 
     public function introduce($type) {
-
-        $translation = [
-            'company' => [
-                'ar' => 'شركه',
-                'en' => 'Company'
-            ],
-            'individual' => [
-                'ar' => 'فرد',
-                'en' => 'Individual'
-            ]
-        ];
-
         if($type == 'individual' || $type == 'company') {
             Session::put('userType', $type);
-            Session::put('userTypeTranslation', $translation[$type]);
         }
-
-        return redirect()->back();
+        return response()->json([
+            'status' => true
+        ]);
     }
 }

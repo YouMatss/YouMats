@@ -65,6 +65,8 @@ class CheckoutController extends Controller
     {
         $data = $request->validated();
 
+        $data['phone_number'] = '+966' . trim($data['phone_number'], '+966');
+
         //Let's create an account for him & login so we complete the order.
         if(!Auth::guard('web')->check()) {
             $rules['email'] = 'required|email|unique:users|max:191';
