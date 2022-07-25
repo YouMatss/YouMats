@@ -189,8 +189,7 @@
                                         {{__('checkout.phone')}}
                                     </label>
                                     <input type="tel" class="form-control phoneNumber"
-                                           value="{{ Auth::guard('web')->user()->phone ?? old('phone_number') }}"
-                                           name="phone_number" aria-label="Phone Number" data-error-class="u-has-error" data-success-class="u-has-success">
+                                           name="phone_number" data-error-class="u-has-error" data-success-class="u-has-success">
                                     @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -486,7 +485,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" @if(old('terms')) checked @endif type="checkbox" name="terms" value="true" id="defaultCheck10" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
                                         <label class="form-check-label form-label rtl" for="defaultCheck10">
-                                            <a href="#" class="text-blue">{{__('checkout.terms_conditions')}}</a>
+                                            <a href="{{url('/page/terms-and-conditions')}}" target="_blank" class="text-blue">{{__('checkout.terms_conditions')}}</a>
                                             <span class="text-danger">*</span>
                                         </label>
                                         @error('terms')

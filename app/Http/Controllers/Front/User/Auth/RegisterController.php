@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Front\User\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewRegister;
 use App\Models\Admin;
 use App\Models\Country;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Notifications\CompanyRegistered;
+use App\Rules\PhoneNumberRule;
 use App\Rules\TopLevelEmailDomainValidator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Foundation\Application;
@@ -19,6 +21,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -74,7 +77,7 @@ class RegisterController extends Controller
             'type' => ['required', 'string', 'In:individual,company'],
             'name' => ['required', 'string', 'max:191'],
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users', new TopLevelEmailDomainValidator()],
-            'phone' => ['nullable', 'string', 'max:191'],
+            'phone' => ['nullable', new PhoneNumberRule()],
             'address' => ['nullable', 'string', 'max:191'],
             'latitude' => NULLABLE_STRING_VALIDATION,
             'longitude' => NULLABLE_STRING_VALIDATION,
@@ -104,6 +107,12 @@ class RegisterController extends Controller
         if($data['type'] == 'company')
             foreach(Admin::all() as $admin)
                 $admin->notify(new CompanyRegistered($user));
+
+        if($user)
+            Mail::to([
+                'mohamedmaher055@gmail.com',
+                'info@youmats.com'
+            ])->send(new NewRegister($user));
 
         Session::flash('custom_success', __('auth.user_register_successfully'));
 

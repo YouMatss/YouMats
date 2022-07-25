@@ -66,12 +66,12 @@
                                         <a id="userTypeDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#userTypeDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                         <span class="d-sm-inline-flex align-items-center">
                                             <i class="ec ec-user mr-1"></i>
-                                            {{\Illuminate\Support\Facades\Session::get('userTypeTranslation')[LaravelLocalization::getCurrentLocale()]}}
+                                            {{__('general.'.\Illuminate\Support\Facades\Session::get('userType'))}}
                                         </span>
                                         </a>
                                         <div id="userTypeDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="userTypeDropdownInvoker2">
-                                            <a class="dropdown-item" href="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
-                                            <a class="dropdown-item" href="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
+                                            <a class="dropdown-item typeIntroduceButton" data-url="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
+                                            <a class="dropdown-item typeIntroduceButton" data-url="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
                                         </div>
                                     </div>
                                     <!-- End Language -->
@@ -272,14 +272,14 @@
                                                             <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-3" data-target="#top-header-nav-3">
                                                                 <span class="d-sm-inline-flex align-items-center">
                                                                     <i class="ec ec-user mr-1"></i>
-                                                                    {{\Illuminate\Support\Facades\Session::get('userTypeTranslation')[\App::getLocale()]}}
+                                                                    {{__('general.'.\Illuminate\Support\Facades\Session::get('userType'))}}
                                                                 </span>
                                                             </a>
                                                             <div id="top-header-nav-3" class="collapse" data-parent="#headerSidebarContent">
                                                                 <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
                                                                     <li>
-                                                                        <a class="dropdown-item" href="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
-                                                                        <a class="dropdown-item" href="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
+                                                                        <a class="dropdown-item typeIntroduceButton" data-url="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
+                                                                        <a class="dropdown-item typeIntroduceButton" data-url="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>

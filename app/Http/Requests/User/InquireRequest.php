@@ -5,7 +5,7 @@ namespace App\Http\Requests\User;
 use App\Rules\PhoneNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContactRequest extends FormRequest
+class InquireRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,12 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
+            'company_name' => REQUIRED_STRING_VALIDATION,
             'name' => REQUIRED_STRING_VALIDATION,
             'email' => REQUIRED_EMAIL_VALIDATION,
             'phone' => ['required', new PhoneNumberRule()],
-            'message' => NULLABLE_TEXT_VALIDATION
+            'message' => NULLABLE_TEXT_VALIDATION,
+            'file' => NULLABLE_FILE_VALIDATION
         ];
     }
 }

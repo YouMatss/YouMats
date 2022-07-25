@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Front\Vendor\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewRegister;
 use App\Models\Country;
-use App\Providers\RouteServiceProvider;
 use App\Models\Vendor;
+use App\Providers\RouteServiceProvider;
 use App\Rules\TopLevelEmailDomainValidator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -20,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -84,7 +84,7 @@ class RegisterController extends Controller
             'name_en' => ['required', 'string', 'max:191'],
             'name_ar' => ['required', 'string', 'max:191'],
             'email' => ['required', 'string', 'max:191', 'email', 'unique:vendors', new TopLevelEmailDomainValidator()],
-            'phone' => ['required', 'string', 'max:30'],
+//            'phone' => ['nullable', new PhoneNumberRule()],
             'address' => ['required', 'string', 'max:191'],
             'type' => [...NULLABLE_STRING_VALIDATION, 'In:factory,distributor,wholesales,retail'],
             'latitude' => NULLABLE_STRING_VALIDATION,
@@ -106,7 +106,7 @@ class RegisterController extends Controller
             'country_id' => $data['country_id'],
             'name' => $data['name_en'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
+//            'phone' => $data['phone'],
             'address' => $data['address'],
             'type' => $data['type'],
             'latitude' => $data['latitude'],
@@ -125,6 +125,12 @@ class RegisterController extends Controller
             }
 
         $vendor->save();
+
+        if($vendor)
+            Mail::to([
+                'mohamedmaher055@gmail.com',
+                'info@youmats.com'
+            ])->send(new NewRegister($vendor));
 
         Session::flash('custom_success', __('auth.vendor_register_successfully'));
 

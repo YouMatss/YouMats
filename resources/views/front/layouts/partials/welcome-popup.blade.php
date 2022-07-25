@@ -7,10 +7,10 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <a class="select_reg" href="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
+                        <a class="select_reg typeIntroduceButton" data-url="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
                     </div>
                     <div class="col-md-6">
-                        <a class="select_reg" href="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
+                        <a class="select_reg typeIntroduceButton" data-url="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
                     </div>
                 </div>
             </div>
@@ -23,6 +23,20 @@
     document.addEventListener('DOMContentLoaded', function() {
         $(document).ready(function() {
             $('#myModal').modal({backdrop: 'static', keyboard: false});
+
+            $(document).on('click', '.typeIntroduceButton', function () {
+                let url = $(this).data('url');
+                $.ajax({
+                    type: 'GET',
+                    url: url
+                })
+                .done(function(response) {
+                    if(response.status) {
+                        location.reload();
+                    }
+                })
+            });
+
         });
     });
 </script>

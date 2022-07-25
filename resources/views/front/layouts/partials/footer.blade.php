@@ -238,7 +238,7 @@
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_phone')}}</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control phoneNumber" @if(auth()->check()) value="{{ auth()->user()->phone }}" @endif>
+                                            <input type="tel" class="form-control phoneNumber" @if(auth()->check()) value="{{ auth()->user()->phone }}" @endif>
                                         </div>
                                     </div>
                                 </div>
