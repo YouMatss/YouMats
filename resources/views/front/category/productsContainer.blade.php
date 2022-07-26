@@ -5,10 +5,6 @@
         <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}} {{__('general.of')}} {{$products->total()}} {{__('general.results')}}</p>
     </div>
     @if(is_individual())
-    <div class="custom-control custom-switch">
-        <input type="checkbox" name="is_price" class="custom-control-input" id="is_price" @if(request()->input('filter.is_price') == 'on') checked @endif>
-        <label class="custom-control-label" for="is_price">{{__('general.is_price')}}</label>
-    </div>
     <div class="text-right">
         <select class="form-control form-control-sm" id="sort_select">
             <option selected value="">{{__('general.sort_placeholder')}}</option>
@@ -23,7 +19,7 @@
 
 <!-- Shop-control-bar -->
 <div class="bg-gray-1 flex-center-between borders-radius-9 py-1">
-    <div class="px-3 d-none d-xl-block">
+    <div class="px-3 d-none">
         <ul class="nav nav-tab-shop" id="pills-tab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="grid-view-tab" data-toggle="pill" href="#grid-view" role="tab" aria-controls="grid-view" aria-selected="false">
@@ -41,14 +37,7 @@
 {{--            </li>--}}
         </ul>
     </div>
-    @if(is_individual())
-    <div class="rtl">
-        {{__('general.city_location_text')}}: {{getCurrentCityName()}}
-        <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
-        {{__('general.category_word_after_change_city_button')}}
-    </div>
-    @endif
-    <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
+    <nav class="px-3 flex-horizontal-left text-gray-20 d-none">
         <a class="text-gray-30 font-size-20 mr-2" href="{{$products->previousPageUrl()}}">
             @if(app()->getLocale() == 'ar')
                 &nbsp;→&nbsp;
@@ -65,6 +54,25 @@
             @endif
         </a>
     </nav>
+
+    @if(is_individual())
+        <div class="rtl ml-2 box--chan-c">
+
+            <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
+            <strong class="tit_check_in_city"> {{__('general.city_location_text')}}: {{getCurrentCityName()}}</strong>
+            {{--        {{__('general.category_word_after_change_city_button')}}--}}
+        </div>
+    @endif
+
+    <div class="custom-control custom-switch">
+        <input type="checkbox" name="is_price" class="custom-control-input" id="is_price" @if(request()->input('filter.is_price') == 'on') checked @endif>
+        <label class="custom-control-label tit--custom--label" for="is_price"><strong class="tit_check_in">{{__('general.is_price')}}</strong></label>
+    </div>
+
+    <div class="custom-control custom-switch">
+        <input type="checkbox" name="is_delivery" class="custom-control-input" id="is_delivery" @if(request()->input('filter.is_delivery') == 'on') checked @endif>
+        <label class="custom-control-label tit--custom--label" for="is_delivery"> <strong class="tit_check_in">{{__('general.is_delivery')}}</strong></label>
+    </div>
 </div>
 <!-- End Shop-control-bar -->
 

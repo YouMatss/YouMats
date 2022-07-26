@@ -46,7 +46,6 @@
                                     </nav>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
                                     <div class="tab-content" id="nav-tabContent">
@@ -64,7 +63,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
                                     <nav>
@@ -78,14 +76,14 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
                                     <div class="tab-content" id="nav-tabContent">
                                         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                             <div class="tab-pane fade @if($loop->first) show active @endif" id="nav-{{$localeCode}}-short-desc"
                                                  role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-short-desc">
+                                                <label for="short_desc_{{$localeCode}}">{{__('vendorAdmin.short_desc')}}</label>
                                                 <div class="form-group">
-                                                    <label for="short_desc_{{$localeCode}}">{{__('vendorAdmin.short_desc')}}</label>
                                                     <textarea id="short_desc_{{$localeCode}}" class="form-control ckeditor" name="short_desc_{{$localeCode}}">
                                                 {{old('short_desc_'.$localeCode)}}
                                             </textarea>
@@ -115,8 +113,8 @@
                                         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                             <div class="tab-pane fade @if($loop->first) show active @endif" id="nav-{{$localeCode}}-desc"
                                                  role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-desc">
+                                                <label for="desc_{{$localeCode}}">{{__('vendorAdmin.desc')}}</label>
                                                 <div class="form-group">
-                                                    <label for="desc_{{$localeCode}}">{{__('vendorAdmin.desc')}}</label>
                                                     <textarea id="desc_{{$localeCode}}" rows="5" class="form-control ckeditor" name="desc_{{$localeCode}}">
                                                 {{old('desc_'.$localeCode)}}
                                             </textarea>
@@ -128,7 +126,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12 col-lg-12">
+                                <div class="col-md-12 col-lg-12 mt-4">
                                     <div class="form-group">
                                         <label for="type">{{__('vendorAdmin.type')}}</label>
                                         <select class="form-control" name="type" id="type">

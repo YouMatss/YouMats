@@ -23,7 +23,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
+                <li class="nav-item item_Upgrade">
                     <a href="{{route('vendor.subscribe.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-star text-success"></i>
                         <p class="text-success">{{__('vendorAdmin.upgrade_your_membership')}}</p>

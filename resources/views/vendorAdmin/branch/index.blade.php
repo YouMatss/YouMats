@@ -19,7 +19,7 @@
 
             <div class="card card--vendor edit-head-table-vendor">
                 <div class="card-body">
-                    <table id="example1" class="table" style="width: 100%">
+                    <table id="example1" class="table responsive" style="width: 100%">
                         <thead>
                             <tr class="head--table--vendor">
                                 <th class="text-center">#</th>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Category;
 
 use App\Helpers\Classes\CollectionPaginate;
+use App\Helpers\Classes\DeliveryFilter;
 use App\Helpers\Classes\PriceFilter;
 use App\Helpers\Classes\ProductsSortDelivery;
 use App\Helpers\Classes\ProductsSortIsDelivery;
@@ -44,7 +45,8 @@ class CategoryController extends Controller
         $products->allowedFilters([
             AllowedFilter::partial('attributes', null, true, ','),
             AllowedFilter::scope('price'),
-            AllowedFilter::custom('is_price', new PriceFilter())
+            AllowedFilter::custom('is_price', new PriceFilter()),
+            AllowedFilter::custom('is_delivery', new DeliveryFilter())
         ]);
 
         if(isset($request->sort) && is_individual()) {

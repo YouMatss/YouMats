@@ -40,7 +40,8 @@
         <form method="get" action="{{url()->current()}}">
         <div class="container">
             <div class="row mb-8 rtl">
-                <div class="col-xl-3 col-wd-2gdot5">
+                <div class="show--filter d-block d-lg-none d-xl-none"> Show Filter <i class="fa fa-search"></i> </div>
+                <div class="col-xl-3 col-wd-2gdot5 d-none d-lg-block d-xl-block hidden--search--filter">
                     @if(!is_company())
                     <div class="mb-6">
                         <div class="range-slider bg-gray-3 p-3">
@@ -182,6 +183,9 @@
                     if ($('#is_price').is(':checked')) {
                         href += '&filter[is_price]=' + $('#is_price').val();
                     }
+                    if ($('#is_delivery').is(':checked')) {
+                        href += '&filter[is_delivery]=' + $('#is_delivery').val();
+                    }
                     if ($('#price_range').val()) {
                         href += '&filter[price]=' + $('#price_range').val();
                     }
@@ -203,13 +207,16 @@
                 });
                 $(document).on('click', '#city_submit', function () {
                     filterResults();
-                })
+                });
                 $(document).on('change', '#sort_select', function () {
                     filterResults();
-                })
+                });
                 $(document).on('change', '#is_price', function () {
                     filterResults();
-                })
+                });
+                $(document).on('change', '#is_delivery', function () {
+                    filterResults();
+                });
             });
         });
     </script>
