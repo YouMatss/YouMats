@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front\Product;
 
 use App\Helpers\Filters\FiltersJsonField;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -16,10 +17,31 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
 {
+    private function checkOnCategoriesSlugs($categories_slug, $product) {
+        $categories_slug_array = array_reverse(explode('/', $categories_slug));
+
+        abort_if(count($categories_slug_array) < 2, 404);
+
+        foreach ($categories_slug_array as $key => $category_slug) {
+            $category = Category::where('slug', $category_slug)->firstorfail();
+
+            if($key == 0) {
+                abort_if($category->id != $product->category->id, 404);
+            } elseif($key == 1) {
+                abort_if($category->id != $product->category->parent->id, 404);
+            } elseif($key == 2) {
+                abort_if($category->id != $product->category->parent->parent->id, 404);
+            } elseif($key == 3) {
+                abort_if($category->id != $product->category->parent->parent->parent->id, 404);
+            }
+        }
+    }
+
     public function index($categories_slug, $slug) {
         $data['product'] = Product::with('category', 'tags', 'vendor')
-            ->where(['slug' => $slug, 'active' => true])->first();
-        abort_if(!$data['product'], 404);
+            ->where(['slug' => $slug, 'active' => true])->firstOrFail();
+
+        $this->checkOnCategoriesSlugs($categories_slug, $data['product']);
 
         if(Session::has('city')) {
             $data['delivery'] = $data['product']->delivery;
