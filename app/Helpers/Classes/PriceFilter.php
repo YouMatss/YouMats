@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Helpers\Classes;
-
 
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\QueryBuilder\Filters\Filter;
