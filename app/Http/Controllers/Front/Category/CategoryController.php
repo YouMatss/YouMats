@@ -6,8 +6,6 @@ use App\Helpers\Classes\CollectionPaginate;
 use App\Helpers\Classes\DeliveryFilter;
 use App\Helpers\Classes\PriceFilter;
 use App\Helpers\Classes\ProductsSortDelivery;
-use App\Helpers\Classes\ProductsSortIsDelivery;
-use App\Helpers\Classes\ProductsSortPrice;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
@@ -55,10 +53,10 @@ class CategoryController extends Controller
                     AllowedSort::custom('delivery', new ProductsSortDelivery($products), 'delivery'),
                 ])
                 ->with('category')
-                ->get()->unique();
+                ->take(500)->get()->unique();
         } else {
             $filter = $products->with('category')
-                ->get()
+                ->take(500)->get()
                 ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
                     return $collection->shuffle();
                 })->ungroup()
