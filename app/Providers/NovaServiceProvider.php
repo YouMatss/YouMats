@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Anaseqal\NovaImport\NovaImport;
 use App\Models\Category as CategoryModel;
+use App\Models\Product as ProductModel;
 use App\Models\Vendor as VendorModel;
 use App\Nova\Admin;
 use App\Nova\Car;
@@ -47,6 +48,7 @@ use App\Nova\Unit;
 use App\Nova\User;
 use App\Nova\Vendor;
 use App\Observers\CategoryObserver;
+use App\Observers\ProductObserver;
 use App\Observers\VendorObserver;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
@@ -92,6 +94,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         ], [], 'Vendor Terms');
         Nova::serving(function () {
             CategoryModel::observe(CategoryObserver::class);
+            ProductModel::observe(ProductObserver::class);
             VendorModel::observe(VendorObserver::class);
         });
     }

@@ -13,6 +13,74 @@
     <meta name="twitter:description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : $category->short_desc}}">
     <meta name="twitter:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}">
     <link rel="canonical" href="{{url()->current()}}" />
+
+
+    <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "Store",
+            "image": [
+              "https://www.youmats.sa/storage/35545/Highcompressed_410811867.webp",
+              "https://www.youmats.sa/storage/169/conversions/se_7-cropper.jpg",
+              "https://www.youmats.sa/storage/35565/Highcompressed_1076776512.webp"
+             ],
+            "name": "YouMats Building Materials",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Hamzah Ibn Abdul Muttalib Dhahrat Al Badi'ah Building No 6249, Riyadh",
+              "addressLocality": "Riyadh",
+              "addressRegion": "Dhahrat Al Badi'ah",
+              "postalCode": "12981",
+              "addressCountry": "SA"
+            },
+            "review": {
+              "@type": "Review",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "4",
+                "bestRating": "5"
+              },
+              "author": {
+                "@type": "Person",
+                "name": "YouMats"
+              }
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 24.5827648,
+              "longitude": -46.6285563
+            },
+            "url": "https://www.youmats.sa/contact-us",
+            "telephone": "+9660502111754",
+            "servesCuisine": "Saudi Arabia",
+            "priceRange": "SAR",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "9:30",
+                "closes": "17:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Saturday"
+                ],
+                "opens": "10:00",
+                "closes": "17:00"
+              }
+            ]
+          }
+    </script>
+
+
     {!! $category->schema !!}
 @endsection
 @section('content')
@@ -20,9 +88,14 @@
         <div class="container">
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{__('general.home')}}</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{$category->name}}</li>
+                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble" itemscope itemtype="https://schema.org/BreadcrumbList">
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="{{route('home')}}"><span itemprop="name">{{__('general.home')}}</span></a>
+                            <meta itemprop="position" content="1" />
+                        </li>
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page"><span itemprop="name">{{$category->name}}</span>
+                            <meta itemprop="position" content="2" />
+                        </li>
                     </ol>
                 </nav>
             </div>

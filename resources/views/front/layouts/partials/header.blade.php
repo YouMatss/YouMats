@@ -187,7 +187,7 @@
                     <div class="col-auto">
                         <nav class="navbar navbar-expand u-header__navbar py-0 justify-content-xl-between">
                             <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center" href="{{route('home')}}" aria-label="">
-                                <img loading="lazy" alt="YouMats Logo" src="{{ Storage::url(nova_get_setting('logo')) }}">
+                                <img loading="lazy" alt="YouMats" src="{{ Storage::url(nova_get_setting('logo')) }}">
                             </a>
                             <button id="sidebarHeaderInvokerMenu" type="button" class="d-block d-md-none d-lg-none navbar-toggler d-block btn u-hamburger mr-3 mr-xl-0" aria-controls="sidebarHeader" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarHeader1" data-unfold-type="css-animation" data-unfold-animation-in="fadeInLeft" data-unfold-animation-out="fadeOutLeft" data-unfold-duration="500">
                                 <span id="hamburgerTriggerMenu" class="u-hamburger__box">

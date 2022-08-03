@@ -103,6 +103,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nette/schema" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nette/utils" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nicmart/tree" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nikaia/nova-rating-field" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nunomaduro/collision" />
@@ -166,6 +167,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/resource-operations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/type" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/browsershot" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/crawler" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/db-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/eloquent-sortable" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/image" />
@@ -174,10 +177,12 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-medialibrary" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-permission" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-query-builder" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-sitemap" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-translatable" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-translation-loader" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/nova-backup-tool" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/once" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/robots-txt" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/temporary-directory" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/staudenmeir/belongs-to-through" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/staudenmeir/eloquent-has-many-deep" />
@@ -187,6 +192,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/debug" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dom-crawler" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/error-handler" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/event-dispatcher-contracts" />
@@ -215,6 +221,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/translation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/tokenizer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/tightenco/collect" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/torann/currency" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/torann/geoip" />
@@ -223,7 +230,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/vyuldashev/nova-permission" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/waynestate/nova-ckeditor4-field" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/whitecube/nova-flexible-content" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/whitecube/nova-google-maps" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yassi/nova-nested-form" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ziffdavis/nova-nestedset" />

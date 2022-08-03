@@ -88,6 +88,17 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function subscribedVendors(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->belongsToMany(Vendor::class, Product::class)
+            ->join('categories', 'categories.id', 'products.category_id')
+            ->orWhere('categories.parent_id', $this->id)
+            ->distinct()->get();
+    }
+
+    /**
      * @return HasMany
      */
     public function attributes(): HasMany

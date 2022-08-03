@@ -10,13 +10,20 @@ use Laravel\Nova\Panel;
 
 class Fields {
 
+
     /**
      * @param string $model
      * @param string $tableName
+     * @param bool $requiredSlug
      * @return Panel
      */
-    public static function SEO(string $model, string $tableName): Panel
+    public static function SEO(string $model, string $tableName, bool $requiredSlug = true): Panel
     {
+        if($requiredSlug)
+            $slugValidation = REQUIRED_STRING_VALIDATION;
+        else
+            $slugValidation = NULLABLE_STRING_VALIDATION;
+
         return (new Panel('SEO', [
             Slug::make('Slug')
                 ->slugLanguage('en')
@@ -24,7 +31,7 @@ class Fields {
                 ->slugModel($model)
                 ->event('blur')
                 ->hideFromIndex()
-                ->rules(REQUIRED_STRING_VALIDATION)
+                ->rules($slugValidation)
                 ->creationRules("unique:$tableName,slug")
                 ->updateRules("unique:$tableName,slug,{{resourceId}}"),
 

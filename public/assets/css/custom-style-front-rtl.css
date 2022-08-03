@@ -30,3 +30,6 @@
     direction: rtl;
     text-align: right;
 }
+.tit--custom--label {
+    width: 90px;
+}

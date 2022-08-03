@@ -23,6 +23,11 @@
     <meta name="twitter:image:width" content="800">
     <meta name="twitter:image:height" content="418">
 
+
+
+
+
+
     {!! $product->schema !!}
 {{--    <script>--}}
 {{--        ga('require', 'ec');--}}
@@ -47,13 +52,24 @@
             <!-- breadcrumb -->
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{ __('general.home') }}</a></li>
+                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble" itemscope itemtype="https://schema.org/BreadcrumbList">
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="{{route('home')}}"><span itemprop="name">{{__('general.home')}}</span></a>
+                            <meta itemprop="position" content="1" />
+                        </li>
                         @foreach($product->category->ancestors as $ancestor)
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors()->pluck('slug')->toArray(), $ancestor->slug)])}}">{{$ancestor->name}}</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors()->pluck('slug')->toArray(), $ancestor->slug)])}}"><span itemprop="name">{{$ancestor->name}}</span></a>
+                            <meta itemprop="position" content="{{$loop->iteration + 1}}" />
+                        </li>
                         @endforeach
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{$product->category->name}}</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{$product->name}}</li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}"><span itemprop="name">{{$product->category->name}}</span></a>
+                            <meta itemprop="position" content="{{count($product->category->ancestors) + 2}}" />
+                        </li>
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page"><span itemprop="name">{{$product->name}}</span>
+                            <meta itemprop="position" content="{{count($product->category->ancestors) + 3}}" />
+                        </li>
                     </ol>
                 </nav>
             </div>
@@ -90,7 +106,7 @@
                 <div class="col-md-6 col-lg-4 col-xl-4 mb-md-6 mb-lg-0">
                     <div class="mb-2">
                         <a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{$product->category->name}}</a>
-                        <h2 class="font-size-25" style="line-height: 1.6">{{$product->name}}</h2>
+                        <h1 class="font-size-25" style="line-height: 1.6">{{$product->name}}</h1>
                         <div class="mb-2">
                             <a class="d-inline-flex align-items-center small font-size-15 text-lh-1">
 {{--                                <div class="text-warning mr-2">--}}

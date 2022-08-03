@@ -12,6 +12,8 @@
     <meta name="twitter:title" content="{{ (json_decode(nova_get_setting('home_meta_title'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}">
     <meta name="twitter:description" content="{{ (json_decode(nova_get_setting('home_meta_desc'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}">
     <meta name="twitter:image" content="{{ Storage::url(nova_get_setting('logo')) }}">
+
+    
     {!! nova_get_setting('home_schema') !!}
 @endsection
 @section('content')

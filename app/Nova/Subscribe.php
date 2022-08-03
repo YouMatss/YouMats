@@ -52,14 +52,18 @@ class Subscribe extends Resource
             ID::make(__('ID'), 'id')->sortable(),
 
             BelongsTo::make('Vendor')
+                ->rules([...REQUIRED_INTEGER_VALIDATION, ...['exists:vendors,id']])
                 ->withoutTrashed(),
 
             BelongsTo::make('Membership')
+                ->rules([...REQUIRED_INTEGER_VALIDATION, ...['exists:memberships,id']])
                 ->withoutTrashed(),
 
-            Date::make('Expiry Date'),
+            Date::make('Expiry Date')
+                ->rules(REQUIRED_DATE_VALIDATION),
 
-            Currency::make('Price'),
+            Currency::make('Price')
+                ->rules(REQUIRED_NUMERIC_VALIDATION)->min(0)->step(0.05),
         ];
     }
 
@@ -69,7 +73,7 @@ class Subscribe extends Resource
      */
     public static function authorizedToCreate(Request $request): bool
     {
-        return false;
+        return true;
     }
 
     /**

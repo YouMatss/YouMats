@@ -210,7 +210,7 @@ class Product extends Resource
                     ->translatable(),
             ]),
 
-            Fields::SEO(static::$model,'products'),
+            Fields::SEO(static::$model,'products', false),
         ];
     }
 

@@ -84,9 +84,9 @@
     display: none;
 }
 
-h1.section-title.section-title__full.mb-0.pb-2.font-size-22{
-    display: none;
-}
+/*h1.section-title.section-title__full.mb-0.pb-2.font-size-22{*/
+/*    display: none;*/
+/*}*/
 
 .product-item__body a img {
     height: 150px;
