@@ -1,12 +1,14 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="robots" content="all" />
-    @yield('metaTags')
+        <link rel="shortcut icon" href="favicon.ico">
+
+        @yield('metaTags')
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
                     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -14,7 +16,6 @@
                 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-58Q2BVQ');</script>
         <!-- End Google Tag Manager -->
-        
 
         <!-- Google Analytics -->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -29,9 +30,9 @@
 
         <!-- Google web master -->
         <meta name="google-site-verification" content="42jgsTk384G-j5A58b0eoyX-aR9ozjFnnLeymC27O2c" />
-        
-        
-                <script type="application/ld+json">
+
+
+        <script type="application/ld+json">
           {
             "@context": "https://schema.org",
             "@type": "Store",
@@ -94,8 +95,7 @@
               }
             ]
           }
-          </script>
-
+      </script>
 
         @include('front.layouts.partials.assets')
     </head>

@@ -379,6 +379,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
     private function generalData() {
         return [
+            Text::make('Site Name', 'site_name')
+                ->rules(REQUIRED_STRING_VALIDATION)->translatable(),
             Text::make('Main Phone', 'phone')
                 ->rules(REQUIRED_STRING_VALIDATION),
         ];
@@ -401,6 +403,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             Code::make('Home Schema', 'home_schema')
                 ->rules(NULLABLE_TEXT_VALIDATION),
+
+            Text::make('Categories Additional Word', 'categories_additional_word')
+                ->rules(NULLABLE_STRING_VALIDATION)->translatable(),
+
+            Text::make('Products Additional Word', 'products_additional_word')
+                ->rules(NULLABLE_STRING_VALIDATION)->translatable(),
+
         ];
     }
 

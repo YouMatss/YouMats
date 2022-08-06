@@ -131,7 +131,7 @@ if (!function_exists('cartOrChat')) {
 
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company()) {
-                return $cart;
+                return $cart . $chat;
             } elseif(!(optional($product->vendor)->current_subscribe && in_array(optional($product->vendor)->current_subscribe->membership_id, [env('INDIVIDUAL_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))) {
                 return $view;
             } elseif($product->type == 'product' && $product->price > 0 && $product->delivery) {

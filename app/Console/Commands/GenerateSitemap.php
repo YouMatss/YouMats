@@ -40,6 +40,7 @@ class GenerateSitemap extends Command
     {
         // modify this to your own needs
         SitemapGenerator::create(config('app.url'))
+            ->maxTagsPerSitemap(5000)
             ->writeToFile(public_path('sitemap.xml'));
     }
 }

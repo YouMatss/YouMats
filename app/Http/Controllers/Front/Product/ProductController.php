@@ -121,7 +121,8 @@ class ProductController extends Controller
                 foreach ($product->tags as $tag) {
                     $data['search_tags'][$tag->id] = $tag;
                 }
-            $data['search_categories'][$product->category->id] = $product->category;
+            if(isset($product->category->id))
+                $data['search_categories'][$product->category->id] = $product->category;
         }
 
         if(isset($_GET['filter']['has_tags']))
