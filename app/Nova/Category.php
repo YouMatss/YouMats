@@ -99,7 +99,7 @@ class Category extends Resource
             new Panel('Template For Title', [
                 Heading::make('Instructions: + => for input, - => for dropdown, Ex for dropdown: -Orientation-Horizontal-Vertical'),
                 SimpleRepeatable::make('Template', 'template', [
-                    Text::make('Word')->rules(NULLABLE_STRING_VALIDATION)->translatable(),
+                    Text::make('Word')->rules(NULLABLE_TEXT_VALIDATION)->translatable(),
                 ])->canAddRows(true)->canDeleteRows(true),
             ]),
 
