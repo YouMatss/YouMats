@@ -1,13 +1,13 @@
 @extends('front.layouts.master')
 @section('metaTags')
     <title>{{(!empty($product->meta_title)) ? $product->meta_title : nova_get_setting_translate('products_additional_word') . ' ' . $product->name}}</title>
-    <meta name="description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . $product->short_desc}}">
+    <meta name="description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc)}}">
     <meta name="keywords" content="{{$product->meta_keywords}}">
 
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:site_name" content="Youmats Building Materials">
     <meta property="og:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : nova_get_setting_translate('products_additional_word') . ' ' . $product->name}}" />
-    <meta property="og:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . $product->short_desc}}" />
+    <meta property="og:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc)}}" />
     <meta property="og:type" content="website" />
     <meta property="og:image" itemprop="image" content="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" />
     <meta property="og:image:type" content="image/jpeg">
@@ -18,7 +18,7 @@
     <meta name="twitter:site" content="@youmats">
     <meta name="twitter:creator" content="@youmats">
     <meta name="twitter:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : nova_get_setting_translate('products_additional_word') . ' ' . $product->name}}">
-    <meta name="twitter:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . $product->short_desc}}">
+    <meta name="twitter:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc)}}">
     <meta name="twitter:image" content="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}">
     <meta name="twitter:image:width" content="800">
     <meta name="twitter:image:height" content="418">

@@ -62,7 +62,8 @@ if (!function_exists('getCityNameById')) {
 
 if (!function_exists('cartOrChat')) {
     function cartOrChat($product, $view_page = true) {
-        $chat = '<div><a target="_blank" href="https://wa.me/'. nova_get_setting('phone') .'?text='.$product->whatsapp_message().'"
+//        href="https://wa.me/'. nova_get_setting('phone') .'?text='.$product->whatsapp_message().'"
+        $chat = '<div><a target="_blank" href="https://wa.me/+966'.$product->phone().'"
                     class="cart-chat-category btn btn-primary transition-3d-hover">
                         <i class="fa fa-comments"></i> &nbsp;' . __("general.chat_button") . '
                     </a>

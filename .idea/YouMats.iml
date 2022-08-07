@@ -83,6 +83,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/glide" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/mime-type-detection" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/oauth2-server" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/uri" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/uri-interfaces" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/maatwebsite/excel" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/maatwebsite/laravel-nova-excel" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/maennchen/zipstream-php" />
@@ -95,6 +97,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/mcamara/laravel-localization" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mirovit/nova-notifications" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mockery/mockery" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/monaye/simple-link-button" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/moontoast/math" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mrmonat/nova-translatable" />
@@ -190,7 +193,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/debug" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dom-crawler" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/error-handler" />
@@ -230,6 +232,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/vyuldashev/nova-permission" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/waynestate/nova-ckeditor4-field" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/whitecube/nova-flexible-content" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/whitecube/nova-google-maps" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yassi/nova-nested-form" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ziffdavis/nova-nestedset" />

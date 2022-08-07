@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Spatie\Crawler\Crawler;
 use Spatie\Sitemap\SitemapGenerator;
 
 class GenerateSitemap extends Command
@@ -40,7 +41,9 @@ class GenerateSitemap extends Command
     {
         // modify this to your own needs
         SitemapGenerator::create(config('app.url'))
-            ->maxTagsPerSitemap(5000)
+            ->configureCrawler(function (Crawler $crawler) {
+                $crawler->setMaximumDepth(2);
+            })
             ->writeToFile(public_path('sitemap.xml'));
     }
 }
