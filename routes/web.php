@@ -9,6 +9,17 @@ use App\Http\Controllers\Front\Vendor\Admin\SippingGroupController;
 use App\Http\Controllers\Front\Vendor\Admin\SubScribeController;
 use Illuminate\Support\Facades\Route;
 
+//Route::get('products_sitemap', function () {
+//    $increment = 2000;
+//    for($i = 0; $i <= 30000; $i += $increment) {
+//        \Illuminate\Support\Facades\Artisan::call('sitemap:products', [
+//            'start' => $i,
+//            'increment' => $increment
+//        ]);
+//    }
+//    dd('Done');
+//});
+
 //Actions routes
 Route::post('changeCity', 'Common\MiscController@changeCity')->name('front.changeCity');
 Route::post('changeCurrency', 'Common\MiscController@changeCurrency')->name('front.currencySwitch');
