@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Front\Vendor\Admin\BranchController;
+use App\Http\Controllers\Front\Vendor\Admin\GenerateProductController;
 use App\Http\Controllers\Front\Vendor\Admin\IndexController;
 use App\Http\Controllers\Front\Vendor\Admin\OrderController;
 use App\Http\Controllers\Front\Vendor\Admin\ProductController;
@@ -76,6 +77,9 @@ Route::group([
             Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
             Route::put('/update/{id}', [ProductController::class, 'update'])->name('update');
             Route::get('/deleteImage/{product}/{image}', [ProductController::class, 'deleteImage'])->name('deleteImage');
+
+            Route::get('/generate', [GenerateProductController::class, 'generate'])->name('generate');
+            Route::post('/generate', [GenerateProductController::class, 'requestGenerate'])->name('request.generate');
         });
         Route::group(['prefix' => 'branch', 'as' => 'branch.'], function () {
             Route::get('/', [BranchController::class, 'index'])->name('index');

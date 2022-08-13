@@ -146,6 +146,12 @@
                     </ul>
                 </li>
                 @endif
+{{--                <li class="nav-item">--}}
+{{--                    <a href="{{route('vendor.product.generate')}}" class="nav-link">--}}
+{{--                        <i class="nav-icon fas fa-layer-group"></i>--}}
+{{--                        <p>{{__('vendorAdmin.request_generate_products')}}</p>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             </ul>
         </nav>
     </div>
