@@ -15,6 +15,10 @@
         {
             "type": "path",
             "url": "./nova-components/TitleTemplate"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/GenerateProducts"
         }
     ],
     "require": {
@@ -77,7 +81,8 @@
         "whitecube/nova-flexible-content": "^v0.2.10",
         "whitecube/nova-google-maps": "^0.0.1",
         "yassi/nova-nested-form": "^3.0",
-        "ziffdavis/nova-nestedset": "^0.0.1"
+        "ziffdavis/nova-nestedset": "^0.0.1",
+        "maher/generate-products": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

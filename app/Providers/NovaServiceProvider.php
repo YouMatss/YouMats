@@ -17,6 +17,7 @@ use App\Nova\Coupon;
 use App\Nova\Currency;
 use App\Nova\Driver;
 use App\Nova\FAQ;
+use App\Nova\GenerateProduct;
 use App\Nova\Inquire;
 use App\Nova\Language;
 use App\Nova\Membership;
@@ -194,6 +195,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                 'icon' => null,
                                 'path' => '/resources/sub-categories/new'
                             ]),
+                            NovaResource::make(GenerateProduct::class)->canSee(function ($request) {
+                                return $request->user()->isSuperAdmin();
+                            }),
                         ]
                     ]),
                     TopLevelResource::make([

@@ -34,32 +34,34 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-12">
-                                        <nav>
-                                            <div class="nav nav-languages" id="nav-tab" role="tablist">
-                                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                                    <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-name"
-                                                       data-toggle="tab" href="#nav-{{$localeCode}}-name" role="tab" aria-controls="nav-{{$localeCode}}-name" aria-selected="false">{{ $properties['native'] }}</a>
-                                                @endforeach
-                                            </div>
-                                        </nav>
+                                <div id="template-container" style="display: none">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <nav>
+                                                <div class="nav nav-languages" id="nav-tab" role="tablist">
+                                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                        <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-name"
+                                                           data-toggle="tab" href="#nav-{{$localeCode}}-name" role="tab" aria-controls="nav-{{$localeCode}}-name" aria-selected="false">{{ $properties['native'] }}</a>
+                                                    @endforeach
+                                                </div>
+                                            </nav>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-12">
-                                        <div class="tab-content" id="nav-tabContent">
-                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                                <div class="tab-pane fade @if($loop->first) show active @endif"
-                                                     id="nav-{{$localeCode}}-name" role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-name">
-                                                    <div class="form-group">
-                                                        <label for="name-{{$localeCode}}">{{__('vendorAdmin.name')}}</label>
-                                                        <div id="template-{{$localeCode}}">
-                                                            <input type="text" class="form-control" name="name_{{$localeCode}}" id="name-{{$localeCode}}" value="{{old('name-'.$localeCode)}}">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="tab-content" id="nav-tabContent">
+                                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                    <div class="tab-pane fade @if($loop->first) show active @endif"
+                                                         id="nav-{{$localeCode}}-name" role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-name">
+                                                        <div class="form-group">
+                                                            <label for="name-{{$localeCode}}">{{__('vendorAdmin.template')}}</label>
+                                                            <div id="template-{{$localeCode}}">
+                                                                <input type="text" class="form-control" name="name_{{$localeCode}}" id="name-{{$localeCode}}" value="{{old('name-'.$localeCode)}}">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +90,7 @@
             var subCategoryElement = $('#subCategory');
             $.ajax({
                 type: 'GET',
-                url: "{{route('vendor.category.getSub')}}",
+                url: "{{route('vendor.category.getSub', [true])}}",
                 data: { category_id: category_id }
             }).done(function(response) {
                 subCategoryElement.html('');
@@ -104,37 +106,34 @@
                 url: "{{route('vendor.category.getTemplate')}}",
                 data: { subCategory_id: subCategory_id }
             }).done(function(response){
-                if(response.length == 0 || response[0] == null) {
+                if(response.length != 0 && response[0] != null) {
+                    $('#template-container').show();
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                    $('#template-{{$localeCode}}').html(`<input type="text" class="form-control" name="name_{{$localeCode}}" id="name-{{$localeCode}}" value="{{old('name-'.$localeCode)}}">`);
-                    @endforeach
-                } else {
-                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                    var template = $('#template-{{$localeCode}}');
-                    template.html('');
-                    response.forEach(function (value, index) {
-                        var word = value.word.{{$localeCode}},
-                            firstLetter = word.split('')[0];
-                        if(firstLetter == '+') {
-                            template.append(`<input type="text" class="form-control d-inline-block w-auto mx-1"
-                                    name="name_{{$localeCode}}[`+index+`]"
-                                    placeholder="`+word.substr(1)+`">`
-                            );
-                        } else if(firstLetter == '-') {
-                            var split = word.substr(1).split('-'),
-                                options = '';
-                            split.splice(1).forEach(function (value) {
-                                options += `<option value="`+value+`">`+value+`</option>`;
-                            });
-                            template.append(`<select class="form-control d-inline-block w-auto mx-1" name="name_{{$localeCode}}[`+index+`]">
-                                        <option value="" disabled selected>`+split[0]+`</option>`+options+`</select>`);
-                        } else {
-                            template.append(`
-                            <input type="hidden" name="name_{{$localeCode}}[`+index+`]" value="`+word+`" >
-                            <label class="mx-1 w-auto">`+word+`</label>
-                        `);
-                        }
-                    });
+                        var template = $('#template-{{$localeCode}}');
+                        template.html('');
+                        response.forEach(function (value, index) {
+                            let word = value.word.{{$localeCode}},
+                                firstLetter = word.split('')[0];
+                            if(firstLetter == '+') {
+                                template.append(`<input type="text" class="form-control d-inline-block w-auto mx-1"
+                                        name="name_{{$localeCode}}[`+index+`]"
+                                        placeholder="`+word.substr(1)+`">`
+                                );
+                            } else if(firstLetter == '-') {
+                                let split = word.substr(1).split('-'),
+                                    options = '';
+                                split.splice(1).forEach(function (value) {
+                                    options += `<option value="`+value+`">`+value+`</option>`;
+                                });
+                                template.append(`<select class="form-control d-inline-block w-auto mx-1" name="name_{{$localeCode}}[`+index+`]">
+                                            <option value="" disabled selected>`+split[0]+`</option>`+options+`</select>`);
+                            } else {
+                                template.append(`
+                                <input type="hidden" name="name_{{$localeCode}}[`+index+`]" value="`+word+`" >
+                                <label class="mx-1 w-auto">`+word+`</label>
+                            `);
+                            }
+                        });
                     @endforeach
                 }
             });

@@ -66,7 +66,7 @@ Route::group([
             Route::get('/error', [SubScribeController::class, 'error'])->name('error');
         });
 
-        Route::get('getSubCategories', [IndexController::class, 'getSubCategories'])->name('category.getSub');
+        Route::get('getSubCategories/{has_template?}', [IndexController::class, 'getSubCategories'])->name('category.getSub');
         Route::get('getAttributes', [IndexController::class, 'getAttributes'])->name('category.getAttr');
         Route::get('getTemplate', [IndexController::class, 'getTemplate'])->name('category.getTemplate');
 
