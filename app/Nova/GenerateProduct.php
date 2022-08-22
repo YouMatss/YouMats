@@ -59,7 +59,7 @@ class GenerateProduct extends Resource
             GenerateProducts::make('Template')
                 ->category('category')
                 ->endpoint('/api/loadData/{category}/model/{model}')
-                ->hideFromIndex(),
+                ->onlyOnForms(),
         ];
     }
 

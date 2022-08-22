@@ -46,14 +46,9 @@ class GenerateProducts extends Field
      */
     protected function fillAttributeFromRequest($request, $requestAttribute, $model, $attribute)
     {
-        dd($request->template);
-
-        if ($request->exists($requestAttribute)) {
-            foreach (json_decode($request->template) as $key => $item) {
-                $template[$key] = implode(' ', $item);
-            }
-            $model->template = $template;
-        }
+//        if ($request->exists($requestAttribute)) {
+            $model->template = $request->$requestAttribute;
+//        }
     }
 
 }

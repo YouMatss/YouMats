@@ -500,23 +500,83 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     if (response.data.template != null && response.data.template != '') {
                         _this3.template = response.data.template;
                         var templateLength = _this3.template.length;
-                        // if (response.data.current) {
-                        // this.current = {
-                        //     'ar': response.data.current.ar.split('-'),
-                        //     'en': response.data.current.en.split('-')
-                        // }
-                        // } else {
-                        _this3.current = {
-                            'ar': new Array(templateLength).fill({
-                                'value': null,
-                                'order': null
-                            }),
-                            'en': new Array(templateLength).fill({
-                                'value': null,
-                                'order': null
-                            })
-                            // }
-                        };console.log(_this3.current);
+                        if (response.data.current) {
+                            _this3.current = {
+                                'ar': response.data.current.ar,
+                                'en': response.data.current.en
+                            };
+                        } else {
+                            _this3.current = {
+                                'ar': {
+                                    0: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    1: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    2: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    3: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    4: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    5: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    6: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    7: {
+                                        'value': '',
+                                        'order': ''
+                                    }
+                                },
+                                'en': {
+                                    0: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    1: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    2: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    3: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    4: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    5: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    6: {
+                                        'value': '',
+                                        'order': ''
+                                    },
+                                    7: {
+                                        'value': '',
+                                        'order': ''
+                                    }
+                                }
+                            };
+                        }
                     } else {
                         _this3.template = null;
                     }
@@ -540,7 +600,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Fill the given FormData object with the field's internal value.
          */
         fill: function fill(formData) {
-            formData.append(this.field.attribute, this.current || '');
+            formData.append(this.field.attribute, JSON.stringify(this.current) || '');
         }
     }
 });
@@ -26925,8 +26985,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.current[locale][0]["value"],
-                                  expression: "current[locale][0]['value']"
+                                  value: _vm.current[locale][index]["value"],
+                                  expression: "current[locale][index]['value']"
                                 }
                               ],
                               staticClass:
@@ -26939,7 +26999,7 @@ var render = function() {
                                 required: ""
                               },
                               domProps: {
-                                value: _vm.current[locale][0]["value"]
+                                value: _vm.current[locale][index]["value"]
                               },
                               on: {
                                 input: function($event) {
@@ -26947,7 +27007,7 @@ var render = function() {
                                     return
                                   }
                                   _vm.$set(
-                                    _vm.current[locale][0],
+                                    _vm.current[locale][index],
                                     "value",
                                     $event.target.value
                                   )
@@ -26960,8 +27020,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.current[locale][0]["order"],
-                                  expression: "current[locale][0]['order']"
+                                  value: _vm.current[locale][index]["order"],
+                                  expression: "current[locale][index]['order']"
                                 }
                               ],
                               staticClass:
@@ -26977,7 +27037,7 @@ var render = function() {
                                 placeholder: "index"
                               },
                               domProps: {
-                                value: _vm.current[locale][0]["order"]
+                                value: _vm.current[locale][index]["order"]
                               },
                               on: {
                                 input: function($event) {
@@ -26985,7 +27045,7 @@ var render = function() {
                                     return
                                   }
                                   _vm.$set(
-                                    _vm.current[locale][0],
+                                    _vm.current[locale][index],
                                     "order",
                                     $event.target.value
                                   )
@@ -27000,8 +27060,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.current[locale][1]["value"],
-                                  expression: "current[locale][1]['value']"
+                                  value: _vm.current[locale][index]["value"],
+                                  expression: "current[locale][index]['value']"
                                 }
                               ],
                               staticClass:
@@ -27016,7 +27076,7 @@ var render = function() {
                                 required: ""
                               },
                               domProps: {
-                                value: _vm.current[locale][1]["value"]
+                                value: _vm.current[locale][index]["value"]
                               },
                               on: {
                                 input: function($event) {
@@ -27024,7 +27084,7 @@ var render = function() {
                                     return
                                   }
                                   _vm.$set(
-                                    _vm.current[locale][1],
+                                    _vm.current[locale][index],
                                     "value",
                                     $event.target.value
                                   )
@@ -27037,8 +27097,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.current[locale][1]["order"],
-                                  expression: "current[locale][1]['order']"
+                                  value: _vm.current[locale][index]["order"],
+                                  expression: "current[locale][index]['order']"
                                 }
                               ],
                               staticClass:
@@ -27054,7 +27114,7 @@ var render = function() {
                                 placeholder: "index"
                               },
                               domProps: {
-                                value: _vm.current[locale][1]["order"]
+                                value: _vm.current[locale][index]["order"]
                               },
                               on: {
                                 input: function($event) {
@@ -27062,7 +27122,7 @@ var render = function() {
                                     return
                                   }
                                   _vm.$set(
-                                    _vm.current[locale][1],
+                                    _vm.current[locale][index],
                                     "order",
                                     $event.target.value
                                   )
@@ -27077,10 +27137,10 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: (_vm.current[locale][2]["value"] =
+                                  value: (_vm.current[locale][index]["value"] =
                                     item.word[locale]),
                                   expression:
-                                    "current[locale][2]['value'] = item.word[locale]"
+                                    "current[locale][index]['value'] = item.word[locale]"
                                 }
                               ],
                               staticClass:
@@ -27092,7 +27152,7 @@ var render = function() {
                                 required: ""
                               },
                               domProps: {
-                                value: (_vm.current[locale][2]["value"] =
+                                value: (_vm.current[locale][index]["value"] =
                                   item.word[locale])
                               },
                               on: {
@@ -27101,7 +27161,7 @@ var render = function() {
                                     return
                                   }
                                   _vm.$set(
-                                    (_vm.current[locale][2]["value"] =
+                                    (_vm.current[locale][index]["value"] =
                                       item.word),
                                     locale,
                                     $event.target.value

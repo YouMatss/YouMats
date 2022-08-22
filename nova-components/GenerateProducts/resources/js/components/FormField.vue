@@ -8,23 +8,23 @@
                         <div v-if="item.word[locale].split('')[0] == '+'">
                             <input type="text" class="form-control form-input form-input-bordered inline-block w-auto mb-1" :class="errorClasses"
                                    :placeholder="item.word[locale].substr(1)" required style="width: 75%"
-                                   v-model="current[locale][0]['value']" />
+                                   v-model="current[locale][index]['value']" />
                             <input type="number" class="form-control form-input form-input-bordered inline-block w-auto mb-1"
                                    style="width: 23%;margin: 0 0.5%;border-color: #65bc18;" required
-                                   placeholder="index" v-model="current[locale][0]['order']" />
+                                   placeholder="index" v-model="current[locale][index]['order']" />
                         </div>
                         <div v-else-if="item.word[locale].split('')[0] == '-'">
                             <input type="text" class="form-control form-input form-input-bordered inline-block w-auto mb-1" :class="errorClasses"
                                    :placeholder="item.word[locale].substr(1).split('-')[0]" required style="width: 75%"
-                                   v-model="current[locale][1]['value']" />
+                                   v-model="current[locale][index]['value']" />
                             <input type="number" class="form-control form-input form-input-bordered inline-block w-auto mb-1"
                                    style="width: 23%;margin: 0 0.5%;border-color: #65bc18;" required
-                                   placeholder="index" v-model="current[locale][1]['order']" />
+                                   placeholder="index" v-model="current[locale][index]['order']" />
                         </div>
                         <div v-else-if="item.word[locale].split('')[0] != null">
                             <input type="text" readonly required
                                    class="form-control form-input form-input-bordered inline-block w-auto mb-1" style="width: 100%"
-                                   v-model="current[locale][2]['value'] = item.word[locale]" />
+                                   v-model="current[locale][index]['value'] = item.word[locale]" />
                         </div>
                     </div>
                 </div>
@@ -87,24 +87,83 @@ export default {
                         if (response.data.template != null && response.data.template != '') {
                             this.template = response.data.template;
                             let templateLength = this.template.length;
-                            // if (response.data.current) {
-                                // this.current = {
-                                //     'ar': response.data.current.ar.split('-'),
-                                //     'en': response.data.current.en.split('-')
-                                // }
-                            // } else {
+                            if (response.data.current) {
                                 this.current = {
-                                    'ar': new Array(templateLength).fill({
-                                        'value': null,
-                                        'order': null
-                                    }),
-                                    'en': new Array(templateLength).fill({
-                                        'value': null,
-                                        'order': null
-                                    })
+                                    'ar': response.data.current.ar,
+                                    'en': response.data.current.en
                                 }
-                            // }
-                            console.log(this.current);
+                            } else {
+                                this.current = {
+                                    'ar': {
+                                        0: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        1: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        2: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        3: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        4: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        5: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        6: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        7: {
+                                            'value': '',
+                                            'order': ''
+                                        }
+                                    },
+                                    'en': {
+                                        0: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        1: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        2: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        3: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        4: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        5: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        6: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        7: {
+                                            'value': '',
+                                            'order': ''
+                                        }
+                                    }
+                                }
+                            }
                         } else {
                             this.template = null;
                         }
@@ -127,7 +186,7 @@ export default {
          * Fill the given FormData object with the field's internal value.
          */
         fill(formData) {
-            formData.append(this.field.attribute, this.current || '')
+            formData.append(this.field.attribute, JSON.stringify(this.current) || '')
         },
     }
 }

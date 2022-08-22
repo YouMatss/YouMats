@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Maher\GenerateProducts\GenerateProducts;
+use App\Models\GenerateProduct;
 
 class GenerateProductController extends Controller
 {
@@ -15,8 +15,8 @@ class GenerateProductController extends Controller
             $data['template'] = $category->template;
         }
         if((!is_null($model_id) && $model_id != 'null')) {
-            $model = GenerateProducts::where('id', $model_id)->firstorfail(['template']);
-            $data['current'] = $model->template;
+            $model = GenerateProduct::where('id', $model_id)->firstorfail(['template']);
+            $data['current'] = json_decode($model->template);
         }
         return response()->json($data);
     }
