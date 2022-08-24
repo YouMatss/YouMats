@@ -56,30 +56,9 @@ class SubScribeController extends Controller
         }
     }
 
-    public function submit(Request $request) {
-//        $data = $request->all();
-//
+    public function submit() {
         $merchant_reference = Payment::use($this->provider)->generateMerchantReference();
-//        $arrData = [
-//            'service_command' => 'TOKENIZATION',
-//            'access_code' => env('PAYFORT_ACCESS_CODE'),
-//            'merchant_identifier' => env('PAYFORT_MERCHANT_IDENTIFIER'),
-//            'merchant_reference' => $merchant_reference,
-//            'language' => env('PAYFORT_LANGUAGE'),
-//            'expiry_date' => $data['expiration_month'].$data['expiration_year'],
-//            'card_number' => $data['card_number_filter'],
-//            'card_security_code' => $data['cvc'],
-//            'card_holder_name' => $data['hold_name'],
-//            'return_url' => url('/api/payfort/response'),
-//            'remember_me' => 'yes'
-//        ];
-//        $arrData['signature'] = Payment::use($this->provider)->calculateSignature($arrData, 'request');
-//
-//        return Http::post("https://sbcheckout.payfort.com/FortAPI/paymentPage", $arrData);
-
         return Payment::use($this->provider, $merchant_reference)->pay();
-
-
     }
 
     public function success() {
@@ -107,27 +86,24 @@ class SubScribeController extends Controller
             foreach(Admin::all() as $admin)
                 $admin->notify(new VendorSubscribed($data['vendor'], $data['membership'], $subscribe));
 
-//            $arrData = [
-//                'command' => 'PURCHASE',
-//                'access_code' => env('PAYFORT_ACCESS_CODE'),
-//                'merchant_identifier' => env('PAYFORT_MERCHANT_IDENTIFIER'),
-//                'merchant_reference' => $data['request']['merchant_reference'],
-//                'amount' => $data['request']['amount'],
-//                'currency' => $data['request']['currency'],
-//                'language' => $data['request']['language'],
-//                'customer_email' => $data['request']['customer_email'],
-//                'eci' => 'RECURRING',
-//                'token_name' => $data['request']['token_name']
-////                'order_description' => 'Membership',
-////                'customer_name' => $data['request']['customer_name'],
-////                'return_url' => url('/api/payfort/response'),
-////                'card_security_code' => '123'
-//            ];
-//            $signature = Payment::use($this->provider)->calculateSignature($arrData, 'request');
-//            $arrData['signature'] = $signature;
-//
-//            $response = Http::post('https://sbpaymentservices.payfort.com/FortAPI/paymentApi', $arrData);
-//
+            $merchant_reference = Payment::use($this->provider)->generateMerchantReference();
+            $arrData = [
+                'command' => 'PURCHASE',
+                'access_code' => env('PAYFORT_ACCESS_CODE'),
+                'merchant_identifier' => env('PAYFORT_MERCHANT_IDENTIFIER'),
+                'merchant_reference' => $merchant_reference,
+                'amount' => $data['request']['amount'],
+                'currency' => $data['request']['currency'],
+                'language' => $data['request']['language'],
+                'customer_email' => $data['request']['customer_email'],
+                'eci' => 'RECURRING',
+                'token_name' => $data['request']['token_name']
+            ];
+            $signature = Payment::use($this->provider)->calculateSignature($arrData, 'request');
+            $arrData['signature'] = $signature;
+
+            $response = Http::post('https://sbpaymentservices.payfort.com/FortAPI/paymentApi', $arrData);
+
 //            dd($response->object());
 
             return view('vendorAdmin.subscribe.payment.success')->with($data);
