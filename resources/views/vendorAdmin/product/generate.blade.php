@@ -3,6 +3,11 @@
     <title>{{__('vendorAdmin.generate_product')}}</title>
 @endsection
 @section('content')
+    <style>
+        .form-control-w-100 {
+            width: 100% !important;
+        }
+    </style>
     <section class="content content-vendor-edit pt-2">
         <div class="container-fluid">
             <div class="row">
@@ -37,31 +42,17 @@
                                 <div id="template-container" style="display: none">
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12">
-                                            <nav>
-                                                <div class="nav nav-languages" id="nav-tab" role="tablist">
-                                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                                        <a class="nav-link @if($loop->first) active @endif" id="nav-{{$localeCode}}-tab-name"
-                                                           data-toggle="tab" href="#nav-{{$localeCode}}-name" role="tab" aria-controls="nav-{{$localeCode}}-name" aria-selected="false">{{ $properties['native'] }}</a>
-                                                    @endforeach
-                                                </div>
-                                            </nav>
+                                            <div class="form-group">
+                                                <label>{{__('vendorAdmin.template')}}</label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 col-lg-12">
-                                            <div class="tab-content" id="nav-tabContent">
-                                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                                    <div class="tab-pane fade @if($loop->first) show active @endif"
-                                                         id="nav-{{$localeCode}}-name" role="tabpanel" aria-labelledby="nav-{{$localeCode}}-tab-name">
-                                                        <div class="form-group">
-                                                            <label for="name-{{$localeCode}}">{{__('vendorAdmin.template')}}</label>
-                                                            <div id="template-{{$localeCode}}">
-                                                                <input type="text" class="form-control" name="name_{{$localeCode}}" id="name-{{$localeCode}}" value="{{old('name-'.$localeCode)}}">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <div id="template-ar"></div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <div id="template-en"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -115,23 +106,19 @@
                             let word = value.word.{{$localeCode}},
                                 firstLetter = word.split('')[0];
                             if(firstLetter == '+') {
-                                template.append(`<input type="text" class="form-control d-inline-block w-auto mx-1"
-                                        name="name_{{$localeCode}}[`+index+`]"
-                                        placeholder="`+word.substr(1)+`">`
-                                );
+                                template.append(`<div class="form-group"><input type="text" class="form-control form-control-w-100" name="name_{{$localeCode}}[`+index+`]"
+                                            placeholder="`+word.substr(1)+`"></div>`);
                             } else if(firstLetter == '-') {
                                 let split = word.substr(1).split('-'),
                                     options = '';
                                 split.splice(1).forEach(function (value) {
                                     options += `<option value="`+value+`">`+value+`</option>`;
                                 });
-                                template.append(`<select class="form-control d-inline-block w-auto mx-1" name="name_{{$localeCode}}[`+index+`]">
-                                            <option value="" disabled selected>`+split[0]+`</option>`+options+`</select>`);
+                                template.append(`<div class="form-group"><select multiple class="form-control form-control-w-100" name="name_{{$localeCode}}[`+index+`]">
+                                            <option value="" disabled selected>`+split[0]+`</option>`+options+`</select></div>`);
                             } else {
-                                template.append(`
-                                <input type="hidden" name="name_{{$localeCode}}[`+index+`]" value="`+word+`" >
-                                <label class="mx-1 w-auto">`+word+`</label>
-                            `);
+                                template.append(`<div class="form-group"><input class="form-control form-control-w-100" type="text" disabled
+                                            name="name_{{$localeCode}}[`+index+`]" value="`+word+`"></div>`);
                             }
                         });
                     @endforeach
