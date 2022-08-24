@@ -23,6 +23,8 @@
     <meta name="twitter:image:width" content="800">
     <meta name="twitter:image:height" content="418">
 
+    {!! $product->getTranslation('canonical', LaravelLocalization::getCurrentLocale(), false) !!}
+
     {!! $product->schema !!}
 {{--    <script>--}}
 {{--        ga('require', 'ec');--}}

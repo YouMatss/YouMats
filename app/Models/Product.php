@@ -25,7 +25,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
 
     protected $guarded = ['id'];
 
-    public $translatable = ['name', 'temp_name', 'desc', 'short_desc', 'search_keywords', 'meta_title', 'meta_keywords', 'meta_desc'];
+    public $translatable = ['name', 'temp_name', 'desc', 'short_desc', 'search_keywords', 'meta_title', 'meta_keywords', 'meta_desc', 'canonical'];
 
     /**
      * The accessors to append to the model's array form.

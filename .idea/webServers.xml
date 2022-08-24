@@ -10,7 +10,7 @@
         </fileTransfer>
       </webServer>
       <webServer id="34b306a4-2925-4f67-866c-c59828fb4c41" name="old">
-        <fileTransfer accessType="SFTP" host="youmats.com" port="22" sshConfigId="130d6156-f493-483a-9d0c-a12752c22442" sshConfig="root@youmats.com:22 password">
+        <fileTransfer accessType="SFTP" host="youmats.com" port="22" sshConfigId="130d6156-f493-483a-9d0c-a12752c22442" sshConfig="youmats@youmats.com:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
