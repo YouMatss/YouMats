@@ -25,8 +25,8 @@ class RequestGenerateProductRequest extends FormRequest
     {
         return [
             'category_id' => [...REQUIRED_NUMERIC_VALIDATION, ...['exists:categories,id']],
-            'name_en' => REQUIRED_VALIDATION,
-            'name_ar' => REQUIRED_VALIDATION
+            'template_en' => REQUIRED_VALIDATION,
+            'template_ar' => REQUIRED_VALIDATION
         ];
     }
 }

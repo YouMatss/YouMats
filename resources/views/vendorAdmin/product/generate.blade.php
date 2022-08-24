@@ -4,8 +4,12 @@
 @endsection
 @section('content')
     <style>
-        .form-control-w-100 {
+        .form-control-custom {
             width: 100% !important;
+            margin-bottom: 0 !important;
+        }
+        .form-group-custom {
+            margin-bottom: 10px !important;
         }
     </style>
     <section class="content content-vendor-edit pt-2">
@@ -71,11 +75,9 @@
             $('#category').change(function () {
                 getSubCategories($(this).val());
             });
-
             $('#subCategory').change(function () {
                 getTemplateForTitle($(this).val());
             });
-
         });
         function getSubCategories(category_id) {
             var subCategoryElement = $('#subCategory');
@@ -106,7 +108,7 @@
                             let word = value.word.{{$localeCode}},
                                 firstLetter = word.split('')[0];
                             if(firstLetter == '+') {
-                                template.append(`<div class="form-group"><input type="text" class="form-control form-control-w-100" name="name_{{$localeCode}}[`+index+`]"
+                                template.append(`<div class="form-group form-group-custom"><input type="text" class="form-control form-control-custom" name="template_{{$localeCode}}[`+index+`]"
                                             placeholder="`+word.substr(1)+`"></div>`);
                             } else if(firstLetter == '-') {
                                 let split = word.substr(1).split('-'),
@@ -114,11 +116,13 @@
                                 split.splice(1).forEach(function (value) {
                                     options += `<option value="`+value+`">`+value+`</option>`;
                                 });
-                                template.append(`<div class="form-group"><select multiple class="form-control form-control-w-100" name="name_{{$localeCode}}[`+index+`]">
-                                            <option value="" disabled selected>`+split[0]+`</option>`+options+`</select></div>`);
-                            } else {
-                                template.append(`<div class="form-group"><input class="form-control form-control-w-100" type="text" disabled
-                                            name="name_{{$localeCode}}[`+index+`]" value="`+word+`"></div>`);
+                                template.append(`<div class="form-group form-group-custom">
+                                            <select id="select2-{{$localeCode}}-`+index+`" data-select2-id="{{$localeCode}}-`+index+`" multiple class="form-control form-control-custom"
+                                                    name="template_{{$localeCode}}[`+index+`][]">`+options+`</select></div>`);
+                                $('#select2-{{$localeCode}}-'+index).select2({theme: 'classic', width: '100%', placeholder: split[0]});
+                            } else if(firstLetter) {
+                                template.append(`<div class="form-group form-group-custom"><input class="form-control form-control-custom" type="text" readonly
+                                            name="template_{{$localeCode}}[`+index+`]" value="`+word+`"></div>`);
                             }
                         });
                     @endforeach

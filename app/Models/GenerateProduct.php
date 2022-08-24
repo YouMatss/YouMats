@@ -5,29 +5,27 @@ namespace App\Models;
 use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GenerateProduct extends Model
 {
-    use HasFactory, HasTranslations, UnicodeJsonColumn;
+    use HasFactory, UnicodeJsonColumn;
 
-    public $translatable = [
-//        'template'
-    ];
+    protected $guarded = ['id'];
 
     protected $casts = [
-        'template' => 'array'
+        'template' => 'json'
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function category() {
         return $this->belongsTo(Category::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function vendor() {
         return $this->belongsTo(Vendor::class);

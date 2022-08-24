@@ -228,7 +228,7 @@ body.new--style--custom .content-header h1 {
 }
 
 body.new--style--custom .form-control{
-    background-color: #fff;
+    /*background-color: #fff;*/
     padding-left: .75rem;
     padding-right: .75rem;
     color: #7c858e;
