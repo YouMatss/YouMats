@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Front\Vendor\Admin\BranchController;
+use App\Http\Controllers\Front\Vendor\Admin\GenerateProductController;
 use App\Http\Controllers\Front\Vendor\Admin\IndexController;
 use App\Http\Controllers\Front\Vendor\Admin\OrderController;
 use App\Http\Controllers\Front\Vendor\Admin\ProductController;
@@ -9,6 +10,17 @@ use App\Http\Controllers\Front\Vendor\Admin\SippingGroupController;
 use App\Http\Controllers\Front\Vendor\Admin\SubScribeController;
 use Illuminate\Support\Facades\Route;
 
+//Route::get('products_sitemap', function () {
+//    $increment = 2000;
+//    for($i = 0; $i <= 30000; $i += $increment) {
+//        \Illuminate\Support\Facades\Artisan::call('sitemap:products', [
+//            'start' => $i,
+//            'increment' => $increment
+//        ]);
+//    }
+//    dd('Done');
+//});
+
 //Actions routes
 Route::post('changeCity', 'Common\MiscController@changeCity')->name('front.changeCity');
 Route::post('changeCurrency', 'Common\MiscController@changeCurrency')->name('front.currencySwitch');
@@ -16,7 +28,7 @@ Route::get('introduce/{type}', 'Common\MiscController@introduce')->name('front.i
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    'middleware' => [ 'localizationRedirect' ]
 ], function(){
 
     //Auth (Verified/Authenticated) routes
@@ -54,7 +66,7 @@ Route::group([
             Route::get('/error', [SubScribeController::class, 'error'])->name('error');
         });
 
-        Route::get('getSubCategories', [IndexController::class, 'getSubCategories'])->name('category.getSub');
+        Route::get('getSubCategories/{has_template?}', [IndexController::class, 'getSubCategories'])->name('category.getSub');
         Route::get('getAttributes', [IndexController::class, 'getAttributes'])->name('category.getAttr');
         Route::get('getTemplate', [IndexController::class, 'getTemplate'])->name('category.getTemplate');
 
@@ -65,6 +77,9 @@ Route::group([
             Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
             Route::put('/update/{id}', [ProductController::class, 'update'])->name('update');
             Route::get('/deleteImage/{product}/{image}', [ProductController::class, 'deleteImage'])->name('deleteImage');
+
+            Route::get('/generate', [GenerateProductController::class, 'generate'])->name('generate');
+            Route::post('/generate', [GenerateProductController::class, 'requestGenerate'])->name('request.generate');
         });
         Route::group(['prefix' => 'branch', 'as' => 'branch.'], function () {
             Route::get('/', [BranchController::class, 'index'])->name('index');

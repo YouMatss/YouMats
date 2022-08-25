@@ -135,13 +135,13 @@
                 <div class="mb-3 mb-md-0">&copy; <a href="#" class="font-weight-bold text-gray-90">{{env('APP_NAME')}}</a> - {{__('general.footer_all_rights_reserved')}}</div>
                 <div class="text-md-right">
                     <span class="d-inline-block bg-white border rounded p-1">
-                        <img loading="lazy" class="max-width-6" src="{{asset('assets/img')}}/mada.png">
+                        <img loading="lazy" alt="Mada card logo icon" class="max-width-6" src="{{asset('assets/img')}}/mada.png">
                     </span>
                     <span class="d-inline-block bg-white border rounded p-1">
-                        <img loading="lazy" class="max-width-5" src="{{asset('assets/img')}}/patment-icon_1.png">
+                        <img loading="lazy" alt="Master card logo icon" class="max-width-5" src="{{asset('assets/img')}}/patment-icon_1.png">
                     </span>
                     <span class="d-inline-block bg-white border rounded p-1">
-                        <img loading="lazy" class="max-width-5" src="{{asset('assets/img')}}/patment-icon_2.png">
+                        <img loading="lazy" alt="Visa card logo icon" class="max-width-5" src="{{asset('assets/img')}}/patment-icon_2.png">
                     </span>
                 </div>
             </div>

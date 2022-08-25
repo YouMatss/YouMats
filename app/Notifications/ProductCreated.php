@@ -15,9 +15,9 @@ class ProductCreated extends Notification
     protected Product $product;
 
     /**
-     * Create a new notification instance.
-     *
-     * @return void
+     * ProductCreated constructor.
+     * @param Vendor $vendor
+     * @param Product $product
      */
     public function __construct(Vendor $vendor, Product $product)
     {

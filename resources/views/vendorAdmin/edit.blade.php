@@ -75,25 +75,25 @@
                                     @foreach($vendor->contacts as $key => $row)
                                         <div class="clone-element clone-element-add-contact">
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-4 col-lg-3">
                                                     <div class="form-group">
                                                         <label for="person_name">{{__('vendorAdmin.person_name')}}</label>
                                                         <input type="text" class="form-control" id="person_name" name="contacts_person_name[]" value="{{$row['person_name']}}" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-4 col-lg-2">
                                                     <div class="form-group">
                                                         <label for="c_email">{{__('vendorAdmin.email')}}</label>
                                                         <input type="email" class="form-control" id="c_email" name="contacts_email[]" value="{{$row['email']}}" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-4 col-lg-2">
                                                     <div class="form-group">
                                                         <label for="c_phone">{{__('vendorAdmin.phone')}}</label>
                                                         <input type="text" class="form-control" id="c_phone" name="contacts_phone[]" value="{{$row['phone']}}" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-5 col-lg-2">
                                                     <div class="form-group">
                                                         <label for="cities">{{__('vendorAdmin.cities')}}</label>
                                                         <select class="form-control select2-cities" data-select2-id="select2-city-{{$loop->index}}" multiple="multiple" id="cities" name="contacts_cities[{{$key}}][]">
@@ -103,7 +103,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-4 col-lg-2">
                                                     <div class="form-group">
                                                         <label for="c_with">{{__('vendorAdmin.with')}}</label>
                                                         <select class="form-control" id="c_with" name="contacts_with[]">
@@ -114,7 +114,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2 col-lg-1">
                                                     <div class="form-group">
                                                         <label>{{__('vendorAdmin.remove')}}</label>
                                                         <button class="form-control btn-remove-add btn btn-danger btn-xs clone-remove">
@@ -300,25 +300,25 @@
             $('#clone-add').on('click', function () {
                 let clone_element = `<div class="clone-element clone-element-add-contact">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4 col-lg-3">
                                         <div class="form-group">
                                             <label for="person_name">{{__('vendorAdmin.person_name')}}</label>
                                             <input type="text" class="form-control" id="person_name" name="contacts_person_name[]"/>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-4 col-lg-2">
                                         <div class="form-group">
                                             <label for="c_email">{{__('vendorAdmin.email')}}</label>
                                             <input type="email" class="form-control" id="c_email" name="contacts_email[]" />
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-4 col-lg-2">
                                         <div class="form-group">
                                             <label for="c_phone">{{__('vendorAdmin.phone')}}</label>
                                             <input type="text" class="form-control" id="c_phone" name="contacts_phone[]" />
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-5 col-lg-2">
                                         <div class="form-group">
                                             <label for="cities">{{__('vendorAdmin.cities')}}</label>
                                             <select class="form-control select2-cities" multiple="multiple" id="cities" name="contacts_cities[]">
@@ -328,7 +328,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-4 col-lg-2">
                                         <div class="form-group">
                                             <label for="c_with">{{__('vendorAdmin.with')}}</label>
                                                     <select class="form-control" id="c_with" name="contacts_with[]">
@@ -339,7 +339,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-2 col-lg-1">
                                                 <div class="form-group">
                                                     <label>{{__('vendorAdmin.remove')}}</label>
                                                     <button class="form-control btn-remove-add btn btn-danger btn-xs clone-remove">

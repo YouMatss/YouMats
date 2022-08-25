@@ -138,17 +138,23 @@ class IndexController extends Controller
         return redirect()->back();
     }
 
+
     /**
      * @param Request $request
+     * @param false $has_template
      * @return JsonResponse
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function getSubCategories(Request $request) {
+    public function getSubCategories(Request $request, $has_template = false) {
         $data = $this->validate($request, [
             'category_id' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:categories,id']]
         ]);
 
-        $subCategories = Category::where('parent_id', $data['category_id'])->orderBy('sort')->pluck('name', 'id');
+        if($has_template) {
+            $subCategories = Category::where('parent_id', $data['category_id'])->where('template', '!=', '[]')->orderBy('sort')->pluck('name', 'id');
+        }
+        else
+            $subCategories = Category::where('parent_id', $data['category_id'])->orderBy('sort')->pluck('name', 'id');
 
         return response()->json($subCategories);
     }

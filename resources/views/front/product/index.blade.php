@@ -1,13 +1,13 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>{{(!empty($product->meta_title)) ? $product->meta_title : $product->name}}</title>
-    <meta name="description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : $product->short_desc}}">
+    <title>{{(!empty($product->meta_title)) ? $product->meta_title : nova_get_setting_translate('products_additional_word') . ' ' . $product->name}}</title>
+    <meta name="description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc)}}">
     <meta name="keywords" content="{{$product->meta_keywords}}">
 
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:site_name" content="Youmats Building Materials">
-    <meta property="og:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : $product->name}}" />
-    <meta property="og:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : $product->short_desc}}" />
+    <meta property="og:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : nova_get_setting_translate('products_additional_word') . ' ' . $product->name}}" />
+    <meta property="og:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc)}}" />
     <meta property="og:type" content="website" />
     <meta property="og:image" itemprop="image" content="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" />
     <meta property="og:image:type" content="image/jpeg">
@@ -17,11 +17,13 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@youmats">
     <meta name="twitter:creator" content="@youmats">
-    <meta name="twitter:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : $product->name}}">
-    <meta name="twitter:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : $product->short_desc}}">
+    <meta name="twitter:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : nova_get_setting_translate('products_additional_word') . ' ' . $product->name}}">
+    <meta name="twitter:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc)}}">
     <meta name="twitter:image" content="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}">
     <meta name="twitter:image:width" content="800">
     <meta name="twitter:image:height" content="418">
+
+    {!! $product->getTranslation('canonical', LaravelLocalization::getCurrentLocale(), false) !!}
 
     {!! $product->schema !!}
 {{--    <script>--}}
@@ -47,13 +49,24 @@
             <!-- breadcrumb -->
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{ __('general.home') }}</a></li>
+                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble" itemscope itemtype="https://schema.org/BreadcrumbList">
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="{{route('home')}}"><span itemprop="name">{{__('general.home')}}</span></a>
+                            <meta itemprop="position" content="1" />
+                        </li>
                         @foreach($product->category->ancestors as $ancestor)
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors()->pluck('slug')->toArray(), $ancestor->slug)])}}">{{$ancestor->name}}</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors()->pluck('slug')->toArray(), $ancestor->slug)])}}"><span itemprop="name">{{$ancestor->name}}</span></a>
+                            <meta itemprop="position" content="{{$loop->iteration + 1}}" />
+                        </li>
                         @endforeach
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{$product->category->name}}</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{$product->name}}</li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}"><span itemprop="name">{{$product->category->name}}</span></a>
+                            <meta itemprop="position" content="{{count($product->category->ancestors) + 2}}" />
+                        </li>
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page"><span itemprop="name">{{$product->name}}</span>
+                            <meta itemprop="position" content="{{count($product->category->ancestors) + 3}}" />
+                        </li>
                     </ol>
                 </nav>
             </div>
@@ -90,7 +103,7 @@
                 <div class="col-md-6 col-lg-4 col-xl-4 mb-md-6 mb-lg-0">
                     <div class="mb-2">
                         <a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{$product->category->name}}</a>
-                        <h2 class="font-size-25" style="line-height: 1.6">{{$product->name}}</h2>
+                        <h1 class="font-size-25" style="line-height: 1.6">{{$product->name}}</h1>
                         <div class="mb-2">
                             <a class="d-inline-flex align-items-center small font-size-15 text-lh-1">
 {{--                                <div class="text-warning mr-2">--}}

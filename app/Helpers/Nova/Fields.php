@@ -10,21 +10,29 @@ use Laravel\Nova\Panel;
 
 class Fields {
 
+
     /**
      * @param string $model
      * @param string $tableName
+     * @param bool $requiredSlug
+     * @param bool $is_canonical
      * @return Panel
      */
-    public static function SEO(string $model, string $tableName): Panel
+    public static function SEO(string $model, string $tableName, bool $requiredSlug = true, $is_canonical = false): Panel
     {
-        return (new Panel('SEO', [
+        if($requiredSlug)
+            $slugValidation = REQUIRED_STRING_VALIDATION;
+        else
+            $slugValidation = NULLABLE_STRING_VALIDATION;
+
+        $attributes = [
             Slug::make('Slug')
                 ->slugLanguage('en')
                 ->slugUnique()
                 ->slugModel($model)
                 ->event('blur')
                 ->hideFromIndex()
-                ->rules(REQUIRED_STRING_VALIDATION)
+                ->rules($slugValidation)
                 ->creationRules("unique:$tableName,slug")
                 ->updateRules("unique:$tableName,slug,{{resourceId}}"),
 
@@ -47,7 +55,16 @@ class Fields {
             Code::make('Schema')
                 ->hideFromIndex()
                 ->rules(NULLABLE_TEXT_VALIDATION),
-        ]));
+        ];
+
+        if($is_canonical) {
+            $canonical = Text::make('Canonical')->hideFromIndex()
+                ->rules(NULLABLE_STRING_VALIDATION)->translatable();
+
+            $attributes[] = $canonical;
+        }
+
+        return (new Panel('SEO', $attributes));
     }
 
 }

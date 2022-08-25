@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Front\Category;
 
 use App\Helpers\Classes\CollectionPaginate;
+use App\Helpers\Classes\DeliveryFilter;
 use App\Helpers\Classes\PriceFilter;
 use App\Helpers\Classes\ProductsSortDelivery;
-use App\Helpers\Classes\ProductsSortIsDelivery;
-use App\Helpers\Classes\ProductsSortPrice;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
@@ -44,7 +43,8 @@ class CategoryController extends Controller
         $products->allowedFilters([
             AllowedFilter::partial('attributes', null, true, ','),
             AllowedFilter::scope('price'),
-            AllowedFilter::custom('is_price', new PriceFilter())
+            AllowedFilter::custom('is_price', new PriceFilter()),
+            AllowedFilter::custom('is_delivery', new DeliveryFilter())
         ]);
 
         if(isset($request->sort) && is_individual()) {
@@ -53,10 +53,10 @@ class CategoryController extends Controller
                     AllowedSort::custom('delivery', new ProductsSortDelivery($products), 'delivery'),
                 ])
                 ->with('category')
-                ->get()->unique();
+                ->take(500)->get()->unique();
         } else {
             $filter = $products->with('category')
-                ->get()
+                ->take(500)->get()
                 ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
                     return $collection->shuffle();
                 })->ungroup()
@@ -70,6 +70,14 @@ class CategoryController extends Controller
         $data['category']->load('attributes', 'attributes.values');
 
         if(isset($data['parent'])) {
+            $data['subscribeVendors'] = [];
+            $subscribeVendors = $data['category']->subscribedVendors();
+            foreach ($subscribeVendors as $subscribeVendor) {
+                if($subscribeVendor->current_subscribe) {
+                    $data['subscribeVendors'][] = $subscribeVendor;
+                }
+            }
+
             return view('front.category.sub')->with($data);
         } else {
             return view('front.category.index')->with($data);

@@ -12,6 +12,7 @@
     <meta name="twitter:title" content="{{$page->meta_title}}">
     <meta name="twitter:description" content="{{$page->meta_desc}}">
     <meta name="twitter:image" content="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['url']}}">
+    
     {!! $page->schema !!}
 @endsection
 @section('content')

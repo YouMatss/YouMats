@@ -23,20 +23,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         $(document).ready(function() {
             $('#myModal').modal({backdrop: 'static', keyboard: false});
-
-            $(document).on('click', '.typeIntroduceButton', function () {
-                let url = $(this).data('url');
-                $.ajax({
-                    type: 'GET',
-                    url: url
-                })
-                .done(function(response) {
-                    if(response.status) {
-                        location.reload();
-                    }
-                })
-            });
-
         });
     });
 </script>

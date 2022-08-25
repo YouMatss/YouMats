@@ -116,6 +116,10 @@ body.new--style--custom .btn-youmats {
     border-color: #4099de;
 
 }
+body.new--style--custom .btn-youmats:hover {
+    background-color: #2583cd;
+    border-color: #2583cd;
+}
 
 body.new--style--custom .card.card--vendor{
     border: 0;
@@ -162,7 +166,7 @@ body.new--style--custom:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-
 body.new--style--custom:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-footer,
 body.new--style--custom:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header {
     transition: margin-left .3s ease-in-out;
-    margin-left: 13.75rem;
+
 }
 .sidebar-mini .main-sidebar .nav-link {
     width: calc(13.75rem - .5rem * 2);
@@ -224,7 +228,7 @@ body.new--style--custom .content-header h1 {
 }
 
 body.new--style--custom .form-control{
-    background-color: #fff;
+    /*background-color: #fff;*/
     padding-left: .75rem;
     padding-right: .75rem;
     color: #7c858e;
@@ -347,4 +351,72 @@ td.btn-pain label{
     color: #fff !important;
     font-size: 12px !important;
     padding: 5px 15px;
+}
+
+
+.style_box_pay{
+    text-align: center;
+}
+
+.style_box_pay p{
+    text-align: center;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    top: -47px;
+    right: 0;
+    width: 300px;
+    border: 2px solid #dd4;
+    font-size: 14px;
+    padding: 15px 0;
+    border-radius: 5px;
+    background: #fff;
+}
+.style_box_pay span{
+    margin: 50px 0 50px 0;
+    display: block;
+}
+.style_box_pay button{
+
+}
+
+.card_pay_m{
+    border: 2px solid #ddd;
+}
+.nav-languages {
+    margin: 20px 0 15px 0;
+}
+
+body.new--style--custom .content-vendor-ship .clone-element .form-control {
+    width: 100%;
+}
+body.new--style--custom .content-vendor-ship  label:not(.form-check-label):not(.custom-file-label) {
+    margin: 10px 0 5px 0;
+}
+@media (min-width: 768px) {
+    body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .content-wrapper, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-footer, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header {
+        margin-left: 13.75rem;
+    }
+}
+
+
+.item_Upgrade{
+
+}
+
+body.new--style--custom .nav-sidebar .nav-item.item_Upgrade>.nav-link{
+    margin: 0;
+    padding: 15px 0;
+    background: #3a3434;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+}
+body.new--style--custom .nav-sidebar .nav-item.item_Upgrade>.nav-link i{
+    font-size: 14px;
+    margin: 0;
+    width: auto;
+}
+body.new--style--custom .nav-sidebar .nav-item.item_Upgrade>.nav-link:hover{
+    background: #2e2727;
 }

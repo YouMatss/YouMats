@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Anaseqal\NovaImport\NovaImport;
 use App\Models\Category as CategoryModel;
+use App\Models\Product as ProductModel;
 use App\Models\Vendor as VendorModel;
 use App\Nova\Admin;
 use App\Nova\Car;
@@ -16,6 +17,7 @@ use App\Nova\Coupon;
 use App\Nova\Currency;
 use App\Nova\Driver;
 use App\Nova\FAQ;
+use App\Nova\GenerateProduct;
 use App\Nova\Inquire;
 use App\Nova\Language;
 use App\Nova\Membership;
@@ -47,6 +49,7 @@ use App\Nova\Unit;
 use App\Nova\User;
 use App\Nova\Vendor;
 use App\Observers\CategoryObserver;
+use App\Observers\ProductObserver;
 use App\Observers\VendorObserver;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
@@ -92,6 +95,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         ], [], 'Vendor Terms');
         Nova::serving(function () {
             CategoryModel::observe(CategoryObserver::class);
+            ProductModel::observe(ProductObserver::class);
             VendorModel::observe(VendorObserver::class);
         });
     }
@@ -191,6 +195,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                 'icon' => null,
                                 'path' => '/resources/sub-categories/new'
                             ]),
+                            NovaResource::make(GenerateProduct::class)->canSee(function ($request) {
+                                return $request->user()->isSuperAdmin();
+                            }),
                         ]
                     ]),
                     TopLevelResource::make([
@@ -376,6 +383,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
     private function generalData() {
         return [
+            Text::make('Site Name', 'site_name')
+                ->rules(REQUIRED_STRING_VALIDATION)->translatable(),
             Text::make('Main Phone', 'phone')
                 ->rules(REQUIRED_STRING_VALIDATION),
         ];
@@ -398,6 +407,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             Code::make('Home Schema', 'home_schema')
                 ->rules(NULLABLE_TEXT_VALIDATION),
+
+            Text::make('Categories Additional Word', 'categories_additional_word')
+                ->rules(NULLABLE_STRING_VALIDATION)->translatable(),
+
+            Text::make('Products Additional Word', 'products_additional_word')
+                ->rules(NULLABLE_STRING_VALIDATION)->translatable(),
+
         ];
     }
 

@@ -22,7 +22,9 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use Maher\TitleTemplate\TitleTemplate;
+use Monaye\SimpleLinkButton\SimpleLinkButton;
 use Nikaia\Rating\Rating;
+use NovaButton\Button;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
@@ -127,6 +129,11 @@ class Product extends Resource
             DateTime::make('Creation Date', 'created_at')
                 ->onlyOnDetail(),
 
+//            SimpleLinkButton::make('Link', route('front.product', [generatedNestedSlug($this->model()->category->ancestors()->pluck('slug')->toArray(), $this->model()->category->slug), $this->model()->slug]))->type('outline')
+//                ->style('primary')
+//                ->attributes(['target' => '_blank'])
+//                ->onlyOnIndex(),
+
             (new Panel('Gallery', [
                 Medialibrary::make('Images', PRODUCT_PATH)->fields(function () {
                     return [
@@ -210,7 +217,7 @@ class Product extends Resource
                     ->translatable(),
             ]),
 
-            Fields::SEO(static::$model,'products'),
+            Fields::SEO(static::$model,'products', false, true),
         ];
     }
 

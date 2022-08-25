@@ -11,7 +11,9 @@
         "build-template-title": "cd nova-components/TemplateTitle && npm run dev",
         "build-template-title-prod": "cd nova-components/TemplateTitle && npm run prod",
         "build-title-template": "cd nova-components/TitleTemplate && npm run dev",
-        "build-title-template-prod": "cd nova-components/TitleTemplate && npm run prod"
+        "build-title-template-prod": "cd nova-components/TitleTemplate && npm run prod",
+        "build-generate-products": "cd nova-components/GenerateProducts && npm run dev",
+        "build-generate-products-prod": "cd nova-components/GenerateProducts && npm run prod"
     },
     "devDependencies": {
         "axios": "^0.26.1",

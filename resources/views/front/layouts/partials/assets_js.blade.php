@@ -75,6 +75,20 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+        $(document).on('click', '.typeIntroduceButton', function () {
+            let url = $(this).data('url');
+            $.ajax({
+                type: 'GET',
+                url: url
+            })
+                .done(function(response) {
+                    if(response.status) {
+                        location.reload();
+                    }
+                })
+        });
+
         <!-- JS Plugins Init. -->
         $(window).on('load', function () {
             // initialization of HSMegaMenu component

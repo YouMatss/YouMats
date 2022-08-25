@@ -15,6 +15,10 @@
         {
             "type": "path",
             "url": "./nova-components/TitleTemplate"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/GenerateProducts"
         }
     ],
     "require": {
@@ -51,6 +55,7 @@
         "mauricewijnia/nova-maps-address": "^1.3",
         "mcamara/laravel-localization": "^1.6",
         "mirovit/nova-notifications": "^1.0",
+        "monaye/simple-link-button": "^1.0",
         "nikaia/nova-rating-field": "^1.0",
         "optimistdigital/nova-multiselect-field": "^2.3",
         "optimistdigital/nova-settings": "^3.2",
@@ -63,6 +68,7 @@
         "richardkeep/nova-timenow": "^1.0",
         "spatie/laravel-medialibrary": "^9.4",
         "spatie/laravel-query-builder": "^3.3",
+        "spatie/laravel-sitemap": "^v5.8",
         "spatie/laravel-translatable": "^4.6",
         "spatie/laravel-translation-loader": "^2.7",
         "spatie/nova-backup-tool": "^4.1",
@@ -72,9 +78,11 @@
         "torann/geoip": "^3.0",
         "vyuldashev/nova-permission": "^2.10",
         "waynestate/nova-ckeditor4-field": "^0.7.0",
+        "whitecube/nova-flexible-content": "^v0.2.10",
         "whitecube/nova-google-maps": "^0.0.1",
         "yassi/nova-nested-form": "^3.0",
-        "ziffdavis/nova-nestedset": "^0.0.1"
+        "ziffdavis/nova-nestedset": "^0.0.1",
+        "maher/generate-products": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
@@ -88,7 +96,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/thanks": false
+        }
     },
     "extra": {
         "laravel": {

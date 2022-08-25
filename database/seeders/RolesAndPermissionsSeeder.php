@@ -32,6 +32,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'cities',
             'contacts',
             'subscribers',
+            'subscribes',
             'tags',
             'currencies',
             'memberships',

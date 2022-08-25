@@ -1,18 +1,19 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>{{(!empty($category->meta_title)) ? $category->meta_title : $category->title}}</title>
-    <meta name="description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : $category->short_desc}}">
+    <title>{{(!empty($category->meta_title)) ? $category->meta_title : $category->title . ' | ' . nova_get_setting_translate('site_name')}}</title>
+    <meta name="description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc)}}">
     <meta name="keywords" content="{{$category->meta_keywords}}">
     <meta property="og:url" content="{{url()->current()}}" />
-    <meta property="og:title" content="{{(!empty($category->meta_title)) ? $category->meta_title : $category->title}}" />
-    <meta property="og:description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : $category->short_desc}}" />
+    <meta property="og:title" content="{{(!empty($category->meta_title)) ? $category->meta_title : $category->title . ' | ' . nova_get_setting_translate('site_name')}}" />
+    <meta property="og:description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc)}}" />
     <meta property="og:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
-    <meta name="twitter:title" content="{{(!empty($category->meta_title)) ? $category->meta_title : $category->title}}">
-    <meta name="twitter:description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : $category->short_desc}}">
+    <meta name="twitter:title" content="{{(!empty($category->meta_title)) ? $category->meta_title : $category->title . ' | ' . nova_get_setting_translate('site_name')}}">
+    <meta name="twitter:description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc)}}">
     <meta name="twitter:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}">
     <link rel="canonical" href="{{url()->current()}}" />
+
     {!! $category->schema !!}
 @endsection
 @section('content')
@@ -20,17 +21,54 @@
         <div class="container">
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{__('general.home')}}</a></li>
+                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble" itemscope itemtype="https://schema.org/BreadcrumbList">
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="{{route('home')}}"><span itemprop="name">{{__('general.home')}}</span></a>
+                            <meta itemprop="position" content="1" />
+                        </li>
                         @foreach($category->ancestors as $ancestor)
-                            <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors()->pluck('slug')->toArray(), $ancestor->slug)])}}">{{$ancestor->name}}</a></li>
+                            <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors()->pluck('slug')->toArray(), $ancestor->slug)])}}"><span itemprop="name">{{$ancestor->name}}</span></a>
+                                <meta itemprop="position" content="{{$loop->iteration + 1}}" />
+                            </li>
                         @endforeach
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{$category->name}}</li>
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page"><span itemprop="name">{{$category->name}}</span>
+                            <meta itemprop="position" content="{{count($category->ancestors) + 2}}" />
+                        </li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
+
+    @if(count($subscribeVendors))
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="position-relative" style="direction: ltr">
+                    <div class="js-slick-carousel u-slick u-slick--gutters-0 position-static overflow-hidden u-slick-overflow-visble pb-5 pt-2 px-1" data-pagi-classes="text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-3 pt-1"
+                         data-slides-show="6" data-slides-scroll="1"
+                         data-responsive='[{"breakpoint": 1400,"settings": {"slidesToShow": 5}}, {"breakpoint": 1200,"settings": {"slidesToShow": 3}}, {"breakpoint": 992,"settings": {"slidesToShow": 2}}, {"breakpoint": 768,"settings": {"slidesToShow": 2}}, {"breakpoint": 554,"settings": {"slidesToShow": 2}}]'>
+                        @foreach($subscribeVendors as $subscribeVendor)
+                            <div class="js-slide products-group img-logos-new">
+                                <div class="mb-2">
+                                    <a href="{{ route('vendor.show', [$subscribeVendor->slug]) }}" class="d-block text-center">
+                                        <img class="img-fluid img-logos-new" style="height: 50px !important;"
+                                             src="{{ $subscribeVendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}"
+                                             alt="{{ $subscribeVendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt'] }}"
+                                             title="{{ $subscribeVendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title'] }}">
+                                    </a>
+                                    <label class="text-gray-100">{{$subscribeVendor->name}}</label>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <div class="mb-6 bg-md-transparent">
         <div class="container mb-8">
             <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
@@ -40,7 +78,8 @@
         <form method="get" action="{{url()->current()}}">
         <div class="container">
             <div class="row mb-8 rtl">
-                <div class="col-xl-3 col-wd-2gdot5">
+                <div class="show--filter d-block d-lg-none d-xl-none"> Show Filter <i class="fa fa-search"></i> </div>
+                <div class="col-xl-3 col-wd-2gdot5 d-none d-lg-block d-xl-block hidden--search--filter">
                     @if(!is_company())
                     <div class="mb-6">
                         <div class="range-slider bg-gray-3 p-3">
@@ -182,6 +221,9 @@
                     if ($('#is_price').is(':checked')) {
                         href += '&filter[is_price]=' + $('#is_price').val();
                     }
+                    if ($('#is_delivery').is(':checked')) {
+                        href += '&filter[is_delivery]=' + $('#is_delivery').val();
+                    }
                     if ($('#price_range').val()) {
                         href += '&filter[price]=' + $('#price_range').val();
                     }
@@ -203,13 +245,16 @@
                 });
                 $(document).on('click', '#city_submit', function () {
                     filterResults();
-                })
+                });
                 $(document).on('change', '#sort_select', function () {
                     filterResults();
-                })
+                });
                 $(document).on('change', '#is_price', function () {
                     filterResults();
-                })
+                });
+                $(document).on('change', '#is_delivery', function () {
+                    filterResults();
+                });
             });
         });
     </script>

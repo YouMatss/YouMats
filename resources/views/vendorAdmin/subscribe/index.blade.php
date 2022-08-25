@@ -29,27 +29,30 @@
                 <div class="col-md-4 mb-2">
                     <form action="{{route('vendor.subscribe.upgrade')}}" method="get" enctype="multipart/form-data">
                         <input type="hidden" name="membership_id" value="{{$membership->id}}">
-                        <div class="card">
+                        <div class="card card_pay_m">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <p><strong>{{$membership->name . ' (' . $membership->price . ' ' . getCurrency('symbol') . ')'}}</strong></p>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <span>{!! $membership->desc !!}</span>
-                                    </div>
+                                  <div class="style_box_pay">
+                                      <div class="col-md-12">
+                                          <p><strong>{{$membership->name}}</strong></p>
+                                          <p>{{$membership->price . ' ' . getCurrency('symbol')}}</p>
+                                      </div>
+                                      <div class="col-md-12">
+                                          <span>{!! $membership->desc !!}</span>
+                                      </div>
 {{--                                    @if($current_subscribe_id == $membership->id)--}}
 {{--                                    <div class="col-md-12">--}}
 {{--                                        <label class="label label-success">{{__('vendorAdmin.already_subscribed')}}</label>--}}
 {{--                                    </div>--}}
 {{--                                    @endif--}}
-                                    <div class="col-md-12 mt-2">
-                                        @if($current_subscribe_id == $membership->id)
-                                            <button type="submit" class="btn btn-warning" form="cancel_subscribe">{{__('vendorAdmin.cancel_subscribe')}}</button>
-                                        @else
-                                            <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.subscribe_now')}}</button>
-                                        @endif
-                                    </div>
+                                      <div class="col-md-12 mt-2">
+                                          @if($current_subscribe_id == $membership->id)
+                                              <button type="submit" class="btn btn-warning" form="cancel_subscribe">{{__('vendorAdmin.cancel_subscribe')}}</button>
+                                          @else
+                                              <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.subscribe_now')}}</button>
+                                          @endif
+                                      </div>
+                                  </div>
                                 </div>
                             </div>
                         </div>

@@ -62,7 +62,8 @@ if (!function_exists('getCityNameById')) {
 
 if (!function_exists('cartOrChat')) {
     function cartOrChat($product, $view_page = true) {
-        $chat = '<div><a target="_blank" href="https://wa.me/'. nova_get_setting('phone') .'?text='.$product->whatsapp_message().'"
+//        href="https://wa.me/'. nova_get_setting('phone') .'?text='.$product->whatsapp_message().'"
+        $chat = '<div><a target="_blank" href="https://wa.me/+966'.$product->phone().'"
                     class="cart-chat-category btn btn-primary transition-3d-hover">
                         <i class="fa fa-comments"></i> &nbsp;' . __("general.chat_button") . '
                     </a>
@@ -131,8 +132,8 @@ if (!function_exists('cartOrChat')) {
 
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company()) {
-                return $cart;
-            } elseif(!($product->vendor->current_subscribe && in_array($product->vendor->current_subscribe->membership_id, [env('INDIVIDUAL_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))) {
+                return $cart . $chat;
+            } elseif(!(optional($product->vendor)->current_subscribe && in_array(optional($product->vendor)->current_subscribe->membership_id, [env('INDIVIDUAL_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))) {
                 return $view;
             } elseif($product->type == 'product' && $product->price > 0 && $product->delivery) {
                 if($product->stock && $product->stock < $product->min_quantity) {
