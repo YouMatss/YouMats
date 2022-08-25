@@ -3,6 +3,7 @@
 namespace Maher\GenerateProducts;
 
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class GenerateProducts extends Field
 {
@@ -38,7 +39,7 @@ class GenerateProducts extends Field
     /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param  NovaRequest  $request
      * @param  string  $requestAttribute
      * @param  object  $model
      * @param  string  $attribute
@@ -47,7 +48,7 @@ class GenerateProducts extends Field
     protected function fillAttributeFromRequest($request, $requestAttribute, $model, $attribute)
     {
 //        if ($request->exists($requestAttribute)) {
-            $model->template = $request->$requestAttribute;
+            $model->template = json_decode($request->$requestAttribute, true);
 //        }
     }
 

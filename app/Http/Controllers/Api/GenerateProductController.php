@@ -16,7 +16,7 @@ class GenerateProductController extends Controller
         }
         if((!is_null($model_id) && $model_id != 'null')) {
             $model = GenerateProduct::where('id', $model_id)->firstorfail(['template']);
-            $data['current'] = json_decode($model->template);
+            $data['current'] = $model->template;
         }
         return response()->json($data);
     }
