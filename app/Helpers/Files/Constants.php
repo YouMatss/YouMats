@@ -46,7 +46,10 @@ define('REQUIRED_NUMERIC_VALIDATION', ['required', 'numeric']);
 define('NULLABLE_NUMERIC_VALIDATION', ['nullable', 'numeric']);
 
 // Password
+define('REQUIRED_PASSWORD_VALIDATION', ['required', 'string', 'min:8', 'confirmed']);
 define('NULLABLE_PASSWORD_VALIDATION', ['nullable', 'string', 'min:8', 'confirmed']);
+define('REQUIRED_PASSWORD_NOT_CONFIRMED_VALIDATION', ['required', 'string', 'min:8']);
+
 
 // Image
 define('REQUIRED_IMAGE_VALIDATION', ['required', 'image', 'mimes:jpg,jpeg,png,gif,svg,webp', 'max:2048']);

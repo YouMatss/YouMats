@@ -2,12 +2,15 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\GenerateProductsAction;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Maher\GenerateProducts\GenerateProducts;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
+use Pdmfc\NovaFields\ActionButton;
 use Whitecube\NovaFlexibleContent\Flexible;
 use ZiffDavis\Nova\Nestedset\Fields\NestedsetSelect;
 
@@ -60,6 +63,12 @@ class GenerateProduct extends Resource
                 ->category('category')
                 ->endpoint('/api/loadData/{category}/model/{model}')
                 ->onlyOnForms(),
+
+            ActionButton::make('Generate')
+                ->action(GenerateProductsAction::class, $this->id)
+                ->text('Generate')
+                ->exceptOnForms()
+                ->showLoadingAnimation(),
         ];
     }
 
@@ -68,7 +77,7 @@ class GenerateProduct extends Resource
      * @param Request $request
      * @return bool
      */
-    public static function authorizedToCreate(Request $request): bool
+    public static function authorizedToCreate(Request $request)
     {
         return true;
     }
@@ -114,6 +123,11 @@ class GenerateProduct extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new GenerateProductsAction)
+                ->confirmText('Are you sure you want to generate this products?')
+                ->confirmButtonText('Generate')
+                ->cancelButtonText("Don't generate"),
+        ];
     }
 }
