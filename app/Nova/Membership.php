@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Davidpiesse\NovaToggle\Toggle;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Currency;
@@ -42,6 +43,9 @@ class Membership extends Resource
                 ->rules(REQUIRED_NUMERIC_VALIDATION)
                 ->min(0)
                 ->step(0.05),
+
+            Toggle::make('Active', 'status')
+                ->falseColor('#bacad6')->editableIndex(),
         ];
     }
 

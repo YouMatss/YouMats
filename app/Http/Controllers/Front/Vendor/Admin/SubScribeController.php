@@ -33,7 +33,7 @@ class SubScribeController extends Controller
 
     public function index() {
         $data['vendor'] = Auth::guard('vendor')->user();
-        $data['memberships'] = Membership::all();
+        $data['memberships'] = Membership::where('status', true)->get();
         $data['current_subscribe_id'] = $data['vendor']->current_subscribe->membership_id ?? null;
 
         return view('vendorAdmin.subscribe.index')->with($data);
