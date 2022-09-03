@@ -6,12 +6,15 @@ use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Translatable\HasTranslations;
 
 class GenerateProduct extends Model
 {
-    use HasFactory, UnicodeJsonColumn;
+    use HasFactory, UnicodeJsonColumn, HasTranslations;
 
     protected $guarded = ['id'];
+
+    public $translatable = ['short_desc', 'desc'];
 
     protected $casts = [
         'template' => 'json'

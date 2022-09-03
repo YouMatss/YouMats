@@ -4,7 +4,7 @@
 {{--            src="https://secure.gravatar.com/avatar/{{ md5(\Illuminate\Support\Str::lower($user->email)) }}?size=512"--}}
 {{--            class="rounded-full w-8 h-8 mr-3"--}}
 {{--        />--}}
-        <img src="{{ asset('favicon.ico') }}" class="rounded-full w-8 h-8 mr-3" />
+        <img src="{{ Storage::url(nova_get_setting('favicon')) }}" class="rounded-full w-8 h-8 mr-3" />
     @endisset
 
     <span class="text-90">

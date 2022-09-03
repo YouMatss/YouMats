@@ -26,6 +26,9 @@ class CreateGenerateProductsTable extends Migration
 
             $table->json('template');
 
+            $table->longText('desc')->nullable();
+            $table->longText('short_desc')->nullable();
+
             $table->timestamps();
         });
     }

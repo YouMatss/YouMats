@@ -27,7 +27,7 @@
             <div class="font-size-12 productDesc px-2 pb-2 mb-2">{!! $product->short_desc !!}</div>
 {{--            <div class="text-gray-20 mb-2 font-size-12">{{__('general.sku')}}: {{$product->SKU}}</div>--}}
             <div style="min-height: 100px" class="custom-price-border px-2 pb-2 mb-2">
-                @if(auth()->guard('admin')->check() && isset($product->vendor))
+                @if(/*auth()->guard('admin')->check() && */isset($product->vendor))
                     <div class="text-gray-20 font-size-12" title="{{$product->vendor->name}}">{{__('general.vendor')}}: {{\Str::limit($product->vendor->name, 20)}}</div>
                 @endif
                 <div class="font-size-14">

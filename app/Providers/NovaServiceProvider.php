@@ -330,6 +330,17 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'logo' => $combinedName
                     ];
                 })->rules(NULLABLE_IMAGE_VALIDATION),
+            Image::make(__('Favicon'), 'favicon')
+                ->store(function(Request $request, $model) {
+                    $file = $request->favicon->getClientOriginalName();
+                    $fileName = pathinfo($file, PATHINFO_FILENAME);
+                    $extension = pathinfo($file, PATHINFO_EXTENSION);
+                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
+                    $request->favicon->storeAs('/', $combinedName, 'public');
+                    return [
+                        'favicon' => $combinedName
+                    ];
+                })->rules(NULLABLE_IMAGE_VALIDATION),
             Image::make(__('Slider Background'), 'slider_background')
                 ->maxWidth(140)
                 ->store(function(Request $request, $model) {

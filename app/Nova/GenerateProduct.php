@@ -11,6 +11,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Maher\GenerateProducts\GenerateProducts;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use Pdmfc\NovaFields\ActionButton;
+use Waynestate\Nova\CKEditor;
 use Whitecube\NovaFlexibleContent\Flexible;
 use ZiffDavis\Nova\Nestedset\Fields\NestedsetSelect;
 
@@ -69,6 +70,14 @@ class GenerateProduct extends Resource
                 ->text('Generate')
                 ->exceptOnForms()
                 ->showLoadingAnimation(),
+
+            CKEditor::make('Short Description', 'short_desc')
+                ->hideFromIndex()->translatable()
+                ->rules(NULLABLE_TEXT_VALIDATION),
+
+            CKEditor::make('Description', 'desc')
+                ->hideFromIndex()->translatable()
+                ->rules(NULLABLE_TEXT_VALIDATION),
         ];
     }
 

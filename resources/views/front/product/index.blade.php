@@ -132,7 +132,7 @@
 
                         <p>{!! $product->short_desc !!}</p>
 {{--                        <div><strong>{{__('general.sku')}}</strong>: {{$product->SKU}}</div>--}}
-                        @if(auth()->guard('admin')->check() && isset($product->vendor->name))
+                        @if(/*auth()->guard('admin')->check() && */isset($product->vendor->name))
                             <div><strong>{{__('general.vendor')}}</strong>: {{$product->vendor->name}}</div>
                         @endif
                     </div>
