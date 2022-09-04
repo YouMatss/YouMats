@@ -3,11 +3,14 @@
 namespace App\Nova;
 
 use App\Nova\Actions\GenerateProductsAction;
+use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Panel;
 use Maher\GenerateProducts\GenerateProducts;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use Pdmfc\NovaFields\ActionButton;
@@ -78,6 +81,19 @@ class GenerateProduct extends Resource
             CKEditor::make('Description', 'desc')
                 ->hideFromIndex()->translatable()
                 ->rules(NULLABLE_TEXT_VALIDATION),
+
+            (new Panel('Images', [
+                Medialibrary::make('Images', GENERATE_PRODUCT_PATH)->fields(function () {
+                    return [Text::make('File Name', 'file_name')->rules('required', 'min:2')];
+                })->rules('array', 'nullable')
+                    ->creationRules('min:1')
+                    ->attachRules(NULLABLE_IMAGE_VALIDATION)
+                    ->accept('image/*')
+                    ->autouploading()->sortable()->attachOnDetails()
+                    ->hideFromIndex()
+                    ->croppable('cropper'),
+            ])),
+
         ];
     }
 

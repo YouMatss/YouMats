@@ -8,6 +8,7 @@ define("CATEGORY_PATH", 'category');
 define("CATEGORY_COVER", 'category_cover');
 define("TEAM_PATH", 'team');
 define("PRODUCT_PATH", 'product');
+define("GENERATE_PRODUCT_PATH", 'generate_product');
 define("COMPANY_PATH", 'company');
 define("VENDOR_PATH", 'vendor');
 define("VENDOR_LOGO", 'vendor_logo');

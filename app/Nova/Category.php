@@ -95,6 +95,7 @@ class Category extends Resource
             Toggle::make(__('Featured'), 'isFeatured')->falseColor('#bacad6')->editableIndex(),
             Toggle::make(__('Top Category'), 'topCategory')->falseColor('#bacad6')->editableIndex(),
             Toggle::make(__('Show in footer'), 'show_in_footer')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Hide Availability & Stock'), 'hide_availability')->falseColor('#bacad6')->hideFromIndex(),
 
             new Panel('Template For Title', [
                 Heading::make('Instructions: + => for input, - => for dropdown, Ex for dropdown: -Orientation-Horizontal-Vertical'),

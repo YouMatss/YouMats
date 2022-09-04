@@ -6,11 +6,13 @@ use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 
-class GenerateProduct extends Model
+class GenerateProduct extends Model implements HasMedia
 {
-    use HasFactory, UnicodeJsonColumn, HasTranslations;
+    use HasFactory, UnicodeJsonColumn, HasTranslations, InteractsWithMedia;
 
     protected $guarded = ['id'];
 
@@ -19,6 +21,10 @@ class GenerateProduct extends Model
     protected $casts = [
         'template' => 'json'
     ];
+
+    public function registerAllMediaConversions(): void {
+        $this->addMediaConversion('cropper')->performOnCollections(GENERATE_PRODUCT_PATH);
+    }
 
     /**
      * @return BelongsTo

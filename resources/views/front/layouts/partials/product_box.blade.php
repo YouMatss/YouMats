@@ -30,22 +30,24 @@
                 @if(/*auth()->guard('admin')->check() && */isset($product->vendor))
                     <div class="text-gray-20 font-size-12" title="{{$product->vendor->name}}">{{__('general.vendor')}}: {{\Str::limit($product->vendor->name, 20)}}</div>
                 @endif
-                <div class="font-size-14">
-                    @if(is_company())
-                        <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
-                    @else
-                        @if($product->stock && $product->stock >= $product->min_quantity)
+                @if(!$product->category->hide_availability)
+                    <div class="font-size-14">
+                        @if(is_company())
                             <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
                         @else
-                            <span class="text-red font-weight-bold">{{__('product.out_of_stock')}}</span>
+                            @if($product->stock && $product->stock >= $product->min_quantity)
+                                <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
+                            @else
+                                <span class="text-red font-weight-bold">{{__('product.out_of_stock')}}</span>
+                            @endif
                         @endif
-                    @endif
-                </div>
-                @if(!is_company())
-                    @if(isset($product->delivery))
-                        <div>{{__('product.delivery_to_your_city_in_category')}}: <b>{{getCurrentCityName()}}</b></div>
-                    @else
-                        <div style="color:#ff0000;">{{__('product.no_delivery_in_category')}}: {{getCurrentCityName()}}</div>
+                    </div>
+                    @if(!is_company())
+                        @if(isset($product->delivery))
+                            <div>{{__('product.delivery_to_your_city_in_category')}}: <b>{{getCurrentCityName()}}</b></div>
+                        @else
+                            <div style="color:#ff0000;">{{__('product.no_delivery_in_category')}}: {{getCurrentCityName()}}</div>
+                        @endif
                     @endif
                 @endif
                 <div class="product-price">
