@@ -2,12 +2,19 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\GenerateProductsAction;
+use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Panel;
 use Maher\GenerateProducts\GenerateProducts;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
+use Pdmfc\NovaFields\ActionButton;
+use Waynestate\Nova\CKEditor;
 use Whitecube\NovaFlexibleContent\Flexible;
 use ZiffDavis\Nova\Nestedset\Fields\NestedsetSelect;
 
@@ -60,6 +67,33 @@ class GenerateProduct extends Resource
                 ->category('category')
                 ->endpoint('/api/loadData/{category}/model/{model}')
                 ->onlyOnForms(),
+
+            ActionButton::make('Generate')
+                ->action(GenerateProductsAction::class, $this->id)
+                ->text('Generate')
+                ->exceptOnForms()
+                ->showLoadingAnimation(),
+
+            CKEditor::make('Short Description', 'short_desc')
+                ->hideFromIndex()->translatable()
+                ->rules(NULLABLE_TEXT_VALIDATION),
+
+            CKEditor::make('Description', 'desc')
+                ->hideFromIndex()->translatable()
+                ->rules(NULLABLE_TEXT_VALIDATION),
+
+            (new Panel('Images', [
+                Medialibrary::make('Images', GENERATE_PRODUCT_PATH)->fields(function () {
+                    return [Text::make('File Name', 'file_name')->rules('required', 'min:2')];
+                })->rules('array', 'nullable')
+                    ->creationRules('min:1')
+                    ->attachRules(NULLABLE_IMAGE_VALIDATION)
+                    ->accept('image/*')
+                    ->autouploading()->sortable()->attachOnDetails()
+                    ->hideFromIndex()
+                    ->croppable('cropper'),
+            ])),
+
         ];
     }
 
@@ -68,7 +102,7 @@ class GenerateProduct extends Resource
      * @param Request $request
      * @return bool
      */
-    public static function authorizedToCreate(Request $request): bool
+    public static function authorizedToCreate(Request $request)
     {
         return true;
     }
@@ -114,6 +148,11 @@ class GenerateProduct extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new GenerateProductsAction)
+                ->confirmText('Are you sure you want to generate this products?')
+                ->confirmButtonText('Generate')
+                ->cancelButtonText("Don't generate"),
+        ];
     }
 }

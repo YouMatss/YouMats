@@ -60,10 +60,10 @@
                 <div class="position-relative position-md-static px-md-6">
                     <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0" id="pills-tab-8" role="tablist">
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link active" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">{{ __('vendor.information') }}</a>
+                            <a class="nav-link" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">{{ __('vendor.information') }}</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                            <a class="nav-link" id="Jpills-two-example1-tab" data-toggle="pill" href="#Jpills-two-example1" role="tab" aria-controls="Jpills-two-example1" aria-selected="false">{{ __('vendor.products') }}</a>
+                            <a class="nav-link active" id="Jpills-two-example1-tab" data-toggle="pill" href="#Jpills-two-example1" role="tab" aria-controls="Jpills-two-example1" aria-selected="false">{{ __('vendor.products') }}</a>
                         </li>
                         <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
                             <a class="nav-link" id="Jpills-three-example1-tab" data-toggle="pill" href="#Jpills-three-example1" role="tab" aria-controls="Jpills-three-example1" aria-selected="false">{{ __('vendor.branches') }}</a>
@@ -74,7 +74,7 @@
             <div class="col-md-12">
                 <div class="borders-radius-17 border p-4 mt-4 mt-md-0 px-lg-10 py-lg-9 mb-5">
                     <div class="tab-content" id="Jpills-tabContent">
-                    <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
+                    <div class="tab-pane fade" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
                         <div class="block_info_vendor">
                             <div class="row">
                                 <div class="col-md-12 mb-5">
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
+                    <div class="tab-pane fade active show" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
                         @if(count($products) > 0)
                             <ul class="row list-unstyled products-group no-gutters">
                                 @foreach($products as $product)

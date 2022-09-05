@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d11760d274b5014a78c76a880a0fdd93",
+    "content-hash": "58e6613ff8c71d45989d151fd8f3b6cb",
     "packages": [
         {
             "name": "adamcmoore/nova-gmap",
@@ -6512,6 +6512,59 @@
                 "source": "https://github.com/paragonie/sodium_compat/tree/v1.17.1"
             },
             "time": "2022-03-23T19:32:04+00:00"
+        },
+        {
+            "name": "pdmfc/nova-action-button",
+            "version": "v0.7.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pdmfc/nova-action-button.git",
+                "reference": "f938ea0961589aec1954468ad1eb48751a7fd7b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pdmfc/nova-action-button/zipball/f938ea0961589aec1954468ad1eb48751a7fd7b5",
+                "reference": "f938ea0961589aec1954468ad1eb48751a7fd7b5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pdmfc\\NovaFields\\ActionButtonFieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pdmfc\\NovaFields\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "João Santos",
+                    "email": "joao.santos@pdmfc.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel Nova field to run actions.",
+            "homepage": "https://github.com/pdmfc/nova-action-button",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/pdmfc/nova-action-button/issues",
+                "source": "https://github.com/pdmfc/nova-action-button/tree/v0.7.4"
+            },
+            "time": "2021-10-09T13:32:17+00:00"
         },
         {
             "name": "phoenix-lib/nova-nested-tree-attach-many",
