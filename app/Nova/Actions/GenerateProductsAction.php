@@ -25,7 +25,7 @@ class GenerateProductsAction extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        if (Hash::check('YouMats@102030', $fields['password'])) {
+        if (Hash::check('YouMats@50', $fields['password'])) {
             foreach ($models as $model) {
                 $this->handleModels($model);
             }

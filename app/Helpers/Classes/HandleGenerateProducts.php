@@ -5,6 +5,7 @@ namespace App\Helpers\Classes;
 
 use App\Models\Product;
 use Illuminate\Support\Str;
+use Laravel\Nova\Actions\Action;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Trait HandleGenerateProducts
@@ -26,6 +27,8 @@ Trait HandleGenerateProducts
         ];
 
         $arr = $this->combine($sentences);
+
+        dd($arr);
         foreach ($arr as $row) {
 
             $product = Product::create([
@@ -46,15 +49,14 @@ Trait HandleGenerateProducts
             ]);
 
             //Add images to the product
-//            if(count($model->getMedia(GENERATE_PRODUCT_PATH))) {
-//                foreach($model->getMedia(GENERATE_PRODUCT_PATH) as $image) {
-//                    $product->addMediaFromUrl($image->getUrl())->toMediaCollection(PRODUCT_PATH);
-//                }
-//            }
+            if(count($model->getMedia(GENERATE_PRODUCT_PATH))) {
+                foreach($model->getMedia(GENERATE_PRODUCT_PATH) as $image) {
+                    $product->addMediaFromUrl($image->getUrl())->toMediaCollection(PRODUCT_PATH);
+                }
+            }
 
         }
     }
-
 
     private function reformat($data) {
         $formattedData = [];
@@ -62,24 +64,28 @@ Trait HandleGenerateProducts
         $maxLength = 1;
 
         foreach ($this->locales as $locale) {
-            foreach ($data[$locale] as $item) {
+            foreach ($data[$locale] as $key => $item) {
                 $tempValue = explode('-', $item['value']);
                 if($maxLength < count($tempValue)) {
                     $maxLength = count($tempValue);
                 }
-                $values[$locale][] = $tempValue;
+                $values[$locale][$key]['order'] = $item['order'];
+                $values[$locale][$key]['value'] = $tempValue;
             }
         }
 
         foreach ($this->locales as $locale) {
             foreach ($values[$locale] as $key => $value) {
-                if(count($value) < $maxLength) {
-                    $formattedData[$locale][$key] = $value;
-                    for ($i = count($value); $i < $maxLength; $i++) {
-                        $formattedData[$locale][$key][$i] = '';
+                if(!empty($value[0])) {
+                    $formattedData[$locale][$key]['order'] = $key;
+                    if(count($value) < $maxLength) {
+                        $formattedData[$locale][$key]['value'] = $value;
+                        for ($i = count($value); $i < $maxLength; $i++) {
+                            $formattedData[$locale][$key]['value'][$i] = '';
+                        }
+                    } else {
+                        $formattedData[$locale][$key]['value'] = $value;
                     }
-                } else {
-                    $formattedData[$locale][$key] = $value;
                 }
             }
         }
@@ -92,24 +98,27 @@ Trait HandleGenerateProducts
 
     private function combine($arr) {
         $result = [];
-
         for ($i = 0; $i < count($arr['name']['ar']); $i++) {
             $result[$i]['name']['ar'] = $arr['name']['ar'][$i];
             $result[$i]['name']['en'] = $arr['name']['en'][$i];
-            $result[$i]['desc']['ar'] = $arr['desc']['ar'][$i];
-            $result[$i]['desc']['en'] = $arr['desc']['en'][$i];
-            $result[$i]['short_desc']['ar'] = $arr['short_desc']['ar'][$i];
-            $result[$i]['short_desc']['en'] = $arr['short_desc']['en'][$i];
+//            $result[$i]['desc']['ar'] = $arr['desc']['ar'][$i];
+//            $result[$i]['desc']['en'] = $arr['desc']['en'][$i];
+//            $result[$i]['short_desc']['ar'] = $arr['short_desc']['ar'][$i];
+//            $result[$i]['short_desc']['en'] = $arr['short_desc']['en'][$i];
         }
         return $result;
     }
 
-    private function getOrderedValues($template) {
+    private function getOrderedValues($template, $array = false) {
         $result = [];
         foreach ($this->locales as $locale) {
             foreach ($template[$locale] as $row) {
-                if($row['order'])
-                    $result[$locale][$row['order']] = $row['value'];
+                if($row['order']) {
+                    if($array)
+                        $result[$locale][$row['order']] = explode('-', $row['value']);
+                    else
+                        $result[$locale][$row['order']] = $row['value'];
+                }
             }
         }
         return $result;
