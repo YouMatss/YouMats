@@ -46,8 +46,10 @@ Trait HandleGenerateProducts
             ]);
 
             //Add images to the product
-//            foreach($model->getMedia(GENERATE_PRODUCT_PATH) as $image) {
-//                $product->addMediaFromUrl($image->getUrl())->toMediaCollection(PRODUCT_PATH);
+//            if(count($model->getMedia(GENERATE_PRODUCT_PATH))) {
+//                foreach($model->getMedia(GENERATE_PRODUCT_PATH) as $image) {
+//                    $product->addMediaFromUrl($image->getUrl())->toMediaCollection(PRODUCT_PATH);
+//                }
 //            }
 
         }
