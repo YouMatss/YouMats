@@ -6,13 +6,10 @@ use App\Helpers\Classes\HandleGenerateProducts;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Hash;
-use InvalidArgumentException;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
-use Laravel\Nova\Fields\Password;
 
-class GenerateProductsAction extends Action
+class GenerateProductsTestAction extends Action
 {
     use InteractsWithQueue, Queueable, HandleGenerateProducts;
 
@@ -25,14 +22,8 @@ class GenerateProductsAction extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        if (Hash::check(env('GENERATE_PRODUCTS_PASSWORD', 'YouMats@123'), $fields['password'])) {
-            foreach ($models as $model) {
-                $this->handleModels($model);
-            }
-
-            return Action::message('Products Generated Successfully');
-        } else {
-            throw new InvalidArgumentException('The given password is invalid.');
+        foreach ($models as $model) {
+            $this->handleModels($model, true);
         }
     }
 
@@ -43,8 +34,7 @@ class GenerateProductsAction extends Action
      */
     public function fields()
     {
-        return [
-            Password::make('Password')->rules(REQUIRED_PASSWORD_NOT_CONFIRMED_VALIDATION),
-        ];
+        return [];
     }
+
 }

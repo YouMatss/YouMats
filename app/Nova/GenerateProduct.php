@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Nova\Actions\GenerateProductsAction;
+use App\Nova\Actions\GenerateProductsTestAction;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -71,6 +72,12 @@ class GenerateProduct extends Resource
             ActionButton::make('Generate')
                 ->action(GenerateProductsAction::class, $this->id)
                 ->text('Generate')
+                ->exceptOnForms()
+                ->showLoadingAnimation(),
+
+            ActionButton::make('Test Generate')
+                ->action(GenerateProductsTestAction::class, $this->id)
+                ->text('Test')
                 ->exceptOnForms()
                 ->showLoadingAnimation(),
 
@@ -153,6 +160,7 @@ class GenerateProduct extends Resource
                 ->confirmText('Are you sure you want to generate this products?')
                 ->confirmButtonText('Generate')
                 ->cancelButtonText("Don't generate"),
+            new GenerateProductsTestAction
         ];
     }
 }
