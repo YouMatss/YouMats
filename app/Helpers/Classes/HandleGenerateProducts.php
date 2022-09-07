@@ -5,6 +5,7 @@ namespace App\Helpers\Classes;
 
 use App\Models\Product;
 use Illuminate\Support\Str;
+use Laravel\Nova\Actions\Action;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Trait HandleGenerateProducts
@@ -18,14 +19,19 @@ Trait HandleGenerateProducts
         $this->locales = LaravelLocalization::getSupportedLanguagesKeys();
     }
 
-    private function handleModels($model) {
+    private function handleModels($model, $test_mode = false) {
         $sentences = [
             'name' => (new GenerateSentence())->printf($this->reformat($model->template)),
             'desc' => (new GenerateSentence())->printf($this->reformat($this->handleDesc($model, 'desc')), true),
             'short_desc' => (new GenerateSentence())->printf($this->reformat($this->handleDesc($model, 'short_desc')), true)
         ];
 
-        $arr = $this->combine($sentences);
+        $arr = $this->replaceRealValues($model, $this->combine($sentences));
+
+        if($test_mode) {
+            dd($arr);
+        }
+
         foreach ($arr as $row) {
 
             $product = Product::create([
@@ -45,16 +51,17 @@ Trait HandleGenerateProducts
                 'sort' => 0
             ]);
 
-            //Add images to the product
-//            if(count($model->getMedia(GENERATE_PRODUCT_PATH))) {
-//                foreach($model->getMedia(GENERATE_PRODUCT_PATH) as $image) {
-//                    $product->addMediaFromUrl($image->getUrl())->toMediaCollection(PRODUCT_PATH);
-//                }
-//            }
+            try {
+                //Add images to the product
+                if(count($model->getMedia(GENERATE_PRODUCT_PATH))) {
+                    foreach($model->getMedia(GENERATE_PRODUCT_PATH) as $image) {
+                        $product->addMediaFromUrl($image->getUrl())->toMediaCollection(PRODUCT_PATH);
+                    }
+                }
+            } catch (\Exception $e) {}
 
         }
     }
-
 
     private function reformat($data) {
         $formattedData = [];
@@ -62,24 +69,28 @@ Trait HandleGenerateProducts
         $maxLength = 1;
 
         foreach ($this->locales as $locale) {
-            foreach ($data[$locale] as $item) {
+            foreach ($data[$locale] as $key => $item) {
                 $tempValue = explode('-', $item['value']);
                 if($maxLength < count($tempValue)) {
                     $maxLength = count($tempValue);
                 }
-                $values[$locale][] = $tempValue;
+                $values[$locale][$key]['order'] = $item['order'];
+                $values[$locale][$key]['value'] = $tempValue;
             }
         }
 
         foreach ($this->locales as $locale) {
-            foreach ($values[$locale] as $key => $value) {
-                if(count($value) < $maxLength) {
-                    $formattedData[$locale][$key] = $value;
-                    for ($i = count($value); $i < $maxLength; $i++) {
-                        $formattedData[$locale][$key][$i] = '';
+            foreach ($values[$locale] as $key => $row) {
+                if(!empty($row['value'][0])) {
+                    $formattedData[$locale][$key]['order'] = $row['order'];
+                    if(count($row['value']) < $maxLength) {
+                        $formattedData[$locale][$key]['value'] = $row['value'];
+                        for ($i = count($row['value']); $i < $maxLength; $i++) {
+                            $formattedData[$locale][$key]['value'][$i] = '';
+                        }
+                    } else {
+                        $formattedData[$locale][$key]['value'] = $row['value'];
                     }
-                } else {
-                    $formattedData[$locale][$key] = $value;
                 }
             }
         }
@@ -92,7 +103,6 @@ Trait HandleGenerateProducts
 
     private function combine($arr) {
         $result = [];
-
         for ($i = 0; $i < count($arr['name']['ar']); $i++) {
             $result[$i]['name']['ar'] = $arr['name']['ar'][$i];
             $result[$i]['name']['en'] = $arr['name']['en'][$i];
@@ -104,12 +114,52 @@ Trait HandleGenerateProducts
         return $result;
     }
 
-    private function getOrderedValues($template) {
+    private function replaceRealValues($model, $arr) {
+        $orderedValues = $this->getOrderedValues($model->template, true);
+        $result = [];
+        foreach ($arr as $key => $row) {
+            $result[$key] = $this->replaceValue($row, $orderedValues);
+        }
+        return $result;
+    }
+
+    private function replaceValue($row, $values) {
+        $indexes = [];
+        $newSentence = [];
+        foreach ($row as $itemName => $item) {
+            foreach ($item as $locale => $value) {
+                $sentence = explode('#', $value);
+                $newSentence[$itemName][$locale] = '';
+                foreach ($sentence as $word) {
+                    if ($locale == 'ar' && $itemName == 'name' && preg_match('/^[0-9.]+$/', $word)) {
+                        $tempIndex = explode('.', $word);
+                        $indexes[$tempIndex[0]] = $tempIndex[1];
+                        $newSentence[$itemName][$locale] .= $values[$locale][$tempIndex[0]][$tempIndex[1]];
+                    } elseif ($locale != 'ar' && preg_match('/[0-9]$/', $word)) {
+                        $originalIndex = $word;
+                        $newSentence[$itemName][$locale] .= $values[$locale][$originalIndex][$indexes[$originalIndex]];
+                    } elseif ($locale == 'ar' && $itemName != 'name' && preg_match('/^[0-9.]+$/', $word)) {
+                        $originalIndex = explode('.', $word)[0];
+                        $newSentence[$itemName][$locale] .= $values[$locale][$originalIndex][$indexes[$originalIndex]];
+                    } else {
+                        $newSentence[$itemName][$locale] .= $word;
+                    }
+                }
+            }
+        }
+        return $newSentence;
+    }
+
+    private function getOrderedValues($template, $array = false) {
         $result = [];
         foreach ($this->locales as $locale) {
             foreach ($template[$locale] as $row) {
-                if($row['order'])
-                    $result[$locale][$row['order']] = $row['value'];
+                if($row['order']) {
+                    if($array)
+                        $result[$locale][$row['order']] = explode('-', $row['value']);
+                    else
+                        $result[$locale][$row['order']] = $row['value'];
+                }
             }
         }
         return $result;
@@ -119,12 +169,21 @@ Trait HandleGenerateProducts
         $orderedValues = $this->getOrderedValues($model->template);
         $result = [];
         foreach ($this->locales as $locale) {
-            foreach (explode('##', strip_tags($model->getTranslation($attr, $locale))) as $row) {
+            foreach (explode('##', strip_tags($model->getTranslation($attr, $locale))) as $key => $row) {
                 if(is_numeric($row)) {
-                    $result[$locale][]['value'] = $orderedValues[$locale][$row];
+                    $result[$locale][$key]['order'] = $row;
+                    $result[$locale][$key]['value'] = $orderedValues[$locale][$row];
                 } elseif(!empty($row)) {
-                    $result[$locale][]['value'] = $row;
+                    $result[$locale][$key]['order'] = '';
+                    $result[$locale][$key]['value'] = $row;
                 }
+            }
+            if(array_key_first($result[$locale]) != 0) {
+                $temp = [];
+                foreach ($result[$locale] as $key => $item) {
+                    $temp[$key - array_key_first($result[$locale])] = $item;
+                }
+                $result[$locale] = $temp;
             }
         }
         return $result;
