@@ -8,8 +8,10 @@ use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use Maher\GenerateProducts\GenerateProducts;
@@ -83,11 +85,11 @@ class GenerateProduct extends Resource
 
             CKEditor::make('Short Description', 'short_desc')
                 ->hideFromIndex()->translatable()
-                ->rules(NULLABLE_TEXT_VALIDATION),
+                ->rules(REQUIRED_TEXT_VALIDATION),
 
             CKEditor::make('Description', 'desc')
                 ->hideFromIndex()->translatable()
-                ->rules(NULLABLE_TEXT_VALIDATION),
+                ->rules(REQUIRED_TEXT_VALIDATION),
 
             (new Panel('Images', [
                 Medialibrary::make('Images', GENERATE_PRODUCT_PATH)->fields(function () {
@@ -100,6 +102,13 @@ class GenerateProduct extends Resource
                     ->hideFromIndex()
                     ->croppable('cropper'),
             ])),
+
+            new Panel('Search Keywords', [
+                Heading::make("Instructions: Set every keyword in one line"),
+                Textarea::make('Search Keywords')
+                    ->rules(NULLABLE_TEXT_VALIDATION)
+                    ->translatable(),
+            ]),
 
         ];
     }

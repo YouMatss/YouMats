@@ -46,6 +46,7 @@ Trait HandleGenerateProducts
                 'cost' => 0,
                 'stock' => 1000,
                 'SKU' => Str::sku('yt', '-'),
+                'search_keywords' => $model->search_keywords,
                 'active' => 0,
                 'slug' => Str::slug($row['name']['en'], '-') . rand(100, 999),
                 'sort' => 0
