@@ -250,22 +250,22 @@
                                                         </li>
                                                         @endif
                                                         <li class="u-has-submenu u-header-collapse__submenu">
-                                                                <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-2" data-target="#top-header-nav-2">
-                                                                    <span class="d-sm-inline-flex align-items-center">
-                                                                        <i class="fas fa-globe-americas mr-1 font-size-14"></i>
-                                                                        {{ LaravelLocalization::getCurrentLocaleNative() }}
-                                                                    </span>
-                                                                </a>
-                                                                <div id="top-header-nav-2" class="collapse" data-parent="#headerSidebarContent">
-                                                                    <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
-                                                                        <li>
-                                                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                                                                <a class="dropdown-item {{$localeCode}}" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">{{ $properties['native'] }}</a>
-                                                                            @endforeach
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
+                                                            <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-2" data-target="#top-header-nav-2">
+                                                                <span class="d-sm-inline-flex align-items-center">
+                                                                    <i class="fas fa-globe-americas mr-1 font-size-14"></i>
+                                                                    {{ LaravelLocalization::getCurrentLocaleNative() }}
+                                                                </span>
+                                                            </a>
+                                                            <div id="top-header-nav-2" class="collapse" data-parent="#headerSidebarContent">
+                                                                <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
+                                                                    <li>
+                                                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                                            <a class="dropdown-item {{$localeCode}}" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">{{ $properties['native'] }}</a>
+                                                                        @endforeach
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
 
                                                         @if(is_guest() && \Illuminate\Support\Facades\Session::get('userType'))
                                                         <li class="u-has-submenu u-header-collapse__submenu">
@@ -287,58 +287,44 @@
                                                         @endif
 
                                                         @if(Auth::guard('web')->check() && !Auth::guard('vendor')->check())
-                                                        <li class="u-has-submenu u-header-collapse__submenu">
-                                                            <div id="top-header-nav-5" class="collapse" data-parent="#headerSidebarContent">
-                                                                <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
-                                                                    <li>
-                                                                        <div class="d-flex align-items-center">
-                                                                            <!-- Language -->
-                                                                            <div class="position-relative">
-                                                                                <a id="profileDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#profileDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-                                                                                    <span class="d-sm-inline-flex align-items-center">
-                                                                                        <i class="ec ec-user mr-1"></i> {{auth('web')->user()->name}}
-                                                                                    </span>
-                                                                                </a>
-                                                                                <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
-                                                                                    <a class="dropdown-item" href="{{route('front.user.profile')}}">Profile</a>
-                                                                                    <form class="dropdown-item" style="cursor: pointer" action="{{route('logout')}}" method="POST">
-                                                                                        @csrf
-                                                                                        <button type="submit" class="dropdown-item">Logout</button>
-                                                                                    </form>
-                                                                                </div>
-                                                                            </div>
-                                                                            <!-- End Language -->
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>
+                                                            <li class="u-has-submenu u-header-collapse__submenu">
+                                                                <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-user" data-target="#top-header-nav-user">
+                                                                <span class="d-sm-inline-flex align-items-center">
+                                                                    <i class="ec ec-user mr-1 font-size-14"></i>
+                                                                    {{auth('web')->user()->name}}
+                                                                </span>
+                                                                </a>
+                                                                <div id="top-header-nav-user" class="collapse" data-parent="#headerSidebarContent">
+                                                                    <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
+                                                                        <li><a class="dropdown-item" href="{{route('front.user.profile')}}">{{__('general.profile')}}</a></li>
+                                                                        <li>
+                                                                            <form class="dropdown-item" style="cursor: pointer" action="{{route('logout')}}" method="POST">
+                                                                                @csrf
+                                                                                <button type="submit" class="dropdown-item" style="padding: 0 !important;">{{__('general.logout')}}</button>
+                                                                            </form>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
                                                         @endif
 
                                                         @if(Auth::guard('vendor')->check() && !Auth::guard('web')->check())
                                                             <li class="u-has-submenu u-header-collapse__submenu">
-                                                                <div id="top-header-nav-6" class="collapse" data-parent="#headerSidebarContent">
+                                                                <a class="u-header-collapse__nav-link u-header-collapse__nav-pointer collapsed" href="javascript:;" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="top-header-nav-vendor" data-target="#top-header-nav-vendor">
+                                                                    <span class="d-sm-inline-flex align-items-center">
+                                                                        <i class="ec ec-user mr-1 font-size-14"></i>
+                                                                        {{auth('vendor')->user()->name}}
+                                                                    </span>
+                                                                </a>
+                                                                <div id="top-header-nav-vendor" class="collapse" data-parent="#headerSidebarContent">
                                                                     <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
+                                                                        <li><a class="dropdown-item" href="{{ route('vendor.product.index') }}">{{__('general.profile')}}</a></li>
+                                                                        <li><a class="dropdown-item" href="{{ route('chat.vendor.conversations', [1]) }}">{{__('general.messages')}}</a></li>
                                                                         <li>
-                                                                            <div class="d-flex align-items-center">
-                                                                                <!-- Language -->
-                                                                                <div class="position-relative">
-                                                                                    <a id="profileDropdownInvoker2" data-toggle="dropdown" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#profileDropdown1" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-                                                                                        <span class="d-sm-inline-flex align-items-center">
-                                                                                            <i class="ec ec-user mr-1"></i> {{auth('vendor')->user()->name}}
-                                                                                        </span>
-                                                                                    </a>
-                                                                                    <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
-                                                                                        <a class="dropdown-item" href="{{ route('vendor.product.index') }}">{{__('general.profile')}}</a>
-                                                                                        <a class="dropdown-item" href="{{ route('chat.vendor.conversations', [1]) }}">{{__('general.messages')}}</a>
-                                                                                        <form class="dropdown-item" style="cursor: pointer" action="{{route('vendor.logout')}}" method="POST">
-                                                                                            @csrf
-                                                                                            <button type="submit" class="dropdown-item">{{__('general.logout')}}</button>
-                                                                                        </form>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <!-- End Language -->
-                                                                            </div>
+                                                                            <form class="dropdown-item" style="cursor: pointer" action="{{route('vendor.logout')}}" method="POST">
+                                                                                @csrf
+                                                                                <button type="submit" class="dropdown-item" style="padding: 0 !important;">{{__('general.logout')}}</button>
+                                                                            </form>
                                                                         </li>
                                                                     </ul>
                                                                 </div>

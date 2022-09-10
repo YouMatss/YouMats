@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderItem extends Model
 {
-    use HasFactory, SoftDeletes, UnicodeJsonColumn;
+    use HasFactory, UnicodeJsonColumn;
 
     protected $casts = [
         'delivery_cars' => 'array'
