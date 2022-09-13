@@ -195,17 +195,7 @@
                             </div>
 
                             @if(!Auth::guard('vendor')->check())
-                                @if(is_company())
-                                    {!! cartOrChat($product) !!}
-                                @elseif(optional($product->vendor)->current_subscribe && in_array($product->vendor->current_subscribe->membership_id, [env('INDIVIDUAL_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))
-                                    @if($product->price || $product->delivery)
-                                        {!! cartOrChat($product) !!}
-                                    @else
-                                        <a class="cart-chat-category btn-primary transition-3d-hover" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{__('product.category_href')}}</a>
-                                    @endif
-                                @else
-                                    <a class="cart-chat-category btn-primary transition-3d-hover" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{__('product.category_href')}}</a>
-                                @endif
+                                {!! cartOrChat($product) !!}
                                 <div class="flex-content-center flex-wrap">
                                     <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i>{{__('product.wishlist')}}</a>
                                 </div>
