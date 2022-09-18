@@ -29,6 +29,8 @@ class CreateGenerateProductsTable extends Migration
             $table->longText('desc')->nullable();
             $table->longText('short_desc')->nullable();
 
+            $table->longText('search_keywords')->nullable();
+
             $table->timestamps();
         });
     }
