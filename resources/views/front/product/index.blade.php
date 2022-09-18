@@ -1,13 +1,13 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>{{(!empty($product->meta_title)) ? $product->meta_title : nova_get_setting_translate('products_additional_word') . ' ' . $product->name}}</title>
-    <meta name="description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc)}}">
-    <meta name="keywords" content="{{$product->meta_keywords}}">
+    <title>{{getMetaTag($product, 'meta_title', nova_get_setting_translate('products_additional_word') . ' ' . $product->name)}}</title>
+    <meta name="description" content="{{getMetaTag($product, 'meta_desc', nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc))}}">
+    <meta name="keywords" content="{{getMetaTag($product, 'meta_keywords', '')}}">
 
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:site_name" content="Youmats Building Materials">
-    <meta property="og:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : nova_get_setting_translate('products_additional_word') . ' ' . $product->name}}" />
-    <meta property="og:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc)}}" />
+    <meta property="og:title" content="{{getMetaTag($product, 'meta_title', nova_get_setting_translate('products_additional_word') . ' ' . $product->name)}}" />
+    <meta property="og:description" content="{{getMetaTag($product, 'meta_desc', nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc))}}" />
     <meta property="og:type" content="website" />
     <meta property="og:image" itemprop="image" content="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" />
     <meta property="og:image:type" content="image/jpeg">
@@ -17,8 +17,8 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@youmats">
     <meta name="twitter:creator" content="@youmats">
-    <meta name="twitter:title" content="{{(!empty($product->meta_title)) ? $product->meta_title : nova_get_setting_translate('products_additional_word') . ' ' . $product->name}}">
-    <meta name="twitter:description" content="{{(!empty($product->meta_desc)) ? $product->meta_desc : nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc)}}">
+    <meta name="twitter:title" content="{{getMetaTag($product, 'meta_title', nova_get_setting_translate('products_additional_word') . ' ' . $product->name)}}">
+    <meta name="twitter:description" content="{{getMetaTag($product, 'meta_desc', nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc))}}">
     <meta name="twitter:image" content="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}">
     <meta name="twitter:image:width" content="800">
     <meta name="twitter:image:height" content="418">
@@ -26,6 +26,7 @@
     {!! $product->getTranslation('canonical', LaravelLocalization::getCurrentLocale(), false) !!}
 
     {!! $product->schema !!}
+
 {{--    <script>--}}
 {{--        ga('require', 'ec');--}}
 {{--        ga('ec:addImpression', {--}}
@@ -141,39 +142,43 @@
                     <div class="mb-2">
                         <div class="card p-5 border-width-2 border-color-1 borders-radius-17">
                             <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">
-                                @if(is_company())
-                                    <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
-                                @else
-                                    @if($product->stock && $product->stock >= $product->min_quantity)
+                                @if(!$product->category->hide_availability)
+                                    @if(is_company())
                                         <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
                                     @else
-                                        <span class="text-red font-weight-bold">{{__('product.out_of_stock')}}</span>
+                                        @if($product->stock && $product->stock >= $product->min_quantity)
+                                            <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
+                                        @else
+                                            <span class="text-red font-weight-bold">{{__('product.out_of_stock')}}</span>
+                                        @endif
                                     @endif
                                 @endif
                             </div>
                             @if(!is_company())
-                                @if(isset($delivery))
-                                    <div>
-                                        <span>{{__('product.delivery_to_your_city')}}: <b>{{getCurrentCityName()}}</b></span>
-                                        <br/>
-                                        <span>{{__('product.delivery_price')}} {{$product->min_quantity}} {{__('product.piece')}}:
-                                            @if($delivery['price'] > 0)
-                                            <b>{{getCurrency('symbol')}} {{round($delivery['price'] * getCurrency('rate'), 2)}}</b>
-                                            @else
-                                            <b>{{__('product.delivery_free')}}</b>
+                                @if(!$product->category->hide_availability)
+                                    @if(isset($delivery))
+                                        <div>
+                                            <span>{{__('product.delivery_to_your_city')}}: <b>{{getCurrentCityName()}}</b></span>
+                                            <br/>
+                                            <span>{{__('product.delivery_price')}} {{$product->min_quantity}} {{__('product.piece')}}:
+                                                @if($delivery['price'] > 0)
+                                                <b>{{getCurrency('symbol')}} {{round($delivery['price'] * getCurrency('rate'), 2)}}</b>
+                                                @else
+                                                <b>{{__('product.delivery_free')}}</b>
+                                                @endif
+                                            </span>
+                                            <br/>
+                                            <span>{{__('product.delivery_time')}}: <b>{{$delivery['time']}} {{($delivery['format'] == 'hour') ? __('product.delivery_hours') : __('product.delivery_days') }}</b></span>
+                                            <button type="button" class="btn btn-block btn-xs btn-primary mt-2 choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
+                                        </div>
+                                    @else
+                                        <div>
+                                            <span style="color:#ff0000;margin-bottom: 10px;display: inline-block;">{{__('product.no_delivery')}}: {{getCurrentCityName()}}</span>
+                                            @if(!is_null($delivery_cities))
+                                            <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
                                             @endif
-                                        </span>
-                                        <br/>
-                                        <span>{{__('product.delivery_time')}}: <b>{{$delivery['time']}} {{($delivery['format'] == 'hour') ? __('product.delivery_hours') : __('product.delivery_days') }}</b></span>
-                                        <button type="button" class="btn btn-block btn-xs btn-primary mt-2 choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
-                                    </div>
-                                @else
-                                    <div>
-                                        <span style="color:#ff0000;margin-bottom: 10px;display: inline-block;">{{__('product.no_delivery')}}: {{getCurrentCityName()}}</span>
-                                        @if(!is_null($delivery_cities))
-                                        <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
-                                        @endif
-                                    </div>
+                                        </div>
+                                    @endif
                                 @endif
                                 @if($product->price)
                                 <div class="mb-3">

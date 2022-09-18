@@ -7,10 +7,16 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <a class="select_reg typeIntroduceButton" data-url="{{route('front.introduce', ['individual'])}}">{{__('general.continue_as_individual')}}</a>
+                        <a class="select_reg typeIntroduceButton" data-url="{{route('front.introduce', ['individual'])}}">
+                            {{__('general.continue_as_individual', [],'ar')}} <br/>
+                            {{__('general.continue_as_individual', [], 'en')}}
+                        </a>
                     </div>
                     <div class="col-md-6">
-                        <a class="select_reg typeIntroduceButton" data-url="{{route('front.introduce', ['company'])}}">{{__('general.continue_as_company')}}</a>
+                        <a class="select_reg typeIntroduceButton" data-url="{{route('front.introduce', ['company'])}}">
+                            {{__('general.continue_as_company', [], 'ar')}} <br/>
+                            {{__('general.continue_as_company', [], 'en')}}
+                        </a>
                     </div>
                 </div>
             </div>

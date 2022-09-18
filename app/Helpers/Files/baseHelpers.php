@@ -4,6 +4,7 @@ use App\Helpers\Classes\Delivery;
 use App\Helpers\Classes\Shipping as ShippingHelper;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 if (!function_exists('front_url')) {
     function front_url() {
@@ -277,4 +278,14 @@ function cart_delivery() {
 
 function cart_total() {
     return number_format(parseNumber(Cart::instance('cart')->total()) + cart_delivery(), 2);
+}
+
+if(!function_exists('getMetaTag')) {
+    function getMetaTag($model, $key, $default) {
+        $value = $model->getTranslation($key, LaravelLocalization::getCurrentLocale(), false);
+        if(!empty($value))
+            return $value;
+        else
+            return $default;
+    }
 }
