@@ -62,6 +62,7 @@ use DigitalCreative\CollapsibleResourceManager\Resources\NovaResource;
 use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Infinety\Filemanager\FilemanagerTool;
 use KABBOUCHI\LogsTool\LogsTool;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\Code;
@@ -277,6 +278,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             NovaSettings::make()->canSee(function ($request) {
                 return $request->user()->isSuperAdmin();
             }),
+            new FilemanagerTool(),
             NovaTranslationEditor::make(),
             (new BackupTool())
                 ->canSee(function ($request) {
