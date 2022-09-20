@@ -1,17 +1,21 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>{{(!empty($category->meta_title)) ? $category->meta_title : $category->title . ' | ' . nova_get_setting_translate('site_name')}}</title>
-    <meta name="description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc)}}">
-    <meta name="keywords" content="{{$category->meta_keywords}}">
+
+    <title>{{getMetaTag($category, 'meta_title', $category->title . ' | ' . nova_get_setting_translate('site_name'))}}</title>
+    <meta name="description" content="{{getMetaTag($category, 'meta_desc', nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc))}}">
+    <meta name="keywords" content="{{getMetaTag($category, 'meta_keywords', '')}}">
+
     <meta property="og:url" content="{{url()->current()}}" />
-    <meta property="og:title" content="{{(!empty($category->meta_title)) ? $category->meta_title : $category->title . ' | ' . nova_get_setting_translate('site_name')}}" />
-    <meta property="og:description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc)}}" />
+    <meta property="og:title" content="{{getMetaTag($category, 'meta_title', $category->title . ' | ' . nova_get_setting_translate('site_name'))}}" />
+    <meta property="og:description" content="{{getMetaTag($category, 'meta_desc', nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc))}}" />
     <meta property="og:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" />
+
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
-    <meta name="twitter:title" content="{{(!empty($category->meta_title)) ? $category->meta_title : $category->title . ' | ' . nova_get_setting_translate('site_name')}}">
-    <meta name="twitter:description" content="{{(!empty($category->meta_desc)) ? $category->meta_desc : nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc)}}">
+    <meta name="twitter:title" content="{{getMetaTag($category, 'meta_title', $category->title . ' | ' . nova_get_setting_translate('site_name'))}}">
+    <meta name="twitter:description" content="{{getMetaTag($category, 'meta_desc', nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc))}}">
     <meta name="twitter:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}">
+
     <link rel="canonical" href="{{url()->current()}}" />
 
     {!! $category->schema !!}

@@ -236,6 +236,7 @@
       <path value="$PROJECT_DIR$/vendor/whitecube/nova-flexible-content" />
       <path value="$PROJECT_DIR$/vendor/maher/generate-products" />
       <path value="$PROJECT_DIR$/vendor/pdmfc/nova-action-button" />
+      <path value="$PROJECT_DIR$/vendor/infinety-es/nova-filemanager" />
     </include_path>
   </component>
   <component name="PhpUnit">

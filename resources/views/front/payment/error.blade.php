@@ -73,14 +73,14 @@
                     {{__('general.sar')}} {{ number_format(Request::get('amount')/100, 2) }}
                 </div>
             </div>
-            <div class="row row-1">
-                <div class="col-9">
-                    {{__('checkout.status')}}
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                    {{ Request::get('response_message') }}
-                </div>
-            </div>
+{{--            <div class="row row-1">--}}
+{{--                <div class="col-9">--}}
+{{--                    {{__('checkout.status')}}--}}
+{{--                </div>--}}
+{{--                <div class="col-3 d-flex justify-content-center">--}}
+{{--                    {{ Request::get('response_message') }}--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <div class="row row-1">
                 <div class="col-9">
                     {{__('checkout.merchant_reference')}}

@@ -4,6 +4,7 @@ use App\Helpers\Classes\Delivery;
 use App\Helpers\Classes\Shipping as ShippingHelper;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 if (!function_exists('front_url')) {
     function front_url() {
@@ -62,6 +63,15 @@ if (!function_exists('getCityNameById')) {
 
 if (!function_exists('cartOrChat')) {
     function cartOrChat($product, $view_page = true) {
+        $viewIndex = '<div><a href="'.route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug]).'"
+                    class="cart-chat-category btn btn-primary transition-3d-hover">
+                        <i class="fa fa-eye"></i> &nbsp;' . __("general.view_product") . '
+                    </a>
+                </div>';
+
+        $viewDetails = '<a class="cart-chat-category btn-primary transition-3d-hover"
+                            href="'.route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)]).'">'.__('product.category_href').'</a>';
+
 //        href="https://wa.me/'. nova_get_setting('phone') .'?text='.$product->whatsapp_message().'"
         $chat = '<div><a target="_blank" href="https://wa.me/+966'.$product->phone().'"
                     class="cart-chat-category btn btn-primary transition-3d-hover">
@@ -96,6 +106,7 @@ if (!function_exists('cartOrChat')) {
                     <i class="' . $icon .'"></i> &nbsp;' . $cart_word . '
                 </button>
             </div>';
+            $view = $viewDetails;
         } else {
             $cart = '
             <div class="float-container">
@@ -122,27 +133,22 @@ if (!function_exists('cartOrChat')) {
                         class="btn-add-cart cart-chat-category btn btn-primary transition-3d-hover"><i class="' . $icon .'"></i></button>
                 </div>
             </div>';
+            $view = $viewIndex;
         }
-
-        $view = '<div><a href="'.route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug]).'"
-                    class="cart-chat-category btn btn-primary transition-3d-hover">
-                        <i class="fa fa-eye"></i> &nbsp;' . __("general.view_product") . '
-                    </a>
-                </div>';
 
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company()) {
                 return $cart . $chat;
             } elseif(!(optional($product->vendor)->current_subscribe && in_array(optional($product->vendor)->current_subscribe->membership_id, [env('INDIVIDUAL_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))) {
                 return $view;
-            } elseif($product->type == 'product' && $product->price > 0 && $product->delivery) {
-                if($product->stock && $product->stock < $product->min_quantity) {
-                    return $view;
+            } elseif($product->price && $product->price > 0 && $product->delivery && $product->stock && $product->stock < $product->min_quantity) {
+                if($product->phone()) {
+                    return $cart . $chat;
                 }
                 return $cart;
             } else {
-                if(($product->price || $product->delivery) && $product->phone()) {
-                    return $chat;
+                if($product->phone()) {
+                    return $chat . $view;
                 } else {
                     return $view;
                 }
@@ -272,4 +278,14 @@ function cart_delivery() {
 
 function cart_total() {
     return number_format(parseNumber(Cart::instance('cart')->total()) + cart_delivery(), 2);
+}
+
+if(!function_exists('getMetaTag')) {
+    function getMetaTag($model, $key, $default) {
+        $value = $model->getTranslation($key, LaravelLocalization::getCurrentLocale(), false);
+        if(!empty($value))
+            return $value;
+        else
+            return $default;
+    }
 }

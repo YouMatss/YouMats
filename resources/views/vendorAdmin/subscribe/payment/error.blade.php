@@ -58,14 +58,14 @@
                     {{__('general.sar')}} {{ isset($request['amount']) ? $request['amount']/100 : '' }}
                 </div>
             </div>
-            <div class="row row-1">
-                <div class="col-9">
-                    {{__('checkout.status')}}
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                    {{ isset($request['response_message']) ? $request['response_message'] : '' }}
-                </div>
-            </div>
+{{--            <div class="row row-1">--}}
+{{--                <div class="col-9">--}}
+{{--                    {{__('checkout.status')}}--}}
+{{--                </div>--}}
+{{--                <div class="col-3 d-flex justify-content-center">--}}
+{{--                    {{ isset($request['response_message']) ? $request['response_message'] : '' }}--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <div class="row row-1">
                 <div class="col-9">
                     {{__('checkout.merchant_reference')}}

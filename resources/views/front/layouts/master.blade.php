@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html dir="{{LaravelLocalization::getCurrentLocaleDirection()}}" lang="{{LaravelLocalization::getCurrentLocale()}}-SA">
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -7,6 +7,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="robots" content="all" />
         <link rel="shortcut icon" href="{{ Storage::url(nova_get_setting('favicon')) }}">
+
+        <link rel="alternate" hreflang="{{LaravelLocalization::getCurrentLocale()}}-SA" href="{{url()->current()}}"/>
 
         @yield('metaTags')
         <!-- Google Tag Manager -->
