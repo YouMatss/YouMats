@@ -56,6 +56,7 @@ use App\Policies\RolePolicy;
 use Bernhardh\NovaTranslationEditor\NovaTranslationEditor;
 use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
+use DigitalCreative\CollapsibleResourceManager\Resources\ExternalLink;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 use DigitalCreative\CollapsibleResourceManager\Resources\InternalLink;
 use DigitalCreative\CollapsibleResourceManager\Resources\NovaResource;
@@ -234,6 +235,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'label' => 'Management',
                         'expanded' => true,
                         'resources' => [
+                            InternalLink::make([
+                                'label' => 'File Manager (Extra)',
+                                'target' => '_self',
+                                'path' => '/nova-filemanager?path=extra'
+                            ]),
                             Admin::class,
                             Team::class,
                             Partner::class,
@@ -272,7 +278,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                 ]
                             ]),
                         ]
-                    ])
+                    ]),
                 ]
             ]),
             NovaSettings::make()->canSee(function ($request) {

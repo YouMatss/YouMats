@@ -9,8 +9,9 @@ class DeliveryFilter implements Filter
 {
     public function __invoke(Builder $query, $value, string $property)
     {
-            $query->where('price', '>', 0)->get()
-                /*->whereNotNull('delivery')
-                ->where('subscribe', true)*/;
+            $query->where('price', '>', 0)
+                ->whereNotNull('shipping_id')
+                ->where('specific_shipping', true)
+                ->get();
     }
 }
