@@ -41,21 +41,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('backup:run')->daily()->at('01:00');
 
-        $schedule->call(function () {
-            $subscribes = Subscribe::whereDate('expiry_date', '>=', now())->get();
-            $now = Carbon::now();
-
-            foreach ($subscribes as $subscribe) {
-                $subscribe_expiry_date = Carbon::parse($subscribe->expiry_date);
-                $diff = $subscribe_expiry_date->diffInDays($now);
-                $vendor = Vendor::where('vendor_id', $subscribe->vendor_id)->first();
-                if($diff < 3) {
-                    Mail::to($vendor)->send(new NoticeExpirySubscribe($vendor, $diff));
-                }
-            }
-
-        })->dailyAt('13:00');
-
+        $schedule->command('subscribe:check')->daily()->at('20:00');
     }
 
     protected function scheduleTimezone()

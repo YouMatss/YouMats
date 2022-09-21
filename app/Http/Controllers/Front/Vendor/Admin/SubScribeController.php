@@ -83,28 +83,12 @@ class SubScribeController extends Controller
                 'price' => $data['membership']->price,
             ]);
 
+            $data['vendor']->update([
+                'token_name' => $data['request']['token_name']
+            ]);
+
             foreach(Admin::all() as $admin)
                 $admin->notify(new VendorSubscribed($data['vendor'], $data['membership'], $subscribe));
-
-            $merchant_reference = Payment::use($this->provider)->generateMerchantReference();
-            $arrData = [
-                'command' => 'PURCHASE',
-                'access_code' => env('PAYFORT_ACCESS_CODE'),
-                'merchant_identifier' => env('PAYFORT_MERCHANT_IDENTIFIER'),
-                'merchant_reference' => $merchant_reference,
-                'amount' => $data['request']['amount'],
-                'currency' => $data['request']['currency'],
-                'language' => $data['request']['language'],
-                'customer_email' => $data['request']['customer_email'],
-                'eci' => 'RECURRING',
-                'token_name' => $data['request']['token_name']
-            ];
-            $signature = Payment::use($this->provider)->calculateSignature($arrData, 'request');
-            $arrData['signature'] = $signature;
-
-            $response = Http::post('https://sbpaymentservices.payfort.com/FortAPI/paymentApi', $arrData);
-
-//            dd($response->object());
 
             return view('vendorAdmin.subscribe.payment.success')->with($data);
         } catch (\Exception $exception) {
