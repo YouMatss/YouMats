@@ -46,6 +46,8 @@ class Membership extends Resource
 
             Toggle::make('Active', 'status')
                 ->falseColor('#bacad6')->editableIndex(),
+
+            BelongsToMany::make('Categories'),
         ];
     }
 

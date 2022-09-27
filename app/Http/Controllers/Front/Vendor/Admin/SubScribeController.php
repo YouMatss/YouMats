@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Front\Vendor\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Vendor\SubScribeRequest;
 use App\Models\Admin;
+use App\Models\Category;
 use App\Models\Membership;
+use App\Models\Product;
 use App\Models\Subscribe;
 use App\Notifications\VendorSubscribeCanceled;
 use App\Notifications\VendorSubscribed;
@@ -15,6 +17,7 @@ use Devinweb\Payment\Facades\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -33,8 +36,17 @@ class SubScribeController extends Controller
 
     public function index() {
         $data['vendor'] = Auth::guard('vendor')->user();
-        $data['memberships'] = Membership::where('status', true)->get();
-        $data['current_subscribe_id'] = $data['vendor']->current_subscribe->membership_id ?? null;
+
+        $data['categories'] = Category::join('products', 'products.category_id', '=', 'categories.id')
+            ->join('vendors', 'vendors.id', '=', 'products.vendor_id')
+            ->join('categories_memberships', 'categories_memberships.category_id', '=', 'categories.id')
+            ->join('memberships', 'categories_memberships.membership_id', '=', 'memberships.id')
+            ->where('vendors.id', $data['vendor']->id)
+            ->where('memberships.status', true)
+            ->select('categories.*')
+            ->distinct()->get();
+
+//        $data['current_subscribe_id'] = $data['vendor']->current_subscribe->membership_id ?? null;
 
         return view('vendorAdmin.subscribe.index')->with($data);
     }

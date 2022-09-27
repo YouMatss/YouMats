@@ -6,6 +6,7 @@ use App\Helpers\Traits\UnicodeJsonColumn;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -20,4 +21,13 @@ class Membership extends Model implements Sortable
     protected $dates = ['deleted_at'];
 
     protected $cascadeDeletes = ['vendors'];
+
+    /**
+     * @return BelongsToMany
+     */
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'categories_memberships', 'membership_id', 'category_id');
+    }
+
 }

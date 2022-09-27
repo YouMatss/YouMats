@@ -25,40 +25,64 @@
     <section class="content content-vendor-edit pt-2">
         <div class="container-fluid">
             <div class="row">
-                @foreach($memberships as $membership)
-                <div class="col-md-4 mb-2">
-                    <form action="{{route('vendor.subscribe.upgrade')}}" method="get" enctype="multipart/form-data">
-                        <input type="hidden" name="membership_id" value="{{$membership->id}}">
-                        <div class="card card_pay_m">
-                            <div class="card-body">
+                <div class="col-md-12">
+                    <p>
+                        @foreach($categories as $category)
+                        <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                data-target="#cat{{$category->id}}"
+                                aria-expanded="false"
+                                aria-controls="cat{{$category->id}}">
+                            {{$category->name}}
+                        </button>
+                        @endforeach
+                    </p>
+                </div>
+                <div class="col-md-12">
+                    @foreach($categories as $category)
+                        <div class="collapse" id="cat{{$category->id}}">
+                            <div class="card card-body pt-5">
+                                <div class="container-fluid">
                                 <div class="row">
-                                  <div class="style_box_pay">
-                                      <div class="col-md-12">
-                                          <p><strong>{{$membership->name}}</strong></p>
-                                          <p>{{$membership->price . ' ' . getCurrency('symbol')}}</p>
-                                      </div>
-                                      <div class="col-md-12">
-                                          <span>{!! $membership->desc !!}</span>
-                                      </div>
-{{--                                    @if($current_subscribe_id == $membership->id)--}}
-{{--                                    <div class="col-md-12">--}}
-{{--                                        <label class="label label-success">{{__('vendorAdmin.already_subscribed')}}</label>--}}
-{{--                                    </div>--}}
-{{--                                    @endif--}}
-                                      <div class="col-md-12 mt-2">
-                                          @if($current_subscribe_id == $membership->id)
-                                              <button type="submit" class="btn btn-warning" form="cancel_subscribe">{{__('vendorAdmin.cancel_subscribe')}}</button>
-                                          @else
-                                              <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.subscribe_now')}}</button>
-                                          @endif
-                                      </div>
-                                  </div>
+                                    @foreach($category->memberships->where('status', true) as $membership)
+                                        <div class="col-md-4">
+                                            <form action="{{route('vendor.subscribe.upgrade')}}" method="get" enctype="multipart/form-data">
+                                                <input type="hidden" name="membership_id" value="{{$membership->id}}">
+                                                <div class="card card_pay_m">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="style_box_pay">
+                                                                <div class="col-md-12">
+                                                                    <p><strong>{{$membership->name}}</strong></p>
+                                                                    <p>{{$membership->price . ' ' . getCurrency('symbol')}}</p>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <span>{!! $membership->desc !!}</span>
+                                                                </div>
+{{--                                                                @if($current_subscribe_id == $membership->id)--}}
+{{--                                                                <div class="col-md-12">--}}
+{{--                                                                    <label class="label label-success">{{__('vendorAdmin.already_subscribed')}}</label>--}}
+{{--                                                                </div>--}}
+{{--                                                                @endif--}}
+                                                                <div class="col-md-12 mt-2">
+                                                                    @if($current_subscribe_id == $membership->id)
+                                                                        <button type="submit" class="btn btn-warning" form="cancel_subscribe">{{__('vendorAdmin.cancel_subscribe')}}</button>
+                                                                    @else
+                                                                        <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.subscribe_now')}}</button>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @endforeach
+                                </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
     </section>
