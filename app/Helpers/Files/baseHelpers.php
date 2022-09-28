@@ -289,3 +289,17 @@ if(!function_exists('getMetaTag')) {
             return $default;
     }
 }
+
+if(!function_exists('isSubscribe')) {
+    function isSubscribe($subscribes, $category_id, $membership_id, $return_model = false) {
+        if (!isset($subscribes) || !count($subscribes))
+            return false;
+        foreach ($subscribes as $subscribe)
+            if ($subscribe->category_id == $category_id && $subscribe->membership_id == $membership_id) {
+                if($return_model)
+                    return $subscribe;
+                else
+                    return true;
+            }
+    }
+}

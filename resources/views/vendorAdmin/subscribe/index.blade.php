@@ -47,6 +47,7 @@
                                         <div class="col-md-4">
                                             <form action="{{route('vendor.subscribe.upgrade')}}" method="get" enctype="multipart/form-data">
                                                 <input type="hidden" name="membership_id" value="{{$membership->id}}">
+                                                <input type="hidden" name="category_id" value="{{$category->id}}">
                                                 <div class="card card_pay_m">
                                                     <div class="card-body">
                                                         <div class="row">
@@ -58,13 +59,14 @@
                                                                 <div class="col-md-12">
                                                                     <span>{!! $membership->desc !!}</span>
                                                                 </div>
-{{--                                                                @if($current_subscribe_id == $membership->id)--}}
-{{--                                                                <div class="col-md-12">--}}
-{{--                                                                    <label class="label label-success">{{__('vendorAdmin.already_subscribed')}}</label>--}}
-{{--                                                                </div>--}}
-{{--                                                                @endif--}}
+                                                                @if(isSubscribe($current_subscribes, $category->id, $membership->id))
+                                                                <div class="col-md-12">
+                                                                    <label class="label label-success">{{__('vendorAdmin.already_subscribed')}}</label>
+                                                                </div>
+                                                                @endif
                                                                 <div class="col-md-12 mt-2">
-                                                                    @if($current_subscribe_id == $membership->id)
+                                                                    <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.subscribe_now')}}</button>
+                                                                    @if(isSubscribe($current_subscribes, $category->id, $membership->id))
                                                                         <button type="submit" class="btn btn-warning" form="cancel_subscribe">{{__('vendorAdmin.cancel_subscribe')}}</button>
                                                                     @else
                                                                         <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.subscribe_now')}}</button>

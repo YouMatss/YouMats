@@ -46,26 +46,30 @@ class SubScribeController extends Controller
             ->select('categories.*')
             ->distinct()->get();
 
-//        $data['current_subscribe_id'] = $data['vendor']->current_subscribe->membership_id ?? null;
+        $data['current_subscribes'] = $data['vendor']->current_subscribes;
 
         return view('vendorAdmin.subscribe.index')->with($data);
     }
 
     public function upgrade(SubScribeRequest $request) {
         $data = $request->validated();
-        try {
+//        try {
             $data['vendor'] = Auth::guard('vendor')->user();
             $data['membership'] = Membership::findorfail($data['membership_id']);
+            $data['category'] = Category::findorfail($data['category_id']);
 
-            if(isset($data['vendor']->current_subscribe) && $data['vendor']->current_subscribe->membership_id == $data['membership_id'])
-                return abort(404);
+            if(isSubscribe($data['vendor']->current_subscribes, $data['category_id'], $data['membership_id']))
+                return abort(403);
 
-            Session::put('membership_id', $data['membership_id']);
+            Session::put('subscribe', [
+                'membership_id' => $data['membership_id'],
+                'category_id' => $data['category_id']
+            ]);
 
             return view('vendorAdmin.subscribe.payment.form')->with($data);
-        } catch (\Exception $exception) {
-            return redirect()->route('home');
-        }
+//        } catch (\Exception $exception) {
+//            return redirect()->route('home');
+//        }
     }
 
     public function submit() {
@@ -80,10 +84,11 @@ class SubScribeController extends Controller
                 return redirect()->route('home');
 
             $data['vendor'] = Auth::guard('vendor')->user();
-            $data['membership'] = Membership::findorfail(Session::get('membership_id'));
+            $data['membership'] = Membership::findorfail(Session::get('subscribe')['membership_id']);
+            $data['category'] = Category::findorfail(Session::get('subscribe')['category_id']);
 
-            if($data['vendor']->current_subscribe) {
-                $data['vendor']->current_subscribe->update([
+            if(isSubscribe($data['vendor']->current_subscribes, $data['category']->id, $data['membership']->id)) {
+                isSubscribe($data['vendor']->current_subscribes, $data['category']->id, $data['membership']->id, true)->update([
                     'expiry_date' => Carbon::yesterday()
                 ]);
             }
@@ -91,6 +96,7 @@ class SubScribeController extends Controller
             $subscribe = Subscribe::create([
                 'vendor_id' => $data['vendor']->id,
                 'membership_id' => $data['membership']->id,
+                'category_id' => $data['category']->id,
                 'expiry_date' => Carbon::now()->addMonth(),
                 'price' => $data['membership']->price,
             ]);

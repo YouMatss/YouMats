@@ -24,7 +24,8 @@ class SubScribeRequest extends FormRequest
     public function rules()
     {
         return [
-            'membership_id' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:memberships,id']]
+            'membership_id' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:memberships,id']],
+            'category_id' => [...REQUIRED_INTEGER_VALIDATION, ...['exists:categories,id']]
         ];
     }
 }
