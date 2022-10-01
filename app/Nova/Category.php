@@ -10,6 +10,7 @@ use Drobee\NovaSluggable\SluggableText;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Heading;
@@ -110,6 +111,7 @@ class Category extends Resource
             HasMany::make('Products'),
             HasMany::make('Attributes'),
             HasMany::make('Vendors'),
+            BelongsToMany::make('Memberships'),
         ];
     }
 

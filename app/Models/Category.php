@@ -5,9 +5,14 @@ namespace App\Models;
 use App\Helpers\Traits\DefaultImage;
 use App\Helpers\Traits\UnicodeJsonColumn;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kalnoy\Nestedset\NodeTrait;
 use Spatie\EloquentSortable\Sortable;
@@ -48,9 +53,9 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id', 'id');
     }
@@ -63,7 +68,7 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     /**
-     * @return HasMany|\Illuminate\Database\Eloquent\Relations\HasManyThrough
+     * @return HasMany|HasManyThrough
      */
     public function products()
     {
@@ -77,9 +82,9 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    public function vendors(): \Illuminate\Database\Eloquent\Builder
+    public function vendors(): Builder
     {
         return $this->belongsToMany(Vendor::class, Product::class)
             ->join('categories', 'categories.id', 'products.category_id')
@@ -88,13 +93,19 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return mixed
      */
-    public function subscribedVendors(): \Illuminate\Database\Eloquent\Collection
+    public function subscribedVendors()
     {
-        return $this->belongsToMany(Vendor::class, Product::class)
-            ->join('categories', 'categories.id', 'products.category_id')
-            ->orWhere('categories.parent_id', $this->id)
+        return Vendor::join('products', 'products.vendor_id', '=', 'vendors.id')
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->join('subscribes', function ($join) {
+                $join->on('subscribes.category_id', '=', 'categories.id');
+                $join->on('subscribes.vendor_id', '=', 'vendors.id');
+            })
+            ->where('categories.id', $this->id)
+            ->whereDate('subscribes.expiry_date', '>', now())
+            ->select('vendors.id', 'vendors.name', 'vendors.slug')
             ->distinct()->get();
     }
 
@@ -115,5 +126,13 @@ class Category extends Model implements Sortable, HasMedia
             ->join('products as p', 'p.id', '=', 'pt.product_id')
             ->join('categories as c', 'c.id', '=', 'p.category_id')
             ->where('c.id', '=', $this->id)->distinct('tags.id')->get();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function memberships(): BelongsToMany
+    {
+        return $this->belongsToMany(Membership::class, 'categories_memberships', 'category_id', 'membership_id');
     }
 }

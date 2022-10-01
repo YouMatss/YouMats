@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Category;
 use App\Models\Membership;
 use App\Models\Subscribe;
 use App\Models\Vendor;
@@ -14,18 +15,21 @@ class VendorSubscribed extends Notification
 
     private Vendor $vendor;
     private Membership $membership;
+    private Category $category;
     private Subscribe $subscribe;
 
     /**
      * VendorSubscribed constructor.
      * @param Vendor $vendor
      * @param Membership $membership
+     * @param Category $category
      * @param Subscribe $subscribe
      */
-    public function __construct(Vendor $vendor, Membership $membership, Subscribe $subscribe)
+    public function __construct(Vendor $vendor, Membership $membership, Category $category, Subscribe $subscribe)
     {
         $this->vendor = $vendor;
         $this->membership = $membership;
+        $this->category = $category;
         $this->subscribe = $subscribe;
     }
 
@@ -52,7 +56,7 @@ class VendorSubscribed extends Notification
     {
         return \Mirovit\NovaNotifications\Notification::make()
             ->info('A vendor has been subscribed.')
-            ->subtitle('Vendor: ' . $this->vendor->name . ' Subscribed to an ' . $this->membership->name . ' plan.')
+            ->subtitle('Vendor: ' . $this->vendor->name . ' Subscribed to an ' . $this->membership->name . ' plan in category: ' . $this->category->name . '.')
             ->routeDetail('subscribes', $this->subscribe->id)
             ->toArray();
     }

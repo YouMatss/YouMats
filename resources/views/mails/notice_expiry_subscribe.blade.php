@@ -182,7 +182,7 @@
                                         <td style="overflow-wrap:break-word;word-break:break-word;padding:30px 10px;font-family:arial,helvetica,sans-serif;" align="left">
                                             <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                 <p style="font-size: 14px; line-height: 140%; text-align: center;"><strong><span style="font-size: 20px; line-height: 28px; color: #444444;">{{__('mails.summary')}}</span></strong></p>
-                                                <p style="font-size: 14px; line-height: 140%; text-align: center;"><br /><strong><span style="font-size: 20px; line-height: 28px; color: #444444;">{{__('mails.expiry_date')}}: {{date('F d,Y', strtotime($vendor->current_subscribe->expiry_date))}}</span></strong></p>
+                                                <p style="font-size: 14px; line-height: 140%; text-align: center;"><br /><strong><span style="font-size: 20px; line-height: 28px; color: #444444;">{{__('mails.expiry_date')}}: {{date('F d,Y', strtotime($subscribe->expiry_date))}}</span></strong></p>
                                                 <p style="font-size: 14px; line-height: 140%; text-align: center;"><br /><strong><span style="font-size: 20px; line-height: 28px; color: #444444;">{{__('mails.left_days')}}: {{$diff . \Str::plural(__('mails.day'))}}</span></strong></p>
                                             </div>
                                         </td>

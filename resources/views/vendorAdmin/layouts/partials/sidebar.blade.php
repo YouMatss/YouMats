@@ -127,7 +127,7 @@
                         </li>
                     </ul>
                 </li>
-                @if($vendor->current_subscribe && in_array($vendor->current_subscribe->membership_id, [env('COMPANY_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))
+                @if($vendor->current_subscribes && array_intersect($vendor->current_subscribes->pluck('membership_id')->toArray(), [env('COMPANY_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-hand-holding-usd"></i>
