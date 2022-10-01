@@ -49,7 +49,7 @@ class NoticeExpirySubscribe extends Command
             $diff = $subscribe_expiry_date->diffInDays($now);
             $vendor = Vendor::where('vendor_id', $subscribe->vendor_id)->first();
             if($diff < 3) {
-                Mail::to($vendor)->send(new \App\Mail\NoticeExpirySubscribe($vendor, $diff));
+                Mail::to($vendor)->send(new \App\Mail\NoticeExpirySubscribe($vendor, $subscribe, $diff));
             }
         }
     }

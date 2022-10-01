@@ -19,7 +19,7 @@
         <form> <span id="card-header">{{__('checkout.product_list')}}</span>
             <div class="row row-1">
                 <div class="col-9">
-                    {{$membership->name}} <b>({{__('general.sar')}} {{$membership->price}})</b>
+                    {{$membership->name . ' - ' . $category->name}} <b>({{__('general.sar')}} {{$membership->price}})</b>
                 </div>
                 <div class="col-3 d-flex justify-content-center">
                     {{__('general.sar')}} {{$membership->price}}

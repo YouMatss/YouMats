@@ -78,7 +78,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     }
 
     public function getSubscribeAttribute() {
-        if(isset($this->current_subscribes)) {
+        if(count($this->current_subscribes)) {
             return 1;
         }
         return 0;

@@ -70,13 +70,7 @@ class CategoryController extends Controller
         $data['category']->load('attributes', 'attributes.values');
 
         if(isset($data['parent'])) {
-            $data['subscribeVendors'] = [];
-            $subscribeVendors = $data['category']->subscribedVendors();
-            foreach ($subscribeVendors as $subscribeVendor) {
-                if($subscribeVendor->current_subscribe) {
-                    $data['subscribeVendors'][] = $subscribeVendor;
-                }
-            }
+            $data['subscribeVendors'] = $data['category']->subscribedVendors();
 
             return view('front.category.sub')->with($data);
         } else {

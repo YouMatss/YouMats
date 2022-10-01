@@ -132,7 +132,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      * @return int
      */
     public function getSubscribeAttribute() {
-        if(isset($this->vendor->current_subscribe)) {
+        if(count($this->vendor->current_subscribes)) {
             return 1;
         }
         return 0;

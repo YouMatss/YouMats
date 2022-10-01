@@ -2,14 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\NoticeExpirySubscribe;
 use App\Models\Subscribe;
-use App\Models\Vendor;
-use Carbon\Carbon;
 use Devinweb\Payment\Facades\Payment;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Mail;
 
 class CheckSubscribes extends Command
 {

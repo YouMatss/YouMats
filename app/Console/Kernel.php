@@ -2,13 +2,8 @@
 
 namespace App\Console;
 
-use App\Mail\NoticeExpirySubscribe;
-use App\Models\Subscribe;
-use App\Models\Vendor;
-use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\Mail;
 
 class Kernel extends ConsoleKernel
 {

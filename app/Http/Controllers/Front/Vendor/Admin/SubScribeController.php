@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Vendor\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Vendor\CancelSubscribe;
 use App\Http\Requests\Vendor\SubScribeRequest;
 use App\Models\Admin;
 use App\Models\Category;
@@ -87,8 +88,12 @@ class SubScribeController extends Controller
             $data['membership'] = Membership::findorfail(Session::get('subscribe')['membership_id']);
             $data['category'] = Category::findorfail(Session::get('subscribe')['category_id']);
 
-            if(isSubscribe($data['vendor']->current_subscribes, $data['category']->id, $data['membership']->id)) {
-                isSubscribe($data['vendor']->current_subscribes, $data['category']->id, $data['membership']->id, true)->update([
+            $check = $data['vendor']->current_subscribes
+                ->where('category_id', $data['category']->id)
+                ->where('membership_id', $data['membership']->id)->first();
+
+            if($check) {
+                $check->update([
                     'expiry_date' => Carbon::yesterday()
                 ]);
             }
@@ -98,7 +103,7 @@ class SubScribeController extends Controller
                 'membership_id' => $data['membership']->id,
                 'category_id' => $data['category']->id,
                 'expiry_date' => Carbon::now()->addMonth(),
-                'price' => $data['membership']->price,
+                'price' => $data['membership']->price
             ]);
 
             $data['vendor']->update([
@@ -106,7 +111,7 @@ class SubScribeController extends Controller
             ]);
 
             foreach(Admin::all() as $admin)
-                $admin->notify(new VendorSubscribed($data['vendor'], $data['membership'], $subscribe));
+                $admin->notify(new VendorSubscribed($data['vendor'], $data['membership'], $data['category'], $subscribe));
 
             return view('vendorAdmin.subscribe.payment.success')->with($data);
         } catch (\Exception $exception) {
@@ -122,7 +127,8 @@ class SubScribeController extends Controller
                 return redirect()->route('home');
 
             $data['vendor'] = Auth::guard('vendor')->user();
-            $data['membership'] = Membership::findorfail(Session::get('membership_id'));
+            $data['membership'] = Membership::findorfail(Session::get('subscribe')['membership_id']);
+            $data['category'] = Category::findorfail(Session::get('subscribe')['category_id']);
 
             return view('vendorAdmin.subscribe.payment.error')->with($data);
         } catch (\Exception $exception) {
@@ -130,9 +136,16 @@ class SubScribeController extends Controller
         }
     }
 
-    public function cancel() {
+    public function cancel(CancelSubscribe $request) {
+        $data = $request->validated();
+
         $data['vendor'] = Auth::guard('vendor')->user();
-        $subscribe = $data['vendor']->current_subscribe;
+        $data['membership'] = Membership::findorfail($data['membership_id']);
+        $data['category'] = Category::findorfail($data['category_id']);
+
+        $subscribe = $data['vendor']->current_subscribes()
+            ->where('category_id', $data['category']->id)
+            ->where('membership_id', $data['membership']->id)->firstorfail();
 
         $subscribe->update([
             'expiry_date' => Carbon::yesterday()

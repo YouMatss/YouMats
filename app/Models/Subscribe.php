@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Subscribe extends Model
 {
@@ -14,16 +15,26 @@ class Subscribe extends Model
     protected $dates = ['expiry_date'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function vendor() {
+    public function vendor(): BelongsTo
+    {
         return $this->belongsTo(Vendor::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function membership() {
+    public function membership(): BelongsTo
+    {
         return $this->belongsTo(Membership::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

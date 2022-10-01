@@ -25,20 +25,6 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                @if($vendor->current_subscribe)
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-info"><i class="far fa-star text-success"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">{{\App\Models\Membership::findorfail($vendor->current_subscribe->membership_id)->name}}</span>
-                            <span class="info-box-number" style="font-size: 14px">{{__('vendorAdmin.subscribe_expiry_date') . ': ' . date('F d,Y', strtotime($vendor->current_subscribe->expiry_date))}}</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                @endif
                 <div class="col-md-3 col-sm-6 col-12">
                     <div class="info-box">
                         <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>

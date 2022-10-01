@@ -93,13 +93,19 @@ class Category extends Model implements Sortable, HasMedia
     }
 
     /**
-     * @return Collection
+     * @return mixed
      */
-    public function subscribedVendors(): Collection
+    public function subscribedVendors()
     {
-        return $this->belongsToMany(Vendor::class, Product::class)
-            ->join('categories', 'categories.id', 'products.category_id')
-            ->orWhere('categories.parent_id', $this->id)
+        return Vendor::join('products', 'products.vendor_id', '=', 'vendors.id')
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->join('subscribes', function ($join) {
+                $join->on('subscribes.category_id', '=', 'categories.id');
+                $join->on('subscribes.vendor_id', '=', 'vendors.id');
+            })
+            ->where('categories.id', $this->id)
+            ->whereDate('subscribes.expiry_date', '>', now())
+            ->select('vendors.id', 'vendors.name', 'vendors.slug')
             ->distinct()->get();
     }
 

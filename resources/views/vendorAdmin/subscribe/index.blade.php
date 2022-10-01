@@ -22,16 +22,14 @@
     </div>
     <!-- /.content-header -->
 
-    <section class="content content-vendor-edit pt-2">
+    <section class="content content-vendor-edit pt-2" id="membershipsCategories">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <p>
                         @foreach($categories as $category)
                         <button class="btn btn-primary" type="button" data-toggle="collapse"
-                                data-target="#cat{{$category->id}}"
-                                aria-expanded="false"
-                                aria-controls="cat{{$category->id}}">
+                                data-target="#cat{{$category->id}}">
                             {{$category->name}}
                         </button>
                         @endforeach
@@ -39,7 +37,7 @@
                 </div>
                 <div class="col-md-12">
                     @foreach($categories as $category)
-                        <div class="collapse" id="cat{{$category->id}}">
+                        <div class="collapse" id="cat{{$category->id}}" data-parent="#membershipsCategories">
                             <div class="card card-body pt-5">
                                 <div class="container-fluid">
                                 <div class="row">
@@ -59,15 +57,24 @@
                                                                 <div class="col-md-12">
                                                                     <span>{!! $membership->desc !!}</span>
                                                                 </div>
-                                                                @if(isSubscribe($current_subscribes, $category->id, $membership->id))
+                                                                @php
+                                                                    $isSubscribe = isSubscribe($current_subscribes, $category->id, $membership->id);
+                                                                    $isSubscribeWithModel = isSubscribe($current_subscribes, $category->id, $membership->id, true);
+                                                                @endphp
+                                                                @if($isSubscribe)
                                                                 <div class="col-md-12">
+                                                                    <label class="label label-warning">{{\Carbon\Carbon::now()->diffInDays($isSubscribeWithModel->expiry_date, false) + 1 . ' ' . __('vendorAdmin.days_remaining')}}</label>
                                                                     <label class="label label-success">{{__('vendorAdmin.already_subscribed')}}</label>
                                                                 </div>
                                                                 @endif
                                                                 <div class="col-md-12 mt-2">
-                                                                    <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.subscribe_now')}}</button>
-                                                                    @if(isSubscribe($current_subscribes, $category->id, $membership->id))
+                                                                    @if($isSubscribe)
+                                                                        <input type="hidden" form="cancel_subscribe" name="membership_id" value="{{$membership->id}}" />
+                                                                        <input type="hidden" form="cancel_subscribe" name="category_id" value="{{$category->id}}" />
                                                                         <button type="submit" class="btn btn-warning" form="cancel_subscribe">{{__('vendorAdmin.cancel_subscribe')}}</button>
+                                                                        @if(\Carbon\Carbon::now()->diffInDays($isSubscribeWithModel->expiry_date, false) < 5)
+                                                                            <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.subscribe_renew')}}</button>
+                                                                        @endif
                                                                     @else
                                                                         <button type="submit" class="btn btn-youmats">{{__('vendorAdmin.subscribe_now')}}</button>
                                                                     @endif

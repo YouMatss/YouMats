@@ -56,8 +56,10 @@ class Subscribe extends Resource
                 ->withoutTrashed(),
 
             BelongsTo::make('Membership')
-                ->rules([...REQUIRED_INTEGER_VALIDATION, ...['exists:memberships,id']])
-                ->withoutTrashed(),
+                ->rules([...REQUIRED_INTEGER_VALIDATION, ...['exists:memberships,id']]),
+
+            BelongsTo::make('Category')
+                ->rules([...REQUIRED_INTEGER_VALIDATION, ...['exists:categories,id']]),
 
             Date::make('Expiry Date')
                 ->rules(REQUIRED_DATE_VALIDATION),
