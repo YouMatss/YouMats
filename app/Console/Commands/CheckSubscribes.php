@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Admin;
 use App\Models\Subscribe;
+use Carbon\Carbon;
 use Devinweb\Payment\Facades\Payment;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -66,7 +68,30 @@ class CheckSubscribes extends Command
 
                 $response = Http::post('https://sbpaymentservices.payfort.com/FortAPI/paymentApi', $arrData);
 
-                dd($response->object());
+                $response_code = $response->object()->response_code;
+
+
+                if($response_code == '04000') {
+
+                }
+
+                $subscribe->update([
+                    'expiry_date' => Carbon::yesterday()
+                ]);
+
+                $newSubscribe = Subscribe::create([
+                    'vendor_id' => $subscribe->vendor_id,
+                    'membership_id' => $subscribe->membership_id,
+                    'category_id' => $subscribe->category_id,
+                    'expiry_date' => Carbon::now()->addMonth(),
+                    'price' => $subscribe->price
+                ]);
+
+                foreach(Admin::all() as $admin) {
+                    // Push vendor renew notification
+//                    $admin->notify(new VendorSubscribed($data['vendor'], $data['membership'], $data['category'], $subscribe));
+                }
+
 
             }
         }
