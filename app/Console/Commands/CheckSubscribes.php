@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Devinweb\Payment\Facades\Payment;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class CheckSubscribes extends Command
 {
@@ -84,6 +85,8 @@ class CheckSubscribes extends Command
                         'expiry_date' => Carbon::now()->addMonth(),
                         'price' => $subscribe->price
                     ]);
+
+                    Log::info('Subscribe renew for vendor: ' . $subscribe->vendor->name);
 
                     foreach(Admin::all() as $admin) {
                         $admin->notify(new VendorSubscribeRenew($newSubscribe));
