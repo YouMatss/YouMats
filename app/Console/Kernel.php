@@ -36,7 +36,11 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('backup:run')->daily()->at('01:00');
 
-        $schedule->command('subscribe:check')->daily()->at('20:00');
+        $schedule->command('subscribe:check')->daily()
+            ->timezone('Asia/Riyadh')
+            ->at('20:00')
+            ->runInBackground()
+            ->evenInMaintenanceMode();
     }
 
     protected function scheduleTimezone()
