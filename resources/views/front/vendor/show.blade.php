@@ -103,6 +103,7 @@
                                                         <span>{{ $contact['phone'] }}</span><br/>
                                                         <label style="font-weight: bold">{{__('vendor.email')}}: </label>
                                                         <span>{{ $contact['email'] }}</span><br/>
+                                                        @if(isset($contact['cities']))
                                                         <label style="font-weight: bold">{{__('vendor.cities')}}: </label>
                                                         <span>
                                                             @foreach($contact['cities'] as $city)
@@ -112,6 +113,7 @@
                                                                 @endif
                                                             @endforeach
                                                         </span><br/>
+                                                        @endif
                                                         <label style="font-weight: bold">{{__('vendor.with')}}: </label>
                                                         <span>{{ __('vendor.'.$contact['with']) }}</span>
                                                     </td>
