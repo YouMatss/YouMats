@@ -24,6 +24,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('subscribe:check')->daily()
+            ->timezone(config('app.timezone'))
+            ->at('00:00')
+            ->runInBackground()
+            ->evenInMaintenanceMode();
+
         $schedule->command('sitemap:generate')->weekly();
 
         $increment = 2000;
@@ -35,17 +41,11 @@ class Kernel extends ConsoleKernel
         }
 
         $schedule->command('backup:run')->daily()->at('01:00');
-
-        $schedule->command('subscribe:check')->daily()
-            ->timezone('Asia/Riyadh')
-            ->at('20:00')
-            ->runInBackground()
-            ->evenInMaintenanceMode();
     }
 
     protected function scheduleTimezone()
     {
-        return 'Asia/Riyadh';
+        return config('app.timezone');
     }
 
     /**

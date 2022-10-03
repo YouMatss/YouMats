@@ -74,7 +74,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     }
 
     public function current_subscribes() {
-        return $this->hasMany(Subscribe::class)->whereDate('expiry_date', '>', now());
+        return $this->hasMany(Subscribe::class)->whereDate('expiry_date', '>=', now());
     }
 
     public function getSubscribeAttribute() {

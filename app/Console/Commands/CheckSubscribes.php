@@ -46,10 +46,10 @@ class CheckSubscribes extends Command
      */
     public function handle()
     {
-        $subscribes = Subscribe::whereDate('expiry_date', today('+3'))->get();
+        $subscribes = Subscribe::whereDate('expiry_date', Carbon::yesterday(config('app.timezone')))->get();
 
         foreach ($subscribes as $subscribe) {
-            if(isset($subscribe->vendor)) {
+            if(isset($subscribe->vendor) && !is_null($subscribe->vendor->token_name)) {
 
                 $merchant_reference = Payment::use($this->provider)->generateMerchantReference();
 
@@ -69,30 +69,37 @@ class CheckSubscribes extends Command
                 $signature = Payment::use($this->provider)->calculateSignature($arrData, 'request');
                 $arrData['signature'] = $signature;
 
-                $response = Http::post('https://sbpaymentservices.payfort.com/FortAPI/paymentApi', $arrData);
+                Log::info('Collect data successfully.');
+
+                $response = Http::post('https://paymentservices.payfort.com/FortAPI/paymentApi', $arrData);
 
                 $response_code = $response->object()->response_code;
 
                 if(substr($response_code, 2) == '000') {
+                    Log::info('Recurring Successfully Transaction.');
+
                     $subscribe->update([
-                        'expiry_date' => Carbon::yesterday()
+                        'expiry_date' => Carbon::yesterday(config('app.timezone'))
                     ]);
 
                     $newSubscribe = Subscribe::create([
                         'vendor_id' => $subscribe->vendor_id,
                         'membership_id' => $subscribe->membership_id,
                         'category_id' => $subscribe->category_id,
-                        'expiry_date' => Carbon::now()->addMonth(),
+                        'expiry_date' => Carbon::now(config('app.timezone'))->addMonth(),
                         'price' => $subscribe->price
                     ]);
 
                     Log::info('Subscribe renew for vendor: ' . $subscribe->vendor->name);
 
-                    foreach(Admin::all() as $admin) {
+                    foreach(Admin::all() as $admin)
                         $admin->notify(new VendorSubscribeRenew($newSubscribe));
-                    }
+                } else {
+                    Log::info('Fail renew Subscribe for vendor: ' . $subscribe->vendor->name);
                 }
             }
         }
+
+        Log::info('All Recurring processes done.');
     }
 }

@@ -8,19 +8,12 @@ use App\Http\Requests\Vendor\SubScribeRequest;
 use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Membership;
-use App\Models\Product;
 use App\Models\Subscribe;
 use App\Notifications\VendorSubscribeCanceled;
 use App\Notifications\VendorSubscribed;
-use App\Notifications\VendorUpdated;
 use Carbon\Carbon;
 use Devinweb\Payment\Facades\Payment;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class SubScribeController extends Controller
@@ -94,7 +87,7 @@ class SubScribeController extends Controller
 
             if($check) {
                 $check->update([
-                    'expiry_date' => Carbon::yesterday()
+                    'expiry_date' => Carbon::yesterday(config('app.timezone'))
                 ]);
             }
 
@@ -102,7 +95,7 @@ class SubScribeController extends Controller
                 'vendor_id' => $data['vendor']->id,
                 'membership_id' => $data['membership']->id,
                 'category_id' => $data['category']->id,
-                'expiry_date' => Carbon::now()->addMonth(),
+                'expiry_date' => Carbon::now(config('app.timezone'))->addMonth(),
                 'price' => $data['membership']->price
             ]);
 
@@ -148,7 +141,11 @@ class SubScribeController extends Controller
             ->where('membership_id', $data['membership']->id)->firstorfail();
 
         $subscribe->update([
-            'expiry_date' => Carbon::yesterday()
+            'expiry_date' => Carbon::yesterday(config('app.timezone'))
+        ]);
+
+        $data['vendor']->update([
+            'token_name' => null
         ]);
 
         foreach(Admin::all() as $admin)
