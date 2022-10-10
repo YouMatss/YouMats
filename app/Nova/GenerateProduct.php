@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Helpers\Nova\Fields;
 use App\Nova\Actions\GenerateProductsAction;
 use App\Nova\Actions\GenerateProductsTestAction;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
@@ -92,15 +93,7 @@ class GenerateProduct extends Resource
                 ->rules(REQUIRED_TEXT_VALIDATION),
 
             (new Panel('Images', [
-                Medialibrary::make('Images', GENERATE_PRODUCT_PATH)->fields(function () {
-                    return [Text::make('File Name', 'file_name')->rules('required', 'min:2')];
-                })->rules('array', 'nullable')
-                    ->creationRules('min:1')
-                    ->attachRules(NULLABLE_IMAGE_VALIDATION)
-                    ->accept('image/*')
-                    ->autouploading()->sortable()->attachOnDetails()
-                    ->hideFromIndex()
-                    ->croppable('cropper'),
+                Fields::image(false, GENERATE_PRODUCT_PATH, 'Images', false),
             ])),
 
             new Panel('Search Keywords', [

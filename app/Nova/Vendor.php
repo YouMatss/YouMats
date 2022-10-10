@@ -119,50 +119,11 @@ class Vendor extends Resource
                 ->hideFromIndex()
                 ->rules(NULLABLE_STRING_VALIDATION),
 
-            Medialibrary::make('Cover', VENDOR_COVER)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
+            Fields::image(true, VENDOR_COVER, 'Cover', true),
 
-                    Text::make('Image Title', 'img_title')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION),
+            Fields::image(true, VENDOR_LOGO, 'Logo', true),
 
-                    Text::make('Image Alt', 'img_alt')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION)
-                ];
-            })->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper')
-                ->hideFromIndex(),
-
-            Medialibrary::make('Logo', VENDOR_LOGO)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-
-                    Text::make('Image Title', 'img_title')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION),
-
-                    Text::make('Image Alt', 'img_alt')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION)
-                ];
-            })->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails()->single()
-                ->hideFromIndex(),
-
-            Medialibrary::make('Licenses', VENDOR_PATH)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')->rules('required', 'min:2'),
-                ];
-            })->rules('array', 'required')->creationRules('min:1')
-                ->attachRules(REQUIRED_IMAGE_VALIDATION)->accept('image/*')
-                ->autouploading()->attachOnDetails()->hideFromIndex(),
+            Fields::image(true, VENDOR_PATH, 'Licenses', false),
 
             Toggle::make('Active')
                 ->falseColor('#bacad6')->editableIndex(),

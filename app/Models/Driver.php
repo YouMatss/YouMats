@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Driver extends Authenticatable implements HasMedia
 {
@@ -27,12 +28,15 @@ class Driver extends Authenticatable implements HasMedia
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * @throws \Spatie\Image\Exceptions\InvalidManipulation
-     */
-    public function registerAllMediaConversions(): void {
-        $this->addMediaConversion('thumb')
-            ->width(200)->height(200);
+    public function registerMediaConversions(Media $media = null): void {
+        $this->addMediaConversion('thumb')->width(200)->height(200);
+        $this->addMediaConversion('cropper')->performOnCollections(DRIVER_PHOTO);
+    }
+
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection(DRIVER_PHOTO)->singleFile();
+        $this->addMediaCollection(DRIVER_ID);
+        $this->addMediaCollection(DRIVER_LICENSE);
     }
 
     /**

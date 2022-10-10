@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Helpers\Nova\Fields;
 use Benjacho\BelongsToManyField\BelongsToManyField;
 use Davidpiesse\NovaToggle\Toggle;
+use DmitryBubyakin\NovaMedialibraryField\Fields\GeneratedConversions;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
@@ -135,26 +136,7 @@ class Product extends Resource
 //                ->onlyOnIndex(),
 
             (new Panel('Gallery', [
-                Medialibrary::make('Images', PRODUCT_PATH)->fields(function () {
-                    return [
-                        Text::make('File Name', 'file_name')
-                            ->rules('required', 'min:2'),
-
-                        Text::make('Image Title', 'img_title')
-                            ->translatable()
-                            ->rules(NULLABLE_STRING_VALIDATION),
-
-                        Text::make('Image Alt', 'img_alt')
-                            ->translatable()
-                            ->rules(NULLABLE_STRING_VALIDATION)
-                    ];
-                })->rules('array', 'required')
-                    ->creationRules('min:1')
-                    ->attachRules(REQUIRED_IMAGE_VALIDATION)
-                    ->accept('image/*')
-                    ->autouploading()->sortable()->attachOnDetails()
-                    ->hideFromIndex()
-                    ->croppable('cropper'),
+                Fields::image(false, PRODUCT_PATH, 'Images', false),
             ])),
 
             (new Panel('Shipping Prices', [

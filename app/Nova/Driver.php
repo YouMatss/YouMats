@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Helpers\Nova\Fields;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
@@ -87,34 +88,11 @@ class Driver extends Resource
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
 
-            Medialibrary::make('Driver Photo', DRIVER_PHOTO)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-                ];
-            })->attachRules(NULLABLE_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails(),
+            Fields::image(false, DRIVER_PHOTO, 'Driver Photo', true),
 
-            Medialibrary::make('Driver ID', DRIVER_ID)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-                ];
-            })->attachRules(NULLABLE_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails()
-                ->hideFromIndex(),
+            Fields::file(false, DRIVER_ID, 'Driver ID', false),
 
-            Medialibrary::make('Driver License', DRIVER_LICENSE)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-                ];
-            })->attachRules(NULLABLE_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails()
-                ->hideFromIndex(),
+            Fields::file(false, DRIVER_LICENSE, 'Driver License', false),
 
             HasOne::make('Car'),
 

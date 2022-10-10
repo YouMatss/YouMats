@@ -15,8 +15,7 @@ class Quote extends Model implements HasMedia
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function registerMediaCollections(): void
-    {
+    public function registerMediaCollections(): void{
         $this->addMediaCollection(QUOTE_ATTACHMENT);
     }
 

@@ -15,6 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 use Znck\Eloquent\Traits\BelongsToThrough;
 
@@ -44,15 +45,15 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         'location'           => 'array'
     ];
 
-    public function registerAllMediaConversions(): void {
+    public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('thumb')->width(200)->height(200);
-        $this->addMediaConversion('cropper')->performOnCollections(VENDOR_LOGO);
-        $this->addMediaConversion('cropper')->performOnCollections(VENDOR_COVER);
+        $this->addMediaConversion('cropper')->performOnCollections(VENDOR_LOGO, VENDOR_COVER);
     }
 
     public function registerMediaCollections(): void {
         $this->addMediaCollection(VENDOR_LOGO)->singleFile();
         $this->addMediaCollection(VENDOR_COVER)->singleFile();
+        $this->addMediaCollection(VENDOR_PATH);
     }
 
     public function sendPasswordResetNotification($token)

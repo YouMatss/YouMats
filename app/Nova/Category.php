@@ -68,26 +68,9 @@ class Category extends Resource
                 ->translatable()
                 ->rules(REQUIRED_TEXT_VALIDATION),
 
-            Medialibrary::make('Image', CATEGORY_PATH)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')->rules('required', 'min:2'),
-                    Text::make('Image Title', 'img_title')->translatable()->rules(NULLABLE_STRING_VALIDATION),
-                    Text::make('Image Alt', 'img_alt')->translatable()->rules(NULLABLE_STRING_VALIDATION)
-                ];
-            })->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->accept('image/*')->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+            Fields::image(true, CATEGORY_PATH, 'Image', true),
 
-            Medialibrary::make('Cover', CATEGORY_COVER)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')->rules('required', 'min:2'),
-                    Text::make('Image Title', 'img_title')->translatable()->rules(NULLABLE_STRING_VALIDATION),
-                    Text::make('Image Alt', 'img_alt')->translatable()->rules(NULLABLE_STRING_VALIDATION)
-                ];
-            })->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->accept('image/*')->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper')
-                ->hideFromIndex(),
+            Fields::image(true, CATEGORY_COVER, 'Cover', true),
 
             Toggle::make(__('Section I'), 'section_i')->falseColor('#bacad6')->editableIndex(),
             Toggle::make(__('Section II'), 'section_ii')->falseColor('#bacad6')->editableIndex(),

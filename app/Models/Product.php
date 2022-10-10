@@ -16,6 +16,7 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 use Znck\Eloquent\Traits\BelongsToThrough;
 
@@ -38,9 +39,13 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         'shipping_prices' => 'array'
     ];
 
-    public function registerAllMediaConversions(): void {
-        $this->addMediaConversion('thumb')->width(200)->height(200);
+    public function registerMediaConversions(Media $media = null): void {
+        $this->addMediaConversion('webp')->format('webp');
         $this->addMediaConversion('cropper')->performOnCollections(PRODUCT_PATH);
+    }
+
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection(PRODUCT_PATH)->withResponsiveImages();
     }
 
     public function getPriceAttribute($value) {

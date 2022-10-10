@@ -17,7 +17,6 @@ define("PARTNER_PATH", 'partner');
 define("CURRENCY_PATH", 'currency');
 define("INQUIRE_PATH", 'inquire');
 define("PAGE_PATH", 'page');
-define("CONTENT_PATH", 'content');
 define("SLIDER_PATH", 'slider');
 define("DRIVER_PHOTO", 'driver_photo');
 define("DRIVER_ID", 'driver_id');

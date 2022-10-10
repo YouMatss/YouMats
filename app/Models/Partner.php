@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 
 class Partner extends Model implements HasMedia
@@ -17,13 +18,13 @@ class Partner extends Model implements HasMedia
 
     protected $translatable = ['name'];
 
-    public function registerMediaCollections(): void {
-        $this->addMediaCollection(PARTNER_PATH)->singleFile();
-    }
-
-    public function registerAllMediaConversions(): void {
+    public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('thumb')->width(200)->height(200);
         $this->addMediaConversion('cropper')->performOnCollections(PARTNER_PATH);
+    }
+
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection(PARTNER_PATH)->singleFile();
     }
 
 }

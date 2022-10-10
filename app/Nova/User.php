@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Helpers\Nova\Fields;
 use App\Nova\Filters\UserStatus;
 use App\Nova\Filters\UserType;
 use App\Nova\Metrics\NewUsers;
@@ -52,25 +53,9 @@ class User extends Resource
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
-            Medialibrary::make('Profile', USER_PROFILE)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-                ];
-            })->attachRules(NULLABLE_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+            Fields::image(false, USER_PROFILE, 'Profile', true),
 
-            Medialibrary::make('Cover', USER_COVER)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-                ];
-            })->attachRules(NULLABLE_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+            Fields::image(false, USER_COVER, 'Cover', true),
 
             Text::make('Phone')
                 ->hideFromIndex()
@@ -104,17 +89,7 @@ class User extends Resource
                 ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:individual,company'])),
 
             NovaDependencyContainer::make([
-                Medialibrary::make('Licenses', COMPANY_PATH)->fields(function () {
-                    return [
-                        Text::make('File Name', 'file_name')
-                            ->rules('required', 'min:2'),
-                    ];
-                })->rules('array', 'required')
-                    ->creationRules('min:1')
-                    ->attachRules(REQUIRED_IMAGE_VALIDATION)
-                    ->accept('image/*')
-                    ->autouploading()->attachOnDetails()
-                    ->hideFromIndex(),
+                Fields::image(true, COMPANY_PATH, 'Licenses', false),
             ])->dependsOn('type', 'company'),
 
             HasMany::make('Orders'),

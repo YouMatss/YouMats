@@ -11,6 +11,7 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 
 class Currency extends Model implements Sortable, HasMedia
@@ -19,8 +20,12 @@ class Currency extends Model implements Sortable, HasMedia
 
     public $translatable = ['symbol'];
 
-    public function registerAllMediaConversions(): void {
-        $this->addMediaConversion('thumb')
-            ->width(50)->height(50);
+    public function registerMediaConversions(Media $media = null): void {
+        $this->addMediaConversion('thumb')->width(50)->height(50);
+        $this->addMediaConversion('cropper')->performOnCollections(CURRENCY_PATH);
+    }
+
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection(CURRENCY_PATH)->singleFile();
     }
 }

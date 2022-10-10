@@ -11,6 +11,7 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 
 class Page extends Model implements Sortable, HasMedia
@@ -19,11 +20,13 @@ class Page extends Model implements Sortable, HasMedia
 
     public $translatable = ['title', 'desc', 'short_desc', 'meta_title', 'meta_keywords', 'meta_desc'];
 
-    public function registerAllMediaConversions(): void {
-        $this->addMediaConversion('thumb')
-            ->width(200)->height(200);
-
-        $this->addMediaConversion('cropper')
-            ->performOnCollections(PAGE_PATH);
+    public function registerMediaConversions(Media $media = null): void {
+        $this->addMediaConversion('thumb')->width(200)->height(200);
+        $this->addMediaConversion('cropper')->performOnCollections(PAGE_PATH);
     }
+
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection(PAGE_PATH)->singleFile();
+    }
+
 }

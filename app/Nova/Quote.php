@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Helpers\Nova\Fields;
 use App\Nova\Filters\Quote\QuoteDate;
 use App\Nova\Filters\Quote\QuoteStatus;
 use App\Nova\Metrics\Quote\QuotePerDay;
@@ -49,11 +50,7 @@ class Quote extends Resource
             Text::make('Phone2')->hideFromIndex()->rules(NULLABLE_STRING_VALIDATION),
             Text::make('Address')->hideFromIndex()->rules(REQUIRED_STRING_VALIDATION),
 
-            Medialibrary::make('Attachments', QUOTE_ATTACHMENT)
-                ->attachRules(NULLABLE_FILE_VALIDATION)
-                ->autouploading()
-                ->attachOnDetails()
-                ->hideFromIndex(),
+            Fields::file(false, QUOTE_ATTACHMENT, 'Attachments', false),
 
             Select::make('Status')->options([
                 'pending' => 'Pending',

@@ -11,6 +11,7 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 
 class Slider extends Model implements Sortable, HasMedia
@@ -19,8 +20,9 @@ class Slider extends Model implements Sortable, HasMedia
 
     public $translatable = ['quote', 'title', 'button_title'];
 
-    public function registerAllMediaConversions(): void {
+    public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('thumb')->width(200)->height(200);
+        $this->addMediaConversion('cropper')->performOnCollections(SLIDER_PATH);
     }
 
     public function registerMediaCollections(): void {

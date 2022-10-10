@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Helpers\Nova\Fields;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
@@ -49,23 +50,7 @@ class Team extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Medialibrary::make('Image', TEAM_PATH)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-
-                    Text::make('Image Title', 'img_title')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION),
-
-                    Text::make('Image Alt', 'img_alt')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION)
-                ];
-            })->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->single()->attachOnDetails()
-                ->croppable('cropper'),
+            Fields::image(true, TEAM_PATH, 'Image', true),
 
             Text::make('Name')
                 ->sortable()

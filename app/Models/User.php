@@ -14,6 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class User extends Authenticatable implements HasMedia, MustVerifyEmail {
     use HasApiTokens, SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, UnicodeJsonColumn;
@@ -31,15 +32,15 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
         'email_verified_at' => 'datetime',
     ];
 
-    public function registerAllMediaConversions(): void {
-        $this->addMediaConversion('thumb')
-            ->width(200)->height(200);
+    public function registerMediaConversions(Media $media = null): void {
+        $this->addMediaConversion('thumb')->width(200)->height(200);
+        $this->addMediaConversion('cropper')->performOnCollections(USER_PROFILE, USER_COVER);
+    }
 
-        $this->addMediaConversion('cropper')
-            ->performOnCollections(USER_PROFILE);
-
-        $this->addMediaConversion('cropper')
-            ->performOnCollections(USER_COVER);
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection(USER_PROFILE)->singleFile();
+        $this->addMediaCollection(USER_COVER)->singleFile();
+        $this->addMediaCollection(COMPANY_PATH);
     }
 
     public function orders() {

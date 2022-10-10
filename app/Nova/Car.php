@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Helpers\Nova\Fields;
 use Davidpiesse\NovaToggle\Toggle;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
@@ -90,25 +91,9 @@ class Car extends Resource
                 ->falseColor('#bacad6')
                 ->editableIndex(),
 
-            Medialibrary::make('Car Photo', CAR_PHOTO)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-                ];
-            })->attachRules(NULLABLE_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails(),
+            Fields::image(false, CAR_PHOTO, 'Car Photo', false),
 
-            Medialibrary::make('Car License', CAR_LICENSE)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-                ];
-            })->attachRules(NULLABLE_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails()
-                ->hideFromIndex(),
-
+            Fields::file(false, CAR_LICENSE, 'Car License', false),
         ];
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 
 class GenerateProduct extends Model implements HasMedia
@@ -22,8 +23,12 @@ class GenerateProduct extends Model implements HasMedia
         'template' => 'json'
     ];
 
-    public function registerAllMediaConversions(): void {
+    public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('cropper')->performOnCollections(GENERATE_PRODUCT_PATH);
+    }
+
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection(GENERATE_PRODUCT_PATH);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Helpers\Nova\Fields;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
@@ -36,23 +37,7 @@ class Language extends Resource
                 '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->name . '</a>'
             )->asHtml()->onlyOnIndex(),
 
-            Medialibrary::make('Image', LANGUAGE_PATH)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-
-                    Text::make('Image Title', 'img_title')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION),
-
-                    Text::make('Image Alt', 'img_alt')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION)
-                ];
-            })->attachRules(REQUIRED_IMAGE_VALIDATION)
-                ->accept('image/*')
-                ->autouploading()->attachOnDetails()->single()
-                ->croppable('cropper'),
+            Fields::image(true, LANGUAGE_PATH, 'Image', true),
 
             Slug::make('Slug')
                 ->sortable()

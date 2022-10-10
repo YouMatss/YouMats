@@ -2,6 +2,8 @@
 
 namespace App\Helpers\Nova;
 
+use DmitryBubyakin\NovaMedialibraryField\Fields\GeneratedConversions;
+use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Drobee\NovaSluggable\Slug;
 use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\Text;
@@ -9,8 +11,6 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 
 class Fields {
-
-
     /**
      * @param string $model
      * @param string $tableName
@@ -67,4 +67,59 @@ class Fields {
         return (new Panel('SEO', $attributes));
     }
 
+    /**
+     * @param bool $isRequired
+     * @param string $mediaCollection
+     * @param string $name
+     * @param bool $single
+     * @param string|null $helpText
+     * @return Medialibrary
+     */
+    public static function image(bool $isRequired, string $mediaCollection, string $name = 'Image', bool $single = true, string $helpText = null): Medialibrary
+    {
+        $image = Medialibrary::make(__($name), $mediaCollection)->fields(function() {
+            return [
+                Text::make('File Name', 'file_name')->rules('required', 'min:2'),
+                Text::make('Image Title', 'img_title')->translatable()->rules(NULLABLE_STRING_VALIDATION),
+                Text::make('Image Alt', 'img_alt')->translatable()->rules(NULLABLE_STRING_VALIDATION),
+                GeneratedConversions::make('Conversions')->withTooltips(),
+            ];
+        })->attachRules($isRequired ? REQUIRED_IMAGE_VALIDATION : NULLABLE_IMAGE_VALIDATION)
+            ->accept('image/*')
+            ->autouploading()->sortable()->attachOnDetails()
+            ->hideFromIndex()->attachExisting($mediaCollection)
+            ->croppable('cropper')
+            ->help($helpText);
+
+        if($single)
+            $image->single();
+
+        return $image;
+    }
+
+    /**
+     * @param bool $isRequired
+     * @param string $mediaCollection
+     * @param string $name
+     * @param bool $single
+     * @param string|null $helpText
+     * @return Medialibrary
+     */
+    public static function file(bool $isRequired, string $mediaCollection, string $name = 'File', bool $single = true, string $helpText = null): Medialibrary
+    {
+        $file = Medialibrary::make(__($name), $mediaCollection)->fields(function() {
+            return [
+                Text::make('File Name', 'file_name')->rules('required', 'min:2')
+            ];
+        })->attachRules($isRequired ? REQUIRED_FILE_VALIDATION : NULLABLE_FILE_VALIDATION)
+            ->accept('*')
+            ->autouploading()->sortable()->attachOnDetails()
+            ->hideFromIndex()->attachExisting($mediaCollection)
+            ->help($helpText);
+
+        if($single)
+            $file->single();
+
+        return $file;
+    }
 }

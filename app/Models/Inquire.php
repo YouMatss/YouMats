@@ -14,4 +14,8 @@ class Inquire extends Model implements HasMedia
     use SoftDeletes, HasFactory, InteractsWithMedia, UnicodeJsonColumn;
 
     protected $guarded = ['id'];
+
+    public function registerMediaCollections(): void{
+        $this->addMediaCollection(INQUIRE_PATH);
+    }
 }

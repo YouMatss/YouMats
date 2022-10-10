@@ -19,6 +19,7 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 
 class Category extends Model implements Sortable, HasMedia
@@ -41,10 +42,9 @@ class Category extends Model implements Sortable, HasMedia
         return $this->getTranslations('name')[app()->getLocale()];
     }
 
-    public function registerAllMediaConversions(): void {
+    public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('thumb')->width(200)->height(200);
-        $this->addMediaConversion('cropper')->performOnCollections(CATEGORY_PATH);
-        $this->addMediaConversion('cropper')->performOnCollections(CATEGORY_COVER);
+        $this->addMediaConversion('cropper')->performOnCollections(CATEGORY_PATH, CATEGORY_COVER);
     }
 
     public function registerMediaCollections(): void {

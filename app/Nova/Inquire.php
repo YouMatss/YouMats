@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Helpers\Nova\Fields;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\DateTime;
@@ -73,23 +74,7 @@ class Inquire extends Resource
                 ->rules(NULLABLE_TEXT_VALIDATION)
                 ->alwaysShow(),
 
-            Medialibrary::make('File', INQUIRE_PATH)->fields(function () {
-                return [
-                    Text::make('File Name', 'file_name')
-                        ->rules('required', 'min:2'),
-
-                    Text::make('Image Title', 'img_title')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION),
-
-                    Text::make('Image Alt', 'img_alt')
-                        ->translatable()
-                        ->rules(NULLABLE_STRING_VALIDATION)
-                ];
-            })->attachRules(NULLABLE_FILE_VALIDATION)
-                ->hideFromIndex()
-                ->accept('*')
-                ->autouploading()->attachOnDetails()->single(),
+            Fields::file(false, INQUIRE_PATH, 'File', true)
 
         ];
     }
