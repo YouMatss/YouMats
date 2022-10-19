@@ -146,7 +146,7 @@
                                             </div>
                                         </div>
                                         <div class="mt-1 mar-left-15">
-                                            <img class="img-thumbnail" width="200" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}">
+                                            <img class="img-thumbnail" width="150" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_150_150')['url'] }}">
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@
                                             </div>
                                         </div>
                                         <div class="mt-1 mar-left-15">
-                                            <img class="img-thumbnail" width="200" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER)['url'] }}">
+                                            <img class="img-thumbnail" width="150" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER, 'size_height_300')['url'] }}">
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +177,7 @@
                                         <div class="mt-1 mar-left-15">
                                             @foreach($vendor->getMedia(VENDOR_PATH) as $license)
                                                 @if(substr($license->mime_type, 0, 5) == 'image')
-                                                    <img class="img-thumbnail" width="200" src="{{ $license->getUrl() }}">
+                                                    <img class="img-thumbnail" width="200" src="{{ $license->getUrl('licenses') }}">
                                                 @else
                                                     <a href="{{ $license->getUrl() }}" target="_blank">
                                                         <img class="img-thumbnail" width="200" src="{{front_url().'/assets/img/default_logo.jpg'}}">

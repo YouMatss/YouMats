@@ -6,13 +6,13 @@
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:title" content="{{$page->meta_title}}" />
     <meta property="og:description" content="{{$page->meta_desc}}" />
-    <meta property="og:image" content="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['url']}}" />
+    <meta property="og:image" content="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH, 'size_height_300')['url']}}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
     <meta name="twitter:title" content="{{$page->meta_title}}">
     <meta name="twitter:description" content="{{$page->meta_desc}}">
-    <meta name="twitter:image" content="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['url']}}">
-    
+    <meta name="twitter:image" content="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH, 'size_height_300')['url']}}">
+
     {!! $page->schema !!}
 @endsection
 @section('content')
@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <img loading="lazy" src="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['url']}}" alt="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['alt']}}" title="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['title']}}">
+                    <img loading="lazy" src="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH, 'size_1350_300')['url']}}" alt="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['alt']}}" title="{{$page->getFirstMediaUrlOrDefault(PAGE_PATH)['title']}}">
                 </div>
             </div>
         </div>
@@ -53,35 +53,5 @@
             </div>
         </div>
         @endif
-
-{{--        <div class="row">--}}
-{{--            <div class="col-md-4 mb-4 mb-md-0">--}}
-{{--                <div class="card mb-3 border-0 text-center rounded-0">--}}
-{{--                    <img loading="lazy" class="img-fluid mb-3" src="{{ Storage::url(nova_get_setting('logo')) }}" alt="Card image cap">--}}
-{{--                    <div class="card-body">--}}
-{{--                        <h5 class="font-size-18 font-weight-semi-bold mb-3">What we really do?</h5>--}}
-{{--                        <p class="text-gray-90 max-width-334 mx-auto">Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus.</p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="col-md-4 mb-4 mb-md-0">--}}
-{{--                <div class="card mb-3 border-0 text-center rounded-0">--}}
-{{--                    <img loading="lazy" class="img-fluid mb-3" src="{{ Storage::url(nova_get_setting('logo')) }}" alt="Card image cap">--}}
-{{--                    <div class="card-body">--}}
-{{--                        <h5 class="font-size-18 font-weight-semi-bold mb-3">Our Vision</h5>--}}
-{{--                        <p class="text-gray-90 max-width-334 mx-auto">Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus.</p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="col-md-4">--}}
-{{--                <div class="card mb-3 border-0 text-center rounded-0">--}}
-{{--                    <img loading="lazy" class="img-fluid mb-3" src="{{ Storage::url(nova_get_setting('logo')) }}" alt="Card image cap">--}}
-{{--                    <div class="card-body">--}}
-{{--                        <h5 class="font-size-18 font-weight-semi-bold mb-3">History of the Company</h5>--}}
-{{--                        <p class="text-gray-90 max-width-334 mx-auto">Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus.</p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
     </div>
 @endsection

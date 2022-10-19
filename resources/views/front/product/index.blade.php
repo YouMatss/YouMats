@@ -9,7 +9,7 @@
     <meta property="og:title" content="{{getMetaTag($product, 'meta_title', nova_get_setting_translate('products_additional_word') . ' ' . $product->name)}}" />
     <meta property="og:description" content="{{getMetaTag($product, 'meta_desc', nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc))}}" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" itemprop="image" content="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}" />
+    <meta property="og:image" itemprop="image" content="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_300_300')['url'] }}" />
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="300">
     <meta property="og:image:height" content="300">
@@ -19,7 +19,7 @@
     <meta name="twitter:creator" content="@youmats">
     <meta name="twitter:title" content="{{getMetaTag($product, 'meta_title', nova_get_setting_translate('products_additional_word') . ' ' . $product->name)}}">
     <meta name="twitter:description" content="{{getMetaTag($product, 'meta_desc', nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc))}}">
-    <meta name="twitter:image" content="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}">
+    <meta name="twitter:image" content="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_300_300')['url']}}">
     <meta name="twitter:image:width" content="800">
     <meta name="twitter:image:height" content="418">
 
@@ -82,12 +82,12 @@
                         @if(count($product->getMedia(PRODUCT_PATH)))
                         @foreach($product->getMedia(PRODUCT_PATH) as $image)
                             <div class="js-slide">
-                                <img loading="lazy" class="img-fluid" src="{{$image->getFullUrl()}}" alt="{{$image->img_alt ?? ''}}" title="{{$image->img_title ?? ''}}">
+                                <img loading="lazy" class="img-fluid" src="{{$image->getFullUrl('size_500_500')}}" alt="{{$image->img_alt ?? ''}}" title="{{$image->img_title ?? ''}}">
                             </div>
                         @endforeach
                         @else
                             <div class="js-slide">
-                                <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                                <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_500_500')['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                             </div>
                         @endif
                     </div>
@@ -95,7 +95,7 @@
                     <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off" data-infinite="true" data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav">
                         @foreach($product->getMedia(PRODUCT_PATH) as $thumb)
                         <div class="js-slide" style="cursor: pointer;">
-                            <img loading="lazy" class="img-fluid" src="{{$thumb->getFullUrl()}}" alt="{{$thumb->img_alt ?? ''}}" title="{{$thumb->img_title ?? ''}}">
+                            <img loading="lazy" class="img-fluid" src="{{$thumb->getFullUrl('size_50_50')}}" alt="{{$thumb->img_alt ?? ''}}" title="{{$thumb->img_title ?? ''}}">
                         </div>
                         @endforeach
                     </div>
@@ -121,7 +121,7 @@
                             </a>
                         </div>
                         <a href="{{ route('home') }}" class="d-inline-block max-width-150 ml-n2 mb-2">
-                            <img loading="lazy" class="img-fluid" src="{{ Storage::url(nova_get_setting('logo')) }}">
+                            <img loading="lazy" class="img-fluid" src="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}">
                         </a>
                         {{--<div class="mb-2">--}}
                             {{--<ul class="font-size-14 pl-3 ml-1 text-gray-9">--}}
@@ -240,7 +240,7 @@
                             {!! $product->desc !!}
                             <div class="row">
                                 <div class="col-md-6 text-right">
-                                    <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                                    <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_500_500')['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                                 </div>
                             </div>
                         </div>
@@ -297,7 +297,7 @@
                                             <h5 class="mb-1 product-item__title"><a href="{{route('front.product', [generatedNestedSlug($r_product->category->ancestors()->pluck('slug')->toArray(), $r_product->category->slug), $r_product->slug])}}" class="text-blue font-weight-bold">{{$r_product->name}}</a></h5>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [generatedNestedSlug($r_product->category->ancestors()->pluck('slug')->toArray(), $r_product->category->slug), $r_product->slug])}}" class="a_img_pro d-block text-center">
-                                                    <img loading="lazy" class="img-fluid" src="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                                                    <img loading="lazy" class="img-fluid" src="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                                                 </a>
                                             </div>
                                             <div class="flex-center-between mb-1">

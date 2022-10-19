@@ -6,19 +6,18 @@
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:title" content="{{ (json_decode(nova_get_setting('home_meta_title'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}" />
     <meta property="og:description" content="{{ (json_decode(nova_get_setting('home_meta_desc'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}" />
-    <meta property="og:image" content="{{ Storage::url(nova_get_setting('logo')) }}" />
+    <meta property="og:image" content="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
     <meta name="twitter:title" content="{{ (json_decode(nova_get_setting('home_meta_title'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}">
     <meta name="twitter:description" content="{{ (json_decode(nova_get_setting('home_meta_desc'))->{LaravelLocalization::getCurrentLocale()}) ?? env('APP_NAME') }}">
-    <meta name="twitter:image" content="{{ Storage::url(nova_get_setting('logo')) }}">
+    <meta name="twitter:image" content="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}">
 
-    
     {!! nova_get_setting('home_schema') !!}
 @endsection
 @section('content')
     <div class="mb-4">
-        <div class="bg-img-hero" style="background-image: url({{ Storage::url(nova_get_setting('slider_background', 'default_image.png')) }});">
+        <div class="bg-img-hero" style="background-image: url({{ $staticImages->getFirstMediaUrlOrDefault(SLIDER_BACKGROUND_PATH, 'size_1920_438')['url'] }});">
             <div class="container min-height-438 overflow-hidden">
                 <div class="js-slick-carousel u-slick" data-pagi-classes="text-center position-absolute right-0 bottom-0 left-0 u-slick__pagination u-slick__pagination--long justify-content-start mb-3 mb-md-4 offset-xl-2 pl-xl-16 pl-wd-13">
                     @foreach($sliders as $slider)
@@ -48,7 +47,7 @@
                             <div class="col-xl-5 col-6 d-flex align-items-end ml-auto ml-md-0 slick-slide-img-content"
                                  data-scs-animation-in="fadeInUp"
                                  data-scs-animation-delay="500">
-                                <img loading="lazy" class="img-fluid ml-auto mr-5" src="{{ $slider->getFirstMediaUrlOrDefault(SLIDER_PATH)['url'] }}" alt="{{$slider->getFirstMediaUrlOrDefault(SLIDER_PATH)['alt']}}" title="{{$slider->getFirstMediaUrlOrDefault(SLIDER_PATH)['title']}}">
+                                <img loading="lazy" class="img-fluid ml-auto mr-5" src="{{ $slider->getFirstMediaUrlOrDefault(SLIDER_PATH, 'size_400_270')['url'] }}" alt="{{$slider->getFirstMediaUrlOrDefault(SLIDER_PATH)['alt']}}" title="{{$slider->getFirstMediaUrlOrDefault(SLIDER_PATH)['title']}}">
                             </div>
                         </div>
                     </div>
@@ -66,7 +65,7 @@
                         <a href="{{__('homee.first_section_url')}}" class="d-black text-gray-90">
                             <div class="min-height-166 py-1 py-xl-2 py-wd-4 d-flex bg-gray-1 align-items-center">
                                 <div class="col-6 col-xl-7 col-wd-6 pr-0">
-                                    <img loading="lazy" class="img-fluid" src="{{ Storage::url(nova_get_setting('home_first_section', 'default_logo.jpg')) }}" title="{{__('homee.first_section')}}" alt="{{__('homee.first_section')}}">
+                                    <img loading="lazy" class="img-fluid" src="{{ $staticImages->getFirstMediaUrlOrDefault(HOME_FIRST_SECTION_PATH, 'size_144_100')['url'] }}" title="{{__('homee.first_section')}}" alt="{{__('homee.first_section')}}">
                                 </div>
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
@@ -86,7 +85,7 @@
                         <a href="{{__('homee.second_section_url')}}" class="d-black text-gray-90">
                             <div class="min-height-166 py-1 py-xl-2 py-wd-4 d-flex bg-gray-1 align-items-center">
                                 <div class="col-6 col-xl-7 col-wd-6 pr-0">
-                                    <img loading="lazy" class="img-fluid" src="{{ Storage::url(nova_get_setting('home_second_section', 'default_logo.jpg')) }}" title="{{__('homee.second_section')}}" alt="{{__('homee.second_section')}}">
+                                    <img loading="lazy" class="img-fluid" src="{{ $staticImages->getFirstMediaUrlOrDefault(HOME_SECOND_SECTION_PATH, 'size_144_100')['url'] }}" title="{{__('homee.second_section')}}" alt="{{__('homee.second_section')}}">
                                 </div>
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                                     <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
@@ -107,7 +106,7 @@
                             <div class="min-height-166 py-1 py-xl-2 py-wd-4 d-flex bg-gray-1 align-items-center">
 
                                 <div class="col-6 col-xl-7 col-wd-6 pr-0">
-                                    <img loading="lazy" class="img-fluid" src="{{ Storage::url(nova_get_setting('home_third_section', 'default_logo.jpg')) }}" title="{{__('homee.third_section')}}" alt="{{__('homee.third_section')}}">
+                                    <img loading="lazy" class="img-fluid" src="{{ $staticImages->getFirstMediaUrlOrDefault(HOME_THIRD_SECTION_PATH, 'size_144_100')['url'] }}" title="{{__('homee.third_section')}}" alt="{{__('homee.third_section')}}">
                                 </div>
 
                                 <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
@@ -141,7 +140,7 @@
                 @foreach($featured_categories as $f_category)
                 <div class="box">
                     <a href="{{route('front.category', [generatedNestedSlug($f_category->ancestors()->pluck('slug')->toArray(), $f_category->slug)])}}" class="st_block">
-                        <img loading="lazy" src="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['url']}}"
+                        <img loading="lazy" src="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER, 'size_255_364')['url']}}"
                              alt="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['alt']}}"
                              title="{{$f_category->getFirstMediaUrlOrDefault(CATEGORY_COVER)['title']}}" />
                         <div class="content d-flex">
@@ -212,7 +211,7 @@
                                             </h3>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [generatedNestedSlug($bs_product->category->ancestors()->pluck('slug')->toArray(), $bs_product->category->slug), $bs_product->slug])}}" class="d-block text-center">
-                                                    <img loading="lazy" class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, '')['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
+                                                    <img loading="lazy" class="img-fluid" src="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$bs_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                                 </a>
                                             </div>
                                         </div>
@@ -256,7 +255,7 @@
                 <div class="col-md-3">
                     <div class="block_img_cat">
                         <a href="{{route('front.category', [generatedNestedSlug($section_i_category->ancestors()->pluck('slug')->toArray(), $section_i_category->slug)])}}" class="d-block">
-                            <img loading="lazy" class="img-fluid" src="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                            <img loading="lazy" class="img-fluid" src="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_305_570')['url']}}" alt="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                         </a>
                         <div class="des_block_cat_new">
                             <h3>{{$section_i_category->name}}</h3>
@@ -279,7 +278,7 @@
                                         </h5>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [generatedNestedSlug($i_product->category->ancestors()->pluck('slug')->toArray(), $i_product->category->slug), $i_product->slug])}}" class="d-block text-center">
-                                                <img loading="lazy" class="img-fluid" src="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
+                                                <img loading="lazy" class="img-fluid" src="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
                                         <div class="product-price">
@@ -320,8 +319,8 @@
                     <div class="bg-gray-1 overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
                         <a href="{{route('front.category', [generatedNestedSlug($t_category->ancestors()->pluck('slug')->toArray(), $t_category->slug)])}}" class="d-block">
                             <div class="media align-items-center">
-                                <div class="max-width-148 img_cat_home">
-                                    <img loading="lazy" class="img-fluid" src="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, '')['url']}}" alt="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                                <div class="max-width-150 img_cat_home">
+                                    <img loading="lazy" class="img-fluid" src="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_150_150')['url']}}" alt="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$t_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                                 </div>
                                 <div class="ml-4 media-body">
                                     <h3 class="mb-0 text-gray-90">{{$t_category->name}}</h3>
@@ -349,7 +348,7 @@
         <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [generatedNestedSlug($section_ii_category->ancestors()->pluck('slug')->toArray(), $section_ii_category->slug)])}}" class="d-block">
-                    <img loading="lazy" class="img-fluid img_main_block" width="200" src="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                    <img loading="lazy" class="img-fluid img_main_block" width="200" src="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_height_300')['url']}}" alt="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
@@ -368,7 +367,7 @@
                                     </h5>
                                     <div class="mb-2">
                                         <a href="{{route('front.product', [generatedNestedSlug($ii_product->category->ancestors()->pluck('slug')->toArray(), $ii_product->category->slug), $ii_product->slug])}}" class="d-block text-center">
-                                            <img loading="lazy" class="img-fluid" src="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
+                                            <img loading="lazy" class="img-fluid" src="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                         </a>
                                     </div>
                                     <div class="product-price">
@@ -411,7 +410,7 @@
         <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [generatedNestedSlug($section_iii_category->ancestors()->pluck('slug')->toArray(), $section_iii_category->slug)])}}" class="d-block">
-                    <img loading="lazy" class="img-fluid img_main_block" width="200" src="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                    <img loading="lazy" class="img-fluid img_main_block" width="200" src="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_height_300')['url']}}" alt="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
@@ -430,7 +429,7 @@
                                         </h3>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [generatedNestedSlug($iii_product->category->ancestors()->pluck('slug')->toArray(), $iii_product->category->slug), $iii_product->slug])}}" class="d-block text-center">
-                                                <img loading="lazy" class="img-fluid" src="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
+                                                <img loading="lazy" class="img-fluid" src="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
                                         <div class="product-price">
@@ -473,7 +472,7 @@
         <div class="row rtl">
             <div class="col-12 col-md-2">
                 <a href="{{route('front.category', [generatedNestedSlug($section_iv_category->ancestors()->pluck('slug')->toArray(), $section_iv_category->slug)])}}" class="d-block">
-                    <img loading="lazy" class="img-fluid img_main_block" width="200" src="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                    <img loading="lazy" class="img-fluid img_main_block" width="200" src="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_height_300')['url']}}" alt="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                 </a>
             </div>
             <div class="col-12 col-md-10 pl-md-0">
@@ -492,7 +491,7 @@
                                         </h3>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [generatedNestedSlug($iv_product->category->ancestors()->pluck('slug')->toArray(), $iv_product->category->slug), $iv_product->slug])}}" class="d-block text-center">
-                                                <img loading="lazy" class="img-fluid" src="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url']}}" alt="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
+                                                <img loading="lazy" class="img-fluid" src="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
                                         <div class="product-price">

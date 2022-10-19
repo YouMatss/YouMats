@@ -61,7 +61,7 @@
                                         @if($item->model)
                                             <a href="{{route('front.product', [generatedNestedSlug($item->model->category->ancestors()->pluck('slug')->toArray(), $item->model->category->slug), $item->model->slug])}}">
                                                 <img loading="lazy" class="img-fluid max-width-100 p-1 border border-color-1"
-                                                     src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['url'] }}"
+                                                     src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_width_100')['url'] }}"
                                                      alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"
                                                      title="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}"
                                                 >

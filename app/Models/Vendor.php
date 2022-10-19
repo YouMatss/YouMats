@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -46,8 +47,59 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     ];
 
     public function registerMediaConversions(Media $media = null): void {
-        $this->addMediaConversion('thumb')->width(200)->height(200);
-        $this->addMediaConversion('cropper')->performOnCollections(VENDOR_LOGO, VENDOR_COVER);
+        $this->addMediaConversion('size_height_50')
+            ->height(50)
+            ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_262_50')
+            ->crop(Manipulations::CROP_CENTER, 262, 50)
+            ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_30_30')
+            ->crop(Manipulations::CROP_CENTER, 30, 30)
+            ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_50_50')
+            ->crop(Manipulations::CROP_CENTER, 50, 50)
+            ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_height_100')
+            ->height(100)
+            ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_100_100')
+            ->crop(Manipulations::CROP_CENTER, 100, 100)
+            ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_height_150')
+            ->height(150)
+            ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_150_150')
+            ->crop(Manipulations::CROP_CENTER, 150, 150)
+            ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_height_200')
+            ->height(200)
+            ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_200_200')
+            ->crop(Manipulations::CROP_CENTER, 200, 200)
+            ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_height_300')
+            ->height(300)
+            ->performOnCollections(VENDOR_COVER)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_1350_300')
+            ->crop(Manipulations::CROP_CENTER, 1350, 300)
+            ->performOnCollections(VENDOR_COVER)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(VENDOR_LOGO, VENDOR_COVER)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('licenses')
+            ->performOnCollections(VENDOR_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 
     public function registerMediaCollections(): void {

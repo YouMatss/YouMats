@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -33,8 +34,35 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
     ];
 
     public function registerMediaConversions(Media $media = null): void {
-        $this->addMediaConversion('thumb')->width(200)->height(200);
-        $this->addMediaConversion('cropper')->performOnCollections(USER_PROFILE, USER_COVER);
+        $this->addMediaConversion('size_height_200')
+            ->height(200)
+            ->performOnCollections(USER_PROFILE)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_30_30')
+            ->crop(Manipulations::CROP_CENTER, 30, 30)
+            ->performOnCollections(USER_PROFILE)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_50_50')
+            ->crop(Manipulations::CROP_CENTER, 50, 50)
+            ->performOnCollections(USER_PROFILE)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_200_200')
+            ->crop(Manipulations::CROP_CENTER, 200, 200)
+            ->performOnCollections(USER_PROFILE)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_height_300')
+            ->height(300)
+            ->performOnCollections(USER_COVER)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_1350_300')
+            ->crop(Manipulations::CROP_CENTER, 1350, 300)
+            ->performOnCollections(USER_COVER)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(USER_PROFILE, USER_COVER)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('licenses')
+            ->performOnCollections(COMPANY_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 
     public function registerMediaCollections(): void {

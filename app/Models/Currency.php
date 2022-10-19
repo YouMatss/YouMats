@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -21,8 +22,15 @@ class Currency extends Model implements Sortable, HasMedia
     public $translatable = ['symbol'];
 
     public function registerMediaConversions(Media $media = null): void {
-        $this->addMediaConversion('thumb')->width(50)->height(50);
-        $this->addMediaConversion('cropper')->performOnCollections(CURRENCY_PATH);
+        $this->addMediaConversion('size_height_20')
+            ->height(20)
+            ->performOnCollections(CURRENCY_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_20_20')
+            ->crop(Manipulations::CROP_CENTER, 20, 20)
+            ->performOnCollections(CURRENCY_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('cropper')->performOnCollections(CURRENCY_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 
     public function registerMediaCollections(): void {

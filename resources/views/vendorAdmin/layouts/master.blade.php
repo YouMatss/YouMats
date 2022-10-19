@@ -9,7 +9,7 @@
 <body class="hold-transition sidebar-mini layout-fixed new--style--custom">
 <div class="wrapper">
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="{{ Storage::url(nova_get_setting('logo')) }}"
+        <img class="animation__shake" src="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}"
              alt="{{env('APP_NAME')}}" width="200">
     </div>
     @include('vendorAdmin.layouts.partials.navbar')
@@ -21,7 +21,7 @@
         <strong>{{__('vendorAdmin.copyright')}} &copy; {{date('Y')}}</strong>
         {{__('vendorAdmin.all_rights_reserved')}}.
         <div class="float-right d-none d-sm-inline-block">
-            <img width="100" src="{{ Storage::url(nova_get_setting('logo')) }}" />
+            <img width="100" src="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_25')['url'] }}" />
         </div>
     </footer>
 </div>

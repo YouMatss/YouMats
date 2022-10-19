@@ -40,6 +40,7 @@ use App\Nova\PaymentGateway;
 use App\Nova\Product;
 use App\Nova\Quote;
 use App\Nova\Slider;
+use App\Nova\StaticImage;
 use App\Nova\Subscribe;
 use App\Nova\Subscriber;
 use App\Nova\Tag;
@@ -56,18 +57,15 @@ use App\Policies\RolePolicy;
 use Bernhardh\NovaTranslationEditor\NovaTranslationEditor;
 use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
-use DigitalCreative\CollapsibleResourceManager\Resources\ExternalLink;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 use DigitalCreative\CollapsibleResourceManager\Resources\InternalLink;
 use DigitalCreative\CollapsibleResourceManager\Resources\NovaResource;
 use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Infinety\Filemanager\FilemanagerTool;
 use KABBOUCHI\LogsTool\LogsTool;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\Code;
-use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Nova;
@@ -90,7 +88,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             new Panel('General', $this->generalData()),
             new Panel('General SEO', $this->generalSeo()),
             new Panel('Social Media Links', $this->socialFields()),
-            new Panel('Media', $this->generalMedia()),
         ], [], 'General');
         NovaSettings::addSettingsFields([
             new Panel('Vendor Terms', $this->vendorTerms())
@@ -241,6 +238,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                 'path' => '/nova-filemanager?path=extra'
                             ]),
                             Admin::class,
+                            StaticImage::class,
                             Team::class,
                             Partner::class,
                             Slider::class,
@@ -318,85 +316,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             Text::make('Facebook')->rules(NULLABLE_URL_VALIDATION),
             Text::make('Twitter')->rules(NULLABLE_URL_VALIDATION),
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    private function generalMedia(): array
-    {
-        return [
-            Image::make(__('Logo'), 'logo')
-                ->store(function(Request $request, $model) {
-                    $file = $request->logo->getClientOriginalName();
-                    $fileName = pathinfo($file, PATHINFO_FILENAME);
-                    $extension = pathinfo($file, PATHINFO_EXTENSION);
-                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
-                    $request->logo->storeAs('/', $combinedName, 'public');
-                    return [
-                        'logo' => $combinedName
-                    ];
-                })->rules(NULLABLE_IMAGE_VALIDATION),
-            Image::make(__('Favicon'), 'favicon')
-                ->store(function(Request $request, $model) {
-                    $file = $request->favicon->getClientOriginalName();
-                    $fileName = pathinfo($file, PATHINFO_FILENAME);
-                    $extension = pathinfo($file, PATHINFO_EXTENSION);
-                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
-                    $request->favicon->storeAs('/', $combinedName, 'public');
-                    return [
-                        'favicon' => $combinedName
-                    ];
-                })->rules(NULLABLE_IMAGE_VALIDATION),
-            Image::make(__('Slider Background'), 'slider_background')
-                ->maxWidth(140)
-                ->store(function(Request $request, $model) {
-                    $file = $request->slider_background->getClientOriginalName();
-                    $fileName = pathinfo($file, PATHINFO_FILENAME);
-                    $extension = pathinfo($file, PATHINFO_EXTENSION);
-                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
-                    $request->slider_background->storeAs('/', $combinedName, 'public');
-                    return [
-                        'slider_background' => $combinedName
-                    ];
-                })->rules(NULLABLE_IMAGE_VALIDATION),
-            Image::make(__('Home First Section'), 'home_first_section')
-                ->maxWidth(140)
-                ->store(function(Request $request, $model) {
-                    $file = $request->home_first_section->getClientOriginalName();
-                    $fileName = pathinfo($file, PATHINFO_FILENAME);
-                    $extension = pathinfo($file, PATHINFO_EXTENSION);
-                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
-                    $request->home_first_section->storeAs('/', $combinedName, 'public');
-                    return [
-                        'home_first_section' => $combinedName
-                    ];
-                })->rules(NULLABLE_IMAGE_VALIDATION),
-            Image::make(__('Home Second Section'), 'home_second_section')
-                ->maxWidth(140)
-                ->store(function(Request $request, $model) {
-                    $file = $request->home_second_section->getClientOriginalName();
-                    $fileName = pathinfo($file, PATHINFO_FILENAME);
-                    $extension = pathinfo($file, PATHINFO_EXTENSION);
-                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
-                    $request->home_second_section->storeAs('/', $combinedName, 'public');
-                    return [
-                        'home_second_section' => $combinedName
-                    ];
-                })->rules(NULLABLE_IMAGE_VALIDATION),
-            Image::make(__('Home Third Section'), 'home_third_section')
-                ->maxWidth(140)
-                ->store(function(Request $request, $model) {
-                    $file = $request->home_third_section->getClientOriginalName();
-                    $fileName = pathinfo($file, PATHINFO_FILENAME);
-                    $extension = pathinfo($file, PATHINFO_EXTENSION);
-                    $combinedName = $fileName . '-' . now()->timestamp . '.' . $extension;
-                    $request->home_third_section->storeAs('/', $combinedName, 'public');
-                    return [
-                        'home_third_section' => $combinedName
-                    ];
-                })->rules(NULLABLE_IMAGE_VALIDATION),
         ];
     }
 

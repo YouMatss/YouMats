@@ -28,7 +28,7 @@
             @foreach($featuredVendors as $vendor)
                 <div class="js-slide img_vend">
                     <a href="{{ route('vendor.show', [$vendor->slug]) }}" class="link-hover__brand">
-                        <img loading="lazy" class="img-fluid m-auto max-height-50" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" alt="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
+                        <img loading="lazy" class="img-fluid m-auto max-height-50" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_height_50')['url'] }}" alt="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                     </a>
                 </div>
             @endforeach

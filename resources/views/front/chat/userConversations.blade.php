@@ -13,7 +13,7 @@
                         <li @if($loop_vendor->id == $vendor->id) class="active" @endif>
                             <a href="{{route('chat.user.conversations', [$loop_vendor->id])}}">
                                 <div class="online_sdtu user-status-icon user-icon-vendor_{{$loop_vendor->id}}" id="userStatusHead{{$loop_vendor->id}}"></div>
-                                <img loading="lazy" width="55px" height="55px" src="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
+                                <img loading="lazy" width="50px" height="50px" src="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_50_50')['url']}}" alt="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$loop_vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                                 <div>
                                     <h2>{{$loop_vendor->name}}</h2>
                                     <span class="time_send">
@@ -38,7 +38,7 @@
                 <div class="main_chat">
                     <header>
                         <div class="online_sdtu_head user-status-icon user-icon-vendor_{{$vendor->id}}" id="userStatusHead{{$vendor->id}}"></div>
-                        <img loading="lazy" width="55px" height="55px" src="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" alt="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
+                        <img loading="lazy" width="50px" height="50px" src="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_50_50')['url']}}" alt="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt']}}" title="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title']}}">
                         <div>
                             <h2>{{$vendor->name}}</h2>
                             <h3>already {{$vendor->count_messages($auth_user->id)}} messages</h3>
@@ -53,7 +53,7 @@
                                         <h3 title="{{date('d/m/Y h:i A', strtotime($message->created_at))}}">{{date('h:i A', strtotime($message->created_at))}}</h3>
                                         <h2>{{$auth_user->name}}</h2>
                                         <span class="status status_peaple">
-                                            <img loading="lazy" src="{{$auth_user->getFirstMediaUrlOrDefault(USER_PROFILE)['url']}}">
+                                            <img loading="lazy" src="{{$auth_user->getFirstMediaUrlOrDefault(USER_PROFILE, 'size_30_30')['url']}}">
                                         </span>
                                     </div>
                                     <div class="triangle"></div>
@@ -63,7 +63,7 @@
                                 <li class="you">
                                     <div class="entete">
                                         <span class="status status_peaple">
-                                            <img loading="lazy" src="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}">
+                                            <img loading="lazy" src="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_30_30')['url']}}">
                                         </span>
                                         <h2 class="ml-3">{{$vendor->name}}</h2>
                                         <h3 title="{{date('d/m/Y h:i A', strtotime($message->created_at))}}">{{date('h:i A', strtotime($message->created_at))}}</h3>
@@ -156,7 +156,7 @@
 
                 function appendMessageToSender(message) {
                     let name = '{{ $auth_user->name }}';
-                    let image = '{!! $auth_user->getFirstMediaUrlOrDefault(USER_PROFILE)['url'] !!}';
+                    let image = '{!! $auth_user->getFirstMediaUrlOrDefault(USER_PROFILE, 'size_30_30')['url'] !!}';
                     let newMessage =
                         `<li class="me">
                             <div class="entete">
@@ -174,7 +174,7 @@
 
                 function appendMessageToReceiver(message) {
                     let name = '{{ $vendor->name }}';
-                    let image = '{!! $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] !!}';
+                    let image = '{!! $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_30_30')['url'] !!}';
                     let newMessage =
                         `<li class="you">
                         <div class="entete">

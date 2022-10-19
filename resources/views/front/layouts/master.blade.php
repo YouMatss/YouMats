@@ -6,7 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="robots" content="all" />
-        <link rel="shortcut icon" href="{{ Storage::url(nova_get_setting('favicon')) }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ $staticImages->getFirstMediaUrlOrDefault(FAVICON_PATH, 'size_16_16')['url'] }}" size="16x16">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ $staticImages->getFirstMediaUrlOrDefault(FAVICON_PATH, 'size_32_32')['url'] }}" size="32x32">
 
         <link rel="alternate" hreflang="{{LaravelLocalization::getCurrentLocale()}}-SA" href="{{url()->current()}}"/>
 

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -21,8 +22,15 @@ class Team extends Model implements Sortable, HasMedia
     public $translatable = ['name', 'position', 'info'];
 
     public function registerMediaConversions(Media $media = null): void {
-        $this->addMediaConversion('thumb')->width(200)->height(200);
-        $this->addMediaConversion('cropper')->performOnCollections(TEAM_PATH);
+        $this->addMediaConversion('size_height_120')
+            ->height(120)
+            ->performOnCollections(TEAM_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_120_120')
+            ->crop(Manipulations::CROP_CENTER, 120, 120)
+            ->performOnCollections(TEAM_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('cropper')->performOnCollections(TEAM_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 
     public function registerMediaCollections(): void {

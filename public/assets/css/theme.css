@@ -33268,7 +33268,7 @@ blockquote:not(.blockquote) p {
 
 .vmm-bg img{
   height: 350px;
-  padding:30px
+  padding: 30px
 }
 
 .u-header .vertical-menu .vmm-bg-extended .vmm-bg,
@@ -37689,11 +37689,11 @@ blockquote:not(.blockquote) p {
 }
 
 .img_main_block{
-  height: 307px;
+  height: 300px;
 }
 
 .img_category_page{
-  width:85px;
+  width:100px;
   /*-webkit-transform: rotate(-15deg);*/
   /*transform: rotate(-15deg);*/
 }
@@ -37920,7 +37920,7 @@ section {
     width: 50%;
   }
   .img_main_block {
-    height: 307px;
+    height: 300px;
     width: 100%;
   }
 

@@ -27,7 +27,7 @@
                                             <div id="languageDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker">
                                                 @foreach(\Config::get('currencies') as $currency)
                                                 <a class="dropdown-item active currency_button" data-code="{{$currency->code}}" href="#">
-                                                    <img loading="lazy" width="20px" alt="Currency Flag" src="{{$currency->getFirstMediaUrlOrDefault(CURRENCY_PATH, 'thumb')['url']}}" />&nbsp;
+                                                    <img loading="lazy" width="20px" alt="{{$currency->getFirstMediaUrlOrDefault(CURRENCY_PATH)['alt']}}" src="{{$currency->getFirstMediaUrlOrDefault(CURRENCY_PATH, 'size_20_20')['url']}}" />&nbsp;
                                                     {{$currency->code}} @if($currency->symbol) ({{$currency->symbol}}) @endif
                                                 </a>
                                                 @endforeach
@@ -187,7 +187,7 @@
                     <div class="col-auto">
                         <nav class="navbar navbar-expand u-header__navbar py-0 justify-content-xl-between">
                             <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center" href="{{route('home')}}" aria-label="">
-                                <img loading="lazy" alt="YouMats" src="{{ Storage::url(nova_get_setting('logo')) }}">
+                                <img loading="lazy" alt="{{env('APP_NAME')}}" src="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}">
                             </a>
                             <button id="sidebarHeaderInvokerMenu" type="button" class="d-block d-md-none d-lg-none navbar-toggler d-block btn u-hamburger mr-3 mr-xl-0" aria-controls="sidebarHeader" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarHeader1" data-unfold-type="css-animation" data-unfold-animation-in="fadeInLeft" data-unfold-animation-out="fadeOutLeft" data-unfold-duration="500">
                                 <span id="hamburgerTriggerMenu" class="u-hamburger__box">
@@ -220,7 +220,7 @@
                                             <div id="headerSidebarContent" class="u-sidebar__content u-header-sidebar__content">
 
                                                 <a class="d-flex ml-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-vertical" href="#" aria-label="">
-                                                    <img loading="lazy" src="{{ Storage::url(nova_get_setting('logo')) }}">
+                                                    <img loading="lazy" src="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}">
                                                 </a>
 
 
@@ -240,7 +240,7 @@
                                                                     <li>
                                                                         @foreach(\Config::get('currencies') as $currency)
                                                                             <a class="dropdown-item active currency_button" data-code="{{$currency->code}}" href="#">
-                                                                                <img loading="lazy" width="20px" alt="Currency Flags" src="{{$currency->getFirstMediaUrlOrDefault(CURRENCY_PATH, 'thumb')['url']}}" />&nbsp;
+                                                                                <img loading="lazy" width="20px" alt="{{$currency->getFirstMediaUrlOrDefault(CURRENCY_PATH)['alt']}}" src="{{$currency->getFirstMediaUrlOrDefault(CURRENCY_PATH, 'size_20_20')['url']}}" />&nbsp;
                                                                                 {{$currency->code}} @if($currency->symbol) ({{$currency->symbol}}) @endif
                                                                             </a>
                                                                         @endforeach
@@ -524,7 +524,7 @@
 
                                                             <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="{{$category->slug}}">
                                                                 <div class="vmm-bg">
-                                                                    <img loading="lazy" class="img-fluid" src="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" alt="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt'] }}" title="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title'] }}">
+                                                                    <img loading="lazy" class="img-fluid" src="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_width_290')['url']}}" alt="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt'] }}" title="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title'] }}">
                                                                 </div>
                                                                 <div class="row u-header__mega-menu-wrapper">
                                                                     <div class="col mb-3 mb-sm-0">

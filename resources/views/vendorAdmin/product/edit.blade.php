@@ -171,15 +171,15 @@
                                             <label class="custom-file-label">{{__('vendorAdmin.choose_images')}}</label>
                                         </div>
                                     </div>
-                                    <div class="mt-1 temp-img-container"></div>
-                                    <div class="mt-1">
+                                    <div class="mt-3 temp-img-container"></div>
+                                    <div class="mt-3">
                                         <div class="row">
                                         @foreach($product->getMedia(PRODUCT_PATH) as $image)
-                                            <div class="col-md-2 image-container">
+                                            <div class="col-md-1 image-container">
                                                 <a href="{{route('vendor.product.deleteImage', [$product, $image])}}">
                                                     <i class="absolute-image fas fa-times"></i>
                                                 </a>
-                                                <img class="img-thumbnail" width="100%" src="{{ $image->getUrl() }}">
+                                                <img class="img-thumbnail" width="100%" src="{{ $image->getUrl('size_width_100') }}">
                                             </div>
                                         @endforeach
                                         </div>

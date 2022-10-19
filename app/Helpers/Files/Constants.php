@@ -3,19 +3,18 @@
 // define link for uploads folders
 define("USER_PROFILE", 'user_profile');
 define("USER_COVER", 'user_cover');
+define("COMPANY_PATH", 'company');
 define("LANGUAGE_PATH", 'language');
 define("CATEGORY_PATH", 'category');
 define("CATEGORY_COVER", 'category_cover');
 define("TEAM_PATH", 'team');
 define("PRODUCT_PATH", 'product');
 define("GENERATE_PRODUCT_PATH", 'generate_product');
-define("COMPANY_PATH", 'company');
-define("VENDOR_PATH", 'vendor');
 define("VENDOR_LOGO", 'vendor_logo');
 define("VENDOR_COVER", 'vendor_cover');
+define("VENDOR_PATH", 'vendor');
 define("PARTNER_PATH", 'partner');
 define("CURRENCY_PATH", 'currency');
-define("INQUIRE_PATH", 'inquire');
 define("PAGE_PATH", 'page');
 define("SLIDER_PATH", 'slider');
 define("DRIVER_PHOTO", 'driver_photo');
@@ -23,7 +22,15 @@ define("DRIVER_ID", 'driver_id');
 define("DRIVER_LICENSE", 'driver_license');
 define("CAR_PHOTO", 'car_photo');
 define("CAR_LICENSE", 'car_license');
+define("INQUIRE_PATH", 'inquire');
 define('QUOTE_ATTACHMENT', 'quote');
+
+define('LOGO_PATH', 'logo');
+define('FAVICON_PATH', 'favicon');
+define('SLIDER_BACKGROUND_PATH', 'slider_background');
+define('HOME_FIRST_SECTION_PATH', 'home_first_section');
+define('HOME_SECOND_SECTION_PATH', 'home_second_section');
+define('HOME_THIRD_SECTION_PATH', 'home_third_section');
 
 
 // define validation

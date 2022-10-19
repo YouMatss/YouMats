@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Session;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -40,12 +41,48 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     ];
 
     public function registerMediaConversions(Media $media = null): void {
-        $this->addMediaConversion('webp')->format('webp');
-        $this->addMediaConversion('cropper')->performOnCollections(PRODUCT_PATH);
+        $this->addMediaConversion('size_height_50')
+            ->height(50)
+            ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_50_50')
+            ->crop(Manipulations::CROP_CENTER, 50, 50)
+            ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_height_150')
+            ->height(150)
+            ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_width_100')
+            ->width(100)
+            ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_150_150')
+            ->crop(Manipulations::CROP_CENTER, 150, 150)
+            ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_height_300')
+            ->height(300)
+            ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_300_300')
+            ->crop(Manipulations::CROP_CENTER, 300, 300)
+            ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_height_500')
+            ->height(500)
+            ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_500_500')
+            ->crop(Manipulations::CROP_CENTER, 500, 500)
+            ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
+
+
+        $this->addMediaConversion('cropper')->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 
     public function registerMediaCollections(): void {
-        $this->addMediaCollection(PRODUCT_PATH)->withResponsiveImages();
+        $this->addMediaCollection(PRODUCT_PATH);
     }
 
     public function getPriceAttribute($value) {

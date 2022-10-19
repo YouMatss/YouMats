@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -21,8 +22,16 @@ class Page extends Model implements Sortable, HasMedia
     public $translatable = ['title', 'desc', 'short_desc', 'meta_title', 'meta_keywords', 'meta_desc'];
 
     public function registerMediaConversions(Media $media = null): void {
-        $this->addMediaConversion('thumb')->width(200)->height(200);
-        $this->addMediaConversion('cropper')->performOnCollections(PAGE_PATH);
+        $this->addMediaConversion('size_height_300')
+            ->height(300)
+            ->performOnCollections(PAGE_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_1350_300')
+            ->crop(Manipulations::CROP_CENTER, 1350, 300)
+            ->performOnCollections(PAGE_PATH)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(PAGE_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 
     public function registerMediaCollections(): void {

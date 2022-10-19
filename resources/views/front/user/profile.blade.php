@@ -32,9 +32,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_COVER)['url'] }}" class="photo_cover_vendor">
+                    <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_COVER, 'size_1350_300')['url'] }}" class="photo_cover_vendor">
                 </div>
-                <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_PROFILE)['url'] }}" class="photo_profile_vendor">
+                <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_PROFILE, 'size_200_200')['url'] }}" class="photo_profile_vendor">
             </div>
         </div>
         <div class="row">
@@ -73,12 +73,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="box_img_v">
-                                                <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_COVER)['url'] }}" class="photo_cover_vendor">
+                                                <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_COVER, 'size_height_300')['url'] }}" class="photo_cover_vendor">
                                             </div>
                                         </div>
                                         <div class="col-md-3 ml-auto">
                                             <div class="box_img_profile">
-                                                <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_PROFILE)['url'] }}" class="photo_cover_vendor">
+                                                <img loading="lazy" src="{{ $user->getFirstMediaUrlOrDefault(USER_PROFILE, 'size_200_200')['url'] }}" class="photo_cover_vendor">
                                             </div>
                                         </div>
 

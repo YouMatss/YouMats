@@ -77,7 +77,7 @@ class Fields {
      */
     public static function image(bool $isRequired, string $mediaCollection, string $name = 'Image', bool $single = true, string $helpText = null): Medialibrary
     {
-        $image = Medialibrary::make(__($name), $mediaCollection)->fields(function() {
+        $image = Medialibrary::make($name, $mediaCollection)->fields(function() {
             return [
                 Text::make('File Name', 'file_name')->rules('required', 'min:2'),
                 Text::make('Image Title', 'img_title')->translatable()->rules(NULLABLE_STRING_VALIDATION),
@@ -107,7 +107,7 @@ class Fields {
      */
     public static function file(bool $isRequired, string $mediaCollection, string $name = 'File', bool $single = true, string $helpText = null): Medialibrary
     {
-        $file = Medialibrary::make(__($name), $mediaCollection)->fields(function() {
+        $file = Medialibrary::make($name, $mediaCollection)->fields(function() {
             return [
                 Text::make('File Name', 'file_name')->rules('required', 'min:2')
             ];

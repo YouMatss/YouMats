@@ -89,7 +89,7 @@ class User extends Resource
                 ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:individual,company'])),
 
             NovaDependencyContainer::make([
-                Fields::image(true, COMPANY_PATH, 'Licenses', false),
+                Fields::file(true, COMPANY_PATH, 'Licenses', false),
             ])->dependsOn('type', 'company'),
 
             HasMany::make('Orders'),

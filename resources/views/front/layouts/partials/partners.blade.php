@@ -28,7 +28,7 @@
             @foreach($featuredPartners as $partner)
                 <div class="js-slide img_vend">
                     <a href="{{$partner->link}}" class="link-hover__brand">
-                        <img loading="lazy" class="img-fluid m-auto max-height-50" src="{{ $partner->getFirstMediaUrlOrDefault(PARTNER_PATH)['url'] }}" alt="{{$partner->getFirstMediaUrlOrDefault(PARTNER_PATH)['alt']}}" title="{{$partner->getFirstMediaUrlOrDefault(PARTNER_PATH)['title']}}">
+                        <img loading="lazy" class="img-fluid m-auto max-height-50" src="{{ $partner->getFirstMediaUrlOrDefault(PARTNER_PATH, 'size_height_50')['url'] }}" alt="{{$partner->getFirstMediaUrlOrDefault(PARTNER_PATH)['alt']}}" title="{{$partner->getFirstMediaUrlOrDefault(PARTNER_PATH)['title']}}">
                     </a>
                 </div>
             @endforeach

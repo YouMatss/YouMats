@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -29,8 +30,19 @@ class Driver extends Authenticatable implements HasMedia
     ];
 
     public function registerMediaConversions(Media $media = null): void {
-        $this->addMediaConversion('thumb')->width(200)->height(200);
-        $this->addMediaConversion('cropper')->performOnCollections(DRIVER_PHOTO);
+        $this->addMediaConversion('size_height_200')
+            ->height(200)
+            ->performOnCollections(DRIVER_PHOTO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_200_200')
+            ->crop(Manipulations::CROP_CENTER, 200, 200)
+            ->performOnCollections(DRIVER_PHOTO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(DRIVER_PHOTO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('licenses')
+            ->performOnCollections(DRIVER_ID, DRIVER_LICENSE)->format(Manipulations::FORMAT_WEBP);
     }
 
     public function registerMediaCollections(): void {

@@ -123,7 +123,7 @@ class Vendor extends Resource
 
             Fields::image(true, VENDOR_LOGO, 'Logo', true),
 
-            Fields::image(true, VENDOR_PATH, 'Licenses', false),
+            Fields::file(true, VENDOR_PATH, 'Licenses', false),
 
             Toggle::make('Active')
                 ->falseColor('#bacad6')->editableIndex(),

@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('home')}}" class="brand-link">
-        <img src="{{ Storage::url(nova_get_setting('logo')) }}" alt="{{env('APP_NAME')}}"
+        <img src="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_25')['url'] }}" alt="{{env('APP_NAME')}}"
              class="brand-image">
         <span class="brand-text font-weight-light">&nbsp;</span>
     </a>
@@ -11,7 +11,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}"
+                <img src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_50_50')['url'] }}"
                      class="img-circle elevation-2"
                      alt="{{ $vendor->name }}">
             </div>

@@ -8,13 +8,13 @@
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:title" content="{{getMetaTag($vendor, 'meta_title', $vendor->name)}}" />
     <meta property="og:description" content="{{getMetaTag($vendor, 'meta_desc', $vendor->name)}}" />
-    <meta property="og:image" content="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}" />
+    <meta property="og:image" content="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_height_150')['url']}}" />
 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
     <meta name="twitter:title" content="{{getMetaTag($vendor, 'meta_title', $vendor->name)}}">
     <meta name="twitter:description" content="{{getMetaTag($vendor, 'meta_desc', $vendor->name)}}">
-    <meta name="twitter:image" content="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url']}}">
+    <meta name="twitter:image" content="{{$vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_height_150')['url']}}">
 
     <link rel="canonical" href="{{url()->current()}}" />
 
@@ -44,9 +44,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="img_vendor">
-                    <img loading="lazy" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER)['url'] }}" class="photo_cover_vendor">
+                    <img loading="lazy" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_COVER, 'size_1350_300')['url'] }}" class="photo_cover_vendor">
                 </div>
-                <img loading="lazy" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}" class="photo_profile_vendor">
+                <img loading="lazy" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_200_200')['url'] }}" class="photo_profile_vendor">
             </div>
         </div>
         <div class="row">

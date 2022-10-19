@@ -7,6 +7,7 @@ use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -21,8 +22,19 @@ class Car extends Model implements HasMedia
     public $translatable = ['name'];
 
     public function registerMediaConversions(Media $media = null): void {
-        $this->addMediaConversion('thumb')->width(200)->height(200);
-        $this->addMediaConversion('cropper')->performOnCollections(CAR_PHOTO);
+        $this->addMediaConversion('size_height_200')
+            ->height(200)
+            ->performOnCollections(CAR_PHOTO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('size_200_200')
+            ->crop(Manipulations::CROP_CENTER, 200, 200)
+            ->performOnCollections(CAR_PHOTO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('cropper')
+            ->performOnCollections(CAR_PHOTO)->format(Manipulations::FORMAT_WEBP);
+
+        $this->addMediaConversion('licenses')
+            ->performOnCollections(CAR_LICENSE)->format(Manipulations::FORMAT_WEBP);
     }
 
     public function registerMediaCollections(): void {

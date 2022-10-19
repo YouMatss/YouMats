@@ -34,7 +34,7 @@
                 <div class="col-lg-5">
                     <div class="mb-6">
                         <a href="{{route('home')}}" class="d-inline-block">
-                            <img loading="lazy" src="{{ Storage::url(nova_get_setting('logo')) }}" height="50">
+                            <img loading="lazy" src="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}" height="45">
                         </a>
                     </div>
                     @if(is_company())

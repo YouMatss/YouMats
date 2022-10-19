@@ -7,6 +7,7 @@ use App\Models\Currency;
 use App\Models\FAQ;
 use App\Models\Page;
 use App\Models\Partner;
+use App\Models\StaticImage;
 use App\Models\Vendor;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;

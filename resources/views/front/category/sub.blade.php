@@ -8,13 +8,13 @@
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:title" content="{{getMetaTag($category, 'meta_title', $category->title . ' | ' . nova_get_setting_translate('site_name'))}}" />
     <meta property="og:description" content="{{getMetaTag($category, 'meta_desc', nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc))}}" />
-    <meta property="og:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}" />
+    <meta property="og:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_350_350')['url']}}" />
 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
     <meta name="twitter:title" content="{{getMetaTag($category, 'meta_title', $category->title . ' | ' . nova_get_setting_translate('site_name'))}}">
     <meta name="twitter:description" content="{{getMetaTag($category, 'meta_desc', nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc))}}">
-    <meta name="twitter:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}">
+    <meta name="twitter:image" content="{{$category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_350_350')['url']}}">
 
     <link rel="canonical" href="{{url()->current()}}" />
 
@@ -55,14 +55,14 @@
                          data-responsive='[{"breakpoint": 1400,"settings": {"slidesToShow": 5}}, {"breakpoint": 1200,"settings": {"slidesToShow": 3}}, {"breakpoint": 992,"settings": {"slidesToShow": 2}}, {"breakpoint": 768,"settings": {"slidesToShow": 2}}, {"breakpoint": 554,"settings": {"slidesToShow": 2}}]'>
                         @foreach($subscribeVendors as $subscribeVendor)
                             <div class="js-slide products-group img-logos-new">
-                                <div class="mb-2">
+                                <div>
                                     <a href="{{ route('vendor.show', [$subscribeVendor->slug]) }}" class="d-block text-center">
-                                        <img class="img-fluid img-logos-new" style="height: 50px !important;"
-                                             src="{{ $subscribeVendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['url'] }}"
+                                        <img class="img-fluid img-logos-new" style="display: inline-block !important;height: 50px !important;"
+                                             src="{{ $subscribeVendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_height_50')['url'] }}"
                                              alt="{{ $subscribeVendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt'] }}"
                                              title="{{ $subscribeVendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['title'] }}">
                                     </a>
-                                    <label class="text-gray-100">{{$subscribeVendor->name}}</label>
+                                    <p class="text-gray-100">{{$subscribeVendor->name}}</p>
                                 </div>
                             </div>
                         @endforeach
@@ -173,11 +173,11 @@
                             <div class="row flex-nowrap flex-md-wrap overflow-auto overflow-md-visble rtl" style="padding-top: 15px">
                                 @foreach($category->children as $child)
                                     <div class="col-md-4 col-lg-3 col-xl-4 col-xl-2gdot4 mb-3 flex-shrink-0 flex-md-shrink-1">
-                                        <div class="bg-white overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
+                                        <div class="bg-white overflow-hidden shadow-on-hover d-flex align-items-center" style="height: 100px !important;">
                                             <a href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2">
                                                 <div class="media align-items-center">
                                                     <div class="pt-2">
-                                                        <img loading="lazy" class="img-fluid img_category_page" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['url']}}"
+                                                        <img loading="lazy" class="img-fluid img_category_page" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_85_85')['url']}}"
                                                              alt="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}">
                                                     </div>
                                                     <div class="ml-3 media-body">
