@@ -3,16 +3,14 @@
 namespace App\Nova;
 
 use App\Helpers\Nova\Fields;
+use App\Nova\Actions\ImportProducts;
 use Benjacho\BelongsToManyField\BelongsToManyField;
 use Davidpiesse\NovaToggle\Toggle;
-use DmitryBubyakin\NovaMedialibraryField\Fields\GeneratedConversions;
-use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
-use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
@@ -21,11 +19,8 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
-use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use Maher\TitleTemplate\TitleTemplate;
-use Monaye\SimpleLinkButton\SimpleLinkButton;
 use Nikaia\Rating\Rating;
-use NovaButton\Button;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
@@ -245,7 +240,7 @@ class Product extends Resource
     public function actions(Request $request)
     {
         return [
-            new DownloadExcel,
+            new ImportProducts
         ];
     }
 }

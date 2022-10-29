@@ -10,7 +10,7 @@ class SubscribersImport implements ToModel
     public function model(array $row)
     {
         return new Subscriber([
-            'email' => $row[1]
+            'email' => $row[0]
         ]);
     }
 }

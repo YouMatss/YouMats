@@ -76,8 +76,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         $this->addMediaConversion('size_500_500')
             ->crop(Manipulations::CROP_CENTER, 500, 500)
             ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
-
-
+        
         $this->addMediaConversion('cropper')->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 

@@ -166,7 +166,6 @@ return [
          * Package Service Providers...
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Maatwebsite\LaravelNovaExcel\LaravelNovaExcelServiceProvider::class,
         Ladumor\OneSignal\OneSignalServiceProvider::class,
         /*
          * Application Service Providers...

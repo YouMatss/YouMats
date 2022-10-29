@@ -7,7 +7,6 @@ use App\Nova\Metrics\SubscribersCount;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 
 class Subscriber extends Resource
 {
@@ -54,7 +53,6 @@ class Subscriber extends Resource
     public function actions(Request $request)
     {
         return [
-            (new DownloadExcel)->withHeadings()->askForFilename()->askForWriterType(),
             new ImportSubscribers
         ];
     }

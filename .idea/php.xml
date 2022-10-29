@@ -128,8 +128,6 @@
       <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
       <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
       <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
-      <path value="$PROJECT_DIR$/vendor/maatwebsite/laravel-nova-excel" />
-      <path value="$PROJECT_DIR$/vendor/laravie/serialize-queries" />
       <path value="$PROJECT_DIR$/vendor/anaseqal/nova-import" />
       <path value="$PROJECT_DIR$/vendor/pusher/pusher-php-server" />
       <path value="$PROJECT_DIR$/vendor/paragonie/sodium_compat" />

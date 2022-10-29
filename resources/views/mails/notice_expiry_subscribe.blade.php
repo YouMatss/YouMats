@@ -119,7 +119,7 @@
                                                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                                     <tr>
                                                         <td style="padding-right: 0px;padding-left: 0px;" align="center">
-                                                            <img align="center" border="0" src="http://youmats.sa/assets/img/logo.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 181px;" width="181"/>
+                                                            <img align="center" border="0" src="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}" alt="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['alt'] }}" title="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['title'] }}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 181px;" width="181"/>
                                                         </td>
                                                     </tr>
                                                 </table>

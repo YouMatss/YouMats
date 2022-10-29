@@ -20,13 +20,14 @@ class ImportSubscribers extends Action
 
     public function handle(ActionFields $fields) {
         Excel::import(new SubscribersImport, $fields->file);
+
         return Action::message('It worked!');
     }
 
     public function fields()
     {
         return [
-            File::make('File')->rules('required'),
+            File::make('File')->rules(REQUIRED_EXCEL_VALIDATION),
         ];
     }
 }

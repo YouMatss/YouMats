@@ -67,6 +67,8 @@ define('NULLABLE_PDF_VALIDATION', ['nullable', 'file', 'mimes:pdf', 'max:4096'])
 
 define('REQUIRED_FILE_VALIDATION', ['required', 'file', 'mimes:png,jpg,jpeg,pdf,doc,docx,txt,csv,xlsx,svg,webp', 'max:10000']);
 define('NULLABLE_FILE_VALIDATION', ['nullable', 'file', 'mimes:png,jpg,jpeg,pdf,doc,docx,txt,csv,xlsx,svg,webp', 'max:10000']);
+
+define('REQUIRED_EXCEL_VALIDATION', ['required', 'file', 'mimes:xlsx,csv,xls']);
 // Array
 define('ARRAY_VALIDATION', ['array']);
 define('REQUIRED_ARRAY_VALIDATION', ['required', 'array']);

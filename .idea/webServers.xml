@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="51790013-de42-4492-973f-4ab9ac077b26" name="youmats" url="http://youmats.sa">
-        <fileTransfer rootFolder="/home/youmats/public_html" accessType="SFTP" host="youmats.sa" port="22" sshConfigId="5337c75d-40d7-4e6b-890f-7e016b1745d0" sshConfig="root@youmats.sa:22 password">
+      <webServer id="51790013-de42-4492-973f-4ab9ac077b26" name="youmats" url="http://new.youmats.com">
+        <fileTransfer rootFolder="/home/youmats/public_html" accessType="SFTP" host="new.youmats.com" port="22" sshConfigId="5337c75d-40d7-4e6b-890f-7e016b1745d0" sshConfig="root@new.youmats.com:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

@@ -5,7 +5,6 @@ namespace App\Nova;
 use App\Helpers\Nova\Fields;
 use App\Nova\Filters\Category\CategoryType;
 use Davidpiesse\NovaToggle\Toggle;
-use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Drobee\NovaSluggable\SluggableText;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
@@ -18,12 +17,10 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
-use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
 use Waynestate\Nova\CKEditor;
-use Whitecube\NovaFlexibleContent\Flexible;
 
 class Category extends Resource
 {
@@ -141,8 +138,6 @@ class Category extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            new DownloadExcel,
-        ];
+        return [];
     }
 }

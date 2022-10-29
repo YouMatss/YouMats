@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7999e704c10d5bf18ee2b44248bacf2",
+    "content-hash": "8f5553cd93e6f2e24c9d272b0ac7363e",
     "packages": [
         {
             "name": "adamcmoore/nova-gmap",
@@ -3765,70 +3765,6 @@
             "time": "2022-05-20T13:38:08+00:00"
         },
         {
-            "name": "laravie/serialize-queries",
-            "version": "v2.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravie/serialize-queries.git",
-                "reference": "b2ac587c8a1dfc27b7f0b40ab649c246a8b994ce"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravie/serialize-queries/zipball/b2ac587c8a1dfc27b7f0b40ab649c246a8b994ce",
-                "reference": "b2ac587c8a1dfc27b7f0b40ab649c246a8b994ce",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "^8.67 || ^9.0",
-                "illuminate/queue": "^8.67 || ^9.0",
-                "php": "^7.3 || ^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.22 || ^7.0",
-                "phpstan/phpstan": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Laravie\\SerializesQuery\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mior Muhammad Zaki",
-                    "email": "crynobone@gmail.com"
-                }
-            ],
-            "description": "Serializable Laravel Query Builder",
-            "support": {
-                "issues": "https://github.com/laravie/serialize-queries/issues",
-                "source": "https://github.com/laravie/serialize-queries/tree/v2.0.2"
-            },
-            "funding": [
-                {
-                    "url": "https://paypal.me/crynobone",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://liberapay.com/crynobone",
-                    "type": "liberapay"
-                }
-            ],
-            "time": "2022-07-26T23:53:26+00:00"
-        },
-        {
             "name": "lcobucci/clock",
             "version": "2.0.0",
             "source": {
@@ -4827,64 +4763,6 @@
                 }
             ],
             "time": "2022-05-02T13:50:01+00:00"
-        },
-        {
-            "name": "maatwebsite/laravel-nova-excel",
-            "version": "1.2.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SpartnerNL/Laravel-Nova-Excel.git",
-                "reference": "a7fe3ad5c729339b3fc824b002109d01318173db"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SpartnerNL/Laravel-Nova-Excel/zipball/a7fe3ad5c729339b3fc824b002109d01318173db",
-                "reference": "a7fe3ad5c729339b3fc824b002109d01318173db",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/nova": "*",
-                "laravie/serialize-queries": "^1.0|^2.0",
-                "maatwebsite/excel": "^3.1",
-                "php": ">=7.1.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Maatwebsite\\LaravelNovaExcel\\LaravelNovaExcelServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Maatwebsite\\LaravelNovaExcel\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Patrick Brouwers",
-                    "email": "patrick@maatwebsite.nl"
-                }
-            ],
-            "description": "Supercharged Excel exports for Laravel Nova Resources",
-            "keywords": [
-                "PHPExcel",
-                "actions",
-                "laravel",
-                "laravel-nova",
-                "nova",
-                "phpspreadsheet"
-            ],
-            "support": {
-                "issues": "https://github.com/SpartnerNL/Laravel-Nova-Excel/issues",
-                "source": "https://github.com/SpartnerNL/Laravel-Nova-Excel/tree/1.2.10"
-            },
-            "time": "2022-02-09T21:42:18+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
