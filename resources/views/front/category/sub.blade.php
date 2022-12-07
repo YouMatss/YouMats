@@ -80,7 +80,7 @@
                 <h1 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$category->getTranslation('title', app()->getLocale(), false)}}</h1>
             </div>
         </div>
-        @endifc
+        @endif
         <form method="get" action="{{url()->current()}}">
         <div class="container">
             <div class="row mb-8 rtl">

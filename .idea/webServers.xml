@@ -3,14 +3,14 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="51790013-de42-4492-973f-4ab9ac077b26" name="youmats" url="http://new.youmats.com">
-        <fileTransfer rootFolder="/home/youmats/public_html" accessType="SFTP" host="new.youmats.com" port="22" sshConfigId="5337c75d-40d7-4e6b-890f-7e016b1745d0" sshConfig="root@new.youmats.com:22 password">
+        <fileTransfer rootFolder="/home/youmats/public_html" accessType="SFTP" host="youmats.com" port="22" sshConfigId="5337c75d-40d7-4e6b-890f-7e016b1745d0" sshConfig="root@youmats.com:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
       <webServer id="34b306a4-2925-4f67-866c-c59828fb4c41" name="old">
-        <fileTransfer accessType="SFTP" host="youmats.com" port="22" sshConfigId="130d6156-f493-483a-9d0c-a12752c22442" sshConfig="root@youmats.com:22 password">
+        <fileTransfer accessType="SFTP" host="youmats.com" port="22" sshConfigId="5337c75d-40d7-4e6b-890f-7e016b1745d0" sshConfig="root@youmats.com:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
