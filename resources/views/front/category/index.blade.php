@@ -105,11 +105,13 @@
         </div>
     </div>
     <div class="mb-6 bg-gray-7 py-6">
+        @if($category->getTranslation('title', app()->getLocale(), false))
         <div class="container mb-8">
             <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-                <h1 class="section-title section-title__full mb-0 pb-2 font-size-22">{{(!empty($category->title)) ? $category->title : $category->name}}</h1>
+                <h1 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$category->getTranslation('title', app()->getLocale(), false)}}</h1>
             </div>
         </div>
+        @endif
         <div class="container">
             <div class="row flex-nowrap flex-md-wrap overflow-auto overflow-md-visble rtl">
                 @foreach($children as $child)
