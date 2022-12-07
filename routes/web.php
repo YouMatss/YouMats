@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 //    dd('Done');
 //});
 
+foreach (json_decode(nova_get_setting('redirect')) as $redirect) {
+    Route::permanentRedirect($redirect->from, $redirect->to);
+}
+
 //Actions routes
 Route::post('changeCity', 'Common\MiscController@changeCity')->name('front.changeCity');
 Route::post('changeCurrency', 'Common\MiscController@changeCurrency')->name('front.currencySwitch');

@@ -73,6 +73,7 @@ use Laravel\Nova\NovaApplicationServiceProvider;
 use Laravel\Nova\Panel;
 use Mirovit\NovaNotifications\NovaNotifications;
 use OptimistDigital\NovaSettings\NovaSettings;
+use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use Richardkeep\NovaTimenow\NovaTimenow;
 use Spatie\BackupTool\BackupTool;
 use Vyuldashev\NovaPermission\NovaPermissionTool;
@@ -92,6 +93,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         NovaSettings::addSettingsFields([
             new Panel('Vendor Terms', $this->vendorTerms())
         ], [], 'Vendor Terms');
+        NovaSettings::addSettingsFields([
+            new Panel('Redirect 301', $this->redirect301())
+        ], [], 'Redirect 301');
         Nova::serving(function () {
             CategoryModel::observe(CategoryObserver::class);
             ProductModel::observe(ProductObserver::class);
@@ -367,6 +371,19 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ->rules(REQUIRED_TEXT_VALIDATION)->translatable(),
             Text::make('Button', 'vendor_terms_button')
                 ->rules(REQUIRED_STRING_VALIDATION)->translatable(),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function redirect301(): array
+    {
+        return [
+            SimpleRepeatable::make('Redirect', 'redirect', [
+                Text::make('From')->rules(REQUIRED_STRING_VALIDATION),
+                Text::make('To')->rules(REQUIRED_STRING_VALIDATION)
+            ])->canAddRows(true)->canDeleteRows(true),
         ];
     }
 }
