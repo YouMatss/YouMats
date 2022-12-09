@@ -289,6 +289,14 @@
         </div>
     </div>
 </aside>
+
 <a class="js-go-to u-go-to" href="#" data-position='{"bottom": 15, "right": 15 }' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
     <span class="fas fa-arrow-up u-go-to__inner"></span>
+</a>
+
+<a class="widget" href="tel:+{{nova_get_setting('widget_phone')}}">
+    <i class="fas fa-phone"></i>
+</a>
+<a class="widget whatsapp" href="https://wa.me/+{{nova_get_setting('widget_whatsapp')}}" target="_blank">
+    <i class="fab fa-whatsapp"></i>
 </a>

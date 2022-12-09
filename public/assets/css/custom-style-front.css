@@ -169,3 +169,36 @@
 .typeIntroduceButton {
     cursor: pointer;
 }
+
+.widget {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+    background-color: #003f91;
+    color: #FFF;
+    position: fixed;
+    bottom: 70px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.widget i {
+    font-size: 20px;
+}
+
+.widget:hover {
+    color: #FFF;
+}
+
+.widget.whatsapp {
+    background-color: #00e676;
+    bottom: 125px;
+}
+
+.widget.whatsapp i {
+    font-size: 30px;
+}

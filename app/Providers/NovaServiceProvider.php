@@ -329,6 +329,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ->rules(REQUIRED_STRING_VALIDATION)->translatable(),
             Text::make('Main Phone', 'phone')
                 ->rules(REQUIRED_STRING_VALIDATION),
+            Text::make('Widget Phone', 'widget_phone')
+                ->rules(REQUIRED_STRING_VALIDATION),
+            Text::make('Widget Whatsapp', 'widget_whatsapp')
+                ->rules(REQUIRED_STRING_VALIDATION),
         ];
     }
 
