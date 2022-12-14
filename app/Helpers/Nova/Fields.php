@@ -16,9 +16,10 @@ class Fields {
      * @param string $tableName
      * @param bool $requiredSlug
      * @param bool $is_canonical
+     * @param bool $translatable_schema
      * @return Panel
      */
-    public static function SEO(string $model, string $tableName, bool $requiredSlug = true, $is_canonical = false): Panel
+    public static function SEO(string $model, string $tableName, bool $requiredSlug = true, bool $is_canonical = false, bool $translatable_schema = false): Panel
     {
         if($requiredSlug)
             $slugValidation = REQUIRED_STRING_VALIDATION;
@@ -51,11 +52,20 @@ class Fields {
                 ->rules(NULLABLE_TEXT_VALIDATION)
                 ->alwaysShow()
                 ->translatable(),
-
-            Code::make('Schema')
-                ->hideFromIndex()
-                ->rules(NULLABLE_TEXT_VALIDATION),
         ];
+
+        $schema = Code::make('Schema')
+            ->hideFromIndex()
+            ->rules(NULLABLE_TEXT_VALIDATION);
+
+        if($translatable_schema) {
+            $schema = Code::make('Schema')
+                ->hideFromIndex()
+                ->rules(NULLABLE_TEXT_VALIDATION)
+                ->translatable();
+        }
+
+        $attributes[] = $schema;
 
         if($is_canonical) {
             $canonical = Text::make('Canonical')->hideFromIndex()

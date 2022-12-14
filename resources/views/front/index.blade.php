@@ -169,34 +169,48 @@
                 </div>
 
                 <div class="mb-4 position-relative">
-                    <div class="js-slick-carousel u-slick u-slick--gutters-0 position-static overflow-hidden u-slick-overflow-visble pb-5 pt-2 px-1" data-arrows-classes="u-slick__arrow u-slick__arrow--flat u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-inner u-slick__arrow-inner--left ml-lg-2 ml-xl-n3" data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-inner u-slick__arrow-inner--right mr-lg-2 mr-xl-n3" data-pagi-classes="text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-3 pt-1" data-slides-show="7" data-slides-scroll="1"
-                         data-responsive='[{
-                                  "breakpoint": 1400,
-                                  "settings": {
-                                    "slidesToShow": 5
-                                  }
-                                }, {
-                                    "breakpoint": 1200,
-                                    "settings": {
-                                      "slidesToShow": 3
-                                    }
-                                }, {
-                                  "breakpoint": 992,
-                                  "settings": {
-                                    "slidesToShow": 2
-                                  }
-                                }, {
-                                  "breakpoint": 768,
-                                  "settings": {
-                                    "slidesToShow": 2
-                                  }
-                                }, {
-                                  "breakpoint": 554,
-                                  "settings": {
-                                    "slidesToShow": 2
-                                  }
-                                }]'>
 
+                    <div
+                         class="js-slick-carousel u-slick u-slick--gutters-0 position-static overflow-hidden u-slick-overflow-visble pb-5 pt-2 px-1"
+                         data-arrows-classes="u-slick__arrow u-slick__arrow--flat u-slick__arrow-centered--y rounded-circle"
+                         data-pagi-classes="text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-3 pt-1"
+                         data-arrow-left-classes="fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9"
+                         data-arrow-right-classes="fa fa-angle-right u-slick__arrow-classic-inner--right"
+                         data-slick='{
+                            "autoplay": true,
+                            "infinite": true,
+                            "slidesToShow": 7
+                            @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+                            ,"rtl": true
+                            @endif
+                         }'
+                         data-responsive='[{
+                              "breakpoint": 1400,
+                              "settings": {
+                                "slidesToShow": 5
+                              }
+                            }, {
+                                "breakpoint": 1200,
+                                "settings": {
+                                  "slidesToShow": 3
+                                }
+                            }, {
+                              "breakpoint": 992,
+                              "settings": {
+                                "slidesToShow": 2
+                              }
+                            }, {
+                              "breakpoint": 768,
+                              "settings": {
+                                "slidesToShow": 2
+                              }
+                            }, {
+                              "breakpoint": 554,
+                              "settings": {
+                                "slidesToShow": 2
+                              }
+                         }]'
+                    >
                         @foreach($best_seller_products as $bs_product)
                         <div class="js-slide products-group">
                             <div class="product-item mx-1 remove-divider">
@@ -235,7 +249,7 @@
                             </div>
                         </div>
                         @endforeach
-                    </div>
+                    </>
                 </div>
             </div>
         </div>
@@ -243,7 +257,7 @@
 
     @if(isset($section_i_category))
     <div class="container">
-        <div class="mb-6">
+        <div class="my-6">
             <!-- Nav nav-pills -->
             <div class="position-relative text-center z-index-2">
                 <div class=" d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 rtl">
