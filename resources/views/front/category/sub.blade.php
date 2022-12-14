@@ -18,7 +18,7 @@
 
     <link rel="canonical" href="{{url()->current()}}" />
 
-    {!! $category->schema !!}
+    {!! $category->getTranslation('schema', LaravelLocalization::getCurrentLocale(), false) !!}
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
@@ -210,6 +210,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             $(document).on('ready', function () {
+
+                $('.show--filter').on('click', function () {
+                    $('.hidden--search--filter').toggleClass('d-none');
+                });
+
                 function getAttributesIds(checkboxName) {
                     let checkBoxes = document.getElementsByName(checkboxName);
                     let ids = Array.prototype.slice.call(checkBoxes)

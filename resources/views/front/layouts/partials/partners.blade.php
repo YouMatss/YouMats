@@ -13,18 +13,22 @@
                 "autoplay": true,
                 "infinite": true,
                 "slidesToShow": 5
+                @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+                ,"rtl": true
+                @endif
              }'
              data-responsive='[{
-                            "breakpoint": 992,
-                            "settings": {
-                                "slidesToShow": 2
-                            }
-                        }, {
-                            "breakpoint": 768,
-                            "settings": {
-                                "slidesToShow": 1
-                            }
-                        }]'>
+                "breakpoint": 992,
+                "settings": {
+                    "slidesToShow": 2
+                }
+             }, {
+                "breakpoint": 768,
+                "settings": {
+                    "slidesToShow": 1
+                }
+             }]'
+        >
             @foreach($featuredPartners as $partner)
                 <div class="js-slide img_vend">
                     <a href="{{$partner->link}}" class="link-hover__brand">

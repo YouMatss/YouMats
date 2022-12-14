@@ -23,7 +23,7 @@ class HomeController extends Controller
         $data['section_iii_category'] = Category::where('section_iii', 1)->first();
         $data['section_iv_category'] = Category::where('section_iv', 1)->first();
 
-        $data['best_seller_products'] = Product::where('active', 1)->where('best_seller', 1)->orderBy('sort')->get();
+        $data['best_seller_products'] = Product::where('active', 1)->where('best_seller', 1)->orderBy('sort')->take(14)->get();
 
         return view('front.index')->with($data);
     }

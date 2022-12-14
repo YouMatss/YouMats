@@ -18,72 +18,7 @@
 
     <link rel="canonical" href="{{url()->current()}}" />
 
-    <script type="application/ld+json">
-          {
-            "@context": "https://schema.org",
-            "@type": "Store",
-            "image": [
-              "https://www.youmats.sa/storage/35545/Highcompressed_410811867.webp",
-              "https://www.youmats.sa/storage/169/conversions/se_7-cropper.jpg",
-              "https://www.youmats.sa/storage/35565/Highcompressed_1076776512.webp"
-             ],
-            "name": "YouMats Building Materials",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Hamzah Ibn Abdul Muttalib Dhahrat Al Badi'ah Building No 6249, Riyadh",
-              "addressLocality": "Riyadh",
-              "addressRegion": "Dhahrat Al Badi'ah",
-              "postalCode": "12981",
-              "addressCountry": "SA"
-            },
-            "review": {
-              "@type": "Review",
-              "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": "4",
-                "bestRating": "5"
-              },
-              "author": {
-                "@type": "Person",
-                "name": "YouMats"
-              }
-            },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": 24.5827648,
-              "longitude": -46.6285563
-            },
-            "url": "https://www.youmats.sa/contact-us",
-            "telephone": "+9660502111754",
-            "servesCuisine": "Saudi Arabia",
-            "priceRange": "SAR",
-            "openingHoursSpecification": [
-              {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Saturday",
-                  "Sunday"
-                ],
-                "opens": "9:30",
-                "closes": "17:00"
-              },
-              {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Saturday"
-                ],
-                "opens": "10:00",
-                "closes": "17:00"
-              }
-            ]
-          }
-    </script>
-
-    {!! $category->schema !!}
+    {!! $category->getTranslation('schema', LaravelLocalization::getCurrentLocale(), false) !!}
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">

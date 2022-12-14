@@ -85,7 +85,7 @@ class Category extends Resource
                 ])->canAddRows(true)->canDeleteRows(true),
             ]),
 
-            Fields::SEO(static::$model,'categories'),
+            Fields::SEO(static::$model,'categories', true, false, true),
 
             HasMany::make('Children', 'children', self::class),
             HasMany::make('Products'),
