@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
+use App\Models\Currency;
+use App\Models\StaticImage;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//         Admin::factory(10)->create();
         $this->call(RolesAndPermissionsSeeder::class);
+        StaticImage::create();
+        Currency::create([
+            'name' => 'Saudi Riyal',
+            'code' => 'SAR',
+            'symbol' => '{"en":"SAR","ar":"\u0631.\u0633"}',
+            'rate' => '1.000000',
+            'active' => true
+        ]);
     }
 }
