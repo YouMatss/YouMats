@@ -178,7 +178,7 @@
     background-color: #003f91;
     color: #FFF;
     position: fixed;
-    bottom: 70px;
+    bottom: 15px;
     right: 15px;
     display: flex;
     align-items: center;
@@ -196,7 +196,7 @@
 
 .widget.whatsapp {
     background-color: #00e676;
-    bottom: 125px;
+    bottom: 70px;
 }
 
 .widget.whatsapp i {

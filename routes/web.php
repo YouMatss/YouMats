@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 //    dd('Done');
 //});
 
+// Redirect 301 from admin panel
 foreach (json_decode(nova_get_setting('redirect')) as $redirect) {
     Route::permanentRedirect($redirect->from, $redirect->to);
 }
@@ -34,6 +35,9 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localizationRedirect' ]
 ], function(){
+
+    // Redirect 301 for products links from old website
+    Route::permanentRedirect('Product-View/{productId}/{productSlug}', 'https://www.youmats.com');
 
     //Auth (Verified/Authenticated) routes
     Route::group(['namespace' => 'User'], function () {

@@ -38,7 +38,6 @@ mix.scripts([
         'public/assets/js/components/hs.selectpicker.js'
     ], 'public/assets/js/app.min.js')
     .styles([
-        'public/assets/vendor/font-awesome/css/fontawesome-all.min.css',
         'public/assets/css/font-electro.css',
         'public/assets/vendor/animate.css/animate.min.css',
         'public/assets/vendor/hs-megamenu/src/hs.megamenu.css',
@@ -50,9 +49,11 @@ mix.scripts([
         'public/assets/css/theme.css',
         'public/assets/css/style.css',
         'public/assets/css/custom.css',
-        'public/assets/css/intlTelInput.min.css'
+        'public/assets/css/intlTelInput.min.css',
+        'public/assets/css/custom-style-front.css'
     ], 'public/assets/css/app.min.css')
     .styles([
-        'public/assets/css/rtl.css'
+        'public/assets/css/rtl.css',
+        'public/assets/css/custom-style-front-rtl.css'
     ], 'public/assets/css/rtl.min.css')
     .version();
