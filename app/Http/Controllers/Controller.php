@@ -30,6 +30,7 @@ class Controller extends BaseController
         $data['pages'] = Page::orderBy('sort')->get();
         $data['footer_categories'] = Category::where('show_in_footer', '1')->orderBy('created_at', 'desc');
         $data['FAQs'] = FAQ::orderBy('sort')->get();
+        $data['staticImages'] = StaticImage::first();
 
         View::share($data);
         Config::set($config);

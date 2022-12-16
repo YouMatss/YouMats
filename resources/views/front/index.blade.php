@@ -130,6 +130,7 @@
 
     @include('front.layouts.partials.vendors')
 
+    @if(count($featured_categories))
     <div class="cat">
         <div class="container">
             <div class="row">
@@ -155,9 +156,11 @@
             </div>
         </div>
     </div>
+    @endif
 
     @include('front.layouts.partials.partners')
 
+    @if(count($best_seller_products))
     <div class="mb-5">
 
         <div class="bg-img-hero bg_cat_new st_new pt-5">
@@ -249,11 +252,12 @@
                             </div>
                         </div>
                         @endforeach
-                    </>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    @endif
 
     @if(isset($section_i_category))
     <div class="container">
@@ -322,6 +326,7 @@
     </div>
     @endif
 
+    @if(count($top_categories))
     <div class="container st_new">
         <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
             <h2 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('homee.top_categories') }}</h2>
@@ -347,6 +352,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     @if(isset($section_ii_category))
     <!-- Section II Category -->

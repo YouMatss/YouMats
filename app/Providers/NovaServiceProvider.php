@@ -84,23 +84,25 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
-        CategoryModel::fixTree();
-        NovaSettings::addSettingsFields([
-            new Panel('General', $this->generalData()),
-            new Panel('General SEO', $this->generalSeo()),
-            new Panel('Social Media Links', $this->socialFields()),
-        ], [], 'General');
-        NovaSettings::addSettingsFields([
-            new Panel('Vendor Terms', $this->vendorTerms())
-        ], [], 'Vendor Terms');
-        NovaSettings::addSettingsFields([
-            new Panel('Redirect 301', $this->redirect301())
-        ], [], 'Redirect 301');
-        Nova::serving(function () {
-            CategoryModel::observe(CategoryObserver::class);
-            ProductModel::observe(ProductObserver::class);
-            VendorModel::observe(VendorObserver::class);
-        });
+        try {
+            CategoryModel::fixTree();
+            NovaSettings::addSettingsFields([
+                new Panel('General', $this->generalData()),
+                new Panel('General SEO', $this->generalSeo()),
+                new Panel('Social Media Links', $this->socialFields()),
+            ], [], 'General');
+            NovaSettings::addSettingsFields([
+                new Panel('Vendor Terms', $this->vendorTerms())
+            ], [], 'Vendor Terms');
+            NovaSettings::addSettingsFields([
+                new Panel('Redirect 301', $this->redirect301())
+            ], [], 'Redirect 301');
+            Nova::serving(function () {
+                CategoryModel::observe(CategoryObserver::class);
+                ProductModel::observe(ProductObserver::class);
+                VendorModel::observe(VendorObserver::class);
+            });
+        } catch (\Exception $e) {}
     }
 
     protected function routes()
@@ -323,7 +325,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         ];
     }
 
-    private function generalData() {
+    private function generalData(): array
+    {
         return [
             Text::make('Site Name', 'site_name')
                 ->rules(REQUIRED_STRING_VALIDATION)->translatable(),

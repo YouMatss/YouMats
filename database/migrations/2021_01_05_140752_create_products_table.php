@@ -52,6 +52,8 @@ class CreateProductsTable extends Migration
             $table->boolean('specific_shipping')->default(0);
             $table->json('shipping_prices')->nullable();
 
+            $table->text('search_keywords')->nullable();
+
             $table->string('slug')->unique();
             $table->text('meta_title')->nullable();
             $table->text('meta_desc')->nullable();

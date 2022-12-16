@@ -22,9 +22,11 @@ use Illuminate\Support\Facades\Route;
 //});
 
 // Redirect 301 from admin panel
-foreach (json_decode(nova_get_setting('redirect')) as $redirect) {
-    Route::permanentRedirect($redirect->from, $redirect->to);
-}
+try {
+    foreach (json_decode(nova_get_setting('redirect')) as $redirect) {
+        Route::permanentRedirect($redirect->from, $redirect->to);
+    }
+} catch (Exception $e) {}
 
 //Actions routes
 Route::post('changeCity', 'Common\MiscController@changeCity')->name('front.changeCity');
@@ -114,7 +116,6 @@ Route::group([
         Route::get('quote/view/{id}', [QuoteController::class, 'view'])->name('quote.view');
 //        Route::post('quote/update', [QuoteController::class, 'update'])->name('quote.update');
     });
-    // Vendor Routes
 
     //Cart Routes
     Route::group(['prefix' => 'cart', 'namespace' => 'Product'], function() {

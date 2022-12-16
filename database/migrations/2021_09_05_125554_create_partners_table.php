@@ -16,7 +16,7 @@ class CreatePartnersTable extends Migration
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
             $table->text('name');
-            $table->text('link')->default('#');
+            $table->text('link')->nullable();
             $table->boolean('featured')->default(0);
             $table->softDeletes();
             $table->timestamps();
