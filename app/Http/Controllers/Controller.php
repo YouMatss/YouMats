@@ -7,7 +7,6 @@ use App\Models\Currency;
 use App\Models\FAQ;
 use App\Models\Page;
 use App\Models\Partner;
-use App\Models\StaticImage;
 use App\Models\Vendor;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -30,7 +29,6 @@ class Controller extends BaseController
         $data['pages'] = Page::orderBy('sort')->get();
         $data['footer_categories'] = Category::where('show_in_footer', '1')->orderBy('created_at', 'desc');
         $data['FAQs'] = FAQ::orderBy('sort')->get();
-        $data['staticImages'] = StaticImage::first();
 
         View::share($data);
         Config::set($config);
