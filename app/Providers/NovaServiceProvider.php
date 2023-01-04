@@ -336,6 +336,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ->rules(REQUIRED_STRING_VALIDATION),
             Text::make('Widget Whatsapp', 'widget_whatsapp')
                 ->rules(REQUIRED_STRING_VALIDATION),
+            Text::make('Whatsapp Integration', 'whatsapp_integration')
+                ->rules(REQUIRED_STRING_VALIDATION),
         ];
     }
 

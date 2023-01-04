@@ -54,7 +54,7 @@
                          data-slides-show="6" data-slides-scroll="1"
                          data-responsive='[{"breakpoint": 1400,"settings": {"slidesToShow": 5}}, {"breakpoint": 1200,"settings": {"slidesToShow": 3}}, {"breakpoint": 992,"settings": {"slidesToShow": 2}}, {"breakpoint": 768,"settings": {"slidesToShow": 2}}, {"breakpoint": 554,"settings": {"slidesToShow": 2}}]'>
                         @foreach($subscribeVendors as $subscribeVendor)
-                            <div class="js-slide products-group img-logos-new">
+                            <div class="text-center js-slide products-group img-logos-new">
                                 <div>
                                     <a href="{{ route('vendor.show', [$subscribeVendor->slug]) }}" class="d-block text-center">
                                         <img class="img-fluid img-logos-new" style="display: inline-block !important;height: 50px !important;"
@@ -79,6 +79,11 @@
             <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
                 <h1 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$category->getTranslation('title', app()->getLocale(), false)}}</h1>
             </div>
+            @if($category->getTranslation('desc', app()->getLocale(), false))
+                <div class="d-block d-lg-none d-xl-none text-left">
+                    {!! $category->getTranslation('desc', app()->getLocale(), false) !!}
+                </div>
+            @endif
         </div>
         @endif
         <form method="get" action="{{url()->current()}}">
@@ -169,6 +174,11 @@
                     @endif
                 </div>
                 <div class="col-xl-9 col-wd-9gdot5">
+                    @if($category->getTranslation('desc', app()->getLocale(), false))
+                        <div class="d-none d-lg-block d-xl-block text-left">
+                        {!! $category->getTranslation('desc', app()->getLocale(), false) !!}
+                        </div>
+                    @endif
                     @if(count($category->children))
                     <div class="mb-6 bg-gray-7">
                         <div class="container">

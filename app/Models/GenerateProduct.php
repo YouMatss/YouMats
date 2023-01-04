@@ -17,7 +17,7 @@ class GenerateProduct extends Model implements HasMedia
 
     protected $guarded = ['id'];
 
-    public $translatable = ['short_desc', 'desc'];
+    public $translatable = ['short_desc', 'desc', 'search_keywords'];
 
     protected $casts = [
         'template' => 'json'

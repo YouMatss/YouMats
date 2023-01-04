@@ -4,7 +4,9 @@
         <div class="product-item__body">
             <div class="mb-2 px-2"><a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5">{{$product->category->name}}</a></div>
             <h5 class="mb-1 product-item__title px-2">
-                <a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a>
+                <a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="text-blue font-weight-bold">
+                    {{ Str::limit($product->name, 72) }}
+                </a>
             </h5>
             <div class="mb-2 px-2">
                 <a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="d-block text-center">
@@ -24,9 +26,9 @@
 {{--                    --}}{{--<span class="text-secondary">(40)</span>--}}
 {{--                </a>--}}
 {{--            </div>--}}
-            <div class="font-size-12 productDesc px-2 pb-2 mb-2">{!! $product->short_desc !!}</div>
+            <div class="font-size-12 productDesc px-2 pb-2 mb-2">{{ Str::limit(strip_tags($product->short_desc), 107) }}</div>
 {{--            <div class="text-gray-20 mb-2 font-size-12">{{__('general.sku')}}: {{$product->SKU}}</div>--}}
-            <div style="min-height: 100px" class="custom-price-border px-2 pb-2 mb-2">
+            <div class="custom-price-border px-2 pb-2 mb-2">
                 @if(auth()->guard('admin')->check() && isset($product->vendor))
                     <div class="text-gray-20 font-size-12" title="{{$product->vendor->name}}">{{__('general.vendor')}}: {{\Str::limit($product->vendor->name, 20)}}</div>
                 @endif
@@ -42,6 +44,8 @@
                             @endif
                         @endif
                     </div>
+                @endif
+                @if(!$product->category->hide_delivery_status)
                     @if(!is_company())
                         @if(isset($product->delivery))
                             <div>{{__('product.delivery_to_your_city_in_category')}}: <b>{{getCurrentCityName()}}</b></div>
@@ -50,11 +54,11 @@
                         @endif
                     @endif
                 @endif
-                <div class="product-price">
                 @if($product->type == 'product' && (!is_company()) && $product->price)
-                <div>{{getCurrency('symbol')}} {{$product->formatted_price}}</div>
+                <div style="min-height: 100px" class="product-price">
+                    <div>{{getCurrency('symbol')}} {{$product->formatted_price}}</div>
+                </div>
                 @endif
-            </div>
             </div>
             <div class="px-2">
                 {!! cartOrChat($product, false) !!}

@@ -75,38 +75,37 @@
         </div>
     </div>
     <div class="container">
-        <div class="mb-14">
-            <div class="row rtl">
-                <div class="col-md-6 col-lg-4 col-xl-5 mb-4 mb-md-0 ltr">
-                    <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2" data-infinite="true" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4" data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4" data-nav-for="#sliderSyncingThumb">
-                        @if(count($product->getMedia(PRODUCT_PATH)))
-                        @foreach($product->getMedia(PRODUCT_PATH) as $image)
-                            <div class="js-slide">
-                                <img loading="lazy" class="img-fluid" src="{{$image->getFullUrl('size_500_500')}}" alt="{{$image->img_alt ?? ''}}" title="{{$image->img_title ?? ''}}">
-                            </div>
-                        @endforeach
-                        @else
-                            <div class="js-slide">
-                                <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_500_500')['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
-                            </div>
-                        @endif
-                    </div>
-                    @if(count($product->getMedia(PRODUCT_PATH)) > 1)
-                    <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off" data-infinite="true" data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav">
-                        @foreach($product->getMedia(PRODUCT_PATH) as $thumb)
-                        <div class="js-slide" style="cursor: pointer;">
-                            <img loading="lazy" class="img-fluid" src="{{$thumb->getFullUrl('size_50_50')}}" alt="{{$thumb->img_alt ?? ''}}" title="{{$thumb->img_title ?? ''}}">
+        <div class="row rtl">
+            <div class="col-md-6 col-lg-4 col-xl-5 mb-4 mb-md-0 ltr">
+                <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2" data-infinite="true" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4" data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4" data-nav-for="#sliderSyncingThumb">
+                    @if(count($product->getMedia(PRODUCT_PATH)))
+                    @foreach($product->getMedia(PRODUCT_PATH) as $image)
+                        <div class="js-slide">
+                            <img loading="lazy" class="img-fluid" src="{{$image->getFullUrl('size_500_500')}}" alt="{{$image->img_alt ?? ''}}" title="{{$image->img_title ?? ''}}">
                         </div>
-                        @endforeach
-                    </div>
+                    @endforeach
+                    @else
+                        <div class="js-slide">
+                            <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_500_500')['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                        </div>
                     @endif
                 </div>
-                <div class="col-md-6 col-lg-4 col-xl-4 mb-md-6 mb-lg-0">
+                @if(count($product->getMedia(PRODUCT_PATH)) > 1)
+                <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off" data-infinite="true" data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav">
+                    @foreach($product->getMedia(PRODUCT_PATH) as $thumb)
+                    <div class="js-slide" style="cursor: pointer;">
+                        <img loading="lazy" class="img-fluid" src="{{$thumb->getFullUrl('size_50_50')}}" alt="{{$thumb->img_alt ?? ''}}" title="{{$thumb->img_title ?? ''}}">
+                    </div>
+                    @endforeach
+                </div>
+                @endif
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-4 mb-md-6 mb-lg-0">
+                <div class="mb-2">
+                    <a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{$product->category->name}}</a>
+                    <h1 class="font-size-25" style="line-height: 1.6">{{$product->name}}</h1>
                     <div class="mb-2">
-                        <a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{$product->category->name}}</a>
-                        <h1 class="font-size-25" style="line-height: 1.6">{{$product->name}}</h1>
-                        <div class="mb-2">
-                            <a class="d-inline-flex align-items-center small font-size-15 text-lh-1">
+                        <a class="d-inline-flex align-items-center small font-size-15 text-lh-1">
 {{--                                <div class="text-warning mr-2">--}}
 {{--                                    @for($i=1;$i<=$product->rate;$i++)--}}
 {{--                                        <small class="fas fa-star"></small>--}}
@@ -116,113 +115,112 @@
 {{--                                    @endfor--}}
 {{--                                    {{$product->rate}}--}}
 {{--                                </div>--}}
-                                &nbsp;
-                                <span class="text-secondary font-size-13">({{$product->views}} {{__('product.views')}})</span>
-                            </a>
-                        </div>
-                        <a href="{{ route('home') }}" class="d-inline-block max-width-150 ml-n2 mb-2">
-                            <img loading="lazy" class="img-fluid" src="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}">
+                            &nbsp;
+                            <span class="text-secondary font-size-13">({{$product->views}} {{__('product.views')}})</span>
                         </a>
-                        {{--<div class="mb-2">--}}
-                            {{--<ul class="font-size-14 pl-3 ml-1 text-gray-9">--}}
-                                {{--@foreach($product->tags as $tag)--}}
-                                {{--<li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}</a></li>--}}
-                                {{--@endforeach--}}
-                            {{--</ul>--}}
-                        {{--</div>--}}
+                    </div>
+                    <a href="{{ route('home') }}" class="d-inline-block max-width-150 ml-n2 mb-2">
+                        <img loading="lazy" class="img-fluid" src="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}">
+                    </a>
+                    {{--<div class="mb-2">--}}
+                        {{--<ul class="font-size-14 pl-3 ml-1 text-gray-9">--}}
+                            {{--@foreach($product->tags as $tag)--}}
+                            {{--<li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}</a></li>--}}
+                            {{--@endforeach--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
 
-                        <p>{!! $product->short_desc !!}</p>
+                    <p>{!! $product->short_desc !!}</p>
 {{--                        <div><strong>{{__('general.sku')}}</strong>: {{$product->SKU}}</div>--}}
-                        @if(auth()->guard('admin')->check() && isset($product->vendor->name))
-                            <div><strong>{{__('general.vendor')}}</strong>: {{$product->vendor->name}}</div>
+                    @if(auth()->guard('admin')->check() && isset($product->vendor->name))
+                        <div><strong>{{__('general.vendor')}}</strong>: {{$product->vendor->name}}</div>
+                    @endif
+                </div>
+            </div>
+            <div class="mx-md-auto mx-lg-0 col-md-6 col-lg-4 col-xl-3">
+                <div class="mb-2">
+                    <div class="card p-5 border-width-2 border-color-1 borders-radius-17">
+                        @if(!$product->category->hide_availability)
+                        <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">
+                            @if(is_company())
+                                <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
+                            @else
+                                @if($product->stock && $product->stock >= $product->min_quantity)
+                                    <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
+                                @else
+                                    <span class="text-red font-weight-bold">{{__('product.out_of_stock')}}</span>
+                                @endif
+                            @endif
+                        </div>
+                        @endif
+                        @if(!is_company())
+                            @if(!$product->category->hide_delivery_status)
+                                @if(isset($delivery))
+                                    <div>
+                                        <span>{{__('product.delivery_to_your_city')}}: <b>{{getCurrentCityName()}}</b></span>
+                                        <br/>
+                                        <span>{{__('product.delivery_price')}} {{$product->min_quantity}} {{__('product.piece')}}:
+                                            @if($delivery['price'] > 0)
+                                            <b>{{getCurrency('symbol')}} {{round($delivery['price'] * getCurrency('rate'), 2)}}</b>
+                                            @else
+                                            <b>{{__('product.delivery_free')}}</b>
+                                            @endif
+                                        </span>
+                                        <br/>
+                                        <span>{{__('product.delivery_time')}}: <b>{{$delivery['time']}} {{($delivery['format'] == 'hour') ? __('product.delivery_hours') : __('product.delivery_days') }}</b></span>
+                                        <button type="button" class="btn btn-block btn-xs btn-primary mt-2 choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
+                                    </div>
+                                @else
+                                    <div>
+                                        <span style="color:#ff0000;margin-bottom: 10px;display: inline-block;">{{__('product.no_delivery')}}: {{getCurrentCityName()}}</span>
+                                        @if(!is_null($delivery_cities))
+                                        <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
+                                        @endif
+                                    </div>
+                                @endif
+                            @endif
+                            @if($product->price)
+                            <div class="mb-3">
+                                <div class="font-size-36">{{getCurrency('symbol')}} {{$product->formatted_price}}</div>
+                            </div>
+                            @endif
+                        @endif
+
+                        <div class="mb-3">
+                            <div class="left-page-single">
+                                @if(is_company())
+                                <a href="{{ route('home') }}"> <i class="fa fa-user"></i> {{env('APP_NAME')}} </a>
+                                <a href="tel:+966502111754" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> {{__('info.phone')}} </a>
+                                <a href="mailto:info@youmats.com"> <i class="fa fa-envelope"></i> {{__('info.email')}} </a>
+                                @endif
+                                <h3> {{__('product.how_to_pay')}} </h3>
+                                <p> {{__('product.how_to_pay_desc')}} </p>
+                            </div>
+                        </div>
+
+                        @if(!Auth::guard('vendor')->check())
+                            {!! cartOrChat($product) !!}
+                            <div class="flex-content-center flex-wrap">
+                                <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i>{{__('product.wishlist')}}</a>
+                            </div>
                         @endif
                     </div>
                 </div>
-                <div class="mx-md-auto mx-lg-0 col-md-6 col-lg-4 col-xl-3">
-                    <div class="mb-2">
-                        <div class="card p-5 border-width-2 border-color-1 borders-radius-17">
-                            <div class="text-gray-9 font-size-14 pb-2 border-color-1 border-bottom mb-3">
-                                @if(!$product->category->hide_availability)
-                                    @if(is_company())
-                                        <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
-                                    @else
-                                        @if($product->stock && $product->stock >= $product->min_quantity)
-                                            <span class="text-green font-weight-bold">{{__('product.in_stock')}}</span>
-                                        @else
-                                            <span class="text-red font-weight-bold">{{__('product.out_of_stock')}}</span>
-                                        @endif
-                                    @endif
-                                @endif
-                            </div>
-                            @if(!is_company())
-                                @if(!$product->category->hide_availability)
-                                    @if(isset($delivery))
-                                        <div>
-                                            <span>{{__('product.delivery_to_your_city')}}: <b>{{getCurrentCityName()}}</b></span>
-                                            <br/>
-                                            <span>{{__('product.delivery_price')}} {{$product->min_quantity}} {{__('product.piece')}}:
-                                                @if($delivery['price'] > 0)
-                                                <b>{{getCurrency('symbol')}} {{round($delivery['price'] * getCurrency('rate'), 2)}}</b>
-                                                @else
-                                                <b>{{__('product.delivery_free')}}</b>
-                                                @endif
-                                            </span>
-                                            <br/>
-                                            <span>{{__('product.delivery_time')}}: <b>{{$delivery['time']}} {{($delivery['format'] == 'hour') ? __('product.delivery_hours') : __('product.delivery_days') }}</b></span>
-                                            <button type="button" class="btn btn-block btn-xs btn-primary mt-2 choose_city" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
-                                        </div>
-                                    @else
-                                        <div>
-                                            <span style="color:#ff0000;margin-bottom: 10px;display: inline-block;">{{__('product.no_delivery')}}: {{getCurrentCityName()}}</span>
-                                            @if(!is_null($delivery_cities))
-                                            <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('product.delivery_change_city_button')}}</button>
-                                            @endif
-                                        </div>
-                                    @endif
-                                @endif
-                                @if($product->price)
-                                <div class="mb-3">
-                                    <div class="font-size-36">{{getCurrency('symbol')}} {{$product->formatted_price}}</div>
-                                </div>
-                                @endif
-                            @endif
-
-                            <div class="mb-3">
-                                <div class="left-page-single">
-                                    @if(is_company())
-                                    <a href="{{ route('home') }}"> <i class="fa fa-user"></i> {{env('APP_NAME')}} </a>
-                                    <a href="tel:+966502111754" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> {{__('info.phone')}} </a>
-                                    <a href="mailto:info@youmats.com"> <i class="fa fa-envelope"></i> {{__('info.email')}} </a>
-                                    @endif
-                                    <h3> {{__('product.how_to_pay')}} </h3>
-                                    <p> {{__('product.how_to_pay_desc')}} </p>
-                                </div>
-                            </div>
-
-                            @if(!Auth::guard('vendor')->check())
-                                {!! cartOrChat($product) !!}
-                                <div class="flex-content-center flex-wrap">
-                                    <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i>{{__('product.wishlist')}}</a>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <ul class="font-size-14 pl-3 ml-1 text-gray-9 style_tags">
-                            @foreach($product->tags as $tag)
-                                <li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}  </a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-
+                <div class="mb-2">
+                    <ul class="font-size-14 pl-3 ml-1 text-gray-9 style_tags">
+                        @foreach($product->tags as $tag)
+                            <li><a href="{{route('front.tag', [$tag->slug])}}">{{$tag->name}}  </a></li>
+                        @endforeach
+                    </ul>
                 </div>
+
             </div>
         </div>
     </div>
     <div class="bg-gray-7 pt-6 pb-3 mb-6">
         <div class="container">
             <div class="js-scroll-nav">
-                <div class="bg-white pt-4 pb-6 px-xl-11 px-md-5 px-4 mb-6 overflow-hidden">
+                <div class="bg-white pt-4 px-xl-11 px-md-5 px-4 mb-6 overflow-hidden">
                     <div id="Description" class="mx-md-2">
                         <div class="position-relative mb-6">
                             <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-center mb-6 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-lg-down-bottom-0 pb-1 pb-xl-0 mb-n1 mb-xl-0">
@@ -236,9 +234,11 @@
                             </ul>
                         </div>
                         <div class="mx-md-4 pt-1 ti_rtl rtl">
-                            <h2 class="font-size-24 mb-3">{{ __('product.description') }}</h2>
-                            {!! $product->desc !!}
                             <div class="row">
+                                <div class="col-md-6">
+                                    <h2 class="font-size-24 mb-3">{{ __('product.description') }}</h2>
+                                    {!! $product->desc !!}
+                                </div>
                                 <div class="col-md-6 text-right">
                                     <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_500_500')['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                                 </div>
@@ -259,34 +259,47 @@
                 </div>
 
                 <div class="mb-4 position-relative">
-                    <div class="js-slick-carousel u-slick u-slick--gutters-0 position-static overflow-hidden u-slick-overflow-visble pb-5 pt-2 px-1" data-arrows-classes="u-slick__arrow u-slick__arrow--flat u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-inner u-slick__arrow-inner--left ml-lg-2 ml-xl-n3" data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-inner u-slick__arrow-inner--right mr-lg-2 mr-xl-n3" data-pagi-classes="text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-3 pt-1" data-slides-show="7" data-slides-scroll="1"
-                         data-responsive='[{
-                                  "breakpoint": 1400,
-                                  "settings": {
-                                    "slidesToShow": 5
-                                  }
-                                }, {
-                                    "breakpoint": 1200,
-                                    "settings": {
-                                      "slidesToShow": 3
-                                    }
-                                }, {
-                                  "breakpoint": 992,
-                                  "settings": {
-                                    "slidesToShow": 2
-                                  }
-                                }, {
-                                  "breakpoint": 768,
-                                  "settings": {
-                                    "slidesToShow": 2
-                                  }
-                                }, {
-                                  "breakpoint": 554,
-                                  "settings": {
-                                    "slidesToShow": 2
-                                  }
-                                }]'>
-
+                    <div
+                        class="js-slick-carousel u-slick u-slick--gutters-0 position-static overflow-hidden u-slick-overflow-visble pb-5 pt-2 px-1"
+                        data-arrows-classes="u-slick__arrow u-slick__arrow--flat u-slick__arrow-centered--y rounded-circle"
+                        data-pagi-classes="text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-3 pt-1"
+                        data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-inner u-slick__arrow-inner--left ml-lg-2 ml-xl-n3"
+                        data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-inner u-slick__arrow-inner--right mr-lg-2 mr-xl-n3"
+                        data-slick='{
+                            "autoplay": true,
+                            "infinite": true,
+                            "slidesToShow": 7
+                            @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+                            ,"rtl": true
+                            @endif
+                         }'
+                        data-responsive='[{
+                              "breakpoint": 1400,
+                              "settings": {
+                                "slidesToShow": 5
+                              }
+                            }, {
+                                "breakpoint": 1200,
+                                "settings": {
+                                  "slidesToShow": 3
+                                }
+                            }, {
+                              "breakpoint": 992,
+                              "settings": {
+                                "slidesToShow": 2
+                              }
+                            }, {
+                              "breakpoint": 768,
+                              "settings": {
+                                "slidesToShow": 2
+                              }
+                            }, {
+                              "breakpoint": 554,
+                              "settings": {
+                                "slidesToShow": 2
+                              }
+                         }]'
+                    >
                         @foreach($related_products as $r_product)
                         <div class="js-slide products-group">
                             <div class="product-item mx-1 remove-divider">

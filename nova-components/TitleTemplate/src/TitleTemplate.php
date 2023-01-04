@@ -49,7 +49,7 @@ class TitleTemplate extends Field
         if ($request->exists($requestAttribute)) {
             foreach (json_decode($request->name) as $key => $item) {
                 $name[$key] = implode(' ', $item);
-                $tempName[$key] = implode('-', $item);
+                $tempName[$key] = implode('(^)', $item);
             }
             $model->name = $name;
             $model->temp_name = $tempName;
