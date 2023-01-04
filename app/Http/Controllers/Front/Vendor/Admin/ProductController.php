@@ -83,7 +83,7 @@ class ProductController extends Controller
 
         if(gettype($data['name_en']) == 'array') {
             $data['name'] = ['en' => implode(' ', $data['name_en']), 'ar' => implode(' ', $data['name_ar'])];
-            $data['temp_name'] = ['en' => implode('-', $data['name_en']), 'ar' => implode('-', $data['name_ar'])];
+            $data['temp_name'] = ['en' => implode('(^)', $data['name_en']), 'ar' => implode('(^)', $data['name_ar'])];
             $data['meta_title'] = ['en' => implode(' ', $data['name_en']), 'ar' => implode(' ', $data['name_ar'])];
             $data['meta_keywords'] = ['en' => implode(' ', $data['name_en']), 'ar' => implode(' ', $data['name_ar'])];
         } else {
@@ -155,7 +155,7 @@ class ProductController extends Controller
 
         if(gettype($data['name_en']) == 'array') {
             $data['name'] = ['en' => implode(' ', $data['name_en']), 'ar' => implode(' ', $data['name_ar'])];
-            $data['temp_name'] = ['en' => implode('-', $data['name_en']), 'ar' => implode('-', $data['name_ar'])];
+            $data['temp_name'] = ['en' => implode('(^)', $data['name_en']), 'ar' => implode('(^)', $data['name_ar'])];
         } else {
             $data['name'] = ['en' => $data['name_en'], 'ar' => $data['name_ar']];
         }

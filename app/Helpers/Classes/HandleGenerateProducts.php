@@ -29,7 +29,7 @@ Trait HandleGenerateProducts
         $arr = $this->replaceRealValues($model, $this->combine($sentences));
 
         if($test_mode) {
-            dd($arr);
+            dd(count($arr), array_slice($arr, 0, 10));
         }
 
         foreach ($arr as $row) {

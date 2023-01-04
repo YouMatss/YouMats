@@ -85,8 +85,8 @@ export default {
                             this.template = response.data.template;
                             if (response.data.temp_name) {
                                 this.tempName = {
-                                    'ar': response.data.temp_name.ar.split('-'),
-                                    'en': response.data.temp_name.en.split('-')
+                                    'ar': response.data.temp_name.ar.split('(^)'),
+                                    'en': response.data.temp_name.en.split('(^)')
                                 }
                             } else {
                                 this.tempName = {

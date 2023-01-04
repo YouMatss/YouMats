@@ -56,9 +56,9 @@ class Category extends Resource
                     ->useSingleSelect()->hideFromIndex()->nullable(),
             ])->dependsOn('category', false),
 
-            Textarea::make('Short Description', 'short_desc')
-                ->translatable()
-                ->rules(NULLABLE_TEXT_VALIDATION),
+//            Textarea::make('Short Description', 'short_desc')
+//                ->translatable()
+//                ->rules(NULLABLE_TEXT_VALIDATION),
 
             CKEditor::make('Description', 'desc')
                 ->hideFromIndex()
@@ -76,7 +76,8 @@ class Category extends Resource
             Toggle::make(__('Featured'), 'isFeatured')->falseColor('#bacad6')->editableIndex(),
             Toggle::make(__('Top Category'), 'topCategory')->falseColor('#bacad6')->editableIndex(),
             Toggle::make(__('Show in footer'), 'show_in_footer')->falseColor('#bacad6')->editableIndex(),
-            Toggle::make(__('Hide Availability & Stock'), 'hide_availability')->falseColor('#bacad6')->hideFromIndex(),
+            Toggle::make(__('Hide Availability'), 'hide_availability')->falseColor('#bacad6')->hideFromIndex(),
+            Toggle::make(__('Hide Delivery Status'), 'hide_delivery_status')->falseColor('#bacad6')->hideFromIndex(),
 
             new Panel('Template For Title', [
                 Heading::make('Instructions: + => for input, - => for dropdown, Ex for dropdown: -Orientation-Horizontal-Vertical'),

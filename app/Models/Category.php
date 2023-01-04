@@ -27,7 +27,7 @@ class Category extends Model implements Sortable, HasMedia
 {
     use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, CascadeSoftDeletes, NodeTrait, UnicodeJsonColumn;
 
-    public $translatable = ['name', 'title', 'desc', 'short_desc', 'meta_title', 'meta_keywords', 'meta_desc', 'schema'];
+    public $translatable = ['name', 'title', 'desc', 'meta_title', 'meta_keywords', 'meta_desc', 'schema'];
 
     protected $casts = [
         'template' => 'array'

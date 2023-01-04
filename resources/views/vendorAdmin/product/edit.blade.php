@@ -533,7 +533,7 @@
                         var word = value.word.{{$localeCode}},
                             firstLetter = word.split('')[0],
                             name = '{{$product->getTranslation('temp_name', $localeCode)}}',
-                            splitName = name.split('-');
+                            splitName = name.split('(^)');
                         if(word == '') return;
 
                         console.log(name);

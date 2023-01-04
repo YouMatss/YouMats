@@ -76,7 +76,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         $this->addMediaConversion('size_500_500')
             ->crop(Manipulations::CROP_CENTER, 500, 500)
             ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
-        
+
         $this->addMediaConversion('cropper')->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 
@@ -173,7 +173,10 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      * @return int
      */
     public function getSubscribeAttribute() {
-        if(isset($this->vendor->current_subscribes) && count($this->vendor->current_subscribes)) {
+        if(isset($this->vendor->current_subscribes)
+            && count($this->vendor->current_subscribes)
+            && in_array($this->category_id, $this->vendor->current_subscribes->pluck('category_id')->toArray())
+        ) {
             return 1;
         }
         return 0;

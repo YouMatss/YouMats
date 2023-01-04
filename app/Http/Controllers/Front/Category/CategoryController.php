@@ -23,6 +23,10 @@ class CategoryController extends Controller
 
         $data['category'] = Category::whereSlug($slug)->firstOrFail();
 
+        if(count($parsedSlug) - count($data['category']->ancestors) != 1) {
+            abort(404);
+        }
+
         $data['parent'] = $data['category']->parent;
         $data['children'] = $data['category']->children;
 
