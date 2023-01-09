@@ -57,7 +57,7 @@ class GenerateProductsSitemap extends Command
                 ->setLastModificationDate(Carbon::now())
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
                 ->setPriority(0.8));
-            $route_en = str_replace('https://new.youmats.com/', 'https://new.youmats.com/en/', $route);
+            $route_en = str_replace('https://www.youmats.com/', 'https://www.youmats.com/en/', $route);
             $sitemap->add(Url::create($route_en)
                 ->setLastModificationDate(Carbon::now())
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
