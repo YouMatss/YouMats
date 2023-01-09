@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
+use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
 
 class Subscribe extends Resource
 {
@@ -51,15 +52,18 @@ class Subscribe extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            BelongsTo::make('Vendor')
+            BelongsTo::make('Vendor', 'vendor', Vendor::class)
                 ->rules([...REQUIRED_INTEGER_VALIDATION, ...['exists:vendors,id']])
-                ->withoutTrashed(),
+                ->withoutTrashed()->searchable(),
 
             BelongsTo::make('Membership')
-                ->rules([...REQUIRED_INTEGER_VALIDATION, ...['exists:memberships,id']]),
+                ->rules([...REQUIRED_INTEGER_VALIDATION, ...['exists:memberships,id']])
+                ->withoutTrashed(),
 
-            BelongsTo::make('Category')
-                ->rules([...REQUIRED_INTEGER_VALIDATION, ...['exists:categories,id']]),
+            BelongsTo::make('Category')->exceptOnForms(),
+            NestedTreeAttachManyField::make('Category')
+                ->rules([...REQUIRED_INTEGER_VALIDATION, ...['exists:categories,id']])
+                ->useSingleSelect()->nullable(),
 
             Date::make('Expiry Date')
                 ->rules(REQUIRED_DATE_VALIDATION),

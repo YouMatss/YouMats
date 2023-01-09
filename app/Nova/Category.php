@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Helpers\Nova\Fields;
+use App\Nova\Actions\GenerateSitemap;
 use App\Nova\Filters\Category\CategoryType;
 use Davidpiesse\NovaToggle\Toggle;
 use Drobee\NovaSluggable\SluggableText;
@@ -15,10 +16,10 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
+use Pdmfc\NovaFields\ActionButton;
 use PhoenixLib\NovaNestedTreeAttachMany\NestedTreeAttachManyField;
 use Waynestate\Nova\CKEditor;
 
@@ -78,6 +79,14 @@ class Category extends Resource
             Toggle::make(__('Show in footer'), 'show_in_footer')->falseColor('#bacad6')->editableIndex(),
             Toggle::make(__('Hide Availability'), 'hide_availability')->falseColor('#bacad6')->hideFromIndex(),
             Toggle::make(__('Hide Delivery Status'), 'hide_delivery_status')->falseColor('#bacad6')->hideFromIndex(),
+
+            ActionButton::make('Sitemap')
+                ->action(GenerateSitemap::class, $this->id)
+                ->showLoadingAnimation()
+                ->exceptOnForms()
+                ->readonly(function () {
+                    return $this->category == 0;
+                }),
 
             new Panel('Template For Title', [
                 Heading::make('Instructions: + => for input, - => for dropdown, Ex for dropdown: -Orientation-Horizontal-Vertical'),
@@ -139,6 +148,11 @@ class Category extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new GenerateSitemap)
+                ->confirmText('Are you sure you want to generate sitemap for this category?')
+                ->confirmButtonText('Generate')
+                ->cancelButtonText("Don't generate"),
+        ];
     }
 }

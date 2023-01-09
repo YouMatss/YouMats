@@ -1,7 +1,7 @@
 @extends('front.layouts.master')
 @section('metaTags')
 
-    <title>{{getMetaTag($category, 'meta_title', $category->title . ' | ' . nova_get_setting_translate('site_name'))}}</title>
+    <title>{{getMetaTag($category, 'meta_title', $category->title)}}</title>
     <meta name="description" content="{{getMetaTag($category, 'meta_desc', nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc))}}">
     <meta name="keywords" content="{{getMetaTag($category, 'meta_keywords', '')}}">
 
