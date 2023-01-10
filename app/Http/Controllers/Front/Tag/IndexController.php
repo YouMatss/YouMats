@@ -15,7 +15,7 @@ class IndexController extends Controller
         $data['tag'] = Tag::with('products')->where('slug', $tag_slug)->first();
         abort_if(!$data['tag'], 404);
 
-        $data['products'] = $data['tag']->products()->paginate(10);
+        $data['products'] = $data['tag']->products()->inRandomOrder()->paginate(20);
 
         $tags_ids = [];
 

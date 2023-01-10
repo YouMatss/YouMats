@@ -32,13 +32,13 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('sitemap:generate')->weekly();
 
-        $increment = 2000;
-        for($i = 0; $i <= 30000; $i += $increment) {
-            $schedule->command('sitemap:products', [
-                'start' => $i,
-                'increment' => $increment
-            ])->weekly();
-        }
+//        $increment = 2000;
+//        for($i = 0; $i <= 30000; $i += $increment) {
+//            $schedule->command('sitemap:products', [
+//                'start' => $i,
+//                'increment' => $increment
+//            ])->weekly();
+//        }
 
         $schedule->command('backup:run')->daily()->at('01:00');
     }

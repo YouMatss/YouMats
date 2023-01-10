@@ -65,6 +65,9 @@ class Subscribe extends Resource
                 ->rules([...REQUIRED_INTEGER_VALIDATION, ...['exists:categories,id']])
                 ->useSingleSelect()->nullable(),
 
+            Date::make('Subscribe Date', 'created_at')
+                ->exceptOnForms(),
+
             Date::make('Expiry Date')
                 ->rules(REQUIRED_DATE_VALIDATION),
 
@@ -97,7 +100,7 @@ class Subscribe extends Resource
      */
     public function authorizedToDelete(Request $request): bool
     {
-        return false;
+        return true;
     }
 
     /**

@@ -16,3 +16,6 @@ yarn-error.log
 /.idea/workspace.xml
 .idea/php.xml
 .htaccess
+.user.ini
+php.ini
+/public/sitemap*.xml

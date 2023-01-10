@@ -12,6 +12,8 @@
     <meta name="twitter:title" content="{{$tag->meta_title}}">
     <meta name="twitter:description" content="{{$tag->meta_desc}}">
     <meta name="twitter:image" content="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}">
+
+    {!! $tag->schema !!}
 @endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
@@ -29,12 +31,25 @@
         </div>
     </div>
     <div class="mb-6 bg-md-transparent py-6">
+        @if($tag->getTranslation('name', app()->getLocale(), false))
+            <div class="container mb-8">
+                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
+                    <h1 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$tag->getTranslation('name', app()->getLocale(), false)}}</h1>
+                </div>
+                @if($tag->getTranslation('desc', app()->getLocale(), false))
+                    <div class="d-block d-lg-none d-xl-none text-left">
+                        {!! $tag->getTranslation('desc', app()->getLocale(), false) !!}
+                    </div>
+                @endif
+            </div>
+        @endif
         <div class="container">
             <div class="row mb-8">
+
                 <div class="d-none d-xl-block col-xl-3 col-wd-2gdot5">
                     <div class="mb-6">
                         <div class="border-bottom border-color-1 mb-5">
-                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Tags</h3>
+                            <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">{{ __('general.related_tags') }}</h3>
                         </div>
                         <div class="border-bottom pb-4 mb-4">
                             @foreach($tags as $row)
@@ -51,8 +66,13 @@
                     </div>
                 </div>
                 <div class="col-xl-9 col-wd-9gdot5">
+                    @if($tag->getTranslation('desc', app()->getLocale(), false))
+                        <div class="d-none d-lg-block d-xl-block text-left">
+                            {!! $tag->getTranslation('desc', app()->getLocale(), false) !!}
+                        </div>
+                    @endif
+
                     <div class="d-block d-md-flex flex-center-between mb-3">
-                        <h3 class="font-size-25 mb-2 mb-md-0">{{$tag->name}}</h3>
                         <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} 1–25 {{__('general.of')}} 56 {{__('general.results')}}</p>
                     </div>
 
@@ -84,13 +104,6 @@
                                         </div>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="list-view-tab" data-toggle="pill" href="#list-view" role="tab" aria-controls="list-view" aria-selected="true">
-                                        <div class="d-md-flex justify-content-md-center align-items-md-center">
-                                            <i class="fa fa-th-list"></i>
-                                        </div>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                         <nav class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex">
@@ -110,13 +123,6 @@
                                     <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
                                         @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'grid'])
                                     </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade pt-2" id="list-view" role="tabpanel" aria-labelledby="list-view-tab" data-target-group="groups">
-                            <ul class="d-block list-unstyled products-group prodcut-list-view-small">
-                                @foreach($products as $product)
-                                    @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'list'])
                                 @endforeach
                             </ul>
                         </div>

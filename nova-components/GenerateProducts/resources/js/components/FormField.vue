@@ -126,6 +126,26 @@ export default {
                                         7: {
                                             'value': '',
                                             'order': ''
+                                        },
+                                        8: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        9: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        10: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        11: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        12: {
+                                            'value': '',
+                                            'order': ''
                                         }
                                     },
                                     'en': {
@@ -158,6 +178,26 @@ export default {
                                             'order': ''
                                         },
                                         7: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        8: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        9: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        10: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        11: {
+                                            'value': '',
+                                            'order': ''
+                                        },
+                                        12: {
                                             'value': '',
                                             'order': ''
                                         }

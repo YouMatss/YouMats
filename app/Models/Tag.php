@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Helpers\Traits\UnicodeJsonColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
 
@@ -15,8 +16,12 @@ class Tag extends Model {
 
     protected $appends = ['translated_name'];
 
-    public function products() {
-        return $this->belongsToMany(Product::class)->where('active', 1);
+    /**
+     * @return BelongsToMany
+     */
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class)->where('active', true);
     }
 
     /**
