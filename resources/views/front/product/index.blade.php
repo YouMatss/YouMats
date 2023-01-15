@@ -77,7 +77,11 @@
     <div class="container">
         <div class="row rtl">
             <div class="col-md-6 col-lg-4 col-xl-5 mb-4 mb-md-0 ltr">
-                <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2" data-infinite="true" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4" data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4" data-nav-for="#sliderSyncingThumb">
+                <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2"
+                     data-infinite="true" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle"
+                     data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4"
+                     data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4"
+                     data-nav-for="#sliderSyncingThumb">
                     @if(count($product->getMedia(PRODUCT_PATH)))
                     @foreach($product->getMedia(PRODUCT_PATH) as $image)
                         <div class="js-slide">
@@ -91,7 +95,8 @@
                     @endif
                 </div>
                 @if(count($product->getMedia(PRODUCT_PATH)) > 1)
-                <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off" data-infinite="true" data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav">
+                <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off"
+                     data-infinite="true" data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav">
                     @foreach($product->getMedia(PRODUCT_PATH) as $thumb)
                     <div class="js-slide" style="cursor: pointer;">
                         <img loading="lazy" class="img-fluid" src="{{$thumb->getFullUrl('size_50_50')}}" alt="{{$thumb->img_alt ?? ''}}" title="{{$thumb->img_title ?? ''}}">

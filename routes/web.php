@@ -9,6 +9,7 @@ use App\Http\Controllers\Front\Vendor\Admin\QuoteController;
 use App\Http\Controllers\Front\Vendor\Admin\SippingGroupController;
 use App\Http\Controllers\Front\Vendor\Admin\SubScribeController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 //Route::get('products_sitemap', function () {
 //    $increment = 2000;
@@ -33,13 +34,15 @@ Route::post('changeCity', 'Common\MiscController@changeCity')->name('front.chang
 Route::post('changeCurrency', 'Common\MiscController@changeCurrency')->name('front.currencySwitch');
 Route::get('introduce/{type}', 'Common\MiscController@introduce')->name('front.introduce');
 
+// Redirect 301 for products links from old website
+Route::permanentRedirect('ar/Product-View/{productId}/{productSlug}', env('APP_URL'));
+Route::permanentRedirect('en/Product-View/{productId}/{productSlug}', env('APP_URL'));
+Route::permanentRedirect('Product-View/{productId}/{productSlug}', env('APP_URL'));
+
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localizationRedirect' ]
 ], function(){
-
-    // Redirect 301 for products links from old website
-    Route::permanentRedirect('Product-View/{productId}/{productSlug}', 'https://www.youmats.com');
 
     //Auth (Verified/Authenticated) routes
     Route::group(['namespace' => 'User'], function () {

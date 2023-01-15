@@ -17,6 +17,11 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
 {
+    /**
+     * @param $categories_slug
+     * @param $product
+     * @return void
+     */
     private function checkOnCategoriesSlugs($categories_slug, $product) {
         $categories_slug_array = array_reverse(explode('/', $categories_slug));
 
@@ -37,9 +42,18 @@ class ProductController extends Controller
         }
     }
 
+    /**
+     * @param $categories_slug
+     * @param $slug
+     * @return Application|Factory|View
+     */
     public function index($categories_slug, $slug) {
         $data['product'] = Product::with('category', 'tags', 'vendor')
-            ->where(['slug' => $slug, 'active' => true])->firstOrFail();
+            ->where(['slug' => $slug, 'active' => true])->first();
+
+        if(!$data['product']) {
+            return redirect(route('home'), 301);
+        }
 
         $this->checkOnCategoriesSlugs($categories_slug, $data['product']);
 
