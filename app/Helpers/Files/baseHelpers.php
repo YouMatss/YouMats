@@ -281,12 +281,14 @@ function cart_total() {
 }
 
 if(!function_exists('getMetaTag')) {
-    function getMetaTag($model, $key, $default) {
+    function getMetaTag($model, $key, $default, $second_default = '') {
         $value = $model->getTranslation($key, LaravelLocalization::getCurrentLocale(), false);
         if(!empty($value))
             return $value;
-        else
+        elseif(!empty($default))
             return $default;
+        else
+            return $second_default;
     }
 }
 
