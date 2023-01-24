@@ -194,10 +194,20 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return null;
     }
 
-    public function whatsapp_message() {
-        $link = route('front.product', [generatedNestedSlug($this->category->ancestors()->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
-        $phone_code = ';;' . $this->phone_code() . ';;';
-        return $link . '%0A%0A' . $phone_code;
+    /**
+     * @return string
+     */
+    public function whatsapp_message(): string
+    {
+        $integration_number = nova_get_setting('whatsapp_integration');
+        $message = route('front.product', [generatedNestedSlug($this->category->ancestors()->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
+        if(!$this->vendor->manage_by_admin) {
+            $integration_number = nova_get_setting('whatsapp_manage_by_admin');
+            $phone_code = ';;' . $this->phone_code() . ';;';
+            $message .= '%0A%0A' . $phone_code;
+        }
+
+        return 'https://wa.me/'. $integration_number .'?text='. $message;
     }
 
     /**

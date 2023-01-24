@@ -72,8 +72,7 @@ if (!function_exists('cartOrChat')) {
         $viewDetails = '<a class="cart-chat-category btn-primary transition-3d-hover"
                             href="'.route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)]).'">'.__('product.category_href').'</a>';
 
-//        href="https://wa.me/+966'.$product->phone().'"
-        $chat = '<div><a target="_blank" href="https://wa.me/'. nova_get_setting('whatsapp_integration') .'?text='.$product->whatsapp_message().'"
+        $chat = '<div><a target="_blank" href="'.$product->whatsapp_message().'"
                     class="cart-chat-category btn btn-primary transition-3d-hover">
                         <i class="fa fa-comments"></i> &nbsp;' . __("general.chat_button") . '
                     </a>
