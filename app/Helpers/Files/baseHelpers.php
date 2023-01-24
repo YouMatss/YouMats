@@ -73,7 +73,10 @@ if (!function_exists('cartOrChat')) {
                             href="'.route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)]).'">'.__('product.category_href').'</a>';
 
 //        href="https://wa.me/+966'.$product->phone().'"
-        $chat = '<div><a target="_blank" href="https://wa.me/'. nova_get_setting('whatsapp_integration') .'?text='.$product->whatsapp_message().'"
+        $integration_number = nova_get_setting('whatsapp_integration');
+        if($product->vendor->manage_by_admin)
+            $integration_number = nova_get_setting('whatsapp_manage_by_admin');
+        $chat = '<div><a target="_blank" href="https://wa.me/'. $integration_number .'?text='.$product->whatsapp_message().'"
                     class="cart-chat-category btn btn-primary transition-3d-hover">
                         <i class="fa fa-comments"></i> &nbsp;' . __("general.chat_button") . '
                     </a>

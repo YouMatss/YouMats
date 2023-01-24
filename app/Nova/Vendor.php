@@ -29,7 +29,7 @@ class Vendor extends Resource
     public static $perPageViaRelationship = 25;
 
     public static $search = [
-        'id', 'name'
+        'name', 'slug'
     ];
 
     public function fields(Request $request)
@@ -130,6 +130,9 @@ class Vendor extends Resource
 
             Toggle::make('Featured', 'isFeatured')->sortable()
                 ->falseColor('#bacad6')->editableIndex(),
+
+            Toggle::make('Manage by '.env('APP_NAME'), 'manage_by_admin')->sortable()
+                ->falseColor('#bacad6'),
 
             Date::make('Signup Date', 'created_at')
                 ->sortable()->exceptOnForms(),

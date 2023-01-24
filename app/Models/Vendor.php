@@ -43,7 +43,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'contacts'          => 'array',
-        'location'           => 'array'
+        'location'          => 'array'
     ];
 
     public function registerMediaConversions(Media $media = null): void {

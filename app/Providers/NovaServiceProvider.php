@@ -338,6 +338,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ->rules(REQUIRED_STRING_VALIDATION),
             Text::make('Whatsapp Integration', 'whatsapp_integration')
                 ->rules(REQUIRED_STRING_VALIDATION),
+            Text::make('Whatsapp Manage by '.env('APP_NAME'), 'whatsapp_manage_by_admin')
+                ->rules(REQUIRED_STRING_VALIDATION),
         ];
     }
 
