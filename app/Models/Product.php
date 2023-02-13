@@ -6,6 +6,7 @@ use App\Helpers\Classes\Shipping as ShippingHelper;
 use App\Helpers\Traits\DefaultImage;
 use App\Helpers\Traits\UnicodeJsonColumn;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -204,7 +205,8 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         if(!$this->vendor->manage_by_admin) {
             $integration_number = nova_get_setting('whatsapp_integration');
             $phone_code = ';;' . $this->phone_code() . ';;';
-            $message .= '%0A%0A' . $phone_code;
+            $message .= '%0A,%0A' . $phone_code;
+            $message .= '%0A,%0A' . $this->category->name;
         }
 
         return 'https://wa.me/'. $integration_number .'?text='. $message;
