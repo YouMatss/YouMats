@@ -259,59 +259,64 @@
     </div>
     @endif
 
-    @if(isset($section_i_category))
+    @if(count($featured_sections_categories))
     <div class="container">
         <div class="my-6">
             <!-- Nav nav-pills -->
             <div class="position-relative text-center z-index-2">
                 <div class=" d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 rtl">
-                    <h2 class="section-title mb-0 pb-2 font-size-22">{{$section_i_category->name}}</h2>
+                    <h2 class="section-title mb-0 pb-2 font-size-22">{{$featured_sections_categories[0]->name}}</h2>
                 </div>
             </div>
             <!-- End Nav Pills -->
             <div class="row rtl">
                 <div class="col-md-3">
                     <div class="block_img_cat">
-                        <a href="{{route('front.category', [generatedNestedSlug($section_i_category->ancestors()->pluck('slug')->toArray(), $section_i_category->slug)])}}" class="d-block">
-                            <img loading="lazy" class="img-fluid" src="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_305_570')['url']}}" alt="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_i_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                        <a href="{{route('front.category', [generatedNestedSlug($featured_sections_categories[0]->ancestors()->pluck('slug')->toArray(), $featured_sections_categories[0]->slug)])}}" class="d-block">
+                            <img loading="lazy" class="img-fluid" src="{{$featured_sections_categories[0]->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_305_570')['url']}}"
+                                 alt="{{$featured_sections_categories[0]->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}"
+                                 title="{{$featured_sections_categories[0]->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
                         </a>
                         <div class="des_block_cat_new">
-                            <h3>{{$section_i_category->name}}</h3>
-                            <a href="{{route('front.category', [generatedNestedSlug($section_i_category->ancestors()->pluck('slug')->toArray(), $section_i_category->slug)])}}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16 animated fadeInUp">{{__('general.view_all')}}</a>
+                            <h3>{{$featured_sections_categories[0]->name}}</h3>
+                            <a href="{{route('front.category', [generatedNestedSlug($featured_sections_categories[0]->ancestors()->pluck('slug')->toArray(), $featured_sections_categories[0]->slug)])}}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16 animated fadeInUp">{{__('general.view_all')}}</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-9">
                     <ul class="row list-unstyled products-group no-gutters mb-0">
-                        @foreach($section_i_category->products->take(8) as $i_product)
+                        @foreach($featured_sections_categories[0]->products->take(8) as $featured_sections_product_0)
                         <li class="col-6 col-md-4 col-wd-3 product-item">
                             <div class="product-item__outer h-100">
                                 <div class="product-item__inner bg-white p-3">
                                     <div class="product-item__body pb-xl-2">
                                         <div class="mb-2">
-                                            <a href="{{route('front.category', [generatedNestedSlug($i_product->category->ancestors()->pluck('slug')->toArray(), $i_product->category->slug)])}}" class="font-size-12 text-gray-5">{{$i_product->category->name}}</a>
+                                            <a href="{{route('front.category', [generatedNestedSlug($featured_sections_product_0->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product_0->category->slug)])}}" class="font-size-12 text-gray-5">{{$featured_sections_product_0->category->name}}</a>
                                         </div>
                                         <h5 class="mb-1 product-item__title">
-                                            <a href="{{route('front.product', [generatedNestedSlug($i_product->category->ancestors()->pluck('slug')->toArray(), $i_product->category->slug), $i_product->slug])}}" class="text-blue font-weight-bold">{{$i_product->name}}</a>
+                                            <a href="{{route('front.product', [generatedNestedSlug($featured_sections_product_0->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product_0->category->slug), $featured_sections_product_0->slug])}}" class="text-blue font-weight-bold">{{$featured_sections_product_0->name}}</a>
                                         </h5>
                                         <div class="mb-2">
-                                            <a href="{{route('front.product', [generatedNestedSlug($i_product->category->ancestors()->pluck('slug')->toArray(), $i_product->category->slug), $i_product->slug])}}" class="d-block text-center">
-                                                <img loading="lazy" class="img-fluid" src="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$i_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
+                                            <a href="{{route('front.product', [generatedNestedSlug($featured_sections_product_0->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product_0->category->slug), $featured_sections_product_0->slug])}}" class="d-block text-center">
+                                                <img loading="lazy" class="img-fluid"
+                                                     src="{{$featured_sections_product_0->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}"
+                                                     alt="{{$featured_sections_product_0->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}"
+                                                     title="{{$featured_sections_product_0->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
                                             </a>
                                         </div>
                                         <div class="product-price">
-                                            @if($i_product->type == 'product' && (!is_company()) && $i_product->price)
-                                                <div class="text-gray-100">{{getCurrency('symbol')}} {{$i_product->formatted_price}}</div>
+                                            @if($featured_sections_product_0->type == 'product' && (!is_company()) && $featured_sections_product_0->price)
+                                                <div class="text-gray-100">{{getCurrency('symbol')}} {{$featured_sections_product_0->formatted_price}}</div>
                                             @endif
                                         </div>
 {{--                                        <div>--}}
-{{--                                            {!! cartOrChat($i_product, false) !!}--}}
+{{--                                            {!! cartOrChat($featured_sections_product_0, false) !!}--}}
 {{--                                        </div>--}}
                                     </div>
                                     <div class="product-item__footer">
                                         @if(!Auth::guard('vendor')->check())
                                             <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a data-url="{{ route('wishlist.add', ['product' => $i_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
+                                                <a data-url="{{ route('wishlist.add', ['product' => $featured_sections_product_0]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
                                             </div>
                                         @endif
                                     </div>
@@ -354,189 +359,72 @@
     </div>
     @endif
 
-    @if(isset($section_ii_category))
-    <!-- Section II Category -->
-    <div class="container mb-8 st_new">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_ii_category->name}}</h3>
-            <a class="d-block text-gray-16" href="{{route('front.category', [generatedNestedSlug($section_ii_category->ancestors()->pluck('slug')->toArray(), $section_ii_category->slug)])}}">
-                {{__('general.go_to_all_products')}}
-                <i class="ec ec-arrow-right-categproes"></i>
-            </a>
-        </div>
+    @if(count($featured_sections_categories) > 1)
+        @foreach($featured_sections_categories->skip(1) as $featured_sections_category)
+            <div class="container mb-8 st_new">
+                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
+                    <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$featured_sections_category->name}}</h3>
+                    <a class="d-block text-gray-16" href="{{route('front.category', [generatedNestedSlug($featured_sections_category->ancestors()->pluck('slug')->toArray(), $featured_sections_category->slug)])}}">
+                        {{__('general.go_to_all_products')}}
+                        <i class="ec ec-arrow-right-categproes"></i>
+                    </a>
+                </div>
 
-        <div class="row rtl">
-            <div class="col-12 col-md-2">
-                <a href="{{route('front.category', [generatedNestedSlug($section_ii_category->ancestors()->pluck('slug')->toArray(), $section_ii_category->slug)])}}" class="d-block">
-                    <img loading="lazy" class="img-fluid img_main_block" width="200" src="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_height_300')['url']}}" alt="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_ii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
-                </a>
-            </div>
-            <div class="col-12 col-md-10 pl-md-0">
-                <!-- Tab Content -->
-                <ul class="row list-unstyled products-group no-gutters">
-                    @foreach($section_ii_category->products->take(6) as $ii_product)
-                    <li class="col-6 col-md-2 col-xl-2 product-item">
-                        <div class="product-item__outer h-100">
-                            <div class="product-item__inner px-xl-3 p-3">
-                                <div class="product-item__body pb-xl-2">
-                                    <div class="mb-2">
-                                        <a href="{{route('front.category', [generatedNestedSlug($section_ii_category->ancestors()->pluck('slug')->toArray(), $section_ii_category->slug)])}}" class="font-size-12 text-gray-5">{{$section_ii_category->name}}</a>
-                                    </div>
-                                    <h5 class="mb-1 product-item__title">
-                                        <a href="{{route('front.product', [generatedNestedSlug($ii_product->category->ancestors()->pluck('slug')->toArray(), $ii_product->category->slug), $ii_product->slug])}}" class="text-blue font-weight-bold">{{$ii_product->name}}</a>
-                                    </h5>
-                                    <div class="mb-2">
-                                        <a href="{{route('front.product', [generatedNestedSlug($ii_product->category->ancestors()->pluck('slug')->toArray(), $ii_product->category->slug), $ii_product->slug])}}" class="d-block text-center">
-                                            <img loading="lazy" class="img-fluid" src="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$ii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
-                                        </a>
-                                    </div>
-                                    <div class="product-price">
-                                        @if($ii_product->type == 'product' && (!is_company()) && $ii_product->price)
-                                            <div class="text-gray-100">{{getCurrency('symbol')}} {{$ii_product->formatted_price}}</div>
+                <div class="row rtl">
+                    <div class="col-12 col-md-2">
+                        <a href="{{route('front.category', [generatedNestedSlug($featured_sections_category->ancestors()->pluck('slug')->toArray(), $featured_sections_category->slug)])}}" class="d-block">
+                            <img loading="lazy" class="img-fluid img_main_block" width="200"
+                                 src="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_height_300')['url']}}"
+                                 alt="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}"
+                                 title="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-10 pl-md-0">
+                        <!-- Tab Content -->
+                        <ul class="row list-unstyled products-group no-gutters">
+                            @foreach($featured_sections_category->products()->take(6)->get() as $featured_sections_product)
+                            <li class="col-6 col-md-2 col-xl-2 product-item">
+                                <div class="product-item__outer h-100">
+                                    <div class="product-item__inner px-xl-3 p-3">
+                                        <div class="product-item__body pb-xl-2">
+                                            <div class="mb-2">
+                                                <a href="{{route('front.category', [generatedNestedSlug($featured_sections_category->ancestors()->pluck('slug')->toArray(), $featured_sections_category->slug)])}}" class="font-size-12 text-gray-5">{{$featured_sections_category->name}}</a>
+                                            </div>
+                                            <h5 class="mb-1 product-item__title">
+                                                <a href="{{route('front.product', [generatedNestedSlug($featured_sections_product->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product->category->slug), $featured_sections_product->slug])}}" class="text-blue font-weight-bold">{{$featured_sections_product->name}}</a>
+                                            </h5>
+                                            <div class="mb-2">
+                                                <a href="{{route('front.product', [generatedNestedSlug($featured_sections_product->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product->category->slug), $featured_sections_product->slug])}}" class="d-block text-center">
+                                                    <img loading="lazy" class="img-fluid"
+                                                         src="{{$featured_sections_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}"
+                                                         alt="{{$featured_sections_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}"
+                                                         title="{{$featured_sections_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
+                                                </a>
+                                            </div>
+                                            <div class="product-price">
+                                                @if($featured_sections_product->type == 'product' && (!is_company()) && $featured_sections_product->price)
+                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$featured_sections_product->formatted_price}}</div>
+                                                @endif
+                                            </div>
+        {{--                                    <div>--}}
+        {{--                                        {!! cartOrChat($featured_sections_product, false) !!}--}}
+        {{--                                    </div>--}}
+                                        </div>
+                                        @if(!Auth::guard('vendor')->check())
+                                            <div class="product-item__footer">
+                                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                                    <a data-url="{{ route('wishlist.add', ['product' => $featured_sections_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
+                                                </div>
+                                            </div>
                                         @endif
                                     </div>
-{{--                                    <div>--}}
-{{--                                        {!! cartOrChat($ii_product, false) !!}--}}
-{{--                                    </div>--}}
                                 </div>
-                                @if(!Auth::guard('vendor')->check())
-                                    <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a data-url="{{ route('wishlist.add', ['product' => $ii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
-                                        </div>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </li>
-                    @endforeach
-                </ul>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    @endif
-
-    @if(isset($section_iii_category))
-    <!-- Section III Category -->
-    <div class="container mb-8 st_new">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iii_category->name}}</h3>
-            <a class="d-block text-gray-16" href="{{route('front.category', [generatedNestedSlug($section_iii_category->ancestors()->pluck('slug')->toArray(), $section_iii_category->slug)])}}">
-                {{__('general.go_to_all_products')}}
-                <i class="ec ec-arrow-right-categproes"></i>
-            </a>
-        </div>
-
-        <div class="row rtl">
-            <div class="col-12 col-md-2">
-                <a href="{{route('front.category', [generatedNestedSlug($section_iii_category->ancestors()->pluck('slug')->toArray(), $section_iii_category->slug)])}}" class="d-block">
-                    <img loading="lazy" class="img-fluid img_main_block" width="200" src="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_height_300')['url']}}" alt="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iii_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
-                </a>
-            </div>
-            <div class="col-12 col-md-10 pl-md-0">
-                <!-- Tab Content -->
-                <ul class="row list-unstyled products-group no-gutters">
-                    @foreach($section_iii_category->products->take(6) as $iii_product)
-                        <li class="col-6 col-md-2 col-xl-2 product-item">
-                            <div class="product-item__outer h-100">
-                                <div class="product-item__inner px-xl-3 p-3">
-                                    <div class="product-item__body pb-xl-2">
-                                        <div class="mb-2">
-                                            <a href="{{route('front.category', [generatedNestedSlug($section_iii_category->ancestors()->pluck('slug')->toArray(), $section_iii_category->slug)])}}" class="font-size-12 text-gray-5">{{$section_iii_category->name}}</a>
-                                        </div>
-                                        <h3 class="mb-1 product-item__title">
-                                            <a href="{{route('front.product', [generatedNestedSlug($iii_product->category->ancestors()->pluck('slug')->toArray(), $iii_product->category->slug), $iii_product->slug])}}" class="text-blue font-weight-bold">{{$iii_product->name}}</a>
-                                        </h3>
-                                        <div class="mb-2">
-                                            <a href="{{route('front.product', [generatedNestedSlug($iii_product->category->ancestors()->pluck('slug')->toArray(), $iii_product->category->slug), $iii_product->slug])}}" class="d-block text-center">
-                                                <img loading="lazy" class="img-fluid" src="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iii_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
-                                            </a>
-                                        </div>
-                                        <div class="product-price">
-                                            @if($iii_product->type == 'product' && (!is_company()) && $iii_product->price)
-                                                <div class="text-gray-100">{{getCurrency('symbol')}} {{$iii_product->formatted_price}}</div>
-                                            @endif
-                                        </div>
-{{--                                        <div>--}}
-{{--                                            {!! cartOrChat($iii_product, false) !!}--}}
-{{--                                        </div>--}}
-                                    </div>
-                                    @if(!Auth::guard('vendor')->check())
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a data-url="{{ route('wishlist.add', ['product' => $iii_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-    </div>
-    @endif
-
-    @if(isset($section_iv_category))
-    <!-- Section IV Category -->
-    <div class="container mb-8 st_new">
-        <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-            <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">{{$section_iv_category->name}}</h3>
-            <a class="d-block text-gray-16" href="{{route('front.category', [generatedNestedSlug($section_iv_category->ancestors()->pluck('slug')->toArray(), $section_iv_category->slug)])}}">
-                {{__('general.go_to_all_products')}}
-                <i class="ec ec-arrow-right-categproes"></i>
-            </a>
-        </div>
-
-        <div class="row rtl">
-            <div class="col-12 col-md-2">
-                <a href="{{route('front.category', [generatedNestedSlug($section_iv_category->ancestors()->pluck('slug')->toArray(), $section_iv_category->slug)])}}" class="d-block">
-                    <img loading="lazy" class="img-fluid img_main_block" width="200" src="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_height_300')['url']}}" alt="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$section_iv_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
-                </a>
-            </div>
-            <div class="col-12 col-md-10 pl-md-0">
-                <!-- Tab Content -->
-                <ul class="row list-unstyled products-group no-gutters">
-                    @foreach($section_iv_category->products->take(6) as $iv_product)
-                        <li class="col-6 col-md-2 col-xl-2 product-item">
-                            <div class="product-item__outer h-100">
-                                <div class="product-item__inner px-xl-3 p-3">
-                                    <div class="product-item__body pb-xl-2">
-                                        <div class="mb-2">
-                                            <a href="{{route('front.category', [generatedNestedSlug($section_iv_category->ancestors()->pluck('slug')->toArray(), $section_iv_category->slug)])}}" class="font-size-12 text-gray-5">{{$section_iv_category->name}}</a>
-                                        </div>
-                                        <h3 class="mb-1 product-item__title">
-                                            <a href="{{route('front.product', [generatedNestedSlug($iv_product->category->ancestors()->pluck('slug')->toArray(), $iv_product->category->slug), $iv_product->slug])}}" class="text-blue font-weight-bold">{{$iv_product->name}}</a>
-                                        </h3>
-                                        <div class="mb-2">
-                                            <a href="{{route('front.product', [generatedNestedSlug($iv_product->category->ancestors()->pluck('slug')->toArray(), $iv_product->category->slug), $iv_product->slug])}}" class="d-block text-center">
-                                                <img loading="lazy" class="img-fluid" src="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$iv_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}" />
-                                            </a>
-                                        </div>
-                                        <div class="product-price">
-                                            @if($iv_product->type == 'product' && (!is_company()) && $iv_product->price)
-                                                <div class="text-gray-100">{{getCurrency('symbol')}} {{$iv_product->formatted_price}}</div>
-                                            @endif
-                                        </div>
-{{--                                        <div>--}}
-{{--                                            {!! cartOrChat($iv_product, false) !!}--}}
-{{--                                        </div>--}}
-                                    </div>
-                                    @if(!Auth::guard('vendor')->check())
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a data-url="{{ route('wishlist.add', ['product' => $iv_product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-    </div>
+        @endforeach
     @endif
 @endsection

@@ -20,6 +20,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Maher\TitleTemplate\TitleTemplate;
+use Monaye\SimpleLinkButton\SimpleLinkButton;
 use Nikaia\Rating\Rating;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
@@ -80,7 +81,7 @@ class Product extends Resource
             Select::make('Type')->options([
                 'product' => 'Product',
                 'service' => 'Service'
-            ])->displayUsingLabels()
+            ])->displayUsingLabels()->hideFromIndex()
             ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:product,service'])),
 
             NovaDependencyContainer::make([
@@ -119,16 +120,17 @@ class Product extends Resource
             Toggle::make('Best Seller')->sortable()
                 ->falseColor('#bacad6')->editableIndex(),
 
-            Number::make('Views')
+            Number::make('Views')->hideFromIndex()
                 ->hideWhenUpdating()->hideWhenCreating(),
 
             DateTime::make('Creation Date', 'created_at')
                 ->onlyOnDetail(),
 
-//            SimpleLinkButton::make('Link', route('front.product', [generatedNestedSlug($this->model()->category->ancestors()->pluck('slug')->toArray(), $this->model()->category->slug), $this->model()->slug]))->type('outline')
-//                ->style('primary')
-//                ->attributes(['target' => '_blank'])
-//                ->onlyOnIndex(),
+            SimpleLinkButton::make('Link', getFullProductLink($this->model()))
+                ->type('outline')
+                ->style('primary')
+                ->attributes(['target' => '_blank'])
+                ->onlyOnIndex(),
 
             (new Panel('Gallery', [
                 Fields::image(false, PRODUCT_PATH, 'Images', false),

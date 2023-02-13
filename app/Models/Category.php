@@ -131,11 +131,17 @@ class Category extends Model implements Sortable, HasMedia
     {
         if($this->isRoot()) {
             return $this->hasManyThrough(Product::class, self::class, 'parent_id')
-                ->where('products.active', 1)->orderBy('products.updated_at', 'desc');
+                ->where('products.active', true)
+                ->orderBy('products.updated_at', 'desc');
         }
-        return $this->hasMany(Product::class)
-            ->where('products.active', 1)
-            ->orderBy('products.updated_at', 'desc');
+        if($this->isLeaf()) {
+            return $this->hasMany(Product::class)
+                ->where('products.active', true)
+                ->orderBy('products.updated_at', 'desc');
+        }
+        return Product::whereHas('category', fn($query) =>
+            $query->whereDescendantOrSelf($this)
+        )->where('products.active', true)->orderBy('products.updated_at', 'desc');
     }
 
     /**

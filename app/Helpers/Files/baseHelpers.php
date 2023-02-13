@@ -211,6 +211,21 @@ if(!function_exists('generatedNestedSlug')) {
     }
 }
 
+if(!function_exists('getFullProductLink')) {
+    /**
+     * @param $productModel
+     * @return string
+     */
+    function getFullProductLink($productModel): string
+    {
+        $slugs = optional(optional(optional(optional($productModel)->category)->ancestors())->pluck('slug'))->toArray();
+
+        if(!isset($slugs))
+            return '#';
+
+        return route('front.product', [generatedNestedSlug($slugs, $productModel->category->slug), $productModel->slug]);
+    }
+}
 if (!\Illuminate\Support\Collection::hasMacro('ungroup')) {
     /**
      * Ungroup a previously grouped collection (grouped by {@see Collection::groupBy()})
