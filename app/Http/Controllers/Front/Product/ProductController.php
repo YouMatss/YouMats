@@ -6,6 +6,7 @@ use App\Helpers\Filters\FiltersJsonField;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -56,6 +57,8 @@ class ProductController extends Controller
         }
 
         $this->checkOnCategoriesSlugs($categories_slug, $data['product']);
+        
+        $data['is_CustomDesign'] = $data['product']['category']['ancestors'];
 
         if(Session::has('city')) {
             $data['delivery'] = $data['product']->delivery;
@@ -105,8 +108,42 @@ class ProductController extends Controller
     /**
      * @return string
      */
-    public function search(): string
+    public function suggest(): string
     {
+        $data['selected_categories'] = [];
+        $data['searched_word']  = $_GET['filter']['name'];
+
+        $data['suggested_products'] = QueryBuilder::for(Product::class)
+                        ->select(
+                            'id',
+                            'category_id',
+                            'vendor_id',
+                            'name',
+                            'rate',
+                            'price',
+                            'slug'
+                          )
+                        ->allowedFilters([
+                            AllowedFilter::custom('name', new FiltersJsonField),
+                            AllowedFilter::scope('price'),
+                            AllowedFilter::callback('has_categories', fn($query, $value) => $query->whereHas('category', fn($query) => $query->whereIn('categories.id', $value)))
+                        ])
+                        ->allowedIncludes(['category'])
+                        ->where('active', true)
+                        ->limit(8)
+                        ->get()
+                        ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
+                            return $collection->shuffle();
+                        })->ungroup()
+                        ->unique();
+           
+          return view('front.layouts.partials.searchDiv')->with($data)->render();
+    }
+
+
+
+    public function search() {
+
         $data['selected_tags'] = [];
         $data['selected_categories'] = [];
 
@@ -123,12 +160,11 @@ class ProductController extends Controller
                         ])
                         ->allowedIncludes(['tags', 'category'])
                         ->where('active', true)
-                        ->limit(15)
-                        ->get()
-                        ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
-                            return $collection->shuffle();
-                        })->ungroup()
-                        ->unique();
+                        ->paginate(20);
+
+        $data['search_products']->withPath(url()->current())->withQueryString();
+                
+
 
         foreach ($search_products_by_name_only as $product) {
             if($product->tags)
@@ -145,7 +181,15 @@ class ProductController extends Controller
             $data['selected_categories'] = explode(',', $_GET['filter']['has_categories']);
 
         $data['max_price'] = ceil($search_products_by_name_only->max('price'));
+        
+        return view('front.search.search')->with($data);
 
-        return view('front.layouts.partials.searchDiv')->with($data)->render();
     }
+
+
+
+
+
+
+   
 }
