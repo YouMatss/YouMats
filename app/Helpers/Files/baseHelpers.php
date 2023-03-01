@@ -1,6 +1,5 @@
 <?php
 
-use App\Helpers\Classes\Delivery;
 use App\Helpers\Classes\Shipping as ShippingHelper;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
@@ -168,6 +167,7 @@ if (!function_exists('generate_map')) {
         return $html_tag;
     }
 }
+
 if (!function_exists('generate_map_branch')) {
     function generate_map_branch() {
         $html_tag = "";
@@ -180,6 +180,27 @@ if (!function_exists('generate_map_branch')) {
     }
 }
 
+function encrypt_vendor_message($vendor_name) {
+    $array = [
+        'a' => 'w', 'b' => 'h', 'c' => 'q', 'd' => 'g',
+        'e' => 't', 'f' => 'r', 'g' => 'f', 'h' => 'd',
+        'i' => 'e', 'j' => 's', 'k' => 'y', 'l' => 'a',
+        'm' => 'u', 'n' => 'z', 'o' => 'i', 'p' => 'x',
+        'q' => 'o', 'r' => 'c', 's' => 'p', 't' => 'v',
+        'u' => 'l', 'v' => 'b', 'w' => 'k', 'x' => 'n',
+        'y' => 'j', 'z' => 'm'
+    ];
+    $numbers = array_keys($array);
+    $letters = array_values($array);
+    return str_replace($numbers, $letters, $vendor_name);
+}
+
+if (!function_exists('vendor_encrypt')) {
+    function vendor_encrypt($vendor) {
+        $vendor_name = $vendor ? $vendor->name : '';
+        return encrypt_vendor_message($vendor_name);
+    }
+}
 function haversineGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000) {
     // convert from degrees to radians
     $latFrom = deg2rad($latitudeFrom);
