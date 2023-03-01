@@ -13,6 +13,8 @@
     <meta name="twitter:description" content="{{$tag->meta_desc}}">
     <meta name="twitter:image" content="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}">
 
+    <link rel="canonical" href="{{url()->current()}}" />
+
     {!! $tag->schema !!}
 @endsection
 @section('content')
