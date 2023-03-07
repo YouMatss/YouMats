@@ -205,7 +205,9 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         if(!$this->vendor->manage_by_admin) {
             $integration_number = nova_get_setting('whatsapp_integration');
             $phone_code = ';;' . $this->phone_code() . ';;';
+            $vendor_code = ';;' . vendor_encrypt($this->vendor) . ';;';
             $message .= '%0A,%0A' . $phone_code;
+            $message .= '%0A,%0A' . $vendor_code;
             $message .= '%0A,%0A' . $this->category->name;
         }
 

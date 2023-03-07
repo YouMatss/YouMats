@@ -1,6 +1,5 @@
 <?php
 
-use App\Helpers\Classes\Delivery;
 use App\Helpers\Classes\Shipping as ShippingHelper;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
@@ -72,8 +71,7 @@ if (!function_exists('cartOrChat')) {
         $viewDetails = '<a class="cart-chat-category btn-primary transition-3d-hover"
                             href="'.route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)]).'">'.__('product.category_href').'</a>';
 
-//        href="https://wa.me/+966'.$product->phone().'"
-        $chat = '<div><a target="_blank" href="https://wa.me/'. nova_get_setting('whatsapp_integration') .'?text='.$product->whatsapp_message().'"
+        $chat = '<div><a target="_blank" href="'.$product->whatsapp_message().'"
                     class="cart-chat-category btn btn-primary transition-3d-hover">
                         <i class="fa fa-comments"></i> &nbsp;' . __("general.chat_button") . '
                     </a>
@@ -169,6 +167,7 @@ if (!function_exists('generate_map')) {
         return $html_tag;
     }
 }
+
 if (!function_exists('generate_map_branch')) {
     function generate_map_branch() {
         $html_tag = "";
@@ -181,6 +180,27 @@ if (!function_exists('generate_map_branch')) {
     }
 }
 
+function encrypt_vendor_message($vendor_name) {
+    $array = [
+        'a' => 'w', 'b' => 'h', 'c' => 'q', 'd' => 'g',
+        'e' => 't', 'f' => 'r', 'g' => 'f', 'h' => 'd',
+        'i' => 'e', 'j' => 's', 'k' => 'y', 'l' => 'a',
+        'm' => 'u', 'n' => 'z', 'o' => 'i', 'p' => 'x',
+        'q' => 'o', 'r' => 'c', 's' => 'p', 't' => 'v',
+        'u' => 'l', 'v' => 'b', 'w' => 'k', 'x' => 'n',
+        'y' => 'j', 'z' => 'm'
+    ];
+    $numbers = array_keys($array);
+    $letters = array_values($array);
+    return str_replace($numbers, $letters, $vendor_name);
+}
+
+if (!function_exists('vendor_encrypt')) {
+    function vendor_encrypt($vendor) {
+        $vendor_name = $vendor ? $vendor->name : '';
+        return encrypt_vendor_message($vendor_name);
+    }
+}
 function haversineGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000) {
     // convert from degrees to radians
     $latFrom = deg2rad($latitudeFrom);
@@ -212,6 +232,21 @@ if(!function_exists('generatedNestedSlug')) {
     }
 }
 
+if(!function_exists('getFullProductLink')) {
+    /**
+     * @param $productModel
+     * @return string
+     */
+    function getFullProductLink($productModel): string
+    {
+        $slugs = optional(optional(optional(optional($productModel)->category)->ancestors())->pluck('slug'))->toArray();
+
+        if(!isset($slugs))
+            return '#';
+
+        return route('front.product', [generatedNestedSlug($slugs, $productModel->category->slug), $productModel->slug]);
+    }
+}
 if (!\Illuminate\Support\Collection::hasMacro('ungroup')) {
     /**
      * Ungroup a previously grouped collection (grouped by {@see Collection::groupBy()})
@@ -281,12 +316,14 @@ function cart_total() {
 }
 
 if(!function_exists('getMetaTag')) {
-    function getMetaTag($model, $key, $default) {
+    function getMetaTag($model, $key, $default, $second_default = '') {
         $value = $model->getTranslation($key, LaravelLocalization::getCurrentLocale(), false);
         if(!empty($value))
             return $value;
-        else
+        elseif(!empty($default))
             return $default;
+        else
+            return $second_default;
     }
 }
 
