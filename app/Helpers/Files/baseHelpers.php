@@ -197,7 +197,7 @@ function encrypt_vendor_message($vendor_name) {
 
 if (!function_exists('vendor_encrypt')) {
     function vendor_encrypt($vendor) {
-        $vendor_name = $vendor ? $vendor->name : '';
+        $vendor_name = $vendor ? $vendor->getTranslation('name', 'en') : '';
         return encrypt_vendor_message($vendor_name);
     }
 }
