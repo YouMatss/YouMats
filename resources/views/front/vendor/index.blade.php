@@ -1,5 +1,7 @@
 @extends('front.layouts.master')
-
+@section('metaTags')
+    <link rel="canonical" href="{{url()->current()}}" />
+@endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
         <div class="container">
