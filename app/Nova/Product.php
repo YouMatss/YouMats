@@ -9,6 +9,7 @@ use Davidpiesse\NovaToggle\Toggle;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -22,7 +23,6 @@ use Laravel\Nova\Panel;
 use Maher\TitleTemplate\TitleTemplate;
 use Monaye\SimpleLinkButton\SimpleLinkButton;
 use Nikaia\Rating\Rating;
-use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Waynestate\Nova\CKEditor;
@@ -168,25 +168,35 @@ class Product extends Resource
             ])),
 
             (new Panel('Attributes (For Product Filtration)', [
-                Multiselect::make('Attributes')
-                    ->options(function () {
-                        $collection = [];
-                        $query = \App\Models\Attribute::with('values');
-
-                        if(!is_null($this->category_id))
+                BelongsToManyField::make('Attributes')
+                    ->options(\App\Models\AttributeValue::with('attribute')
+                        ->whereHas('attribute', function ($query) {
                             $query->where('category_id', $this->category_id);
+                        })->get()
+                    )
+                    ->setMultiselectProps(['selectLabel' => 'click for select'])
+                    ->optionsLabel('translated_name')->hideFromIndex()
+                    ->showAsListInDetail()->hideWhenCreating(),
 
-                        $data = $query->get();
-
-                        foreach ($data as $row) {
-                            foreach ($row->values as $value) {
-                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key];
-                            }
-                        }
-                        return $collection;
-                    })
-                    ->placeholder('Choose Attributes Values')
-                    ->hideFromIndex(),
+//                Multiselect::make('Attributes', 'attributes')
+//                    ->options(function () {
+//                        $collection = [];
+//                        $query = \App\Models\Attribute::with('values');
+//
+//                        if(!is_null($this->category_id))
+//                            $query->where('category_id', $this->category_id);
+//
+//                        $data = $query->get();
+//
+//                        foreach ($data as $row) {
+//                            foreach ($row->values as $value) {
+//                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key];
+//                            }
+//                        }
+//                        return $collection;
+//                    })
+//                    ->placeholder('Choose Attributes Values')
+//                    ->hideFromIndex(),
             ])),
 
             new Panel('Search Keywords', [
