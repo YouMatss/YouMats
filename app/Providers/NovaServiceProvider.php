@@ -7,6 +7,7 @@ use App\Models\Category as CategoryModel;
 use App\Models\Product as ProductModel;
 use App\Models\Vendor as VendorModel;
 use App\Nova\Admin;
+use App\Nova\Attribute;
 use App\Nova\Car;
 use App\Nova\CarType;
 use App\Nova\Category;
@@ -248,6 +249,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Team::class,
                             Partner::class,
                             Slider::class,
+                            Attribute::class,
                             Group::make([
                                 'label' => 'Settings',
                                 'expanded' => false,

@@ -3417,7 +3417,7 @@
             "dist": {
                 "type": "path",
                 "url": "./nova",
-                "reference": "a760e51bd8e62fbdcc567969236de2ec4cb76dc6"
+                "reference": "449dd9b55a4cb43b03ef88c4a7fa08718d8cc6c3"
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -4839,11 +4839,11 @@
         },
         {
             "name": "maher/generate-products",
-            "version": "dev-Maher",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./nova-components/GenerateProducts",
-                "reference": "4a8fb13c0cf3c1dc6a12f6c9ceb5cba85881dd11"
+                "reference": "0382c24bae309503f675ce7e64dbdfe1cb64457e"
             },
             "require": {
                 "php": ">=7.1.0"
@@ -4875,11 +4875,11 @@
         },
         {
             "name": "maher/title-template",
-            "version": "dev-Maher",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./nova-components/TitleTemplate",
-                "reference": "6245514b1b88e0fbafa6609c282700c0d2641366"
+                "reference": "d72b2885702a579da6c6742d10ddf9d8bbf4db88"
             },
             "require": {
                 "php": ">=7.1.0"
@@ -15170,5 +15170,5 @@
         "php": "7.4.*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }

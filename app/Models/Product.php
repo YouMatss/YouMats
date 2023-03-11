@@ -242,6 +242,14 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     /**
      * @return BelongsToMany
      */
+    public function attributes(): BelongsToMany
+    {
+        return $this->belongsToMany(AttributeValue::class, 'attribute_values_products', 'product_id', 'attribute_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
