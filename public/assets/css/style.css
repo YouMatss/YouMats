@@ -1099,6 +1099,14 @@
         padding: 30px;
     }
 
+    .block_img_cat a img {
+        height: auto !important;
+    }
+
+    .img_main_block {
+        height: auto !important;
+    }
+
 }
 
 

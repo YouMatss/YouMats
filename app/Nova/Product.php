@@ -178,6 +178,12 @@ class Product extends Resource
                     ->optionsLabel('translated_name')->hideFromIndex()
                     ->showAsListInDetail()->hideWhenCreating(),
 
+                BelongsToManyField::make('Attributes')
+                    ->options(\App\Models\AttributeValue::with('attribute')->get())
+                    ->setMultiselectProps(['selectLabel' => 'click for select'])
+                    ->optionsLabel('translated_name')
+                    ->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
+
 //                Multiselect::make('Attributes', 'attributes')
 //                    ->options(function () {
 //                        $collection = [];

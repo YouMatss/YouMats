@@ -127,8 +127,8 @@
                             <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input filter-checkboxes" name="attributes"
-                                           @if (in_array($value->id, explode(',', request()->input('filter.attributes')))) checked @endif
-                                           value="{{$value->id}}" id="{{$attribute->id . '_' . $value->id}}">
+                                           @if (in_array($attribute->id . '-' . $value->id, explode(',', request()->input('filter.attributes')))) checked @endif
+                                           value="{{$attribute->id . '-' . $value->id}}" id="{{$attribute->id . '_' . $value->id}}">
                                     <label class="custom-control-label" for="{{$attribute->id . '_' . $value->id}}">{{$value->value}}</label>
                                 </div>
                             </div>
