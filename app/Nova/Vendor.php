@@ -29,7 +29,7 @@ class Vendor extends Resource
     public static $perPageViaRelationship = 25;
 
     public static $search = [
-        'name', 'slug'
+        'name', 'slug', 'email'
     ];
 
     public function fields(Request $request)
@@ -132,6 +132,9 @@ class Vendor extends Resource
                 ->falseColor('#bacad6')->editableIndex(),
 
             Toggle::make('Manage by '.env('APP_NAME'), 'manage_by_admin')->sortable()
+                ->falseColor('#bacad6'),
+
+            Toggle::make('Enable Encryption Mode',  'enable_encryption_mode')->sortable()
                 ->falseColor('#bacad6'),
 
             Date::make('Signup Date', 'created_at')
