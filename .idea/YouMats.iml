@@ -237,6 +237,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/whitecube/nova-google-maps" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yassi/nova-nested-form" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ziffdavis/nova-nestedset" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mobiledetect/mobiledetectlib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/riverskies/laravel-mobile-detect" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

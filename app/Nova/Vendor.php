@@ -134,9 +134,6 @@ class Vendor extends Resource
             Toggle::make('Manage by '.env('APP_NAME'), 'manage_by_admin')->sortable()
                 ->falseColor('#bacad6'),
 
-            Toggle::make('Enable Encryption Mode',  'enable_encryption_mode')->sortable()
-                ->falseColor('#bacad6'),
-
             Date::make('Signup Date', 'created_at')
                 ->sortable()->exceptOnForms(),
 

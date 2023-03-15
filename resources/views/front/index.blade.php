@@ -294,7 +294,9 @@
                                             <a href="{{route('front.category', [generatedNestedSlug($featured_sections_product_0->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product_0->category->slug)])}}" class="font-size-12 text-gray-5">{{$featured_sections_product_0->category->name}}</a>
                                         </div>
                                         <h5 class="mb-1 product-item__title">
-                                            <a href="{{route('front.product', [generatedNestedSlug($featured_sections_product_0->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product_0->category->slug), $featured_sections_product_0->slug])}}" class="text-blue font-weight-bold">{{$featured_sections_product_0->name}}</a>
+                                            <a href="{{route('front.product', [generatedNestedSlug($featured_sections_product_0->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product_0->category->slug), $featured_sections_product_0->slug])}}" class="text-blue font-weight-bold">
+                                                {{ Str::limit($featured_sections_product_0->name, 65) }}
+                                            </a>
                                         </h5>
                                         <div class="mb-2">
                                             <a href="{{route('front.product', [generatedNestedSlug($featured_sections_product_0->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product_0->category->slug), $featured_sections_product_0->slug])}}" class="d-block text-center">
@@ -373,10 +375,18 @@
                 <div class="row rtl">
                     <div class="col-12 col-md-2">
                         <a href="{{route('front.category', [generatedNestedSlug($featured_sections_category->ancestors()->pluck('slug')->toArray(), $featured_sections_category->slug)])}}" class="d-block">
-                            <img loading="lazy" class="img-fluid img_main_block" width="200"
-                                 src="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_height_300')['url']}}"
-                                 alt="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}"
-                                 title="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                            @desktop
+                                <img loading="lazy" class="img-fluid img_main_block" width="200"
+                                     src="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_200_300')['url']}}"
+                                     alt="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}"
+                                     title="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                            @enddesktop
+                            @handheld
+                                <img loading="lazy" class="img-fluid img_main_block" width="200"
+                                     src="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_255_364')['url']}}"
+                                     alt="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}"
+                                     title="{{$featured_sections_category->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}" />
+                            @endhandheld
                         </a>
                     </div>
                     <div class="col-12 col-md-10 pl-md-0">
@@ -391,7 +401,9 @@
                                                 <a href="{{route('front.category', [generatedNestedSlug($featured_sections_category->ancestors()->pluck('slug')->toArray(), $featured_sections_category->slug)])}}" class="font-size-12 text-gray-5">{{$featured_sections_category->name}}</a>
                                             </div>
                                             <h5 class="mb-1 product-item__title">
-                                                <a href="{{route('front.product', [generatedNestedSlug($featured_sections_product->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product->category->slug), $featured_sections_product->slug])}}" class="text-blue font-weight-bold">{{$featured_sections_product->name}}</a>
+                                                <a href="{{route('front.product', [generatedNestedSlug($featured_sections_product->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product->category->slug), $featured_sections_product->slug])}}" class="text-blue font-weight-bold">
+                                                    {{ Str::limit($featured_sections_product->name, 65) }}
+                                                </a>
                                             </h5>
                                             <div class="mb-2">
                                                 <a href="{{route('front.product', [generatedNestedSlug($featured_sections_product->category->ancestors()->pluck('slug')->toArray(), $featured_sections_product->category->slug), $featured_sections_product->slug])}}" class="d-block text-center">

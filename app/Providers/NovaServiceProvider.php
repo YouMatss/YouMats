@@ -57,6 +57,7 @@ use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
 use Bernhardh\NovaTranslationEditor\NovaTranslationEditor;
 use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
+use Davidpiesse\NovaToggle\Toggle;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 use DigitalCreative\CollapsibleResourceManager\Resources\InternalLink;
@@ -342,6 +343,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ->rules(REQUIRED_STRING_VALIDATION),
             Text::make('Whatsapp Manage by '.env('APP_NAME'), 'whatsapp_manage_by_admin')
                 ->rules(REQUIRED_STRING_VALIDATION),
+            Toggle::make('Enable Encryption Mode',  'enable_encryption_mode')
+                ->falseColor('#bacad6'),
         ];
     }
 
