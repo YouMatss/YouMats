@@ -597,7 +597,7 @@
                     <!-- Search Bar [START] -->
                     <div class="col d-none d-xl-block">
                         <label class="sr-only" for="searchProduct">{{__('general.search')}}</label>            
-                        <div class="input-group" id="SearchBar" style="padding-top: 4px;">
+                        <div class="input-group" id="SearchBar" style="margin-top: 4px;">
                             <select id="CategoriesSearchBar" class="form-select form-select-lg height-40 py-2 px-2" style="border-radius: 0 7.5px 7.5px 0;max-width: 130px;background: #f3f3f3;border: #f3f3f3;">
                                 <option value="0" selected> {{__('general.all_categories')}}</option>
                                 @foreach($categories as $category)
@@ -608,8 +608,8 @@
                               </select>    
                             <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40" style="border-radius: 0;" id="searchProductInput" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
                             <div class="input-group-append">
-                                <button class="btn btn-dark height-40 py-2 px-2 rounded-right-pill" style="min-width: 80px;" type="button" id="searchProductBtn">
-                                    <span class="ec ec-search font-size-24" id="searchButtonSpan" style="font-weight: bolder;"></span>
+                                <button class="btn btn-dark height-40 py-2 px-2 rounded-right-pill" style="background-color: #febd69;border-color: #febd69;" type="button" id="searchProductBtn">
+                                    <span class="ec ec-search font-size-24" id="searchButtonSpan" style="color: black;font-weight: bolder;"></span>
                                 </button>
                             </div>
                         </div>

@@ -73,6 +73,8 @@ class ProductController extends Controller
             ->where('id', '!=', $data['product']->id)
             ->where('active', 1)
             ->orderby('sort')->take(10)->get();
+            
+        $data['main_phone'] = $data['product']->vendor->contacts[0]['phone'];
 
         return view('front.product.index')->with($data);
     }

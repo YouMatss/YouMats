@@ -1,4 +1,4 @@
-@if($view == 'Suggestion')
+@if($view == 'Suggestion') 
 <li class="product-item remove-divider" style="width: 100%;">
     <div class="product-item__outer w-100">
         <a href="{{ route('products.search') }}?filter[name]={{ $_GET['filter']['name'] }}&filter[has_categories]={{ $_GET['filter']['has_categories'] }}&filter[include]=tags,tagsCount,category,categoryCount">
