@@ -181,6 +181,7 @@ if (!function_exists('generate_map_branch')) {
 }
 
 function encrypt_vendor_message($vendor_name) {
+    $encrypted_string = '';
     $array = [
         'a' => 'w', 'b' => 'h', 'c' => 'q', 'd' => 'g',
         'e' => 't', 'f' => 'r', 'g' => 'f', 'h' => 'd',
@@ -190,9 +191,10 @@ function encrypt_vendor_message($vendor_name) {
         'u' => 'l', 'v' => 'b', 'w' => 'k', 'x' => 'n',
         'y' => 'j', 'z' => 'm'
     ];
-    $numbers = array_keys($array);
-    $letters = array_values($array);
-    return str_replace($numbers, $letters, $vendor_name);
+    foreach (str_split($vendor_name) as $letter) {
+        $encrypted_string .= $array[strtolower($letter)] ?? $letter;
+    }
+    return $encrypted_string;
 }
 
 if (!function_exists('vendor_encrypt')) {
@@ -247,6 +249,7 @@ if(!function_exists('getFullProductLink')) {
         return route('front.product', [generatedNestedSlug($slugs, $productModel->category->slug), $productModel->slug]);
     }
 }
+
 if (!\Illuminate\Support\Collection::hasMacro('ungroup')) {
     /**
      * Ungroup a previously grouped collection (grouped by {@see Collection::groupBy()})
