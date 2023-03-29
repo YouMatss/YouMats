@@ -26,7 +26,7 @@
 {{--                    --}}{{--<span class="text-secondary">(40)</span>--}}
 {{--                </a>--}}
 {{--            </div>--}}
-            <div class="font-size-12 productDesc px-2 pb-2 mb-2">{{ Str::replace('&nbsp;', ' ', Str::limit(strip_tags($product->short_desc), 107)) }}</div>
+            <div class="font-size-12 productDesc px-2 pb-2 mb-2">{{ Str::replace(['&nbsp;', '&times;'], [' ', '×'], Str::limit(strip_tags($product->short_desc), 107)) }}</div>
 {{--            <div class="text-gray-20 mb-2 font-size-12">{{__('general.sku')}}: {{$product->SKU}}</div>--}}
             <div class="custom-price-border px-2 pb-2 mb-2">
                 @if(auth()->guard('admin')->check() && isset($product->vendor))
