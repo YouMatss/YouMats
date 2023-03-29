@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Front\Tag;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Tag;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class IndexController extends Controller
 {
@@ -28,5 +32,18 @@ class IndexController extends Controller
         $data['tags'] = $this->getTags($tags_ids);
 
         return view('front.tag.index')->with($data);
+    }
+
+    /**
+     * @param $search_keyword
+     * @return Application|Factory|View
+     */
+    public function searchKeywordsTags($search_keyword) {
+        $data['keyword'] = $search_keyword;
+        $data['products'] = Product::where('active', true)
+            ->where("search_keywords->" . app()->getLocale(), "LIKE", "%$search_keyword%")
+            ->inRandomOrder()->paginate(20);
+
+        return view('front.tag.search_keywords_tags')->with($data);
     }
 }
