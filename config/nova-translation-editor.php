@@ -21,7 +21,8 @@ return [
         'passwords',
         'validation',
         'pagination',
-        'verify'
+        'verify',
+        'keywordsTags'
     ],
     'languages' => [
         'en', 'ar'

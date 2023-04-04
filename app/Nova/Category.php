@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Panel;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
@@ -70,13 +71,13 @@ class Category extends Resource
 
             Fields::image(true, CATEGORY_COVER, 'Cover', true),
 
-            Toggle::make(__('Section I'), 'section_i')->falseColor('#bacad6')->editableIndex(),
-            Toggle::make(__('Section II'), 'section_ii')->falseColor('#bacad6')->editableIndex(),
-            Toggle::make(__('Section III'), 'section_iii')->falseColor('#bacad6')->editableIndex(),
-            Toggle::make(__('Section IV'), 'section_iv')->falseColor('#bacad6')->editableIndex(),
-            Toggle::make(__('Featured'), 'isFeatured')->falseColor('#bacad6')->editableIndex(),
-            Toggle::make(__('Top Category'), 'topCategory')->falseColor('#bacad6')->editableIndex(),
-            Toggle::make(__('Show in footer'), 'show_in_footer')->falseColor('#bacad6')->editableIndex(),
+            Toggle::make(__('Featured Sections'), 'featured_sections')->falseColor('#bacad6')->editableIndex()->sortable(),
+            Number::make(__('Featured Section Order'), 'featured_section_order')
+                ->min(0)->step(1)->hideFromIndex(),
+
+            Toggle::make(__('Featured'), 'isFeatured')->falseColor('#bacad6')->editableIndex()->sortable(),
+            Toggle::make(__('Top Category'), 'topCategory')->falseColor('#bacad6')->editableIndex()->sortable(),
+            Toggle::make(__('Show in footer'), 'show_in_footer')->falseColor('#bacad6')->editableIndex()->sortable(),
             Toggle::make(__('Hide Availability'), 'hide_availability')->falseColor('#bacad6')->hideFromIndex(),
             Toggle::make(__('Hide Delivery Status'), 'hide_delivery_status')->falseColor('#bacad6')->hideFromIndex(),
 

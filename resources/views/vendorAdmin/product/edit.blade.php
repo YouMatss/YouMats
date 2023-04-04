@@ -195,7 +195,7 @@
                                         @foreach($attributes as $attribute)
                                             <optgroup label="{{$attribute->key}}">
                                             @foreach($attribute->values as $value)
-                                                <option value="{{$value->id}}" @if(in_array($value->id, json_decode($product->attributes))) selected @endif>{{$value->value . ' (' . $attribute->key . ')'}}</option>
+                                                <option value="{{$value->id}}" @if(in_array($value->id, $product->attributes->modelKeys())) selected @endif>{{$value->value . ' (' . $attribute->key . ')'}}</option>
                                             @endforeach
                                             </optgroup>
                                         @endforeach

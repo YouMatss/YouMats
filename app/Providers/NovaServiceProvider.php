@@ -7,6 +7,7 @@ use App\Models\Category as CategoryModel;
 use App\Models\Product as ProductModel;
 use App\Models\Vendor as VendorModel;
 use App\Nova\Admin;
+use App\Nova\Attribute;
 use App\Nova\Car;
 use App\Nova\CarType;
 use App\Nova\Category;
@@ -56,6 +57,7 @@ use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
 use Bernhardh\NovaTranslationEditor\NovaTranslationEditor;
 use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
+use Davidpiesse\NovaToggle\Toggle;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 use DigitalCreative\CollapsibleResourceManager\Resources\InternalLink;
@@ -248,6 +250,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                             Team::class,
                             Partner::class,
                             Slider::class,
+                            Attribute::class,
                             Group::make([
                                 'label' => 'Settings',
                                 'expanded' => false,
@@ -338,6 +341,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ->rules(REQUIRED_STRING_VALIDATION),
             Text::make('Whatsapp Integration', 'whatsapp_integration')
                 ->rules(REQUIRED_STRING_VALIDATION),
+            Text::make('Whatsapp Manage by '.env('APP_NAME'), 'whatsapp_manage_by_admin')
+                ->rules(REQUIRED_STRING_VALIDATION),
+            Toggle::make('Enable Encryption Mode',  'enable_encryption_mode')
+                ->falseColor('#bacad6'),
         ];
     }
 
