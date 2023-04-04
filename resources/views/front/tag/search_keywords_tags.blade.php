@@ -1,15 +1,15 @@
 @extends('front.layouts.master')
 @section('metaTags')
-    <title>{{$keyword}}</title>
+    <title>{{__('keywordsTags.before_meta_title') . ' ' . $keyword . ' ' . __('keywordsTags.after_meta_title')}}</title>
     <meta name="description" content="{{$keyword}}">
-    <meta name="keywords" content="{{$keyword}}">
+    <meta name="keywords" content="">
     <meta property="og:url" content="{{url()->current()}}" />
-    <meta property="og:title" content="{{$keyword}}" />
+    <meta property="og:title" content="{{__('keywordsTags.before_meta_title') . ' ' . $keyword . ' ' . __('keywordsTags.after_meta_title')}}" />
     <meta property="og:description" content="{{$keyword}}" />
     <meta property="og:image" content="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@YouMats">
-    <meta name="twitter:title" content="{{$keyword}}">
+    <meta name="twitter:title" content="{{__('keywordsTags.before_meta_title') . ' ' . $keyword . ' ' . __('keywordsTags.after_meta_title')}}">
     <meta name="twitter:description" content="{{$keyword}}">
     <meta name="twitter:image" content="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}">
 

@@ -165,7 +165,7 @@ Route::group([
     Route::get('/search', 'Product\ProductController@search')->name('products.search');
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
 
-    Route::get('/init-search/{search_keyword}', 'Tag\IndexController@searchKeywordsTags')->name('front.tag.search');
+    Route::get('/shop/{search_keyword}', 'Tag\IndexController@searchKeywordsTags')->name('front.tag.search');
 
     Route::get('/{categories_slug}/{slug}/i', 'Product\ProductController@index')
         ->name('front.product')->where('categories_slug', '.*');

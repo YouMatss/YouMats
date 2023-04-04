@@ -6,7 +6,6 @@ use App\Helpers\Traits\DefaultImage;
 use App\Helpers\Traits\UnicodeJsonColumn;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,7 +24,11 @@ use Spatie\Translatable\HasTranslations;
 
 class Category extends Model implements Sortable, HasMedia
 {
-    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, CascadeSoftDeletes, NodeTrait, UnicodeJsonColumn;
+    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, CascadeSoftDeletes, UnicodeJsonColumn;
+
+    use NodeTrait {
+        ancestors as traitAncestors;
+    }
 
     public $translatable = ['name', 'title', 'desc', 'meta_title', 'meta_keywords', 'meta_desc', 'schema'];
 
@@ -115,6 +118,10 @@ class Category extends Model implements Sortable, HasMedia
     public function parent(): BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id', 'id');
+    }
+
+    public function ancestors() {
+        return $this->traitAncestors()->defaultOrder();
     }
 
     /**
