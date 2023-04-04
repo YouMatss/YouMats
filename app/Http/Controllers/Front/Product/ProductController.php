@@ -127,6 +127,41 @@ class ProductController extends Controller
     /**
      * @return string
      */
+    public function suggest(): string
+    {
+        $data['selected_categories'] = [];
+        $data['searched_word']  = $_GET['filter']['name'];
+
+        $data['suggested_products'] = QueryBuilder::for(Product::class)
+                        ->select(
+                            'id',
+                            'category_id',
+                            'vendor_id',
+                            'name',
+                            'rate',
+                            'price',
+                            'slug'
+                          )
+                        ->allowedFilters([
+                            AllowedFilter::custom('name', new FiltersJsonField),
+                            AllowedFilter::scope('price'),
+                            AllowedFilter::callback('has_categories', fn($query, $value) => $query->whereHas('category', fn($query) => $query->whereIn('categories.id', $value)))
+                        ])
+                        ->allowedIncludes(['category'])
+                        ->where('active', true)
+                        ->limit(8)
+                        ->get()
+                        ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
+                            return $collection->shuffle();
+                        })->ungroup()
+                        ->unique();
+           
+          return view('front.layouts.partials.searchDiv')->with($data)->render();
+    }
+
+    /**
+     * @return string
+     */
     public function search(): string
     {
         $data['selected_tags'] = [];

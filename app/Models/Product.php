@@ -203,6 +203,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         $integration_number = nova_get_setting('whatsapp_manage_by_admin');
         $message = route('front.product', [generatedNestedSlug($this->category->ancestors()->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
         if(!$this->vendor->manage_by_admin) {
+
             if(!nova_get_setting('enable_encryption_mode')) {
                 $integration_number = ($this->phone()) ?? nova_get_setting('whatsapp_manage_by_admin');
             } else {
@@ -214,6 +215,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
                 $message .= '%0A,%0A' . $vendor_code;
                 $message .= '%0A,%0A' . $category_name;
             }
+
         }
 
         return 'https://wa.me/'. $integration_number .'?text='. $message;

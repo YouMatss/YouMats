@@ -181,7 +181,9 @@ if (!function_exists('generate_map_branch')) {
 }
 
 function encrypt_vendor_message($vendor_name) {
+
     $encrypted_string = '';
+
     $array = [
         'a' => 'w', 'b' => 'h', 'c' => 'q', 'd' => 'g',
         'e' => 't', 'f' => 'r', 'g' => 'f', 'h' => 'd',
@@ -191,15 +193,19 @@ function encrypt_vendor_message($vendor_name) {
         'u' => 'l', 'v' => 'b', 'w' => 'k', 'x' => 'n',
         'y' => 'j', 'z' => 'm'
     ];
+
     foreach (str_split($vendor_name) as $letter) {
         $encrypted_string .= $array[strtolower($letter)] ?? $letter;
     }
     return $encrypted_string;
+
 }
 
 if (!function_exists('vendor_encrypt')) {
     function vendor_encrypt($vendor) {
+
         $vendor_name = $vendor ? $vendor->getTranslation('name', 'en') : '';
+
         return encrypt_vendor_message($vendor_name);
     }
 }

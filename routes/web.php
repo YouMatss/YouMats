@@ -9,6 +9,7 @@ use App\Http\Controllers\Front\Vendor\Admin\QuoteController;
 use App\Http\Controllers\Front\Vendor\Admin\SippingGroupController;
 use App\Http\Controllers\Front\Vendor\Admin\SubScribeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 //Route::get('products_sitemap', function () {
@@ -156,13 +157,14 @@ Route::group([
     Route::get('/team', 'Team\IndexController@index')->name('front.team.index');
     Route::get('/FAQs', 'Common\PageController@faqs')->name('front.faqs.page');
     Route::get('/contact-us', 'Common\PageController@contactUs')->name('front.contact.page');
-
+    Route::get('/s', 'Product\ProductController@search')->name('products.search');
+    Route::get('/suggest', 'Product\ProductController@suggest')->name('products.suggest');
     Route::post('/contact-us', 'Common\PageController@contactUsRequest')->name('front.contact.request');
     Route::post('/subscribe', 'Common\MiscController@subscribeRequest')->name('front.subscribe.request');
     Route::post('/inquire', 'Common\MiscController@inquireRequest')->name('front.inquire.request');
 
     Route::get('/page/{slug}', 'Common\PageController@page')->name('front.page.index');
-    Route::get('/search', 'Product\ProductController@search')->name('products.search');
+    
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
 
     Route::get('/shop/{search_keyword}', 'Tag\IndexController@searchKeywordsTags')->name('front.tag.search');
