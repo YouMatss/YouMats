@@ -1,8 +1,8 @@
 <div class="container rtl" id="SearchInnerDiv" style="position: relative">
-    <div class="h_scroll" style="margin: -5px 100px 0 0;padding: 0;">
+    <div class="h_scroll" style="padding: 0;">
         <div class="container p-0">
             <div class="row">
-                <div class="col-xl-12 col-wd-12gdot5">
+                <div class="col-xl-12 col-wd-12gdot5" style="width:100%;">
                     <div class="block_search_check">
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade pt-1 show active" id="pills-one-example1" role="tabpanel" aria-labelledby="pills-one-example1-tab" data-target-group="groups">

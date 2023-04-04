@@ -28,12 +28,12 @@
                 beforeSend: function () {
 
                     AdjustWidth();
-                    searchRegionGrid.html(`<div class="mx-auto mt-8" style="margin-left: auto!important;"><i class="fa fa-spin fa-spinner fa-6x"></i></div>`);
-                    searchDiv.removeClass('d-none');
+                    //searchRegionGrid.html(`<div class="mx-auto mt-8" style="margin-left: auto!important;"><i class="fa fa-spin fa-spinner fa-6x"></i></div>`);
 
                 },
                 success: function (response) {
 
+                    searchDiv.removeClass('d-none');
                     searchDiv.html(response);
                     AdjustWidth();
                     $.HSCore.components.HSRangeSlider.init('.js-range-slider');
@@ -55,7 +55,7 @@
         $(document).on('ready', function () {
             //HANDLE SEARCH HERE
 
-            $(document).on('keyup', '#searchProductInput', function(e) {
+            $("#searchProductInput, #searchProductInputMobile").keyup( function(e) {
 
                 let searchText = $("#searchProductInput").val(),
                     codes = [9, 16, 17, 18, 19, 20, 27, 33, 35, 36, 37, 38, 39, 40, 44, 45, 91, 92, 93, 112,
@@ -72,11 +72,12 @@
                     }, timeoutVal);
                 }
             });
-            $(document).on('click', '#searchProductInput', function(e) {
+            $("#searchProductInput, #searchProductInputMobile").click( function(e) {
 
                 document.getElementById("u-header__section").style.position = "static";
                 document.getElementById("header").style.position = "static";
                 document.getElementById("SearchBar").style.zIndex = "99999";
+                document.getElementById("SearchBarMoblie").style.zIndex = "99999";
                 document.getElementById("SearchFace").style.cssText = "width:100%;height:1000vh;background:black;position:absolute;z-index:1005;opacity:0.5;";
 
             });
@@ -85,6 +86,7 @@
                 document.getElementById("u-header__section").style.position = "relative";
                 document.getElementById("header").style.position = "relative";
                 document.getElementById("SearchBar").style.zIndex = "relative";
+                document.getElementById("SearchBarMoblie").style.zIndex = "relative";
                 document.getElementById("SearchFace").style.cssText = "";
                 searchDiv.addClass('d-none');
             });

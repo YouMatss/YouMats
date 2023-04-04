@@ -1,5 +1,6 @@
+<div id="SearchFace" ></div>
 <header id="header" class="u-header u-header-left-aligned-nav">
-    <div class="u-header__section shadow-none">
+    <div class="u-header__section shadow-none" id="u-header__section">
 
         <!-------- Top header -------->
         <div class="u-header-topbar d-none d-lg-block bg-gray-2 border-0 py-2 d-xl-block">
@@ -379,7 +380,7 @@
 
                                                         <div id="{{$category->slug}}" class="collapse" data-parent="#headerSidebarContent">
                                                             <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
-                                                                @foreach($category->children->take(4) as $child)
+                                                                @foreach($category->children as $child)
                                                                 <li><a class="u-header-collapse__submenu-nav-link" href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}">{{$child->name}}</a></li>
                                                                 @endforeach
                                                             </ul>
@@ -484,7 +485,7 @@
         <!-- Search-Form -->
 
         <div class="box_search_nav d-block d-lg-none">
-            <div class="input-group">
+            <div class="input-group" id="SearchBarMoblie">
                 <input type="search" autocomplete="off" class="fils_search_nav form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInputMobile" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
                 <div class="input-group-append">
                     <!-- End Select -->

@@ -6,7 +6,7 @@ use App\Helpers\Filters\FiltersJsonField;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
-use Facade\Ignition\QueryRecorder\Query;
+use App\Models\Vendor;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -57,8 +57,6 @@ class ProductController extends Controller
         }
 
         $this->checkOnCategoriesSlugs($categories_slug, $data['product']);
-        
-        $data['is_CustomDesign'] = $data['product']['category']['ancestors'];
 
         if(Session::has('city')) {
             $data['delivery'] = $data['product']->delivery;
@@ -68,13 +66,32 @@ class ProductController extends Controller
         $data['product']->views++;
         $data['product']->save();
 
-        $data['related_products'] = Product::with('category')
+        $data['same_vendor_products'] = Product::with('category')
+            ->where('category_id', $data['product']->category_id)
+            ->where('vendor_id', $data['product']->vendor_id)
+            ->where('id', '!=', $data['product']->id)
+            ->where('active', true)
+            ->inRandomOrder()->take(10)->get();
+
+        $data['subscribed_vendors'] = Vendor::with(['products' => function ($query) use ($data) {
+            $query->where('category_id', $data['product']->category_id)->inRandomOrder();
+        }])
+            ->join('products', 'products.vendor_id', '=', 'vendors.id')
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->join('subscribes', 'subscribes.vendor_id', '=', 'vendors.id')
+            ->whereDate('subscribes.expiry_date', '>', now())
+            ->where('subscribes.category_id', $data['product']->category_id)
+            ->where('products.category_id', $data['product']->category_id)
+            ->where('vendors.active', true)
+            ->where('vendors.id', '!=', $data['product']->vendor_id)
+            ->select('vendors.*')
+            ->inRandomOrder()->distinct()->get();
+
+        $data['same_category_products'] = Product::with('category')
             ->where('category_id', $data['product']->category_id)
             ->where('id', '!=', $data['product']->id)
-            ->where('active', 1)
-            ->orderby('sort')->take(10)->get();
-            
-        $data['main_phone'] = $data['product']->vendor->contacts[0]['phone'];
+            ->where('active', true)
+            ->inRandomOrder()->take(10)->get();
 
         return view('front.product.index')->with($data);
     }
@@ -142,10 +159,11 @@ class ProductController extends Controller
           return view('front.layouts.partials.searchDiv')->with($data)->render();
     }
 
-
-
-    public function search() {
-
+    /**
+     * @return string
+     */
+    public function search(): string
+    {
         $data['selected_tags'] = [];
         $data['selected_categories'] = [];
 
@@ -162,11 +180,12 @@ class ProductController extends Controller
                         ])
                         ->allowedIncludes(['tags', 'category'])
                         ->where('active', true)
-                        ->paginate(20);
-
-        $data['search_products']->withPath(url()->current())->withQueryString();
-                
-
+                        ->limit(15)
+                        ->get()
+                        ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
+                            return $collection->shuffle();
+                        })->ungroup()
+                        ->unique();
 
         foreach ($search_products_by_name_only as $product) {
             if($product->tags)
@@ -183,15 +202,7 @@ class ProductController extends Controller
             $data['selected_categories'] = explode(',', $_GET['filter']['has_categories']);
 
         $data['max_price'] = ceil($search_products_by_name_only->max('price'));
-        
-        return view('front.search.search')->with($data);
 
+        return view('front.layouts.partials.searchDiv')->with($data)->render();
     }
-
-
-
-
-
-
-   
 }
