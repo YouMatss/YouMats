@@ -162,8 +162,16 @@ Route::group([
     Route::post('/inquire', 'Common\MiscController@inquireRequest')->name('front.inquire.request');
 
     Route::get('/page/{slug}', 'Common\PageController@page')->name('front.page.index');
-    
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
+    
+    Route::get('/suppliers', 'Vendor\IndexController@index')->name('vendor.index');
+    Route::get('/suppliers/{vendor_slug}', 'Vendor\IndexController@show')->name('vendor.show');
+    
+    Route::permanentRedirect('/partners', '/suppliers');
+    Route::permanentRedirect('/partners/{vendor_slug}', '/suppliers/{vendor_slug}');
+
+    Route::get('/PhoneCall/{slug}', 'Common\TwilioController@call')->name('api.twilio');
+    Route::get('/shop/{search_keyword}', 'Tag\IndexController@searchKeywordsTags')->name('front.tag.search');
 
     Route::get('/{categories_slug}/{slug}/i', 'Product\ProductController@index')
         ->name('front.product')->where('categories_slug', '.*');
@@ -171,5 +179,7 @@ Route::group([
     Route::get('/{slug}', 'Category\CategoryController@index')
         ->name('front.category')->where('slug', '.*')
         ->where('slug', '^(?!admin_panel|nova-api|nova-vendor).*$');
+
+
 
 });

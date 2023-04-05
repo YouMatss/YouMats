@@ -162,8 +162,8 @@ class ProductController extends Controller
     /**
      * @return string
      */
-    public function search(): string
-    {
+    public function search() {
+
         $data['selected_tags'] = [];
         $data['selected_categories'] = [];
 
@@ -180,12 +180,11 @@ class ProductController extends Controller
                         ])
                         ->allowedIncludes(['tags', 'category'])
                         ->where('active', true)
-                        ->limit(15)
-                        ->get()
-                        ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
-                            return $collection->shuffle();
-                        })->ungroup()
-                        ->unique();
+                        ->paginate(20);
+
+        $data['search_products']->withPath(url()->current())->withQueryString();
+                
+
 
         foreach ($search_products_by_name_only as $product) {
             if($product->tags)
@@ -202,7 +201,8 @@ class ProductController extends Controller
             $data['selected_categories'] = explode(',', $_GET['filter']['has_categories']);
 
         $data['max_price'] = ceil($search_products_by_name_only->max('price'));
+        
+        return view('front.search.search')->with($data);
 
-        return view('front.layouts.partials.searchDiv')->with($data)->render();
     }
 }
