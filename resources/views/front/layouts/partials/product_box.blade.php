@@ -9,6 +9,14 @@
                 </a>
             </h5>
             <div class="mb-2 px-2">
+                @if(isset($product->vendor) && count($product->vendor->current_subscribes))
+                    <span class="badge badge-primary text-white" style="
+                                border-radius: 1px;
+                                font-weight: bold;
+                                padding: 1em 0.4em;
+                                background-color: #333;
+                            ">{{\Str::limit($product->vendor->name, 20)}}</span>
+                @endif
                 <a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="d-block text-center">
                     <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}">
                 </a>
@@ -26,12 +34,11 @@
 {{--                    --}}{{--<span class="text-secondary">(40)</span>--}}
 {{--                </a>--}}
 {{--            </div>--}}
-            <div class="font-size-12 productDesc px-2 pb-2 mb-2">{{ Str::replace('&nbsp;', ' ', Str::limit(strip_tags($product->short_desc), 107)) }}</div>
+
+            <div class="font-size-12 productDesc px-2 pb-2 mb-2">{{ Str::replace(['&nbsp;', '&times;'], [' ', '×'], Str::limit(strip_tags($product->short_desc), 107)) }}</div>
+
 {{--            <div class="text-gray-20 mb-2 font-size-12">{{__('general.sku')}}: {{$product->SKU}}</div>--}}
             <div class="custom-price-border px-2 pb-2 mb-2">
-                @if(auth()->guard('admin')->check() && isset($product->vendor))
-                    <div class="text-gray-20 font-size-12" title="{{$product->vendor->name}}">{{__('general.vendor')}}: {{\Str::limit($product->vendor->name, 20)}}</div>
-                @endif
                 @if(!$product->category->hide_availability)
                     <div class="font-size-14">
                         @if(is_company())

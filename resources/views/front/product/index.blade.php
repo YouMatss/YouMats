@@ -1,13 +1,13 @@
 @extends('front.layouts.master')
 @section('metaTags')
     <title>{{getMetaTag($product, 'meta_title', nova_get_setting_translate('products_additional_word') . ' ' . $product->name)}}</title>
-    <meta name="description" content="{{getMetaTag($product, 'meta_desc', nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc))}}">
+    <meta name="description" content="{{getMetaTag($product, 'meta_desc', strip_tags($product->short_desc), strip_tags($product->desc))}}">
     <meta name="keywords" content="{{getMetaTag($product, 'meta_keywords', '')}}">
 
     <meta property="og:url" content="{{url()->current()}}" />
     <meta property="og:site_name" content="Youmats Building Materials">
     <meta property="og:title" content="{{getMetaTag($product, 'meta_title', nova_get_setting_translate('products_additional_word') . ' ' . $product->name)}}" />
-    <meta property="og:description" content="{{getMetaTag($product, 'meta_desc', nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc))}}" />
+    <meta property="og:description" content="{{getMetaTag($product, 'meta_desc', strip_tags($product->short_desc), strip_tags($product->desc))}}" />
     <meta property="og:type" content="website" />
     <meta property="og:image" itemprop="image" content="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_300_300')['url'] }}" />
     <meta property="og:image:type" content="image/jpeg">
@@ -18,7 +18,7 @@
     <meta name="twitter:site" content="@youmats">
     <meta name="twitter:creator" content="@youmats">
     <meta name="twitter:title" content="{{getMetaTag($product, 'meta_title', nova_get_setting_translate('products_additional_word') . ' ' . $product->name)}}">
-    <meta name="twitter:description" content="{{getMetaTag($product, 'meta_desc', nova_get_setting_translate('products_additional_word') . ' ' . strip_tags($product->short_desc))}}">
+    <meta name="twitter:description" content="{{getMetaTag($product, 'meta_desc', strip_tags($product->short_desc), strip_tags($product->desc))}}">
     <meta name="twitter:image" content="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_300_300')['url']}}">
     <meta name="twitter:image:width" content="800">
     <meta name="twitter:image:height" content="418">
@@ -78,28 +78,50 @@
         <div class="row rtl">
             <div class="col-md-6 col-lg-4 col-xl-5 mb-4 mb-md-0 ltr">
                 <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2"
-                     data-infinite="true" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle"
+                     data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle"
                      data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4"
                      data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4"
-                     data-nav-for="#sliderSyncingThumb">
-                    @if(count($product->getMedia(PRODUCT_PATH)))
-                    @foreach($product->getMedia(PRODUCT_PATH) as $image)
-                        <div class="js-slide">
-                            <img loading="lazy" class="img-fluid" src="{{$image->getFullUrl('size_500_500')}}" alt="{{$image->img_alt ?? ''}}" title="{{$image->img_title ?? ''}}">
-                        </div>
-                    @endforeach
+                     data-nav-for="#sliderSyncingThumb" data-infinite="false"
+                     data-slick='{
+                        "autoplay": true,
+                        @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+                        ,"rtl": true
+                        @endif
+                     }'>
+                    @if(count($product->getMedia(PRODUCT_PATH)) > 0)
+                        @foreach($product->getMedia(PRODUCT_PATH) as $image)
+                            <div class="js-slide">
+                                <img loading="lazy" class="img-fluid"
+                                     src="{{$image->getFullUrl('size_500_500')}}"
+                                     alt="{{$image->img_alt ?? ''}}"
+                                     title="{{$image->img_title ?? ''}}">
+                            </div>
+                        @endforeach
                     @else
                         <div class="js-slide">
-                            <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_500_500')['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
+                            <img loading="lazy" class="img-fluid"
+                                 src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_500_500')['url']}}"
+                                 alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}"
+                                 title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                         </div>
                     @endif
                 </div>
                 @if(count($product->getMedia(PRODUCT_PATH)) > 1)
-                <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off"
-                     data-infinite="true" data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav">
+                <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing
+                        u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off"
+                     data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav"
+                     data-slick='{
+                        "autoplay": true,
+                        @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+                        ,"rtl": true
+                        @endif
+                     }'>
                     @foreach($product->getMedia(PRODUCT_PATH) as $thumb)
-                    <div class="js-slide" style="cursor: pointer;">
-                        <img loading="lazy" class="img-fluid" src="{{$thumb->getFullUrl('size_50_50')}}" alt="{{$thumb->img_alt ?? ''}}" title="{{$thumb->img_title ?? ''}}">
+                    <div class="js-slide" style="cursor: pointer;height: auto !important;">
+                        <img loading="lazy" class="img-fluid"
+                             src="{{$thumb->getFullUrl('size_50_50')}}"
+                             alt="{{$thumb->img_alt ?? ''}}"
+                             title="{{$thumb->img_title ?? ''}}">
                     </div>
                     @endforeach
                 </div>
@@ -254,13 +276,12 @@
             </div>
         </div>
     </div>
+
     <div class="mb-5">
         <div class="bg-img-hero">
-
             <div class="container p-0">
-
                 <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-                    <h2 class="section-title section-title__full mb-0 pb-2 font-size-22">{{ __('product.related_products') }}</h2>
+                    <h2 class="section-title section-title__full mb-0 pb-2 font-size-22"><a href="{{ route('vendor.show', [$product->vendor->slug]) }}">{{ __('product.products') . ' ' . $product->vendor->name }}</a></h2>
                 </div>
 
                 <div class="mb-4 position-relative">
@@ -270,72 +291,16 @@
                         data-pagi-classes="text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-3 pt-1"
                         data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-inner u-slick__arrow-inner--left ml-lg-2 ml-xl-n3"
                         data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-inner u-slick__arrow-inner--right mr-lg-2 mr-xl-n3"
-                        data-slick='{
-                            "autoplay": true,
-                            "infinite": true,
-                            "slidesToShow": 7
+                        data-slick='{"autoplay": true, "infinite": true, "slidesToShow": 7, "dots": false
                             @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
                             ,"rtl": true
                             @endif
                          }'
-                        data-responsive='[{
-                              "breakpoint": 1400,
-                              "settings": {
-                                "slidesToShow": 5
-                              }
-                            }, {
-                                "breakpoint": 1200,
-                                "settings": {
-                                  "slidesToShow": 3
-                                }
-                            }, {
-                              "breakpoint": 992,
-                              "settings": {
-                                "slidesToShow": 2
-                              }
-                            }, {
-                              "breakpoint": 768,
-                              "settings": {
-                                "slidesToShow": 2
-                              }
-                            }, {
-                              "breakpoint": 554,
-                              "settings": {
-                                "slidesToShow": 2
-                              }
-                         }]'
-                    >
-                        @foreach($related_products as $r_product)
+                        data-responsive='[{"breakpoint": 1400,"settings": {"slidesToShow": 5}}, {"breakpoint": 1200,"settings": {"slidesToShow": 3}}, {"breakpoint": 992,"settings": {"slidesToShow": 2}}, {"breakpoint": 768,"settings": {"slidesToShow": 2}}, {"breakpoint": 554, "settings": {"slidesToShow": 2}}]'>
+                        @foreach($same_vendor_products as $same_vendor_product)
                         <div class="js-slide products-group">
                             <div class="product-item mx-1 remove-divider">
-                                <div class="product-item__outer h-100">
-                                    <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
-                                        <div class="product-item__body pb-xl-2">
-                                            <div class="mb-2"><a href="{{route('front.category', [generatedNestedSlug($r_product->category->ancestors()->pluck('slug')->toArray(), $r_product->category->slug)])}}" class="font-size-12 text-gray-5">{{$r_product->category->name}}</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="{{route('front.product', [generatedNestedSlug($r_product->category->ancestors()->pluck('slug')->toArray(), $r_product->category->slug), $r_product->slug])}}" class="text-blue font-weight-bold">{{$r_product->name}}</a></h5>
-                                            <div class="mb-2">
-                                                <a href="{{route('front.product', [generatedNestedSlug($r_product->category->ancestors()->pluck('slug')->toArray(), $r_product->category->slug), $r_product->slug])}}" class="a_img_pro d-block text-center">
-                                                    <img loading="lazy" class="img-fluid" src="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{$r_product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
-                                                </a>
-                                            </div>
-                                            <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    @if((!is_company()) && $r_product->price)
-                                                    <div class="text-gray-100">{{getCurrency('symbol')}} {{$r_product->formatted_price}}</div>
-                                                    @endif
-                                                </div>
-{{--                                                {!! cartOrChat($r_product, false) !!}--}}
-                                            </div>
-                                        </div>
-                                        @if(!Auth::guard('vendor')->check())
-                                            <div class="product-item__footer">
-                                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                    <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
+                                @include('front.layouts.partials.product_box', ['product' => $same_vendor_product, 'view' => 'grid'])
                             </div>
                         </div>
                         @endforeach
@@ -344,5 +309,74 @@
             </div>
         </div>
     </div>
+
+    @foreach($subscribed_vendors as $subscribed_vendor)
+        <div class="mb-5">
+            <div class="bg-img-hero">
+                <div class="container p-0">
+                    <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
+                        <h2 class="section-title section-title__full mb-0 pb-2 font-size-22"><a href="{{ route('vendor.show', [$subscribed_vendor->slug]) }}">{{  __('product.products') . ' ' . $subscribed_vendor->name }}</a></h2>
+                    </div>
+
+                    <div class="mb-4 position-relative">
+                        <div
+                            class="js-slick-carousel u-slick u-slick--gutters-0 position-static overflow-hidden u-slick-overflow-visble pb-5 pt-2 px-1"
+                            data-arrows-classes="u-slick__arrow u-slick__arrow--flat u-slick__arrow-centered--y rounded-circle"
+                            data-pagi-classes="text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-3 pt-1"
+                            data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-inner u-slick__arrow-inner--left ml-lg-2 ml-xl-n3"
+                            data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-inner u-slick__arrow-inner--right mr-lg-2 mr-xl-n3"
+                            data-slick='{"autoplay": true, "infinite": true, "slidesToShow": 7, "dots": false
+                            @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+                            ,"rtl": true
+                            @endif
+                         }'
+                            data-responsive='[{"breakpoint": 1400,"settings": {"slidesToShow": 5}}, {"breakpoint": 1200,"settings": {"slidesToShow": 3}}, {"breakpoint": 992,"settings": {"slidesToShow": 2}}, {"breakpoint": 768,"settings": {"slidesToShow": 2}}, {"breakpoint": 554, "settings": {"slidesToShow": 2}}]'>
+                            @foreach($subscribed_vendor->products->take(10) as $subscribed_vendor_product)
+                                <div class="js-slide products-group">
+                                    <div class="product-item mx-1 remove-divider">
+                                        @include('front.layouts.partials.product_box', ['product' => $subscribed_vendor_product, 'view' => 'grid'])
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    <div class="mb-5">
+        <div class="bg-img-hero">
+            <div class="container p-0">
+                <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
+                    <h2 class="section-title section-title__full mb-0 pb-2 font-size-22"><a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{ __('product.same_category_title') . ' ' . $product->category->name }}</a></h2>
+                </div>
+
+                <div class="mb-4 position-relative">
+                    <div
+                        class="js-slick-carousel u-slick u-slick--gutters-0 position-static overflow-hidden u-slick-overflow-visble pb-5 pt-2 px-1"
+                        data-arrows-classes="u-slick__arrow u-slick__arrow--flat u-slick__arrow-centered--y rounded-circle"
+                        data-pagi-classes="text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-3 pt-1"
+                        data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-inner u-slick__arrow-inner--left ml-lg-2 ml-xl-n3"
+                        data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-inner u-slick__arrow-inner--right mr-lg-2 mr-xl-n3"
+                        data-slick='{"autoplay": true, "infinite": true, "slidesToShow": 7, "dots": false
+                            @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+                            ,"rtl": true
+                            @endif
+                         }'
+                        data-responsive='[{"breakpoint": 1400,"settings": {"slidesToShow": 5}}, {"breakpoint": 1200,"settings": {"slidesToShow": 3}}, {"breakpoint": 992,"settings": {"slidesToShow": 2}}, {"breakpoint": 768,"settings": {"slidesToShow": 2}}, {"breakpoint": 554, "settings": {"slidesToShow": 2}}]'>
+                        @foreach($same_category_products as $same_category_product)
+                            <div class="js-slide products-group">
+                                <div class="product-item mx-1 remove-divider">
+                                    @include('front.layouts.partials.product_box', ['product' => $same_category_product, 'view' => 'grid'])
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @include('front.layouts.partials.change_city', ['delivery_cities' => $delivery_cities, 'ajax' => true])
 @endsection

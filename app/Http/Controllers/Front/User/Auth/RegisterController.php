@@ -110,8 +110,11 @@ class RegisterController extends Controller
 
         if($user)
             Mail::to([
-                'mohamedmaher055@gmail.com',
-                'info@youmats.com'
+//                'mohamedmaher055@gmail.com',
+                'info@youmats.com',
+                'sameh@youmats.com',
+                'ereny@youmats.com',
+                'marina@youmats.com'
             ])->send(new NewRegister($user));
 
         Session::flash('custom_success', __('auth.user_register_successfully'));

@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Yassi\NestedForm\NestedForm;
@@ -49,6 +50,8 @@ class Attribute extends Resource
                 '<a href="'. \Nova::path()."/resources/{$this->uriKey()}/{$this->id}" . '" class="no-underline dim text-primary font-bold">'. $this->key . '</a>'
             )->asHtml()->onlyOnIndex(),
             NestedForm::make('Values', 'values', AttributeValue::class)->open(false),
+
+            HasMany::make('Values', 'values', AttributeValue::class),
         ];
     }
 

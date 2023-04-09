@@ -128,8 +128,11 @@ class RegisterController extends Controller
 
         if($vendor)
             Mail::to([
-                'mohamedmaher055@gmail.com',
-                'info@youmats.com'
+//                'mohamedmaher055@gmail.com',
+                'info@youmats.com',
+                'sameh@youmats.com',
+                'ereny@youmats.com',
+                'marina@youmats.com'
             ])->send(new NewRegister($vendor));
 
         Session::flash('custom_success', __('auth.vendor_register_successfully'));

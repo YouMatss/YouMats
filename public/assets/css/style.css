@@ -953,7 +953,7 @@
     color: #fff;
 }
 .product-item__title a{
-    min-height: 4.50rem;
+    min-height: 3.50rem;
 }
 
 .st_one_block a{
@@ -1097,6 +1097,14 @@
 
     .p_bn_cart{
         padding: 30px;
+    }
+
+    .block_img_cat a img {
+        height: auto !important;
+    }
+
+    .img_main_block {
+        height: auto !important;
     }
 
 }

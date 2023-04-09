@@ -9,6 +9,7 @@ use Davidpiesse\NovaToggle\Toggle;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -20,8 +21,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Maher\TitleTemplate\TitleTemplate;
+use Monaye\SimpleLinkButton\SimpleLinkButton;
 use Nikaia\Rating\Rating;
-use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
 use Waynestate\Nova\CKEditor;
@@ -80,7 +81,7 @@ class Product extends Resource
             Select::make('Type')->options([
                 'product' => 'Product',
                 'service' => 'Service'
-            ])->displayUsingLabels()
+            ])->displayUsingLabels()->hideFromIndex()
             ->rules(array_merge(REQUIRED_STRING_VALIDATION, ['In:product,service'])),
 
             NovaDependencyContainer::make([
@@ -119,16 +120,17 @@ class Product extends Resource
             Toggle::make('Best Seller')->sortable()
                 ->falseColor('#bacad6')->editableIndex(),
 
-            Number::make('Views')
+            Number::make('Views')->hideFromIndex()
                 ->hideWhenUpdating()->hideWhenCreating(),
 
             DateTime::make('Creation Date', 'created_at')
                 ->onlyOnDetail(),
 
-//            SimpleLinkButton::make('Link', route('front.product', [generatedNestedSlug($this->model()->category->ancestors()->pluck('slug')->toArray(), $this->model()->category->slug), $this->model()->slug]))->type('outline')
-//                ->style('primary')
-//                ->attributes(['target' => '_blank'])
-//                ->onlyOnIndex(),
+            SimpleLinkButton::make('Link', getFullProductLink($this->model()))
+                ->type('outline')
+                ->style('primary')
+                ->attributes(['target' => '_blank'])
+                ->onlyOnIndex(),
 
             (new Panel('Gallery', [
                 Fields::image(false, PRODUCT_PATH, 'Images', false),
@@ -166,25 +168,41 @@ class Product extends Resource
             ])),
 
             (new Panel('Attributes (For Product Filtration)', [
-                Multiselect::make('Attributes')
-                    ->options(function () {
-                        $collection = [];
-                        $query = \App\Models\Attribute::with('values');
-
-                        if(!is_null($this->category_id))
+                BelongsToManyField::make('Attributes')
+                    ->options(\App\Models\AttributeValue::with('attribute')
+                        ->whereHas('attribute', function ($query) {
                             $query->where('category_id', $this->category_id);
+                        })->get()
+                    )
+                    ->setMultiselectProps(['selectLabel' => 'click for select'])
+                    ->optionsLabel('translated_name')->hideFromIndex()
+                    ->showAsListInDetail()->hideWhenCreating(),
 
-                        $data = $query->get();
+                BelongsToManyField::make('Attributes')
+                    ->options(\App\Models\AttributeValue::with('attribute')->get())
+                    ->setMultiselectProps(['selectLabel' => 'click for select'])
+                    ->optionsLabel('translated_name')
+                    ->hideFromDetail()->hideFromIndex()->hideWhenUpdating(),
 
-                        foreach ($data as $row) {
-                            foreach ($row->values as $value) {
-                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key];
-                            }
-                        }
-                        return $collection;
-                    })
-                    ->placeholder('Choose Attributes Values')
-                    ->hideFromIndex(),
+//                Multiselect::make('Attributes', 'attributes')
+//                    ->options(function () {
+//                        $collection = [];
+//                        $query = \App\Models\Attribute::with('values');
+//
+//                        if(!is_null($this->category_id))
+//                            $query->where('category_id', $this->category_id);
+//
+//                        $data = $query->get();
+//
+//                        foreach ($data as $row) {
+//                            foreach ($row->values as $value) {
+//                                $collection[$value->id] = ['label' => $value->value, 'group' => $row->key];
+//                            }
+//                        }
+//                        return $collection;
+//                    })
+//                    ->placeholder('Choose Attributes Values')
+//                    ->hideFromIndex(),
             ])),
 
             new Panel('Search Keywords', [

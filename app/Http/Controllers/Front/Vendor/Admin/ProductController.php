@@ -109,13 +109,10 @@ class ProductController extends Controller
             $data['shipping_prices'] = null;
         }
 
-        if(isset($data['attributes'])) {
-            $data['attributes'] = '[' . implode(',', $data['attributes']) . ']';
-        } else {
-            $data['attributes'] = '[]';
-        }
-
         $product = Product::create($data);
+
+        if(isset($data['attributes']))
+            $product->attributes()->attach($data['attributes']);
 
         foreach(Admin::all() as $admin)
             $admin->notify(new ProductCreated(Auth::guard('vendor')->user(), $product));
@@ -182,11 +179,10 @@ class ProductController extends Controller
             $data['shipping_prices'] = null;
         }
 
-        if(!isset($data['attributes'])) {
-            $data['attributes'] = [];
-        }
-
         $product->update($data);
+
+        if(isset($data['attributes']))
+            $product->attributes()->sync($data['attributes']);
 
         foreach(Admin::all() as $admin)
             $admin->notify(new ProductUpdated(Auth::guard('vendor')->user(), $product));

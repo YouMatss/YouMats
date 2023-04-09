@@ -6,7 +6,6 @@ use App\Helpers\Traits\DefaultImage;
 use App\Helpers\Traits\UnicodeJsonColumn;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,7 +24,11 @@ use Spatie\Translatable\HasTranslations;
 
 class Category extends Model implements Sortable, HasMedia
 {
-    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, CascadeSoftDeletes, NodeTrait, UnicodeJsonColumn;
+    use SoftDeletes, HasFactory, SortableTrait, HasTranslations, InteractsWithMedia, DefaultImage, CascadeSoftDeletes, UnicodeJsonColumn;
+
+    use NodeTrait {
+        ancestors as traitAncestors;
+    }
 
     public $translatable = ['name', 'title', 'desc', 'meta_title', 'meta_keywords', 'meta_desc', 'schema'];
 
@@ -117,6 +120,10 @@ class Category extends Model implements Sortable, HasMedia
         return $this->belongsTo(self::class, 'parent_id', 'id');
     }
 
+    public function ancestors() {
+        return $this->traitAncestors()->defaultOrder();
+    }
+
     /**
      * @return HasMany
      */
@@ -131,11 +138,17 @@ class Category extends Model implements Sortable, HasMedia
     {
         if($this->isRoot()) {
             return $this->hasManyThrough(Product::class, self::class, 'parent_id')
-                ->where('products.active', 1)->orderBy('products.updated_at', 'desc');
+                ->where('products.active', true)
+                ->orderBy('products.updated_at', 'desc');
         }
-        return $this->hasMany(Product::class)
-            ->where('products.active', 1)
-            ->orderBy('products.updated_at', 'desc');
+        if($this->isLeaf()) {
+            return $this->hasMany(Product::class)
+                ->where('products.active', true)
+                ->orderBy('products.updated_at', 'desc');
+        }
+        return Product::whereHas('category', fn($query) =>
+            $query->whereDescendantOrSelf($this)
+        )->where('products.active', true)->orderBy('products.updated_at', 'desc');
     }
 
     /**

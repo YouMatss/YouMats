@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 
@@ -42,6 +43,8 @@ class AttributeValue extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make('Attribute')->showCreateRelationButton(),
             Text::make('Value')->translatable()->rules(REQUIRED_STRING_VALIDATION),
+
+            BelongsToMany::make('Products', 'products', Product::class),
         ];
     }
 
