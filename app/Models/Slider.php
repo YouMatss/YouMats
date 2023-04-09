@@ -24,13 +24,16 @@ class Slider extends Model implements Sortable, HasMedia
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('size_height_270')
             ->height(270)
+            ->nonQueued()
             ->performOnCollections(SLIDER_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_400_270')
             ->crop(Manipulations::CROP_CENTER, 400, 270)
+            ->nonQueued()
             ->performOnCollections(SLIDER_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('cropper')
+            ->nonQueued()
             ->performOnCollections(SLIDER_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 

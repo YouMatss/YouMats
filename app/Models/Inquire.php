@@ -19,6 +19,7 @@ class Inquire extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('webp')
+            ->nonQueued()
             ->performOnCollections(INQUIRE_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 

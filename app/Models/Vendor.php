@@ -49,56 +49,70 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('size_height_50')
             ->height(50)
+            ->nonQueued()
             ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_262_50')
             ->crop(Manipulations::CROP_CENTER, 262, 50)
+            ->nonQueued()
             ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_30_30')
             ->crop(Manipulations::CROP_CENTER, 30, 30)
+            ->nonQueued()
             ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_50_50')
             ->crop(Manipulations::CROP_CENTER, 50, 50)
+            ->nonQueued()
             ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_100')
             ->height(100)
+            ->nonQueued()
             ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_100_100')
             ->crop(Manipulations::CROP_CENTER, 100, 100)
+            ->nonQueued()
             ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_150')
             ->height(150)
+            ->nonQueued()
             ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_150_150')
             ->crop(Manipulations::CROP_CENTER, 150, 150)
+            ->nonQueued()
             ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_200')
             ->height(200)
+            ->nonQueued()
             ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_200_200')
             ->crop(Manipulations::CROP_CENTER, 200, 200)
+            ->nonQueued()
             ->performOnCollections(VENDOR_LOGO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_300')
             ->height(300)
+            ->nonQueued()
             ->performOnCollections(VENDOR_COVER)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_1350_300')
             ->crop(Manipulations::CROP_CENTER, 1350, 300)
+            ->nonQueued()
             ->performOnCollections(VENDOR_COVER)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('cropper')
+            ->nonQueued()
             ->performOnCollections(VENDOR_LOGO, VENDOR_COVER)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('licenses')
+            ->nonQueued()
             ->performOnCollections(VENDOR_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 

@@ -36,32 +36,40 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail {
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('size_height_200')
             ->height(200)
+            ->nonQueued()
             ->performOnCollections(USER_PROFILE)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_30_30')
             ->crop(Manipulations::CROP_CENTER, 30, 30)
+            ->nonQueued()
             ->performOnCollections(USER_PROFILE)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_50_50')
             ->crop(Manipulations::CROP_CENTER, 50, 50)
+            ->nonQueued()
             ->performOnCollections(USER_PROFILE)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_200_200')
             ->crop(Manipulations::CROP_CENTER, 200, 200)
+            ->nonQueued()
             ->performOnCollections(USER_PROFILE)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_300')
             ->height(300)
+            ->nonQueued()
             ->performOnCollections(USER_COVER)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_1350_300')
             ->crop(Manipulations::CROP_CENTER, 1350, 300)
+            ->nonQueued()
             ->performOnCollections(USER_COVER)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('cropper')
+            ->nonQueued()
             ->performOnCollections(USER_PROFILE, USER_COVER)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('licenses')
+            ->nonQueued()
             ->performOnCollections(COMPANY_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 

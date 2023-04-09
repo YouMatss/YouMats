@@ -44,41 +44,52 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('size_height_50')
             ->height(50)
+            ->nonQueued()
             ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_50_50')
             ->crop(Manipulations::CROP_CENTER, 50, 50)
+            ->nonQueued()
             ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_150')
             ->height(150)
+            ->nonQueued()
             ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_width_100')
             ->width(100)
+            ->nonQueued()
             ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_150_150')
             ->crop(Manipulations::CROP_CENTER, 150, 150)
+            ->nonQueued()
             ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_300')
             ->height(300)
+            ->nonQueued()
             ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_300_300')
             ->crop(Manipulations::CROP_CENTER, 300, 300)
+            ->nonQueued()
             ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_500')
             ->height(500)
+            ->nonQueued()
             ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_500_500')
             ->crop(Manipulations::CROP_CENTER, 500, 500)
+            ->nonQueued()
             ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
 
-        $this->addMediaConversion('cropper')->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
+        $this->addMediaConversion('cropper')
+            ->nonQueued()
+            ->performOnCollections(PRODUCT_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 
     public function registerMediaCollections(): void {

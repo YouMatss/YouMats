@@ -49,61 +49,76 @@ class Category extends Model implements Sortable, HasMedia
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('size_height_85')
             ->height(85)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_85_85')
             ->crop(Manipulations::CROP_CENTER, 85, 85)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_570')
             ->height(570)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_305_570')
             ->crop(Manipulations::CROP_CENTER, 305, 570)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_150')
             ->height(150)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_100_100')
             ->crop(Manipulations::CROP_CENTER, 100, 100)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_150_150')
             ->crop(Manipulations::CROP_CENTER, 150, 150)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_300')
             ->height(300)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_200_300')
             ->crop(Manipulations::CROP_CENTER, 200, 300)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_width_290')
             ->width(290)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_width_350')
             ->width(350)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_350_350')
             ->crop(Manipulations::CROP_CENTER, 350, 350)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_height_364')
             ->height(364)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_COVER)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_255_364')
             ->crop(Manipulations::CROP_CENTER, 255, 364)
+            ->nonQueued()
             ->performOnCollections(CATEGORY_COVER)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('cropper')
+            ->nonQueued()
             ->performOnCollections(CATEGORY_PATH, CATEGORY_COVER)->format(Manipulations::FORMAT_WEBP);
     }
 
