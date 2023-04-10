@@ -22,13 +22,16 @@ class Partner extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('size_height_50')
             ->height(50)
+            ->nonQueued()
             ->performOnCollections(PARTNER_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_262_50')
             ->crop(Manipulations::CROP_CENTER, 262, 50)
+            ->nonQueued()
             ->performOnCollections(PARTNER_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('cropper')
+            ->nonQueued()
             ->performOnCollections(PARTNER_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 

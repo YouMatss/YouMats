@@ -24,13 +24,16 @@ class Page extends Model implements Sortable, HasMedia
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('size_height_300')
             ->height(300)
+            ->nonQueued()
             ->performOnCollections(PAGE_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_1350_300')
             ->crop(Manipulations::CROP_CENTER, 1350, 300)
+            ->nonQueued()
             ->performOnCollections(PAGE_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('cropper')
+            ->nonQueued()
             ->performOnCollections(PAGE_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 

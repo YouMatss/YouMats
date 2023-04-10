@@ -19,6 +19,7 @@ class Quote extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('webp')
+            ->nonQueued()
             ->performOnCollections(QUOTE_ATTACHMENT)->format(Manipulations::FORMAT_WEBP);
     }
 

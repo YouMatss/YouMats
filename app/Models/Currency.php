@@ -24,13 +24,17 @@ class Currency extends Model implements Sortable, HasMedia
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('size_height_20')
             ->height(20)
+            ->nonQueued()
             ->performOnCollections(CURRENCY_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_20_20')
             ->crop(Manipulations::CROP_CENTER, 20, 20)
+            ->nonQueued()
             ->performOnCollections(CURRENCY_PATH)->format(Manipulations::FORMAT_WEBP);
 
-        $this->addMediaConversion('cropper')->performOnCollections(CURRENCY_PATH)->format(Manipulations::FORMAT_WEBP);
+        $this->addMediaConversion('cropper')
+            ->nonQueued()
+            ->performOnCollections(CURRENCY_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 
     public function registerMediaCollections(): void {

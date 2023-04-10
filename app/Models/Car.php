@@ -24,16 +24,20 @@ class Car extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('size_height_200')
             ->height(200)
+            ->nonQueued()
             ->performOnCollections(CAR_PHOTO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_200_200')
             ->crop(Manipulations::CROP_CENTER, 200, 200)
+            ->nonQueued()
             ->performOnCollections(CAR_PHOTO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('cropper')
+            ->nonQueued()
             ->performOnCollections(CAR_PHOTO)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('licenses')
+            ->nonQueued()
             ->performOnCollections(CAR_LICENSE)->format(Manipulations::FORMAT_WEBP);
     }
 

@@ -173,7 +173,7 @@
                     </div>
                     @endif
                 </div>
-                <div class="col-xl-9 col-wd-9gdot5">
+                <div class="col-xl-9 col-wd-9gdot5" style="width: 100%!important;">
                     @if($category->getTranslation('desc', app()->getLocale(), false))
                         <div class="d-none d-lg-block d-xl-block text-left">
                         {!! $category->getTranslation('desc', app()->getLocale(), false) !!}

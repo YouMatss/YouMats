@@ -24,7 +24,9 @@ class GenerateProduct extends Model implements HasMedia
     ];
 
     public function registerMediaConversions(Media $media = null): void {
-        $this->addMediaConversion('cropper')->performOnCollections(GENERATE_PRODUCT_PATH);
+        $this->addMediaConversion('cropper')
+            ->nonQueued()
+            ->performOnCollections(GENERATE_PRODUCT_PATH);
     }
 
     public function registerMediaCollections(): void {

@@ -24,13 +24,17 @@ class Team extends Model implements Sortable, HasMedia
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('size_height_120')
             ->height(120)
+            ->nonQueued()
             ->performOnCollections(TEAM_PATH)->format(Manipulations::FORMAT_WEBP);
 
         $this->addMediaConversion('size_120_120')
             ->crop(Manipulations::CROP_CENTER, 120, 120)
+            ->nonQueued()
             ->performOnCollections(TEAM_PATH)->format(Manipulations::FORMAT_WEBP);
 
-        $this->addMediaConversion('cropper')->performOnCollections(TEAM_PATH)->format(Manipulations::FORMAT_WEBP);
+        $this->addMediaConversion('cropper')
+            ->nonQueued()
+            ->performOnCollections(TEAM_PATH)->format(Manipulations::FORMAT_WEBP);
     }
 
     public function registerMediaCollections(): void {
