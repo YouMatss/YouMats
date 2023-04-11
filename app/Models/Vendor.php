@@ -8,11 +8,13 @@ use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -166,6 +168,15 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     public function shippings(): HasMany
     {
         return $this->hasMany(Shipping::class);
+    }
+
+    /**
+     * @return Builder
+     */
+    public function categories(): Builder
+    {
+        return $this->belongsToMany(Category::class, Product::class)
+            ->distinct()->get()->unique()->toQuery();
     }
 
     /**
