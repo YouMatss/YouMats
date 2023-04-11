@@ -146,6 +146,7 @@ class Vendor extends Resource
             HasMany::make('Products'),
             HasMany::make('Branches'),
             HasMany::make('Shippings'),
+            HasMany::make('Categories'),
             HasMany::make('Subscribes'),
         ];
     }
