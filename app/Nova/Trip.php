@@ -2,8 +2,6 @@
 
 namespace App\Nova;
 
-use Acm\NovaGmap\NovaGmap;
-use GeneaLabs\NovaMapMarkerField\MapMarker;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;

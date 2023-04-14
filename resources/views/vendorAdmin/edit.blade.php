@@ -290,7 +290,7 @@
 </section>
 @endsection
 @section('js_additional')
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{env('NOVA_MAPS_ADDRESS_KEY')}}&libraries=places&sensor=false"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{env('FRONT_MAPS_KEY')}}&libraries=places&sensor=false"></script>
     <script src="{{front_url()}}/assets/js/map.js"></script>
     <script>
         $(document).ready(function() {

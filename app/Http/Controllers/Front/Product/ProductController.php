@@ -26,7 +26,7 @@ class ProductController extends Controller
     private function checkOnCategoriesSlugs($categories_slug, $product) {
         $categories_slug_array = array_reverse(explode('/', $categories_slug));
 
-        abort_if(count($categories_slug_array) < 2, 404);
+        abort_if(count($categories_slug_array) < 1, 404);
 
         foreach ($categories_slug_array as $key => $category_slug) {
             $category = Category::where('slug', $category_slug)->firstorfail();
@@ -66,12 +66,14 @@ class ProductController extends Controller
         $data['product']->views++;
         $data['product']->save();
 
-        $data['same_vendor_products'] = Product::with('category')
-            ->where('category_id', $data['product']->category_id)
-            ->where('vendor_id', $data['product']->vendor_id)
-            ->where('id', '!=', $data['product']->id)
-            ->where('active', true)
-            ->inRandomOrder()->take(10)->get();
+        if($data['product']->subscribe) {
+            $data['same_vendor_products'] = Product::with('category')
+                ->where('category_id', $data['product']->category_id)
+                ->where('vendor_id', $data['product']->vendor_id)
+                ->where('id', '!=', $data['product']->id)
+                ->where('active', true)
+                ->inRandomOrder()->take(10)->get();
+        }
 
         $data['subscribed_vendors'] = Vendor::with(['products' => function ($query) use ($data) {
             $query->where('category_id', $data['product']->category_id)->inRandomOrder();
@@ -155,7 +157,7 @@ class ProductController extends Controller
                             return $collection->shuffle();
                         })->ungroup()
                         ->unique();
-           
+
           return view('front.layouts.partials.searchDiv')->with($data)->render();
     }
 
@@ -183,7 +185,7 @@ class ProductController extends Controller
                         ->paginate(20);
 
         $data['search_products']->withPath(url()->current())->withQueryString();
-                
+
 
 
         foreach ($search_products_by_name_only as $product) {
@@ -201,7 +203,7 @@ class ProductController extends Controller
             $data['selected_categories'] = explode(',', $_GET['filter']['has_categories']);
 
         $data['max_price'] = ceil($search_products_by_name_only->max('price'));
-        
+
         return view('front.search.search')->with($data);
 
     }

@@ -159,8 +159,14 @@
 
                     <p>{!! $product->short_desc !!}</p>
 {{--                        <div><strong>{{__('general.sku')}}</strong>: {{$product->SKU}}</div>--}}
-                    @if(auth()->guard('admin')->check() && isset($product->vendor->name))
-                        <div><strong>{{__('general.vendor')}}</strong>: {{$product->vendor->name}}</div>
+                    @if(isset($product->vendor) && $product->subscribe)
+                        <a href="{{ route('vendor.show', [$product->vendor->slug]) }}" class="badge badge-primary text-white" style="
+                                border-radius: 1px;
+                                font-weight: bold;
+                                padding: 1em 0.4em;
+                                background-color: #333;
+                                font-size: 75%;
+                            ">{{\Str::limit($product->vendor->name, 20)}}</a>
                     @endif
                 </div>
             </div>
@@ -277,6 +283,7 @@
         </div>
     </div>
 
+    @if(isset($same_vendor_products))
     <div class="mb-5">
         <div class="bg-img-hero">
             <div class="container p-0">
@@ -309,6 +316,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     @foreach($subscribed_vendors as $subscribed_vendor)
         <div class="mb-5">
