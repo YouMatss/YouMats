@@ -3,19 +3,17 @@
 namespace App\Nova;
 
 use App\Helpers\Nova\Fields;
+use App\Nova\Filters\VendorType;
 use Davidpiesse\NovaToggle\Toggle;
-use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Drobee\NovaSluggable\SluggableText;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 use Mauricewijnia\NovaMapsAddress\MapsAddress;
 use OptimistDigital\MultiselectField\Multiselect;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
@@ -158,7 +156,9 @@ class Vendor extends Resource
 
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new VendorType
+        ];
     }
 
     public function lenses(Request $request)

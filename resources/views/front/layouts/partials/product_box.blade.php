@@ -9,13 +9,14 @@
                 </a>
             </h5>
             <div class="mb-2 px-2">
-                @if(isset($product->vendor) && count($product->vendor->current_subscribes))
-                    <span class="badge badge-primary text-white" style="
+                @if(isset($product->vendor) && $product->subscribe)
+                    <a href="{{ route('vendor.show', [$product->vendor->slug]) }}" class="badge badge-primary text-white" style="
                                 border-radius: 1px;
                                 font-weight: bold;
                                 padding: 1em 0.4em;
                                 background-color: #333;
-                            ">{{\Str::limit($product->vendor->name, 20)}}</span>
+                                font-size: 75%;
+                            ">{{\Str::limit($product->vendor->name, 20)}}</a>
                 @endif
                 <a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="d-block text-center">
                     <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}">

@@ -23,7 +23,6 @@
     ],
     "require": {
         "php": "7.4.*",
-        "adamcmoore/nova-gmap": "^2.0",
         "ampeco/nova-date-range-filter": "^0.1.1",
         "anaseqal/nova-import": "^0.0.6",
         "benjacho/belongs-to-many-field": "^1.8",
@@ -40,7 +39,6 @@
         "epartment/nova-dependency-container": "^1.2",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
-        "genealabs/nova-map-marker-field": "^0.3.1",
         "guzzlehttp/guzzle": "^6.5",
         "hardevine/shoppingcart": "^2.9",
         "infinety-es/nova-filemanager": "^2.8",
@@ -83,7 +81,6 @@
         "vyuldashev/nova-permission": "^2.10",
         "waynestate/nova-ckeditor4-field": "^0.7.0",
         "whitecube/nova-flexible-content": "^v0.2.10",
-        "whitecube/nova-google-maps": "^0.0.1",
         "yassi/nova-nested-form": "^3.0",
         "ziffdavis/nova-nestedset": "^0.0.1"
     },

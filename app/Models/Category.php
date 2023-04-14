@@ -38,7 +38,7 @@ class Category extends Model implements Sortable, HasMedia
 
     protected $dates = ['deleted_at'];
 
-    protected $cascadeDeletes = ['products'];
+    protected $cascadeDeletes = ['children', 'allProducts', 'products'];
 
     public function getNameAttribute() {
         if(!isset($this->getTranslations('name')[app()->getLocale()]))
