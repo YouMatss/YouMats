@@ -137,7 +137,7 @@ if (!function_exists('cartOrChat')) {
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company()) {
                 return $cart . $chat;
-            } elseif(!(optional($product->vendor)->current_subscribes && array_intersect(optional($product->vendor)->current_subscribes->pluck('membership_id')->toArray(), [env('INDIVIDUAL_MEMBERSHIP_ID'), env('BOTH_MEMBERSHIP_ID')]))) {
+            } elseif(!$product->subscribe) {
                 return $view;
             } elseif($product->price && $product->price > 0 && $product->delivery && $product->stock && $product->stock >= $product->min_quantity) {
                 if($product->phone()) {

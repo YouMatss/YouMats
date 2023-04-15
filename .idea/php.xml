@@ -147,8 +147,6 @@
       <path value="$PROJECT_DIR$/vendor/chris-ware/nova-breadcrumbs" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-query-builder" />
       <path value="$PROJECT_DIR$/vendor/yassi/nova-nested-form" />
-      <path value="$PROJECT_DIR$/vendor/genealabs/nova-map-marker-field" />
-      <path value="$PROJECT_DIR$/vendor/symfony/thanks" />
       <path value="$PROJECT_DIR$/vendor/acme/Attribute" />
       <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
       <path value="$PROJECT_DIR$/vendor/facade/ignition" />
@@ -206,9 +204,7 @@
       <path value="$PROJECT_DIR$/vendor/optimistdigital/nova-translatable" />
       <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
-      <path value="$PROJECT_DIR$/vendor/whitecube/nova-google-maps" />
       <path value="$PROJECT_DIR$/vendor/mauricewijnia/nova-maps-address" />
-      <path value="$PROJECT_DIR$/vendor/adamcmoore/nova-gmap" />
       <path value="$PROJECT_DIR$/vendor/ladumor/one-signal" />
       <path value="$PROJECT_DIR$/vendor/league/flysystem" />
       <path value="$PROJECT_DIR$/vendor/coreproc/nova-echo" />
