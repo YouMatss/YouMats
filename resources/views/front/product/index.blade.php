@@ -23,6 +23,8 @@
     <meta name="twitter:image:width" content="800">
     <meta name="twitter:image:height" content="418">
 
+    <style> video { display: none; } </style>
+
     {!! $product->getTranslation('canonical', LaravelLocalization::getCurrentLocale(), false) !!}
 
     {!! $product->schema !!}
@@ -45,6 +47,27 @@
 {{--    </script>--}}
 @endsection
 @section('content')
+
+
+
+<div id="CallSupplierDiv" style="display: none;position: fixed;z-index: 999;right: 15px;bottom: 175px;max-height: 90px;width: 250px;border-radius: 10px;background: rgb(0 165 5 / 42%);color: white;">
+
+
+            <div class="modal-body">
+                <div id="TimerZone" style="text-align: center;display:none;" >
+                    <label id="minutes" style="margin: 0;">00</label>:<label id="seconds" style="margin: 0;">00</label>
+                </div>
+                <div class="connection" >
+
+                    <input type="hidden" id="extension" value="{{ $vendor_phone }}">
+                    <input type="button" id="call" class=" cart-chat-category btn btn-primary" value="Call" />
+                </div>
+
+                <div id="calling"></div>
+                <div id="media-views"></div>
+            </div>
+</div>
+
     <div class="bg-gray-13 bg-md-transparent">
         <div class="container">
             <!-- breadcrumb -->
@@ -233,6 +256,16 @@
 
                         @if(!Auth::guard('vendor')->check())
                             {!! cartOrChat($product) !!}
+
+                            <div>
+                                <a onclick="SetUpCall()">
+                                    <button
+                                        class=" cart-chat-category btn btn-primary transition-3d-hover" style="cursor: pointer;background-color: #00a505;border-color: #009805;">
+                                        <i class="fa fa-phone"></i> {{ __("general.call") }}
+                                    </button>
+                                </a>
+                            </div>
+
                             <div class="flex-content-center flex-wrap">
                                 <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i>{{__('product.wishlist')}}</a>
                             </div>
@@ -388,3 +421,19 @@
 
     @include('front.layouts.partials.change_city', ['delivery_cities' => $delivery_cities, 'ajax' => true])
 @endsection
+
+<script src="{{front_url()}}/assets/js/lib/sdp-interop-sl-1.4.0.js"></script>
+<script src="{{front_url()}}/assets/js/lib/jssip-3.0.13.js"></script>
+<script src="{{front_url()}}/assets/js/utils.js"></script>
+<script src="{{front_url()}}/assets/js/cyber_mega_phone.js"></script>
+<script src="{{front_url()}}/assets/js/phone_call.js"></script>
+
+<script>
+
+        function SetUpCall(){
+             document.getElementById('CallSupplierDiv').style.display = "block";
+             document.getElementById('call').click();
+
+        }
+
+</script>
