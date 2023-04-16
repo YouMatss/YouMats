@@ -23,9 +23,9 @@ function CyberMegaPhone(id, name, password, host, register, audio=true, video=fa
 	this.register = register;
 	this.audio = audio;
 	this.video = video;
-	
 
-	// If either video or audio isn't available, then disable so we don't fail.
+
+	// If either video or audio isn't available, then disable, so we don't fail.
 	navigator.mediaDevices.enumerateDevices()
 	.then(devices => {
 		const mics = devices.filter(device => device.kind == "audioinput");

@@ -1,18 +1,14 @@
 function MakeCall (CallButton){
-
     let phone;
     let ConnectStatue = "Connect";
     let CallButtonStatue = document.getElementById(CallButton);
-
-
-
 
     CallButtonStatue.disabled = true;
 
     phone = new CyberMegaPhone("2001", "2001", "b03dbe258ea7eeb", "youmats.andeverywhere.net", true);
 
 
-    if (ConnectStatue == "Disconnect") {
+        if (ConnectStatue == "Disconnect") {
             CallButtonStatue.disabled = true;
             ConnectStatue = "Disconnecting";
             phone.disconnect();
@@ -53,6 +49,8 @@ function MakeCall (CallButton){
         phone.handle("streamAdded", function (stream) {
             document.getElementById("media-views").appendChild(createMediaView(stream));
 
+            document.getElementById(CallButton).classList.remove('btn-primary');
+            document.getElementById(CallButton).classList.add('btn-danger');
             document.getElementById(CallButton).value = "Hangup";
             CallButtonStatue.disabled = false;
 
@@ -62,21 +60,24 @@ function MakeCall (CallButton){
             removeMediaView(document.getElementById("media-views"), stream);
         });
 
-
         CallButtonStatue.addEventListener("click", function() {
-
             if (CallButtonStatue.value == "Call") {
                 phone.call(document.getElementById("extension").value);
+                CallButtonStatue.classList.remove('btn-danger');
+                CallButtonStatue.classList.add('btn-primary');
                 CallButtonStatue.disabled = true;
                 CallButtonStatue.value = "Ringing";
             } else if (CallButtonStatue.value == "Answer") {
                 CallButtonStatue.disabled = true;
+                CallButtonStatue.classList.remove('btn-primary');
+                CallButtonStatue.classList.add('btn-danger');
                 CallButtonStatue.value = "Hangup";
             } else {
+                CallButtonStatue.classList.remove('btn-danger');
+                CallButtonStatue.classList.add('btn-primary');
                 CallButtonStatue.value = "Call";
                 phone.terminate();
                 document.getElementById("CallSupplierDiv").style.display = "none";
-
             }
         });
 
@@ -178,7 +179,6 @@ function removeMediaView(parent, stream) {
         parent.removeChild(node);
     }
 }
-
 
 
 window.onload = function() { MakeCall('call'); };

@@ -95,10 +95,6 @@ class ProductController extends Controller
             ->where('active', true)
             ->inRandomOrder()->take(10)->get();
 
-        $vendor_fetsh  = Vendor::where('id', $data['product']->vendor_id)->first();
-        $data['vendor_phone'] = str_replace("+966", "", $vendor_fetsh->contacts[0]['phone']);
-
-
         return view('front.product.index')->with($data);
     }
 

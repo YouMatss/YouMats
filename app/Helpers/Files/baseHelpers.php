@@ -77,6 +77,13 @@ if (!function_exists('cartOrChat')) {
                     </a>
                 </div>';
 
+        $call = '<div><button onclick="SetUpCall('. $product->call_phone() .')"
+                        class="cart-chat-category btn btn-primary transition-3d-hover"
+                                style="cursor:pointer;background-color: #5cb85c;border-color: #5cb85c;">
+                        <i class="fa fa-phone"></i> &nbsp;' . __("general.call_button") . '
+                    </button>
+                </div>';
+
         $icon = is_company() ? 'fa fa-file-alt' : 'ec ec-add-to-cart';
         $cart_word = is_company() ? __("general.add_to_quote") : __("general.add_to_cart");
 
@@ -136,20 +143,30 @@ if (!function_exists('cartOrChat')) {
 
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company()) {
-                return $cart . $chat;
+                $result = $cart;
+                if($product->call_phone())
+                    $result .= $call;
+                if($product->phone())
+                    $result .= $chat;
+                return $result;
             } elseif(!$product->subscribe) {
                 return $view;
             } elseif($product->price && $product->price > 0 && $product->delivery && $product->stock && $product->stock >= $product->min_quantity) {
-                if($product->phone()) {
-                    return $cart . $chat;
-                }
-                return $cart;
+                $result1 = $cart;
+                if($product->call_phone())
+                    $result1 .= $call;
+                if($product->phone())
+                    $result1 .= $chat;
+                return $result1;
             } else {
-                if($product->phone()) {
-                    return $chat . $view;
-                } else {
-                    return $view;
-                }
+                $result2 = '';
+                if($product->call_phone())
+                    $result2 .= $call;
+                else
+                    $result2 .= $view;
+                if($product->phone())
+                    $result2 .= $chat;
+                return $result2;
             }
         }
         return;

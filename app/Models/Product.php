@@ -206,6 +206,25 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return null;
     }
 
+    public function call_phone() {
+        if(!$this->vendor->call_phones)
+            return null;
+        $callPhones = json_decode($this->vendor->call_phones);
+        $city_id = 1;
+        $userType = 'individual';
+        if(is_company())
+            $userType = 'company';
+        if(Session::has('city'))
+            $city_id = Session::get('city');
+
+        foreach ($callPhones as $callPhone) {
+            if(in_array($city_id, $callPhone->cities) && ($callPhone->with == 'both' || $userType == $callPhone->with)) {
+                return $callPhone->phone;
+            }
+        }
+        return null;
+    }
+
     /**
      * @return string
      */
