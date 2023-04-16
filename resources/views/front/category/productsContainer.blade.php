@@ -1,3 +1,4 @@
+@include('front.layouts.partials.clickToCall')
 <div class="d-block d-md-flex flex-center-between mb-3 rtl">
     <div class="text-left">
         <span class="font-size-25 mb-2 mb-md-0"></span>

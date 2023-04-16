@@ -23,6 +23,8 @@
     <meta name="twitter:image:width" content="800">
     <meta name="twitter:image:height" content="418">
 
+    <style> video { display: none; } </style>
+
     {!! $product->getTranslation('canonical', LaravelLocalization::getCurrentLocale(), false) !!}
 
     {!! $product->schema !!}
@@ -45,6 +47,7 @@
 {{--    </script>--}}
 @endsection
 @section('content')
+    @include('front.layouts.partials.clickToCall')
     <div class="bg-gray-13 bg-md-transparent">
         <div class="container">
             <!-- breadcrumb -->
