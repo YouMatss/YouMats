@@ -232,7 +232,7 @@ function mute(stream, options) {
 		}
 	};
 
-	options = options || { audio: true, video: true };
+	options = options || { audio: true, video: false };
 
 	if (typeof options.audio != 'undefined') {
 		setTracks(stream.getAudioTracks(), options.audio);
