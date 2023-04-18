@@ -9,6 +9,13 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
+      <webServer id="4771d440-acb6-413d-9972-3b042f728ed8" name="calling server">
+        <fileTransfer accessType="SFTP" host="youmats.andeverywhere.net" port="22" sshConfigId="9297b145-417f-41c6-823d-05071b059f49" sshConfig="root@youmats.andeverywhere.net:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

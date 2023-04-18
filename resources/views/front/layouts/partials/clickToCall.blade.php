@@ -1,55 +1,50 @@
 <div id="CallSupplierDiv">
     <div>
-        <div class="vendor_name">YouMats</div>
-        <div id="TimerZone" style="text-align: center;/*display:none;*/" >
-            <label id="minutes" style="margin: 0;">00</label>:<label id="seconds" style="margin: 0;">00</label>
-        </div>
         <div class="connection">
-            <input type="hidden" id="extension">
-            <input type="button" id="call" value="call" class="btn btn-primary btn-block" />
-            <button id="ChangeSpearker" class="btn btn-block">
-                 <i class="fa fa-volume-down" style="font-size: 17px;"></i>
-            </button>
-            <label for="audioOutput">Audio output destination: </label><select id="audioOutput"></select>
-
-
+            <input type="hidden" id="extension" />
+            <input type="button" id="call" value="Call" class="btn btn-primary btn-block" />
+            <div id="TimerZone" style="/*display:none;*/" >
+                <label id="minutes" style="margin: 0;">00</label>:<label id="seconds" style="margin: 0;">00</label>
+            </div>
+            <div class="options">
+                <button id="speaker" class="btn btn-primary"><i class="fa fa-volume-up"></i></button>
+                <button id="mute" class="btn btn-primary"><i class="fa fa-microphone-slash"></i></button>
+            </div>
         </div>
         <div id="calling"></div>
         <div id="media-views"></div>
     </div>
 </div>
-<script src="{{front_url()}}/assets/js/lib/sdp-interop-sl-1.4.0.js?rand={{rand('0','5000')}}"></script>
-<script src="{{front_url()}}/assets/js/lib/jssip-3.0.13.js?rand={{rand('0','5000')}}"></script>
-<script src="{{front_url()}}/assets/js/utils.js?rand={{rand('0','5000')}}"></script>
+
+
+<script src="{{front_url()}}/assets/js/lib/sdp-interop-sl-1.4.0.js"></script>
+<script src="{{front_url()}}/assets/js/lib/jssip-3.0.13.js"></script>
+<script src="{{front_url()}}/assets/js/utils.js"></script>
 <script src="{{front_url()}}/assets/js/cyber_mega_phone.js?rand={{rand('0','5000')}}"></script>
 <script src="{{front_url()}}/assets/js/phone_call.js?rand={{rand('0','5000')}}"></script>
 
 <script>
     function SetUpCall(phone_number){
-
         MakeCall('call');
-        document.getElementById('CallSupplierDiv').style.display = "block";
         document.getElementById('extension').value = phone_number;
+        document.getElementById('CallSupplierDiv').style.display = "block";
 
         setTimeout(function() {
             document.getElementById('call').click();
-        }, "1000");
-
+        }, 1000);
     }
-
 </script>
 
 <style>
     #CallSupplierDiv {
         display: none;
-        margin-bottom: 24px;
+        margin-bottom: 15px;
         padding: 20px;
         background-color: #FFF;
         position: fixed;
-        right: -58px;
-        bottom: 95px;
+        right: 0;
+        bottom: 0;
         box-sizing: border-box;
-        align-items: center;
         border-radius: 24px;
         margin-left: 70px;
         margin-right: 70px;
@@ -59,27 +54,43 @@
         transition: all 0.3s ease-in-out 0s;
         transform: translateY(0px);
     }
-    #call {
-        margin-top: 20px;
+    #CallSupplierDiv #call{
+        border-radius: 24px;
+        margin-bottom: 8px;
         box-shadow: none;
-        border-radius:  24px 0 0 24px;
-        max-width: 70%;
-        float: left;
     }
-    #CallSupplierDiv .vendor_name {
-        font-size: 30px;
-        font-weight: bold;
+
+    #CallSupplierDiv #TimerZone {
         text-align: center;
+        font-size: 16px;
+        direction: ltr;
     }
-    #ChangeSpearker {
-        margin-top: 20px;
-        max-width: 30%;
-        float: right;
-        border-radius: 0 24px 24px 0;
-        background: #00224e;
-        color: white;
+
+    #CallSupplierDiv .options {
+        margin-top: 8px;
+        text-align: center;
+        padding-top: 5px;
     }
-    .connection{
+
+    #CallSupplierDiv #speaker, #CallSupplierDiv #mute {
+        border-radius: 50%;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #FFF;
+        border-color: #FFF;
+        color: #000;
+        margin: 0 4px;
+    }
+
+    #CallSupplierDiv #speaker.active, #CallSupplierDiv #mute.active {
+        background-color: #003f91;
+        border-color: #003f91;
+        color: #FFF;
+    }
+
+    #CallSupplierDiv .connection{
         width: 180px;
     }
 </style>

@@ -66,27 +66,12 @@ class Vendor extends Resource
                     ->rules(REQUIRED_STRING_VALIDATION),
                 Text::make('Email', 'email')
                     ->rules(REQUIRED_EMAIL_VALIDATION),
-                Text::make('Phone', 'phone')
+                Text::make('Call Phone', 'call_phone')
+                    ->rules(REQUIRED_STRING_VALIDATION),
+                Text::make('Whatsapp Phone', 'phone')
                     ->rules(REQUIRED_STRING_VALIDATION),
                 Text::make('Code', 'phone_code')
                     ->readonly(),
-                Multiselect::make('Cities', 'cities')
-                    ->options(\App\Models\City::pluck('name', 'id'))
-                    ->saveAsJSON(),
-                Select::make('With?', 'with')
-                    ->options([
-                        'individual' => 'Individual',
-                        'company' => 'Company',
-                        'both' => 'Both'
-                    ])
-                    ->rules(REQUIRED_STRING_VALIDATION),
-            ]),
-
-            SimpleRepeatable::make('Call Phones', 'call_phones', [
-                Text::make('Person Name', 'person_name')
-                    ->rules(REQUIRED_STRING_VALIDATION),
-                Text::make('Phone', 'phone')
-                    ->rules(REQUIRED_STRING_VALIDATION),
                 Multiselect::make('Cities', 'cities')
                     ->options(\App\Models\City::pluck('name', 'id'))
                     ->saveAsJSON(),

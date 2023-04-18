@@ -114,7 +114,7 @@
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
                                 <li><a class="list-group-item list-group-item-action" href="#">{{ __('footer.account') }}</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="#">{{ __('footer.wishlist') }}</a></li>
+{{--                                <li><a class="list-group-item list-group-item-action" href="#">{{ __('footer.wishlist') }}</a></li>--}}
                                 <li><a class="list-group-item list-group-item-action" href="{{route('front.team.index')}}">{{ __('footer.team') }}</a></li>
                                 @foreach($pages as $page)
                                 <li><a class="list-group-item list-group-item-action" href="{{route('front.page.index', [$page->slug])}}">{{$page->title}}</a></li>

@@ -8,11 +8,11 @@
                 <div class="d-flex align-items-center">
                     <div class="topbar-right ml-auto st_nav_mob">
                         <ul class="list-inline mb-0">
-                            @if(!Auth::guard('vendor')->check())
-                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                    <a href="@if(Cart::instance('wishlist')->count() > 0) {{ route('wishlist.index') }} @else # @endif" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> {{__('general.wishlist')}} </a>
-                                </li>
-                            @endif
+{{--                            @if(!Auth::guard('vendor')->check())--}}
+{{--                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">--}}
+{{--                                    <a href="@if(Cart::instance('wishlist')->count() > 0) {{ route('wishlist.index') }} @else # @endif" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> {{__('general.wishlist')}} </a>--}}
+{{--                                </li>--}}
+{{--                            @endif--}}
                             @if(\Config::get('currencies'))
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                                     <div class="d-flex align-items-center">
@@ -597,7 +597,7 @@
                     </div>
                     <!-- Search Bar [START] -->
                     <div class="col d-none d-xl-block">
-                        <label class="sr-only" for="searchProduct">{{__('general.search')}}</label>            
+                        <label class="sr-only" for="searchProduct">{{__('general.search')}}</label>
                         <div class="input-group" id="SearchBar" style="margin-top: 4px;">
                             <select id="CategoriesSearchBar" class="form-select form-select-lg height-40 py-2 px-2" style="border-radius: 0 7.5px 7.5px 0;max-width: 130px;background: #f3f3f3;border: #f3f3f3;">
                                 <option value="0" selected> {{__('general.all_categories')}}</option>
@@ -606,7 +606,7 @@
                                         {{$category->name}}
                                     </option>
                                 @endforeach
-                              </select>    
+                              </select>
                             <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40" style="border-radius: 0;" id="searchProductInput" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
                             <div class="input-group-append">
                                 <button class="btn btn-dark height-40 py-2 px-2 rounded-right-pill" style="background-color: #febd69;border-color: #febd69;" type="button" id="searchProductBtn">
