@@ -1,21 +1,18 @@
 <div id="CallSupplierDiv">
-    <div>
-        <div class="connection">
-            <input type="hidden" id="extension" />
-            <input type="button" id="call" value="Call" class="btn btn-primary btn-block" />
-            <div id="TimerZone" style="/*display:none;*/" >
-                <label id="minutes" style="margin: 0;">00</label>:<label id="seconds" style="margin: 0;">00</label>
-            </div>
-            <div class="options">
-                <button id="speaker" class="btn btn-primary"><i class="fa fa-volume-up"></i></button>
-                <button id="mute" class="btn btn-primary"><i class="fa fa-microphone-slash"></i></button>
-            </div>
+    <div class="connection">
+        <input type="hidden" id="extension" />
+        <input type="button" id="call" value="Call" class="btn btn-primary btn-block" />
+        <div id="TimerZone" style="/*display:none;*/" >
+            <label id="minutes" style="margin: 0;">00</label>:<label id="seconds" style="margin: 0;">00</label>
         </div>
-        <div id="calling"></div>
-        <div id="media-views"></div>
+        <div class="options">
+            <button id="speaker" type="button" onclick="speakerToggle()" class="btn btn-primary"><i class="fa fa-volume-up"></i></button>
+            <button id="mute" type="button" onclick="muteToggle()" class="btn btn-primary"><i class="fa fa-microphone-slash"></i></button>
+        </div>
     </div>
 </div>
-
+<div id="calling"></div>
+<div id="media-views"></div>
 
 <script src="{{front_url()}}/assets/js/lib/sdp-interop-sl-1.4.0.js"></script>
 <script src="{{front_url()}}/assets/js/lib/jssip-3.0.13.js"></script>
@@ -32,6 +29,13 @@
         setTimeout(function() {
             document.getElementById('call').click();
         }, 1000);
+    }
+    function muteToggle() {
+        // mute();
+        $('#mute').toggleClass('active');
+    }
+    function speakerToggle() {
+        $('#speaker').toggleClass('active');
     }
 </script>
 
