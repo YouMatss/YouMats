@@ -47,7 +47,6 @@
 {{--    </script>--}}
 @endsection
 @section('content')
-    @include('front.layouts.partials.clickToCall')
     <div class="bg-gray-13 bg-md-transparent">
         <div class="container">
             <!-- breadcrumb -->
@@ -225,20 +224,22 @@
                         <div class="mb-3">
                             <div class="left-page-single">
                                 @if(is_company())
-                                <a href="{{ route('home') }}"> <i class="fa fa-user"></i> {{env('APP_NAME')}} </a>
-                                <a href="tel:+966502111754" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> {{__('info.phone')}} </a>
-                                <a href="mailto:info@youmats.com"> <i class="fa fa-envelope"></i> {{__('info.email')}} </a>
+                                    <a href="{{ route('home') }}"> <i class="fa fa-user"></i> {{env('APP_NAME')}} </a>
+                                    <a href="tel:+966502111754" class="phone_link" data-url=""> <i class="fa fa-phone" aria-hidden="true"></i> {{__('info.phone')}} </a>
+                                    <a href="mailto:info@youmats.com"> <i class="fa fa-envelope"></i> {{__('info.email')}} </a>
                                 @endif
-                                <h3> {{__('product.how_to_pay')}} </h3>
-                                <p> {{__('product.how_to_pay_desc')}} </p>
+                                @if($product->price && $product->price > 0 && $product->delivery && $product->stock && $product->stock >= $product->min_quantity) {
+                                    <h3> {{__('product.how_to_pay')}} </h3>
+                                    <p> {{__('product.how_to_pay_desc')}} </p>
+                                @endif
                             </div>
                         </div>
 
                         @if(!Auth::guard('vendor')->check())
                             {!! cartOrChat($product) !!}
-                            <div class="flex-content-center flex-wrap">
-                                <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i>{{__('product.wishlist')}}</a>
-                            </div>
+{{--                            <div class="flex-content-center flex-wrap">--}}
+{{--                                <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i>{{__('product.wishlist')}}</a>--}}
+{{--                            </div>--}}
                         @endif
                     </div>
                 </div>
@@ -390,4 +391,5 @@
     </div>
 
     @include('front.layouts.partials.change_city', ['delivery_cities' => $delivery_cities, 'ajax' => true])
+    @include('front.layouts.partials.clickToCall')
 @endsection

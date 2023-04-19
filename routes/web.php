@@ -131,11 +131,11 @@ Route::group([
         Route::post('/coupon', 'CartController@applyCoupon')->name('apply.coupon');
     });
 
-    Route::group(['prefix' => 'wishlist', 'namespace' => 'Product', 'middleware' => ['auth', 'verified']], function() {
-        Route::get('/', 'WishlistController@index')->name('wishlist.index');
-        Route::post('/add/{product}', 'WishlistController@add')->name('wishlist.add');
-        Route::delete('/delete/{rowId}', 'WishlistController@deleteItem')->name('wishlist.remove');
-    });
+//    Route::group(['prefix' => 'wishlist', 'namespace' => 'Product', 'middleware' => ['auth', 'verified']], function() {
+//        Route::get('/', 'WishlistController@index')->name('wishlist.index');
+//        Route::post('/add/{product}', 'WishlistController@add')->name('wishlist.add');
+//        Route::delete('/delete/{rowId}', 'WishlistController@deleteItem')->name('wishlist.remove');
+//    });
 
     Route::group(['prefix' => 'checkout', 'namespace' => 'Product'], function() {
         Route::get('/', 'CheckoutController@index')->name('checkout.index');
@@ -165,10 +165,10 @@ Route::group([
 
     Route::get('/page/{slug}', 'Common\PageController@page')->name('front.page.index');
     Route::get('/tag/{tag_slug}', 'Tag\IndexController@index')->name('front.tag');
-    
+
     Route::get('/suppliers', 'Vendor\IndexController@index')->name('vendor.index');
     Route::get('/suppliers/{vendor_slug}', 'Vendor\IndexController@show')->name('vendor.show');
-    
+
     Route::permanentRedirect('/partners', '/suppliers');
     Route::permanentRedirect('/partners/{vendor_slug}', '/suppliers/{vendor_slug}');
 

@@ -78,8 +78,9 @@ if (!function_exists('cartOrChat')) {
                 </div>';
 
         $call = '<div><button onclick="SetUpCall('. $product->call_phone() .')"
-                        class="cart-chat-category btn btn-primary transition-3d-hover"
-                                style="cursor:pointer;background-color: #5cb85c;border-color: #5cb85c;">
+                            type="button"
+                            class="cart-chat-category btn btn-primary transition-3d-hover"
+                            style="cursor:pointer;background-color: #5cb85c;border-color: #5cb85c;">
                         <i class="fa fa-phone"></i> &nbsp;' . __("general.call_button") . '
                     </button>
                 </div>';

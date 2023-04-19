@@ -3,6 +3,13 @@
   <component name="PublishConfigData" serverName="youmats" persistUploadOnCheckin="false" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
     <option name="confirmBeforeUploading" value="false" />
     <serverData>
+      <paths name="calling server">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="youmats">
         <serverdata>
           <mappings>

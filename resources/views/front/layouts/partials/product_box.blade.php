@@ -72,13 +72,13 @@
                 {!! cartOrChat($product, false) !!}
             </div>
         </div>
-        @if(!Auth::guard('vendor')->check())
-            <div class="product-item__footer px-2">
-                <div class="border-top py-2 flex-center-between flex-wrap">
-                    <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>
-                </div>
-            </div>
-        @endif
+{{--        @if(!Auth::guard('vendor')->check())--}}
+{{--            <div class="product-item__footer px-2">--}}
+{{--                <div class="border-top py-2 flex-center-between flex-wrap">--}}
+{{--                    <a data-url="{{ route('wishlist.add', ['product' => $product]) }}" class="text-gray-6 font-size-13 btn-add-wishlist pointer"><i class="ec ec-favorites mr-1 font-size-15"></i> {{__('product.wishlist')}}</a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        @endif--}}
     </div>
 </div>
 @elseif($view == 'list')

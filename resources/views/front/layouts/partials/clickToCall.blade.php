@@ -10,10 +10,7 @@
 <script>
     function SetUpCall(phone_number){
 
-        //MakeCall('call');
         document.getElementById('CallSupplierDiv').style.display = "block";
-        //document.getElementById('extension').value = phone_number;
-        //document.getElementById('call').click();
         document.getElementById('myframe').src = window.location.protocol + "//" + window.location.host + "/Phone/index.php?number=" + phone_number;
 
         $('.overlayButton').click(function(){

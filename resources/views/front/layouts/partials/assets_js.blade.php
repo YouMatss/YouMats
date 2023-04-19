@@ -206,23 +206,23 @@
         });
 
         //WISHLIST
-        $(".btn-add-wishlist").on('click', function(){
-            let url = $(this).data('url');
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: { _token: '{{ csrf_token() }}' }
-            })
-                .done(function(response) {
-                    if(response.status)
-                        toastr.success(response.message);
-                    else
-                        toastr.warning(response.message)
-                })
-                .fail(function(response) {
-                    toastr.error(response.responseJSON.message ?? 'error');
-                })
-        });
+        {{--$(".btn-add-wishlist").on('click', function(){--}}
+        {{--    let url = $(this).data('url');--}}
+        {{--    $.ajax({--}}
+        {{--        type: 'POST',--}}
+        {{--        url: url,--}}
+        {{--        data: { _token: '{{ csrf_token() }}' }--}}
+        {{--    })--}}
+        {{--        .done(function(response) {--}}
+        {{--            if(response.status)--}}
+        {{--                toastr.success(response.message);--}}
+        {{--            else--}}
+        {{--                toastr.warning(response.message)--}}
+        {{--        })--}}
+        {{--        .fail(function(response) {--}}
+        {{--            toastr.error(response.responseJSON.message ?? 'error');--}}
+        {{--        })--}}
+        {{--});--}}
 
         let inputs = document.querySelectorAll(".phoneNumber");
 

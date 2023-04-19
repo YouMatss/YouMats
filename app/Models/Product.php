@@ -207,9 +207,9 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     }
 
     public function call_phone() {
-        if(!$this->vendor->call_phones)
+        if(!$this->vendor->contacts)
             return null;
-        $callPhones = json_decode($this->vendor->call_phones);
+        $callPhones = $this->vendor->contacts;
         $city_id = 1;
         $userType = 'individual';
         if(is_company())
@@ -218,8 +218,8 @@ class Product extends Model implements Sortable, HasMedia, Buyable
             $city_id = Session::get('city');
 
         foreach ($callPhones as $callPhone) {
-            if(in_array($city_id, $callPhone->cities) && ($callPhone->with == 'both' || $userType == $callPhone->with)) {
-                return $callPhone->phone;
+            if(in_array($city_id, $callPhone['cities']) && ($callPhone['with'] == 'both' || $userType == $callPhone['with'])) {
+                return $callPhone['call_phone'] ?? null;
             }
         }
         return null;
