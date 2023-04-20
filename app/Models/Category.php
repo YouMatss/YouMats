@@ -182,6 +182,7 @@ class Category extends Model implements Sortable, HasMedia
      */
     public function subscribedVendors()
     {
+//        $data['category']->descendants->pluck('id')
         return Vendor::join('products', 'products.vendor_id', '=', 'vendors.id')
             ->join('categories', 'categories.id', '=', 'products.category_id')
             ->join('subscribes', function ($join) {

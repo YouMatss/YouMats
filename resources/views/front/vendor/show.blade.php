@@ -114,8 +114,6 @@
                                                             @endforeach
                                                         </span><br/>
                                                         @endif
-                                                        <label style="font-weight: bold">{{__('vendor.with')}}: </label>
-                                                        <span>{{ __('vendor.'.$contact['with']) }}</span>
                                                     </td>
                                                 </tr>
                                             @endforeach

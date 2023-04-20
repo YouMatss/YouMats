@@ -95,6 +95,11 @@ class ProductController extends Controller
             ->where('active', true)
             ->inRandomOrder()->take(10)->get();
 
+        $widget_data = get_widget_data_by_product($data['product']);
+
+        $data['widget_phone'] = $widget_data['widget_phone'];
+        $data['widget_whatsapp'] = $widget_data['widget_whatsapp'];
+
         return view('front.product.index')->with($data);
     }
 

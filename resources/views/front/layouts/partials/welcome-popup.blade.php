@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <a class="select_reg typeIntroduceButton" data-url="{{route('front.introduce', ['individual'])}}">
-                            {{__('general.continue_as_individual', [],'ar')}} <br/>
+                            {{__('general.continue_as_individual', [], 'ar')}} <br/>
                             {{__('general.continue_as_individual', [], 'en')}}
                         </a>
                     </div>

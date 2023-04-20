@@ -67,9 +67,9 @@ class Vendor extends Resource
                 Text::make('Email', 'email')
                     ->rules(REQUIRED_EMAIL_VALIDATION),
                 Text::make('Call Phone', 'call_phone')
-                    ->rules(REQUIRED_STRING_VALIDATION),
+                    ->rules(NULLABLE_STRING_VALIDATION),
                 Text::make('Whatsapp Phone', 'phone')
-                    ->rules(REQUIRED_STRING_VALIDATION),
+                    ->rules(NULLABLE_STRING_VALIDATION),
                 Text::make('Code', 'phone_code')
                     ->readonly(),
                 Multiselect::make('Cities', 'cities')

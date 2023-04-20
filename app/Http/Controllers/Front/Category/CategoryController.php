@@ -33,7 +33,7 @@ class CategoryController extends Controller
 
         $children_categories_ids = Category::descendantsAndSelf($data['category']->id)->pluck('id');
 
-        if(isset($request->filter['city'])){
+        if(isset($request->filter['city'])) {
             setCity($request->filter['city']);
         }
 

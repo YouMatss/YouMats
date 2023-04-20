@@ -35,9 +35,15 @@ class IndexController extends Controller
      * @return Application|Factory|View
      */
     public function show($vendor_slug) {
-        $vendor = Vendor::where('slug', $vendor_slug)->firstorfail();
-        $products = $vendor->products()->paginate(20);
-        $branches = $vendor->branches()->paginate(5);
-        return view('front.vendor.show', ['vendor' => $vendor, 'products' => $products, 'branches' => $branches]);
+        $data['vendor'] = Vendor::where('slug', $vendor_slug)->firstorfail();
+        $data['products'] = $data['vendor']->products()->paginate(20);
+        $data['branches'] = $data['vendor']->branches()->paginate(5);
+
+        $widget_data = get_widget_data_by_vendor($data['vendor']);
+
+        $data['widget_phone'] = $widget_data['widget_phone'];
+        $data['widget_whatsapp'] = $widget_data['widget_whatsapp'];
+
+        return view('front.vendor.show')->with($data);
     }
 }

@@ -599,7 +599,7 @@
 
 .select_reg.active ,.select_reg:hover {
     background: #003f91;
-    color: #fff;
+    color: #fff !important;
 }
 
 .select_reg.active a, .select_reg:hover a{
