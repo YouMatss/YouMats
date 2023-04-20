@@ -82,4 +82,5 @@
     @if(is_individual())
         @include('front.layouts.partials.change_city')
     @endif
+    @include('front.layouts.partials.clickToCall')
 @endsection

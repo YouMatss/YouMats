@@ -251,4 +251,6 @@
             </div>
         </div>
     </div>
+    @include('front.layouts.partials.clickToCall')
+
 @endsection
