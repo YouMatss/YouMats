@@ -238,4 +238,5 @@
             });
         });
     </script>
+    @include('front.layouts.partials.clickToCall')
 @endsection
