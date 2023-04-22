@@ -77,7 +77,7 @@ if (!function_exists('cartOrChat')) {
                     </a>
                 </div>';
 
-        $call = '<div><button onclick="SetUpCall('. $product->call_phone() .')"
+        $call = '<div><button onclick="SetUpCall('. Clean_Phone_Number($product->call_phone()) .')"
                             type="button"
                             class="cart-chat-category btn btn-primary transition-3d-hover"
                             style="cursor:pointer;background-color: #5cb85c;border-color: #5cb85c;">
@@ -398,5 +398,17 @@ if(!function_exists('get_widget_data_by_product')) {
             'widget_phone' => null,
             'widget_whatsapp' => null
         ];
+    }
+}
+
+if(!function_exists('Clean_Phone_Number')) {
+    function Clean_Phone_Number($raw_number){
+
+        // remove any charactor
+        //remove country code of saudi arabia (966)
+
+        $filtered_number =  preg_replace('/^\+?966|\|966|\D+/', '', ($raw_number));
+
+        return $filtered_number;
     }
 }
