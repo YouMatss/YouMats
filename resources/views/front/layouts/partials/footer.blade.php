@@ -176,16 +176,12 @@
                     <div class="u-sidebar__content u-header-sidebar__content">
                         <form id="inquireForm" enctype="multipart/form-data">
                             @csrf
-                            <!-- Login -->
                             <div id="login" data-target-group="idForm">
-                                <!-- Title -->
                                 <header class="text-center mb-7">
                                     <h2 class="h4 mb-0">{{__('general.quotation_title')}}</h2>
                                     <p>{{__('general.quotation_subtitle')}}</p>
                                 </header>
-                                <!-- End Title -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_company_name')}}</label>
@@ -199,9 +195,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_contact_person')}}</label>
@@ -215,9 +209,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_email')}}</label>
@@ -231,9 +223,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_phone')}}</label>
@@ -242,9 +232,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_message')}}</label>
@@ -258,9 +246,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <!-- actual upload which is hidden -->
                                     <input type="file" name="file" id="actual-btn" hidden/>
@@ -271,26 +257,20 @@
                                     <!-- name of file chosen -->
                                     <span id="file-chosen">{{ __('general.no_file_chosen') }}</span>
                                 </div>
-                                <!-- End Form Group -->
-
-
-
 
                                 <div class="mb-2">
                                     <button type="submit" class="btn btn-block btn-sm btn-primary transition-3d-hover">{{__('general.quotation_button')}}</button>
                                 </div>
-
                             </div>
                         </form>
                     </div>
                 </div>
-                <!-- End Content -->
             </div>
         </div>
     </div>
 </aside>
 
-<a class="js-go-to u-go-to" href="#" data-position='{"bottom": 125, "right": 15 }' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
+<a class="js-go-to u-go-to" href="#" data-position='{"bottom": 125, "right": 15}' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
     <span class="fas fa-arrow-up u-go-to__inner"></span>
 </a>
 

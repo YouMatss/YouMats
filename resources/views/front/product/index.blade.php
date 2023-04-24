@@ -46,6 +46,34 @@
 {{--        ga('ec:setAction', 'detail');--}}
 {{--    </script>--}}
 @endsection
+@section('extraStyles')
+    <style>
+        .carousel-indicators {
+            position: relative;
+        }
+        .carousel-indicators li {
+            text-indent: unset;
+            height: auto;
+            width: 50px;
+        }
+        .list-inline-item:not(:last-child) {
+            margin-right: 1rem;
+        }
+        .carousel-item img {
+            width: 100%;
+        }
+        .carousel-control-prev i, .carousel-control-next i {
+            opacity: 1;
+            background-color: #003f91;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+        }
+    </style>
+@endsection
 @section('content')
     <div class="bg-gray-13 bg-md-transparent">
         <div class="container">
@@ -79,55 +107,53 @@
     <div class="container">
         <div class="row rtl">
             <div class="col-md-6 col-lg-4 col-xl-5 mb-4 mb-md-0 ltr">
-                <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2"
-                     data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle"
-                     data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4"
-                     data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4"
-                     data-nav-for="#sliderSyncingThumb" data-infinite="false"
-                     data-slick='{
-                        "autoplay": true,
-                        @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
-                        ,"rtl": true
-                        @endif
-                     }'>
-                    @if(count($product->getMedia(PRODUCT_PATH)) > 0)
-                        @foreach($product->getMedia(PRODUCT_PATH) as $image)
-                            <div class="js-slide">
-                                <img loading="lazy" class="img-fluid"
-                                     src="{{$image->getFullUrl('size_500_500')}}"
-                                     alt="{{$image->img_alt ?? ''}}"
-                                     title="{{$image->img_title ?? ''}}">
+                <div id="gallery-carousel" class="carousel slide" data-ride="carousel" align="center">
+                    <!-- slides -->
+                    <div class="carousel-inner">
+                        @if(count($product->getMedia(PRODUCT_PATH)) > 0)
+                            @foreach($product->getMedia(PRODUCT_PATH) as $image)
+                                <div class="carousel-item @if($loop->first) active @endif">
+                                    <img loading="lazy"
+                                         src="{{$image->getFullUrl('size_500_500')}}"
+                                         alt="{{$image->img_alt ?? ''}}"
+                                         title="{{$image->img_title ?? ''}}">
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="carousel-item active">
+                                <img loading="lazy"
+                                     src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_500_500')['url']}}"
+                                     alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}"
+                                     title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
                             </div>
+                        @endif
+                    </div>
+
+                    <!-- Left right -->
+                    <a class="carousel-control-prev" href="#gallery-carousel" data-slide="prev">
+                        <i class="fa fa-arrow-left"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#gallery-carousel" data-slide="next">
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+
+                    @if(count($product->getMedia(PRODUCT_PATH)) > 1)
+                    <!-- Thumbnails -->
+                    <ol class="carousel-indicators list-inline">
+                        @foreach($product->getMedia(PRODUCT_PATH) as $thumb)
+                            <li class="list-inline-item @if($loop->first) active @endif">
+                                <a id="carousel-selector-{{$loop->index}}"
+                                    data-slide-to="{{$loop->index}}" data-target="#gallery-carousel">
+                                    <img loading="lazy" class="img-fluid"
+                                         src="{{$thumb->getFullUrl('size_50_50')}}"
+                                         alt="{{$thumb->img_alt ?? ''}}"
+                                         title="{{$thumb->img_title ?? ''}}">
+                                </a>
+                            </li>
                         @endforeach
-                    @else
-                        <div class="js-slide">
-                            <img loading="lazy" class="img-fluid"
-                                 src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_500_500')['url']}}"
-                                 alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}"
-                                 title="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title']}}">
-                        </div>
+                    </ol>
                     @endif
                 </div>
-                @if(count($product->getMedia(PRODUCT_PATH)) > 1)
-                <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing
-                        u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off"
-                     data-slides-show="5" data-is-thumbs="true" data-nav-for="#sliderSyncingNav"
-                     data-slick='{
-                        "autoplay": true,
-                        @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
-                        ,"rtl": true
-                        @endif
-                     }'>
-                    @foreach($product->getMedia(PRODUCT_PATH) as $thumb)
-                    <div class="js-slide" style="cursor: pointer;height: auto !important;">
-                        <img loading="lazy" class="img-fluid"
-                             src="{{$thumb->getFullUrl('size_50_50')}}"
-                             alt="{{$thumb->img_alt ?? ''}}"
-                             title="{{$thumb->img_title ?? ''}}">
-                    </div>
-                    @endforeach
-                </div>
-                @endif
             </div>
             <div class="col-md-6 col-lg-4 col-xl-4 mb-md-6 mb-lg-0">
                 <div class="mb-2">

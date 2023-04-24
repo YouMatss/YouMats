@@ -1,7 +1,6 @@
 <!doctype html>
 <html dir="{{LaravelLocalization::getCurrentLocaleDirection()}}" lang="{{LaravelLocalization::getCurrentLocale()}}-SA">
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -27,14 +26,12 @@
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-        
+
           gtag('config', 'UA-114976621-1');
         </script>
 
-
         <!-- Google web master -->
         <meta name="google-site-verification" content="42jgsTk384G-j5A58b0eoyX-aR9ozjFnnLeymC27O2c" />
-
 
         @include('front.layouts.partials.assets')
     </head>

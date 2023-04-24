@@ -1,4 +1,4 @@
-<?php
+mi<?php
 
 use Dotenv\Dotenv;
 use Illuminate\Support\Env;

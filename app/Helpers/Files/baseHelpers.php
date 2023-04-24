@@ -403,12 +403,9 @@ if(!function_exists('get_widget_data_by_product')) {
 
 if(!function_exists('Clean_Phone_Number')) {
     function Clean_Phone_Number($raw_number){
+        // remove any character
+        // remove country code of saudi arabia (966)
 
-        // remove any charactor
-        //remove country code of saudi arabia (966)
-
-        $filtered_number =  preg_replace('/^\+?966|\|966|\D+/', '', ($raw_number));
-
-        return $filtered_number;
+        return preg_replace('/^\+?966|\|966|\D+/', '', ($raw_number));
     }
 }

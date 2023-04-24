@@ -138,9 +138,11 @@ body,p,h1,h2,h3,h4,h5,h6,a,.card ,address ,.font-weight-light,.phone,.email, .cu
     top: -1px;
     border-bottom: 2px solid #003f91;
     border-left: 2px solid #003f91;
-
     border-right: 0;
+}
 
+#sidebarNavToggler {
+    padding: 7px 15px 6px;
 }
 
 .slick-slide {
@@ -326,24 +328,28 @@ h3.font-size-24 {
     margin-top: -2px;
 }
 
-
 .tit_cart_min{
     text-align: right;
 }
 
-
 .iti--allow-dropdown input, .iti--allow-dropdown input[type=tel], .iti--allow-dropdown input[type=text], .iti--separate-dial-code input, .iti--separate-dial-code input[type=tel], .iti--separate-dial-code input[type=text] {
-
     margin-left: 0;
-    padding: 0 0 0 85px !important;
+    padding: 0 100px 0 0 !important;
 }
 
 .iti--allow-dropdown .iti__flag-container, .iti--separate-dial-code .iti__flag-container {
-
+    left: auto;
+    right: 0;
 }
 
 .iti--separate-dial-code .iti__selected-flag {
-    border-radius: 15px 0 0 15px;
+    padding: 0 8px 0 6px;
+    border-right: none;
+    border-left: 1.5px solid #DDD;
+}
+
+.iti__country-list{
+    text-align: right;
 }
 
 .input-group > .input-group-append > .btn{
@@ -465,4 +471,25 @@ h3.font-size-24 {
 .close_search{
     right: auto;
     left: -35px;
+}
+
+.input-group>.custom-select:not(:first-child),
+.input-group>.form-control:not(:first-child) {
+    border-radius: 1.4rem;
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
+}
+.input-group>.input-group-append:last-child>.btn:not(:last-child):not(.dropdown-toggle),
+.input-group>.input-group-append:last-child>.input-group-text:not(:last-child),
+.input-group>.input-group-append:not(:last-child)>.btn,
+.input-group>.input-group-append:not(:last-child)>.input-group-text,
+.input-group>.input-group-prepend>.btn,
+.input-group>.input-group-prepend>.input-group-text {
+    border-radius: 1.4rem;
+    border-top-left-radius: unset;
+    border-bottom-left-radius: unset;
+}
+
+.u-sidebar__content {
+    text-align: right;
 }

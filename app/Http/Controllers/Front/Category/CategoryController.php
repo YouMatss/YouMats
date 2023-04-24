@@ -77,6 +77,8 @@ class CategoryController extends Controller
         if(isset($data['parent'])) {
             $data['subscribeVendors'] = $data['category']->subscribedVendors();
 
+//            dd($data['subscribeVendors']);
+
             return view('front.category.sub')->with($data);
         } else {
             return view('front.category.index')->with($data);

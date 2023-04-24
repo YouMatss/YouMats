@@ -182,17 +182,26 @@ class Category extends Model implements Sortable, HasMedia
      */
     public function subscribedVendors()
     {
-//        $data['category']->descendants->pluck('id')
-        return Vendor::join('products', 'products.vendor_id', '=', 'vendors.id')
+        $ancestorIds = $this->ancestors->pluck('id')->push($this->id);
+
+        $vendorsQuery = Vendor::join('products', 'products.vendor_id', '=', 'vendors.id')
             ->join('categories', 'categories.id', '=', 'products.category_id')
             ->join('subscribes', function ($join) {
                 $join->on('subscribes.category_id', '=', 'categories.id');
                 $join->on('subscribes.vendor_id', '=', 'vendors.id');
-            })
-            ->where('categories.id', $this->id)
-            ->whereDate('subscribes.expiry_date', '>', now())
+            });
+
+        $vendorsQuery->where(function ($query) use ($ancestorIds) {
+            foreach ($ancestorIds as $ancestorId) {
+                $query->orWhere('categories.id', $ancestorId);
+            }
+        });
+
+        $vendorsQuery->whereDate('subscribes.expiry_date', '>', now())
             ->select('vendors.id', 'vendors.name', 'vendors.slug')
-            ->distinct()->get();
+            ->distinct();
+
+        return $vendorsQuery->get();
     }
 
     /**
