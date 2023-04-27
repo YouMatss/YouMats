@@ -7,6 +7,7 @@
     </div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
     function SetUpCall(phone_number){
 
@@ -16,25 +17,33 @@
         $('.overlayButton').click(function(){
 
             document.getElementById('CallSupplierDiv').style.display = "none";
-            iframe = document.getElementById('myframe');
-            iframe.parentNode.removeChild(iframe);
+            document.getElementById('myframe').src = "about:blank";
+
+
         });
 
     }
 
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 250) {
+            $("#myframe").css({"bottom": "45px"});
+        }
+        if ($(this).scrollTop() < 10) {
+            $("#myframe").css({"bottom": "0px"});
+        }
+    });
 </script>
 
 <style>
 
     #myframe{
-        height: 150px;
-        width: 270px;
-        position:relative;
-        float:left;
+        height: 180px;
+        width: 300px;
+        position: relative;
     }
     .overlayButton{
-        top: 10px;
-        left: 36px;
+        bottom: 6px;
+        left: 48px;
         position: absolute;
         width: 38%;
         height: 45px;

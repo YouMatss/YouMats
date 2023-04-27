@@ -286,10 +286,9 @@ audio{
 .ui-menu{
     top: 0px;
     left: 0px;
-
     position: fixed !important;
     z-index: 99999999;
-    min-width: 200px !important;
+    width: 248px !important;
     box-sizing: border-box;
     padding: 5px 0px 5px 0px !important;
     border-radius: 5px !important;
@@ -307,14 +306,10 @@ audio{
 }
 
 .ui-menu .ui-menu-item {
-    list-style-image: none !important;
+    list-style-type: none !important;
+    line-height: 1.5rem !important;
 }
-.ui-menu .ui-menu-item-wrapper {
-    padding-left: 0.6em !important;
-}
-.ui-menu-icons .ui-menu-item-wrapper {
-    padding-left: 2em !important;
-}
+
 .ui-menu .ui-icon {
     left: 0.6em !important;
     font-size: 16px !important;
@@ -412,7 +407,10 @@ audio{
 .ui-button .ui-icon {
     background-image: none !important;
 }
-
+.ui-menu-divider {
+    list-style-type: none;
+    display: none;
+}
 
 /* CSS_HtmlElements */
 /* ====================================================================================== */

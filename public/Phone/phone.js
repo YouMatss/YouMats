@@ -1,6 +1,6 @@
 /**
 * ====================
-*  ☎️ Browser Phone ☎️
+*  ☎️ Browser Phone ☎️ 
 * ====================
 * A fully featured browser based WebRTC SIP phone for Asterisk
 * -------------------------------------------------------------
@@ -21,7 +21,7 @@ const navUserAgent = window.navigator.userAgent;  // TODO: change to Navigator.u
 
 /**
  * Language Packs (lang/xx.json)
- * Note: The following should correspond to files on your server.
+ * Note: The following should correspond to files on your server. 
  * eg: If you list "fr" then you need to add the file "fr.json".
  * Use the "en.json" as a template.
  * More specific language must be first. ie: "zh-hans" should be before "zh".
@@ -34,13 +34,13 @@ const availableLang = ["ja", "zh-hans", "zh", "ru", "tr", "nl", "es", "de", "pl"
  * Image Assets
  * Note: You can specify the assets to use below in array format
  */
-let imagesDirectory = getDbItem("imagesDirectory", "");     // Directory For Image Assets eg: images/
-let defaultAvatars = getDbItem("defaultAvatars", "avatars/default.0.webp,avatars/default.1.webp,avatars/default.2.webp,avatars/default.3.webp,avatars/default.4.webp,avatars/default.5.webp,avatars/default.6.webp,avatars/default.7.webp,avatars/default.8.webp");
+let imagesDirectory = getDbItem("imagesDirectory", "");     // Directory For Image Assets eg: images/ 
+let defaultAvatars = getDbItem("defaultAvatars", "avatars/default.0.webp,avatars/default.1.webp,avatars/default.2.webp,avatars/default.3.webp,avatars/default.4.webp,avatars/default.5.webp,avatars/default.6.webp,avatars/default.7.webp,avatars/default.8.webp"); 
 let wallpaperLight = getDbItem("wallpaperLight", "wallpaper.light.webp");  // Wallpaper for Light Theme
 let wallpaperDark = getDbItem("wallpaperDark", "wallpaper.dark.webp");     // Wallpaper for Dark Theme
 
 /**
- *
+ * 
  * User Settings & Defaults
  * Note: Generally you don't really need to be changing these settings, the defaults should be fine
  * If you want to  keep this library in its original form, but still provision settings, look at the
@@ -78,7 +78,7 @@ let BundlePolicy = getDbItem("BundlePolicy", "balanced");                       
 let IceStunServerJson = getDbItem("IceStunServerJson", "");                            // Sets the JSON string for ice Server. Default: [{ "urls": "stun:stun.l.google.com:19302" }] Must be https://developer.mozilla.org/en-US/docs/Web/API/RTCConfiguration/iceServers
 let IceStunCheckTimeout = parseInt(getDbItem("IceStunCheckTimeout", 500));             // Set amount of time in milliseconds to wait for the ICE/STUN server
 let SubscribeBuddyAccept = getDbItem("SubscribeBuddyAccept", "application/pidf+xml");  // Normally only application/dialog-info+xml and application/pidf+xml
-let SubscribeBuddyEvent = getDbItem("SubscribeBuddyEvent", "presence");                // For application/pidf+xml use presence. For application/dialog-info+xml use dialog
+let SubscribeBuddyEvent = getDbItem("SubscribeBuddyEvent", "presence");                // For application/pidf+xml use presence. For application/dialog-info+xml use dialog 
 let SubscribeBuddyExpires = parseInt(getDbItem("SubscribeBuddyExpires", 300));         // Buddy Subscription expiry time (in seconds)
 let profileDisplayPrefix = getDbItem("profileDisplayPrefix", "");                      // Can display an item from you vCard before you name. Options: Number1 | Number2
 let profileDisplayPrefixSeparator = getDbItem("profileDisplayPrefixSeparator", "");    // Used with profileDisplayPrefix, adds a separating character (string). eg: - ~ * or even 💥
@@ -91,8 +91,9 @@ let RecordAllCalls = (getDbItem("RecordAllCalls", "0") == "1");             // S
 let StartVideoFullScreen = (getDbItem("StartVideoFullScreen", "1") == "1"); // Starts a video call in the full screen (browser screen, not desktop)
 let SelectRingingLine = (getDbItem("SelectRingingLine", "1") == "1");       // Selects the ringing line if you are not on another call ()
 
+let UiMaxWidth = parseInt(getDbItem("UiMaxWidth", 1240));                                   // Sets the max-width for the UI elements (don't set this less than 920. Set to very high number for full screen eg: 999999)
 let UiThemeStyle = getDbItem("UiThemeStyle", "system");                                     // Sets the color theme for the UI dark | light | system (set by your systems dark/light settings)
-let UiMessageLayout = getDbItem("UiMessageLayout", "middle");                               // Put the message Stream at the top or middle can be either: top | middle
+let UiMessageLayout = getDbItem("UiMessageLayout", "middle");                               // Put the message Stream at the top or middle can be either: top | middle 
 let UiCustomConfigMenu = (getDbItem("UiCustomConfigMenu", "0") == "1");                     // If set to true, will only call web_hook_on_config_menu
 let UiCustomDialButton = (getDbItem("UiCustomDialButton", "0") == "1");                     // If set to true, will only call web_hook_dial_out
 let UiCustomSortAndFilterButton = (getDbItem("UiCustomSortAndFilterButton", "0") == "1");   // If set to true, will only call web_hook_sort_and_filter
@@ -104,7 +105,7 @@ let UiCustomMessageAction = (getDbItem("UiCustomMessageAction", "0") == "1");   
 let AutoGainControl = (getDbItem("AutoGainControl", "1") == "1");        // Attempts to adjust the microphone volume to a good audio level. (OS may be better at this)
 let EchoCancellation = (getDbItem("EchoCancellation", "1") == "1");      // Attempts to remove echo over the line.
 let NoiseSuppression = (getDbItem("NoiseSuppression", "1") == "1");      // Attempts to clear the call quality of noise.
-let MirrorVideo = getDbItem("VideoOrientation", "rotateY(180deg)");      // Displays the self-preview in normal or mirror view, to better present the preview.
+let MirrorVideo = getDbItem("VideoOrientation", "rotateY(180deg)");      // Displays the self-preview in normal or mirror view, to better present the preview. 
 let maxFrameRate = getDbItem("FrameRate", "");                           // Suggests a frame rate to your webcam if possible.
 let videoHeight = getDbItem("VideoHeight", "");                          // Suggests a video height (and therefor picture quality) to your webcam.
 let MaxVideoBandwidth = parseInt(getDbItem("MaxVideoBandwidth", "2048")); // Specifies the maximum bandwidth (in Kb/s) for your outgoing video stream. e.g: 32 | 64 | 128 | 256 | 512 | 1024 | 2048 | -1 to disable
@@ -112,7 +113,7 @@ let videoAspectRatio = getDbItem("AspectRatio", "1.33");                  // Sug
 let NotificationsActive = (getDbItem("Notifications", "0") == "1");
 
 let StreamBuffer = parseInt(getDbItem("StreamBuffer", 50));                 // The amount of rows to buffer in the Buddy Stream
-let MaxDataStoreDays = parseInt(getDbItem("MaxDataStoreDays", 0));          // Defines the maximum amount of days worth of data (calls, recordings, messages, etc) to store locally. 0=Stores all data always. >0 Trims n days back worth of data at various events where.
+let MaxDataStoreDays = parseInt(getDbItem("MaxDataStoreDays", 0));          // Defines the maximum amount of days worth of data (calls, recordings, messages, etc) to store locally. 0=Stores all data always. >0 Trims n days back worth of data at various events where. 
 let PosterJpegQuality = parseFloat(getDbItem("PosterJpegQuality", 0.6));    // The image quality of the Video Poster images
 let VideoResampleSize = getDbItem("VideoResampleSize", "HD");               // The resample size (height) to re-render video that gets presented (sent). (SD = ???x360 | HD = ???x720 | FHD = ???x1080)
 let RecordingVideoSize = getDbItem("RecordingVideoSize", "HD");             // The size/quality of the video track in the recordings (SD = 640x360 | HD = 1280x720 | FHD = 1920x1080)
@@ -146,7 +147,7 @@ let IntercomPolicy = getDbItem("IntercomPolicy", "enabled");                    
 let EnableAccountSettings = (getDbItem("EnableAccountSettings", "1") == "1");           // Controls the Account tab in Settings
 let EnableAppearanceSettings = (getDbItem("EnableAppearanceSettings", "1") == "0");     // Controls the Appearance tab in Settings
 let EnableNotificationSettings = (getDbItem("EnableNotificationSettings", "1") == "0"); // Controls the Notifications tab in Settings
-let EnableAlphanumericDial = (getDbItem("EnableAlphanumericDial", "0") == "1");         // Allows calling /[^\da-zA-Z\*\#\+\-\_\.\!\~\'\(\)]/g default is /[^\d\*\#\+]/g
+let EnableAlphanumericDial = (getDbItem("EnableAlphanumericDial", "0") == "1");         // Allows calling /[^\da-zA-Z\*\#\+\-\_\.\!\~\'\(\)]/g default is /[^\d\*\#\+]/g 
 let EnableVideoCalling = (getDbItem("EnableVideoCalling", "1") == "0");                 // Enables Video during a call
 let EnableTextExpressions = (getDbItem("EnableTextExpressions", "1") == "1");           // Enables Expressions (Emoji) glyphs when texting
 let EnableTextDictate = (getDbItem("EnableTextDictate", "1") == "1");                   // Enables Dictate (speech-to-text) when texting
@@ -249,36 +250,36 @@ function formatDuration(seconds){
     var sec = Math.floor(parseFloat(seconds));
     if(sec < 0){
         return sec;
-    }
+    } 
     else if(sec >= 0 && sec < 60){
         return sec + " " + ((sec > 1) ? lang.seconds_plural : lang.second_single);
-    }
+    } 
     else if(sec >= 60 && sec < 60 * 60){ // greater then a minute and less then an hour
         var duration = moment.duration(sec, 'seconds');
         return duration.minutes() + " "+ ((duration.minutes() > 1) ? lang.minutes_plural: lang.minute_single) +" " + duration.seconds() +" "+ ((duration.seconds() > 1) ? lang.seconds_plural : lang.second_single);
-    }
+    } 
     else if(sec >= 60 * 60 && sec < 24 * 60 * 60){ // greater than an hour and less then a day
         var duration = moment.duration(sec, 'seconds');
         return duration.hours() + " "+ ((duration.hours() > 1) ? lang.hours_plural : lang.hour_single) +" " + duration.minutes() + " "+ ((duration.minutes() > 1) ? lang.minutes_plural: lang.minute_single) +" " + duration.seconds() +" "+ ((duration.seconds() > 1) ? lang.seconds_plural : lang.second_single);
-    }
+    } 
     //  Otherwise.. this is just too long
 }
 function formatShortDuration(seconds){
     var sec = Math.floor(parseFloat(seconds));
     if(sec < 0){
         return sec;
-    }
+    } 
     else if(sec >= 0 && sec < 60){
         return "00:"+ ((sec > 9)? sec : "0"+sec );
-    }
+    } 
     else if(sec >= 60 && sec < 60 * 60){ // greater then a minute and less then an hour
         var duration = moment.duration(sec, 'seconds');
         return ((duration.minutes() > 9)? duration.minutes() : "0"+duration.minutes()) + ":" + ((duration.seconds() > 9)? duration.seconds() : "0"+duration.seconds());
-    }
+    } 
     else if(sec >= 60 * 60 && sec < 24 * 60 * 60){ // greater than an hour and less then a day
         var duration = moment.duration(sec, 'seconds');
         return ((duration.hours() > 9)? duration.hours() : "0"+duration.hours())  + ":" + ((duration.minutes() > 9)? duration.minutes() : "0"+duration.minutes())  + ":" + ((duration.seconds() > 9)? duration.seconds() : "0"+duration.seconds());
-    }
+    } 
     //  Otherwise.. this is just too long
 }
 function formatBytes(bytes, decimals) {
@@ -295,8 +296,8 @@ function UserLocale(){
     // TODO Needs work
     langtag = language.split('-');
     if(langtag.length == 1){
-        return "";
-    }
+        return ""; 
+    } 
     else if(langtag.length == 2) {
         return langtag[1].toLowerCase();  // en-US => us
     }
@@ -366,7 +367,9 @@ $(window).on("beforeunload", function(event) {
     Unregister(true);
     if(XMPP) XMPP.disconnect("");
 });
-
+$(window).on("resize", function() {
+    UpdateUI();
+});
 $(window).on("offline", function(){
     console.warn('Offline!');
 
@@ -490,6 +493,7 @@ $(document).ready(function () {
     if(options.RecordAllCalls !== undefined) RecordAllCalls = options.RecordAllCalls;
     if(options.StartVideoFullScreen !== undefined) StartVideoFullScreen = options.StartVideoFullScreen;
     if(options.SelectRingingLine !== undefined) SelectRingingLine = options.SelectRingingLine;
+    if(options.UiMaxWidth !== undefined) UiMaxWidth = options.UiMaxWidth;
     if(options.UiThemeStyle !== undefined) UiThemeStyle = options.UiThemeStyle;
     if(options.UiMessageLayout !== undefined) UiMessageLayout = options.UiMessageLayout;
     if(options.UiCustomConfigMenu !== undefined) UiCustomConfigMenu = options.UiCustomConfigMenu;
@@ -556,7 +560,7 @@ $(document).ready(function () {
 
     console.log("Runtime options", options);
 
-    // Single Instance Check
+    // Single Instance Check 
     if(SingleInstance == true){
         console.log("Instance ID :", instanceID);
         // First we set (or try to set) the instance ID
@@ -568,14 +572,14 @@ $(document).ready(function () {
 
     // Load Language File
     // ==================
-    $.getJSON(window.location.protocol + "//" + window.location.host + "/Phone/lang/en.json", function(data){
+    $.getJSON(hostingPrefix + "lang/en.json", function(data){
         lang = data;
         console.log("English Language Pack loaded: ", lang);
         if(loadAlternateLang == true){
             var userLang = GetAlternateLanguage();
             if(userLang != ""){
                 console.log("Loading Alternate Language Pack: ", userLang);
-                $.getJSON(window.location.protocol + "//" + window.location.host +"/Phone/lang/"+ userLang +".json", function (alt_data){
+                $.getJSON(hostingPrefix +"lang/"+ userLang +".json", function (alt_data){
                     lang = alt_data;
                 }).always(function() {
                     console.log("Alternate Language Pack loaded: ", lang);
@@ -596,7 +600,7 @@ $(document).ready(function () {
 function onLocalStorageEvent(event){
     if(event.key == "InstanceId"){
         // Another script is writing to the local storage,
-        // because the event lister is attached after the
+        // because the event lister is attached after the 
         // Instance ID, its from another window/tab/script.
 
         // Because you cannot change focus to another tab (even
@@ -606,12 +610,472 @@ function onLocalStorageEvent(event){
 
         Unregister();
         // TOO: what if you re-register?
-        // Should this unload the entire page, what about calls?
+        // Should this unload the entire page, what about calls? 
     }
 }
 
 
+// User Interface
+// ==============
+function UpdateUI(){
+    var windowWidth = $(window).outerWidth()
+    var windowHeight = $(window).outerHeight();
+    if(windowWidth > UiMaxWidth){
+        $("#leftContentTable").css("border-left-width", "1px");
+        if(selectedBuddy == null && selectedLine == null) {
+            $("#leftContentTable").css("border-right-width", "1px");
+        } else {
+            $("#rightContent").css("border-right-width", "1px");
+        }
+    } else {
+        // Touching Edges
+        $("#leftContentTable").css("border-left-width", "0px");
+        if(selectedBuddy == null && selectedLine == null) {
+            $("#leftContentTable").css("border-right-width", "0px");
+        } else {
+            $("#leftContentTable").css("border-right-width", "1px");
+        }
+        $("#rightContent").css("border-right-width", "0px");
+    }
 
+    if(windowWidth < 920){
+        // Narrow Layout
+
+        if(selectedBuddy == null & selectedLine == null) {
+            // Nobody Selected (SHow Only Left Table)
+            $("#rightContent").hide();
+
+            $("#leftContent").css("width", "100%");
+            $("#leftContent").show();
+        }
+        else {
+            // Nobody Selected (SHow Only Buddy / Line)
+            $("#rightContent").css("margin-left", "0px");
+            $("#rightContent").show();
+
+            $("#leftContent").hide();
+            
+            if(selectedBuddy != null) updateScroll(selectedBuddy.identity);
+        }
+    }
+    else {
+        // Wide Screen Layout
+        if(selectedBuddy == null & selectedLine == null) {
+            $("#leftContent").css("width", "100%");
+            $("#rightContent").css("margin-left", "0px");
+            $("#leftContent").show();
+            $("#rightContent").hide();
+        }
+        else{
+            $("#leftContent").css("width", "320px");
+            $("#rightContent").css("margin-left", "320px");
+            $("#leftContent").show();
+            $("#rightContent").show();
+
+            if(selectedBuddy != null) updateScroll(selectedBuddy.identity);
+        }
+    }
+    for(var l=0; l<Lines.length; l++){
+        updateLineScroll(Lines[l].LineNumber);
+        RedrawStage(Lines[l].LineNumber, false);
+    }
+
+    if(windowObj != null){
+        var offsetTextHeight = windowObj.parent().outerHeight();
+        var width = windowObj.width();
+        if(windowWidth <= width || windowHeight <= offsetTextHeight) {
+            // First apply to dialog, then set css
+            windowObj.dialog("option", "height", windowHeight);
+            windowObj.dialog("option", "width", windowWidth - (1+1+2+2)); // There is padding and a border
+            windowObj.parent().css('top', '0px');
+            windowObj.parent().css('left', '0px');
+        } 
+        else {
+            windowObj.parent().css('left', windowWidth/2 - width/2 + 'px');
+            windowObj.parent().css('top', windowHeight/2 - offsetTextHeight/2 + 'px');
+        }
+    }
+    if(alertObj != null){
+        var width = 300;
+        var offsetTextHeight = alertObj.parent().outerHeight();
+        if(windowWidth <= width || windowHeight <= offsetTextHeight) {
+            if(windowWidth <= width){
+                // First apply to dialog, then set css
+                alertObj.dialog("option", "width", windowWidth - (1+1+2+2));
+                alertObj.parent().css('left', '0px');
+                alertObj.parent().css('top', windowHeight/2 - offsetTextHeight/2 + 'px');
+            }
+            if(windowHeight <= offsetTextHeight){
+                // First apply to dialog, then set css
+                alertObj.dialog("option", "height", windowHeight);
+                alertObj.parent().css('left', windowWidth/2 - width/2 + 'px');
+                alertObj.parent().css('top', '0px');
+            }
+        }
+        else {
+            alertObj.parent().css('left', windowWidth/2 - width/2 + 'px');
+            alertObj.parent().css('top', windowHeight/2 - offsetTextHeight/2 + 'px');
+        }
+    }
+    if(confirmObj != null){
+        var width = 300;
+        var offsetTextHeight = confirmObj.parent().outerHeight();
+        if(windowWidth <= width || windowHeight <= offsetTextHeight) {
+            if(windowWidth <= width){
+                // First apply to dialog, then set css
+                confirmObj.dialog("option", "width", windowWidth - (1+1+2+2));
+                confirmObj.parent().css('left', '0px');
+                confirmObj.parent().css('top', windowHeight/2 - offsetTextHeight/2 + 'px');
+            }
+            if(windowHeight <= offsetTextHeight){
+                // First apply to dialog, then set css
+                confirmObj.dialog("option", "height", windowHeight);
+                confirmObj.parent().css('left', windowWidth/2 - width/2 + 'px');
+                confirmObj.parent().css('top', '0px');
+            }
+        }
+        else {
+            confirmObj.parent().css('left', windowWidth/2 - width/2 + 'px');
+            confirmObj.parent().css('top', windowHeight/2 - offsetTextHeight/2 + 'px');
+        }
+    }
+    if(promptObj != null){
+        var width = 300;
+        var offsetTextHeight = promptObj.parent().outerHeight();
+        if(windowWidth <= width || windowHeight <= offsetTextHeight) {
+            if(windowWidth <= width){
+                // First apply to dialog, then set css
+                promptObj.dialog("option", "width", windowWidth - (1+1+2+2));
+                promptObj.parent().css('left', '0px');
+                promptObj.parent().css('top', windowHeight/2 - offsetTextHeight/2 + 'px');
+            }
+            if(windowHeight <= offsetTextHeight){
+                // First apply to dialog, then set css
+                promptObj.dialog("option", "height", windowHeight);
+                promptObj.parent().css('left', windowWidth/2 - width/2 + 'px');
+                promptObj.parent().css('top', '0px');
+            }
+        }
+        else {
+            promptObj.parent().css('left', windowWidth/2 - width/2 + 'px');
+            promptObj.parent().css('top', windowHeight/2 - offsetTextHeight/2 + 'px');
+        }
+    }
+    HidePopup();
+}
+
+// UI Windows
+// ==========
+function AddSomeoneWindow(numberStr){
+    CloseUpSettings();
+
+    $("#myContacts").hide();
+    $("#searchArea").hide();
+    $("#actionArea").empty();
+
+    var html = "<div style=\"text-align:right\"><button class=roundButtons onclick=\"ShowContacts()\"><i class=\"fa fa-close\"></i></button></div>"
+    
+    html += "<div border=0 class=UiSideField>";
+
+    html += "<div class=UiText>"+ lang.full_name +":</div>";
+    html += "<div><input id=AddSomeone_Name class=UiInputText type=text placeholder='"+ lang.eg_full_name +"'></div>";
+    html += "<div><input type=checkbox id=AddSomeone_Dnd><label for=AddSomeone_Dnd>"+ lang.allow_calls_on_dnd +"</label></div>";
+
+    // Type
+    html += "<ul style=\"list-style-type:none\">";
+    html += "<li><input type=radio name=buddyType id=type_exten checked><label for=type_exten>"+ lang.basic_extension +"</label>";
+    if(ChatEngine == "XMPP"){
+        html += "<li><input type=radio name=buddyType id=type_xmpp><label for=type_xmpp>"+ lang.extension_including_xmpp +"</label>";
+    }
+    html += "<li><input type=radio name=buddyType id=type_contact><label for=type_contact>"+ lang.addressbook_contact +"</label>";
+    html += "</ul>";
+
+    html += "<div id=RowDescription>";
+    html += "<div class=UiText>"+ lang.title_description +":</div>";
+    html += "<div><input id=AddSomeone_Desc class=UiInputText type=text placeholder='"+ lang.eg_general_manager +"'></div>";
+    html += "</div>";
+
+    html += "<div id=RowExtension>";
+    html += "<div class=UiText>"+ lang.extension_number +":</div>";
+    html += "<div><input id=AddSomeone_Exten class=UiInputText type=text placeholder='"+ lang.eg_internal_subscribe_extension +"'></div>";
+    html += "<div><input type=checkbox id=AddSomeone_Subscribe><label for=AddSomeone_Subscribe>"+ lang.subscribe_to_dev_state +"</label></div>";
+    html += "<div id=RowSubscribe style=\"display:none; margin-left:30px;\">";
+    html += "<div class=UiText>"+ lang.internal_subscribe_extension +":</div>";
+    html += "<div><input id=AddSomeone_SubscribeUser class=UiInputText type=text placeholder='"+ lang.eg_internal_subscribe_extension +"'></div>";
+    html += "</div>";
+    html += "</div>";
+
+    html += "<div id=RowMobileNumber>";
+    html += "<div class=UiText>"+ lang.mobile_number +":</div>";
+    html += "<div><input id=AddSomeone_Mobile class=UiInputText type=tel placeholder='"+ lang.eg_mobile_number +"'></div>";
+    html += "</div>";
+
+    html += "<div id=RowEmail>";
+    html += "<div class=UiText>"+ lang.email +":</div>";
+    html += "<div><input id=AddSomeone_Email class=UiInputText type=email placeholder='"+ lang.eg_email +"'></div>";
+    html += "</div>";
+
+    html += "<div id=RowContact1>";
+    html += "<div class=UiText>"+ lang.contact_number_1 +":</div>";
+    html += "<div><input id=AddSomeone_Num1 class=UiInputText type=text placeholder='"+ lang.eg_contact_number_1 +"'></div>";
+    html += "</div>";
+
+    html += "<div id=RowContact2>";
+    html += "<div class=UiText>"+ lang.contact_number_2 +":</div>";
+    html += "<div><input id=AddSomeone_Num2 class=UiInputText type=text placeholder='"+ lang.eg_contact_number_2 +"'></div>";
+    html += "</div>";
+
+    html += "<div id=Persistance>";
+    html += "<div class=UiText>Auto Delete:</div>";
+    html += "<div><input type=checkbox id=AddSomeone_AutoDelete><label for=AddSomeone_AutoDelete>"+ lang.yes +"</label></div>";
+    html += "</div>";
+
+    html += "</div>";
+
+    html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
+
+    $("#actionArea").html(html);
+
+    // Button Actions
+    var buttons = [];
+    buttons.push({
+        text: lang.add,
+        action: function(){
+            // Basic Validation
+            if($("#AddSomeone_Name").val() == "") return;
+            if(type == "extension" || type == "xmpp"){
+                if($("#AddSomeone_Exten").val() == "") return;
+            }
+
+            var type = "extension";
+            if($("#type_exten").is(':checked')){
+                type = "extension";
+                if($("#AddSomeone_Subscribe").is(':checked') && $("#AddSomeone_SubscribeUser").val() == ""){
+                    $("#AddSomeone_SubscribeUser").val($("#AddSomeone_Exten").val())
+                }
+            } else if($("#type_xmpp").is(':checked')){
+                type = "xmpp";
+                if($("#AddSomeone_Subscribe").is(':checked') && $("#AddSomeone_SubscribeUser").val() == ""){
+                    $("#AddSomeone_SubscribeUser").val($("#AddSomeone_Exten").val())
+                }
+            } else if($("#type_contact").is(':checked')){
+                type = "contact";
+            }
+
+            // Add Contact / Extension
+            var json = JSON.parse(localDB.getItem(profileUserID + "-Buddies"));
+            if(json == null) json = InitUserBuddies();
+
+            var buddyObj = null;
+            if(type == "extension"){
+                // Add Extension
+                var id = uID();
+                var dateNow = utcDateNow();
+                json.DataCollection.push(
+                    {
+                        Type: "extension",
+                        LastActivity: dateNow,
+                        ExtensionNumber: $("#AddSomeone_Exten").val(),
+                        MobileNumber: $("#AddSomeone_Mobile").val(),
+                        ContactNumber1: $("#AddSomeone_Num1").val(),
+                        ContactNumber2: $("#AddSomeone_Num2").val(),
+                        uID: id,
+                        cID: null,
+                        gID: null,
+                        jid: null,
+                        DisplayName: $("#AddSomeone_Name").val(),
+                        Description: $("#AddSomeone_Desc").val(),
+                        Email: $("#AddSomeone_Email").val(),
+                        MemberCount: 0,
+                        EnableDuringDnd: $("#AddSomeone_Dnd").is(':checked'),
+                        Subscribe: $("#AddSomeone_Subscribe").is(':checked'),
+                        SubscribeUser: $("#AddSomeone_SubscribeUser").val(),
+                        AutoDelete: $("#AddSomeone_AutoDelete").is(':checked')
+                    }
+                );
+                buddyObj = new Buddy("extension", 
+                                        id, 
+                                        $("#AddSomeone_Name").val(), 
+                                        $("#AddSomeone_Exten").val(), 
+                                        $("#AddSomeone_Mobile").val(), 
+                                        $("#AddSomeone_Num1").val(), 
+                                        $("#AddSomeone_Num2").val(), 
+                                        dateNow, 
+                                        $("#AddSomeone_Desc").val(), 
+                                        $("#AddSomeone_Email").val(), 
+                                        jid, 
+                                        $("#AddSomeone_Dnd").is(':checked'), 
+                                        $("#AddSomeone_Subscribe").is(':checked'),
+                                        $("#AddSomeone_SubscribeUser").val(),
+                                        $("#AddSomeone_AutoDelete").is(':checked'));
+                
+                // Add memory object
+                AddBuddy(buddyObj, false, false, $("#AddSomeone_Subscribe").is(':checked'), true);
+            }
+            if(type == "xmpp"){
+                // Add XMPP extension
+                var id = uID();
+                var dateNow = utcDateNow();
+                var jid = $("#AddSomeone_Exten").val() +"@"+ SipDomain;
+                if(XmppRealm != "" && XmppRealmSeparator != "") jid = XmppRealm +""+ XmppRealmSeparator +""+ jid;
+                json.DataCollection.push(
+                    {
+                        Type: "xmpp", 
+                        LastActivity: dateNow,
+                        ExtensionNumber: $("#AddSomeone_Exten").val(), 
+                        MobileNumber: null,
+                        ContactNumber1: null,
+                        ContactNumber2: null,
+                        uID: id,
+                        cID: null,
+                        gID: null,
+                        jid: jid,
+                        DisplayName: $("#AddSomeone_Name").val(),
+                        Description: null,
+                        Email: null,
+                        MemberCount: 0,
+                        EnableDuringDnd: $("#AddSomeone_Dnd").is(':checked'),
+                        Subscribe: $("#AddSomeone_Subscribe").is(':checked'),
+                        SubscribeUser: $("#AddSomeone_SubscribeUser").val(),
+                        AutoDelete: $("#AddSomeone_AutoDelete").is(':checked')
+                    }
+                );
+                buddyObj = new Buddy("xmpp", 
+                                        id, 
+                                        $("#AddSomeone_Name").val(), 
+                                        $("#AddSomeone_Exten").val(), 
+                                        "", 
+                                        "", 
+                                        "", 
+                                        dateNow, 
+                                        "", 
+                                        "", 
+                                        jid, 
+                                        $("#AddSomeone_Dnd").is(':checked'), 
+                                        $("#AddSomeone_Subscribe").is(':checked'),
+                                        $("#AddSomeone_SubscribeUser").val(),
+                                        $("#AddSomeone_AutoDelete").is(':checked'));
+                
+                // XMPP add to roster
+                XmppAddBuddyToRoster(buddyObj);
+
+                // Add memory object
+                AddBuddy(buddyObj, false, false, $("#AddSomeone_Subscribe").is(':checked'), true);
+            }
+            if(type == "contact"){
+                // Add Regular Contact
+                var id = uID();
+                var dateNow = utcDateNow();
+                json.DataCollection.push(
+                    {
+                        Type: "contact", 
+                        LastActivity: dateNow,
+                        ExtensionNumber: "", 
+                        MobileNumber: $("#AddSomeone_Mobile").val(),
+                        ContactNumber1: $("#AddSomeone_Num1").val(),
+                        ContactNumber2: $("#AddSomeone_Num2").val(),
+                        uID: null,
+                        cID: id,
+                        gID: null,
+                        jid: null,
+                        DisplayName: $("#AddSomeone_Name").val(),
+                        Description: $("#AddSomeone_Desc").val(),
+                        Email: $("#AddSomeone_Email").val(),
+                        MemberCount: 0,
+                        EnableDuringDnd: $("#AddSomeone_Dnd").is(':checked'),
+                        Subscribe: false,
+                        SubscribeUser: null,
+                        AutoDelete: $("#AddSomeone_AutoDelete").is(':checked')
+                    }
+                );
+                buddyObj = new Buddy("contact", 
+                                        id, 
+                                        $("#AddSomeone_Name").val(), 
+                                        "", 
+                                        $("#AddSomeone_Mobile").val(), 
+                                        $("#AddSomeone_Num1").val(), 
+                                        $("#AddSomeone_Num2").val(), 
+                                        dateNow, 
+                                        $("#AddSomeone_Desc").val(), 
+                                        $("#AddSomeone_Email").val(), 
+                                        jid, 
+                                        $("#AddSomeone_Dnd").is(':checked'), 
+                                        false,
+                                        null,
+                                        $("#AddSomeone_AutoDelete").is(':checked'));
+
+                // Add memory object
+                AddBuddy(buddyObj, false, false, false, true);
+            }
+
+            // Save To DB
+            json.TotalRows = json.DataCollection.length;
+            localDB.setItem(profileUserID + "-Buddies", JSON.stringify(json));
+
+            UpdateBuddyList();
+
+            ShowContacts();
+        }
+    });
+    buttons.push({
+        text: lang.cancel,
+        action: function(){
+            ShowContacts();
+        }
+    });
+    $.each(buttons, function(i,obj){
+        var button = $('<button>'+ obj.text +'</button>').click(obj.action);
+        $("#ButtonBar").append(button);
+    });
+
+    // Show
+    $("#actionArea").show();
+    $("#AddSomeone_Name").focus();
+
+    // Do Onload
+    window.setTimeout(function(){
+        $("#type_exten").change(function(){
+            if($("#type_exten").is(':checked')){
+                $("#RowDescription").show();
+                $("#RowExtension").show();
+                $("#RowMobileNumber").show();
+                $("#RowEmail").show();
+                $("#RowContact1").show();
+                $("#RowContact2").show();
+            }
+        });
+        $("#type_xmpp").change(function(){
+            if($("#type_xmpp").is(':checked')){
+                $("#RowDescription").hide();
+                $("#RowExtension").show();
+                $("#RowMobileNumber").hide();
+                $("#RowEmail").hide();
+                $("#RowContact1").hide();
+                $("#RowContact2").hide();
+            }
+        });
+        $("#type_contact").change(function(){
+            if($("#type_contact").is(':checked')){
+                $("#RowDescription").show();
+                $("#RowExtension").hide();
+                $("#RowMobileNumber").show();
+                $("#RowEmail").show();
+                $("#RowContact1").show();
+                $("#RowContact2").show();
+            }
+        });
+        $("#AddSomeone_Subscribe").change(function(){
+            if($("#AddSomeone_Subscribe").is(':checked')){
+                if($("#AddSomeone_Exten").val() != "" && $("#AddSomeone_SubscribeUser").val() == ""){
+                    $("#AddSomeone_SubscribeUser").val($("#AddSomeone_Exten").val());
+                }
+                $("#RowSubscribe").show();
+            } else {
+                $("#RowSubscribe").hide();
+            }
+        });
+    }, 0);
+}
 function CreateGroupWindow(){
     // lang.create_group
 }
@@ -635,7 +1099,260 @@ function HandleNotifyPermission(p){
         });
     }
 }
+function EditBuddyWindow(buddy){
 
+    var buddyObj = FindBuddyByIdentity(buddy);
+    if(buddyObj == null){
+        Alert(lang.alert_not_found, lang.error);
+        return;
+    }
+    var buddyJson = {};
+    var itemId = -1;
+    var json = JSON.parse(localDB.getItem(profileUserID + "-Buddies"));
+    $.each(json.DataCollection, function (i, item) {
+        if(item.uID == buddy || item.cID == buddy || item.gID == buddy){
+            buddyJson = item;
+            itemId = i;
+            return false;
+        }
+    });
+
+    if(buddyJson == {}){
+        Alert(lang.alert_not_found, lang.error);
+        return;
+    }
+    if(UiCustomEditBuddy == true){
+        if(typeof web_hook_on_edit_buddy !== 'undefined') {
+            web_hook_on_edit_buddy(buddyJson);
+        }
+        return;
+    }
+
+    var cropper;
+
+    var html = "<div border=0 class='UiWindowField'>";
+
+    html += "<div id=ImageCanvas style=\"width:150px; height:150px\"></div>";
+    html += "<div style=\"float:left; margin-left:200px;\"><input id=fileUploader type=file></div>";
+    html += "<div style=\"margin-top: 50px\"></div>";
+    
+    html += "<div class=UiText>"+ lang.full_name +":</div>";
+    html += "<div><input id=AddSomeone_Name class=UiInputText type=text placeholder='"+ lang.eg_full_name +"' value='"+ ((buddyJson.DisplayName && buddyJson.DisplayName != "null" && buddyJson.DisplayName != "undefined")? buddyJson.DisplayName : "") +"'></div>";
+    html += "<div><input type=checkbox id=AddSomeone_Dnd "+ ((buddyJson.EnableDuringDnd == true)? "checked" : "" ) +"><label for=AddSomeone_Dnd>Allow calls while on Do Not Disturb</label></div>";
+
+    html += "<div class=UiText>"+ lang.title_description +":</div>";
+    html += "<div><input id=AddSomeone_Desc class=UiInputText type=text placeholder='"+ lang.eg_general_manager +"' value='"+ ((buddyJson.Description && buddyJson.Description != "null" && buddyJson.Description != "undefined")? buddyJson.Description : "") +"'></div>";
+
+    if(buddyJson.Type == "extension" || buddyJson.Type == "xmpp"){
+        html += "<div class=UiText>"+ lang.extension_number +": </div>";
+        html += "<div><input id=AddSomeone_Exten class=UiInputText type=text value="+ buddyJson.ExtensionNumber +"></div>";
+        html += "<div><input type=checkbox id=AddSomeone_Subscribe "+ ((buddyJson.Subscribe == true)? "checked" : "" ) +"><label for=AddSomeone_Subscribe>Subscribe to Device State Notifications</label></div>";
+        html += "<div id=RowSubscribe style=\"display:"+ ((buddyJson.Subscribe == true)? "unset" : "none" ) +";\">";
+        html += "<div class=UiText style=\"margin-left:30px\">"+ lang.internal_subscribe_extension +":</div>";
+        html += "<div style=\"margin-left:30px\"><input id=AddSomeone_SubscribeUser class=UiInputText type=text placeholder='"+ lang.eg_internal_subscribe_extension +"' value='"+ ((buddyJson.SubscribeUser && buddyJson.SubscribeUser != "null" && buddyJson.SubscribeUser != "undefined")? buddyJson.SubscribeUser : "") +"'></div>";
+        html += "</div>";
+    }
+    else {
+        html += "<input type=checkbox id=AddSomeone_Subscribe style=\"display:none\">";
+    }
+    html += "<div class=UiText>"+ lang.mobile_number +":</div>";
+    html += "<div><input id=AddSomeone_Mobile class=UiInputText type=text placeholder='"+ lang.eg_mobile_number +"' value='"+ ((buddyJson.MobileNumber && buddyJson.MobileNumber != "null" && buddyJson.MobileNumber != "undefined")? buddyJson.MobileNumber : "") +"'></div>";
+
+    html += "<div class=UiText>"+ lang.email +":</div>";
+    html += "<div><input id=AddSomeone_Email class=UiInputText type=text placeholder='"+ lang.eg_email +"' value='"+ ((buddyJson.Email && buddyJson.Email != "null" && buddyJson.Email != "undefined")? buddyJson.Email : "") +"'></div>";
+
+    html += "<div class=UiText>"+ lang.contact_number_1 +":</div>";
+    html += "<div><input id=AddSomeone_Num1 class=UiInputText type=text placeholder='"+ lang.eg_contact_number_1 +"' value='"+((buddyJson.ContactNumber1 && buddyJson.ContactNumber1 != "null" && buddyJson.ContactNumber1 != "undefined")? buddyJson.ContactNumber1 : "") +"'></div>";
+
+    html += "<div class=UiText>"+ lang.contact_number_2 +":</div>";
+    html += "<div><input id=AddSomeone_Num2 class=UiInputText type=text placeholder='"+ lang.eg_contact_number_2 +"' value='"+ ((buddyJson.ContactNumber2 && buddyJson.ContactNumber2 != "null" && buddyJson.ContactNumber2 != "undefined")? buddyJson.ContactNumber2 : "") +"'></div>";
+
+    html += "<div class=UiText>Auto Delete:</div>";
+    html += "<div><input type=checkbox id=AddSomeone_AutoDelete "+ ((buddyJson.AutoDelete == true)? "checked" : "" ) +"><label for=AddSomeone_AutoDelete>"+ lang.yes +"</label></div>";
+
+    // TODO, add option to delete data, etc, etc
+    html += "<div class=UiText><button onclick=\"RemoveBuddy('"+ buddyObj.identity +"')\" class=\"UiDeleteButton\"><i class=\"fa fa-trash\"></i> "+ lang.delete_buddy +"</button></div>";
+
+    html += "</div>"
+
+    OpenWindow(html, lang.edit, 480, 640, false, true, lang.save, function(){
+
+        if($("#AddSomeone_Name").val() == "") return;
+        if($("#AddSomeone_Subscribe").is(':checked')){
+            if($("#AddSomeone_Exten").val() != "" && $("#AddSomeone_SubscribeUser").val() == ""){
+                $("#AddSomeone_SubscribeUser").val($("#AddSomeone_Exten").val());
+            }
+        }
+
+        buddyJson.LastActivity = utcDateNow();
+        buddyObj.lastActivity = buddyJson.LastActivity;
+
+        buddyJson.DisplayName = $("#AddSomeone_Name").val();
+        buddyObj.CallerIDName = buddyJson.DisplayName;
+
+        buddyJson.Description = $("#AddSomeone_Desc").val();
+        buddyObj.Desc = buddyJson.Description;
+
+        buddyJson.MobileNumber = $("#AddSomeone_Mobile").val();
+        buddyObj.MobileNumber = buddyJson.MobileNumber;
+
+        buddyJson.Email = $("#AddSomeone_Email").val();
+        buddyObj.Email = buddyJson.Email;
+
+        buddyJson.ContactNumber1 = $("#AddSomeone_Num1").val();
+        buddyObj.ContactNumber1 = buddyJson.ContactNumber1;
+
+        buddyJson.ContactNumber2 = $("#AddSomeone_Num2").val();
+        buddyObj.ContactNumber2 = buddyJson.ContactNumber2;
+
+        buddyJson.EnableDuringDnd = $("#AddSomeone_Dnd").is(':checked');
+        buddyObj.EnableDuringDnd = buddyJson.EnableDuringDnd;
+
+        buddyJson.AutoDelete = $("#AddSomeone_AutoDelete").is(':checked');
+        buddyObj.AllowAutoDelete = buddyJson.AutoDelete;
+
+        if(buddyJson.Type == "extension" || buddyJson.Type == "xmpp"){
+            // First Unsubscribe old information
+            UnsubscribeBuddy(buddyObj);
+
+            buddyJson.ExtensionNumber = $("#AddSomeone_Exten").val();
+            buddyObj.ExtNo = buddyJson.ExtensionNumber;
+
+            buddyJson.Subscribe = $("#AddSomeone_Subscribe").is(':checked');
+            buddyObj.EnableSubscribe = buddyJson.Subscribe;
+
+            if(buddyJson.Subscribe == true){
+                var SubscribeUser = $("#AddSomeone_SubscribeUser").val();
+                buddyJson.SubscribeUser = SubscribeUser;
+                buddyObj.SubscribeUser = SubscribeUser;
+
+                // Subscribe Actions
+                SubscribeBuddy(buddyObj);
+            }
+        }
+
+        // Update Visible Elements
+        UpdateBuddyList();
+
+        // Update Image
+        var constraints = { 
+            type: 'base64', 
+            size: 'viewport', 
+            format: 'webp',  // png
+            quality: 0.5, 
+            circle: false 
+        }
+        $("#ImageCanvas").croppie('result', constraints).then(function(base64) {
+            // Image processing done
+            if(buddyJson.Type == "extension"){
+                console.log("Saving image for extension buddy:", buddyJson.uID)
+                localDB.setItem("img-"+ buddyJson.uID +"-extension", base64);
+                // Update Images
+                $("#contact-"+ buddyJson.uID +"-picture").css("background-image", 'url('+ getPicture(buddyJson.uID, 'extension', true) +')');
+                $("#contact-"+ buddyJson.uID +"-picture-main").css("background-image", 'url('+ getPicture(buddyJson.uID, 'extension', true) +')');
+            }
+            else if(buddyJson.Type == "contact") {
+                console.log("Saving image for contact buddy:", buddyJson.cID)
+                localDB.setItem("img-"+ buddyJson.cID +"-contact", base64);
+                // Update Images
+                $("#contact-"+ buddyJson.cID +"-picture").css("background-image", 'url('+ getPicture(buddyJson.cID, 'contact', true) +')');
+                $("#contact-"+ buddyJson.cID +"-picture-main").css("background-image", 'url('+ getPicture(buddyJson.cID, 'contact', true) +')');
+            }
+            else if(buddyJson.Type == "group") {
+                console.log("Saving image for group buddy:", buddyJson.gID)
+                localDB.setItem("img-"+ buddyJson.gID +"-group", base64);
+                // Update Images
+                $("#contact-"+ buddyJson.gID +"-picture").css("background-image", 'url('+ getPicture(buddyJson.gID, 'group', true) +')');
+                $("#contact-"+ buddyJson.gID +"-picture-main").css("background-image", 'url('+ getPicture(buddyJson.gID, 'group', true) +')');
+            }
+            // Update
+            UpdateBuddyList();
+        });
+
+        // Update: 
+        json.DataCollection[itemId] = buddyJson;
+
+        // Save To DB
+        localDB.setItem(profileUserID + "-Buddies", JSON.stringify(json));
+
+        CloseWindow();
+    }, lang.cancel, function(){
+        CloseWindow();
+    }, function(){
+        // DoOnLoad
+        cropper = $("#ImageCanvas").croppie({
+            viewport: { width: 150, height: 150, type: 'circle' }
+        });
+
+        // Preview Existing Image
+        if(buddyJson.Type == "extension"){
+            $("#ImageCanvas").croppie('bind', { url: getPicture(buddyJson.uID, "extension") }).then();
+
+
+        }
+        if(buddyJson.Type == "xmpp"){
+            $("#ImageCanvas").croppie('bind', { url: getPicture(buddyJson.uID, "xmpp") }).then();
+
+            $("#fileUploader").hide();
+            $("#AddSomeone_Name").attr("disabled", true);
+            $("#AddSomeone_Desc").attr("disabled", true);
+            $("#AddSomeone_Mobile").attr("disabled", true);
+            $("#AddSomeone_Email").attr("disabled", true);
+            $("#AddSomeone_Num1").attr("disabled", true);
+            $("#AddSomeone_Num2").attr("disabled", true);
+        }
+        else if(buddyJson.Type == "contact") {
+            $("#ImageCanvas").croppie('bind', { url: getPicture(buddyJson.cID, "contact") }).then();
+        }
+        else if(buddyJson.Type == "group") {
+            $("#ImageCanvas").croppie('bind', { url: getPicture(buddyJson.gID, "group") }).then();
+        }
+
+        $("#AddSomeone_Subscribe").change(function(){
+            if($("#AddSomeone_Subscribe").is(':checked')){
+                if($("#AddSomeone_Exten").val() != "" && $("#AddSomeone_SubscribeUser").val() == ""){
+                    $("#AddSomeone_SubscribeUser").val($("#AddSomeone_Exten").val());
+                }
+                $("#RowSubscribe").show();
+            } else {
+                $("#RowSubscribe").hide();
+            }
+        });
+
+        // Wire-up File Change
+        $("#fileUploader").change(function () {
+            var filesArray = $(this).prop('files');
+        
+            if (filesArray.length == 1) {
+                var uploadId = Math.floor(Math.random() * 1000000000);
+                var fileObj = filesArray[0];
+                var fileName = fileObj.name;
+                var fileSize = fileObj.size;
+        
+                if (fileSize <= 52428800) {
+                    console.log("Adding (" + uploadId + "): " + fileName + " of size: " + fileSize + "bytes");
+        
+                    var reader = new FileReader();
+                    reader.Name = fileName;
+                    reader.UploadId = uploadId;
+                    reader.Size = fileSize;
+                    reader.onload = function (event) {
+                        $("#ImageCanvas").croppie('bind', {
+                            url: event.target.result
+                        });
+                    }
+                    reader.readAsDataURL(fileObj);
+                }
+                else {
+                    Alert(lang.alert_file_size, lang.error);
+                }
+            }
+            else {
+                Alert(lang.alert_single_file, lang.error);
+            }
+        });
+    });
+}
 function SetStatusWindow(){
     HidePopup();
 
@@ -665,10 +1382,6 @@ function SetStatusWindow(){
 // =======
 function InitUi(){
 
-    // Custom Web hook
-    if(typeof web_hook_on_before_init !== 'undefined') web_hook_on_before_init();
-
-
     var phone = $("#Phone");
     phone.empty();
 
@@ -690,7 +1403,8 @@ function InitUi(){
     phone.append(rightSection);
 
 
-    // TODO:
+    
+    // TODO: 
     $("#BtnCreateGroup").hide(); // Not ready for this yet
 
     var profilePrepend = "";
@@ -710,7 +1424,55 @@ function InitUi(){
         }
     }
     if(profileName) $("#UserCallID").html(profilePrepend +""+ profileName);
+    $("#UserProfilePic").css("background-image", "url('"+ getPicture("profilePicture") +"')");
+    
+    $("#BtnFilter").attr("title", lang.filter_and_sort)
+    $("#BtnFilter").on('click', function(event){
+        if(UiCustomSortAndFilterButton == true){
+            if(typeof web_hook_sort_and_filter !== 'undefined') {
+                web_hook_sort_and_filter(event);
+            }
+        } else {
+            ShowSortAnfFilter();
+        }
+    });
+    
+    $("#txtFindBuddy").attr("placeholder", lang.find_someone)
+    $("#txtFindBuddy").on('keyup', function(event){
+        UpdateBuddyList();
+        $("#txtFindBuddy").focus();
+    });
 
+
+
+
+    $("#TxtVoiceMessages").on('click', function(event){
+        if(VoicemailDid != ""){
+            DialByLine("audio", null, VoicemailDid, lang.voice_mail);
+        }
+    });
+
+    $("#BtnCreateGroup").attr("title", lang.create_group)
+    $("#BtnCreateGroup").on('click', function(event){
+        CreateGroupWindow();
+    });
+
+
+    // Register Buttons
+    $("#reglink").on('click', Register);
+    $("#dereglink").on('click', Unregister);
+
+    // WebRTC Error Page
+    $("#WebRtcFailed").on('click', function(){
+        Confirm(lang.error_connecting_web_socket, lang.web_socket_error, function(){
+            window.open("https://"+ wssServer +":"+ WebSocketPort +"/httpstatus");
+        }, null);
+    });
+
+    // Take out loading UI
+    $(".loading").remove();
+
+    UpdateUI();
 
 
     // Check if you account is created
@@ -719,12 +1481,15 @@ function InitUi(){
         return; // Don't load any more, after applying settings, the page must reload.
     }
 
+    PopulateBuddyList();
 
     // Select Last user
     if(localDB.getItem("SelectedBuddy") != null){
         console.log("Selecting previously selected buddy...", localDB.getItem("SelectedBuddy"));
         SelectBuddy(localDB.getItem("SelectedBuddy"));
+        UpdateUI();
     }
+
 
     // Custom Web hook
     if(typeof web_hook_on_init !== 'undefined') web_hook_on_init();
@@ -745,8 +1510,8 @@ function CreateUserAgent() {
             server: "wss://" + wssServer + ":"+ WebSocketPort +""+ ServerPath,
             traceSip: false,
             connectionTimeout: TransportConnectionTimeout
-            // keepAliveInterval: 30 // Uncomment this and make this any number greater then 0 for keep alive...
-            // NB, adding a keep alive will NOT fix bad internet, if your connection cannot stay open (permanent WebSocket Connection) you probably
+            // keepAliveInterval: 30 // Uncomment this and make this any number greater then 0 for keep alive... 
+            // NB, adding a keep alive will NOT fix bad internet, if your connection cannot stay open (permanent WebSocket Connection) you probably 
             // have a router or ISP issue, and if your internet is so poor that you need to some how keep it alive with empty packets
             // upgrade you internet connection. This is voip we are talking about here.
         },
@@ -801,9 +1566,9 @@ function CreateUserAgent() {
 
     // Add (Hardcode) other RTCPeerConnection({ rtcConfiguration }) config dictionary options here
     // https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection
-    // Example:
+    // Example: 
     // options.sessionDescriptionHandlerFactoryOptions.peerConnectionConfiguration.rtcpMuxPolicy = "require";
-
+    
     userAgent = new SIP.UserAgent(options);
     userAgent.isRegistered = function(){
         return (userAgent && userAgent.registerer && userAgent.registerer.state == SIP.RegistererState.Registered);
@@ -831,7 +1596,7 @@ function CreateUserAgent() {
         }
     }
 
-    var RegistererOptions = {
+    var RegistererOptions = { 
         expires: RegisterExpires,
         extraHeaders: [],
         extraContactHeaderParams: []
@@ -1050,7 +1815,6 @@ function onRegistered(){
         // Output to status
         $("#regStatus").html(lang.registered);
         DialByLine('audio');
-
         // Start XMPP
         if(ChatEngine == "XMPP") reconnectXmpp();
 
@@ -1071,7 +1835,6 @@ function onRegistered(){
         console.log("ReRegistered!");
     }
     userAgent.isReRegister = true;
-
 }
 /**
  * Called if UserAgent can connect, but not register.
@@ -1092,7 +1855,27 @@ function onRegisterFailed(response, cause){
     // Custom Web hook
     if(typeof web_hook_on_registrationFailed !== 'undefined') web_hook_on_registrationFailed(response);
 }
+/**
+ * Called when Unregister is requested
+ */
+function onUnregistered(){
+    if(userAgent.registrationCompleted){
+        console.log("Unregistered, bye!");
+        $("#regStatus").html(lang.unregistered);
 
+        $("#reglink").show();
+        $("#dereglink").hide();
+
+        // Custom Web hook
+        if(typeof web_hook_on_unregistered !== 'undefined') web_hook_on_unregistered();
+    }
+    else {
+        // Was never really registered, so cant really say unregistered
+    }
+
+    // We set this flag here so that the re-register attempts are fully completed.
+    userAgent.isReRegister = false;
+}
 
 // Inbound Calls
 // =============
@@ -1189,7 +1972,7 @@ function ReceiveCall(session) {
     // Possible Early Rejection options
     if(DoNotDisturbEnabled == true || DoNotDisturbPolicy == "enabled") {
         if(DoNotDisturbEnabled == true && buddyObj.EnableDuringDnd == true){
-            // This buddy has been allowed
+            // This buddy has been allowed 
             console.log("Buddy is allowed to call while you are on DND")
         }
         else {
@@ -1208,7 +1991,7 @@ function ReceiveCall(session) {
         }
     }
 
-    // Create the call HTML
+    // Create the call HTML 
     AddLineHtml(lineObj, "inbound");
     $("#line-" + lineObj.LineNumber + "-msg").html(lang.incoming_call);
     $("#line-" + lineObj.LineNumber + "-msg").show();
@@ -1221,6 +2004,8 @@ function ReceiveCall(session) {
     }
     $("#line-" + lineObj.LineNumber + "-AnswerCall").show();
 
+    // Update the buddy list now so that any early rejected calls don't flash on
+    UpdateBuddyList();
 
     // Auto Answer options
     var autoAnswerRequested = false;
@@ -1354,7 +2139,7 @@ function ReceiveCall(session) {
                     // Audio Is Playing
                 }).catch(function(e){
                     console.warn("Unable to play audio file.", e);
-                });
+                }); 
             }
             lineObj.SipSession.data.ringerObj = ringer;
         } else {
@@ -1376,11 +2161,11 @@ function ReceiveCall(session) {
                     // Audio Is Playing
                 }).catch(function(e){
                     console.warn("Unable to play audio file.", e);
-                });
+                }); 
             }
             lineObj.SipSession.data.ringerObj = ringer;
         }
-
+    
     }
 
     // Custom Web hook
@@ -1469,7 +2254,120 @@ function AnswerAudioCall(lineNumber) {
         teardownSession(lineObj);
     });
 }
+function AnswerVideoCall(lineNumber) {
+    // CloseWindow();
 
+    var lineObj = FindLineByNumber(lineNumber);
+    if(lineObj == null){
+        console.warn("Failed to get line ("+ lineNumber +")");
+        return;
+    }
+    var session = lineObj.SipSession;
+    // Stop the ringtone
+    if(session.data.ringerObj){
+        session.data.ringerObj.pause();
+        session.data.ringerObj.removeAttribute('src');
+        session.data.ringerObj.load();
+        session.data.ringerObj = null;
+    }
+    // Check vitals
+    if(HasAudioDevice == false){
+        Alert(lang.alert_no_microphone);
+        $("#line-" + lineObj.LineNumber + "-msg").html(lang.call_failed);
+        $("#line-" + lineObj.LineNumber + "-AnswerCall").hide();
+        return;
+    }
+
+    // Update UI
+    $("#line-" + lineObj.LineNumber + "-AnswerCall").hide();
+
+    // Start SIP handling
+    var supportedConstraints = navigator.mediaDevices.getSupportedConstraints();
+    var spdOptions = {
+        sessionDescriptionHandlerOptions: {
+            constraints: {
+                audio: { deviceId : "default" },
+                video: { deviceId : "default" }
+            }
+        }
+    }
+
+    // Configure Audio
+    var currentAudioDevice = getAudioSrcID();
+    if(currentAudioDevice != "default"){
+        var confirmedAudioDevice = false;
+        for (var i = 0; i < AudioinputDevices.length; ++i) {
+            if(currentAudioDevice == AudioinputDevices[i].deviceId) {
+                confirmedAudioDevice = true;
+                break;
+            }
+        }
+        if(confirmedAudioDevice) {
+            spdOptions.sessionDescriptionHandlerOptions.constraints.audio.deviceId = { exact: currentAudioDevice }
+        }
+        else {
+            console.warn("The audio device you used before is no longer available, default settings applied.");
+            localDB.setItem("AudioSrcId", "default");
+        }
+    }
+    // Add additional Constraints
+    if(supportedConstraints.autoGainControl) {
+        spdOptions.sessionDescriptionHandlerOptions.constraints.audio.autoGainControl = AutoGainControl;
+    }
+    if(supportedConstraints.echoCancellation) {
+        spdOptions.sessionDescriptionHandlerOptions.constraints.audio.echoCancellation = EchoCancellation;
+    }
+    if(supportedConstraints.noiseSuppression) {
+        spdOptions.sessionDescriptionHandlerOptions.constraints.audio.noiseSuppression = NoiseSuppression;
+    }
+
+    // Configure Video
+    var currentVideoDevice = getVideoSrcID();
+    if(currentVideoDevice != "default"){
+        var confirmedVideoDevice = false;
+        for (var i = 0; i < VideoinputDevices.length; ++i) {
+            if(currentVideoDevice == VideoinputDevices[i].deviceId) {
+                confirmedVideoDevice = true;
+                break;
+            }
+        }
+        if(confirmedVideoDevice){
+            spdOptions.sessionDescriptionHandlerOptions.constraints.video.deviceId = { exact: currentVideoDevice }
+        }
+        else {
+            console.warn("The video device you used before is no longer available, default settings applied.");
+            localDB.setItem("VideoSrcId", "default"); // resets for later and subsequent calls
+        }
+    }
+    // Add additional Constraints
+    if(supportedConstraints.frameRate && maxFrameRate != "") {
+        spdOptions.sessionDescriptionHandlerOptions.constraints.video.frameRate = maxFrameRate;
+    }
+    if(supportedConstraints.height && videoHeight != "") {
+        spdOptions.sessionDescriptionHandlerOptions.constraints.video.height = videoHeight;
+    }
+    if(supportedConstraints.aspectRatio && videoAspectRatio != "") {
+        spdOptions.sessionDescriptionHandlerOptions.constraints.video.aspectRatio = videoAspectRatio;
+    }
+
+    // Save Devices
+    lineObj.SipSession.data.withvideo = true;
+    lineObj.SipSession.data.VideoSourceDevice = getVideoSrcID();
+    lineObj.SipSession.data.AudioSourceDevice = getAudioSrcID();
+    lineObj.SipSession.data.AudioOutputDevice = getAudioOutputID();
+
+    if(StartVideoFullScreen) ExpandVideoArea(lineObj.LineNumber);
+
+    // Send Answer
+    lineObj.SipSession.accept(spdOptions).then(function(){
+        onInviteAccepted(lineObj,true);
+    }).catch(function(error){
+        console.warn("Failed to answer call", error, lineObj.SipSession);
+        lineObj.SipSession.data.reasonCode = 500;
+        lineObj.SipSession.data.reasonText = "Client Error";
+        teardownSession(lineObj);
+    });
+}
 function RejectCall(lineNumber) {
     var lineObj = FindLineByNumber(lineNumber);
     if (lineObj == null) {
@@ -1488,9 +2386,9 @@ function RejectCall(lineNumber) {
         });
     }
     else {
-        session.reject({
-            statusCode: 486,
-            reasonPhrase: "Busy Here"
+        session.reject({ 
+            statusCode: 486, 
+            reasonPhrase: "Busy Here" 
         }).catch(function(e){
             console.warn("Problem in RejectCall(), could not reject() call", e, session);
         });
@@ -1605,6 +2503,10 @@ function onInviteAccepted(lineObj, includeVideo, response){
 
     }
 
+    // Start Call Recording
+    if(RecordAllCalls || CallRecordingPolicy == "enabled") {
+        StartRecording(lineObj.LineNumber);
+    }
 
     if(includeVideo){
         // Layout for Video Call
@@ -1644,6 +2546,8 @@ function onInviteAccepted(lineObj, includeVideo, response){
         $("#line-"+ lineObj.LineNumber +"-btn-CancelConference").hide();
         $("#line-"+ lineObj.LineNumber +"-btn-ShowDtmf").show();
         $("#line-"+ lineObj.LineNumber +"-btn-settings").show();
+        $("#line-"+ lineObj.LineNumber +"-btn-ShowCallStats").show();
+        $("#line-"+ lineObj.LineNumber +"-btn-HideCallStats").hide();
         $("#line-"+ lineObj.LineNumber +"-btn-ShowTimeline").show();
         $("#line-"+ lineObj.LineNumber +"-btn-HideTimeline").hide();
         $("#line-"+ lineObj.LineNumber +"-btn-present-src").hide();
@@ -1654,14 +2558,12 @@ function onInviteAccepted(lineObj, includeVideo, response){
         $("#line-" + lineObj.LineNumber + "-ActiveCall").show();
     }
 
+    UpdateBuddyList()
     updateLineScroll(lineObj.LineNumber);
-
-    // Start Audio Monitoring
-    lineObj.LocalSoundMeter = StartLocalAudioMediaMonitoring(lineObj.LineNumber, session);
-    lineObj.RemoteSoundMeter = StartRemoteAudioMediaMonitoring(lineObj.LineNumber, session);
 
     $("#line-" + lineObj.LineNumber + "-msg").html(lang.call_in_progress);
 
+    if(includeVideo && StartVideoFullScreen) ExpandVideoArea(lineObj.LineNumber);
 
     // Custom Web hook
     if(typeof web_hook_on_modify !== 'undefined') web_hook_on_modify("accepted", session);
@@ -1675,12 +2577,12 @@ function onInviteTrying(lineObj, response){
 }
 function onInviteProgress(lineObj, response){
     console.log("Call Progress:", response.message.statusCode);
-
+    
     // Provisional 1xx
     // response.message.reasonPhrase
     if(response.message.statusCode == 180){
         $("#line-" + lineObj.LineNumber + "-msg").html(lang.ringing);
-
+        
         var soundFile = audioBlobs.EarlyMedia_European;
         if(UserLocale().indexOf("us") > -1) soundFile = audioBlobs.EarlyMedia_US;
         if(UserLocale().indexOf("gb") > -1) soundFile = audioBlobs.EarlyMedia_UK;
@@ -1711,7 +2613,7 @@ function onInviteProgress(lineObj, response){
                     // Audio Is Playing
                 }).catch(function(e){
                     console.warn("Unable to play audio file.", e);
-                });
+                }); 
             }
             lineObj.SipSession.data.earlyMedia = earlyMedia;
         }
@@ -1765,7 +2667,7 @@ function onSessionReinvited(lineObj, response){
     // This may be used to include video streams
     var sdp = response.body;
 
-    // All the possible streams will get
+    // All the possible streams will get 
     // Note, this will probably happen after the streams are added
     lineObj.SipSession.data.videoChannelNames = [];
     var videoSections = sdp.split("m=video");
@@ -1813,7 +2715,7 @@ function onSessionReceivedMessage(lineObj, response){
 
             session.data.ConfbridgeChannels = msgJson.channels; // Write over this
             session.data.ConfbridgeChannels.forEach(function(chan) {
-                // The mute and unmute status doesn't appear to be a realtime state, only what the
+                // The mute and unmute status doesn't appear to be a realtime state, only what the 
                 // startmuted= setting of the default profile is.
                 console.log(chan.caller.name, "Is in the conference. Muted:", chan.muted, "Admin:", chan.admin);
             });
@@ -1893,7 +2795,7 @@ function onSessionReceivedMessage(lineObj, response){
         }
         RefreshLineActivity(lineObj.LineNumber);
         response.accept();
-    }
+    } 
     else if(messageType.indexOf("application/x-myphone-confbridge-chat") > -1){
         console.log("x-myphone-confbridge-chat", response);
 
@@ -2012,7 +2914,7 @@ function onTrackAddedEvent(lineObj, includeVideo){
                     autoplay: true,
                     playsinline: true,
                     controls: false
-                });
+                }); 
                 videoEl.hide();
 
                 var videoObj = videoEl.get(0);
@@ -2083,6 +2985,9 @@ function teardownSession(lineObj) {
         session.data.ringerObj.load();
         session.data.ringerObj = null;
     }
+    
+    // Stop Recording if we are
+    StopRecording(lineObj.LineNumber,true);
 
     // Audio Meters
     if(lineObj.LocalSoundMeter != null){
@@ -2119,442 +3024,27 @@ function teardownSession(lineObj) {
         } else if (session.data.terminateby == "them" && session.data.startTime == null){
             // Call Terminated by them during ringing
             if(session.data.reasonCode == 0){
-                // Call was canceled, and not answered elsewhere
+                // Call was canceled, and not answered elsewhere 
                 IncreaseMissedBadge(session.data.buddyId);
             }
         }
     }
-
+    
     // Close up the UI
     window.setTimeout(function () {
         RemoveLine(lineObj);
     }, 1000);
 
-
+    UpdateBuddyList();
+    if(session.data.earlyReject != true){
+        UpdateUI();
+    }
 
     // Custom Web hook
     if(typeof web_hook_on_terminate !== 'undefined') web_hook_on_terminate(session);
 }
 
-// Mic and Speaker Levels
-// ======================
-function StartRemoteAudioMediaMonitoring(lineNum, session) {
-    console.log("Creating RemoteAudio AudioContext on Line:" + lineNum);
 
-    // Create local SoundMeter
-    var soundMeter = new SoundMeter(session.id, lineNum);
-    if(soundMeter == null){
-        console.warn("AudioContext() RemoteAudio not available... it fine.");
-        return null;
-    }
-
-    // Ready the getStats request
-    var remoteAudioStream = new MediaStream();
-    var audioReceiver = null;
-    var pc = session.sessionDescriptionHandler.peerConnection;
-    pc.getReceivers().forEach(function (RTCRtpReceiver) {
-        if(RTCRtpReceiver.track && RTCRtpReceiver.track.kind == "audio"){
-            if(audioReceiver == null) {
-                remoteAudioStream.addTrack(RTCRtpReceiver.track);
-                audioReceiver = RTCRtpReceiver;
-            }
-            else {
-                console.log("Found another Track, but audioReceiver not null");
-                console.log(RTCRtpReceiver);
-                console.log(RTCRtpReceiver.track);
-            }
-        }
-    });
-
-
-    // Setup Charts
-    var maxDataLength = 100;
-    soundMeter.startTime = Date.now();
-    Chart.defaults.global.defaultFontSize = 12;
-
-    var ChatHistoryOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        // devicePixelRatio: 1,
-        animation: false,
-        scales: {
-            yAxes: [{
-                ticks: { beginAtZero: true } //, min: 0, max: 100
-            }],
-            xAxes: [{
-                display: false
-            }]
-        },
-    }
-
-    // Receive Kilobits per second
-    soundMeter.ReceiveBitRateChart = new Chart($("#line-"+ lineNum +"-AudioReceiveBitRate"), {
-        type: 'line',
-        data: {
-            labels: MakeDataArray("", maxDataLength),
-            datasets: [{
-                label: lang.receive_kilobits_per_second,
-                data: MakeDataArray(0, maxDataLength),
-                backgroundColor: 'rgba(168, 0, 0, 0.5)',
-                borderColor: 'rgba(168, 0, 0, 1)',
-                borderWidth: 1,
-                pointRadius: 1
-            }]
-        },
-        options: ChatHistoryOptions
-    });
-    soundMeter.ReceiveBitRateChart.lastValueBytesReceived = 0;
-    soundMeter.ReceiveBitRateChart.lastValueTimestamp = 0;
-
-    // Receive Packets per second
-    soundMeter.ReceivePacketRateChart = new Chart($("#line-"+ lineNum +"-AudioReceivePacketRate"), {
-        type: 'line',
-        data: {
-            labels: MakeDataArray("", maxDataLength),
-            datasets: [{
-                label: lang.receive_packets_per_second,
-                data: MakeDataArray(0, maxDataLength),
-                backgroundColor: 'rgba(168, 0, 0, 0.5)',
-                borderColor: 'rgba(168, 0, 0, 1)',
-                borderWidth: 1,
-                pointRadius: 1
-            }]
-        },
-        options: ChatHistoryOptions
-    });
-    soundMeter.ReceivePacketRateChart.lastValuePacketReceived = 0;
-    soundMeter.ReceivePacketRateChart.lastValueTimestamp = 0;
-
-    // Receive Packet Loss
-    soundMeter.ReceivePacketLossChart = new Chart($("#line-"+ lineNum +"-AudioReceivePacketLoss"), {
-        type: 'line',
-        data: {
-            labels: MakeDataArray("", maxDataLength),
-            datasets: [{
-                label: lang.receive_packet_loss,
-                data: MakeDataArray(0, maxDataLength),
-                backgroundColor: 'rgba(168, 99, 0, 0.5)',
-                borderColor: 'rgba(168, 99, 0, 1)',
-                borderWidth: 1,
-                pointRadius: 1
-            }]
-        },
-        options: ChatHistoryOptions
-    });
-    soundMeter.ReceivePacketLossChart.lastValuePacketLoss = 0;
-    soundMeter.ReceivePacketLossChart.lastValueTimestamp = 0;
-
-    // Receive Jitter
-    soundMeter.ReceiveJitterChart = new Chart($("#line-"+ lineNum +"-AudioReceiveJitter"), {
-        type: 'line',
-        data: {
-            labels: MakeDataArray("", maxDataLength),
-            datasets: [{
-                label: lang.receive_jitter,
-                data: MakeDataArray(0, maxDataLength),
-                backgroundColor: 'rgba(0, 38, 168, 0.5)',
-                borderColor: 'rgba(0, 38, 168, 1)',
-                borderWidth: 1,
-                pointRadius: 1
-            }]
-        },
-        options: ChatHistoryOptions
-    });
-
-    // Receive Audio Levels
-    soundMeter.ReceiveLevelsChart = new Chart($("#line-"+ lineNum +"-AudioReceiveLevels"), {
-        type: 'line',
-        data: {
-            labels: MakeDataArray("", maxDataLength),
-            datasets: [{
-                label: lang.receive_audio_levels,
-                data: MakeDataArray(0, maxDataLength),
-                backgroundColor: 'rgba(140, 0, 168, 0.5)',
-                borderColor: 'rgba(140, 0, 168, 1)',
-                borderWidth: 1,
-                pointRadius: 1
-            }]
-        },
-        options: ChatHistoryOptions
-    });
-
-    // Connect to Source
-    soundMeter.connectToSource(remoteAudioStream, function (e) {
-        if (e != null) return;
-
-        // Create remote SoundMeter
-        console.log("SoundMeter for RemoteAudio Connected, displaying levels for Line: " + lineNum);
-        soundMeter.levelsInterval = window.setInterval(function () {
-            // Calculate Levels (0 - 255)
-            var instPercent = (soundMeter.instant/255) * 100;
-            $("#line-" + lineNum + "-Speaker").css("height", instPercent.toFixed(2) +"%");
-        }, 50);
-        soundMeter.networkInterval = window.setInterval(function (){
-            // Calculate Network Conditions
-            if(audioReceiver != null) {
-                audioReceiver.getStats().then(function(stats) {
-                    stats.forEach(function(report){
-
-                        var theMoment = utcDateNow();
-                        var ReceiveBitRateChart = soundMeter.ReceiveBitRateChart;
-                        var ReceivePacketRateChart = soundMeter.ReceivePacketRateChart;
-                        var ReceivePacketLossChart = soundMeter.ReceivePacketLossChart;
-                        var ReceiveJitterChart = soundMeter.ReceiveJitterChart;
-                        var ReceiveLevelsChart = soundMeter.ReceiveLevelsChart;
-                        var elapsedSec = Math.floor((Date.now() - soundMeter.startTime)/1000);
-
-                        if(report.type == "inbound-rtp"){
-
-                            if(ReceiveBitRateChart.lastValueTimestamp == 0) {
-                                ReceiveBitRateChart.lastValueTimestamp = report.timestamp;
-                                ReceiveBitRateChart.lastValueBytesReceived = report.bytesReceived;
-
-                                ReceivePacketRateChart.lastValueTimestamp = report.timestamp;
-                                ReceivePacketRateChart.lastValuePacketReceived = report.packetsReceived;
-
-                                ReceivePacketLossChart.lastValueTimestamp = report.timestamp;
-                                ReceivePacketLossChart.lastValuePacketLoss = report.packetsLost;
-
-                                return;
-                            }
-                            // Receive Kilobits Per second
-                            var kbitsPerSec = (8 * (report.bytesReceived - ReceiveBitRateChart.lastValueBytesReceived))/1000;
-
-                            ReceiveBitRateChart.lastValueTimestamp = report.timestamp;
-                            ReceiveBitRateChart.lastValueBytesReceived = report.bytesReceived;
-
-                            soundMeter.ReceiveBitRate.push({ value: kbitsPerSec, timestamp : theMoment});
-                            ReceiveBitRateChart.data.datasets[0].data.push(kbitsPerSec);
-                            ReceiveBitRateChart.data.labels.push("");
-                            if(ReceiveBitRateChart.data.datasets[0].data.length > maxDataLength) {
-                                ReceiveBitRateChart.data.datasets[0].data.splice(0,1);
-                                ReceiveBitRateChart.data.labels.splice(0,1);
-                            }
-                            ReceiveBitRateChart.update();
-
-                            // Receive Packets Per Second
-                            var PacketsPerSec = (report.packetsReceived - ReceivePacketRateChart.lastValuePacketReceived);
-
-                            ReceivePacketRateChart.lastValueTimestamp = report.timestamp;
-                            ReceivePacketRateChart.lastValuePacketReceived = report.packetsReceived;
-
-                            soundMeter.ReceivePacketRate.push({ value: PacketsPerSec, timestamp : theMoment});
-                            ReceivePacketRateChart.data.datasets[0].data.push(PacketsPerSec);
-                            ReceivePacketRateChart.data.labels.push("");
-                            if(ReceivePacketRateChart.data.datasets[0].data.length > maxDataLength) {
-                                ReceivePacketRateChart.data.datasets[0].data.splice(0,1);
-                                ReceivePacketRateChart.data.labels.splice(0,1);
-                            }
-                            ReceivePacketRateChart.update();
-
-                            // Receive Packet Loss
-                            var PacketsLost = (report.packetsLost - ReceivePacketLossChart.lastValuePacketLoss);
-
-                            ReceivePacketLossChart.lastValueTimestamp = report.timestamp;
-                            ReceivePacketLossChart.lastValuePacketLoss = report.packetsLost;
-
-                            soundMeter.ReceivePacketLoss.push({ value: PacketsLost, timestamp : theMoment});
-                            ReceivePacketLossChart.data.datasets[0].data.push(PacketsLost);
-                            ReceivePacketLossChart.data.labels.push("");
-                            if(ReceivePacketLossChart.data.datasets[0].data.length > maxDataLength) {
-                                ReceivePacketLossChart.data.datasets[0].data.splice(0,1);
-                                ReceivePacketLossChart.data.labels.splice(0,1);
-                            }
-                            ReceivePacketLossChart.update();
-
-                            // Receive Jitter
-                            soundMeter.ReceiveJitter.push({ value: report.jitter, timestamp : theMoment});
-                            ReceiveJitterChart.data.datasets[0].data.push(report.jitter);
-                            ReceiveJitterChart.data.labels.push("");
-                            if(ReceiveJitterChart.data.datasets[0].data.length > maxDataLength) {
-                                ReceiveJitterChart.data.datasets[0].data.splice(0,1);
-                                ReceiveJitterChart.data.labels.splice(0,1);
-                            }
-                            ReceiveJitterChart.update();
-                        }
-                        if(report.type == "track") {
-
-                            // Receive Audio Levels
-                            var levelPercent = (report.audioLevel * 100);
-                            soundMeter.ReceiveLevels.push({ value: levelPercent, timestamp : theMoment});
-                            ReceiveLevelsChart.data.datasets[0].data.push(levelPercent);
-                            ReceiveLevelsChart.data.labels.push("");
-                            if(ReceiveLevelsChart.data.datasets[0].data.length > maxDataLength)
-                            {
-                                ReceiveLevelsChart.data.datasets[0].data.splice(0,1);
-                                ReceiveLevelsChart.data.labels.splice(0,1);
-                            }
-                            ReceiveLevelsChart.update();
-                        }
-                    });
-                });
-            }
-        } ,1000);
-    });
-
-    return soundMeter;
-}
-function StartLocalAudioMediaMonitoring(lineNum, session) {
-    console.log("Creating LocalAudio AudioContext on line " + lineNum);
-
-    // Create local SoundMeter
-    var soundMeter = new SoundMeter(session.id, lineNum);
-    if(soundMeter == null){
-        console.warn("AudioContext() LocalAudio not available... its fine.")
-        return null;
-    }
-
-    // Ready the getStats request
-    var localAudioStream = new MediaStream();
-    var audioSender = null;
-    var pc = session.sessionDescriptionHandler.peerConnection;
-    pc.getSenders().forEach(function (RTCRtpSender) {
-        if(RTCRtpSender.track && RTCRtpSender.track.kind == "audio"){
-            if(audioSender == null){
-                console.log("Adding Track to Monitor: ", RTCRtpSender.track.label);
-                localAudioStream.addTrack(RTCRtpSender.track);
-                audioSender = RTCRtpSender;
-            }
-            else {
-                console.log("Found another Track, but audioSender not null");
-                console.log(RTCRtpSender);
-                console.log(RTCRtpSender.track);
-            }
-        }
-    });
-
-    // Setup Charts
-    var maxDataLength = 100;
-    soundMeter.startTime = Date.now();
-    Chart.defaults.global.defaultFontSize = 12;
-    var ChatHistoryOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        // devicePixelRatio: 1,
-        animation: false,
-        scales: {
-            yAxes: [{
-                ticks: { beginAtZero: true }
-            }],
-            xAxes: [{
-                display: false
-            }]
-        },
-    }
-
-    // Send Kilobits Per Second
-    soundMeter.SendBitRateChart = new Chart($("#line-"+ lineNum +"-AudioSendBitRate"), {
-        type: 'line',
-        data: {
-            labels: MakeDataArray("", maxDataLength),
-            datasets: [{
-                label: lang.send_kilobits_per_second,
-                data: MakeDataArray(0, maxDataLength),
-                backgroundColor: 'rgba(0, 121, 19, 0.5)',
-                borderColor: 'rgba(0, 121, 19, 1)',
-                borderWidth: 1,
-                pointRadius: 1
-            }]
-        },
-        options: ChatHistoryOptions
-    });
-    soundMeter.SendBitRateChart.lastValueBytesSent = 0;
-    soundMeter.SendBitRateChart.lastValueTimestamp = 0;
-
-    // Send Packets Per Second
-    soundMeter.SendPacketRateChart = new Chart($("#line-"+ lineNum +"-AudioSendPacketRate"), {
-        type: 'line',
-        data: {
-            labels: MakeDataArray("", maxDataLength),
-            datasets: [{
-                label: lang.send_packets_per_second,
-                data: MakeDataArray(0, maxDataLength),
-                backgroundColor: 'rgba(0, 121, 19, 0.5)',
-                borderColor: 'rgba(0, 121, 19, 1)',
-                borderWidth: 1,
-                pointRadius: 1
-            }]
-        },
-        options: ChatHistoryOptions
-    });
-    soundMeter.SendPacketRateChart.lastValuePacketSent = 0;
-    soundMeter.SendPacketRateChart.lastValueTimestamp = 0;
-
-    // Connect to Source
-    soundMeter.connectToSource(localAudioStream, function (e) {
-        if (e != null) return;
-
-        console.log("SoundMeter for LocalAudio Connected, displaying levels for Line: " + lineNum);
-        soundMeter.levelsInterval = window.setInterval(function () {
-            // Calculate Levels (0 - 255)
-            var instPercent = (soundMeter.instant/255) * 100;
-            $("#line-" + lineNum + "-Mic").css("height", instPercent.toFixed(2) +"%");
-        }, 50);
-        soundMeter.networkInterval = window.setInterval(function (){
-            // Calculate Network Conditions
-            // Sending Audio Track
-            if(audioSender != null) {
-                audioSender.getStats().then(function(stats) {
-                    stats.forEach(function(report){
-
-                        var theMoment = utcDateNow();
-                        var SendBitRateChart = soundMeter.SendBitRateChart;
-                        var SendPacketRateChart = soundMeter.SendPacketRateChart;
-                        var elapsedSec = Math.floor((Date.now() - soundMeter.startTime)/1000);
-
-                        if(report.type == "outbound-rtp"){
-                            if(SendBitRateChart.lastValueTimestamp == 0) {
-                                SendBitRateChart.lastValueTimestamp = report.timestamp;
-                                SendBitRateChart.lastValueBytesSent = report.bytesSent;
-
-                                SendPacketRateChart.lastValueTimestamp = report.timestamp;
-                                SendPacketRateChart.lastValuePacketSent = report.packetsSent;
-                                return;
-                            }
-
-                            // Send Kilobits Per second
-                            var kbitsPerSec = (8 * (report.bytesSent - SendBitRateChart.lastValueBytesSent))/1000;
-
-                            SendBitRateChart.lastValueTimestamp = report.timestamp;
-                            SendBitRateChart.lastValueBytesSent = report.bytesSent;
-
-                            soundMeter.SendBitRate.push({ value: kbitsPerSec, timestamp : theMoment});
-                            SendBitRateChart.data.datasets[0].data.push(kbitsPerSec);
-                            SendBitRateChart.data.labels.push("");
-                            if(SendBitRateChart.data.datasets[0].data.length > maxDataLength) {
-                                SendBitRateChart.data.datasets[0].data.splice(0,1);
-                                SendBitRateChart.data.labels.splice(0,1);
-                            }
-                            SendBitRateChart.update();
-
-                            // Send Packets Per Second
-                            var PacketsPerSec = report.packetsSent - SendPacketRateChart.lastValuePacketSent;
-
-                            SendPacketRateChart.lastValueTimestamp = report.timestamp;
-                            SendPacketRateChart.lastValuePacketSent = report.packetsSent;
-
-                            soundMeter.SendPacketRate.push({ value: PacketsPerSec, timestamp : theMoment});
-                            SendPacketRateChart.data.datasets[0].data.push(PacketsPerSec);
-                            SendPacketRateChart.data.labels.push("");
-                            if(SendPacketRateChart.data.datasets[0].data.length > maxDataLength) {
-                                SendPacketRateChart.data.datasets[0].data.splice(0,1);
-                                SendPacketRateChart.data.labels.splice(0,1);
-                            }
-                            SendPacketRateChart.update();
-                        }
-                        if(report.type == "track") {
-                            // Bug/security concern... this seems always to report "0"
-                            // Possible reason: When applied to isolated streams, media metrics may allow an application to infer some characteristics of the isolated stream, such as if anyone is speaking (by watching the audioLevel statistic).
-                            // console.log("Audio Sender: " + report.audioLevel);
-                        }
-                    });
-                });
-            }
-        } ,1000);
-    });
-
-    return soundMeter;
-}
 
 // Sounds Meter Class
 // ==================
@@ -2759,7 +3249,7 @@ function DisplayQosData(sessionId){
         if(IDB.objectStoreNames.contains("CallQos") == false){
             console.warn("IndexDB CallQosData.CallQos does not exists");
             return;
-        }
+        } 
 
         var transaction = IDB.transaction(["CallQos"]);
         var objectStoreGet = transaction.objectStore("CallQos").index('sessionid').getAll(sessionId);
@@ -2789,7 +3279,7 @@ function DisplayQosData(sessionId){
 
                 Chart.defaults.global.defaultFontSize = 12;
 
-                var ChatHistoryOptions = {
+                var ChatHistoryOptions = { 
                     responsive: true,
                     maintainAspectRatio: false,
                     animation: false,
@@ -2800,7 +3290,7 @@ function DisplayQosData(sessionId){
                         xAxes: [{
                             display: false
                         }]
-                    },
+                    }, 
                 }
 
 
@@ -2899,7 +3389,7 @@ function DisplayQosData(sessionId){
                     },
                     options: ChatHistoryOptions
                 });
-
+                
                 // AudioReceiveLevelsChart
                 var labelSet = [];
                 var dataset = [];
@@ -2923,7 +3413,7 @@ function DisplayQosData(sessionId){
                     },
                     options: ChatHistoryOptions
                 });
-
+                
                 // SendPacketRateChart
                 var labelSet = [];
                 var dataset = [];
@@ -3066,8 +3556,8 @@ function SelfSubscribe(){
 
     var targetURI = SIP.UserAgent.makeURI("sip:" + SipUsername + "@" + SipDomain);
 
-    var options = {
-        expires: SubscribeBuddyExpires,
+    var options = { 
+        expires: SubscribeBuddyExpires, 
         extraHeaders: ['Accept: '+ SubscribeBuddyAccept]
     }
 
@@ -3113,8 +3603,8 @@ function SubscribeBuddy(buddyObj) {
 
         var targetURI = SIP.UserAgent.makeURI("sip:" + buddyObj.SubscribeUser + "@" + SipDomain);
 
-        var options = {
-            expires: SubscribeBuddyExpires,
+        var options = { 
+            expires: SubscribeBuddyExpires, 
             extraHeaders: ['Accept: '+ SubscribeBuddyAccept]
         }
         var blfSubscribe = new SIP.Subscriber(userAgent, targetURI, SubscribeBuddyEvent, options);
@@ -3167,7 +3657,7 @@ function UnsubscribeBlf(blfSubscribe){
         blfSubscribe.unsubscribe().catch(function(error){
             console.warn("Error removing BLF notifications:", error);
         });
-    }
+    } 
     else {
         console.log("Incorrect buddy subscribe state", blfSubscribe.data.buddyId, blfSubscribe.state);
     }
@@ -3276,7 +3766,7 @@ function VoicemailNotify(notification){
                 if ("Notification" in window) {
                     if (Notification.permission === "granted") {
 
-                        var noticeOptions = {
+                        var noticeOptions = { 
                             body: lang.you_have_new_voice_mail.replace("{0}", newVoiceMessages)
                         }
 
@@ -3322,8 +3812,8 @@ function ReceiveNotify(notification, selfSubscribe) {
         // Asterisk chan_sip
         <?xml version="1.0" encoding="ISO-8859-1"?>
         <presence
-            xmlns="urn:ietf:params:xml:ns:pidf"
-            xmlns:pp="urn:ietf:params:xml:ns:pidf:person"
+            xmlns="urn:ietf:params:xml:ns:pidf" 
+            xmlns:pp="urn:ietf:params:xml:ns:pidf:person" 
             xmlns:es="urn:ietf:params:xml:ns:pidf:rid:status:rid-status"
             xmlns:ep="urn:ietf:params:xml:ns:pidf:rid:rid-person"
             entity="sip:webrtc@192.168.88.98">
@@ -3347,10 +3837,10 @@ function ReceiveNotify(notification, selfSubscribe) {
 
         // Asterisk chan_pj-sip
         <?xml version="1.0" encoding="UTF-8"?>
-        <presence
-            entity="sip:300@192.168.88.40:443;transport=ws"
-            xmlns="urn:ietf:params:xml:ns:pidf"
-            xmlns:dm="urn:ietf:params:xml:ns:pidf:data-model"
+        <presence 
+            entity="sip:300@192.168.88.40:443;transport=ws" 
+            xmlns="urn:ietf:params:xml:ns:pidf" 
+            xmlns:dm="urn:ietf:params:xml:ns:pidf:data-model" 
             xmlns:rid="urn:ietf:params:xml:ns:pidf:rid">
             <note>Ready</note>
             <tuple id="300">
@@ -3362,10 +3852,10 @@ function ReceiveNotify(notification, selfSubscribe) {
             <dm:person />
         </presence>
 
-        // OpenSIPS
+        // OpenSIPS 
         <?xml version="1.0"?>
-        <presence
-            xmlns="urn:ietf:params:xml:ns:pidf"
+        <presence 
+            xmlns="urn:ietf:params:xml:ns:pidf" 
             entity="sip:200@ws-eu-west-1.innovateasterisk.com">
             <tuple xmlns="urn:ietf:params:xml:ns:pidf" id="tuple_mixing-id">
                 <status>
@@ -3375,11 +3865,11 @@ function ReceiveNotify(notification, selfSubscribe) {
         </presence>
 
         <?xml version="1.0"?>
-        <presence
-            xmlns="urn:ietf:params:xml:ns:pidf"
+        <presence 
+            xmlns="urn:ietf:params:xml:ns:pidf" 
             entity="sip:TTbXG7XMO@ws-eu-west-1.innovateasterisk.com">
-            <tuple
-                xmlns="urn:ietf:params:xml:ns:pidf"
+            <tuple 
+                xmlns="urn:ietf:params:xml:ns:pidf" 
                 id="0x7ffe17f496c0">
                 <status>
                     <basic>open</basic>
@@ -3389,20 +3879,20 @@ function ReceiveNotify(notification, selfSubscribe) {
 
 
         <?xml version="1.0"?>
-        <presence
-            xmlns="urn:ietf:params:xml:ns:pidf"
+        <presence 
+            xmlns="urn:ietf:params:xml:ns:pidf" 
             entity="sip:TTbXG7XMO@ws-eu-west-1.innovateasterisk.com">
-            <tuple
-                xmlns="urn:ietf:params:xml:ns:pidf"
+            <tuple 
+                xmlns="urn:ietf:params:xml:ns:pidf" 
                 id="tuple_mixing-id">
                 <status>
                     <basic>open</basic>
                 </status>
             </tuple>
             <note xmlns="urn:ietf:params:xml:ns:pidf">On the phone</note>
-            <dm:person
-                xmlns:dm="urn:ietf:params:xml:ns:pidf:data-model"
-                xmlns:rid="urn:ietf:params:xml:ns:pidf:rid"
+            <dm:person 
+                xmlns:dm="urn:ietf:params:xml:ns:pidf:data-model" 
+                xmlns:rid="urn:ietf:params:xml:ns:pidf:rid" 
                 id="peers_mixing-id">
                 <rid:activities>
                     <rid:on-the-phone/>
@@ -3413,17 +3903,17 @@ function ReceiveNotify(notification, selfSubscribe) {
 
         // There can be more than one tuple
         <?xml version="1.0"?>
-        <presence
-            xmlns="urn:ietf:params:xml:ns:pidf"
+        <presence 
+            xmlns="urn:ietf:params:xml:ns:pidf" 
             entity="sip:TTbXG7XMO@ws-eu-west-1.innovateasterisk.com">
-            <tuple
-                xmlns="urn:ietf:params:xml:ns:pidf"
+            <tuple 
+                xmlns="urn:ietf:params:xml:ns:pidf" 
                 id="0x7ffce2b4b1a0">
                 <status>
                     <basic>open</basic>
                 </status>
             </tuple>
-            <tuple
+            <tuple 
                 xmlns="urn:ietf:params:xml:ns:pidf"
                 id="0x7ffd6abd4a40">
                 <status>
@@ -3451,7 +3941,7 @@ closed: In the context of INSTANT MESSAGES, this value means that
         var ObservedUser = xml.find("presence").attr("entity");
         buddy = ObservedUser.split("@")[0].split(":")[1];
         // buddy = xml.find("presence").find("tuple").attr("id"); // Asterisk does this, but its not correct.
-        // buddy = notification.request.from.uri.user; // Unreliable
+        // buddy = notification.request.from.uri.user; // Unreliable 
 
         var availability = "closed"
         // availability = xml.find("presence").find("tuple").find("status").find("basic").text();
@@ -3465,7 +3955,7 @@ closed: In the context of INSTANT MESSAGES, this value means that
             });
         }
 
-        Presence = xml.find("presence").find("note").text();
+        Presence = xml.find("presence").find("note").text(); 
         if(Presence == ""){
             if (availability == "open") Presence = "Ready";
             if (availability == "closed") Presence = "Not online";
@@ -3479,10 +3969,10 @@ closed: In the context of INSTANT MESSAGES, this value means that
         /*
         Asterisk:
         <?xml version="1.0"?>
-        <dialog-info
-            xmlns="urn:ietf:params:xml:ns:dialog-info"
-            version="0-99999"
-            state="full|partial"
+        <dialog-info 
+            xmlns="urn:ietf:params:xml:ns:dialog-info" 
+            version="0-99999" 
+            state="full|partial" 
             entity="sip:xxxx@XXX.XX.XX.XX">
             <dialog id="xxxx">
                 <state>trying | proceeding | early | terminated | confirmed</state>
@@ -3491,23 +3981,23 @@ closed: In the context of INSTANT MESSAGES, this value means that
 
         OpenSIPS:
         <?xml version="1.0"?>
-        <dialog-info
-            xmlns="urn:ietf:params:xml:ns:dialog-info"
-            version="18"
-            state="full"
+        <dialog-info 
+            xmlns="urn:ietf:params:xml:ns:dialog-info" 
+            version="18" 
+            state="full" 
             entity="sip:TTbXG7XMO@ws-eu-west-1.innovateasterisk.com"
         />
 
         <?xml version="1.0"?>
-        <dialog-info
-            xmlns="urn:ietf:params:xml:ns:dialog-info"
-            version="17"
-            entity="sip:TTbXG7XMO@ws-eu-west-1.innovateasterisk.com"
+        <dialog-info 
+            xmlns="urn:ietf:params:xml:ns:dialog-info" 
+            version="17" 
+            entity="sip:TTbXG7XMO@ws-eu-west-1.innovateasterisk.com" 
             state="partial">
-            <dialog
-                id="soe2vr886cbn1ccj3h.0"
-    *           local-tag="ceq735vrh"
-    *           remote-tag="a1d22259-28ea-434f-9680-b925218b7418"
+            <dialog 
+                id="soe2vr886cbn1ccj3h.0" 
+    *           local-tag="ceq735vrh" 
+    *           remote-tag="a1d22259-28ea-434f-9680-b925218b7418" 
                 direction="initiator">
                 <state>terminated</state>
     *           <remote>
@@ -3578,7 +4068,7 @@ closed: In the context of INSTANT MESSAGES, this value means that
     // XMPP uses Device states, and Presence, but only XMPP Presence will display a text message
     if(buddyObj.type != "xmpp"){
         console.log("Setting Presence for "+ buddyObj.CallerIDName +" to "+ Presence);
-
+        
         buddyObj.presence = Presence;
         if (Presence == "Not online") Presence = lang.state_not_online;
         if (Presence == "Ready") Presence = lang.state_ready;
@@ -3770,7 +4260,7 @@ function MarkMessageRead(buddyObj, messageId){
             if (item.ItemType == "MSG" && item.ItemId == messageId) {
                 // Found
                 item.Read = { state : true, eventTime: utcDateNow()};
-                // return false; /// Mark all messages matching that id to avoid
+                // return false; /// Mark all messages matching that id to avoid 
                 // duplicate id issue
             }
         });
@@ -3820,18 +4310,18 @@ function ReceiveOutOfDialogMessage(message) {
                 gID: null,
                 jid: null,
                 DisplayName: callerID,
-                Description: "",
+                Description: "", 
                 Email: "",
                 MemberCount: 0,
                 EnableDuringDnd: false,
                 Subscribe: false
             });
             buddyObj = new Buddy("extension", id, callerID, did, "", "", "", dateNow, "", "", jid, false, false);
-
+            
             // Add memory object
             AddBuddy(buddyObj, true, (CurrentCalls==0), false, tue);
 
-            // Update Size:
+            // Update Size: 
             json.TotalRows = json.DataCollection.length;
 
             // Save To DB
@@ -3946,11 +4436,11 @@ function AddCallMessage(buddy, session) {
         // The time when WE answered the call (May be null - no answer)
         // or
         // The time when THEY answered the call (May be null - no answer)
-        CallAnswer = moment.utc(session.data.startTime);  // Local Time gets converted to UTC
+        CallAnswer = moment.utc(session.data.startTime);  // Local Time gets converted to UTC 
 
         callDuration = moment.duration(CallEnd.diff(CallAnswer));
         ringTime = moment.duration(CallAnswer.diff(CallStart));
-    }
+    } 
     else {
         // There was no start time, but on inbound/outbound calls, this would indicate the ring time
         ringTime = moment.duration(CallEnd.diff(CallStart));
@@ -4208,7 +4698,7 @@ function UpdateBuddyActivity(buddy, lastAct){
     // =========================
     if(lastAct){
         buddyObj.lastActivity = lastAct;
-    }
+    } 
     else {
         var timeStamp = utcDateNow();
         buddyObj.lastActivity = timeStamp;
@@ -4228,6 +4718,9 @@ function UpdateBuddyActivity(buddy, lastAct){
         localDB.setItem(profileUserID + "-Buddies", JSON.stringify(json));
     }
 
+    // List Update
+    // ===========
+    UpdateBuddyList();
 }
 function ClearMissedBadge(buddy) {
     var buddyObj = FindBuddyByIdentity(buddy);
@@ -4351,7 +4844,7 @@ function VideoCall(lineObj, dialledNumber, extraHeaders) {
     var startTime = moment.utc();
 
     // Invite
-    console.log("INVITE (video): " + dialledNumber + "@" + SipDomain);
+    console.log("INVITE (video): " + dialledNumber + "@" + SipDomain); 
 
     var targetURI = SIP.UserAgent.makeURI("sip:" + dialledNumber.replace(/#/g, "%23") + "@" + SipDomain);
     lineObj.SipSession = new SIP.Inviter(userAgent, targetURI, spdOptions);
@@ -4363,7 +4856,7 @@ function VideoCall(lineObj, dialledNumber, extraHeaders) {
     lineObj.SipSession.data.callstart = startTime.format("YYYY-MM-DD HH:mm:ss UTC");
     lineObj.SipSession.data.callTimer = window.setInterval(function(){
         var now = moment.utc();
-        var duration = moment.duration(now.diff(startTime));
+        var duration = moment.duration(now.diff(startTime)); 
         var timeStr = formatShortDuration(duration.asSeconds());
         $("#line-" + lineObj.LineNumber + "-timer").html(timeStr);
         $("#line-" + lineObj.LineNumber + "-datetime").html(timeStr);
@@ -4420,6 +4913,8 @@ function VideoCall(lineObj, dialledNumber, extraHeaders) {
     $("#line-" + lineObj.LineNumber + "-progress").show();
     $("#line-" + lineObj.LineNumber + "-msg").show();
 
+    UpdateUI();
+    UpdateBuddyList();
     updateLineScroll(lineObj.LineNumber);
 
     // Custom Web hook
@@ -4458,7 +4953,11 @@ function AudioCallMenu(buddy, obj){
             items.push({icon: "fa fa-users", text: lang.call_group, value: buddyObj.ExtNo });
         }
     }
-
+    if(items.length == 0) {
+        console.error("No numbers to dial");
+        EditBuddyWindow(buddy);
+        return;
+    }
     if(items.length == 1) {
         // only one number provided, call it
         console.log("Automatically calling only number - AudioCall("+ buddy +", "+ items[0].value +")");
@@ -4556,7 +5055,7 @@ function AudioCall(lineObj, dialledNumber, extraHeaders) {
     lineObj.SipSession.data.callstart = startTime.format("YYYY-MM-DD HH:mm:ss UTC");
     lineObj.SipSession.data.callTimer = window.setInterval(function(){
         var now = moment.utc();
-        var duration = moment.duration(now.diff(startTime));
+        var duration = moment.duration(now.diff(startTime)); 
         var timeStr = formatShortDuration(duration.asSeconds());
         $("#line-" + lineObj.LineNumber + "-timer").html(timeStr);
         $("#line-" + lineObj.LineNumber + "-datetime").html(timeStr);
@@ -4613,10 +5112,12 @@ function AudioCall(lineObj, dialledNumber, extraHeaders) {
     $("#line-" + lineObj.LineNumber + "-progress").show();
     $("#line-" + lineObj.LineNumber + "-msg").show();
 
+    UpdateUI();
+    UpdateBuddyList();
     updateLineScroll(lineObj.LineNumber);
 
     // Custom Web hook
-    if(typeof web_hook_on_invite !== 'undefined') web_hook_on_invite(lineObj.SipSession);
+    if(typeof web_hook_on_invite !== 'undefined') web_hook_on_invite(lineObj.SipSession);    
 }
 
 // Sessions & During Call Activity
@@ -4651,9 +5152,517 @@ function countSessions(id){
     });
     return rtn;
 }
+function StartRecording(lineNum){
+    if(CallRecordingPolicy == "disabled") {
+        console.warn("Policy Disabled: Call Recording");
+        return;
+    }
+    var lineObj = FindLineByNumber(lineNum);
+    if(lineObj == null) return;
 
+    $("#line-"+ lineObj.LineNumber +"-btn-start-recording").hide();
+    $("#line-"+ lineObj.LineNumber +"-btn-stop-recording").show();
 
+    var session = lineObj.SipSession;
+    if(session == null){
+        console.warn("Could not find session");
+        return;
+    }
 
+    var id = uID();
+
+    if(!session.data.recordings) session.data.recordings = [];
+    session.data.recordings.push({
+        uID: id,
+        startTime: utcDateNow(),
+        stopTime: utcDateNow(),
+    });
+
+    if(session.data.mediaRecorder && session.data.mediaRecorder.state == "recording"){
+        console.warn("Call Recording was somehow on... stopping call recording");
+        StopRecording(lineNum, true);
+        // State should be inactive now, but the data available event will fire
+        // Note: potential race condition here if someone hits the stop, and start quite quickly.
+    }
+    console.log("Creating call recorder...");
+
+    session.data.recordingAudioStreams = new MediaStream();
+    var pc = session.sessionDescriptionHandler.peerConnection;
+    pc.getSenders().forEach(function (RTCRtpSender) {
+        if(RTCRtpSender.track && RTCRtpSender.track.kind == "audio") {
+            console.log("Adding sender audio track to record:", RTCRtpSender.track.label);
+            session.data.recordingAudioStreams.addTrack(RTCRtpSender.track);
+        }
+    });
+    pc.getReceivers().forEach(function (RTCRtpReceiver) {
+        if(RTCRtpReceiver.track && RTCRtpReceiver.track.kind == "audio") {
+            console.log("Adding receiver audio track to record:", RTCRtpReceiver.track.label);
+            session.data.recordingAudioStreams.addTrack(RTCRtpReceiver.track);
+        }
+    });
+
+    // Resample the Video Recording
+    if(session.data.withvideo){
+        var recordingWidth = 640;
+        var recordingHeight = 360;
+        var pnpVideSize = 100;
+        if(RecordingVideoSize == "HD"){
+            recordingWidth = 1280;
+            recordingHeight = 720;
+            pnpVideSize = 144;
+        }
+        if(RecordingVideoSize == "FHD"){
+            recordingWidth = 1920;
+            recordingHeight = 1080;
+            pnpVideSize = 240;
+        }
+        // Create Canvas
+        session.data.recordingCanvas = $('<canvas/>').get(0);
+        session.data.recordingCanvas.width = (RecordingLayout == "side-by-side")? (recordingWidth * 2) + 5: recordingWidth;
+        session.data.recordingCanvas.height = recordingHeight;
+        session.data.recordingContext = session.data.recordingCanvas.getContext("2d");
+
+        // Capture Interval
+        window.clearInterval(session.data.recordingRedrawInterval);
+        session.data.recordingRedrawInterval = window.setInterval(function(){
+
+            // Video Source
+            var pnpVideo = $("#line-" + lineObj.LineNumber + "-localVideo").get(0);
+
+            var mainVideo = null;
+            var validVideos = [];
+            var talkingVideos = [];
+            var videoContainer = $("#line-" + lineObj.LineNumber + "-remote-videos");
+            var potentialVideos =  videoContainer.find('video').length;
+            if(potentialVideos == 0){
+                // Nothing to render
+                // console.log("Nothing to render in this frame")
+            }
+            else if (potentialVideos == 1){
+                mainVideo = videoContainer.find('video')[0];
+                // console.log("Only one video element", mainVideo);
+            }
+            else if (potentialVideos > 1){
+                // Decide what video to record
+                videoContainer.find('video').each(function(i, video) {
+                    var videoTrack = video.srcObject.getVideoTracks()[0];
+                    if(videoTrack.readyState == "live" && video.videoWidth > 10 && video.videoHeight >= 10) {
+                        if(video.srcObject.isPinned == true){
+                            mainVideo = video;
+                            // console.log("Multiple Videos using last PINNED frame");
+                        }
+                        if(video.srcObject.isTalking == true){
+                            talkingVideos.push(video);
+                        }
+                        validVideos.push(video);
+                    }
+                });
+
+                // Check if we found something
+                if(mainVideo == null && talkingVideos.length >= 1){
+                    // Nothing pinned use talking
+                    mainVideo = talkingVideos[0];
+                    // console.log("Multiple Videos using first talking frame");
+                }
+                if(mainVideo == null && validVideos.length >= 1){
+                    // Nothing pinned or talking use valid
+                    mainVideo = validVideos[0];
+                    // console.log("Multiple Videos using first VALID frame");
+                }
+            }
+
+            // Main Video
+            var videoWidth = (mainVideo && mainVideo.videoWidth > 0)? mainVideo.videoWidth : recordingWidth ;
+            var videoHeight = (mainVideo && mainVideo.videoHeight > 0)? mainVideo.videoHeight : recordingHeight ;
+            if(videoWidth >= videoHeight){
+                // Landscape / Square
+                var scale = recordingWidth / videoWidth;
+                videoWidth = recordingWidth;
+                videoHeight = videoHeight * scale;
+                if(videoHeight > recordingHeight){
+                    var scale = recordingHeight / videoHeight;
+                    videoHeight = recordingHeight;
+                    videoWidth = videoWidth * scale;
+                }
+            } 
+            else {
+                // Portrait
+                var scale = recordingHeight / videoHeight;
+                videoHeight = recordingHeight;
+                videoWidth = videoWidth * scale;
+            }
+            var offsetX = (videoWidth < recordingWidth)? (recordingWidth - videoWidth) / 2 : 0;
+            var offsetY = (videoHeight < recordingHeight)? (recordingHeight - videoHeight) / 2 : 0;
+            if(RecordingLayout == "side-by-side") offsetX = recordingWidth + 5 + offsetX;
+
+            // Picture-in-Picture Video
+            var pnpVideoHeight = pnpVideo.videoHeight;
+            var pnpVideoWidth = pnpVideo.videoWidth;
+            if(pnpVideoHeight > 0){
+                if(pnpVideoWidth >= pnpVideoHeight){
+                    var scale = pnpVideSize / pnpVideoHeight;
+                    pnpVideoHeight = pnpVideSize;
+                    pnpVideoWidth = pnpVideoWidth * scale;
+                } 
+                else{
+                    var scale = pnpVideSize / pnpVideoWidth;
+                    pnpVideoWidth = pnpVideSize;
+                    pnpVideoHeight = pnpVideoHeight * scale;
+                }
+            }
+            var pnpOffsetX = 10;
+            var pnpOffsetY = 10;
+            if(RecordingLayout == "side-by-side"){
+                pnpVideoWidth = pnpVideo.videoWidth;
+                pnpVideoHeight = pnpVideo.videoHeight;
+                if(pnpVideoWidth >= pnpVideoHeight){
+                    // Landscape / Square
+                    var scale = recordingWidth / pnpVideoWidth;
+                    pnpVideoWidth = recordingWidth;
+                    pnpVideoHeight = pnpVideoHeight * scale;
+                    if(pnpVideoHeight > recordingHeight){
+                        var scale = recordingHeight / pnpVideoHeight;
+                        pnpVideoHeight = recordingHeight;
+                        pnpVideoWidth = pnpVideoWidth * scale;
+                    }
+                } 
+                else {
+                    // Portrait
+                    var scale = recordingHeight / pnpVideoHeight;
+                    pnpVideoHeight = recordingHeight;
+                    pnpVideoWidth = pnpVideoWidth * scale;
+                }
+                pnpOffsetX = (pnpVideoWidth < recordingWidth)? (recordingWidth - pnpVideoWidth) / 2 : 0;
+                pnpOffsetY = (pnpVideoHeight < recordingHeight)? (recordingHeight - pnpVideoHeight) / 2 : 0;
+            }
+
+            // Draw Background
+            session.data.recordingContext.fillRect(0, 0, session.data.recordingCanvas.width, session.data.recordingCanvas.height);
+
+            // Draw Main Video
+            if(mainVideo && mainVideo.videoHeight > 0){
+                session.data.recordingContext.drawImage(mainVideo, offsetX, offsetY, videoWidth, videoHeight);
+            }
+
+            // Draw PnP
+            if(pnpVideo.videoHeight > 0 && (RecordingLayout == "side-by-side" || RecordingLayout == "them-pnp")){
+                // Only Draw the Pnp Video when needed
+                session.data.recordingContext.drawImage(pnpVideo, pnpOffsetX, pnpOffsetY, pnpVideoWidth, pnpVideoHeight);
+            }
+        }, Math.floor(1000/RecordingVideoFps));
+
+        // Start Video Capture
+        session.data.recordingVideoMediaStream = session.data.recordingCanvas.captureStream(RecordingVideoFps);
+    }
+
+    session.data.recordingMixedAudioVideoRecordStream = new MediaStream();
+    session.data.recordingMixedAudioVideoRecordStream.addTrack(MixAudioStreams(session.data.recordingAudioStreams).getAudioTracks()[0]);
+    if(session.data.withvideo){
+        session.data.recordingMixedAudioVideoRecordStream.addTrack(session.data.recordingVideoMediaStream.getVideoTracks()[0]);
+    }
+
+    var mediaType = "audio/webm"; // audio/mp4 | audio/webm;
+    if(session.data.withvideo) mediaType = "video/webm";
+    var options = {
+        mimeType : mediaType
+    }
+    // Note: It appears that mimeType is optional, but... Safari is truly dreadful at recording in mp4, and doesn't have webm yet
+    // You you can leave this as default, or force webm, however know that Safari will be no good at this either way.
+    // session.data.mediaRecorder = new MediaRecorder(session.data.recordingMixedAudioVideoRecordStream, options);
+    session.data.mediaRecorder = new MediaRecorder(session.data.recordingMixedAudioVideoRecordStream);
+    session.data.mediaRecorder.data = {}
+    session.data.mediaRecorder.data.id = ""+ id;
+    session.data.mediaRecorder.data.sessionId = ""+ session.id;
+    session.data.mediaRecorder.data.buddyId = ""+ lineObj.BuddyObj.identity;
+    session.data.mediaRecorder.ondataavailable = function(event) {
+        console.log("Got Call Recording Data: ", event.data.size +"Bytes", this.data.id, this.data.buddyId, this.data.sessionId);
+        // Save the Audio/Video file
+        SaveCallRecording(event.data, this.data.id, this.data.buddyId, this.data.sessionId);
+    }
+
+    console.log("Starting Call Recording", id);
+    session.data.mediaRecorder.start(); // Safari does not support time slice
+    session.data.recordings[session.data.recordings.length-1].startTime = utcDateNow();
+
+    $("#line-" + lineObj.LineNumber + "-msg").html(lang.call_recording_started);
+
+    updateLineScroll(lineNum);
+}
+function SaveCallRecording(blob, id, buddy, sessionid){
+    var indexedDB = window.indexedDB;
+    var request = indexedDB.open("CallRecordings", 1);
+    request.onerror = function(event) {
+        console.error("IndexDB Request Error:", event);
+    }
+    request.onupgradeneeded = function(event) {
+        console.warn("Upgrade Required for IndexDB... probably because of first time use.");
+        var IDB = event.target.result;
+
+        // Create Object Store
+        if(IDB.objectStoreNames.contains("Recordings") == false){
+            var objectStore = IDB.createObjectStore("Recordings", { keyPath: "uID" });
+            objectStore.createIndex("sessionid", "sessionid", { unique: false });
+            objectStore.createIndex("bytes", "bytes", { unique: false });
+            objectStore.createIndex("type", "type", { unique: false });
+            objectStore.createIndex("mediaBlob", "mediaBlob", { unique: false });
+        }
+        else {
+            console.warn("IndexDB requested upgrade, but object store was in place.");
+        }
+    }
+    request.onsuccess = function(event) {
+        console.log("IndexDB connected to CallRecordings");
+
+        var IDB = event.target.result;
+        if(IDB.objectStoreNames.contains("Recordings") == false){
+            console.warn("IndexDB CallRecordings.Recordings does not exists, this call recoding will not be saved.");
+            IDB.close();
+            window.indexedDB.deleteDatabase("CallRecordings"); // This should help if the table structure has not been created.
+            return;
+        }
+        IDB.onerror = function(event) {
+            console.error("IndexDB Error:", event);
+        }
+    
+        // Prepare data to write
+        var data = {
+            uID: id,
+            sessionid: sessionid,
+            bytes: blob.size,
+            type: blob.type,
+            mediaBlob: blob
+        }
+        // Commit Transaction
+        var transaction = IDB.transaction(["Recordings"], "readwrite");
+        var objectStoreAdd = transaction.objectStore("Recordings").add(data);
+        objectStoreAdd.onsuccess = function(event) {
+            console.log("Call Recording Success: ", id, blob.size, blob.type, buddy, sessionid);
+        }
+    }
+}
+function StopRecording(lineNum, noConfirm){
+    var lineObj = FindLineByNumber(lineNum);
+    if(lineObj == null || lineObj.SipSession == null) return;
+
+    var session = lineObj.SipSession;
+    if(noConfirm == true){
+        // Called at the end of a call
+        $("#line-"+ lineObj.LineNumber +"-btn-start-recording").show();
+        $("#line-"+ lineObj.LineNumber +"-btn-stop-recording").hide();
+
+        if(session.data.mediaRecorder){
+            if(session.data.mediaRecorder.state == "recording"){
+                console.log("Stopping Call Recording");
+                session.data.mediaRecorder.stop();
+                session.data.recordings[session.data.recordings.length-1].stopTime = utcDateNow();
+                window.clearInterval(session.data.recordingRedrawInterval);
+
+                $("#line-" + lineObj.LineNumber + "-msg").html(lang.call_recording_stopped);
+
+                updateLineScroll(lineNum);
+            } 
+            else{
+                console.warn("Recorder is in an unknown state");
+            }
+        }
+        return;
+    }
+    else {
+        // User attempts to end call recording
+        if(CallRecordingPolicy == "enabled"){
+            console.warn("Policy Enabled: Call Recording");
+            return;
+        }
+
+        Confirm(lang.confirm_stop_recording, lang.stop_recording, function(){
+            StopRecording(lineNum, true);
+        });
+    }
+}
+function PlayAudioCallRecording(obj, cdrId, uID){
+    var container = $(obj).parent();
+    container.empty();
+
+    var audioObj = new Audio();
+    audioObj.autoplay = false;
+    audioObj.controls = true;
+
+    // Make sure you are playing out via the correct device
+    var sinkId = getAudioOutputID();
+    if (typeof audioObj.sinkId !== 'undefined') {
+        audioObj.setSinkId(sinkId).then(function(){
+            console.log("sinkId applied: "+ sinkId);
+        }).catch(function(e){
+            console.warn("Error using setSinkId: ", e);
+        });
+    } else {
+        console.warn("setSinkId() is not possible using this browser.")
+    }
+
+    container.append(audioObj);
+
+    // Get Call Recording
+    var indexedDB = window.indexedDB;
+    var request = indexedDB.open("CallRecordings", 1);
+    request.onerror = function(event) {
+        console.error("IndexDB Request Error:", event);
+    }
+    request.onupgradeneeded = function(event) {
+        console.warn("Upgrade Required for IndexDB... probably because of first time use.");
+    }
+    request.onsuccess = function(event) {
+        console.log("IndexDB connected to CallRecordings");
+
+        var IDB = event.target.result;
+        if(IDB.objectStoreNames.contains("Recordings") == false){
+            console.warn("IndexDB CallRecordings.Recordings does not exists");
+            return;
+        } 
+
+        var transaction = IDB.transaction(["Recordings"]);
+        var objectStoreGet = transaction.objectStore("Recordings").get(uID);
+        objectStoreGet.onerror = function(event) {
+            console.error("IndexDB Get Error:", event);
+        }
+        objectStoreGet.onsuccess = function(event) {
+            $("#cdr-media-meta-size-"+ cdrId +"-"+ uID).html(" Size: "+ formatBytes(event.target.result.bytes));
+            $("#cdr-media-meta-codec-"+ cdrId +"-"+ uID).html(" Codec: "+ event.target.result.type);
+
+            // Play
+            audioObj.src = window.URL.createObjectURL(event.target.result.mediaBlob);
+            audioObj.oncanplaythrough = function(){
+                audioObj.play().then(function(){
+                    console.log("Playback started");
+                }).catch(function(e){
+                    console.error("Error playing back file: ", e);
+                });
+            }
+        }
+    }
+}
+function PlayVideoCallRecording(obj, cdrId, uID, buddy){
+    var container = $(obj).parent();
+    container.empty();
+
+    var videoObj = $("<video>").get(0);
+    videoObj.id = "callrecording-video-"+ cdrId;
+    videoObj.autoplay = false;
+    videoObj.controls = true;
+    videoObj.playsinline = true;
+    videoObj.ontimeupdate = function(event){
+        $("#cdr-video-meta-width-"+ cdrId +"-"+ uID).html(lang.width + " : "+ event.target.videoWidth +"px");
+        $("#cdr-video-meta-height-"+ cdrId +"-"+ uID).html(lang.height +" : "+ event.target.videoHeight +"px");
+    }
+
+    var sinkId = getAudioOutputID();
+    if (typeof videoObj.sinkId !== 'undefined') {
+        videoObj.setSinkId(sinkId).then(function(){
+            console.log("sinkId applied: "+ sinkId);
+        }).catch(function(e){
+            console.warn("Error using setSinkId: ", e);
+        });
+    } else {
+        console.warn("setSinkId() is not possible using this browser.")
+    }
+
+    container.append(videoObj);
+
+    // Get Call Recording
+    var indexedDB = window.indexedDB;
+    var request = indexedDB.open("CallRecordings", 1);
+    request.onerror = function(event) {
+        console.error("IndexDB Request Error:", event);
+    }
+    request.onupgradeneeded = function(event) {
+        console.warn("Upgrade Required for IndexDB... probably because of first time use.");
+    }
+    request.onsuccess = function(event) {
+        console.log("IndexDB connected to CallRecordings");
+
+        var IDB = event.target.result;
+        if(IDB.objectStoreNames.contains("Recordings") == false){
+            console.warn("IndexDB CallRecordings.Recordings does not exists");
+            return;
+        } 
+
+        var transaction = IDB.transaction(["Recordings"]);
+        var objectStoreGet = transaction.objectStore("Recordings").get(uID);
+        objectStoreGet.onerror = function(event) {
+            console.error("IndexDB Get Error:", event);
+        }
+        objectStoreGet.onsuccess = function(event) {
+            $("#cdr-media-meta-size-"+ cdrId +"-"+ uID).html(" Size: "+ formatBytes(event.target.result.bytes));
+            $("#cdr-media-meta-codec-"+ cdrId +"-"+ uID).html(" Codec: "+ event.target.result.type);
+
+            // Play
+            videoObj.src = window.URL.createObjectURL(event.target.result.mediaBlob);
+            videoObj.oncanplaythrough = function(){
+                try{
+                    videoObj.scrollIntoViewIfNeeded(false);
+                } catch(e){}
+                videoObj.play().then(function(){
+                    console.log("Playback started");
+                }).catch(function(e){
+                    console.error("Error playing back file: ", e);
+                });
+
+                // Create a Post Image after a second
+                if(buddy){
+                    window.setTimeout(function(){
+                        var canvas = $("<canvas>").get(0);
+                        var videoWidth = videoObj.videoWidth;
+                        var videoHeight = videoObj.videoHeight;
+                        if(videoWidth > videoHeight){
+                            // Landscape
+                            if(videoHeight > 225){
+                                var p = 225 / videoHeight;
+                                videoHeight = 225;
+                                videoWidth = videoWidth * p;
+                            }
+                        }
+                        else {
+                            // Portrait
+                            if(videoHeight > 225){
+                                var p = 225 / videoWidth;
+                                videoWidth = 225;
+                                videoHeight = videoHeight * p;
+                            }
+                        }
+                        canvas.width = videoWidth;
+                        canvas.height = videoHeight;
+                        canvas.getContext('2d').drawImage(videoObj, 0, 0, videoWidth, videoHeight);  
+                        canvas.toBlob(function(blob) {
+                            var reader = new FileReader();
+                            reader.readAsDataURL(blob);
+                            reader.onloadend = function() {
+                                var Poster = { width: videoWidth, height: videoHeight, posterBase64: reader.result }
+                                console.log("Capturing Video Poster...");
+    
+                                // Update DB
+                                var currentStream = JSON.parse(localDB.getItem(buddy + "-stream"));
+                                if(currentStream != null || currentStream.DataCollection != null){
+                                    $.each(currentStream.DataCollection, function(i, item) {
+                                        if (item.ItemType == "CDR" && item.CdrId == cdrId) {
+                                            // Found
+                                            if(item.Recordings && item.Recordings.length >= 1){
+                                                $.each(item.Recordings, function(r, recording) {
+                                                    if(recording.uID == uID) recording.Poster = Poster;
+                                                });
+                                            }
+                                            return false;
+                                        }
+                                    });
+                                    localDB.setItem(buddy + "-stream", JSON.stringify(currentStream));
+                                    console.log("Capturing Video Poster, Done");
+                                }
+                            }
+                        }, 'image/jpeg', PosterJpegQuality);
+                    }, 1000);
+                }
+            }
+        }
+    }
+}
 
 // Stream Manipulations
 // ====================
@@ -4752,7 +5761,7 @@ function QuickFindBuddy(obj){
             items : items
         }
         PopupMenu(obj, menu);
-    }
+    } 
     else {
         HidePopup();
     }
@@ -4772,6 +5781,10 @@ function StartTransferSession(lineNum){
     holdSession(lineNum);
     $("#line-"+ lineNum +"-txt-FindTransferBuddy").val("");
     $("#line-"+ lineNum +"-txt-FindTransferBuddy").parent().show();
+
+    $("#line-"+ lineNum +"-session-avatar").css("width", "50px");
+    $("#line-"+ lineNum +"-session-avatar").css("height", "50px");
+    RestoreCallControls(lineNum)
 
     $("#line-"+ lineNum +"-btn-blind-transfer").show();
     $("#line-"+ lineNum +"-btn-attended-transfer").show();
@@ -4804,6 +5817,9 @@ function CancelTransferSession(lineNum){
             // Suppress message
         });
     }
+
+    $("#line-"+ lineNum +"-session-avatar").css("width", "");
+    $("#line-"+ lineNum +"-session-avatar").css("height", "");
 
     $("#line-"+ lineNum +"-btn-Transfer").show();
     $("#line-"+ lineNum +"-btn-CancelTransfer").hide();
@@ -4848,12 +5864,12 @@ function BlindTransfer(lineNum) {
     var session = lineObj.SipSession;
 
     if(!session.data.transfer) session.data.transfer = [];
-    session.data.transfer.push({
-        type: "Blind",
-        to: dstNo,
-        transferTime: utcDateNow(),
+    session.data.transfer.push({ 
+        type: "Blind", 
+        to: dstNo, 
+        transferTime: utcDateNow(), 
         disposition: "refer",
-        dispositionTime: utcDateNow(),
+        dispositionTime: utcDateNow(), 
         accept : {
             complete: null,
             eventTime: null,
@@ -4862,7 +5878,7 @@ function BlindTransfer(lineNum) {
     });
     var transferId = session.data.transfer.length-1;
 
-    var transferOptions  = {
+    var transferOptions  = { 
         requestDelegate: {
             onAccept: function(sip){
                 console.log("Blind transfer Accepted");
@@ -4870,7 +5886,7 @@ function BlindTransfer(lineNum) {
                 session.data.terminateby = "us";
                 session.data.reasonCode = 202;
                 session.data.reasonText = "Transfer";
-
+            
                 session.data.transfer[transferId].accept.complete = true;
                 session.data.transfer[transferId].accept.disposition = sip.message.reasonPhrase;
                 session.data.transfer[transferId].accept.eventTime = utcDateNow();
@@ -4922,7 +5938,7 @@ function AttendedTransfer(lineNum){
         console.warn("Cannot transfer, no number");
         return;
     }
-
+    
     var lineObj = FindLineByNumber(lineNum);
     if(lineObj == null || lineObj.SipSession == null){
         console.warn("Null line or session");
@@ -4946,12 +5962,12 @@ function AttendedTransfer(lineNum){
     newCallStatus.show();
 
     if(!session.data.transfer) session.data.transfer = [];
-    session.data.transfer.push({
-        type: "Attended",
-        to: dstNo,
-        transferTime: utcDateNow(),
+    session.data.transfer.push({ 
+        type: "Attended", 
+        to: dstNo, 
+        transferTime: utcDateNow(), 
         disposition: "invite",
-        dispositionTime: utcDateNow(),
+        dispositionTime: utcDateNow(), 
         accept : {
             complete: null,
             eventTime: null,
@@ -5020,15 +6036,15 @@ function AttendedTransfer(lineNum){
             $("#line-"+ lineNum +"-txt-FindTransferBuddy").parent().show();
             $("#line-"+ lineNum +"-btn-blind-transfer").show();
             $("#line-"+ lineNum +"-btn-attended-transfer").show();
-
+    
             $("#line-"+ lineNum +"-btn-complete-attended-transfer").hide();
             $("#line-"+ lineNum +"-btn-cancel-attended-transfer").hide();
             $("#line-"+ lineNum +"-btn-terminate-attended-transfer").hide();
-
+    
             $("#line-"+ lineNum +"-msg").html(lang.attended_transfer_call_terminated);
-
+    
             updateLineScroll(lineNum);
-
+    
             window.setTimeout(function(){
                 newCallStatus.hide();
                 updateLineScroll(lineNum);
@@ -5096,17 +6112,17 @@ function AttendedTransfer(lineNum){
                     });
                     newCallStatus.html(lang.call_cancelled);
                     console.log("New call session canceled");
-
+        
                     session.data.transfer[transferId].accept.complete = false;
                     session.data.transfer[transferId].accept.disposition = "cancel";
                     session.data.transfer[transferId].accept.eventTime = utcDateNow();
-
+        
                     $("#line-" + lineNum + "-msg").html(lang.attended_transfer_call_cancelled);
-
+        
                     updateLineScroll(lineNum);
                 });
                 CancelAttendedTransferBtn.show();
-
+        
                 updateLineScroll(lineNum);
             },
             onRedirect:function(sip){
@@ -5117,11 +6133,11 @@ function AttendedTransfer(lineNum){
                 $("#line-"+ lineNum +"-btn-cancel-attended-transfer").hide();
                 session.data.transfer[transferId].disposition = "accepted";
                 session.data.transfer[transferId].dispositionTime = utcDateNow();
-
+        
                 var CompleteTransferBtn = $("#line-"+ lineNum +"-btn-complete-attended-transfer");
                 CompleteTransferBtn.off('click');
                 CompleteTransferBtn.on('click', function(){
-                    var transferOptions  = {
+                    var transferOptions  = { 
                         requestDelegate: {
                             onAccept: function(sip){
                                 console.log("Attended transfer Accepted");
@@ -5158,20 +6174,20 @@ function AttendedTransfer(lineNum){
                             }
                         }
                     }
-
+        
                     // Send REFER
                     session.refer(newSession, transferOptions).catch(function(error){
                         console.warn("Failed to REFER", error);
                     });
-
+        
                     newCallStatus.html(lang.attended_transfer_complete);
 
                     updateLineScroll(lineNum);
                 });
                 CompleteTransferBtn.show();
-
+        
                 updateLineScroll(lineNum);
-
+        
                 var TerminateAttendedTransferBtn = $("#line-"+ lineNum +"-btn-terminate-attended-transfer");
                 TerminateAttendedTransferBtn.off('click');
                 TerminateAttendedTransferBtn.on('click', function(){
@@ -5180,11 +6196,11 @@ function AttendedTransfer(lineNum){
                     });
                     newCallStatus.html(lang.call_ended);
                     console.log("New call session end");
-
+        
                     session.data.transfer[transferId].accept.complete = false;
                     session.data.transfer[transferId].accept.disposition = "bye";
                     session.data.transfer[transferId].accept.eventTime = utcDateNow();
-
+        
                     $("#line-"+ lineNum +"-btn-complete-attended-transfer").hide();
                     $("#line-"+ lineNum +"-btn-cancel-attended-transfer").hide();
                     $("#line-"+ lineNum +"-btn-terminate-attended-transfer").hide();
@@ -5208,19 +6224,19 @@ function AttendedTransfer(lineNum){
                 newCallStatus.html(lang.call_rejected);
                 session.data.transfer[transferId].disposition = sip.message.reasonPhrase;
                 session.data.transfer[transferId].dispositionTime = utcDateNow();
-
+        
                 $("#line-"+ lineNum +"-txt-FindTransferBuddy").parent().show();
                 $("#line-"+ lineNum +"-btn-blind-transfer").show();
                 $("#line-"+ lineNum +"-btn-attended-transfer").show();
-
+        
                 $("#line-"+ lineNum +"-btn-complete-attended-transfer").hide();
                 $("#line-"+ lineNum +"-btn-cancel-attended-transfer").hide();
                 $("#line-"+ lineNum +"-btn-terminate-attended-transfer").hide();
-
+        
                 $("#line-"+ lineNum +"-msg").html(lang.attended_transfer_call_rejected);
-
+        
                 updateLineScroll(lineNum);
-
+        
                 window.setTimeout(function(){
                     newCallStatus.hide();
                     updateLineScroll(lineNum);
@@ -5233,6 +6249,36 @@ function AttendedTransfer(lineNum){
     });
 }
 
+// Conference Calls
+// ================
+function StartConferenceCall(lineNum){
+    if($("#line-"+ lineNum +"-btn-CancelTransfer").is(":visible")){
+        CancelTransferSession(lineNum);
+        return;
+    }
+
+    $("#line-"+ lineNum +"-btn-Conference").hide();
+    $("#line-"+ lineNum +"-btn-CancelConference").show();
+
+    holdSession(lineNum);
+    $("#line-"+ lineNum +"-txt-FindConferenceBuddy").val("");
+    $("#line-"+ lineNum +"-txt-FindConferenceBuddy").parent().show();
+
+    $("#line-"+ lineNum +"-session-avatar").css("width", "50px");
+    $("#line-"+ lineNum +"-session-avatar").css("height", "50px");
+    RestoreCallControls(lineNum)
+
+    $("#line-"+ lineNum +"-btn-conference-dial").show();
+    $("#line-"+ lineNum +"-btn-cancel-conference-dial").hide();
+    $("#line-"+ lineNum +"-btn-join-conference-call").hide();
+    $("#line-"+ lineNum +"-btn-terminate-conference-call").hide();
+
+    $("#line-"+ lineNum +"-conference-status").hide();
+
+    $("#line-"+ lineNum +"-Conference").show();
+
+    updateLineScroll(lineNum);
+}
 function CancelConference(lineNum){
     var lineObj = FindLineByNumber(lineNum);
     if(lineObj == null || lineObj.SipSession == null){
@@ -5249,6 +6295,9 @@ function CancelConference(lineNum){
             // Suppress message
         });
     }
+
+    $("#line-"+ lineNum +"-session-avatar").css("width", "");
+    $("#line-"+ lineNum +"-session-avatar").css("height", "");
 
     $("#line-"+ lineNum +"-btn-Conference").show();
     $("#line-"+ lineNum +"-btn-CancelConference").hide();
@@ -5279,7 +6328,7 @@ function ConferenceDial(lineNum){
         console.warn("Cannot transfer, must be [0-9*+#]");
         return;
     }
-
+    
     var lineObj = FindLineByNumber(lineNum);
     if(lineObj == null || lineObj.SipSession == null){
         console.warn("Null line or session");
@@ -5301,11 +6350,11 @@ function ConferenceDial(lineNum){
     newCallStatus.show();
 
     if(!session.data.confcalls) session.data.confcalls = [];
-    session.data.confcalls.push({
-        to: dstNo,
-        startTime: utcDateNow(),
+    session.data.confcalls.push({ 
+        to: dstNo, 
+        startTime: utcDateNow(), 
         disposition: "invite",
-        dispositionTime: utcDateNow(),
+        dispositionTime: utcDateNow(), 
         accept : {
             complete: null,
             eventTime: null,
@@ -5371,18 +6420,18 @@ function ConferenceDial(lineNum){
             newCallStatus.html(lang.call_ended);
             session.data.confcalls[confCallId].disposition = "bye";
             session.data.confcalls[confCallId].dispositionTime = utcDateNow();
-
+    
             $("#line-"+ lineNum +"-txt-FindConferenceBuddy").parent().show();
             $("#line-"+ lineNum +"-btn-conference-dial").show();
-
+    
             $("#line-"+ lineNum +"-btn-cancel-conference-dial").hide();
             $("#line-"+ lineNum +"-btn-join-conference-call").hide();
             $("#line-"+ lineNum +"-btn-terminate-conference-call").hide();
-
+    
             $("#line-"+ lineNum +"-msg").html(lang.conference_call_terminated);
-
+    
             updateLineScroll(lineNum);
-
+    
             window.setTimeout(function(){
                 newCallStatus.hide();
                 updateLineScroll(lineNum);
@@ -5466,7 +6515,7 @@ function ConferenceDial(lineNum){
                 newCallStatus.html(lang.ringing);
                 session.data.confcalls[confCallId].disposition = "progress";
                 session.data.confcalls[confCallId].dispositionTime = utcDateNow();
-
+        
                 $("#line-" + lineNum + "-msg").html(lang.conference_call_started);
 
                 var CancelConferenceDialBtn = $("#line-"+ lineNum +"-btn-cancel-conference-dial");
@@ -5477,13 +6526,13 @@ function ConferenceDial(lineNum){
                     });
                     newCallStatus.html(lang.call_cancelled);
                     console.log("New call session canceled");
-
+        
                     session.data.confcalls[confCallId].accept.complete = false;
                     session.data.confcalls[confCallId].accept.disposition = "cancel";
                     session.data.confcalls[confCallId].accept.eventTime = utcDateNow();
-
+        
                     $("#line-" + lineNum + "-msg").html(lang.conference_call_cancelled);
-
+        
                     updateLineScroll(lineNum);
                 });
                 CancelConferenceDialBtn.show();
@@ -5536,7 +6585,7 @@ function ConferenceDial(lineNum){
                     pc.getSenders().forEach(function (RTCRtpSender) {
                         if(RTCRtpSender.track && RTCRtpSender.track.kind == "audio") {
                             console.log("Switching to mixed Audio track on session");
-
+        
                             session.data.AudioSourceTrack = RTCRtpSender.track;
                             outputStreamForSession.addTrack(RTCRtpSender.track);
                             var mixedAudioTrack = MixAudioStreams(outputStreamForSession).getAudioTracks()[0];
@@ -5549,7 +6598,7 @@ function ConferenceDial(lineNum){
                     confPc.getSenders().forEach(function (RTCRtpSender) {
                         if(RTCRtpSender.track && RTCRtpSender.track.kind == "audio") {
                             console.log("Switching to mixed Audio track on conf call");
-
+        
                             session.data.childsession.data.AudioSourceTrack = RTCRtpSender.track;
                             outputStreamForConfSession.addTrack(RTCRtpSender.track);
                             var mixedAudioTrackForConf = MixAudioStreams(outputStreamForConfSession).getAudioTracks()[0];
@@ -5558,18 +6607,18 @@ function ConferenceDial(lineNum){
                             RTCRtpSender.replaceTrack(mixedAudioTrackForConf);
                         }
                     });
-
+        
                     newCallStatus.html(lang.call_in_progress);
                     console.log("Conference Call In Progress");
-
+        
                     session.data.confcalls[confCallId].accept.complete = true;
                     session.data.confcalls[confCallId].accept.disposition = "join";
                     session.data.confcalls[confCallId].accept.eventTime = utcDateNow();
-
+        
                     $("#line-"+ lineNum +"-btn-terminate-conference-call").show();
-
+        
                     $("#line-" + lineNum + "-msg").html(lang.conference_call_in_progress);
-
+        
                     JoinCallBtn.hide();
                     updateLineScroll(lineNum);
 
@@ -5608,7 +6657,7 @@ function ConferenceDial(lineNum){
                     }, 1000);
                 });
                 TerminateConfCallBtn.show();
-
+        
                 updateLineScroll(lineNum);
             },
             onReject:function(sip){
@@ -5616,18 +6665,18 @@ function ConferenceDial(lineNum){
                 newCallStatus.html(lang.call_rejected);
                 session.data.confcalls[confCallId].disposition = sip.message.reasonPhrase;
                 session.data.confcalls[confCallId].dispositionTime = utcDateNow();
-
+        
                 $("#line-"+ lineNum +"-txt-FindConferenceBuddy").parent().show();
                 $("#line-"+ lineNum +"-btn-conference-dial").show();
-
+        
                 $("#line-"+ lineNum +"-btn-cancel-conference-dial").hide();
                 $("#line-"+ lineNum +"-btn-join-conference-call").hide();
                 $("#line-"+ lineNum +"-btn-terminate-conference-call").hide();
-
+        
                 $("#line-"+ lineNum +"-msg").html(lang.conference_call_rejected);
-
+        
                 updateLineScroll(lineNum);
-
+        
                 window.setTimeout(function(){
                     newCallStatus.hide();
                     updateLineScroll(lineNum);
@@ -5869,8 +6918,6 @@ function UnmuteSession(lineNum){
     if(typeof web_hook_on_modify !== 'undefined') web_hook_on_modify("unmute", session);
 }
 function endSession(lineNum) {
-
-
     var lineObj = FindLineByNumber(lineNum);
     if(lineObj == null || lineObj.SipSession == null) return;
 
@@ -5899,7 +6946,7 @@ function sendDTMF(lineNum, itemStr) {
         duration: 100,
         interToneGap: 70
     }
-
+    
     if(lineObj.SipSession.isOnHold == true){
         if(lineObj.SipSession.data.childsession){
             if(lineObj.SipSession.data.childsession.state == SIP.SessionState.Established){
@@ -5916,11 +6963,11 @@ function sendDTMF(lineNum, itemStr) {
             else {
                 console.warn("Cannot Send DTMF ("+ itemStr +"): "+ lineObj.LineNumber + " is on hold, and the child session is not established");
             }
-        }
+        } 
         else {
             console.warn("Cannot Send DTMF ("+ itemStr +"): "+ lineObj.LineNumber + " is on hold, and there is no child session");
         }
-    }
+    } 
     else {
         if(lineObj.SipSession.state == SIP.SessionState.Established || lineObj.SipSession.state == SIP.SessionState.Establishing){
             console.log("Sending DTMF ("+ itemStr +"): "+ lineObj.LineNumber);
@@ -5932,14 +6979,14 @@ function sendDTMF(lineNum, itemStr) {
             else{
                 console.log("Failed to send DTMF ("+ itemStr +")");
             }
-
+        
             $("#line-" + lineNum + "-msg").html(lang.send_dtmf + ": "+ itemStr);
-
+        
             updateLineScroll(lineNum);
-
+    
             // Custom Web hook
             if(typeof web_hook_on_dtmf !== 'undefined') web_hook_on_dtmf(itemStr, lineObj.SipSession);
-        }
+        } 
         else {
             console.warn("Cannot Send DTMF ("+ itemStr +"): "+ lineObj.LineNumber + " session is not establishing or established");
         }
@@ -5956,8 +7003,8 @@ function switchVideoSource(lineNum, srcId){
     $("#line-" + lineNum + "-msg").html(lang.switching_video_source);
 
     var supportedConstraints = navigator.mediaDevices.getSupportedConstraints();
-    var constraints = {
-        audio: false,
+    var constraints = { 
+        audio: false, 
         video: { deviceId: "default" }
     }
     if(srcId != "default"){
@@ -6029,7 +7076,7 @@ function SendCanvas(lineNum){
         return;
     }
     var session = lineObj.SipSession;
-
+    
     $("#line-" + lineNum + "-msg").html(lang.switching_to_canvas);
 
     // Create scratch Pad
@@ -6203,7 +7250,7 @@ function SendVideo(lineNum, src){
             }
             if(RTCRtpSender.track && RTCRtpSender.track.kind == "audio") {
                 console.log("Switching to mixed Audio track on session");
-
+                
                 session.data.AudioSourceTrack = RTCRtpSender.track;
 
                 var mixedAudioStream = new MediaStream();
@@ -6275,7 +7322,7 @@ function ShareScreen(lineNum){
         }).catch(function (err) {
             console.error("Error on getUserMedia");
         });
-    }
+    } 
     else if (navigator.mediaDevices.getDisplayMedia) {
         // New standard
         var screenShareConstraints = { video: true, audio: false }
@@ -6302,7 +7349,7 @@ function ShareScreen(lineNum){
         }).catch(function (err) {
             console.error("Error on getUserMedia");
         });
-    }
+    } 
     else {
         // Firefox, apparently
         var screenShareConstraints = { video: { mediaSource: 'screen' }, audio: false }
@@ -6390,7 +7437,37 @@ function DisableVideoStream(lineNum){
 
     $("#line-" + lineNum + "-msg").html(lang.video_disabled);
 }
+function ShowDtmfMenu(lineNum){
+    console.log("Show DTMF");
+    HidePopup();
 
+    RestoreCallControls(lineNum)
+
+    // DTMF
+    var html = ""
+    html += "<div>";
+    html += "<table cellspacing=10 cellpadding=0 style=\"margin-left:auto; margin-right: auto\">";
+    html += "<tr><td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '1')\"><div>1</div><span>&nbsp;</span></button></td>"
+    html += "<td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '2')\"><div>2</div><span>ABC</span></button></td>"
+    html += "<td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '3')\"><div>3</div><span>DEF</span></button></td></tr>";
+    html += "<tr><td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '4')\"><div>4</div><span>GHI</span></button></td>"
+    html += "<td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '5')\"><div>5</div><span>JKL</span></button></td>"
+    html += "<td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '6')\"><div>6</div><span>MNO</span></button></td></tr>";
+    html += "<tr><td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '7')\"><div>7</div><span>PQRS</span></button></td>"
+    html += "<td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '8')\"><div>8</div><span>TUV</span></button></td>"
+    html += "<td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '9')\"><div>9</div><span>WXYZ</span></button></td></tr>";
+    html += "<tr><td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '*')\">*</button></td>"
+    html += "<td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '0')\">0</button></td>"
+    html += "<td><button class=dialButtons onclick=\"sendDTMF('"+ lineNum +"', '#')\">#</button></td></tr>";
+    html += "</table>";
+    html += "</div>";
+
+    var h = 400;
+    var w = 240
+    OpenWindow(html, lang.send_dtmf, h, w, false, false, lang.cancel, function(){
+        CloseWindow()
+    });
+}
 function ShowPresentMenu(obj, lineNum){
     var items = [];
     items.push({value: "src-camera", icon : "fa fa-video-camera", text: lang.camera, isHeader: false }); // Camera
@@ -6421,6 +7498,100 @@ function ShowPresentMenu(obj, lineNum){
     PopupMenu(obj, menu);
 }
 
+function ShowCallTimeline(lineNum){
+    console.log("Show Timeline");
+    HidePopup();
+    RestoreCallControls(lineNum)
+
+    if($("#line-"+ lineNum +"-AudioStats").is(":visible")){
+        // The AudioStats is open, they can't take the same space
+        HideCallStats(lineNum)
+    }
+
+    $("#line-"+ lineNum +"-AudioOrVideoCall").hide();
+    $("#line-"+ lineNum +"-CallDetails").show();
+    
+    $("#line-"+ lineNum +"-btn-ShowTimeline").hide();
+    $("#line-"+ lineNum +"-btn-HideTimeline").show();
+}
+function HideCallTimeline(lineNum){
+    console.log("Hide Timeline");
+    HidePopup();
+
+    $("#line-"+ lineNum +"-CallDetails").hide();
+    $("#line-"+ lineNum +"-AudioOrVideoCall").show();
+
+    $("#line-"+ lineNum +"-btn-ShowTimeline").show();
+    $("#line-"+ lineNum +"-btn-HideTimeline").hide();
+}
+function ShowCallStats(lineNum){
+    console.log("Show Call Stats");
+    HidePopup();
+    RestoreCallControls(lineNum)
+
+    if($("#line-"+ lineNum +"-CallDetails").is(":visible")){
+        // The Timeline is open, they can't take the same space
+        HideCallTimeline(lineNum)
+    }
+
+    $("#line-"+ lineNum +"-AudioOrVideoCall").hide();
+    $("#line-"+ lineNum +"-AudioStats").show();
+
+    $("#line-"+ lineNum +"-btn-ShowCallStats").hide();
+    $("#line-"+ lineNum +"-btn-HideCallStats").show();
+}
+function HideCallStats(lineNum){
+    console.log("Hide Call Stats");
+
+    HidePopup();
+    $("#line-"+ lineNum +"-AudioOrVideoCall").show();
+    $("#line-"+ lineNum +"-AudioStats").hide();
+
+    $("#line-"+ lineNum +"-btn-ShowCallStats").show();
+    $("#line-"+ lineNum +"-btn-HideCallStats").hide();
+}
+function ToggleMoreButtons(lineNum){
+    if($("#line-"+ lineNum +"-btn-more").is(":visible")){
+        // The more buttons are showing, drop them down
+        RestoreCallControls(lineNum);
+    } else {
+        ExpandCallControls(lineNum);
+    }
+}
+function ExpandCallControls(lineNum){
+    $("#line-"+ lineNum +"-btn-more").show(200);
+    $("#line-"+ lineNum +"-btn-ControlToggle").html('<i class=\"fa fa-chevron-down\"></i>');
+}
+function RestoreCallControls(lineNum){
+    $("#line-"+ lineNum +"-btn-more").hide(200);
+    $("#line-"+ lineNum +"-btn-ControlToggle").html('<i class=\"fa fa-chevron-up\"></i>');
+}
+function ExpandVideoArea(lineNum){
+    $("#line-" + lineNum + "-call-fullscreen").prop("class","streamSection highlightSection FullScreenVideo");
+
+    $("#line-" + lineNum + "-btn-restore").show();
+    $("#line-" + lineNum + "-btn-expand").hide();
+
+    $("#line-" + lineNum + "-VideoCall").css("background-color", "#000000");
+
+    RedrawStage(lineNum, false);
+    if(typeof web_hook_on_expand_video_area !== 'undefined') {
+        web_hook_on_expand_video_area(lineNum);
+    }
+}
+function RestoreVideoArea(lineNum){
+    $("#line-" + lineNum + "-call-fullscreen").prop("class","streamSection highlightSection");
+
+    $("#line-" + lineNum + "-btn-restore").hide();
+    $("#line-" + lineNum + "-btn-expand").show();
+
+    $("#line-" + lineNum + "-VideoCall").css("background-color", "");
+
+    RedrawStage(lineNum, false);
+    if(typeof web_hook_on_restore_video_area !== 'undefined') {
+        web_hook_on_restore_video_area(lineNum);
+    }
+}
 
 // Phone Lines
 // ===========
@@ -6435,8 +7606,22 @@ var Line = function(lineNumber, displayName, displayNumber, buddyObj){
     this.RemoteSoundMeter = null;
 }
 
-
-
+function handleDialInput(obj, event){
+    if(EnableAlphanumericDial){
+        $("#dialText").val($("#dialText").val().replace(/[^\da-zA-Z\*\#\+]/g, "").substring(0,MaxDidLength));
+    }
+    else {
+        $("#dialText").val($("#dialText").val().replace(/[^\d\*\#\+]/g, "").substring(0,MaxDidLength));
+    }
+    $("#dialVideo").prop('disabled', ($("#dialText").val().length >= DidLength));
+    if($("#dialText").val().length > 0){
+        $("#dialText").css("width","138px");
+        $("#dialDeleteKey").show();
+    } else {
+        $("#dialText").css("width","170px");
+        $("#dialDeleteKey").hide();
+    }
+}
 
 function CloseUpSettings(){
     // Video Preview
@@ -6513,13 +7698,24 @@ function CloseUpSettings(){
     catch(e){}
     window.SettingsRingerStreamMeter = null;
 }
+function ShowContacts(){
 
+    CloseUpSettings()
+
+    $("#actionArea").hide();
+    $("#actionArea").empty();
+
+    $("#myContacts").show();
+    $("#searchArea").show();
+}
 function ShowSortAnfFilter(){
+    ShowContacts();
 
+    $("#myContacts").hide();
     $("#searchArea").hide();
     $("#actionArea").empty();
 
-    var html = "<div style=\"text-align:right\"><button class=roundButtons ><i class=\"fa fa-close\"></i></button></div>"
+    var html = "<div style=\"text-align:right\"><button class=roundButtons onclick=\"ShowContacts()\"><i class=\"fa fa-close\"></i></button></div>"
     html += "<table cellspacing=10 cellpadding=0 style=\"margin-left:auto; margin-right: auto\">";
     // By Type (and what order)
     html += "<tr><td><div><input disabled type=radio name=sort_by id=sort_by_type><label for=sort_by_type>"+ lang.sort_type +"</label></div>";
@@ -6532,7 +7728,7 @@ function ShowSortAnfFilter(){
     html += "</td></tr>";
     // By Extension
     html += "<tr><td><div><input type=radio name=sort_by id=sort_by_exten><label for=sort_by_exten>"+ lang.sort_exten +"</label></div></td></tr>";
-    // By Alphabetical
+    // By Alphabetical 
     html += "<tr><td><div><input type=radio name=sort_by id=sort_by_alpha><label for=sort_by_alpha>"+ lang.sort_alpha +"</label></div></td></tr>";
     // Only Last Activity
     html += "<tr><td><div><input type=radio name=sort_by id=sort_by_activity><label for=sort_by_activity>"+ lang.sort_activity +"</label></div></td></tr>";
@@ -6563,57 +7759,63 @@ function ShowSortAnfFilter(){
 
     $("#sort_by_type_cex").change(function(){
         BuddySortBy = "type";
-        localDB.setItem("BuddySortBy", "type");
+        localDB.setItem("BuddySortBy", "type"); 
         SortByTypeOrder = "c|e|x"
-        localDB.setItem("SortByTypeOrder", "c|e|x");
+        localDB.setItem("SortByTypeOrder", "c|e|x"); 
         $("#sort_by_type").prop("checked", true);
 
+        UpdateBuddyList();
     });
     $("#sort_by_type_cxe").change(function(){
         BuddySortBy = "type";
-        localDB.setItem("BuddySortBy", "type");
+        localDB.setItem("BuddySortBy", "type"); 
         SortByTypeOrder = "c|x|e"
-        localDB.setItem("SortByTypeOrder", "c|x|e");
+        localDB.setItem("SortByTypeOrder", "c|x|e"); 
         $("#sort_by_type").prop("checked", true);
 
+        UpdateBuddyList();
     });
     $("#sort_by_type_xec").change(function(){
         BuddySortBy = "type";
-        localDB.setItem("BuddySortBy", "type");
+        localDB.setItem("BuddySortBy", "type"); 
         SortByTypeOrder = "x|e|c"
-        localDB.setItem("SortByTypeOrder", "x|e|c");
+        localDB.setItem("SortByTypeOrder", "x|e|c"); 
         $("#sort_by_type").prop("checked", true);
 
+        UpdateBuddyList();
     });
     $("#sort_by_type_xce").change(function(){
         BuddySortBy = "type";
-        localDB.setItem("BuddySortBy", "type");
+        localDB.setItem("BuddySortBy", "type"); 
         SortByTypeOrder = "x|e|c"
-        localDB.setItem("SortByTypeOrder", "x|c|e");
+        localDB.setItem("SortByTypeOrder", "x|c|e"); 
         $("#sort_by_type").prop("checked", true);
 
+        UpdateBuddyList();
     });
     $("#sort_by_type_exc").change(function(){
         BuddySortBy = "type";
-        localDB.setItem("BuddySortBy", "type");
+        localDB.setItem("BuddySortBy", "type"); 
         SortByTypeOrder = "e|x|c"
-        localDB.setItem("SortByTypeOrder", "e|x|c");
+        localDB.setItem("SortByTypeOrder", "e|x|c"); 
         $("#sort_by_type").prop("checked", true);
 
+        UpdateBuddyList();
     });
     $("#sort_by_type_ecx").change(function(){
         BuddySortBy = "type";
-        localDB.setItem("BuddySortBy", "type");
+        localDB.setItem("BuddySortBy", "type"); 
         SortByTypeOrder = "e|c|x"
-        localDB.setItem("SortByTypeOrder", "e|c|x");
+        localDB.setItem("SortByTypeOrder", "e|c|x"); 
         $("#sort_by_type").prop("checked", true);
 
+        UpdateBuddyList();
     });
 
 
     $("#sort_by_exten").change(function(){
         BuddySortBy = "extension";
-        localDB.setItem("BuddySortBy", "extension");
+        localDB.setItem("BuddySortBy", "extension"); 
         $("#sort_by_type_cex").prop("checked", false);
         $("#sort_by_type_cxe").prop("checked", false);
         $("#sort_by_type_xec").prop("checked", false);
@@ -6621,6 +7823,7 @@ function ShowSortAnfFilter(){
         $("#sort_by_type_exc").prop("checked", false);
         $("#sort_by_type_ecx").prop("checked", false);
 
+        UpdateBuddyList();
     });
     $("#sort_by_alpha").change(function(){
         BuddySortBy = "alphabetical";
@@ -6631,6 +7834,7 @@ function ShowSortAnfFilter(){
         $("#sort_by_type_xce").prop("checked", false);
         $("#sort_by_type_exc").prop("checked", false);
         $("#sort_by_type_ecx").prop("checked", false);
+        UpdateBuddyList();
     });
     $("#sort_by_activity").change(function(){
         BuddySortBy = "activity";
@@ -6642,18 +7846,20 @@ function ShowSortAnfFilter(){
         $("#sort_by_type_exc").prop("checked", false);
         $("#sort_by_type_ecx").prop("checked", false);
 
+        UpdateBuddyList();
     });
 
     $("#sort_auto_delete_at_end").change(function(){
         BuddyAutoDeleteAtEnd = this.checked;
         localDB.setItem("BuddyAutoDeleteAtEnd", (this.checked)? "1" : "0");
-
+        
         if(this.checked){
             $("#sort_auto_delete_hide").prop("checked", false);
             HideAutoDeleteBuddies = false;
             localDB.setItem("HideAutoDeleteBuddies", "0");
         }
 
+        UpdateBuddyList();
     });
     $("#sort_auto_delete_hide").change(function(){
         HideAutoDeleteBuddies = this.checked;
@@ -6662,14 +7868,16 @@ function ShowSortAnfFilter(){
         if(this.checked){
             $("#sort_auto_delete_at_end").prop("checked", false);
             BuddyAutoDeleteAtEnd = false;
-            localDB.setItem("BuddyAutoDeleteAtEnd", "0");
+            localDB.setItem("BuddyAutoDeleteAtEnd", "0");    
         }
 
+        UpdateBuddyList();
     });
     $("#sort_show_exten_num").change(function(){
         BuddyShowExtenNum = this.checked;
         localDB.setItem("BuddyShowExtenNum", (this.checked)? "1" : "0");
 
+        UpdateBuddyList();
     });
 
     $("#actionArea").show();
@@ -6677,7 +7885,7 @@ function ShowSortAnfFilter(){
 
 
 /**
- * Primary method for making a call.
+ * Primary method for making a call. 
  * @param {string} type (required) Either "audio" or "video". Will setup UI according to this type.
  * @param {Buddy} buddy (optional) The buddy to dial if provided.
  * @param {sting} numToDial (required) The number to dial.
@@ -6735,7 +7943,7 @@ function DialByLine(type, buddy, numToDial, CallerID, extraHeaders){
 function SelectLine(lineNum){
     var lineObj = FindLineByNumber(lineNum);
     if(lineObj == null) return;
-
+    
     var displayLineNumber = 0;
     for(var l = 0; l < Lines.length; l++) {
         if(Lines[l].LineNumber == lineObj.LineNumber) displayLineNumber = l+1;
@@ -6773,6 +7981,8 @@ function SelectLine(lineNum){
         Buddies[b].IsSelected = false;
     }
 
+    // Change to Stream if in Narrow view
+    UpdateUI();
 }
 function FindLineByNumber(lineNum) {
     for(var l = 0; l < Lines.length; l++) {
@@ -6780,6 +7990,7 @@ function FindLineByNumber(lineNum) {
     }
     return null;
 }
+
 function AddLineHtml(lineObj, direction){
     var avatar = getPicture(lineObj.BuddyObj.identity);
 
@@ -6808,7 +8019,7 @@ function AddLineHtml(lineObj, direction){
 
 
     // End Call
-    html += "<button id=\"line-"+ lineObj.LineNumber +"-btn-End\" onclick=\"endSession('"+ lineObj.LineNumber +"')\" class=\"roundButtons dialButtons inCallButtons hangupButton\" title=\""+ lang.end_call +"\"><i class=\"fa fa-phone\" style=\"transform: rotate(135deg);font-size: xx-large;\"></i><div id=\"line-"+ lineObj.LineNumber +"-timer\" style=\"font-size: 10px;margin-top: -5px;width: 100%;\"></div></button>";
+    html += "<button id=\"line-"+ lineObj.LineNumber +"-btn-End\" onclick=\"endSession('"+ lineObj.LineNumber +"')\" class=\"roundButtons dialButtons inCallButtons hangupButton\" title=\""+ lang.end_call +"\"><i class=\"fa fa-phone\" style=\"transform: rotate(135deg);font-size: xx-large;\"></i><div id=\"line-"+ lineObj.LineNumber +"-timer\" style=\"font-size: 10px;margin-top: -5px;width: 100%;\">00:00</div></button>";
 
     // Mute
     html += "<button id=\"line-"+ lineObj.LineNumber +"-btn-Mute\" onclick=\"MuteSession('"+ lineObj.LineNumber +"')\" style=\"margin-right: -5px;background-color: rgb(0, 63, 145);border-radius: 0px;border-left: 1px solid rgb(1, 49, 110);\" class=\"roundButtons dialButtons inCallButtons\" title=\""+ lang.mute +"\"><i class=\"fa fa-microphone-slash\"></i></button>";
@@ -6838,6 +8049,7 @@ function AddLineHtml(lineObj, direction){
         RestoreCallControls(lineObj.LineNumber);
     });
 }
+
 function RemoveLine(lineObj){
     if(lineObj == null) return;
 
@@ -6854,6 +8066,7 @@ function RemoveLine(lineObj){
         $("#line-ui-"+ lineObj.LineNumber).remove();
     }
 
+    UpdateBuddyList();
 
     if(earlyReject != true){
         // Rather than showing nothing, go to the last Buddy Selected
@@ -6861,8 +8074,9 @@ function RemoveLine(lineObj){
         if(localDB.getItem("SelectedBuddy") != null){
             console.log("Selecting previously selected buddy...", localDB.getItem("SelectedBuddy"));
             SelectBuddy(localDB.getItem("SelectedBuddy"));
+            UpdateUI();
         }
-    }
+    } 
 }
 function CloseLine(lineNum){
     // Lines and Buddies (Left)
@@ -6886,6 +8100,11 @@ function CloseLine(lineNum){
     }
     selectedBuddy = null;
 
+    // Save Selected
+    // localDB.setItem("SelectedBuddy", null);
+
+    // Change to Stream if in Narrow view
+    UpdateUI();
 }
 function SwitchLines(lineNum){
     $.each(userAgent.sessions, function (i, session) {
@@ -6938,20 +8157,20 @@ function RefreshLineActivity(lineNum){
     var dstCallerID = "";
     if(session.data.calldirection == "inbound") {
         srcCallerID = "<"+ session.remoteIdentity.uri.user +"> "+ session.remoteIdentity.displayName;
-    }
+    } 
     else if(session.data.calldirection == "outbound") {
         dstCallerID = session.data.dst;
     }
 
     var withVideo = (session.data.withvideo)? "("+ lang.with_video +")" : "";
     var startCallMessage = (session.data.calldirection == "inbound")? lang.you_received_a_call_from + " " + srcCallerID  +" "+ withVideo : lang.you_made_a_call_to + " " + dstCallerID +" "+ withVideo;
-    callDetails.push({
+    callDetails.push({ 
         Message: startCallMessage,
         TimeStr : CallStart
     });
     if(CallAnswer){
         var answerCallMessage = (session.data.calldirection == "inbound")? lang.you_answered_after + " " + ringTime + " " + lang.seconds_plural : lang.they_answered_after + " " + ringTime + " " + lang.seconds_plural;
-        callDetails.push({
+        callDetails.push({ 
             Message: answerCallMessage,
             TimeStr : CallAnswer
         });
@@ -7075,6 +8294,7 @@ function InitUserBuddies(){
  * Method used to create a permanent buddy (saved to the local store).
  * Note: This method also makes the memory object for display it on the left hand side, using AddBuddy()
  * @param {string} type One of extension | xmpp | contact | group
+ * @param {boolean} update Option to issue UpdateBuddyList() once done.
  * @param {boolean} focus Option to focus/select the buddy once done.
  * @param {boolean} subscribe Option to create a subscription to the user. (also see subscribeUser)
  * @param {string} callerID The Display Name or Caller ID of the Buddy
@@ -7105,7 +8325,7 @@ function MakeBuddy(type, update, focus, subscribe, callerID, did, jid, AllowDuri
             gID: null,
             jid: null,
             DisplayName: callerID,
-            Description: "",
+            Description: "", 
             Email: "",
             MemberCount: 0,
             EnableDuringDnd: AllowDuringDnd,
@@ -7129,7 +8349,7 @@ function MakeBuddy(type, update, focus, subscribe, callerID, did, jid, AllowDuri
             gID: null,
             jid: jid,
             DisplayName: callerID,
-            Description: "",
+            Description: "", 
             Email: "",
             MemberCount: 0,
             EnableDuringDnd: AllowDuringDnd,
@@ -7142,9 +8362,9 @@ function MakeBuddy(type, update, focus, subscribe, callerID, did, jid, AllowDuri
     }
     if(type == "contact"){
         json.DataCollection.push({
-            Type: "contact",
+            Type: "contact", 
             LastActivity: dateNow,
-            ExtensionNumber: "",
+            ExtensionNumber: "", 
             MobileNumber: "",
             ContactNumber1: did,
             ContactNumber2: "",
@@ -7177,7 +8397,7 @@ function MakeBuddy(type, update, focus, subscribe, callerID, did, jid, AllowDuri
             gID: id,
             jid: null,
             DisplayName: callerID,
-            Description: "",
+            Description: "", 
             Email: "",
             MemberCount: 0,
             EnableDuringDnd: false,
@@ -7188,7 +8408,7 @@ function MakeBuddy(type, update, focus, subscribe, callerID, did, jid, AllowDuri
         buddyObj = new Buddy("group", id, callerID, did, "", "", "", dateNow, "", "", null, false, false, null, autoDelete);
         AddBuddy(buddyObj, update, focus, false, true);
     }
-    // Update Size:
+    // Update Size: 
     json.TotalRows = json.DataCollection.length;
 
     // Save To DB
@@ -7214,14 +8434,322 @@ function UpdateBuddyCallerID(buddyObj, callerID){
         localDB.setItem(profileUserID + "-Buddies", JSON.stringify(json));
     }
 
+    UpdateBuddyList();
 }
 function AddBuddy(buddyObj, update, focus, subscribe, cleanup){
     Buddies.push(buddyObj);
+    if(update == true) UpdateBuddyList();
     AddBuddyMessageStream(buddyObj);
     if(subscribe == true) SubscribeBuddy(buddyObj);
     if(focus == true) SelectBuddy(buddyObj.identity);
+    if(cleanup == true) CleanupBuddies()
 }
+function CleanupBuddies(){
+    if(MaxBuddyAge > 1 || MaxBuddies > 1){
+        // Sort According to .lastActivity
+        Buddies.sort(function(a, b){
+            var aMo = moment.utc(a.lastActivity.replace(" UTC", ""));
+            var bMo = moment.utc(b.lastActivity.replace(" UTC", ""));
+            if (aMo.isSameOrAfter(bMo, "second")) {
+                return -1;
+            } else return 1;
+            return 0;
+        });
 
+        if(MaxBuddyAge > 1){
+            var expiredDate = moment.utc().subtract(MaxBuddyAge, 'days');
+            console.log("Running Buddy Cleanup for activity older than: ", expiredDate.format(DisplayDateFormat+" "+DisplayTimeFormat));
+            for (var b = Buddies.length - 1; b >= 0; b--) {
+                var lastActivity = moment.utc(Buddies[b].lastActivity.replace(" UTC", ""));
+                if(lastActivity.isSameOrAfter(expiredDate, "second")){
+                    // This one is fine
+                } else {
+                    // Too Old
+                    if(Buddies[b].AllowAutoDelete == true){
+                        console.warn("This buddy is too old, and will be deleted: ", lastActivity.format(DisplayDateFormat+" "+DisplayTimeFormat));
+                        DoRemoveBuddy(Buddies[b].identity);
+                    }
+                }
+            }
+        }
+        if(MaxBuddies > 1 && MaxBuddies < Buddies.length){
+            console.log("Running Buddy Cleanup for buddies more than: ", MaxBuddies);
+            for (var b = Buddies.length - 1; b >= MaxBuddies; b--) {
+                if(Buddies[b].AllowAutoDelete == true){
+                    console.warn("This buddy is too Many, and will be deleted: ", Buddies[b].identity);
+                    DoRemoveBuddy(Buddies[b].identity);
+                }
+            }
+        }
+    }
+}
+function PopulateBuddyList() {
+    console.log("Clearing Buddies...");
+    Buddies = new Array();
+    console.log("Adding Buddies...");
+    var json = JSON.parse(localDB.getItem(profileUserID + "-Buddies"));
+    if(json == null) json = InitUserBuddies();
+
+    console.log("Total Buddies: " + json.TotalRows);
+    $.each(json.DataCollection, function (i, item) {
+        item.AutoDelete = (item.AutoDelete == true)? true : false;
+        item.Pinned = (item.Pinned == true)? true : false;
+        if(item.Type == "extension"){
+            // extension
+            var buddy = new Buddy("extension", 
+                                    item.uID, 
+                                    item.DisplayName, 
+                                    item.ExtensionNumber, 
+                                    item.MobileNumber, 
+                                    item.ContactNumber1, 
+                                    item.ContactNumber2, 
+                                    item.LastActivity, 
+                                    item.Description, 
+                                    item.Email, 
+                                    null, 
+                                    item.EnableDuringDnd, 
+                                    item.Subscribe,
+                                    item.SubscribeUser,
+                                    item.AutoDelete,
+                                    item.Pinned);
+            AddBuddy(buddy, false, false, false);
+        }
+        else if(item.Type == "xmpp"){
+            // xmpp
+            var buddy = new Buddy("xmpp", 
+                                    item.uID, 
+                                    item.DisplayName, 
+                                    item.ExtensionNumber, 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    item.LastActivity, 
+                                    "", 
+                                    "", 
+                                    item.jid, 
+                                    item.EnableDuringDnd, 
+                                    item.Subscribe,
+                                    item.SubscribeUser,
+                                    item.AutoDelete,
+                                    item.Pinned);
+            AddBuddy(buddy, false, false, false);
+        }
+        else if(item.Type == "contact"){
+            // contact
+            var buddy = new Buddy("contact", 
+                                    item.cID, 
+                                    item.DisplayName, 
+                                    "", 
+                                    item.MobileNumber, 
+                                    item.ContactNumber1, 
+                                    item.ContactNumber2, 
+                                    item.LastActivity, 
+                                    item.Description, 
+                                    item.Email, 
+                                    null, 
+                                    item.EnableDuringDnd, 
+                                    item.Subscribe,
+                                    item.SubscribeUser,
+                                    item.AutoDelete,
+                                    item.Pinned);
+            AddBuddy(buddy, false, false, false);
+        }
+        else if(item.Type == "group"){
+            // group
+            var buddy = new Buddy("group", 
+                                    item.gID, 
+                                    item.DisplayName, 
+                                    item.ExtensionNumber, 
+                                    "", 
+                                    "", 
+                                    "", 
+                                    item.LastActivity, 
+                                    item.MemberCount + " member(s)", 
+                                    item.Email, 
+                                    null, 
+                                    item.EnableDuringDnd, 
+                                    item.Subscribe,
+                                    item.SubscribeUser,
+                                    item.AutoDelete,
+                                    item.Pinned);
+            AddBuddy(buddy, false, false, false);
+        }
+    });
+    CleanupBuddies()
+
+    // Update List (after add)
+    console.log("Updating Buddy List...");
+    UpdateBuddyList();
+}
+function UpdateBuddyList(){
+    var filter = $("#txtFindBuddy").val();
+
+    $("#myContacts").empty();
+
+    // Show Lines
+    var callCount = 0
+    for(var l = 0; l < Lines.length; l++) {
+
+        var classStr = (Lines[l].IsSelected)? "buddySelected" : "buddy";
+        if(Lines[l].SipSession != null) classStr = (Lines[l].SipSession.isOnHold)? "buddyActiveCallHollding" : "buddyActiveCall";
+
+        var html = "<div id=\"line-"+ Lines[l].LineNumber +"\" class="+ classStr +" onclick=\"SelectLine('"+ Lines[l].LineNumber +"')\">";
+        if(Lines[l].IsSelected == false && Lines[l].SipSession && Lines[l].SipSession.data.started != true && Lines[l].SipSession.data.calldirection == "inbound"){
+            html += "<span id=\"line-"+ Lines[l].LineNumber +"-ringing\" class=missedNotifyer style=\"padding-left: 5px; padding-right: 5px; width:unset\"><i class=\"fa fa-phone\"></i> "+ lang.state_ringing +"</span>";
+        }
+        html += "<div class=lineIcon>"+ (l + 1) +"</div>";
+        html += "<div class=contactNameText><i class=\"fa fa-phone\"></i> "+ lang.line +" "+ (l + 1) +"</div>";
+        html += "<div id=\"line-"+ Lines[l].LineNumber +"-datetime\" class=contactDate>&nbsp;</div>";
+        html += "<div class=presenceText>"+ Lines[l].DisplayName +" <"+ Lines[l].DisplayNumber +">" +"</div>";
+        html += "</div>";
+        // SIP.Session.C.STATUS_TERMINATED
+        if(Lines[l].SipSession && Lines[l].SipSession.data.earlyReject != true){
+            $("#myContacts").append(html);
+            callCount ++;
+        }
+    }
+
+    // Draw a line if there are calls
+    if(callCount > 0){
+        $("#myContacts").append("<hr class=hrline>");
+    }
+
+ 
+
+    // Sort and filter
+    SortBuddies();
+
+    var hiddenBuddies = 0;
+
+    // Display
+    for(var b = 0; b < Buddies.length; b++) {
+        var buddyObj = Buddies[b];
+
+        if(filter && filter.length >= 1){
+            // Perform Filter Display
+            var display = false;
+            if(buddyObj.CallerIDName && buddyObj.CallerIDName.toLowerCase().indexOf(filter.toLowerCase()) > -1 ) display = true;
+            if(buddyObj.ExtNo && buddyObj.ExtNo.toLowerCase().indexOf(filter.toLowerCase()) > -1 ) display = true;
+            if(buddyObj.Desc && buddyObj.Desc.toLowerCase().indexOf(filter.toLowerCase()) > -1 ) display = true;
+            if(!display) continue;
+        }
+
+        var today = moment.utc();
+        var lastActivity = moment.utc(buddyObj.lastActivity.replace(" UTC", ""));
+        var displayDateTime = "";
+        if(lastActivity.isSame(today, 'day'))
+        {
+            displayDateTime = lastActivity.local().format(DisplayTimeFormat);
+        } 
+        else {
+            displayDateTime = lastActivity.local().format(DisplayDateFormat);
+        }
+
+        if(HideAutoDeleteBuddies){
+            if(buddyObj.AllowAutoDelete) {
+                hiddenBuddies++;
+                continue;
+            }
+        }
+
+        var classStr = (buddyObj.IsSelected)? "buddySelected" : "buddy";
+        if(buddyObj.type == "extension") { 
+            var friendlyState = buddyObj.presence;
+            if(friendlyState == "Unknown") friendlyState = lang.state_unknown;
+            if(friendlyState == "Not online") friendlyState = lang.state_not_online;
+            if(friendlyState == "Ready") friendlyState = lang.state_ready;
+            if(friendlyState == "On the phone") friendlyState = lang.state_on_the_phone;
+            if(friendlyState == "Proceeding") friendlyState = lang.state_on_the_phone;
+            if(friendlyState == "Ringing") friendlyState = lang.state_ringing;
+            if(friendlyState == "On hold") friendlyState = lang.state_on_hold;
+            if(friendlyState == "Unavailable") friendlyState = lang.state_unavailable;
+            if(buddyObj.EnableSubscribe != true) friendlyState = (buddyObj.Desc)? buddyObj.Desc : "";
+            var autDeleteStatus = "";
+            if(buddyObj.AllowAutoDelete == true) autDeleteStatus = "<i class=\"fa fa-clock-o\"></i> ";
+            var html = "<div id=\"contact-"+ buddyObj.identity +"\" class="+ classStr +" onclick=\"SelectBuddy('"+ buddyObj.identity +"', 'extension')\">";
+            html += "<span id=\"contact-"+ buddyObj.identity +"-missed\" class=missedNotifyer style=\""+ ((buddyObj.missed && buddyObj.missed > 0)? "" : "display:none") +"\">"+ buddyObj.missed +"</span>";
+            html += "<div id=\"contact-"+ buddyObj.identity +"-picture\" class=buddyIcon style=\"background-image: url('"+ getPicture(buddyObj.identity, buddyObj.type) +"')\"></div>";
+            html += (buddyObj.Pinned)? "<span class=pinnedBuddy><i class=\"fa fa-thumb-tack\"></i></span>" : "";
+            html += "<div class=contactNameText>";
+            html += "<span id=\"contact-"+ buddyObj.identity +"-devstate\" class=\""+ ((buddyObj.EnableSubscribe)? buddyObj.devState : "dotDefault") +"\"></span>";
+            html += (BuddyShowExtenNum == true)? " "+ buddyObj.ExtNo + " - " : " ";
+            html += buddyObj.CallerIDName
+            html += "</div>";
+            html += "<div id=\"contact-"+ buddyObj.identity +"-datetime\" class=contactDate>"+ autDeleteStatus + ""+ displayDateTime +"</div>";
+            html += "<div id=\"contact-"+ buddyObj.identity +"-presence\" class=presenceText>"+ friendlyState +"</div>";
+            html += "</div>";
+            $("#myContacts").append(html);
+        } else if(buddyObj.type == "xmpp") { 
+            var friendlyState = buddyObj.presenceText;
+            var autDeleteStatus = "";
+            if(buddyObj.AllowAutoDelete == true) autDeleteStatus = "<i class=\"fa fa-clock-o\"></i> ";
+            // NOTE: Set by user could contain malicious code
+            friendlyState = friendlyState.replace(/[<>"'\r\n&]/g, function(chr){
+                let table = { '<': 'lt', '>': 'gt', '"': 'quot', '\'': 'apos', '&': 'amp', '\r': '#10', '\n': '#13' };
+                return '&' + table[chr] + ';';
+            });
+            
+            var html = "<div id=\"contact-"+ buddyObj.identity +"\" class="+ classStr +" onclick=\"SelectBuddy('"+ buddyObj.identity +"', 'extension')\">";
+            html += "<span id=\"contact-"+ buddyObj.identity +"-missed\" class=missedNotifyer style=\""+ ((buddyObj.missed && buddyObj.missed > 0)? "" : "display:none") +"\">"+ buddyObj.missed +"</span>";
+            html += "<div id=\"contact-"+ buddyObj.identity +"-picture\" class=buddyIcon style=\"background-image: url('"+ getPicture(buddyObj.identity, buddyObj.type) +"')\"></div>";
+            html += (buddyObj.Pinned)? "<span class=pinnedBuddy><i class=\"fa fa-thumb-tack\"></i></span>" : "";
+            html += "<div class=contactNameText>";
+            html += "<span id=\"contact-"+ buddyObj.identity +"-devstate\" class=\""+ ((buddyObj.EnableSubscribe)? buddyObj.devState : "dotDefault") +"\"></span>";
+            html += (BuddyShowExtenNum == true)? " "+ buddyObj.ExtNo + " - " : " ";
+            html += buddyObj.CallerIDName;
+            html += "</div>";
+            html += "<div id=\"contact-"+ buddyObj.identity +"-datetime\" class=contactDate>"+ autDeleteStatus + ""+ displayDateTime +"</div>";
+            html += "<div id=\"contact-"+ buddyObj.identity +"-presence\" class=presenceText><i class=\"fa fa-comments\"></i> "+ friendlyState +"</div>";
+            html += "<div id=\"contact-"+ buddyObj.identity +"-chatstate-menu\" class=presenceText style=\"display:none\"><i class=\"fa fa-commenting-o\"></i> "+ buddyObj.CallerIDName +" "+ lang.is_typing +"...</div>";
+            html += "</div>";
+            $("#myContacts").append(html);
+        } else if(buddyObj.type == "contact") { 
+            var autDeleteStatus = "";
+            if(buddyObj.AllowAutoDelete == true) autDeleteStatus = "<i class=\"fa fa-clock-o\"></i> ";
+            var html = "<div id=\"contact-"+ buddyObj.identity +"\" class="+ classStr +" onclick=\"SelectBuddy('"+ buddyObj.identity +"', 'contact')\">";
+            html += "<span id=\"contact-"+ buddyObj.identity +"-missed\" class=missedNotifyer style=\""+ ((buddyObj.missed && buddyObj.missed > 0)? "" : "display:none") +"\">"+ buddyObj.missed +"</span>";
+            html += "<div id=\"contact-"+ buddyObj.identity +"-picture\" class=buddyIcon style=\"background-image: url('"+ getPicture(buddyObj.identity, buddyObj.type) +"')\"></div>";
+            html += (buddyObj.Pinned)? "<span class=pinnedBuddy><i class=\"fa fa-thumb-tack\"></i></span>" : "";
+            html += "<div class=contactNameText><i class=\"fa fa-address-card\"></i> "+ buddyObj.CallerIDName +"</div>";
+            html += "<div id=\"contact-"+ buddyObj.identity +"-datetime\" class=contactDate>"+ autDeleteStatus + ""+ displayDateTime +"</div>";
+            html += "<div class=presenceText>"+ buddyObj.Desc +"</div>";
+            html += "</div>";
+            $("#myContacts").append(html);
+        } else if(buddyObj.type == "group"){ 
+            var autDeleteStatus = "";
+            if(buddyObj.AllowAutoDelete == true) autDeleteStatus = "<i class=\"fa fa-clock-o\"></i> ";
+            var html = "<div id=\"contact-"+ buddyObj.identity +"\" class="+ classStr +" onclick=\"SelectBuddy('"+ buddyObj.identity +"', 'group')\">";
+            html += "<span id=\"contact-"+ buddyObj.identity +"-missed\" class=missedNotifyer style=\""+ ((buddyObj.missed && buddyObj.missed > 0)? "" : "display:none") +"\">"+ buddyObj.missed +"</span>";
+            html += "<div id=\"contact-"+ buddyObj.identity +"-picture\" class=buddyIcon style=\"background-image: url('"+ getPicture(buddyObj.identity, buddyObj.type) +"')\"></div>";
+            html += (buddyObj.Pinned)? "<span class=pinnedBuddy><i class=\"fa fa-thumb-tack\"></i></span>" : "";
+            html += "<div class=contactNameText><i class=\"fa fa-users\"></i> "+ buddyObj.CallerIDName +"</div>";
+            html += "<div id=\"contact-"+ buddyObj.identity +"-datetime\" class=contactDate>"+ autDeleteStatus + ""+ displayDateTime +"</div>";
+            html += "<div class=presenceText>"+ buddyObj.Desc +"</div>";
+            html += "</div>";
+            $("#myContacts").append(html);
+        }
+    }
+    if(hiddenBuddies > 0){
+        console.warn("Auto Delete Buddies not shown", hiddenBuddies);
+        var html = "<div id=hiddenBuddies class=hiddenBuddiesText>("+ lang.sort_no_showing.replace("{0}", hiddenBuddies) +")</div>";
+        $("#myContacts").append(html);
+        $("#hiddenBuddies").on("click", function(){
+            HideAutoDeleteBuddies = false;
+            // Show now, but leave default set in storage
+            UpdateBuddyList();
+        });
+    }
+
+
+    // Make Select
+    // ===========
+    for(var b = 0; b < Buddies.length; b++) {
+        if(Buddies[b].IsSelected) {
+            SelectBuddy(Buddies[b].identity, Buddies[b].type);
+            break;
+        }
+    }
+}
 function AddBuddyMessageStream(buddyObj) {
 
     // Profile Etc Row
@@ -7236,7 +8764,7 @@ function AddBuddyMessageStream(buddyObj) {
     profileRow += "<td style=\"width:38px; text-align: center;\">";
     profileRow += "<button id=\"contact-"+ buddyObj.identity +"-btn-back\" onclick=\"CloseBuddy('"+ buddyObj.identity +"')\" class=roundButtons style=\"margin-right:5px\" title=\""+ lang.back +"\"><i class=\"fa fa-chevron-left\"></i></button> ";
     profileRow += "</td>"
-
+    
     // Profile UI
     profileRow += "<td style=\"width:100%\">";
     profileRow += "<div class=contact style=\"cursor: unset; padding:0px\">";
@@ -7261,7 +8789,7 @@ function AddBuddyMessageStream(buddyObj) {
         profileRow += "<i class=\"fa fa-address-card\"></i>";
         profileRow += " <span id=\"contact-"+ buddyObj.identity +"-name\">"+ buddyObj.CallerIDName +"</span>";
         profileRow += "</div>";
-    }
+    } 
     else if(buddyObj.type == "group") {
         profileRow += "<div class=contactNameText style=\"margin-right: 0px;\">"
         profileRow += "<i class=\"fa fa-users\"></i>";
@@ -7279,7 +8807,7 @@ function AddBuddyMessageStream(buddyObj) {
         if (friendlyState == "On hold") friendlyState = lang.state_on_hold;
         if (friendlyState == "Unavailable") friendlyState = lang.state_unavailable;
         profileRow += "<div id=\"contact-"+ buddyObj.identity +"-presence-main\" class=presenceText>"+ friendlyState +"</div>";
-    }
+    } 
     else if(buddyObj.type == "xmpp"){
         profileRow += "<div id=\"contact-"+ buddyObj.identity +"-presence-main\" class=presenceText><i class=\"fa fa-comments\"></i> "+ buddyObj.presenceText +"</div>";
         profileRow += "<div id=\"contact-"+ buddyObj.identity +"-chatstate-main\" class=presenceText style=\"display:none\"><i class=\"fa fa-commenting-o\"></i> "+ buddyObj.CallerIDName +" "+ lang.is_typing +"...</div>";
@@ -7376,7 +8904,7 @@ function AddBuddyMessageStream(buddyObj) {
         textRow += "<td><textarea id=\"contact-"+ buddyObj.identity +"-ChatMessage\" class=\"chatMessage cleanScroller\" placeholder=\""+ lang.type_your_message_here +"\" onkeydown=\"chatOnkeydown(event, this,'"+ buddyObj.identity +"')\" oninput=\"chatOnInput(event, this,'"+ buddyObj.identity +"')\" onpaste=\"chatOnbeforepaste(event, this,'"+ buddyObj.identity +"')\"></textarea></td>";
         textRow += "<td id=\"contact-"+ buddyObj.identity +"-sendMessageButtons\" style=\"width:40px; display:none\"><button onclick=\"SendChatMessage('"+ buddyObj.identity +"')\" class=\"roundButtons\" title=\""+ lang.send +"\"><i class=\"fa fa-paper-plane\"></i></button></td>"
         textRow += "</tr></table>";
-
+        
         textRow += "</td></tr>";
     }
 
@@ -7416,7 +8944,7 @@ function RemoveBuddyMessageStream(buddyObj, days){
     if(days && days > 0){
         if(stream && stream.DataCollection && stream.DataCollection.length >= 1){
 
-            // Create Trim Stream
+            // Create Trim Stream 
             var trimmedStream = {
                 TotalRows : 0,
                 DataCollection : []
@@ -7488,12 +9016,13 @@ function RemoveBuddyMessageStream(buddyObj, days){
         localDB.removeItem("img-"+ buddyObj.identity +"-contact");
         localDB.removeItem("img-"+ buddyObj.identity +"-group");
     }
+    UpdateBuddyList();
 
     // Remove Call Recordings
     if(stream && stream.DataCollection && stream.DataCollection.length >= 1){
         DeleteCallRecordings(buddyObj.identity, stream);
     }
-
+    
     // Remove QOS Data
     if(stream && stream.DataCollection && stream.DataCollection.length >= 1){
         DeleteQosData(buddyObj.identity, stream);
@@ -7659,7 +9188,7 @@ function SortBuddies(){
     Buddies.sort(function(a, b){
         return (a.Pinned === b.Pinned)? 0 : a.Pinned? -1 : 1;
     });
-
+    
 }
 
 
@@ -7728,7 +9257,9 @@ function SelectBuddy(buddy) {
         Buddies[b].IsSelected = (Buddies[b].identity == buddy);
     }
 
-
+    // Change to Stream if in Narrow view
+    UpdateUI();
+    
     // Refresh Stream
     // console.log("Refreshing Stream for you(" + profileUserID + ") and : " + buddyObj.identity);
     RefreshStream(buddyObj);
@@ -7763,6 +9294,8 @@ function CloseBuddy(buddy){
     // Save Selected
     localDB.setItem("SelectedBuddy", null);
 
+    // Change to Stream if in Narrow view
+    UpdateUI();
 }
 function RemoveBuddy(buddy){
     // Check if you are on the phone etc
@@ -7771,6 +9304,7 @@ function RemoveBuddy(buddy){
 
     Confirm(lang.confirm_remove_buddy, lang.remove_buddy, function(){
         DoRemoveBuddy(buddy)
+        UpdateBuddyList();
     });
 }
 function DoRemoveBuddy(buddy){
@@ -7873,7 +9407,7 @@ function RefreshStream(buddyObj, filter) {
             }
             if (item.ItemType == "MSG") {
                 // Special search??
-            }
+            } 
             else if (item.ItemType == "CDR") {
                 // Tag Search
                 if(item.Tags && item.Tags.length > 1){
@@ -7889,7 +9423,7 @@ function RefreshStream(buddyObj, filter) {
             }
             else if(item.ItemType == "FILE"){
                 // Not yest implemented
-            }
+            } 
             else if(item.ItemType == "SMS"){
                 // Not yest implemented
             }
@@ -7951,7 +9485,7 @@ function RefreshStream(buddyObj, filter) {
                 messageString += "<div class=messageDate>" + DateTime + " " + deliveryStatus +"</div>"
                 messageString += "</td>"
                 messageString += "</tr></table>";
-            }
+            } 
             else {
                 // You are the destination (receiving)
                 var ActualSender = ""; //TODO
@@ -7981,9 +9515,9 @@ function RefreshStream(buddyObj, filter) {
 
             }
             $("#contact-" + buddyObj.identity + "-ChatHistory").prepend(messageString);
-        }
+        } 
         else if (item.ItemType == "CDR") {
-            // Add CDR
+            // Add CDR 
             // =======
 
             // CdrId = uID(),
@@ -7995,8 +9529,8 @@ function RefreshStream(buddyObj, filter) {
             // Dst: dstCallerID,
             // Billsec: duration.asSeconds(),
             // MessageData: ""
-            // ReasonText:
-            // ReasonCode:
+            // ReasonText: 
+            // ReasonCode: 
             // Flagged
             // Tags: [""", "", "", ""]
             // Transfers: [{}],
@@ -8004,7 +9538,7 @@ function RefreshStream(buddyObj, filter) {
             // Holds: [{}],
             // Recordings: [{ uID, startTime, mediaType, stopTime: utcDateNow, size}],
             // QOS: [{}]
-
+    
             var iconColor = (item.Billsec > 0)? "green" : "red";
             var formattedMessage = "";
 
@@ -8040,7 +9574,20 @@ function RefreshStream(buddyObj, filter) {
                         var StopTime = moment.utc(recording.stopTime.replace(" UTC", "")).local();
                         var recordingDuration = moment.duration(StopTime.diff(StartTime));
                         recordingsHtml += "<div class=callRecording>";
-
+                        if(item.WithVideo){
+                            if(recording.Poster){
+                                var posterWidth = recording.Poster.width;
+                                var posterHeight = recording.Poster.height;
+                                var posterImage = recording.Poster.posterBase64;
+                                recordingsHtml += "<div><IMG src=\""+ posterImage +"\"><button onclick=\"PlayVideoCallRecording(this, '"+ item.CdrId +"', '"+ recording.uID +"')\" class=videoPoster><i class=\"fa fa-play\"></i></button></div>";
+                            }
+                            else {
+                                recordingsHtml += "<div><button class=roundButtons onclick=\"PlayVideoCallRecording(this, '"+ item.CdrId +"', '"+ recording.uID +"', '"+ buddyObj.identity +"')\"><i class=\"fa fa-video-camera\"></i></button></div>";
+                            }
+                        } 
+                        else {
+                            recordingsHtml += "<div><button class=roundButtons onclick=\"PlayAudioCallRecording(this, '"+ item.CdrId +"', '"+ recording.uID +"', '"+ buddyObj.identity +"')\"><i class=\"fa fa-play\"></i></button></div>";
+                        } 
                         recordingsHtml += "<div>"+ lang.started +": "+ StartTime.format(DisplayTimeFormat) +" <i class=\"fa fa-long-arrow-right\"></i> "+ lang.stopped +": "+ StopTime.format(DisplayTimeFormat) +"</div>";
                         recordingsHtml += "<div>"+ lang.recording_duration +": "+ formatShortDuration(recordingDuration.asSeconds()) +"</div>";
                         recordingsHtml += "<div>";
@@ -8058,7 +9605,7 @@ function RefreshStream(buddyObj, filter) {
                 // (Outbound) You(profileUserID) initiated a call
                 if(item.Billsec == "0") {
                     formattedMessage += " "+ lang.you_tried_to_make +" "+ audioVideo +" ("+ item.ReasonText +").";
-                }
+                } 
                 else {
                     formattedMessage += " "+ lang.you_made + " "+ audioVideo +", "+ lang.and_spoke_for +" " + formatDuration(item.Billsec) + ".";
                 }
@@ -8073,12 +9620,12 @@ function RefreshStream(buddyObj, filter) {
                 messageString += "<div class=messageDate>" + DateTime  + "</div>";
                 messageString += "</td>"
                 messageString += "</tr></table>";
-            }
+            } 
             else {
                 // (Inbound) you(profileUserID) received a call
                 if(item.Billsec == "0"){
                     formattedMessage += " "+ lang.you_missed_a_call + " ("+ item.ReasonText +").";
-                }
+                } 
                 else {
                     formattedMessage += " "+ lang.you_received + " "+ audioVideo +", "+ lang.and_spoke_for +" " + formatDuration(item.Billsec) + ".";
                 }
@@ -8096,10 +9643,10 @@ function RefreshStream(buddyObj, filter) {
             }
             // Messages are prepended here, and appended when logging
             $("#contact-" + buddyObj.identity + "-ChatHistory").prepend(messageString);
-        }
+        } 
         else if(item.ItemType == "FILE"){
             // TODO
-        }
+        } 
         else if(item.ItemType == "SMS"){
             // TODO
         }
@@ -8232,7 +9779,7 @@ function RedrawStage(lineNum, videoChanged){
     // default ia 4:3
     var Margin = 3;
     var videoRatio = 0.750; // 0.5625 = 9/16 (16:9) | 0.75   = 3/4 (4:3)
-    if(videoAspectRatio == "" || videoAspectRatio == "1.33") videoRatio = 0.750;
+    if(videoAspectRatio == "" || videoAspectRatio == "1.33") videoRatio = 0.750;  
     if(videoAspectRatio == "1.77") videoRatio = 0.5625;
     if(videoAspectRatio == "1") videoRatio = 1;
     var stageWidth = videoContainer.outerWidth() - (Margin * 2);
@@ -8300,7 +9847,7 @@ function RedrawStage(lineNum, videoChanged){
         else {
             // None of the videos are pinned
             if(videoTrack.readyState == "live" && srcVideoWidth > 10 && srcVideoHeight >= 10) {
-                // Unpinned
+                // Unpinned 
                 $(video).parent().css("width", videoWidth+"px");
                 $(video).parent().css("height", videoHeight+"px");
                 $(video).show();
@@ -8466,7 +10013,7 @@ function ShowMessageMenu(obj, typeStr, cdrId, buddy) {
                     var dstCallerID = "";
                     if(cdr.CallDirection == "inbound") {
                         srcCallerID = cdr.Src;
-                    }
+                    } 
                     else if(cdr.CallDirection == "outbound") {
                         dstCallerID = cdr.Dst;
                     }
@@ -8496,13 +10043,13 @@ function ShowMessageMenu(obj, typeStr, cdrId, buddy) {
 
                     var withVideo = (cdr.WithVideo)? "("+ lang.with_video +")" : "";
                     var startCallMessage = (cdr.CallDirection == "inbound")? lang.you_received_a_call_from + " " + srcCallerID  +" "+ withVideo : lang.you_made_a_call_to + " " + dstCallerID +" "+ withVideo;
-                    callDetails.push({
+                    callDetails.push({ 
                         Message: startCallMessage,
                         TimeStr: cdr.ItemDate
                     });
                     if(CallAnswer){
                         var answerCallMessage = (cdr.CallDirection == "inbound")? lang.you_answered_after + " " + ringTime + " " + lang.seconds_plural : lang.they_answered_after + " " + ringTime + " " + lang.seconds_plural;
-                        callDetails.push({
+                        callDetails.push({ 
                             Message: answerCallMessage,
                             TimeStr: cdr.CallAnswer
                         });
@@ -8600,10 +10147,10 @@ function ShowMessageMenu(obj, typeStr, cdrId, buddy) {
                             recordingsHtml += "<div>";
                             if(cdr.WithVideo){
                                 recordingsHtml += "<div><video id=\"callrecording-video-"+ recording.uID +"\" controls playsinline style=\"width: 100%\"></div>";
-                            }
+                            } 
                             else {
                                 recordingsHtml += "<div><audio id=\"callrecording-audio-"+ recording.uID +"\" controls style=\"width: 100%\"></div>";
-                            }
+                            } 
                             recordingsHtml += "<div>"+ lang.started +": "+ StartTime.format(DisplayTimeFormat) +" <i class=\"fa fa-long-arrow-right\"></i> "+ lang.stopped +": "+ StopTime.format(DisplayTimeFormat) +"</div>";
                             recordingsHtml += "<div>"+ lang.recording_duration +": "+ formatShortDuration(recordingDuration.asSeconds()) +"</div>";
                             recordingsHtml += "<div><a id=\"download-"+ recording.uID +"\">"+ lang.save_as +"</a> ("+ lang.right_click_and_select_save_link_as +")</div>";
@@ -8616,7 +10163,7 @@ function ShowMessageMenu(obj, typeStr, cdrId, buddy) {
                         html += "<hr>";
                         html += "<div style=\"position: relative; margin: auto; height: 160px; width: 100%;\"><canvas id=\"cdr-AudioSendBitRate\"></canvas></div>";
                         html += "<div style=\"position: relative; margin: auto; height: 160px; width: 100%;\"><canvas id=\"cdr-AudioSendPacketRate\"></canvas></div>";
-
+            
                         html += "<h2 style=\"font-size: 16px\">"+ lang.receive_statistics +"</h2>";
                         html += "<hr>";
                         html += "<div style=\"position: relative; margin: auto; height: 160px; width: 100%;\"><canvas id=\"cdr-AudioReceiveBitRate\"></canvas></div>";
@@ -8669,7 +10216,7 @@ function ShowMessageMenu(obj, typeStr, cdrId, buddy) {
                                 if(IDB.objectStoreNames.contains("Recordings") == false){
                                     console.warn("IndexDB CallRecordings.Recordings does not exists");
                                     return;
-                                }
+                                } 
 
                                 var transaction = IDB.transaction(["Recordings"]);
                                 var objectStoreGet = transaction.objectStore("Recordings").get(recording.uID);
@@ -8773,7 +10320,7 @@ function ShowMessageMenu(obj, typeStr, cdrId, buddy) {
                     });
                 }
                 if(id == 11){
-                    // TODO...
+                    // TODO... 
                     // Involves sharing a message ID, then on change, sent update request
                     // So that both parties share the same update.
                 }
@@ -8929,7 +10476,7 @@ function AddMenu(obj, buddy){
                 if(id == "2"){
                     ShowDictate(buddy);
                 }
-                //
+                // 
             }
         },
         createEvent : null,
@@ -8993,7 +10540,7 @@ function ShowDictate(buddy){
     var textarea = $("#contact-"+ buddy +"-ChatMessage");
 
     buddyObj.recognition.continuous = true;
-    buddyObj.recognition.onstart = function() {
+    buddyObj.recognition.onstart = function() { 
         instructions.html("<i class=\"fa fa-microphone\" style=\"font-size: 21px\"></i><i class=\"fa fa-cog fa-spin\" style=\"font-size:10px; vertical-align:text-bottom; margin-left:2px\"></i> "+ lang.im_listening);
         updateScroll(buddy);
     }
@@ -9051,14 +10598,63 @@ function ShowDictate(buddy){
 function ShowMyProfile(){
     CloseUpSettings();
 
-    $("#searchArea").hide();
-    $("#actionArea").empty();
+
+
+     // SIP & XMPP vCard
+     var profileVcard = getDbItem("profileVcard", null);
+     if(profileVcard != null) profileVcard = JSON.parse(profileVcard);
+
 
             var chatEng = ($("#chat_type_sip").is(':checked'))? "SIMPLE" : "XMPP";
 
+            if(EnableAccountSettings){
+                if($("#Configure_Account_wssServer").val() == "") {
+                    console.warn("Validation Failed");
+                    return;
+                } 
+                if($("#Configure_Account_WebSocketPort").val() == "") {
+                    console.warn("Validation Failed");
+                    return;
+                } 
+                if($("#Configure_Account_profileName").val() == "") {
+                    console.warn("Validation Failed");
+                    return;
+                } 
+                if($("#Configure_Account_SipDomain").val() == "") {
+                    console.warn("Validation Failed");
+                    return;
+                }
+                if($("#Configure_Account_SipUsername").val() == "") {
+                    console.warn("Validation Failed");
+                    return;
+                } 
+                if($("#Configure_Account_SipPassword").val() == "") {
+                    console.warn("Validation Failed");
+                    return;
+                }
+                if(chatEng == "XMPP"){
+                    if($("#Configure_Account_xmpp_address").val() == "") {
+                        console.warn("Validation Failed");
+                        return;
+                    } 
+                    if($("#Configure_Account_xmpp_port").val() == "") {
+                        console.warn("Validation Failed");
+                        return;
+                    }
+                    if($("#Configure_Account_xmpp_domain").val() == "") {
+                        console.warn("Validation Failed");
+                        return;
+                    }
+                    if($("#Configure_Account_profileUser").val() == "") {
+                        console.warn("Validation Failed");
+                        return;
+                    }
+                }
+            }
+
             // The profileUserID identifies users
             if(localDB.getItem("profileUserID") == null) localDB.setItem("profileUserID", uID()); // For first time only
-
+    
             // 1 Account
             if(EnableAccountSettings){
 
@@ -9080,68 +10676,516 @@ function ShowMyProfile(){
                 localDB.setItem("XmppDomain", $("#Configure_Account_xmpp_domain").val());
                 localDB.setItem("profileUser", $("#Configure_Account_profileUser").val());
             }
-
+    
             // 2 Audio & Video
-            localDB.setItem("AudioOutputId", $("#playbackSrc").val());
-            localDB.setItem("AudioSrcId", $("#microphoneSrc").val());
-            localDB.setItem("AutoGainControl", ($("#Settings_AutoGainControl").is(':checked'))? "1" : "0");
-            localDB.setItem("EchoCancellation", ($("#Settings_EchoCancellation").is(':checked'))? "1" : "0");
-            localDB.setItem("NoiseSuppression", ($("#Settings_NoiseSuppression").is(':checked'))? "1" : "0");
-            localDB.setItem("RingOutputId", $("#ringDevice").val());
+            localDB.setItem("AutoGainControl", "1");
+            localDB.setItem("EchoCancellation", "1");
+            localDB.setItem("NoiseSuppression", "1");
 
 
-            // 3 Appearance
-            if(EnableAppearanceSettings){
-                var vCard = {
-                    "TitleDesc": $("#Configure_Profile_TitleDesc").val(),
-                    "Mobile": $("#Configure_Profile_Mobile").val(),
-                    "Email": $("#Configure_Profile_Email").val(),
-                    "Number1": $("#Configure_Profile_Number1").val(),
-                    "Number2": $("#Configure_Profile_Number2").val(),
-                }
-                localDB.setItem("profileVcard", JSON.stringify(vCard));
-
-                var options =  {
-                    type: 'base64',
-                    size: 'viewport',
-                    format: 'webp', // png
-                    quality: 0.5,
-                    circle: false
-                }
-                $("#Appearance_Html").show(); // Bug, only works if visible
-                $("#ImageCanvas").croppie('result', options).then(function(base64) {
-                    localDB.setItem("profilePicture", base64);
-                    $("#Appearance_Html").hide();
-
-                        window.location.reload();
-
-                });
-            } else {
-                    window.location.reload();
-            }
 
             // 4 Notifications
             if(EnableNotificationSettings){
-                localDB.setItem("Notifications", ($("#Settings_Notifications").is(":checked"))? "1" : "0");
+                localDB.setItem("Notifications", "0");
             }
-
 
 
     // Show
     $("#actionArea").show();
 
-}
+    // DoOnload
+    window.setTimeout(function(){
+        // Account
+        if(EnableAccountSettings){
+            $("#chat_type_sip").change(function(){
+                if($("#chat_type_sip").is(':checked')){
+                    $("#RowChatEngine_xmpp").hide();
+                }
+            });
+            $("#chat_type_xmpp").change(function(){
+                if($("#chat_type_xmpp").is(':checked')){
+                    $("#RowChatEngine_xmpp").show();
+                }
+            });
+            $("#Configure_Account_Voicemail_Subscribe").change(function(){
+                if($("#Configure_Account_Voicemail_Subscribe").is(':checked')){
+                    $("#Voicemail_Did_row").show();
+                } else {
+                    $("#Voicemail_Did_row").hide();
+                }
+            });
+        }
 
+
+        var playRingButton = $("#preview_ringer_play");
+        // Ringtone Button Press
+        playRingButton.click(function(){
+    
+            try{
+                window.SettingsRingerAudio.pause();
+            } 
+            catch(e){}
+            window.SettingsRingerAudio = null;
+    
+            try{
+                var tracks = window.SettingsRingerStream.getTracks();
+                tracks.forEach(function(track) {
+                    track.stop();
+                });
+            }
+            catch(e){}
+            window.SettingsRingerStream = null;
+    
+            try{
+                var soundMeter = window.SettingsRingerStreamMeter;
+                soundMeter.stop();
+            }
+            catch(e){}
+            window.SettingsRingerStreamMeter = null;
+    
+            // Load Sample
+            console.log("Audio:", audioBlobs.Ringtone.url);
+            var audioObj = new Audio(audioBlobs.Ringtone.blob);
+            audioObj.preload = "auto";
+            audioObj.onplay = function(){
+                var outputStream = new MediaStream();
+                if (typeof audioObj.captureStream !== 'undefined') {
+                    outputStream = audioObj.captureStream();
+                } 
+                else if (typeof audioObj.mozCaptureStream !== 'undefined') {
+                    return;
+                    // BUG: mozCaptureStream() in Firefox does not work the same way as captureStream()
+                    // the actual sound does not play out to the speakers... its as if the mozCaptureStream
+                    // removes the stream from the <audio> object.
+                    outputStream = audioObj.mozCaptureStream();
+                }
+                else if (typeof audioObj.webkitCaptureStream !== 'undefined') {
+                    outputStream = audioObj.webkitCaptureStream();
+                }
+                else {
+                    console.warn("Cannot display Audio Levels")
+                    return;
+                }
+                // Monitor Output
+                window.SettingsRingerStream = outputStream;
+                window.SettingsRingerStreamMeter = MeterSettingsOutput(outputStream, "Settings_RingerOutput", "width", 50);
+            }
+            audioObj.oncanplaythrough = function(e) {
+                if (typeof audioObj.sinkId !== 'undefined') {
+                    audioObj.setSinkId(selectRingDevice.val()).then(function() {
+                        console.log("Set sinkId to:", selectRingDevice.val());
+                    }).catch(function(e){
+                        console.warn("Failed not apply setSinkId.", e);
+                    });
+                }
+                // Play
+                audioObj.play().then(function(){
+                    // Audio Is Playing
+                }).catch(function(e){
+                    console.warn("Unable to play audio file", e);
+                });
+                console.log("Playing sample audio file... ");
+            }
+    
+            window.SettingsRingerAudio = audioObj;
+        });
+
+        // Audio Playback Source
+        var selectAudioScr = $("#playbackSrc");
+        // Handle output change (speaker)
+        selectAudioScr.change(function(){
+            console.log("Call to change Speaker ("+ this.value +")");
+    
+            var audioObj = window.SettingsOutputAudio;
+            if(audioObj != null) {
+                if (typeof audioObj.sinkId !== 'undefined') {
+                    audioObj.setSinkId(this.value).then(function() {
+                        console.log("sinkId applied to audioObj:", this.value);
+                    }).catch(function(e){
+                        console.warn("Failed not apply setSinkId.", e);
+                    });
+                }
+            }
+        });
+
+        // Microphone
+        var selectMicScr = $("#microphoneSrc");
+        $("#Settings_AutoGainControl").prop("checked", AutoGainControl);
+        $("#Settings_EchoCancellation").prop("checked", EchoCancellation);
+        $("#Settings_NoiseSuppression").prop("checked", NoiseSuppression);
+        // Handle Audio Source changes (Microphone)
+        selectMicScr.change(function(){
+            console.log("Call to change Microphone ("+ this.value +")");
+    
+            // Change and update visual preview
+            try{
+                var tracks = window.SettingsMicrophoneStream.getTracks();
+                tracks.forEach(function(track) {
+                    track.stop();
+                });
+                window.SettingsMicrophoneStream = null;
+            }
+            catch(e){}
+    
+            try{
+                soundMeter = window.SettingsMicrophoneSoundMeter;
+                soundMeter.stop();
+                window.SettingsMicrophoneSoundMeter = null;
+            }
+            catch(e){}
+    
+            // Get Microphone
+            var constraints = { 
+                audio: {
+                    deviceId: { exact: this.value }
+                }, 
+                video: false 
+            }
+            var localMicrophoneStream = new MediaStream();
+            navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream){
+                var audioTrack = mediaStream.getAudioTracks()[0];
+                if(audioTrack != null){
+                    // Display Micrphone Levels
+                    localMicrophoneStream.addTrack(audioTrack);
+                    window.SettingsMicrophoneStream = localMicrophoneStream;
+                    window.SettingsMicrophoneSoundMeter = MeterSettingsOutput(localMicrophoneStream, "Settings_MicrophoneOutput", "width", 50);
+                }
+            }).catch(function(e){
+                console.log("Failed to getUserMedia", e);
+            });
+        });
+
+
+
+        if(navigator.mediaDevices){
+            navigator.mediaDevices.enumerateDevices().then(function(deviceInfos){
+                var savedVideoDevice = getVideoSrcID();
+                var videoDeviceFound = false;
+    
+                var savedAudioDevice = getAudioSrcID();
+                var audioDeviceFound = false;
+    
+                var MicrophoneFound = false;
+                var SpeakerFound = false;
+                var VideoFound = false;
+    
+                for (var i = 0; i < deviceInfos.length; ++i) {
+                    console.log("Found Device ("+ deviceInfos[i].kind +"): ", deviceInfos[i].label);
+    
+                    // Check Devices
+                    if (deviceInfos[i].kind === "audioinput") {
+                        MicrophoneFound = true;
+                        if(savedAudioDevice != "default" && deviceInfos[i].deviceId == savedAudioDevice) {
+                            audioDeviceFound = true;
+                        }
+                    }
+                    else if (deviceInfos[i].kind === "audiooutput") {
+                        SpeakerFound = true;
+                    }
+                    else if (deviceInfos[i].kind === "videoinput") {
+                        if(EnableVideoCalling == true){
+                            VideoFound = true;
+                            if(savedVideoDevice != "default" && deviceInfos[i].deviceId == savedVideoDevice) {
+                                videoDeviceFound = true;
+                            }
+                        }
+                    }
+                }
+    
+                var contraints = {
+                    audio: MicrophoneFound,
+                    video: VideoFound
+                }
+    
+                if(MicrophoneFound){
+                    contraints.audio = { deviceId: "default" }
+                    if(audioDeviceFound) contraints.audio.deviceId = { exact: savedAudioDevice }
+                }
+
+                if(EnableVideoCalling == true){
+                    if(VideoFound){
+                        contraints.video = { deviceId: "default" }
+                        if(videoDeviceFound) contraints.video.deviceId = { exact: savedVideoDevice }
+                    }
+                    // Additional
+                    if($("input[name=Settings_FrameRate]:checked").val() != ""){
+                        contraints.video.frameRate = $("input[name=Settings_FrameRate]:checked").val();
+                    }
+                    if($("input[name=Settings_Quality]:checked").val() != ""){
+                        contraints.video.height = $("input[name=Settings_Quality]:checked").val();
+                    }
+                    if($("input[name=Settings_AspectRatio]:checked").val() != ""){
+                        contraints.video.aspectRatio = $("input[name=Settings_AspectRatio]:checked").val();
+                    } 
+                }
+                console.log("Get User Media", contraints);
+
+                // Get User Media
+                navigator.mediaDevices.getUserMedia(contraints).then(function(mediaStream){
+                    // Note: This code may fire after the close button
+
+                    // Handle Audio
+                    settingsMicrophoneStreamTrack = (mediaStream.getAudioTracks().length >= 1)? mediaStream.getAudioTracks()[0] : null ;
+                    if(MicrophoneFound && settingsMicrophoneStreamTrack != null){
+                        settingsMicrophoneStream = new MediaStream();
+                        settingsMicrophoneStream.addTrack(settingsMicrophoneStreamTrack);
+                        // Display Micrphone Levels
+                        // window.SettingsMicrophoneStream = settingsMicrophoneStream;
+                        settingsMicrophoneSoundMeter = MeterSettingsOutput(settingsMicrophoneStream, "Settings_MicrophoneOutput", "width", 50);
+                    }
+                    else {
+                        console.warn("No microphone devices found. Calling will not be possible.")
+                    }
+
+                    // Display Output Levels
+                    $("#Settings_RingerOutput").css("width", "0%");
+                    if(!SpeakerFound){
+                        console.log("No speaker devices found, make sure one is plugged in.")
+                        $("#playbackSrc").hide();
+                        $("#RingDeviceSection").hide();
+                    }
+    
+                    if(EnableVideoCalling == true){
+                        // Handle Video
+                        settingsVideoStreamTrack = (mediaStream.getVideoTracks().length >= 1)? mediaStream.getVideoTracks()[0] : null;
+                        if(VideoFound && settingsVideoStreamTrack != null){
+                            settingsVideoStream = new MediaStream();
+                            settingsVideoStream.addTrack(settingsVideoStreamTrack);
+                            // Display Preview Video
+                            localVideo.srcObject = settingsVideoStream;
+                            localVideo.onloadedmetadata = function(e) {
+                                localVideo.play();
+                            }
+                        }
+                        else {
+                            console.warn("No video / webcam devices found. Video Calling will not be possible.")
+                        }
+                    }
+
+                    // Return .then()
+                    return navigator.mediaDevices.enumerateDevices();
+                }).then(function(deviceInfos){
+                    for (var i = 0; i < deviceInfos.length; ++i) {
+                        console.log("Found Device ("+ deviceInfos[i].kind +") Again: ", deviceInfos[i].label, deviceInfos[i].deviceId);
+    
+                        var deviceInfo = deviceInfos[i];
+                        var devideId = deviceInfo.deviceId;
+                        var DisplayName = deviceInfo.label;
+                        if(DisplayName.indexOf("(") > 0) DisplayName = DisplayName.substring(0,DisplayName.indexOf("("));
+    
+                        var option = $('<option/>');
+                        option.prop("value", devideId);
+    
+                        if (deviceInfo.kind === "audioinput") {
+                            option.text((DisplayName != "")? DisplayName : "Microphone");
+                            if(getAudioSrcID() == devideId) option.prop("selected", true);
+                            selectMicScr.append(option);
+                        }
+                        else if (deviceInfo.kind === "audiooutput") {
+                            option.text((DisplayName != "")? DisplayName : "Speaker");
+                            if(getAudioOutputID() == devideId) option.prop("selected", true);
+                            selectAudioScr.append(option);
+                            var ringOption = option.clone();
+                            if(getRingerOutputID() == devideId) ringOption.prop("selected", true);
+                            selectRingDevice.append(ringOption);
+                        }
+                        else if (deviceInfo.kind === "videoinput") {
+                            if(EnableVideoCalling == true){
+                                if(getVideoSrcID() == devideId) option.prop("selected", true);
+                                option.text((DisplayName != "")? DisplayName : "Webcam");
+                                selectVideoScr.append(option);
+                            }
+                        }
+                    }
+                    if(EnableVideoCalling == true){
+                        // Add "Default" option
+                        if(selectVideoScr.children('option').length > 0){
+                            var option = $('<option/>');
+                            option.prop("value", "default");
+                            if(getVideoSrcID() == "default" || getVideoSrcID() == "" || getVideoSrcID() == "null") option.prop("selected", true);
+                            option.text("("+ lang.default_video_src +")");
+                            selectVideoScr.append(option);
+                        }
+                    }
+                }).catch(function(e){
+                    console.error(e);
+                    Alert(lang.alert_error_user_media, lang.error);
+                });
+            }).catch(function(e){
+                console.error("Error getting Media Devices", e);
+            });
+        }
+        else {
+            Alert(lang.alert_media_devices, lang.error);
+        }
+
+        // Appearance
+        if(EnableAppearanceSettings){
+
+            $("#Appearance_Html").show(); // Bit of an annoying bug... croppie has to be visible to work
+            $("#ImageCanvas").croppie({
+                viewport: { width: 150, height: 150, type: 'circle' }
+            });
+
+            // Preview Existing Image
+            $("#ImageCanvas").croppie('bind', { 
+                url: getPicture("profilePicture")
+            }).then(function(){
+                $("#Appearance_Html").hide();
+            });
+            
+
+            // Wireup File Change
+            $("#fileUploader").change(function () {
+                var filesArray = $(this).prop('files');
+
+                if (filesArray.length == 1) {
+                    var uploadId = Math.floor(Math.random() * 1000000000);
+                    var fileObj = filesArray[0];
+                    var fileName = fileObj.name;
+                    var fileSize = fileObj.size;
+            
+                    if (fileSize <= 52428800) {
+                        console.log("Adding (" + uploadId + "): " + fileName + " of size: " + fileSize + "bytes");
+            
+                        var reader = new FileReader();
+                        reader.Name = fileName;
+                        reader.UploadId = uploadId;
+                        reader.Size = fileSize;
+                        reader.onload = function (event) {
+                            $("#ImageCanvas").croppie('bind', {
+                                url: event.target.result
+                            });
+                        }
+            
+                        // Use onload for this
+                        reader.readAsDataURL(fileObj);
+                    }
+                    else {
+                        Alert(lang.alert_file_size, lang.error);
+                    }
+                }
+                else {
+                    Alert(lang.alert_single_file, lang.error);
+                }
+            });
+        }
+
+        // Notifications
+        if(EnableNotificationSettings){
+            var NotificationsCheck = $("#Settings_Notifications");
+            NotificationsCheck.prop("checked", NotificationsActive);
+            NotificationsCheck.change(function(){
+                if(this.checked){
+                    if(Notification.permission != "granted"){
+                        if(checkNotificationPromise()){
+                            Notification.requestPermission().then(function(p){
+                                console.log(p);
+                                HandleNotifyPermission(p);
+                            });
+                        }
+                        else {
+                            Notification.requestPermission(function(p){
+                                console.log(p);
+                                HandleNotifyPermission(p)
+                            });
+                        }
+                    }
+                }
+            });
+        }
+
+
+    }, 0);
+
+    window.location.reload();
+
+}
+function RefreshRegistration(){
+    Unregister();
+    console.log("Unregister complete...");
+    window.setTimeout(function(){
+        console.log("Starting registration...");
+        Register();
+    }, 1000);
+}
+function ToggleHeading(obj, div){
+    $("#"+ div).toggle();
+}
+function ToggleAutoAnswer(){
+    if(AutoAnswerPolicy == "disabled"){
+        AutoAnswerEnabled = false;
+        console.warn("Policy AutoAnswer: Disabled");
+        return;
+    }
+    AutoAnswerEnabled = (AutoAnswerEnabled == true)? false : true;
+    if(AutoAnswerPolicy == "enabled") AutoAnswerEnabled = true;
+    localDB.setItem("AutoAnswerEnabled", (AutoAnswerEnabled == true)? "1" : "0");
+    console.log("AutoAnswer:", AutoAnswerEnabled);
+}
+function ToggleDoNoDisturb(){
+    if(DoNotDisturbPolicy == "disabled"){
+        DoNotDisturbEnabled = false;
+        console.warn("Policy DoNotDisturb: Disabled");
+        return;
+    }
+    if(DoNotDisturbPolicy == "enabled") {
+        DoNotDisturbEnabled = true;
+        console.warn("Policy DoNotDisturb: Enabled");
+        return;
+    }
+    if(DoNotDisturbEnabled == true){
+        // Disable DND
+
+        DoNotDisturbEnabled = false
+        localDB.setItem("DoNotDisturbEnabled", "0");
+        $("#dereglink").attr("class", "dotOnline");
+        $("#dndStatus").html("");
+        // Web Hook
+        if(typeof web_hook_disable_dnd !== 'undefined') {
+            web_hook_disable_dnd();
+        }
+    } else {
+        // Enable DND
+
+        DoNotDisturbEnabled = true
+        localDB.setItem("DoNotDisturbEnabled", "1");
+        $("#dereglink").attr("class", "dotDoNotDisturb");
+        $("#dndStatus").html("(DND)");
+
+        // Web Hook
+        if(typeof web_hook_enable_dnd !== 'undefined') {
+            web_hook_enable_dnd();
+        }
+    }
+    console.log("DoNotDisturb", DoNotDisturbEnabled);
+}
+function ToggleCallWaiting(){
+    if(CallWaitingPolicy == "disabled"){
+        CallWaitingEnabled = false;
+        console.warn("Policy CallWaiting: Disabled");
+        return;
+    }
+    CallWaitingEnabled = (CallWaitingEnabled == true)? false : true;
+    if(CallWaitingPolicy == "enabled") CallWaitingPolicy = true;
+    localDB.setItem("CallWaitingEnabled", (CallWaitingEnabled == true)? "1" : "0");
+    console.log("CallWaiting", CallWaitingEnabled);
+}
+function ToggleRecordAllCalls(){
+    if(CallRecordingPolicy == "disabled"){
+        RecordAllCalls = false;
+        console.warn("Policy CallRecording: Disabled");
+        return;
+    }
+    RecordAllCalls = (RecordAllCalls == true)? false : true;
+    if(CallRecordingPolicy == "enabled") RecordAllCalls = true;
+    localDB.setItem("RecordAllCalls", (RecordAllCalls == true)? "1" : "0");
+    console.log("RecordAllCalls", RecordAllCalls);
+}
 
 // Device and Settings
 // ===================
 function ChangeSettings(lineNum, obj){
-    if(UiCustomMediaSettings){
-        if(typeof web_hook_on_edit_media !== 'undefined') {
-            web_hook_on_edit_media(lineNum, obj);
-        }
-        return;
-    }
 
     // Check if you are in a call
     var lineObj = FindLineByNumber(lineNum);
@@ -9159,57 +11203,70 @@ function ChangeSettings(lineNum, obj){
 
     var items = [];
 
-    // Speakers
-    if(HasSpeakerDevice){
-        items.push({value: "", icon : null, text: "-" });
-        items.push({value: "", icon : null, text: lang.speaker, isHeader: true });
-        for (var i = 0; i < SpeakerDevices.length; ++i) {
-            var deviceInfo = SpeakerDevices[i];
-            var devideId = deviceInfo.deviceId;
-            var DisplayName = (deviceInfo.label)? deviceInfo.label : "Speaker";
-            if(DisplayName.indexOf("(") > 0) DisplayName = DisplayName.substring(0,DisplayName.indexOf("("));
-            var disabled = (session.data.AudioOutputDevice == devideId);
+    // Microphones
+    for (var i = 0; i < AudioinputDevices.length; ++i) {
+        var deviceInfo = AudioinputDevices[i];
+        var devideId = deviceInfo.deviceId;
+        var DisplayName = (deviceInfo.label)? deviceInfo.label : "Microphone";
+        if(DisplayName.indexOf("(") > 0) DisplayName = DisplayName.substring(0,DisplayName.indexOf("("));
+        var disabled = (session.data.AudioSourceDevice == devideId);
 
-            items.push({value: "output-"+ devideId, icon : "fa fa-volume-up", text: DisplayName, isDisabled : disabled });
-        }
+        items.push({value: "input-"+ devideId, icon : "fa fa-microphone", text: DisplayName, isDisabled : disabled });
     }
-
 
     var menu = {
         selectEvent : function( event, ui ) {
             var id = ui.item.attr("value");
             if(id != null) {
 
-                // Speaker
-                if(id.indexOf("output-") > -1){
-                    var newid = id.replace("output-", "");
+                // Microphone Device Change
+                if(id.indexOf("input-") > -1){
+                    var newid = id.replace("input-", "");
 
-                    console.log("Call to change Speaker: ", newid);
+                    console.log("Call to change Microphone: ", newid);
 
                     HidePopup();
-
-                    // Save Setting
-                    session.data.AudioOutputDevice = newid;
-
-                    // Also change the sinkId
-                    // ======================
-                    var sinkId = newid;
-                    console.log("Attempting to set Audio Output SinkID for line "+ lineNum +" [" + sinkId + "]");
-
-                    // Remote Audio
-                    var element = $("#line-"+ lineNum +"-remoteAudio").get(0);
-                    if(element) {
-                        if (typeof element.sinkId !== 'undefined') {
-                            element.setSinkId(sinkId).then(function(){
-                                console.log("sinkId applied: "+ sinkId);
-                            }).catch(function(e){
-                                console.warn("Error using setSinkId: ", e);
-                            });
-                        } else {
-                            console.warn("setSinkId() is not possible using this browser.")
-                        }
+            
+                    // First Stop Recording the call
+                    var mustRestartRecording = false;
+                    if(session.data.mediaRecorder && session.data.mediaRecorder.state == "recording"){
+                        StopRecording(lineNum, true);
+                        mustRestartRecording = true;
                     }
+            
+                    // Stop Monitoring
+                    if(lineObj.LocalSoundMeter) lineObj.LocalSoundMeter.stop();
+            
+                    // Save Setting
+                    session.data.AudioSourceDevice = newid;
+            
+                    var constraints = {
+                        audio: {
+                            deviceId: (newid != "default")? { exact: newid } : "default"
+                        },
+                        video: false
+                    }
+                    navigator.mediaDevices.getUserMedia(constraints).then(function(newStream){
+                        // Assume that since we are selecting from a dropdown, this is possible
+                        var newMediaTrack = newStream.getAudioTracks()[0];
+                        var pc = session.sessionDescriptionHandler.peerConnection;
+                        pc.getSenders().forEach(function (RTCRtpSender) {
+                            if(RTCRtpSender.track && RTCRtpSender.track.kind == "audio") {
+                                console.log("Switching Audio Track : "+ RTCRtpSender.track.label + " to "+ newMediaTrack.label);
+                                RTCRtpSender.track.stop(); // Must stop, or this mic will stay in use
+                                RTCRtpSender.replaceTrack(newMediaTrack).then(function(){
+                                    // Start Recording again
+                                    if(mustRestartRecording) StartRecording(lineNum);
+                                }).catch(function(e){
+                                    console.error("Error replacing track: ", e);
+                                });
+                            }
+                        });
+                    }).catch(function(e){
+                        console.error("Error on getUserMedia");
+                    });
                 }
+
 
             }
             else {
@@ -9351,7 +11408,7 @@ function PresentBlank(lineNum){
     $("#line-"+ lineNum +"-src-desktop").prop("disabled", false);
     $("#line-"+ lineNum +"-src-video").prop("disabled", false);
     $("#line-"+ lineNum +"-src-blank").prop("disabled", true);
-
+    
     $("#line-"+ lineNum + "-scratchpad-container").hide();
     RemoveScratchpad(lineNum);
     $("#line-"+ lineNum +"-sharevideo").hide();
@@ -9429,7 +11486,7 @@ function chatOnkeydown(event, obj, buddy) {
             // Windows and Mac react differently here.
         } else {
             event.preventDefault();
-
+            
             SendChatMessage(buddy);
             return false;
         }
@@ -9452,7 +11509,7 @@ function chatOnInput(event, obj, buddy) {
 
 function ReformatMessage(str) {
     var msg = str;
-    // Simple tex=>HTML
+    // Simple tex=>HTML 
     msg = msg.replace(/</gi, "&lt;");
     msg = msg.replace(/>/gi, "&gt;");
     msg = msg.replace(/\n/gi, "<br>");
@@ -9802,7 +11859,7 @@ var ImageEditor_ResetZoom = function (buddy){
         // canvas.viewportTransform[4] = 0;
         // canvas.viewportTransform[5] = 0;
         return true;
-    }
+    } 
     return false;
 }
 var ImageEditor_ZoomIn = function (buddy){
@@ -9863,7 +11920,7 @@ var ImageEditor_AddRectangle = function (buddy){
     {
         canvas.ToolSelected = "none";
         canvas.isDrawingMode = false;
-        var rectangle = new fabric.Rect({
+        var rectangle = new fabric.Rect({ 
             width: 40, height: 40, fill: canvas.FillColour
         })
         canvas.add(rectangle);
@@ -10004,6 +12061,8 @@ function TogglePinned(buddy){
         localDB.setItem(profileUserID + "-Buddies", JSON.stringify(json));
     }
 
+    // Update View
+    UpdateBuddyList();
 }
 
 // FileShare an Upload
@@ -10026,7 +12085,7 @@ function onFileDragDrop(e, buddy){
         var reader = new FileReader();
         reader.onload = function (event) {
             // console.log(event.target.result);
-
+            
             // Check if the file is under 50MB
             if(fileObj.size <= 52428800){
                 // Add to Stream
@@ -10125,8 +12184,11 @@ function OpenWindow(html, title, height, width, hideCloseButton, allowResize, bu
         windowObj.parent().css('left', '0px');
         windowObj.dialog("option", "height", windowHeight); // option
         windowObj.dialog("option", "width", windowWidth);
+        UpdateUI();
     });
 
+    // Call UpdateUI to perform all the nesesary UI updates.
+    UpdateUI();
 }
 function CloseWindow(all) {
     console.log("Call to close any open window");
@@ -10173,7 +12235,7 @@ function Alert(messageStr, TitleStr, onOk) {
         console.log("Alert called with Title: " + TitleStr + ", saying: " + messageStr);
     }
 
-    var html = "<div>";
+    var html = "<div class=NoSelect>";
     html += "<div class=UiText style=\"padding: 10px\" id=AllertMessageText>" + messageStr + "</div>";
     html += "</div>"
 
@@ -10208,6 +12270,8 @@ function Alert(messageStr, TitleStr, onOk) {
 
     alertObj.dialog({ dialogClass: 'no-close' });
 
+     // Call UpdateUI to perform all the nesesary UI updates.
+     UpdateUI();
 
 }
 function Confirm(messageStr, TitleStr, onOk, onCancel) {
@@ -10227,7 +12291,7 @@ function Confirm(messageStr, TitleStr, onOk, onCancel) {
         console.log("Confirm called with Title: " + TitleStr + ", saying: " + messageStr);
     }
 
-    var html = "<div>";
+    var html = "<div class=NoSelect>";
     html += "<div class=UiText style=\"padding: 10px\" id=ConfrimMessageText>" + messageStr + "</div>";
     html += "</div>";
 
@@ -10272,9 +12336,77 @@ function Confirm(messageStr, TitleStr, onOk, onCancel) {
 
     confirmObj.dialog({ dialogClass: 'no-close' });
 
-
+    // Call UpdateUI to perform all the nesesary UI updates.
+    UpdateUI();
 }
+function Prompt(messageStr, TitleStr, FieldText, defaultValue, dataType, placeholderText, onOk, onCancel) {
+    if (alertObj != null) {
+        alertObj.dialog("close");
+        alertObj = null;
+    }
+    if (confirmObj != null) {
+        confirmObj.dialog("close");
+        confirmObj = null;
+    }
+    if (promptObj != null) {
+        console.error("Prompt not null, while Prompt called with Title: " + TitleStr + ", saying: " + messageStr);
+        return;
+    }
+    else {
+        console.log("Prompt called with Title: " + TitleStr + ", saying: " + messageStr);
+    }
 
+    var html = "<div class=NoSelect>";
+    html += "<div class=UiText style=\"padding: 10px\" id=PromptMessageText>";
+    html += messageStr;
+    html += "<div style=\"margin-top:10px\">" + FieldText + " : </div>";
+    html += "<div style=\"margin-top:5px\"><INPUT id=PromptValueField type=" + dataType + " value=\"" + defaultValue + "\" placeholder=\"" + placeholderText + "\" style=\"width:98%\"></div>"
+    html += "</div>";
+    html += "</div>";
+
+    promptObj = $('<div>').html(html).dialog({
+        autoOpen: false,
+        title: TitleStr,
+        modal: true,
+        width: 300,
+        height: "auto",
+        resizable: false,
+        closeOnEscape : false,
+        close: function(event, ui) {
+            $(this).dialog("destroy");
+            promptObj = null;
+        }
+    });
+    
+    var buttons = [];
+    buttons.push({
+        text: lang.ok,
+        click: function(){
+            console.log("Prompt OK clicked, with value: " + $("#PromptValueField").val());
+            if (onOk) onOk($("#PromptValueField").val());
+            $(this).dialog("close");
+            promptObj = null;
+        }
+    });
+    buttons.push({
+        text: lang.cancel,
+        click: function(){
+            console.log("Prompt Cancel clicked");
+            if (onCancel) onCancel();
+            $(this).dialog("close");
+            promptObj = null;
+        }
+    });
+    promptObj.dialog( "option", "buttons", buttons);
+
+    // Open the Window
+    promptObj.dialog("open");
+
+    promptObj.dialog({ dialogClass: 'no-close' });
+
+    // Call UpdateUI to perform all the nesesary UI updates.
+    UpdateUI();
+}
 function PopupMenu(obj, menu){
     console.log("Show Popup Menu");
 
@@ -10304,8 +12436,6 @@ function PopupMenu(obj, menu){
             }
         });
     }
-    menuObj.append("<li><div>-</div></li>");
-    menuObj.append("<li><div style=\"text-align:center; padding-right: 2em\">"+ lang.cancel +"</div></li>");
 
     // Attach UL to body
     menuObj.appendTo(document.body);
@@ -10329,7 +12459,7 @@ function PopupMenu(obj, menu){
     var menuWidth = menuObj.outerWidth()
     var left = x-((menuWidth/2)-(w/2));
     if(left + menuWidth + 10 > window.innerWidth){
-        left = window.innerWidth - menuWidth - 10;
+        left = window.innerWidth - menuWidth;
     }
     if(left < 0) left = 0;
     menuObj.css("left",  left + "px");
@@ -10337,7 +12467,7 @@ function PopupMenu(obj, menu){
     var menuHeight = menuObj.outerHeight()
     var top = y+h;
     if(top + menuHeight + 10 > window.innerHeight){
-        top = window.innerHeight - menuHeight - 10;
+        top = window.innerHeight - menuHeight - 50;
     }
     if(top < 0) top = 0;
     menuObj.css("top", top + "px");
@@ -10394,7 +12524,7 @@ function DetectDevices(){
             if (deviceInfos[i].kind === "audioinput") {
                 HasAudioDevice = true;
                 AudioinputDevices.push(deviceInfos[i]);
-            }
+            } 
             else if (deviceInfos[i].kind === "audiooutput") {
                 HasSpeakerDevice = true;
                 SpeakerDevices.push(deviceInfos[i]);
@@ -10422,21 +12552,21 @@ function onStatusChange(status) {
     // Strophe.ConnectionStatus = status;
     if (status == Strophe.Status.CONNECTING) {
         console.log('XMPP is connecting...');
-    }
+    } 
     else if (status == Strophe.Status.CONNFAIL) {
         console.warn('XMPP failed to connect.');
-    }
+    } 
     else if (status == Strophe.Status.DISCONNECTING) {
         console.log('XMPP is disconnecting.');
-    }
+    } 
     else if (status == Strophe.Status.DISCONNECTED) {
         console.log('XMPP is disconnected.');
-
+        
         // Keep connected
         window.setTimeout(function(){
             // reconnectXmpp();
         }, 5 * 1000);
-    }
+    } 
     else if (status == Strophe.Status.CONNECTED) {
         console.log('XMPP is connected!');
 
@@ -10556,7 +12686,7 @@ function onPresenceChange(presence) {
     if(type == "subscribe"){
         // <presence xmlns="jabber:client" type="subscribe" from="58347g3721h~800@...com" id="1" subscription="both" to="58347g3721h~100@...com"/>
         // <presence xmlns="jabber:client" type="subscribe" from="58347g3721h~800@...com" id="1" subscription="both" to="58347g3721h~100@...com"/>
-
+        
         // One of your buddies is requestion subscription
         console.log("Presence: "+ buddyObj.CallerIDName +" requesting subscrption");
 
@@ -10565,18 +12695,21 @@ function onPresenceChange(presence) {
         // Also Subscribe to them
         XmppSendSubscriptionRequest(buddyObj);
 
+        UpdateBuddyList();
         return true;
     }
     if(type == "subscribed"){
         // One of your buddies has confimed subscription
         console.log("Presence: "+ buddyObj.CallerIDName +" confimed subscrption");
 
+        UpdateBuddyList();
         return true;
     }
     if(type == "unavailable"){
         // <presence xmlns="jabber:client" type="unavailable" from="58347g3721h~800@...com/63zy33arw5" to="yas43lag8l@...com"/>
         console.log("Presence: "+ buddyObj.CallerIDName +" unavailable");
 
+        UpdateBuddyList();
         return true;
     }
 
@@ -10587,16 +12720,18 @@ function onPresenceChange(presence) {
         // Should check if the hash is different, could have been a non-picture change..
         // However, either way you would need to update the vCard, as there isnt a awy to just get the picture
         XmppGetBuddyVcard(buddyObj);
-
+        
+        UpdateBuddyList();
     }
 
     if(pres != "") {
-        // This is a regulare
+        // This is a regulare 
         console.log("Presence: "+ buddyObj.ExtNo +" - "+ buddyObj.CallerIDName +" is now: "+ pres +"("+ status +")");
 
         buddyObj.presence = pres;
         buddyObj.presenceText = (status == "")? lang.default_status : status;
 
+        UpdateBuddyList();
     }
 
     return true;
@@ -10729,6 +12864,8 @@ function XmppGetBuddies(){
         // Update your own status, and get the status of others
         XmppSetMyPresence(getDbItem("XmppLastPresence", "chat"), getDbItem("XmppLastStatus", ""), true);
 
+        // Populate the buddy list
+        UpdateBuddyList();
 
     }, function(e){
         console.warn("Error Getting Roster", e);
@@ -10752,7 +12889,7 @@ function onBuddyUpdate(iq){
 function RefreshBuddyData(buddyObj){
 
     // Get vCard
-
+    
     return;
 
     // Get Last Activity
@@ -10764,7 +12901,7 @@ function RefreshBuddyData(buddyObj){
         if(result.children[0].getAttribute("seconds")){
             var seconds = Number(result.children[0].getAttribute("seconds"));
             lastActivity = moment().utc().subtract(seconds, 'seconds').format("YYYY-MM-DD HH:mm:ss UTC");
-
+    
             UpdateBuddyActivity(buddyObj.identity, lastActivity);
         }
 
@@ -10944,6 +13081,7 @@ function XmppGetBuddyVcard(buddyObj){
             localDB.setItem("img-"+ buddyObj.identity + "-"+ buddyObj.type, imgBase64);
             $("#contact-"+ buddyObj.identity +"-picture-main").css("background-image", 'url('+ getPicture(buddyObj.identity, buddyObj.type, true) +')');
         }
+        UpdateBuddyList();
 
     }, function(e){
         console.warn("Error in XmppGetBuddyVcard", e);
@@ -11115,7 +13253,7 @@ function XmppSendMessage(buddyObj,message, messageId, thread, markable, type){
         msg.c("thread").t(thread);
         msg.up();
     }
-    msg.c("body").t(message);
+    msg.c("body").t(message); 
     // XHTML-IM
     msg.up();
     msg.c("active", {"xmlns": "http://jabber.org/protocol/chatstates"});
@@ -11342,7 +13480,7 @@ var reconnectXmpp = function(){
     if(XMPP) XMPP.disconnect("");
     if(XMPP) XMPP.reset();
 
-    var xmpp_websocket_uri = "wss://"+ XmppServer +":"+ XmppWebsocketPort +""+ XmppWebsocketPath;
+    var xmpp_websocket_uri = "wss://"+ XmppServer +":"+ XmppWebsocketPort +""+ XmppWebsocketPath; 
     var xmpp_username = profileUser +"@"+ XmppDomain;
     if(XmppRealm != "" && XmppRealmSeparator) xmpp_username = XmppRealm + XmppRealmSeparator + xmpp_username;
     var xmpp_password = SipPassword;
