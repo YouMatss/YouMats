@@ -95,10 +95,13 @@ class ProductController extends Controller
             ->where('active', true)
             ->inRandomOrder()->take(10)->get();
 
-        $widget_data = get_widget_data_by_product($data['product']);
+        if ($data['product']->subscribe && !$data['product']->vendor->manage_by_admin) {
+            $data['widget_phone'] = Clean_Phone_Number($data['product']->call_phone());
+            $data['widget_whatsapp'] = $data['product']->whatsapp_message();
+        }
 
-        $data['widget_phone'] = $widget_data['widget_phone'];
-        $data['widget_whatsapp'] = $widget_data['widget_whatsapp'];
+        if(is_company())
+            $data['contact'] = $data['product']->vendor->contacts[0];
 
         return view('front.product.index')->with($data);
     }

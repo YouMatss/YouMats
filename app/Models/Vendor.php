@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -201,6 +202,46 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     public function quote_items(): HasMany
     {
         return $this->hasMany(QuoteItem::class)->orderBy('id', 'desc');
+    }
+
+    public function call_phone() {
+        if(!$this->contacts)
+            return null;
+        $callPhones = $this->contacts;
+        $city_id = 1;
+        $userType = 'individual';
+        if(is_company())
+            $userType = 'company';
+        if(Session::has('city'))
+            $city_id = Session::get('city');
+
+        foreach ($callPhones as $callPhone) {
+            if(in_array($city_id, $callPhone['cities']) && ($callPhone['with'] == 'both' || $userType == $callPhone['with'])) {
+                return $callPhone['call_phone'] ?? null;
+            }
+        }
+        return null;
+    }
+
+    public function whatsapp_message(): string
+    {
+        $integration_number = nova_get_setting('whatsapp_manage_by_admin');
+        $message = '';
+        if(!$this->manage_by_admin) {
+
+            if(!nova_get_setting('enable_encryption_mode')) {
+                $integration_number = ($this->contacts[0]['phone']) ?? nova_get_setting('whatsapp_manage_by_admin');
+            } else {
+                $integration_number = nova_get_setting('whatsapp_integration');
+                $phone_code = ';;' . $this->contacts[0]['phone_code'] . ';;';
+                $vendor_code = ';;' . vendor_encrypt($this) . ';;';
+                $message .= '%0A,%0A' . $phone_code;
+                $message .= '%0A,%0A' . $vendor_code;
+            }
+
+        }
+
+        return 'https://wa.me/'. $integration_number .'?text='. $message;
     }
 
     /**

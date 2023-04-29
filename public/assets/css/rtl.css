@@ -41,6 +41,16 @@ body,p,h1,h2,h3,h4,h5,h6,a,.card ,address ,.font-weight-light,.phone,.email, .cu
     margin-right: 0 !important;
 }
 
+.mr-auto {
+    margin-right: 0 !important;
+    margin-left: auto !important;
+}
+
+.ml-auto {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
 .left-12 {
     right: 0.74987rem;
     left:auto;

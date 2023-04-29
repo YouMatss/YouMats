@@ -368,39 +368,6 @@ if(!function_exists('isSubscribe')) {
     }
 }
 
-
-if(!function_exists('get_widget_data_by_vendor')) {
-    function get_widget_data_by_vendor($vendor): array
-    {
-        if ($vendor->subscribe && !$vendor->manage_by_admin && $vendor->contacts) {
-            return [
-                'widget_phone' => $vendor->contacts[0]['call_phone'] ?? null,
-                'widget_whatsapp' => $vendor->contacts[0]['phone'] ?? null,
-            ];
-        }
-        return [
-            'widget_phone' => null,
-            'widget_whatsapp' => null
-        ];
-    }
-}
-
-if(!function_exists('get_widget_data_by_product')) {
-    function get_widget_data_by_product($product): array
-    {
-        if ($product->subscribe && !$product->vendor->manage_by_admin) {
-            return [
-                'widget_phone' => $product->call_phone() ?? null,
-                'widget_whatsapp' => $product->phone() ?? null,
-            ];
-        }
-        return [
-            'widget_phone' => null,
-            'widget_whatsapp' => null
-        ];
-    }
-}
-
 if(!function_exists('Clean_Phone_Number')) {
     function Clean_Phone_Number($raw_number){
         // remove any character

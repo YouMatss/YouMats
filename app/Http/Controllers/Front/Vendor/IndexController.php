@@ -39,10 +39,10 @@ class IndexController extends Controller
         $data['products'] = $data['vendor']->products()->paginate(20);
         $data['branches'] = $data['vendor']->branches()->paginate(5);
 
-        $widget_data = get_widget_data_by_vendor($data['vendor']);
-
-        $data['widget_phone'] = $widget_data['widget_phone'];
-        $data['widget_whatsapp'] = $widget_data['widget_whatsapp'];
+        if ($data['vendor']->subscribe && !$data['vendor']->manage_by_admin && $data['vendor']->contacts) {
+            $data['widget_phone'] = Clean_Phone_Number($data['vendor']->call_phone());
+            $data['widget_whatsapp'] = $data['vendor']->whatsapp_message();
+        }
 
         return view('front.vendor.show')->with($data);
     }
