@@ -46,12 +46,6 @@ body,p,h1,h2,h3,h4,h5,h6,a,.card ,address ,.font-weight-light,.phone,.email, .cu
     left:auto;
 }
 
-
-.ml-auto, .mx-auto {
-    margin-right: auto !important;
-    margin-left: 0 !important;
-}
-
 .u-header__sub-menu-nav-group {
     padding-left: 0;
     padding-right: 0;
@@ -318,6 +312,10 @@ h3.font-size-24 {
     right: auto !important;
 }
 
+.form-check {
+
+}
+
 .form-check-label{
     margin-right: 20px;
 }
@@ -343,7 +341,7 @@ h3.font-size-24 {
 }
 
 .iti--separate-dial-code .iti__selected-flag {
-    padding: 0 8px 0 6px;
+    padding: 0 12px 0 6px;
     border-right: none;
     border-left: 1.5px solid #DDD;
 }

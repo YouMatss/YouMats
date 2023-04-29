@@ -20,7 +20,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{__('general.home')}}</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('Register') }}</li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('auth.register') }}</li>
                     </ol>
                 </nav>
             </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-12">
                 <div class="mb-8">
                     <div class="position-relative position-md-static px-md-6">
                         <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0" id="pills-tab-8" role="tablist">
@@ -120,17 +120,19 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+
+                                        <div class="col-md-12 mb-5">
                                             {!! generate_map() !!}
                                             <input type="hidden" class="lat" value="{{old('latitude')}}" readonly name="latitude" required>
                                             <input type="hidden" class="lng" value="{{old('longitude')}}" readonly name="longitude" required>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="password" class="form-label">{{ __('auth.password_input') }} <span class="text-danger">*</span></label>
                                                 <div class="eye_show">
                                                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="passwordInput" name="password" required autocomplete="new-password">
-                                                    <span href="#" class="showPassword fa fa-eye" data-toggle="#passwordInput"></span>
+                                                    <span href="#" class="showPassword fa fa-eye fa-lg" data-toggle="#passwordInput"></span>
                                                 </div>
 
                                                 @error('password')
@@ -145,7 +147,7 @@
                                                 <label for="password-confirm" class="form-label">{{ __('auth.confirm_password') }} <span class="text-danger">*</span></label>
                                                 <div class="eye_show">
                                                     <input type="password" class="form-control" name="password_confirmation" id="passwordConfirmInput" required autocomplete="new-password">
-                                                    <span href="#" class="showPassword fa fa-eye" data-toggle="#passwordConfirmInput"></span>
+                                                    <span href="#" class="showPassword fa fa-eye fa-lg" data-toggle="#passwordConfirmInput"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -196,7 +198,7 @@
                         <div class="col-md-12" id="documents">
                             <div class="js-form-message form-group mb-5">
                                 <label class="form-label" >{{ __('auth.documents') }} <span class="text-danger">*</span></label>
-                                <input type="file" class="form-control" name="files[]" required multiple/>
+                                <input type="file" name="files[]" required multiple/>
                             </div>
                         </div>
                     `);

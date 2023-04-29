@@ -178,8 +178,8 @@ if (!function_exists('generate_map')) {
     function generate_map() {
         $html_tag = "";
         $html_tag .= '<div class="col-md-12">';
-        $html_tag .= '<input id="pac-input" class="controls form-control" style="width: 60%;margin-top: 8px;" type="text" placeholder="'. __('general.map_search') .'">';
-        $html_tag .= '<div id="element_map" class="col-md-12" style="height:400px;"></div>';
+        $html_tag .= '<input id="pac-input" class="controls form-control" type="text" placeholder="'. __('general.map_search') .'">';
+        $html_tag .= '<div id="element_map" class="col-md-12" style="max-width: 100%;height:400px;"></div>';
         $html_tag .= '</div>';
         $html_tag .= '<hr>';
         return $html_tag;
@@ -190,7 +190,7 @@ if (!function_exists('generate_map_branch')) {
     function generate_map_branch() {
         $html_tag = "";
         $html_tag .= '<div class="col-md-12">';
-        $html_tag .= '<input id="pac-input-branch" class="controls form-control" style="width: 60%;margin-top: 8px;" type="text" placeholder="'. __('general.map_search') .'">';
+        $html_tag .= '<input id="pac-input-branch" class="controls form-control" type="text" placeholder="'. __('general.map_search') .'">';
         $html_tag .= '<div id="element_map_branch" class="col-md-12" style="height:400px;"></div>';
         $html_tag .= '</div>';
         $html_tag .= '<hr>';

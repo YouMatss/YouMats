@@ -109,14 +109,15 @@ class RegisterController extends Controller
                 $admin->notify(new CompanyRegistered($user));
 
         if($user)
-            Mail::to([
-//                'mohamedmaher055@gmail.com',
-                'info@youmats.com',
-                'sameh@youmats.com',
-                'ereny@youmats.com',
-                'marina@youmats.com'
-            ])->send(new NewRegister($user));
-
+            try {
+                Mail::to([
+//                    'mohamedmaher055@gmail.com',
+                    'info@youmats.com',
+                    'sameh@youmats.com',
+                    'ereny@youmats.com',
+                    'marina@youmats.com'
+                ])->send(new NewRegister($user));
+            } catch(\Exception $e) {}
         Session::flash('custom_success', __('auth.user_register_successfully'));
 
         return $user;

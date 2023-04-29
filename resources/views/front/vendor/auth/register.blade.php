@@ -20,7 +20,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{route('home')}}">{{__('general.home')}}</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('auth.register') }}</li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ __('auth.vendor_register') }}</li>
                     </ol>
                 </nav>
             </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-12">
                 <div class="mb-8">
                     <div class="position-relative position-md-static px-md-6">
                         <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0" id="pills-tab-8" role="tablist">
@@ -45,7 +45,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label for="name_en" class="form-label">{{ __('auth.name') }} <span class="text-danger">(English)*</span></label>
+                                                <label for="name_en" class="form-label">{{ __('auth.name') }} <span class="text-danger">({{ __('auth.in_english') }})*</span></label>
                                                 <input type="text" class="form-control @error('name_en') is-invalid @enderror" id="name_en" name="name_en" value="{{ old('name_en') }}" required autocomplete="name_en" autofocus>
                                                 @error('name_en')
                                                 <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label for="name_ar" class="form-label">{{ __('auth.name') }} <span class="text-danger">(Arabic)*</span></label>
+                                                <label for="name_ar" class="form-label">{{ __('auth.name') }} <span class="text-danger">({{ __('auth.in_arabic') }})*</span></label>
                                                 <input type="text" class="form-control @error('name_ar') is-invalid @enderror" id="name_ar" name="name_ar" value="{{ old('name_ar') }}" required autocomplete="name_ar" autofocus>
                                                 @error('name_ar')
                                                 <span class="invalid-feedback" role="alert">
@@ -169,7 +169,7 @@
 
                                                 <div class="eye_show">
                                                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="passwordInput" name="password" required autocomplete="new-password">
-                                                    <span href="#" class="showPassword fa fa-eye" data-toggle="#passwordInput"></span>
+                                                    <span href="#" class="showPassword fa fa-eye fa-lg" data-toggle="#passwordInput"></span>
                                                 </div>
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert">
@@ -183,7 +183,7 @@
                                                 <label for="password-confirm" class="form-label">{{ __('auth.confirm_password') }} <span class="text-danger">*</span></label>
                                                 <div class="eye_show">
                                                     <input type="password" class="form-control" id="passwordConfirmInput" name="password_confirmation" required autocomplete="new-password">
-                                                    <span href="#" class="showPassword fa fa-eye" data-toggle="#passwordConfirmInput"></span>
+                                                    <span href="#" class="showPassword fa fa-eye fa-lg" data-toggle="#passwordConfirmInput"></span>
                                                 </div>
                                             </div>
                                         </div>
