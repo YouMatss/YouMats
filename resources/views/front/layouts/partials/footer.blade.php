@@ -274,7 +274,7 @@
     <span class="fas fa-arrow-up u-go-to__inner"></span>
 </a>
 
-@if($widget_phone)
+@if(isset($widget_phone))
     <button class="widget" type="button" onclick="SetUpCall({{$widget_phone}})">
         <i class="fas fa-phone"></i>
     </button>

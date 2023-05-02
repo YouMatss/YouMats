@@ -132,13 +132,15 @@ class Shipping
 
         $data['status'] = true;
 
-        foreach ($cars as $car) {
-            $min_quantity_of_car = (int)floor($car['quantity'] / 2);
-            if($car['payload'] < $min_quantity_of_car) {
-                $data['status'] = false;
-                $data['message'] = __('product.shipping_warning_first_sentence')
-                    . ' ' . $car['quantity'] . ' '
-                    . __('product.shipping_warning_second_sentence') . ' ' . $car['payload']/$car['count'];
+        if(isset($cars) && count($cars)) {
+            foreach ($cars as $car) {
+                $min_quantity_of_car = (int)floor($car['quantity'] / 2);
+                if($car['payload'] < $min_quantity_of_car) {
+                    $data['status'] = false;
+                    $data['message'] = __('product.shipping_warning_first_sentence')
+                        . ' ' . $car['quantity'] . ' '
+                        . __('product.shipping_warning_second_sentence') . ' ' . $car['payload']/$car['count'];
+                }
             }
         }
 

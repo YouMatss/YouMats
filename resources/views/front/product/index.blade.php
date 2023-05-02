@@ -250,9 +250,7 @@
                         <div class="mb-3">
                             <div class="left-page-single">
                                 @if(is_company() && $product->subscribe && isset($contact))
-                                    <a href="tel:{{ $contact['call_phone'] }}"> <i class="fa fa-user"></i>&nbsp;&nbsp;{{ $contact['person_name'] }} </a>
-                                    <a href="tel:{{ $contact['call_phone'] }}" class="phone_link"> <i class="fa fa-phone"></i>&nbsp;&nbsp;{{ $contact['call_phone'] }} </a>
-                                    <a href="https://wa.me/{{ $contact['phone'] }}" target="_blank" class="phone_link"> <i class="fab fa-whatsapp"></i>&nbsp;&nbsp;{{ $contact['phone'] }} </a>
+                                    <a href="#"> <i class="fa fa-user"></i>&nbsp;&nbsp;{{ $contact['person_name'] }} </a>
                                     <a href="mailto:{{ $contact['email'] }}"> <i class="fa fa-envelope"></i>&nbsp;&nbsp;{{ $contact['email'] }} </a>
                                 @endif
                                 @if($product->price && $product->price > 0 && $product->delivery && $product->stock && $product->stock >= $product->min_quantity) {
