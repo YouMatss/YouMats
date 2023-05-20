@@ -101,7 +101,8 @@ class ProductController extends Controller
         }
 
         if(is_company())
-            $data['contact'] = $data['product']->vendor->contacts[0];
+            if(isset($data['product']->vendor->contacts[0]))
+                $data['contact'] = $data['product']->vendor->contacts[0];
 
         return view('front.product.index')->with($data);
     }

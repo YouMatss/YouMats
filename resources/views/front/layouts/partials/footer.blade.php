@@ -274,6 +274,7 @@
     <span class="fas fa-arrow-up u-go-to__inner"></span>
 </a>
 
+@if(Request::route()->getName() != 'front.category')
 @if(isset($widget_phone))
     <button class="widget" type="button" onclick="SetUpCall({{$widget_phone}})">
         <i class="fas fa-phone"></i>
@@ -287,3 +288,4 @@
 <a class="widget whatsapp" href="{{$widget_whatsapp ?? 'https://wa.me/' . nova_get_setting('widget_whatsapp')}}" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
+@endif

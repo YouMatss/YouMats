@@ -226,7 +226,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     public function whatsapp_message(): string
     {
         $integration_number = nova_get_setting('whatsapp_manage_by_admin');
-        $message = '';
+        $message = route('vendor.show', [$this->slug]);
         if(!$this->manage_by_admin) {
 
             if(!nova_get_setting('enable_encryption_mode')) {

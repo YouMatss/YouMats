@@ -56,8 +56,7 @@
     </nav>
 
     @if(is_individual())
-        <div class="rtl ml-2 box--chan-c">
-
+        <div class="rtl ml-2 box--chan-c d-none d-lg-block d-xl-block">
             <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
             <strong class="tit_check_in_city"> {{__('general.city_location_text')}}: {{getCurrentCityName()}}</strong>
             {{--        {{__('general.category_word_after_change_city_button')}}--}}

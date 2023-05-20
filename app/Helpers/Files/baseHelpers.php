@@ -69,7 +69,7 @@ if (!function_exists('cartOrChat')) {
                 </div>';
 
         $viewDetails = '<a class="cart-chat-category btn-primary transition-3d-hover"
-                            href="'.route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)]).'">'.__('product.category_href').'</a>';
+                            href="'.route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)]).'">'. __('product.category_href'). ': ' . $product->category->name .'</a>';
 
         $chat = '<div><a target="_blank" href="'.$product->whatsapp_message().'"
                     class="cart-chat-category btn btn-primary transition-3d-hover">
@@ -145,7 +145,7 @@ if (!function_exists('cartOrChat')) {
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company()) {
                 $result = $cart;
-                if($product->call_phone())
+                if($product->call_phone() && nova_get_setting('enable_phone_buttons'))
                     $result .= $call;
                 if($product->phone())
                     $result .= $chat;
@@ -154,14 +154,14 @@ if (!function_exists('cartOrChat')) {
                 return $view;
             } elseif($product->price && $product->price > 0 && $product->delivery && $product->stock && $product->stock >= $product->min_quantity) {
                 $result1 = $cart;
-                if($product->call_phone())
+                if($product->call_phone() && nova_get_setting('enable_phone_buttons'))
                     $result1 .= $call;
                 if($product->phone())
                     $result1 .= $chat;
                 return $result1;
             } else {
                 $result2 = '';
-                if($product->call_phone())
+                if($product->call_phone() && nova_get_setting('enable_phone_buttons'))
                     $result2 .= $call;
                 else
                     $result2 .= $view;

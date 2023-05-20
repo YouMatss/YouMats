@@ -55,10 +55,16 @@ class CategoryController extends Controller
         if(isset($request->sort) && is_individual()) {
             $filter = $products->allowedSorts([
                     'price',
-                    AllowedSort::custom('delivery', new ProductsSortDelivery($products), 'delivery'),
+                    AllowedSort::custom('delivery', new ProductsSortDelivery($products), 'delivery')
                 ])
                 ->with('category')
                 ->take(500)->get()->unique();
+        } elseif(isset($request->filter['city'])) {
+            $filter = $products->take(500)->get()
+                ->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
+                    return $collection;
+                })->ungroup()
+                ->unique();
         } else {
             $filter = $products->with('category')
                 ->take(500)->get()
@@ -76,8 +82,6 @@ class CategoryController extends Controller
 
         if(isset($data['parent'])) {
             $data['subscribeVendors'] = $data['category']->subscribedVendors();
-
-//            dd($data['subscribeVendors']);
 
             return view('front.category.sub')->with($data);
         } else {

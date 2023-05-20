@@ -17,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot() {
         Paginator::useBootstrap();
         try {
+            setCityUsingLocation();
+
             $data['staticImages'] = StaticImage::first();
 
             View::share($data);

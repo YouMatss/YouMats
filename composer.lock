@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dfa5ce57b7afac7d36ac8d5cf1e4b6da",
+    "content-hash": "467f16da57cb3ce0179dfb522e7056aa",
     "packages": [
         {
             "name": "ampeco/nova-date-range-filter",
@@ -2893,6 +2893,60 @@
             "time": "2020-01-24T12:55:36+00:00"
         },
         {
+            "name": "inspheric/nova-url-field",
+            "version": "v1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inspheric/nova-url-field.git",
+                "reference": "e8badc5936b04a3a7c022770a747550a2efbed72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inspheric/nova-url-field/zipball/e8badc5936b04a3a7c022770a747550a2efbed72",
+                "reference": "e8badc5936b04a3a7c022770a747550a2efbed72",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Inspheric\\Fields\\UrlFieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Inspheric\\Fields\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova url field.",
+            "keywords": [
+                "field",
+                "href",
+                "laravel",
+                "nova",
+                "url"
+            ],
+            "support": {
+                "issues": "https://github.com/inspheric/nova-url-field/issues",
+                "source": "https://github.com/inspheric/nova-url-field/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://burtonsenior.com/donate/inspheric/nova-url-field",
+                    "type": "custom"
+                }
+            ],
+            "time": "2020-03-25T17:13:48+00:00"
+        },
+        {
             "name": "intervention/image",
             "version": "2.7.2",
             "source": {
@@ -4837,7 +4891,7 @@
         },
         {
             "name": "maher/generate-products",
-            "version": "dev-related-category-vendor",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./nova-components/GenerateProducts",
@@ -4873,7 +4927,7 @@
         },
         {
             "name": "maher/title-template",
-            "version": "dev-related-category-vendor",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./nova-components/TitleTemplate",
@@ -5365,51 +5419,6 @@
                 "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.41"
             },
             "time": "2022-11-08T18:31:26+00:00"
-        },
-        {
-            "name": "monaye/simple-link-button",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/monaye/simple-link-button.git",
-                "reference": "1699f827534314dbc60337339f0e56ad494a4ca7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/monaye/simple-link-button/zipball/1699f827534314dbc60337339f0e56ad494a4ca7",
-                "reference": "1699f827534314dbc60337339f0e56ad494a4ca7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Monaye\\SimpleLinkButton\\FieldServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Monaye\\SimpleLinkButton\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A Laravel Nova field.",
-            "keywords": [
-                "laravel",
-                "nova"
-            ],
-            "support": {
-                "issues": "https://github.com/monaye/simple-link-button/issues",
-                "source": "https://github.com/monaye/simple-link-button/tree/1.0.3"
-            },
-            "time": "2020-09-25T18:37:07+00:00"
         },
         {
             "name": "monolog/monolog",

@@ -184,24 +184,13 @@ class Category extends Model implements Sortable, HasMedia
     {
         $ancestorIds = $this->ancestors->pluck('id')->push($this->id);
 
-        $vendorsQuery = Vendor::join('products', 'products.vendor_id', '=', 'vendors.id')
-            ->join('categories', 'categories.id', '=', 'products.category_id')
-            ->join('subscribes', function ($join) {
-                $join->on('subscribes.category_id', '=', 'categories.id');
-                $join->on('subscribes.vendor_id', '=', 'vendors.id');
-            });
-
-        $vendorsQuery->where(function ($query) use ($ancestorIds) {
+        $subscribes = Subscribe::where(function ($query) use ($ancestorIds) {
             foreach ($ancestorIds as $ancestorId) {
-                $query->orWhere('categories.id', $ancestorId);
+                $query->orWhere('category_id', $ancestorId);
             }
-        });
+        })->whereDate('expiry_date', '>', now())->distinct()->pluck('vendor_id')->toArray();
 
-        $vendorsQuery->whereDate('subscribes.expiry_date', '>', now())
-            ->select('vendors.id', 'vendors.name', 'vendors.slug')
-            ->distinct();
-
-        return $vendorsQuery->get();
+        return Vendor::whereActive(true)->whereIn('id', $subscribes)->select('id', 'name', 'slug')->get();
     }
 
     /**

@@ -187,7 +187,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     public function getSubscribeAttribute() {
         if(isset($this->vendor->current_subscribes)
             && count($this->vendor->current_subscribes)
-            && in_array($this->category_id, $this->vendor->current_subscribes->pluck('category_id')->toArray())
+            && array_intersect(array_merge([$this->category_id], $this->category->ancestors->pluck('id')->toArray()), $this->vendor->current_subscribes->pluck('category_id')->toArray())
         ) {
             return 1;
         }

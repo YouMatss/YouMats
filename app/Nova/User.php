@@ -34,6 +34,8 @@ class User extends Resource
         'id', 'name', 'email', 'phone', 'phone2', 'address', 'address2'
     ];
 
+
+
     public function fields(Request $request)
     {
         return [

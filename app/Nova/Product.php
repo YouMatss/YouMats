@@ -8,8 +8,8 @@ use Benjacho\BelongsToManyField\BelongsToManyField;
 use Davidpiesse\NovaToggle\Toggle;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
+use Inspheric\Fields\Url;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\DateTime;
@@ -21,7 +21,6 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Panel;
 use Maher\TitleTemplate\TitleTemplate;
-use Monaye\SimpleLinkButton\SimpleLinkButton;
 use Nikaia\Rating\Rating;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use OptimistDigital\NovaSortable\Traits\HasSortableRows;
@@ -126,11 +125,13 @@ class Product extends Resource
             DateTime::make('Creation Date', 'created_at')
                 ->onlyOnDetail(),
 
-            SimpleLinkButton::make('Link', getFullProductLink($this->model()))
-                ->type('outline')
-                ->style('primary')
-                ->attributes(['target' => '_blank'])
-                ->onlyOnIndex(),
+            Url::make('Link')
+                ->customHtmlUsing(function($value, $resource, $label) {
+                    return view('vendor.nova.partials.custom_link', [
+                        'url'   => getFullProductLink($this->model()),
+                        'label' => 'Link',
+                    ])->render();
+                }),
 
             (new Panel('Gallery', [
                 Fields::image(false, PRODUCT_PATH, 'Images', false),

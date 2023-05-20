@@ -455,6 +455,15 @@
                                         <i class="font-size-22 ec ec-favorites"></i>
                                     </a>
                                 </li>
+
+                                @if(is_individual() && Request::route()->getName() == 'front.category')
+                                    <div class="d-block d-lg-none d-xl-none">
+                                        <button type="button" class="choose_city btn btn-primary btn-xs"
+                                                data-toggle="modal" data-target=".change_city_modal" style="margin: 5px 0 0 !important;"
+                                        >{{__('general.city_location_text')}}: {{getCurrentCityName()}}</button>
+                                    </div>
+                                @endif
+
                                 <li class="col d-xl-none px-2 px-sm-3">
                                     @if(Auth::guard('web')->check() && !Auth::guard('vendor')->check())
                                         <a href="{{route('front.user.profile')}}" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="My Account">

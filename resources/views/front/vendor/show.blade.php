@@ -52,7 +52,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="info_main_vendor">
-                    <h3>{{ $vendor->name }}</h3>
+                    <h1>{{ $vendor->name }}</h1>
                     @if(isset($vendor->type))
                     <label style="font-weight: bold">{{__("general.$vendor->type")}}</label>
                     @endif
