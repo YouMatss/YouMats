@@ -287,6 +287,10 @@
     @endif
 
     @if($category->contact_widgets)
+        <a class="js-go-to u-go-to" href="#" data-position='{"bottom": 125, "right": 15}' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
+            <span class="fas fa-arrow-up u-go-to__inner"></span>
+        </a>
+
         @if(isset($widget_phone))
             <button class="widget" type="button" onclick="SetUpCall({{$widget_phone}})">
                 <i class="fas fa-phone"></i>
@@ -299,6 +303,11 @@
 
         <a class="widget whatsapp" href="{{$widget_whatsapp ?? 'https://wa.me/' . nova_get_setting('widget_whatsapp')}}" target="_blank">
             <i class="fab fa-whatsapp"></i>
+        </a>
+
+    @else
+        <a class="js-go-to u-go-to" href="#" data-position='{"bottom": 15, "right": 15}' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
+            <span class="fas fa-arrow-up u-go-to__inner"></span>
         </a>
     @endif
 
@@ -361,18 +370,19 @@
 
 
                 let fixmeTop = $('.mobile-filter').offset().top,
-                    headerHeight = document.querySelector('.nav_fixed').offsetHeight + 55;
+                    headerHeight = document.querySelector('.nav_fixed').offsetHeight;
 
                 $(window).scroll(function() {
                     let currentScroll = $(window).scrollTop();
-                    if (currentScroll >= fixmeTop-headerHeight) {
+                    if (currentScroll >= fixmeTop-(headerHeight+55)) {
                         $('.mobile-filter').css({
                             position: 'fixed',
-                            top: '50px',
+                            top: headerHeight+'px',
+                            right: 0,
                             backgroundColor: '#FFF',
                             zIndex: '1000',
                             padding: '15px 0 0'
-                        });``
+                        });
                     } else {
                         $('.mobile-filter').css({
                             position: 'relative',

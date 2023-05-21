@@ -226,7 +226,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/vendor/maher/title-template" />
-      <path value="$PROJECT_DIR$/vendor/monaye/simple-link-button" />
       <path value="$PROJECT_DIR$/vendor/nicmart/tree" />
       <path value="$PROJECT_DIR$/vendor/tightenco/collect" />
       <path value="$PROJECT_DIR$/vendor/league/uri" />

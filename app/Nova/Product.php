@@ -131,7 +131,7 @@ class Product extends Resource
                         'url'   => getFullProductLink($this->model()),
                         'label' => 'Link',
                     ])->render();
-                }),
+                })->exceptOnForms(),
 
             (new Panel('Gallery', [
                 Fields::image(false, PRODUCT_PATH, 'Images', false),
