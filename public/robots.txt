@@ -3,4 +3,19 @@ Disallow: /admin_panel/
 Disallow: /FAQs
 Disallow: /sameh/
 Disallow: /password/
+Disallow: /en/Product-View/
+Disallow: /ar/Product-View/
+Disallow: /ar/sub-category/
+Disallow: /en/sub-category/
+Disallow: /en/Category/
+Disallow: /ar/Category/
 
+
+https://www.youmats.com/sitemap-precast-concrete.xml
+https://www.youmats.com/sitemap-paints.xml
+https://www.youmats.com/sitemap-iron-product.xml
+https://www.youmats.com/sitemap-wood.xml
+https://www.youmats.com/sitemap-electrical.xml
+https://www.youmats.com/sitemap-plumbing.xml
+https://www.youmats.com/sitemap-safety-products.xml
+https://www.youmats.com/sitemap.xml
