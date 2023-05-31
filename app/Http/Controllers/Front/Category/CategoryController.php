@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front\Category;
 use App\Helpers\Classes\AttributeFilter;
 use App\Helpers\Classes\CollectionPaginate;
 use App\Helpers\Classes\DeliveryFilter;
+use App\Helpers\Classes\Log;
 use App\Helpers\Classes\PriceFilter;
 use App\Helpers\Classes\ProductsSortDelivery;
 use App\Http\Controllers\Controller;
@@ -79,6 +80,8 @@ class CategoryController extends Controller
 
         $data['tags'] = $data['category']->tags();
         $data['category']->load('attributes', 'attributes.values');
+
+        Log::set('visit', [Category::class, $data['category']->id]);
 
         if(isset($data['parent'])) {
             $data['subscribeVendors'] = $data['category']->subscribedVendors();

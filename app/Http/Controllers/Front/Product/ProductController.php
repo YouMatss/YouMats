@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front\Product;
 
+use App\Helpers\Classes\Log;
 use App\Helpers\Filters\FiltersJsonField;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -103,6 +104,8 @@ class ProductController extends Controller
         if(is_company())
             if(isset($data['product']->vendor->contacts[0]))
                 $data['contact'] = $data['product']->vendor->contacts[0];
+
+        Log::set('visit', [Product::class, $data['product']->id]);
 
         return view('front.product.index')->with($data);
     }

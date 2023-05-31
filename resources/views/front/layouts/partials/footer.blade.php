@@ -277,16 +277,10 @@
 </a>
 
 @if(isset($widget_phone))
-    <button class="widget" type="button" onclick="SetUpCall({{$widget_phone}})">
-        <i class="fas fa-phone"></i>
-    </button>
+    <button class="widget log" data-log="call" type="button" onclick="SetUpCall({{$widget_phone}})"><i class="fas fa-phone"></i></button>
 @else
-    <a class="widget" href="tel:{{ nova_get_setting('widget_phone')}}">
-        <i class="fas fa-phone"></i>
-    </a>
+    <a class="widget log" data-log="call" href="tel:{{ nova_get_setting('widget_phone')}}"><i class="fas fa-phone"></i></a>
 @endif
 
-<a class="widget whatsapp" href="{{$widget_whatsapp ?? 'https://wa.me/' . nova_get_setting('widget_whatsapp')}}" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
+<a class="widget whatsapp log" data-log="chat" href="{{$widget_whatsapp ?? 'https://wa.me/' . nova_get_setting('widget_whatsapp')}}" target="_blank"><i class="fab fa-whatsapp"></i></a>
 @endif
