@@ -72,14 +72,14 @@ if (!function_exists('cartOrChat')) {
                             href="'.route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)]).'">'. __('product.category_href'). ': ' . $product->category->name .'</a>';
 
         $chat = '<div><a target="_blank" href="'.$product->whatsapp_message().'"
-                    class="cart-chat-category btn btn-primary transition-3d-hover">
+                    class="cart-chat-category btn btn-primary transition-3d-hover log" data-log="chat">
                         <i class="fa fa-comments"></i> &nbsp;' . __("general.chat_button") . '
                     </a>
                 </div>';
 
         $call = '<div><button onclick="SetUpCall('. Clean_Phone_Number($product->call_phone()) .')"
                             type="button"
-                            class="cart-chat-category btn btn-primary transition-3d-hover"
+                            class="cart-chat-category btn btn-primary transition-3d-hover log" data-log="call"
                             style="cursor:pointer;background-color: #5cb85c;border-color: #5cb85c;">
                         <i class="fa fa-phone"></i> &nbsp;' . __("general.call_button") . '
                     </button>

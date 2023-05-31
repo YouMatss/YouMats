@@ -59,6 +59,7 @@ use Bernhardh\NovaTranslationEditor\NovaTranslationEditor;
 use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
 use Davidpiesse\NovaToggle\Toggle;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
+use DigitalCreative\CollapsibleResourceManager\Resources\ExternalLink;
 use DigitalCreative\CollapsibleResourceManager\Resources\Group;
 use DigitalCreative\CollapsibleResourceManager\Resources\InternalLink;
 use DigitalCreative\CollapsibleResourceManager\Resources\NovaResource;
@@ -240,6 +241,15 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         'label' => 'Management',
                         'expanded' => true,
                         'resources' => [
+                            ExternalLink::make([
+                                'label' => 'Statistics',
+                                'badge' => null,
+                                'icon' => null,
+                                'target' => '_blank',
+                                'url' => route('statistics.dashboard')
+                            ])->canSee(function ($request) {
+                                return $request->user()->isSuperAdmin();
+                            }),
                             InternalLink::make([
                                 'label' => 'File Manager (Extra)',
                                 'target' => '_self',
@@ -263,9 +273,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                     NovaResource::make(FAQ::class)->label('FAQs'),
                                     Unit::class,
                                     NovaResource::make(ActionResource::class)->label('Activity Logs')
-                                    ->canSee(function ($request) {
-                                        return $request->user()->isSuperAdmin();
-                                    }),
+                                        ->canSee(function ($request) {
+                                            return $request->user()->isSuperAdmin();
+                                        }),
                                 ]
                             ]),
                             Group::make([

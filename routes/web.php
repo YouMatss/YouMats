@@ -12,23 +12,21 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-//Route::get('products_sitemap', function () {
-//    $increment = 2000;
-//    for($i = 0; $i <= 30000; $i += $increment) {
-//        \Illuminate\Support\Facades\Artisan::call('sitemap:products', [
-//            'start' => $i,
-//            'increment' => $increment
-//        ]);
-//    }
-//    dd('Done');
-//});
-
 // Redirect 301 from admin panel
 try {
     foreach (json_decode(nova_get_setting('redirect')) as $redirect) {
         Route::permanentRedirect($redirect->from, $redirect->to);
     }
 } catch (Exception $e) {}
+
+Route::group([
+    'prefix' => 'statistics',
+    'middleware' => ['auth:admin'],
+    'as' => 'statistics.'
+], function () {
+    Route::get('/dashboard', [\App\Http\Controllers\Statistics\IndexController::class, 'dashboard'])->name('dashboard');
+});
+Route::post('setLog', [\App\Http\Controllers\Statistics\IndexController::class, 'setLog'])->name('log.set');
 
 //Actions routes
 Route::post('changeCity', 'Common\MiscController@changeCity')->name('front.changeCity');
@@ -56,11 +54,11 @@ Route::group([
         });
     });
 
-    Route::group(['prefix' => 'chat', 'namespace' => 'Chat', 'as' => 'chat.'], function () {
-        Route::get('user/conversations/{vendor_id}', 'MessageController@userConversations')->name('user.conversations');
-        Route::get('vendor/conversations/{user_id}', 'MessageController@vendorConversations')->name('vendor.conversations');
-        Route::post('send_message', 'MessageController@sendMessage')->name('send_message');
-    });
+//    Route::group(['prefix' => 'chat', 'namespace' => 'Chat', 'as' => 'chat.'], function () {
+//        Route::get('user/conversations/{vendor_id}', 'MessageController@userConversations')->name('user.conversations');
+//        Route::get('vendor/conversations/{user_id}', 'MessageController@vendorConversations')->name('vendor.conversations');
+//        Route::post('send_message', 'MessageController@sendMessage')->name('send_message');
+//    });
 
     // Vendor Routes
     Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor', 'as' => 'vendor.'], function () {
@@ -179,7 +177,4 @@ Route::group([
     Route::get('/{slug}', 'Category\CategoryController@index')
         ->name('front.category')->where('slug', '.*')
         ->where('slug', '^(?!admin_panel|nova-api|nova-vendor).*$');
-
-
-
 });

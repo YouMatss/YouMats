@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Front\Vendor;
 
 use App\Helpers\Classes\CollectionPaginate;
+use App\Helpers\Classes\Log;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Vendor;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -43,6 +45,8 @@ class IndexController extends Controller
             $data['widget_phone'] = Clean_Phone_Number($data['vendor']->call_phone());
             $data['widget_whatsapp'] = $data['vendor']->whatsapp_message();
         }
+
+        Log::set('visit', [Vendor::class, $data['vendor']->id]);
 
         return view('front.vendor.show')->with($data);
     }

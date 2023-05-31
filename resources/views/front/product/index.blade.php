@@ -251,7 +251,7 @@
                             <div class="left-page-single">
                                 @if(is_company() && $product->subscribe && isset($contact))
                                     <a href="#"> <i class="fa fa-user"></i>&nbsp;&nbsp;{{ $contact['person_name'] }} </a>
-                                    <a href="mailto:{{ $contact['email'] }}"> <i class="fa fa-envelope"></i>&nbsp;&nbsp;{{ $contact['email'] }} </a>
+                                    <a href="mailto:{{ $contact['email'] }}" class="log" data-log="email"> <i class="fa fa-envelope"></i>&nbsp;&nbsp;{{ $contact['email'] }} </a>
                                 @endif
                                 @if($product->price && $product->price > 0 && $product->delivery && $product->stock && $product->stock >= $product->min_quantity) {
                                     <h3> {{__('product.how_to_pay')}} </h3>
