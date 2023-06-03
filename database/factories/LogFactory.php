@@ -27,8 +27,8 @@ class LogFactory extends Factory
             'city' => $this->faker->city,
             'url' => $this->faker->url,
             'type' => $this->faker->randomElement(['visit', 'chat', 'call', 'email']),
-            'type_type' => $this->faker->randomElement([null, Category::class, Product::class, Vendor::class]),
-            'type_id' => $this->faker->randomDigit,
+            'page_type' => $this->faker->randomElement([null, Category::class, Product::class, Vendor::class]),
+            'page_id' => $this->faker->randomDigit,
             'is_subscribed' => $this->faker->boolean,
             'created_at' => $this->faker->dateTimeBetween('-1 years', 'now', null)
         ];

@@ -4,6 +4,7 @@ namespace App\Helpers\Classes;
 
 use App\Models\Category;
 use App\Models\Log as LogModel;
+use App\Models\Product;
 use Illuminate\Support\Facades\Request;
 use Stevebauman\Location\Facades\Location;
 
@@ -11,7 +12,6 @@ class Log
 {
     public static function set($type = 'visit', $page = [null, null], $url = '') {
         $ip = Request::ip();
-        $ip = '192.29.224.220';
         $location = Location::get($ip);
         if($location) {
             $is_subscribed = false;
@@ -19,7 +19,10 @@ class Log
                 $url = url()->current();
 
             if((!is_null($page[0])) && $page[0] != Category::class) {
-                $model = $page[0]::whereId($page[1])->first('id');
+                if($page[0] == Product::class)
+                    $model = $page[0]::whereId($page[1])->first(['id', 'vendor_id', 'category_id']);
+                else
+                    $model = $page[0]::whereId($page[1])->first('id');
                 $is_subscribed = $model->subscribe;
             }
             LogModel::create([

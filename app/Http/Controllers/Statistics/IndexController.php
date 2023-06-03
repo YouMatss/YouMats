@@ -11,18 +11,23 @@ use Illuminate\Support\Facades\URL;
 
 class IndexController
 {
-    public function dashboard() {
-        return view('statistics.dashboard');
-    }
-
+    /**
+     * @param Request $request
+     * @return void
+     */
     public function setLog(Request $request) {
         $data = $request->validate([
             'type' => [...REQUIRED_STRING_VALIDATION, ...['In:visit,chat,call,email']],
+            'url' => NULLABLE_URL_VALIDATION
         ]);
 
-        $model = $this->detectModel();
-
-        Log::set($data['type'], $model, url()->previous());
+        if($data['url']) {
+            $model = $this->detectProduct($data['url']);
+            Log::set($data['type'], $model, $data['url']);
+        } else {
+            $model = $this->detectModel();
+            Log::set($data['type'], $model, url()->previous());
+        }
     }
 
     /**
@@ -53,5 +58,17 @@ class IndexController
             default:
                 return [null, null];
         }
+    }
+
+    /**
+     * @param $url
+     * @return array
+     */
+    private function detectProduct($url): array
+    {
+        $segments = explode('/', $url);
+        $slug = $segments[count($segments) - 2];
+        $product = Product::whereSlug($slug)->first('id');
+        return [Product::class, $product->id];
     }
 }

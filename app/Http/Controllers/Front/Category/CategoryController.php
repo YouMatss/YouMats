@@ -41,7 +41,12 @@ class CategoryController extends Controller
         $products = QueryBuilder::for(Product::class)
             ->whereIn('category_id', $children_categories_ids)
             ->where('products.active', true)
-            ->select('products.*');
+            ->select('products.id', 'products.category_id', 'products.vendor_id',
+                'products.name', 'products.short_desc', 'products.type', 'products.price',
+                'products.stock', 'products.min_quantity', 'products.active',
+                'products.shipping_id', 'products.specific_shipping', 'products.shipping_prices',
+                'products.slug', 'products.sort'
+            );
 
         $data['minPrice'] = $products->min('price');
         $data['maxPrice'] = $products->max('price');
@@ -60,17 +65,12 @@ class CategoryController extends Controller
                 ])
                 ->with('category')
                 ->take(500)->get()->unique();
-        } elseif(isset($request->filter['city'])) {
-            $filter = $products->take(500)->get()
-                ->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
-                    return $collection;
-                })->ungroup()
-                ->unique();
         } else {
-            $filter = $products->with('category')
-                ->take(500)->get()
+            $filter = $products->take(500)->get()
                 ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
-                    return $collection->shuffle();
+                    return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
+                        return $this->customSort($collection);
+                    })->ungroup();
                 })->ungroup()
                 ->unique();
         }
@@ -91,5 +91,21 @@ class CategoryController extends Controller
             return view('front.category.index')->with($data);
         }
 
+    }
+
+    private function customSort($collection) {
+        $groupCollection = $collection->groupBy('vendor_id');
+        $maxCount = count(max($groupCollection->toArray()));
+        $groupCollection = $groupCollection->shuffle();
+        foreach ($groupCollection as $key => $vendor_group) {
+            $groupCollection[$key] = $vendor_group->shuffle();
+        }
+        for ($i = 0; $i < $maxCount; $i++) {
+            foreach ($groupCollection as $vendor_group) {
+                if(isset($vendor_group[$i]))
+                    $newCollection[] = $vendor_group[$i];
+            }
+        }
+        return $newCollection;
     }
 }
