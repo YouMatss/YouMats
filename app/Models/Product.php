@@ -195,15 +195,49 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     }
 
     public function phone() {
-        if(isset($this->vendor->contacts[0]['phone']))
-            return $this->vendor->contacts[0]['phone'];
-        return null;
+        try {
+            if(isset($this->vendor->contacts)) {
+                foreach ($this->vendor->contacts as $contact) {
+                    if(Session::has('city')
+                        && Session::has('userType')
+                        && isset($contact['cities'])
+                        && ($contact['with'] == Session::get('userType') || $contact['with'] == 'both')) {
+                        foreach ($contact['cities'] as $city) {
+                            if($city == Session::get('city')) {
+                                return $contact['phone'];
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            return null;
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     public function phone_code() {
-        if(isset($this->vendor->contacts[0]['phone_code']))
-            return $this->vendor->contacts[0]['phone_code'];
-        return null;
+        try {
+            if(isset($this->vendor->contacts)) {
+                foreach ($this->vendor->contacts as $contact) {
+                    if(Session::has('city')
+                        && Session::has('userType')
+                        && isset($contact['cities'])
+                        && ($contact['with'] == Session::get('userType') || $contact['with'] == 'both')) {
+                        foreach ($contact['cities'] as $city) {
+                            if($city == Session::get('city')) {
+                                return $contact['phone_code'];
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            return null;
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     public function call_phone() {

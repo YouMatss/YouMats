@@ -24,7 +24,7 @@ class CreateLogsTable extends Migration
 
             $table->enum('type', ['visit', 'chat', 'call', 'email'])->index();
 
-            $table->nullableMorphs('type');
+            $table->nullableMorphs('page');
 
             $table->boolean('is_subscribed')->default(0)->index();
 
