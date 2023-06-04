@@ -226,7 +226,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/vendor/maher/title-template" />
-      <path value="$PROJECT_DIR$/vendor/monaye/simple-link-button" />
       <path value="$PROJECT_DIR$/vendor/nicmart/tree" />
       <path value="$PROJECT_DIR$/vendor/tightenco/collect" />
       <path value="$PROJECT_DIR$/vendor/league/uri" />
@@ -248,6 +247,7 @@
       <path value="$PROJECT_DIR$/vendor/laravie/serialize-queries" />
       <path value="$PROJECT_DIR$/vendor/mobiledetect/mobiledetectlib" />
       <path value="$PROJECT_DIR$/vendor/riverskies/laravel-mobile-detect" />
+      <path value="$PROJECT_DIR$/vendor/inspheric/nova-url-field" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
