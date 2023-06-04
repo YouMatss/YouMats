@@ -17,12 +17,20 @@ class IndexController extends Controller
     /**
      * @return Application|Factory|View
      */
-    public function index()
-    {
+    public function index() {
         // Get all vendors
-        $vendors = Vendor::all()->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
+
+/*
+        $vendors = Vendor::all()->with('current_subscribes')
+        ->sortByDesc('subscribe')
+        ->groupBy('subscribe')
+        ->map(function (Collection $collection) {
             return $collection->sortByDesc('id');
         })->ungroup()->unique();
+*/
+
+        $vendors = Vendor::with('media', 'current_subscribes')->where('active', true)->orderBy('created_at')->get();
+
 
         $vendors = CollectionPaginate::paginate($vendors, 21);
         $vendors->withPath(url()->current())->withQueryString();
@@ -37,7 +45,7 @@ class IndexController extends Controller
      * @return Application|Factory|View
      */
     public function show($vendor_slug) {
-        $data['vendor'] = Vendor::where('slug', $vendor_slug)->firstorfail();
+        $data['vendor']   = Vendor::with('current_subscribes')->where('slug', $vendor_slug)->firstorfail();
         $data['products'] = $data['vendor']->products()->paginate(20);
         $data['branches'] = $data['vendor']->branches()->paginate(5);
 

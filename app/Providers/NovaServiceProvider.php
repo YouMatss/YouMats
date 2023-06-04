@@ -273,9 +273,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                     NovaResource::make(FAQ::class)->label('FAQs'),
                                     Unit::class,
                                     NovaResource::make(ActionResource::class)->label('Activity Logs')
-                                        ->canSee(function ($request) {
-                                            return $request->user()->isSuperAdmin();
-                                        }),
+                                    ->canSee(function ($request) {
+                                        return $request->user()->isSuperAdmin();
+                                    }),
                                 ]
                             ]),
                             Group::make([
@@ -356,7 +356,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             Toggle::make('Enable Encryption Mode',  'enable_encryption_mode')
                 ->falseColor('#bacad6'),
             Toggle::make('Enable Phone Buttons',  'enable_phone_buttons')
-                ->falseColor('#bacad6'),
+                ->falseColor('#bacad6')
+
         ];
     }
 

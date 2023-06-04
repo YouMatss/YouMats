@@ -1,5 +1,3 @@
-User-agent: *
-Disallow: /admin_panel/
 Disallow: /FAQs
 Disallow: /sameh/
 Disallow: /password/

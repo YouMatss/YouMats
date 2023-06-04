@@ -28,6 +28,7 @@ Route::group([
     Route::get('data', [\App\Http\Controllers\Statistics\AdminController::class, 'getLogs'])->name('log.get');
     Route::get('ip/{ip}', [\App\Http\Controllers\Statistics\AdminController::class, 'trackIp'])->name('log.ip');
 });
+
 Route::post('setLog', [\App\Http\Controllers\Statistics\IndexController::class, 'setLog'])->name('log.set');
 
 //Actions routes
@@ -153,8 +154,10 @@ Route::group([
     Route::get('/team', 'Team\IndexController@index')->name('front.team.index');
     Route::get('/FAQs', 'Common\PageController@faqs')->name('front.faqs.page');
     Route::get('/contact-us', 'Common\PageController@contactUs')->name('front.contact.page');
+
     Route::get('/s', 'Product\ProductController@search')->name('products.search');
     Route::get('/suggest', 'Product\ProductController@suggest')->name('products.suggest');
+
     Route::post('/contact-us', 'Common\PageController@contactUsRequest')->name('front.contact.request');
     Route::post('/subscribe', 'Common\MiscController@subscribeRequest')->name('front.subscribe.request');
     Route::post('/inquire', 'Common\MiscController@inquireRequest')->name('front.inquire.request');
@@ -165,12 +168,13 @@ Route::group([
     Route::get('/suppliers', 'Vendor\IndexController@index')->name('vendor.index');
     Route::get('/suppliers/{vendor_slug}', 'Vendor\IndexController@show')->name('vendor.show');
 
+
+    // Remove after a while ...
     Route::permanentRedirect('/partners', '/suppliers');
     Route::permanentRedirect('/partners/{vendor_slug}', '/suppliers/{vendor_slug}');
 
-    Route::get('/PhoneCall/{slug}', 'Common\TwilioController@call')->name('api.twilio');
-    Route::get('/shop/{search_keyword}', 'Tag\IndexController@searchKeywordsTags')->name('front.tag.search');
 
+    Route::get('/shop/{search_keyword}', 'Tag\IndexController@searchKeywordsTags')->name('front.tag.search');
     Route::get('/shop/{search_keyword}', 'Tag\IndexController@searchKeywordsTags')->name('front.tag.search');
 
     Route::get('/{categories_slug}/{slug}/i', 'Product\ProductController@index')
@@ -179,4 +183,5 @@ Route::group([
     Route::get('/{slug}', 'Category\CategoryController@index')
         ->name('front.category')->where('slug', '.*')
         ->where('slug', '^(?!admin_panel|nova-api|nova-vendor).*$');
+
 });

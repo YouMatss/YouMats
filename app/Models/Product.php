@@ -265,7 +265,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     public function whatsapp_message(): string
     {
         $integration_number = nova_get_setting('whatsapp_manage_by_admin');
-        $message = route('front.product', [generatedNestedSlug($this->category->ancestors()->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
+        $message = route('front.product', [generatedNestedSlug($this->category->ancestors->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
         if(!$this->vendor->manage_by_admin) {
 
             if(!nova_get_setting('enable_encryption_mode')) {
@@ -290,7 +290,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      */
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class)->with('ancestors');
     }
 
     /**
@@ -306,7 +306,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      */
     public function vendor(): BelongsTo
     {
-        return $this->belongsTo(Vendor::class);
+        return $this->belongsTo(Vendor::class)->with('current_subscribes');
     }
 
     /**

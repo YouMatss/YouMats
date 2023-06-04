@@ -21,14 +21,11 @@
 
         <!-- Google Analytics -->
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114976621-1"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=AW-831078307"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
-          gtag('config', 'UA-114976621-1');
           gtag('config', 'AW-831078307');
         </script>
 
@@ -46,12 +43,6 @@
         @include('front.layouts.partials.header')
         <main id="content" role="main">
             @yield('content')
-            @if(\Request::route()->getName() != 'cart.show' && \Request::route()->getName() != 'home')
-                @include('front.layouts.partials.partners')
-            @endif
-            @if(\Request::route()->getName() != 'cart.show' && \Request::route()->getName() != 'front.faqs.page')
-                @include('front.layouts.partials.faqs')
-            @endif
         </main>
         @include('front.layouts.partials.footer')
         @include('front.layouts.partials.welcome-popup')

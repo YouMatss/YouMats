@@ -27,7 +27,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, HasTranslations, CascadeSoftDeletes, BelongsToThrough, UnicodeJsonColumn;
 
-    protected $fillable = ['name', 'country_id', 'subCategory_id', 'email' , 'contacts', 'address', 'type', 'latitude', 'longitude',
+    protected $fillable = ['name', 'country_id', 'subCategory_id', 'email' , 'transit_email' ,  'contacts', 'address', 'type', 'latitude', 'longitude',
         'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url', 'slug', 'active'];
 
     protected $guard = 'vendor';
@@ -136,7 +136,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     }
 
     public function products() {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class)->with('media', 'category', 'vendor');
     }
 
     public function subscribes() {

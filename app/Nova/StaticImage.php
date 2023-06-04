@@ -48,9 +48,6 @@ class StaticImage extends Resource
             Fields::image(true, LOGO_PATH, 'Logo', true)->showOnIndex(),
             Fields::image(true, FAVICON_PATH, 'Favicon', true)->showOnIndex(),
             Fields::image(true, SLIDER_BACKGROUND_PATH, 'Slider Background', true)->showOnIndex(),
-            Fields::image(true, HOME_FIRST_SECTION_PATH, 'Home First Section', true)->showOnIndex(),
-            Fields::image(true, HOME_SECOND_SECTION_PATH, 'Home Second Section', true)->showOnIndex(),
-            Fields::image(true, HOME_THIRD_SECTION_PATH, 'Home Third Section', true)->showOnIndex(),
         ];
     }
 

@@ -168,7 +168,7 @@
                             <ul class="row list-unstyled products-group no-gutters">
                                 @foreach($products as $product)
                                     <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
-                                        @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'grid'])
+                                        @include('front.layouts.partials.product_box',  ['product' => $product, 'Mother_Category_Slug' => '', 'view' => 'grid'])
                                     </li>
                                 @endforeach
                             </ul>

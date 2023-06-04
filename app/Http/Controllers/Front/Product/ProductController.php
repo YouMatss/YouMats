@@ -25,9 +25,13 @@ class ProductController extends Controller
      * @return void
      */
     private function checkOnCategoriesSlugs($categories_slug, $product) {
-        $categories_slug_array = array_reverse(explode('/', $categories_slug));
 
+        $categories_slug_array = array_reverse(explode('/', $categories_slug));
         abort_if(count($categories_slug_array) < 1, 404);
+
+        if(!$product) {
+            return redirect(route('home'), 301);
+        }
 
         foreach ($categories_slug_array as $key => $category_slug) {
             $category = Category::where('slug', $category_slug)->firstorfail();
@@ -41,6 +45,7 @@ class ProductController extends Controller
             } elseif($key == 3) {
                 abort_if($category->id != $product->category->parent->parent->parent->id, 404);
             }
+
         }
     }
 
@@ -50,17 +55,12 @@ class ProductController extends Controller
      * @return Application|Factory|View
      */
     public function index($categories_slug, $slug) {
-        $data['product'] = Product::with('category', 'tags', 'vendor')
-            ->where(['slug' => $slug, 'active' => true])->first();
-
-        if(!$data['product']) {
-            return redirect(route('home'), 301);
-        }
+        $data['product'] = Product::with('media', 'vendor')->where(['slug' => $slug, 'active' => true])->first();
 
         $this->checkOnCategoriesSlugs($categories_slug, $data['product']);
 
         if(Session::has('city')) {
-            $data['delivery'] = $data['product']->delivery;
+            $data['delivery']        = $data['product']->delivery;
             $data['delivery_cities'] = $data['product']->delivery_cities();
         }
 
@@ -68,17 +68,20 @@ class ProductController extends Controller
         $data['product']->save();
 
         if($data['product']->subscribe) {
-            $data['same_vendor_products'] = Product::with('category')
+
+            $data['same_vendor_products'] = Product::with('media', 'category', 'vendor')
                 ->where('category_id', $data['product']->category_id)
                 ->where('vendor_id', $data['product']->vendor_id)
                 ->where('id', '!=', $data['product']->id)
                 ->where('active', true)
                 ->inRandomOrder()->take(10)->get();
+
         }
 
         $data['subscribed_vendors'] = Vendor::with(['products' => function ($query) use ($data) {
             $query->where('category_id', $data['product']->category_id)->inRandomOrder();
         }])
+            ->with('subscribes')
             ->join('products', 'products.vendor_id', '=', 'vendors.id')
             ->join('categories', 'categories.id', '=', 'products.category_id')
             ->join('subscribes', 'subscribes.vendor_id', '=', 'vendors.id')
@@ -90,23 +93,28 @@ class ProductController extends Controller
             ->select('vendors.*')
             ->inRandomOrder()->distinct()->get();
 
-        $data['same_category_products'] = Product::with('category')
+        $data['same_category_products'] = Product::with('media', 'category')
             ->where('category_id', $data['product']->category_id)
             ->where('id', '!=', $data['product']->id)
             ->where('active', true)
             ->inRandomOrder()->take(10)->get();
 
         if ($data['product']->subscribe && !$data['product']->vendor->manage_by_admin) {
-            $data['widget_phone'] = Clean_Phone_Number($data['product']->call_phone());
+            $data['widget_phone']    = Clean_Phone_Number($data['product']->call_phone());
             $data['widget_whatsapp'] = $data['product']->whatsapp_message();
         }
 
-        if(is_company())
-            if(isset($data['product']->vendor->contacts[0]))
+        if(is_company()){
+
+            if(isset($data['product']->vendor->contacts[0])){
                 $data['contact'] = $data['product']->vendor->contacts[0];
+            }
 
-        Log::set('visit', [Product::class, $data['product']->id]);
+            Log::set('visit', [Product::class, $data['product']->id]);
 
+            $data['contact']['transit_email'] = $data['product']->vendor['transit_email'];
+
+        }
         return view('front.product.index')->with($data);
     }
 
@@ -114,13 +122,13 @@ class ProductController extends Controller
      * @param Request $request
      * @return Application|Factory|View
      */
-    public function all(Request $request)
-    {
+    public function all(Request $request){
         if(isset($request->filter['city'])) {
             setCity($request->filter['city']);
         }
 
         $products = QueryBuilder::for(Product::class)
+            ->with('media', 'category', 'vendor')
             ->where('products.active', true);
 
         if($request->has('search'))

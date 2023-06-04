@@ -1,5 +1,6 @@
 @extends('front.layouts.master')
 @section('metaTags')
+
     <title>{{getMetaTag($category, 'meta_title', $category->title)}}</title>
     <meta name="description" content="{{getMetaTag($category, 'meta_desc', nova_get_setting_translate('categories_additional_word') . ' ' . strip_tags($category->short_desc))}}">
     <meta name="keywords" content="{{getMetaTag($category, 'meta_keywords', '')}}">
@@ -38,8 +39,9 @@
     }
 </style>
 @endsection
+
 @section('content')
-    <div class="bg-gray-13 bg-md-transparent">
+  <div class="bg-gray-13 bg-md-transparent">
         <div class="container">
             <div class="my-md-3">
                 <nav aria-label="breadcrumb">
@@ -50,7 +52,7 @@
                         </li>
                         @foreach($category->ancestors as $ancestor)
                             <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors()->pluck('slug')->toArray(), $ancestor->slug)])}}"><span itemprop="name">{{$ancestor->name}}</span></a>
+                                <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors->pluck('slug')->toArray(), $ancestor->slug)])}}"><span itemprop="name">{{$ancestor->name}}</span></a>
                                 <meta itemprop="position" content="{{$loop->iteration + 1}}" />
                             </li>
                         @endforeach
@@ -90,7 +92,6 @@
         </div>
     </div>
     @endif
-
     <div class="mb-6 bg-md-transparent">
         @if($category->getTranslation('title', app()->getLocale(), false))
         <div class="container mb-8">
@@ -107,7 +108,6 @@
         <form method="get" action="{{url()->current()}}">
         <div class="container">
             <div class="row mb-8 rtl">
-
                 <div class="col-xl-3 col-wd-2gdot5 d-none d-lg-block d-xl-block">
                     @if(!is_company() && $maxPrice > 0)
                     <div class="mb-6">
@@ -163,8 +163,8 @@
                             @foreach($category->getSiblings() as $sibling)
                             <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                 <div class="custom-control custom-checkbox">
-                                    <a @if($sibling->id == $category->id) style="font-weight: bold" @endif href="{{route('front.category', [generatedNestedSlug($sibling->ancestors()->pluck('slug')->toArray(), $sibling->slug)])}}">{{$sibling->name}}
-{{--                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($sibling->products)}})</span>--}}
+                                    <a @if($sibling->id == $category->id) style="font-weight: bold" @endif href="{{route('front.category', [generatedNestedSlug($sibling->ancestors->pluck('slug')->toArray(), $sibling->slug)])}}">{{$sibling->name}}
+{{--                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($sibling->SampleProducts)}})</span>--}}
                                     </a>
                                 </div>
                             </div>
@@ -172,6 +172,7 @@
                         </div>
                     </div>
                     @endif
+
                     @if(count($tags))
                     <div class="mb-6">
                         <div class="border-bottom border-color-1 mb-5">
@@ -182,7 +183,7 @@
                             <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                 <div class="custom-control custom-checkbox">
                                     <a href="{{route('front.tag', [$tag->slug])}}" class="custom-control-label">{{$tag->name}}
-                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($tag->products)}})</span>
+                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($tag->SampleProducts)}})</span>
                                     </a>
                                 </div>
                             </div>
@@ -190,6 +191,7 @@
                         </div>
                     </div>
                     @endif
+
                 </div>
                 <div class="col-xl-9 col-wd-9gdot5" style="width: 100%!important;">
                     @if($category->getTranslation('desc', app()->getLocale(), false))
@@ -197,6 +199,7 @@
                         {!! $category->getTranslation('desc', app()->getLocale(), false) !!}
                         </div>
                     @endif
+
                     @if(count($category->children))
                     <div class="mb-6 bg-gray-7">
                         <div class="container">
@@ -204,7 +207,7 @@
                                 @foreach($category->children as $child)
                                     <div class="col-md-4 col-lg-3 col-xl-4 col-xl-2gdot4 mb-3 flex-shrink-0 flex-md-shrink-1">
                                         <div class="bg-white overflow-hidden shadow-on-hover d-flex align-items-center" style="height: 100px !important;">
-                                            <a href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2">
+                                            <a href="{{route('front.category', [generatedNestedSlug($child->ancestors->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2">
                                                 <div class="media align-items-center">
                                                     <div class="pt-2">
                                                         <img loading="lazy" class="img-fluid img_category_page" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_85_85')['url']}}"
@@ -277,31 +280,38 @@
                     <div id="productsContainer">
                         @include('front.category.productsContainer', ['category' => $category, 'products' => $products])
                     </div>
+
                 </div>
             </div>
         </div>
         </form>
     </div>
+
     @if(is_individual())
         @include('front.layouts.partials.change_city')
     @endif
-
     @if($category->contact_widgets)
         <a class="js-go-to u-go-to" href="#" data-position='{"bottom": 125, "right": 15}' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
             <span class="fas fa-arrow-up u-go-to__inner"></span>
         </a>
 
         @if(isset($widget_phone))
-            <button class="widget log" data-log="call" type="button" onclick="SetUpCall({{$widget_phone}})"><i class="fas fa-phone"></i></button>
+            <button class="widget log" data-log="call" type="button" onclick="SetUpCall({{$widget_phone}})">
+                <i class="fas fa-phone"></i>
+            </button>
         @else
-            <a class="widget log" data-log="call" href="tel:{{ nova_get_setting('widget_phone')}}"><i class="fas fa-phone"></i></a>
+            <a class="widget log" data-log="call" href="tel:{{ nova_get_setting('widget_phone')}}">
+                <i class="fas fa-phone"></i>
+            </a>
         @endif
-
-        <a class="widget whatsapp log" data-log="chat" href="{{$widget_whatsapp ?? 'https://wa.me/' . nova_get_setting('widget_whatsapp')}}" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    @else
-        <a class="js-go-to u-go-to" href="#" data-position='{"bottom": 15, "right": 15}' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
-            <span class="fas fa-arrow-up u-go-to__inner"></span>
+        <a class="widget whatsapp log" data-log="chat" href="{{$widget_whatsapp ?? 'https://wa.me/' . nova_get_setting('widget_whatsapp')}}" target="_blank">
+            <i class="fab fa-whatsapp"></i>
         </a>
+
+        @else
+            <a class="js-go-to u-go-to" href="#" data-position='{"bottom": 15, "right": 15}' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
+                <span class="fas fa-arrow-up u-go-to__inner"></span>
+            </a>
     @endif
 
 @endsection
@@ -309,6 +319,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             $(document).on('ready', function () {
+
                 function getAttributesIds(checkboxName) {
                     let checkBoxes = document.getElementsByName(checkboxName);
                     let ids = Array.prototype.slice.call(checkBoxes)
@@ -358,34 +369,31 @@
                     filterResults();
                 });
                 $(document).on('change', '#is_delivery', function () {
-                    filterResults();
+                    fi
+                    lterResults();
                 });
-
-
                 let fixmeTop = $('.mobile-filter').offset().top,
-                    headerHeight = document.querySelector('.nav_fixed').offsetHeight;
-
+                headerHeight = document.querySelector('.nav_fixed').offsetHeight;
                 $(window).scroll(function() {
-                    let currentScroll = $(window).scrollTop();
-                    if (currentScroll >= fixmeTop-(headerHeight+55)) {
-                        $('.mobile-filter').css({
-                            position: 'fixed',
-                            top: headerHeight+'px',
-                            right: 0,
-                            backgroundColor: '#FFF',
-                            zIndex: '1000',
-                            padding: '15px 0 0'
-                        });
-                    } else {
-                        $('.mobile-filter').css({
-                            position: 'relative',
-                            top: '0',
-                            backgroundColor: 'transparent',
-                            padding: '0 15px 15px'
-                        });
-                    }
-
-                });
+                let currentScroll = $(window).scrollTop();
+                if (currentScroll >= fixmeTop-(headerHeight+55)) {
+                    $('.mobile-filter').css({
+                        position: 'fixed',
+                        top: headerHeight+'px',
+                        right: 0,
+                        backgroundColor: '#FFF',
+                        zIndex: '1000',
+                        padding: '15px 0 0'
+                    });
+                } else {
+                    $('.mobile-filter').css({
+                        position: 'relative',
+                        top: '0',
+                        backgroundColor: 'transparent',
+                        padding: '0 15px 15px'
+                    });
+                }
+            });
 
             });
         });

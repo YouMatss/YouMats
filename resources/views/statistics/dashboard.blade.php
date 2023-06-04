@@ -15,6 +15,7 @@
         </form>
     </div>
 
+    @if(isset($logs))
     <div class="content">
         <table id="myTable" class="display" data-order='[[ 3, "asc" ]]'>
             <thead>
@@ -37,4 +38,5 @@
             </tbody>
         </table>
     </div>
+    @endif
 @endsection
