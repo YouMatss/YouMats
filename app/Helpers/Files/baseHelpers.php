@@ -5,11 +5,11 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-if (!function_exists('getModelName')) {
-    function getModelName($page_type, $page_id) {
-        return $page_type::whereId($page_id)->first(['name'])->name ?? $page_type . '(' . $page_id . ')';
-    }
+function getModelName($page_type, $page_id) {
+    return $page_type::whereId($page_id)->first(['name'])->name ?? $page_type . '(' . $page_id . ')';
 }
+
+
 if (!function_exists('front_url')) {
     function front_url() {
         return url('/');
@@ -67,111 +67,112 @@ if (!function_exists('getCityNameById')) {
 
 if (!function_exists('cartOrChat')) {
     function cartOrChat($product, $view_page = true) {
-        $product_route = route('front.product', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug), $product->slug]);
-
-        $viewIndex = '<div><a href="'.$product_route.'" style="border-radius:7.5px;"
-                    class="cart-chat-category btn btn-primary singler-button-hover">
-                       <i class="fa fa-eye"></i> &nbsp;' . __("general.view_product") . '
+        $product_route = route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug]);
+        $viewIndex = '<div><a href="'.$product_route.'"
+                    class="cart-chat-category btn btn-primary transition-3d-hover">
+                        <i class="fa fa-eye"></i> &nbsp;' . __("general.view_product") . '
                     </a>
                 </div>';
 
         $viewDetails = '<a class="cart-chat-category btn-primary transition-3d-hover"
-                            href="'.route('front.category', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug)]).'">'. __('product.category_href'). ': ' . $product->category->name .'</a>';
+                            href="'.route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)]).'">'. __('product.category_href'). ': ' . $product->category->name .'</a>';
 
-        $Add_To_Cart = '<div class="border py-1 px-3 border-color-1">
-                            <div class="js-quantity row align-items-center">
-                                <div class="col">
-                                    <input class="cart-quantity js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" min="1" value="1">
-                                </div>
-                                <div class="col-auto" style="padding: 0;">
-                                    <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
-                                        <small class="fas fa-minus btn-icon__inner"></small>
-                                    </a>
-                                    <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
-                                        <small class="fas fa-plus btn-icon__inner"></small>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>';
-
-        $chat = '<div>
-                    <a target="_blank" href="'.$product->whatsapp_message().'"
-                            class="cart-chat-category btn btn-primary singler-button-hover log"
-                            style="border-radius: 7.5px;background-color: #25D366;border-color: #25D366;"
-                            data-log="chat" data-url="'.$product_route.'">
-                            <i class="fab fa-whatsapp"></i> &nbsp;' . __("general.chat_button") . '
+        $chat = '<div><a target="_blank" href="'.$product->whatsapp_message().'"
+                    class="cart-chat-category btn btn-primary transition-3d-hover log" data-log="chat" data-url="'.$product_route.'">
+                        <i class="fa fa-comments"></i> &nbsp;' . __("general.chat_button") . '
                     </a>
                 </div>';
 
-        $call = '<div class="btn-group" style="width: 100%;">
-                        <a target="_blank" href="'.$product->whatsapp_message().'"
-                            class="cart-chat-category btn btn-primary transition-width-hover log"
-                            style="border-radius: 0 7.5px 7.5px 0;background-color: #25D366;border-color: #25D366;"
-                            data-log="chat" data-url="'.$product_route.'">
-                            <i class="fab fa-whatsapp"></i> &nbsp;' . __("general.chat_button") . '
-                        </a>
-                    <button onclick="SetUpCall('. Clean_Phone_Number($product->call_phone()) .')" type="button"
-                            class="cart-chat-category btn btn-primary transition-width-hover log" data-log="call" data-url="'.$product_route.'"
-                            style="cursor:pointer;border-radius: 7.5px 0 0 7.5px;background-color: #075E54;border-color: #075E54;">
+        $call = '<div><button onclick="SetUpCall('. Clean_Phone_Number($product->call_phone()) .')"
+                            type="button"
+                            class="cart-chat-category btn btn-primary transition-3d-hover log" data-log="call" data-url="'.$product_route.'"
+                            style="cursor:pointer;background-color: #5cb85c;border-color: #5cb85c;">
                         <i class="fa fa-phone"></i> &nbsp;' . __("general.call_button") . '
                     </button>
                 </div>';
 
-
+        $icon = is_company() ? 'fa fa-file-alt' : 'ec ec-add-to-cart';
         $cart_word = is_company() ? __("general.add_to_quote") : __("general.add_to_cart");
-
 
         if($view_page) {
             $cart = '
-                    <button type="button" data-url="' . route('cart.add', ['product' => $product]) . '"
-                            data-delivery-url="'. route('cart.delivery_warning', ['product' => $product]) .'"
-                            class="add-to-my-cart btn-add-cart cart-chat-category btn btn-primary">
-                            '.$cart_word.'
-                    </button>
-                ';
+            <div class="border py-1 px-3 border-color-1">
+                <div class="js-quantity row align-items-center">
+                    <div class="col">
+                        <input class="cart-quantity js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" min="'.$product->min_quantity.'" value="'.$product->min_quantity.'">
+                    </div>
+                    <div class="col-auto pr-1">
+                        <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
+                            <small class="fas fa-minus btn-icon__inner"></small>
+                        </a>
+                        <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
+                            <small class="fas fa-plus btn-icon__inner"></small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="button" data-url="' . route('cart.add', ['product' => $product]) . '"
+                    data-delivery-url="'. route('cart.delivery_warning', ['product' => $product]) .'"
+                    class="btn-add-cart cart-chat-category btn btn-primary transition-3d-hover" style="cursor: pointer;">
+                    <i class="' . $icon .'"></i> &nbsp;' . $cart_word . '
+                </button>
+            </div>';
             $view = $viewDetails;
         } else {
             $cart = '
-                <button type="button" data-url="' . route('cart.add', ['product' => $product]) . '"
+            <div class="float-container">
+                <div class="float-child-quantity">
+                    <div class="border py-1 px-3 border-color-1">
+                        <div class="js-quantity row align-items-center">
+                            <div class="col">
+                                <input class="cart-quantity js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" min="'.$product->min_quantity.'" value="'.$product->min_quantity.'">
+                            </div>
+                            <div class="col-auto pr-1">
+                                <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
+                                    <small class="fas fa-minus btn-icon__inner"></small>
+                                </a>
+                                <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0">
+                                    <small class="fas fa-plus btn-icon__inner"></small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="float-child-cart">
+                    <button type="button" data-url="' . route('cart.add', ['product' => $product]) . '"
                         data-delivery-url="'. route('cart.delivery_warning', ['product' => $product]) .'"
-                        class="add-to-my-cart btn-add-cart cart-chat-category btn btn-primary">
-                        '.$cart_word.'
-                </button>
-            ';
+                        class="btn-add-cart cart-chat-category btn btn-primary transition-3d-hover"><i class="' . $icon .'"></i></button>
+                </div>
+            </div>';
             $view = $viewIndex;
         }
 
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company()) {
-                $result = "";
-                if($product->call_phone()){
+                $result = $cart;
+                if($product->call_phone() && nova_get_setting('enable_phone_buttons'))
                     $result .= $call;
-                }elseif($product->phone()){
+                if($product->phone())
                     $result .= $chat;
-                }
-                $result .= $cart;
                 return $result;
             } elseif(!$product->subscribe) {
                 return $view;
             } elseif($product->price && $product->price > 0 && $product->delivery && $product->stock && $product->stock >= $product->min_quantity) {
-
-                $result1 = "";
-                if($product->call_phone()){
-                    $result1 .= $call;
-                }elseif($product->phone()){
-                    $result1 .= $chat;
-                }
                 $result1 = $cart;
+                if($product->call_phone() && nova_get_setting('enable_phone_buttons'))
+                    $result1 .= $call;
+                if($product->phone())
+                    $result1 .= $chat;
                 return $result1;
             } else {
                 $result2 = '';
-                if($product->call_phone()){
+                if($product->call_phone() && nova_get_setting('enable_phone_buttons'))
                     $result2 .= $call;
-                }elseif($product->phone()){
-                    $result2 .= $chat;
-                }else{
+                else
                     $result2 .= $view;
-                }
+                if($product->phone())
+                    $result2 .= $chat;
                 return $result2;
             }
         }
@@ -375,23 +376,15 @@ if(!function_exists('isSubscribe')) {
 
 if(!function_exists('Clean_Phone_Number')) {
     function Clean_Phone_Number($raw_number){
+        // remove any character
+        // remove country code of saudi arabia (966)
 
-        if($raw_number){
+        $filered_number = preg_replace('/^\+?966|\|966|\D+/', '', ($raw_number));
 
-            // remove any character
-            // remove country code of saudi arabia (966)
-
-            $filered_number = preg_replace('/^\+?966|\|966|\D+/', '', ($raw_number));
-
-            if(strlen($filered_number) >= 9 && strlen($filered_number) <= 10){
-                $filered_number = (substr($filered_number, 0, 1) !== "0") ? "80".$filered_number : "8".$filered_number;
-            }
-
-            return  $filered_number;
-
-        }else{
-            return '';
+        if(strlen($filered_number) >= 9 && strlen($filered_number) <= 10){
+            $filered_number = (substr($filered_number, 0, 1) !== "0") ? "80".$filered_number : "8".$filered_number;
         }
 
+        return  $filered_number;
     }
 }

@@ -1,5 +1,5 @@
 <div class="container rtl" id="SearchInnerDiv" style="position: relative">
-    <div class="h_scroll" style="padding: 0;top: -40px;left: 13px;">
+    <div class="h_scroll" style="padding: 0;">
         <div class="container p-0">
             <div class="row">
                 <div class="col-xl-12 col-wd-12gdot5" style="width:100%;">

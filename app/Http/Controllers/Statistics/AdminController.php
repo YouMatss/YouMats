@@ -20,7 +20,7 @@ class AdminController
         $data['subscribed_vendors'] = Vendor::join('subscribes', 'subscribes.vendor_id', 'vendors.id')
             ->whereDate('subscribes.expiry_date', '>', now())->select('vendors.id', 'vendors.name')
             ->groupBy('vendor_id')->get();
-        dd($data);
+
         return view('statistics.dashboard')->with($data);
     }
 

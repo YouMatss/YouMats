@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-
 class AppServiceProvider extends ServiceProvider
 {
     public function register() {
@@ -18,16 +17,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot() {
         Paginator::useBootstrap();
         try {
-
             setCityUsingLocation();
 
-            $data['staticImages'] = StaticImage::with('media')->first();
+            $data['staticImages'] = StaticImage::first();
 
             View::share($data);
-
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-
+        } catch (Exception $exception) {}
     }
 }

@@ -82,6 +82,14 @@ body,p,h1,h2,h3,h4,h5,h6,a,.card ,address ,.font-weight-light,.phone,.email, .cu
     margin-right: .5rem;
     margin-left: 0;
 }
+.input-group > .form-control:not(:last-child), .input-group > .custom-select:not(:last-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    border-top-right-radius: 6.1875rem;
+    border-bottom-right-radius: 6.1875rem;
+}
+
 
 .rounded-right-pill {
     border-top-left-radius: 6.1875rem !important;
@@ -314,6 +322,10 @@ h3.font-size-24 {
     right: auto !important;
 }
 
+.form-check {
+
+}
+
 .form-check-label{
     margin-right: 20px;
 }
@@ -453,16 +465,39 @@ h3.font-size-24 {
     text-align: right !important;
 }
 
+.float-child-quantity {
+    float: right;
+}
+
+.float-child-cart {
+    margin-right: 2%;
+    margin-left: 0;
+    width: 18%;
+    float: right;
+}
+
 .close_search{
     right: auto;
     left: -35px;
 }
 
+.input-group>.custom-select:not(:first-child),
+.input-group>.form-control:not(:first-child) {
+    border-radius: 1.4rem;
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
+}
+.input-group>.input-group-append:last-child>.btn:not(:last-child):not(.dropdown-toggle),
+.input-group>.input-group-append:last-child>.input-group-text:not(:last-child),
+.input-group>.input-group-append:not(:last-child)>.btn,
+.input-group>.input-group-append:not(:last-child)>.input-group-text,
+.input-group>.input-group-prepend>.btn,
+.input-group>.input-group-prepend>.input-group-text {
+    border-radius: 1.4rem;
+    border-top-left-radius: unset;
+    border-bottom-left-radius: unset;
+}
 
 .u-sidebar__content {
     text-align: right;
-}
-
-.input-box-ort{
-    direction: ltr;
 }

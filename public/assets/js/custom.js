@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-   /* <!-- JS Plugins Init. --> */
+    <!-- JS Plugins Init. -->
     $(window).on('load', function () {
         // initialization of HSMegaMenu component
         $('.js-mega-menu').HSMegaMenu({

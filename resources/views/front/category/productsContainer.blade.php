@@ -56,8 +56,7 @@
     </nav>
 
     @if(is_individual())
-
-    <div class="rtl ml-2 box--chan-c d-none d-lg-block d-xl-block">
+        <div class="rtl ml-2 box--chan-c d-none d-lg-block d-xl-block">
             <button type="button" class="choose_city btn btn-primary btn-xs" data-toggle="modal" data-target=".change_city_modal">{{__('general.change_city_button')}}</button>
             <strong class="tit_check_in_city"> {{__('general.city_location_text')}}: {{getCurrentCityName()}}</strong>
             {{--        {{__('general.category_word_after_change_city_button')}}--}}
@@ -82,19 +81,27 @@
         <ul class="row list-unstyled products-group no-gutters" id="categoryProductGrid">
             @forelse($products as $product)
                 <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
-                    @include('front.layouts.partials.product_box', ['product' => $product , 'view' => 'grid'])
+                    @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'grid'])
                 </li>
             @empty
                  <p class="alert alert-warning alert-block w-100">{{__('general.no_data')}}</p>
             @endforelse
         </ul>
     </div>
+{{--    <div class="tab-pane fade pt-2" id="list-view" role="tabpanel" aria-labelledby="list-view-tab" data-target-group="groups">--}}
+{{--        <ul class="d-block list-unstyled products-group prodcut-list-view-small" id="categoryProductList">--}}
+{{--            @forelse($products as $product)--}}
+{{--                @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'list'])--}}
+{{--            @empty--}}
+{{--                <p class="alert alert-warning alert-block w-100">{{__('general.no_data')}}</p>--}}
+{{--            @endforelse--}}
+{{--        </ul>--}}
+{{--    </div>--}}
 </div>
 <!-- End Tab Content -->
-
 <nav class="rtl d-md-flex justify-content-between align-items-center border-top pt-3" aria-label="Page navigation example">
     <ul class="pagination mb-0 pagination-shop justify-content-center justify-content-md-start">
         {{$products->onEachSide(0)->links()}}
     </ul>
 </nav>
-
+@include('front.layouts.partials.clickToCall')

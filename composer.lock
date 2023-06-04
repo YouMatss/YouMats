@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e874be6299e8483d402e552099b6ab3",
+    "content-hash": "467f16da57cb3ce0179dfb522e7056aa",
     "packages": [
         {
             "name": "ampeco/nova-date-range-filter",
@@ -638,61 +638,6 @@
                 "source": "https://github.com/cakephp/chronos"
             },
             "time": "2022-11-08T02:17:04+00:00"
-        },
-        {
-            "name": "chinleung/laravel-nova-optimizer",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/chinleung/laravel-nova-optimizer.git",
-                "reference": "e8e72a5be6ce7cc983627b6866f0d28dee1a782a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/chinleung/laravel-nova-optimizer/zipball/e8e72a5be6ce7cc983627b6866f0d28dee1a782a",
-                "reference": "e8e72a5be6ce7cc983627b6866f0d28dee1a782a",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^6.0|^7.0|^8.0",
-                "laravel/nova": "^3.0",
-                "php": "^7.4"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^4.0",
-                "phpunit/phpunit": "^8.0"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ChinLeung\\LaravelNovaOptimizer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chin Leung",
-                    "email": "hello@chinleung.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A package to optimize performance of Laravel Nova classes.",
-            "homepage": "https://github.com/chinleung/laravel-nova-optimizer",
-            "keywords": [
-                "chinleung",
-                "laravel",
-                "laravel-nova",
-                "laravel-nova-optimizer"
-            ],
-            "support": {
-                "issues": "https://github.com/chinleung/laravel-nova-optimizer/issues",
-                "source": "https://github.com/chinleung/laravel-nova-optimizer/tree/master"
-            },
-            "time": "2020-09-21T17:17:18+00:00"
         },
         {
             "name": "chris-ware/nova-breadcrumbs",
@@ -4946,7 +4891,7 @@
         },
         {
             "name": "maher/generate-products",
-            "version": "dev-youmats-2.0",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./nova-components/GenerateProducts",
@@ -4982,7 +4927,7 @@
         },
         {
             "name": "maher/title-template",
-            "version": "dev-youmats-2.0",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./nova-components/TitleTemplate",
@@ -15263,9 +15208,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "chinleung/laravel-nova-optimizer": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -40,7 +40,7 @@
                     $.HSCore.components.HSQantityCounter.init('.js-quantity');
 
                 }
-
+                
             });
         }
         function doTheMagic(url) {
@@ -68,7 +68,7 @@
                         }else{
                             doTheSuggestion("{{ route('products.suggest') }}?filter[name]=" + searchText + "&filter[has_categories]=");
                         }
-
+                        
                     }, timeoutVal);
                 }
             });
@@ -77,7 +77,7 @@
                 document.getElementById("u-header__section").style.position = "static";
                 document.getElementById("header").style.position = "static";
                 document.getElementById("SearchBar").style.zIndex = "99999";
-                document.getElementById("SearchBarMobile").style.zIndex = "99999";
+                document.getElementById("SearchBarMoblie").style.zIndex = "99999";
                 document.getElementById("SearchFace").style.cssText = "width:100%;height:1000vh;background:black;position:absolute;z-index:1005;opacity:0.5;";
 
             });
@@ -86,7 +86,7 @@
                 document.getElementById("u-header__section").style.position = "relative";
                 document.getElementById("header").style.position = "relative";
                 document.getElementById("SearchBar").style.zIndex = "relative";
-                document.getElementById("SearchBarMobile").style.zIndex = "relative";
+                document.getElementById("SearchBarMoblie").style.zIndex = "relative";
                 document.getElementById("SearchFace").style.cssText = "";
                 searchDiv.addClass('d-none');
             });
@@ -103,7 +103,6 @@
             $(document).on('click', '#searchProductBtn', function () {
                 let searchText = $("#searchProductInput").val();
                 doTheMagic("{{ route('products.search') }}?filter[name]=" + searchText + "&filter[has_categories]=" + CategoriesSearchBar + ",");
-
             });
 
             let input = document.getElementById("searchProductInput");

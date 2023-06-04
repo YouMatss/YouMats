@@ -11147,7 +11147,7 @@ input[type="submit"].btn-block {
     margin-right: -1px;
 }
 .input-group-append {
-    margin-left: 0px;
+    margin-left: -1px;
 }
 .input-group-text {
     display: -ms-flexbox;
@@ -32957,7 +32957,7 @@ label.btn {
 .u-hamburger:hover .u-hamburger__inner,
 .u-hamburger:hover .u-hamburger__inner::after,
 .u-hamburger:hover .u-hamburger__inner::before {
-    background-color: #fff;
+    background-color: #000;
 }
 .u-hamburger__box {
     width: 1.4rem;
@@ -32975,7 +32975,7 @@ label.btn {
 .u-hamburger__inner::before {
     width: 1.4rem;
     height: 0.125rem;
-    background-color: #fff;
+    background-color: #000;
     position: absolute;
     transition-property: -webkit-transform;
     transition-property: transform;
@@ -35256,13 +35256,6 @@ label.btn {
     -webkit-transform-origin: 30% 20%;
     transform-origin: 30% 20%;
 }
-.transition-width-hover {
-    transition: width 1s ease-in-out;
-}
-.transition-width-hover:focus, .transition-width-hover:hover {
-    width: calc(100% + 100px);
-}
-
 .transition-3d-hover {
     transition: all 0.2s ease-in-out;
 }
@@ -35271,7 +35264,6 @@ label.btn {
     -webkit-transform: translateY(-3px);
     transform: translateY(-3px);
 }
-
 .z-index-n1 {
     z-index: -1;
 }
@@ -40984,9 +40976,8 @@ section {
         margin: 5px 0 5px 0;
     }
     .box_search_nav {
-        padding: 15px 10px;
-        background: #232f3e !important;
-        border: 1px solid #232f3e;
+        padding: 0 10px;
+        margin: 15px 0;
     }
     .box_search_nav .input-group .fils_search_nav {
         background: #ddd;
@@ -42483,117 +42474,4 @@ section {
 }
 .category-listing-review:nth-child(even) {
     direction: initial;
-}
-
-.transition-width-hover { transition: width 0.75s ease-in-out;}
-.transition-width-hover:focus, .transition-width-hover:hover {width: calc(100% + 100px);background: #febd69 !important;border-color: #febd69 !important;color: #000 !important;}
-.singler-button-hover:focus, .singler-button-hover:hover{background: #febd69 !important;border-color: #febd69 !important;}
-
-.available-product {
-  background: #25d37b;
-  color: white;
-  padding: 3.5px;
-  text-transform: uppercase;
-  position: absolute;
-  top: 8px;
-  left: 5px;
-  z-index: 2;
-  transform: rotate(-45deg);
-  width: 34px;
-  white-space: nowrap;
-  opacity: 0.7;
-
-  &:before {
-    content: "";
-    width: 0;
-    height: 0;
-    border-style: solid;
-    transform: rotate(45deg);
-    border-width: 20px 20px 0 20px;
-    border-color: #25d37b transparent transparent transparent;
-    position: absolute;
-    right: -27px;
-    bottom: -3px;
-  }
-
-  &:after {
-    content: "";
-    width: 0;
-    height: 0;
-    border-style: solid;
-    transform: rotate(-45deg);
-    border-width: 20px 20px 0 20px;
-    border-color: #25d37b transparent transparent transparent;
-    position: absolute;
-    left: -27px;
-    bottom: -3px;
-  }
-
-}
-.OutOfStock-product {
-  background: #d35d25;
-  color: white;
-  padding: 3.5px;
-  text-transform: uppercase;
-  position: absolute;
-  top: 8px;
-  left: 5px;
-  z-index: 2;
-  transform: rotate(-45deg);
-  width: 34px;
-  white-space: nowrap;
-  opacity: 0.7;
-
-  &:before {
-    content: "";
-    width: 0;
-    height: 0;
-    border-style: solid;
-    transform: rotate(45deg);
-    border-width: 20px 20px 0 20px;
-    border-color: #d35d25 transparent transparent transparent;
-    position: absolute;
-    right: -27px;
-    bottom: -3px;
-  }
-
-  &:after {
-    content: "";
-    width: 0;
-    height: 0;
-    border-style: solid;
-    transform: rotate(-45deg);
-    border-width: 20px 20px 0 20px;
-    border-color: #d35d25 transparent transparent transparent;
-    position: absolute;
-    left: -27px;
-    bottom: -3px;
-  }
-
-}
-.vendor-badge{
-    border-radius: 7.5px;
-    font-weight: bold;
-    padding: 1em;
-    background-color: #232f3e !important;
-    font-size: 75% !important;
-    opacity: 0.6 !important;
-
-  &:hover {
-    opacity: 1 !important;
-  }
-}
-
-.add-to-my-cart{
-    background-color: #416972 !important;
-    color: #fff;
-    border-radius: 7.5px;
-    width: 70%;
-    margin-top: 0 !important;
-
-    &:hover {
-        background-color: #febd69 !important;
-        color: #000;
-
-      }
 }

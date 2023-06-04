@@ -12,10 +12,7 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     public function faqs() {
-
-        $data['FAQs'] = FAQ::orderBy('sort')->get();
-
-        return view('front.pages.faq')->with($data);
+        return view('front.pages.faq');
     }
 
     public function page($slug) {

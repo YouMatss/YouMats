@@ -1,5 +1,5 @@
 <footer>
-    <div class="bg-main-color py-3 text-white">
+    <div class="bg-primary py-3 text-white">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7 mb-md-3 mb-lg-0">
@@ -16,9 +16,9 @@
                         @csrf
                         <label class="sr-only">{{__('general.subscribe_input')}}</label>
                         <div class="input-group input-group-pill">
-                            <input type="email" class="form-control border-0 height-40" style="border-radius: 0 7.5px 7.5px 0;" name="email" placeholder="{{__('general.subscribe_input')}}" aria-label="Email address" required>
+                            <input type="email" class="form-control border-0 height-40" name="email" placeholder="{{__('general.subscribe_input')}}" aria-label="Email address" required>
                             <div class="input-group-append">
-                                <button type="submit" class="btn bg-third-main-color btn-sm-wide height-40 py-2">{{__('general.subscribe_button')}}</button>
+                                <button type="submit" class="btn btn-dark btn-sm-wide height-40 py-2">{{__('general.subscribe_button')}}</button>
                             </div>
                         </div>
                     </form>
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="bg-second-main-color pt-4 pb-4 text-white">
+    <div class="pt-4 bg-gray-13">
         <div class="container mt-1">
             <div class="row">
                 <div class="col-lg-5">
@@ -37,6 +37,7 @@
                             <img loading="lazy" src="{{ $staticImages->getFirstMediaUrlOrDefault(LOGO_PATH, 'size_height_45')['url'] }}" height="45">
                         </a>
                     </div>
+                    @if(is_company())
                     <div class="mb-4">
                         <div class="row no-gutters">
                             <div class="col-auto">
@@ -58,27 +59,28 @@
                     <div class="my-4 my-md-4">
                         <ul class="list-inline mb-0 opacity-7">
                             <li class="list-inline-item mr-0">
-                                <a class="btn font-size-20 btn-icon btn-bg-transparent rounded-circle" style="color: white;" href="{{__('info.facebook')}}">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="{{__('info.facebook')}}">
                                     <span class="fab fa-facebook-f btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item mr-0">
-                                <a class="btn font-size-20 btn-icon btn-bg-transparent rounded-circle" style="color: white;" href="{{__('info.googleplus')}}">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="{{__('info.googleplus')}}">
                                     <span class="fab fa-google btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item mr-0">
-                                <a class="btn font-size-20 btn-icon btn-bg-transparent rounded-circle" style="color: white;" href="{{__('info.twitter')}}">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="{{__('info.twitter')}}">
                                     <span class="fab fa-twitter btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item mr-0">
-                                <a class="btn font-size-20 btn-icon btn-bg-transparent rounded-circle" style="color: white;" href="{{__('info.instagram')}}">
+                                <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle" href="{{__('info.instagram')}}">
                                     <span class="fab fa-github btn-icon__inner"></span>
                                 </a>
                             </li>
                         </ul>
                     </div>
+                    @endif
                 </div>
                 <div class="col-lg-7">
                     <div class="row">
@@ -88,33 +90,36 @@
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
                                 @foreach($footer_categories->take(7)->get() as $category)
                                     <li>
-                                        <a class="list-group-item list-group-item-action text-white" href="{{ route('front.category', $category->slug )}}">{{ $category->name }}</a>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('front.category', [generatedNestedSlug($category->ancestors()->pluck('slug')->toArray(), $category->slug)]) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>
                             <!-- End List Group -->
                         </div>
 
+                        <div class="col-12 col-md mb-4 mb-md-0">
+                            <!-- List Group -->
+                            <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
+                                @foreach($footer_categories->skip(7)->take(7)->get() as $category)
+                                    <li>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('front.category', [generatedNestedSlug($category->ancestors()->pluck('slug')->toArray(), $category->slug)]) }}">{{ $category->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <!-- End List Group -->
+                        </div>
 
                         <div class="col-12 col-md mb-4 mb-md-0">
                             <h6 class="mb-3 font-weight-bold">{{__('general.footer_customer_care')}}</h6>
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
+                                <li><a class="list-group-item list-group-item-action" href="#">{{ __('footer.account') }}</a></li>
+{{--                                <li><a class="list-group-item list-group-item-action" href="#">{{ __('footer.wishlist') }}</a></li>--}}
+                                <li><a class="list-group-item list-group-item-action" href="{{route('front.team.index')}}">{{ __('footer.team') }}</a></li>
                                 @foreach($pages as $page)
-                                <li><a class="list-group-item list-group-item-action text-white" href="{{route('front.page.index', $page->slug)}}">{{$page->title}}</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="{{route('front.page.index', [$page->slug])}}">{{$page->title}}</a></li>
                                 @endforeach
-                            </ul>
-                            <!-- End List Group -->
-                        </div>
-                        <div class="col-12 col-md mb-4 mb-md-0">
-                            <h6 class="mb-3 font-weight-bold">{{__('general.footer_customer_care')}}</h6>
-                            <!-- List Group -->
-                            <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
-                                <li><a class="list-group-item list-group-item-action text-white" href="#">{{ __('footer.account') }}</a></li>
-                                <li><a class="list-group-item list-group-item-action text-white" href="#">{{ __('footer.wishlist') }}</a></li>
-                                <li><a class="list-group-item list-group-item-action text-white" href="{{route('front.team.index')}}">{{ __('footer.team') }}</a></li>
-                                <li><a class="list-group-item list-group-item-action text-white" href="{{route('front.faqs.page')}}">{{ __('footer.faq') }}</a></li>
-                                <li><a class="list-group-item list-group-item-action text-white" href="{{route('front.contact.request')}}">{{ __('general.contact_us') }}</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="{{route('front.faqs.page')}}">{{ __('footer.faq') }}</a></li>
                             </ul>
                             <!-- End List Group -->
                         </div>
@@ -124,10 +129,10 @@
         </div>
     </div>
 
-    <div class="bg-main-color text-white py-2">
+    <div class="bg-gray-14 py-2">
         <div class="container">
             <div class="flex-center-between d-block d-md-flex">
-                <div class="mb-3 mb-md-0">&copy; <a href="#" class="font-weight-bold text-white">{{env('APP_NAME')}}</a> - {{__('general.footer_all_rights_reserved')}}</div>
+                <div class="mb-3 mb-md-0">&copy; <a href="#" class="font-weight-bold text-gray-90">{{env('APP_NAME')}}</a> - {{__('general.footer_all_rights_reserved')}}</div>
                 <div class="text-md-right">
                     <span class="d-inline-block bg-white border rounded p-1">
                         <img loading="lazy" alt="Mada card logo icon" class="max-width-6" src="{{asset('assets/img')}}/mada.png">
@@ -171,20 +176,16 @@
                     <div class="u-sidebar__content u-header-sidebar__content">
                         <form id="inquireForm" enctype="multipart/form-data">
                             @csrf
-                            <!-- Login -->
                             <div id="login" data-target-group="idForm">
-                                <!-- Title -->
                                 <header class="text-center mb-7">
                                     <h2 class="h4 mb-0">{{__('general.quotation_title')}}</h2>
                                     <p>{{__('general.quotation_subtitle')}}</p>
                                 </header>
-                                <!-- End Title -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_company_name')}}</label>
-                                        <div class="input-group input-box-ort">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <span class="fas fa-building"></span>
@@ -194,13 +195,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_contact_person')}}</label>
-                                        <div class="input-group input-box-ort">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <span class="fas fa-user"></span>
@@ -210,13 +209,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_email')}}</label>
-                                        <div class="input-group input-box-ort">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" >
                                                     <span class="fas fa-envelope"></span>
@@ -226,9 +223,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_phone')}}</label>
@@ -237,13 +232,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_message')}}</label>
-                                        <div class="input-group input-box-ort">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <span class="fas fa-sticky-note"></span>
@@ -253,9 +246,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
 
-                                <!-- Form Group -->
                                 <div class="form-group">
                                     <!-- actual upload which is hidden -->
                                     <input type="file" name="file" id="actual-btn" hidden/>
@@ -266,46 +257,30 @@
                                     <!-- name of file chosen -->
                                     <span id="file-chosen">{{ __('general.no_file_chosen') }}</span>
                                 </div>
-                                <!-- End Form Group -->
-
-
-
 
                                 <div class="mb-2">
                                     <button type="submit" class="btn btn-block btn-sm btn-primary transition-3d-hover">{{__('general.quotation_button')}}</button>
                                 </div>
-
                             </div>
                         </form>
                     </div>
                 </div>
-                <!-- End Content -->
             </div>
         </div>
     </div>
 </aside>
 
+
 @if(Request::route()->getName() != 'front.category')
+<a class="js-go-to u-go-to" href="#" data-position='{"bottom": 125, "right": 15}' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
+    <span class="fas fa-arrow-up u-go-to__inner"></span>
+</a>
 
-    <a class="js-go-to u-go-to" href="#" data-position='{"bottom": 125, "right": 15}' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
-        <span class="fas fa-arrow-up u-go-to__inner"></span>
-    </a>
-    @if(isset($widget_phone))
+@if(isset($widget_phone))
+    <button class="widget log" data-log="call" type="button" onclick="SetUpCall({{$widget_phone}})"><i class="fas fa-phone"></i></button>
+@else
+    <a class="widget log" data-log="call" href="tel:{{ nova_get_setting('widget_phone')}}"><i class="fas fa-phone"></i></a>
+@endif
 
-        <button class="widget log" data-log="call" type="button" onclick="SetUpCall({{$widget_phone}})">
-            <i class="fas fa-phone"></i>
-        </button>
-
-    @else
-
-        <a class="widget log" data-log="call" href="tel:{{ $NovaSetting['widget_phone'] }}">
-            <i class="fas fa-phone"></i>
-        </a>
-
-    @endif
-
-        <a class="widget whatsapp log" data-log="chat" href="{{$widget_whatsapp ?? 'https://wa.me/' . $NovaSetting['widget_whatsapp']}}" target="_blank">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-
+<a class="widget whatsapp log" data-log="chat" href="{{$widget_whatsapp ?? 'https://wa.me/' . nova_get_setting('widget_whatsapp')}}" target="_blank"><i class="fab fa-whatsapp"></i></a>
 @endif

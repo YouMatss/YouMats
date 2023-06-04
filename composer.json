@@ -28,7 +28,6 @@
         "benjacho/belongs-to-many-field": "^1.8",
         "bernhardh/nova-translation-editor": "^1.2",
         "binary-cats/laravel-sku": "^0.4.0",
-        "chinleung/laravel-nova-optimizer": "dev-master",
         "chris-ware/nova-breadcrumbs": "^2.1",
         "david-griffiths/nova-dark-theme": "^1.0",
         "davidpiesse/nova-toggle": "^0.0.8",
