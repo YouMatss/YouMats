@@ -23,8 +23,8 @@ trait DefaultImage {
         $collection = $this->getFirstMedia($collectionName);
 
         if($collection) {
-            $title = json_decode($collection->img_title, true)[$locale] ?? $this->name;
-            $alt = json_decode($collection->img_alt, true)[$locale] ?? $this->name;
+            $title = json_decode((string) $collection->img_title, true)[$locale] ?? $this->name;
+            $alt = json_decode((string) $collection->img_alt, true)[$locale] ?? $this->name;
         } else {
             $title = $this->name;
             $alt = $this->name;

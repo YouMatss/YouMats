@@ -13,7 +13,6 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\HasManyThrough;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -66,7 +65,7 @@ class Category extends Resource
             CKEditor::make('Description', 'desc')
                 ->hideFromIndex()
                 ->translatable()
-                ->rules(REQUIRED_TEXT_VALIDATION),
+                ->rules(NULLABLE_TEXT_VALIDATION),
 
             Fields::image(true, CATEGORY_PATH, 'Image', true),
 
@@ -81,6 +80,7 @@ class Category extends Resource
             Toggle::make(__('Show in footer'), 'show_in_footer')->falseColor('#bacad6')->editableIndex()->sortable(),
             Toggle::make(__('Hide Availability'), 'hide_availability')->falseColor('#bacad6')->hideFromIndex(),
             Toggle::make(__('Hide Delivery Status'), 'hide_delivery_status')->falseColor('#bacad6')->hideFromIndex(),
+            Toggle::make(__('Show Contact Widgets'), 'contact_widgets')->falseColor('#bacad6')->hideFromIndex(),
 
             ActionButton::make('Sitemap')
                 ->action(GenerateSitemap::class, $this->id)

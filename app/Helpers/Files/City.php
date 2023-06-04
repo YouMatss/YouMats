@@ -18,7 +18,7 @@ if (!function_exists('setCityUsingLocation')) {
                 $ip = Request::ip();
                 $location = Location::get($ip);
                 if ($location) {
-                    $city = City::where('name', 'LIKE', '%' . $location->cityName . '%')->pluck('id');
+                    $city = City::where('name', 'LIKE', '%' . $location->cityName . '%')->select('id')->first();
                     if ($city) {
                         Session::put('city', $city->id);
                     } else {

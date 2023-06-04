@@ -106,7 +106,8 @@ class RegisterController extends Controller
             'country_id' => $data['country_id'],
             'name' => $data['name_en'],
             'email' => $data['email'],
-//            'phone' => $data['phone'],
+            'transit_email' => str_replace(' ', '-', $data['name_en']) . rand(1,99) . '@youmats.com',
+          //'phone' => $data['phone'],
             'address' => $data['address'],
             'type' => $data['type'],
             'latitude' => $data['latitude'],
@@ -133,7 +134,8 @@ class RegisterController extends Controller
                     'info@youmats.com',
                     'sameh@youmats.com',
                     'ereny@youmats.com',
-                    'marina@youmats.com'
+                    'marina@youmats.com',
+                    'zakaria@youmats.com'
                 ])->send(new NewRegister($vendor));
             } catch(\Exception $e) {}
 

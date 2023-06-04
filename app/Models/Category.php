@@ -135,6 +135,7 @@ class Category extends Model implements Sortable, HasMedia
         return $this->belongsTo(self::class, 'parent_id', 'id');
     }
 
+
     public function ancestors() {
         return $this->traitAncestors()->defaultOrder();
     }
@@ -146,24 +147,35 @@ class Category extends Model implements Sortable, HasMedia
         return $this->hasMany(Product::class);
     }
 
+
     /**
      * @return HasMany|HasManyThrough
      */
-    public function products()
-    {
-        if($this->isRoot()) {
-            return $this->hasManyThrough(Product::class, self::class, 'parent_id')
-                ->where('products.active', true)
-                ->orderBy('products.updated_at', 'desc');
-        }
-        if($this->isLeaf()) {
-            return $this->hasMany(Product::class)
-                ->where('products.active', true)
-                ->orderBy('products.updated_at', 'desc');
-        }
-        return Product::whereHas('category', fn($query) =>
-            $query->whereDescendantOrSelf($this)
-        )->where('products.active', true)->orderBy('products.updated_at', 'desc');
+
+     public function SampleProducts(int $SampleSize = 200){
+
+            if($this->isRoot()) {
+                return $this->hasManyThrough(Product::class, self::class, 'parent_id')
+                    ->with('media')
+                    ->where('products.active', true)
+                    ->orderBy('products.updated_at', 'desc')
+                    ->take($SampleSize);
+            }
+
+            if($this->isLeaf()) {
+                return $this->hasMany(Product::class)
+                    ->with('media')
+                    ->where('products.active', true)
+                    ->orderBy('products.updated_at', 'desc')
+                    ->take($SampleSize);
+            }
+
+            return Product::whereHas('category', fn($query) => $query->whereDescendantOrSelf($this))
+                    ->with('media')
+                    ->where('products.active', true)
+                    ->orderBy('products.updated_at', 'desc')
+                    ->take($SampleSize);
+
     }
 
     /**
@@ -180,28 +192,17 @@ class Category extends Model implements Sortable, HasMedia
     /**
      * @return mixed
      */
-    public function subscribedVendors()
-    {
+    public function subscribedVendors(){
+
         $ancestorIds = $this->ancestors->pluck('id')->push($this->id);
 
-        $vendorsQuery = Vendor::join('products', 'products.vendor_id', '=', 'vendors.id')
-            ->join('categories', 'categories.id', '=', 'products.category_id')
-            ->join('subscribes', function ($join) {
-                $join->on('subscribes.category_id', '=', 'categories.id');
-                $join->on('subscribes.vendor_id', '=', 'vendors.id');
-            });
-
-        $vendorsQuery->where(function ($query) use ($ancestorIds) {
+        $subscribes = Subscribe::where(function ($query) use ($ancestorIds) {
             foreach ($ancestorIds as $ancestorId) {
-                $query->orWhere('categories.id', $ancestorId);
+                $query->orWhere('category_id', $ancestorId);
             }
-        });
+        })->whereDate('expiry_date', '>', now())->distinct()->pluck('vendor_id')->toArray();
 
-        $vendorsQuery->whereDate('subscribes.expiry_date', '>', now())
-            ->select('vendors.id', 'vendors.name', 'vendors.slug')
-            ->distinct();
-
-        return $vendorsQuery->get();
+        return Vendor::with('media')->whereActive(true)->whereIn('id', $subscribes)->select('id', 'name', 'slug')->get();
     }
 
     /**

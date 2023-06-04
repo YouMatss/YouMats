@@ -36,7 +36,9 @@
                                 <div class="product-item__inner px-xl-4 p-3">
                                     <div class="product-item__body pb-xl-2">
                                         <div class="mb-2">
-                                                <a href="{{ route('vendor.show', [$vendor->slug]) }}" class="d-block text-center"><img loading="lazy" class="img-fluid" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_150_150')['url'] }}" alt="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt'] }}"></a>
+                                                <a href="{{ route('vendor.show', [$vendor->slug]) }}" class="d-block text-center">
+                                                    <img loading="lazy" class="img-fluid" src="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO, 'size_150_150')['url'] }}" alt="{{ $vendor->getFirstMediaUrlOrDefault(VENDOR_LOGO)['alt'] }}">
+                                                </a>
                                         </div>
                                         <h5 class="text-center mb-1 product-item__title"><a href="{{ route('vendor.show', [$vendor->slug]) }}" class="font-size-15 text-gray-90">{{ $vendor->name }}</a></h5>
                                     </div>

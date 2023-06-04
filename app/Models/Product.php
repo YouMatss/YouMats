@@ -187,7 +187,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     public function getSubscribeAttribute() {
         if(isset($this->vendor->current_subscribes)
             && count($this->vendor->current_subscribes)
-            && in_array($this->category_id, $this->vendor->current_subscribes->pluck('category_id')->toArray())
+            && array_intersect(array_merge([$this->category_id], $this->category->ancestors->pluck('id')->toArray()), $this->vendor->current_subscribes->pluck('category_id')->toArray())
         ) {
             return 1;
         }
@@ -195,15 +195,49 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     }
 
     public function phone() {
-        if(isset($this->vendor->contacts[0]['phone']))
-            return $this->vendor->contacts[0]['phone'];
-        return null;
+        try {
+            if(isset($this->vendor->contacts)) {
+                foreach ($this->vendor->contacts as $contact) {
+                    if(Session::has('city')
+                        && Session::has('userType')
+                        && isset($contact['cities'])
+                        && ($contact['with'] == Session::get('userType') || $contact['with'] == 'both')) {
+                        foreach ($contact['cities'] as $city) {
+                            if($city == Session::get('city')) {
+                                return $contact['phone'];
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            return null;
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     public function phone_code() {
-        if(isset($this->vendor->contacts[0]['phone_code']))
-            return $this->vendor->contacts[0]['phone_code'];
-        return null;
+        try {
+            if(isset($this->vendor->contacts)) {
+                foreach ($this->vendor->contacts as $contact) {
+                    if(Session::has('city')
+                        && Session::has('userType')
+                        && isset($contact['cities'])
+                        && ($contact['with'] == Session::get('userType') || $contact['with'] == 'both')) {
+                        foreach ($contact['cities'] as $city) {
+                            if($city == Session::get('city')) {
+                                return $contact['phone_code'];
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            return null;
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     public function call_phone() {
@@ -231,7 +265,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     public function whatsapp_message(): string
     {
         $integration_number = nova_get_setting('whatsapp_manage_by_admin');
-        $message = route('front.product', [generatedNestedSlug($this->category->ancestors()->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
+        $message = route('front.product', [generatedNestedSlug($this->category->ancestors->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
         if(!$this->vendor->manage_by_admin) {
 
             if(!nova_get_setting('enable_encryption_mode')) {
@@ -256,7 +290,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      */
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class)->with('ancestors');
     }
 
     /**
@@ -272,7 +306,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
      */
     public function vendor(): BelongsTo
     {
-        return $this->belongsTo(Vendor::class);
+        return $this->belongsTo(Vendor::class)->with('current_subscribes');
     }
 
     /**

@@ -12,23 +12,24 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-//Route::get('products_sitemap', function () {
-//    $increment = 2000;
-//    for($i = 0; $i <= 30000; $i += $increment) {
-//        \Illuminate\Support\Facades\Artisan::call('sitemap:products', [
-//            'start' => $i,
-//            'increment' => $increment
-//        ]);
-//    }
-//    dd('Done');
-//});
-
 // Redirect 301 from admin panel
 try {
     foreach (json_decode(nova_get_setting('redirect')) as $redirect) {
         Route::permanentRedirect($redirect->from, $redirect->to);
     }
 } catch (Exception $e) {}
+
+Route::group([
+    'prefix' => 'statistics',
+    'middleware' => ['auth:admin'],
+    'as' => 'statistics.'
+], function () {
+    Route::get('dashboard', [\App\Http\Controllers\Statistics\AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('data', [\App\Http\Controllers\Statistics\AdminController::class, 'getLogs'])->name('log.get');
+    Route::get('ip/{ip}', [\App\Http\Controllers\Statistics\AdminController::class, 'trackIp'])->name('log.ip');
+});
+
+Route::post('setLog', [\App\Http\Controllers\Statistics\IndexController::class, 'setLog'])->name('log.set');
 
 //Actions routes
 Route::post('changeCity', 'Common\MiscController@changeCity')->name('front.changeCity');
@@ -56,11 +57,11 @@ Route::group([
         });
     });
 
-    Route::group(['prefix' => 'chat', 'namespace' => 'Chat', 'as' => 'chat.'], function () {
-        Route::get('user/conversations/{vendor_id}', 'MessageController@userConversations')->name('user.conversations');
-        Route::get('vendor/conversations/{user_id}', 'MessageController@vendorConversations')->name('vendor.conversations');
-        Route::post('send_message', 'MessageController@sendMessage')->name('send_message');
-    });
+//    Route::group(['prefix' => 'chat', 'namespace' => 'Chat', 'as' => 'chat.'], function () {
+//        Route::get('user/conversations/{vendor_id}', 'MessageController@userConversations')->name('user.conversations');
+//        Route::get('vendor/conversations/{user_id}', 'MessageController@vendorConversations')->name('vendor.conversations');
+//        Route::post('send_message', 'MessageController@sendMessage')->name('send_message');
+//    });
 
     // Vendor Routes
     Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor', 'as' => 'vendor.'], function () {
@@ -153,8 +154,10 @@ Route::group([
     Route::get('/team', 'Team\IndexController@index')->name('front.team.index');
     Route::get('/FAQs', 'Common\PageController@faqs')->name('front.faqs.page');
     Route::get('/contact-us', 'Common\PageController@contactUs')->name('front.contact.page');
+
     Route::get('/s', 'Product\ProductController@search')->name('products.search');
     Route::get('/suggest', 'Product\ProductController@suggest')->name('products.suggest');
+
     Route::post('/contact-us', 'Common\PageController@contactUsRequest')->name('front.contact.request');
     Route::post('/subscribe', 'Common\MiscController@subscribeRequest')->name('front.subscribe.request');
     Route::post('/inquire', 'Common\MiscController@inquireRequest')->name('front.inquire.request');
@@ -165,12 +168,13 @@ Route::group([
     Route::get('/suppliers', 'Vendor\IndexController@index')->name('vendor.index');
     Route::get('/suppliers/{vendor_slug}', 'Vendor\IndexController@show')->name('vendor.show');
 
+
+    // Remove after a while ...
     Route::permanentRedirect('/partners', '/suppliers');
     Route::permanentRedirect('/partners/{vendor_slug}', '/suppliers/{vendor_slug}');
 
-    Route::get('/PhoneCall/{slug}', 'Common\TwilioController@call')->name('api.twilio');
-    Route::get('/shop/{search_keyword}', 'Tag\IndexController@searchKeywordsTags')->name('front.tag.search');
 
+    Route::get('/shop/{search_keyword}', 'Tag\IndexController@searchKeywordsTags')->name('front.tag.search');
     Route::get('/shop/{search_keyword}', 'Tag\IndexController@searchKeywordsTags')->name('front.tag.search');
 
     Route::get('/{categories_slug}/{slug}/i', 'Product\ProductController@index')
@@ -179,7 +183,5 @@ Route::group([
     Route::get('/{slug}', 'Category\CategoryController@index')
         ->name('front.category')->where('slug', '.*')
         ->where('slug', '^(?!admin_panel|nova-api|nova-vendor).*$');
-
-
 
 });

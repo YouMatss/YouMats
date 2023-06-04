@@ -52,7 +52,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="info_main_vendor">
-                    <h3>{{ $vendor->name }}</h3>
+                    <h1>{{ $vendor->name }}</h1>
                     @if(isset($vendor->type))
                     <label style="font-weight: bold">{{__("general.$vendor->type")}}</label>
                     @endif
@@ -168,7 +168,7 @@
                             <ul class="row list-unstyled products-group no-gutters">
                                 @foreach($products as $product)
                                     <li class="col-6 col-md-3 col-wd-2gdot4 product-item">
-                                        @include('front.layouts.partials.product_box', ['product' => $product, 'view' => 'grid'])
+                                        @include('front.layouts.partials.product_box',  ['product' => $product, 'Mother_Category_Slug' => '', 'view' => 'grid'])
                                     </li>
                                 @endforeach
                             </ul>

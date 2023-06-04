@@ -30383,6 +30383,10 @@ label.btn {
           transform: translate(0, -50%);
 }
 
+.adjust-filter-arrows {
+    top: 35%!important;
+}
+
 /*------------------------------------
   Slick Arrows Classic
 ------------------------------------*/

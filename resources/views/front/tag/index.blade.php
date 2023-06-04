@@ -59,7 +59,7 @@
                                     <div class="custom-control custom-checkbox">
                                         <a @if($row->id == $tag->id) style="font-weight: bold" @endif
                                         href="{{route('front.tag', [$row->slug])}}" class="custom-control-label">{{$row->name}}
-                                            <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($row->products)}})</span>
+                                            <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($row->SampleProducts)}})</span>
                                         </a>
                                     </div>
                                 </div>

@@ -10,11 +10,9 @@ use App\Nova\Metrics\UsersPerDay;
 use App\Nova\Metrics\UsersStatus;
 use App\Nova\Metrics\UsersType;
 use Davidpiesse\NovaToggle\Toggle;
-use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
@@ -33,6 +31,8 @@ class User extends Resource
     public static $search = [
         'id', 'name', 'email', 'phone', 'phone2', 'address', 'address2'
     ];
+
+
 
     public function fields(Request $request)
     {

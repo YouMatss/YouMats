@@ -39,6 +39,7 @@
             <!-- End breadcrumb -->
         </div>
     </div>
+
     <div class="mb-6 bg-gray-7 py-6">
         @if($category->getTranslation('title', app()->getLocale(), false))
         <div class="container mb-8">
@@ -52,7 +53,7 @@
                 @foreach($children as $child)
                 <div class="col-md-4 col-lg-3 col-xl-4 col-xl-2gdot4 mb-3 flex-shrink-0 flex-md-shrink-1">
                     <div class="bg-white overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
-                        <a href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2 pr-wd-6">
+                        <a href="{{route('front.category', [generatedNestedSlug($child->ancestors->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2 pr-wd-6">
                             <div class="media align-items-center">
                                 <div>
                                     <img loading="lazy" class="img-fluid img_category_page" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_100_100')['url']}}" alt="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}">
@@ -68,6 +69,7 @@
             </div>
         </div>
     </div>
+
     <div class="mb-6 bg-md-transparent py-0">
         <div class="container">
             <div class="row mb-8">
@@ -79,8 +81,34 @@
             </div>
         </div>
     </div>
+
     @if(is_individual())
         @include('front.layouts.partials.change_city')
     @endif
     @include('front.layouts.partials.clickToCall')
+
+    @if($category->contact_widgets)
+        <a class="js-go-to u-go-to" href="#" data-position='{"bottom": 125, "right": 15}' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
+            <span class="fas fa-arrow-up u-go-to__inner"></span>
+        </a>
+
+        @if(isset($widget_phone))
+            <button class="widget log" data-log="call" type="button" onclick="SetUpCall({{$widget_phone}})">
+                <i class="fas fa-phone"></i>
+            </button>
+        @else
+            <a class="widget log" data-log="call" href="tel:{{ nova_get_setting('widget_phone')}}">
+                <i class="fas fa-phone"></i>
+            </a>
+        @endif
+
+        <a class="widget whatsapp log" data-log="chat" href="{{$widget_whatsapp ?? 'https://wa.me/' . nova_get_setting('widget_whatsapp')}}" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+
+        @else
+        <a class="js-go-to u-go-to" href="#" data-position='{"bottom": 15, "right": 15}' data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown">
+            <span class="fas fa-arrow-up u-go-to__inner"></span>
+        </a>
+    @endif
 @endsection

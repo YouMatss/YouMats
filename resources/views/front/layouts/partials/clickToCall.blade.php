@@ -9,16 +9,57 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
+    function checkPermissions(phone_number) {
+        const permissions = navigator.mediaDevices.getUserMedia({audio: true, video: false})
+        permissions.then((stream) => {
+            SetUpCall(phone_number)
+        })
+        .catch((err) => {
+          this.setState(((prevState) => {
+            havePermissions: false
+          }));
+          console.log(`${err.name} : ${err.message}`)
+        });
+      }
+
     function SetUpCall(phone_number){
 
-        document.getElementById('CallSupplierDiv').style.display = "block";
-        document.getElementById('myframe').src = window.location.protocol + "//" + window.location.host + "/Phone/index.php?number=" + phone_number;
+        navigator.permissions.query({name: 'microphone'}).then(function (PermissionStatus) {
 
-        $('.overlayButton').click(function(){
+            if (PermissionStatus.state == 'granted') {
 
-            document.getElementById('CallSupplierDiv').style.display = "none";
-            document.getElementById('myframe').src = "about:blank";
+                document.getElementById('CallSupplierDiv').style.display = "block";
+                document.getElementById('myframe').src = window.location.protocol + "//" + window.location.host + "/Phone/index.php?number=" + phone_number;
 
+                $('.overlayButton').click(function(){
+
+                    document.getElementById('CallSupplierDiv').style.display = "none";
+                    document.getElementById('myframe').src = "about:blank";
+                });
+
+            } else { // prompt OR denied
+
+                checkPermissions(phone_number);
+                document.getElementById("myModal").innerHTML =
+                    "<div class='modal-dialog' role='document' style='max-width: 500px'>"
+                        + "<div class='modal-content st_model_new'>"
+                            + "<div class='modal-header'>"
+                                + "<h5 class='modal-title' style='padding: 10px 0;'>{{__('general.Notification')}}</h5>"
+                            + "</div>"
+                            + "<div class='modal-body'>"
+                                + "<h5>{{__('general.MicrophoneError')}}</h5>"
+                            + "</div>"
+                        + "</div>"
+                    + "</div>";
+
+                $('#myModal').modal('show');
+
+
+            }
+
+            PermissionStatus.onchange = function(){
+                location.reload();
+            }
 
         });
 

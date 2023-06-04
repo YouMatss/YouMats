@@ -1,5 +1,15 @@
 <script defer>
     document.addEventListener('DOMContentLoaded', function() {
+        $(".log").on('click', function () {
+            let type = $(this).data('log'),
+                url = $(this).data('url');
+            $.ajax({
+                url: "{{route('log.set')}}",
+                data: {"_token": "{{csrf_token()}}", "type": type, "url": url},
+                type: 'POST',
+                success: function (data) {}
+            });
+        });
 
         $(".showPassword").click(function(e) {
             e.preventDefault();
