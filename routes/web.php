@@ -25,7 +25,7 @@ Route::group([
     'as' => 'statistics.'
 ], function () {
     Route::get('data', [\App\Http\Controllers\Statistics\AdminController::class, 'getLogs'])->name('log.get');
-    Route::get('data/list', [\App\Http\Controllers\Statistics\AdminController::class, 'getLogsAjax'])->name('log.get.ajax');
+    Route::post('data/list', [\App\Http\Controllers\Statistics\AdminController::class, 'getLogsAjax'])->name('log.get.ajax');
     Route::get('ip/{ip}', [\App\Http\Controllers\Statistics\AdminController::class, 'trackIp'])->name('log.ip');
 });
 Route::post('setLog', [\App\Http\Controllers\Statistics\IndexController::class, 'setLog'])->name('log.set');

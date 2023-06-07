@@ -24,15 +24,11 @@ class AdminController
 
     public function getLogsAjax(Request $request) {
         if ($request->ajax()) {
-            $parameters = [
-                'vendor_id' => $request->vendor_id,
-                'category_id' => $request->category_id,
-                'date_from' => $request->date_from,
-                'date_to' => $request->date_to
-            ];
+            parse_str(html_entity_decode($request->parameters), $parameters);
 
             $data = $this->methodToGetLogs($parameters);
             return DataTables::of($data)
+                ->setTotalRecords($data->count())
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a>
@@ -47,12 +43,12 @@ class AdminController
     public function methodToGetLogs($request) {
         if($request['vendor_id']) {
             $products_ids = $this->get_products_ids('vendor', $request['vendor_id']);
-            $query = Log::with([
-                'page' /*=> function($q) {
+            $query = Log::/*with([
+                'page' => function($q) {
                     $q->pluck('name');
-                }*/
-            ])->where(function ($q) use ($request, $products_ids) {
-                $q->where(function ($q1) use ($request) {
+                }
+            ])->*/where(function ($q) use ($request, $products_ids) {
+                 $q->where(function ($q1) use ($request) {
                     $q1->where([
                         'page_type' => Vendor::class,
                         'page_id' => $request['vendor_id']

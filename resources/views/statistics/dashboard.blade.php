@@ -100,12 +100,6 @@
             <thead>
                 <tr>
                     <th>IP</th>
-                    <th>Country</th>
-                    <th>City</th>
-                    <th>Type</th>
-                    <th>Model Type</th>
-                    <th>Model</th>
-                    <th>Date</th>
                 </tr>
             </thead>
             <tbody></tbody>

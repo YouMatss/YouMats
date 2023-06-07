@@ -6,7 +6,6 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Dashboard | Statistics</title>
 
-        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
         <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -26,16 +25,27 @@
                 var table = $('.yajra-datatable').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('statistics.log.get.ajax') }}",
+                    paging: true,
+                    orderClasses: false,
+                    deferRender: true,
+                    ajax: {
+                        url: "{{ route('statistics.log.get.ajax') }}",
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            "_token": "{{csrf_token()}}",
+                            "parameters": "{{request()->getQueryString()}}"
+                        }
+                    },
                     columns: [
-                        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                        // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                         {data: 'ip', name: 'ip'},
-                        {
-                            data: 'action',
-                            name: 'action',
-                            orderable: true,
-                            searchable: true
-                        },
+                        // {
+                        //     data: 'action',
+                        //     name: 'action',
+                        //     orderable: true,
+                        //     searchable: true
+                        // },
                     ]
                 });
             });
