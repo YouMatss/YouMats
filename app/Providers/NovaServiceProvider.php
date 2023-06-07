@@ -246,7 +246,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                                 'badge' => null,
                                 'icon' => null,
                                 'target' => '_blank',
-                                'url' => route('statistics.dashboard')
+                                'url' => route('statistics.log.get')
                             ])->canSee(function ($request) {
                                 return $request->user()->isSuperAdmin();
                             }),

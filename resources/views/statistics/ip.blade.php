@@ -3,12 +3,13 @@
     <h2>IP: {{$ip}} - {{$country}} - {{$city}}</h2>
 
     <div class="content">
-        <table id="myTable" class="display" data-order='[[ 3, "asc" ]]'>
+        <table id="myTable" class="display" data-order='[[ 4, "desc" ]]'>
             <thead>
             <tr>
                 <th>URL</th>
                 <th>Type</th>
                 <th>Model</th>
+                <th>Model Type</th>
                 <th>Subscribed?</th>
                 <th>Date</th>
             </tr>
@@ -22,9 +23,10 @@
                         </a>
                     </td>
                     <td>{{$log->type}}</td>
+                    <td>{{$log->page_type}}</td>
                     <td>
-                        <label title="{{getModelName($log->page_type, $log->page_id)}}">
-                            {{\Illuminate\Support\Str::limit(getModelName($log->page_type, $log->page_id), 50)}}
+                        <label title="{{$log->page->name}}">
+                            {{\Illuminate\Support\Str::limit($log->page->name, 50)}}
                         </label>
                     </td>
                     <td>
