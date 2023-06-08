@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase mb-0">Visits</h5>
-{{--                                    <span class="h2 font-weight-bold mb-0">{{ $visits }}</span>--}}
+                                    <span class="h2 font-weight-bold mb-0">{{ $visits }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape text-white rounded-circle shadow">
@@ -47,7 +47,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase mb-0">Calls</h5>
-{{--                                    <span class="h2 font-weight-bold mb-0">{{ $calls }}</span>--}}
+                                    <span class="h2 font-weight-bold mb-0">{{ $calls }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape text-white rounded-circle shadow">
@@ -64,7 +64,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase mb-0">Chats</h5>
-{{--                                    <span class="h2 font-weight-bold mb-0">{{ $chats }}</span>--}}
+                                    <span class="h2 font-weight-bold mb-0">{{ $chats }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape text-white rounded-circle shadow">
@@ -81,7 +81,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase mb-0">E-Mails</h5>
-{{--                                    <span class="h2 font-weight-bold mb-0">{{ $emails }}</span>--}}
+                                    <span class="h2 font-weight-bold mb-0">{{ $emails }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape text-white rounded-circle shadow">
@@ -94,16 +94,5 @@
                 </div>
             </div>
         </div>
-
-        @if(isset($_GET['vendor_id']) || isset($_GET['category_id']) || isset($_GET['date_from']) || isset($_GET['date_to']))
-        <table class="table table-bordered yajra-datatable">
-            <thead>
-                <tr>
-                    <th>IP</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        @endif
     </div>
 @endsection
