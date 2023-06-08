@@ -248,6 +248,8 @@
       <path value="$PROJECT_DIR$/vendor/mobiledetect/mobiledetectlib" />
       <path value="$PROJECT_DIR$/vendor/riverskies/laravel-mobile-detect" />
       <path value="$PROJECT_DIR$/vendor/inspheric/nova-url-field" />
+      <path value="$PROJECT_DIR$/vendor/monaye/simple-link-button" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

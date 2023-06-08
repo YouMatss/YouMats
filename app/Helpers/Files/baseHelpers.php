@@ -5,11 +5,6 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-function getModelName($page_type, $page_id) {
-    return $page_type::whereId($page_id)->first(['name'])->name ?? $page_type . '(' . $page_id . ')';
-}
-
-
 if (!function_exists('front_url')) {
     function front_url() {
         return url('/');

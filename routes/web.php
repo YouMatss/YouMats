@@ -24,7 +24,6 @@ Route::group([
     'middleware' => ['auth:admin'],
     'as' => 'statistics.'
 ], function () {
-    Route::get('dashboard', [\App\Http\Controllers\Statistics\AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('data', [\App\Http\Controllers\Statistics\AdminController::class, 'getLogs'])->name('log.get');
     Route::get('ip/{ip}', [\App\Http\Controllers\Statistics\AdminController::class, 'trackIp'])->name('log.ip');
 });

@@ -17,8 +17,8 @@ class CreateLogsTable extends Migration
             $table->id()->index();
 
             $table->ipAddress('ip')->index();
-            $table->string('country', 50)->index();
-            $table->string('city', 50)->index();
+            $table->string('country', 50)->index()->nullable();
+            $table->string('city', 50)->index()->nullable();
 
             $table->string('url', 255)->index();
 

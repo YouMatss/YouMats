@@ -165,7 +165,8 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         try {
             if(isset($this->vendor->contacts)) {
                 foreach ($this->vendor->contacts as $contact) {
-                    if($contact['with'] != 'company' && Session::has('city') && isset($contact['cities'])) {
+                    if(isset($contact['cities']) && Session::has('userType') && Session::has('city')
+                            && ($contact['with'] == Session::get('userType') || $contact['with'] == 'both')) {
                         foreach ($contact['cities'] as $city) {
                             if($city == Session::get('city')) {
                                 return 1;
