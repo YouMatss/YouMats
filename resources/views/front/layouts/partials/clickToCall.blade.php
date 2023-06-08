@@ -81,7 +81,7 @@
                                 + "<h5 class='modal-title' style='padding: 10px 0;'>{{__('general.Notification')}}</h5>"
                             + "</div>"
                             + "<div class='modal-body'>"
-                                + "<h5>{{__('general.MicrophoneError')}}</h5>"
+                                + "<h5>{{__('general.microphoneerror')}}</h5>"
                             + "</div>"
                         + "</div>"
                     + "</div>";
