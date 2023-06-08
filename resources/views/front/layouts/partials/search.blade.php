@@ -6,17 +6,22 @@
             timeoutVal = 300,
             searchDiv = $("#searchDiv");
 
-        function AdjustWidth(){
+        function AdjustProperties(){
+            if(screen.availWidth > 760){
 
-                let one = document.getElementById("SearchBar");
-                    let two = document.getElementById("SearchInnerDiv");
-                    style = window.getComputedStyle(one);
-                    wdt = style.getPropertyValue('width');
-                    two.style.width = wdt;
+                let PopupSuggetion = document.getElementById("SearchInnerDiv");
+                let SearchBarDiv   = document.getElementById("SearchBar"),
+                    eleStyle = window.getComputedStyle(SearchBarDiv);
+
+                const LeftSpace = -(SearchBarDiv.getBoundingClientRect().left.toFixed()-105) + "px";
+
+                PopupSuggetion.setAttribute("style","left:"+ LeftSpace + ";width:" + eleStyle.width + ";position: relative;");
 
             }
+        }
 
         function doTheSuggestion(url) {
+
             let searchRegionGrid = $('#searchRegionGrid');
             url += '&include=category,categoryCount';
             if(xhr && xhr.readyState != 4) {
@@ -26,21 +31,15 @@
                 url: url,
                 type: 'GET',
                 beforeSend: function () {
-
-                    AdjustWidth();
-                    //searchRegionGrid.html(`<div class="mx-auto mt-8" style="margin-left: auto!important;"><i class="fa fa-spin fa-spinner fa-6x"></i></div>`);
-
+                    AdjustProperties();
                 },
                 success: function (response) {
-
                     searchDiv.removeClass('d-none');
                     searchDiv.html(response);
-                    AdjustWidth();
+                    AdjustProperties();
                     $.HSCore.components.HSRangeSlider.init('.js-range-slider');
                     $.HSCore.components.HSQantityCounter.init('.js-quantity');
-
                 }
-                
             });
         }
         function doTheMagic(url) {
@@ -50,60 +49,54 @@
                     xhr.abort();
                 }
                 window.location = url;
+
         }
 
         $(document).on('ready', function () {
-            //HANDLE SEARCH HERE
 
             $("#searchProductInput, #searchProductInputMobile").keyup( function(e) {
 
-                let searchText = $("#searchProductInput").val(),
-                    codes = [9, 16, 17, 18, 19, 20, 27, 33, 35, 36, 37, 38, 39, 40, 44, 45, 91, 92, 93, 112,
-                            113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 144, 145, 182, 183];
-                if (e.keyCode == 13 || $.inArray(e.keyCode, codes) == -1) {
+                let WebSearchSuggest    = $("#searchProductInput").val();
+                let MobileSearchSuggest = $("#searchProductInputMobile").val();
+                let CategoriesSearchBar = $("#CategoriesSearchBar").val();
+                var searchText = (WebSearchSuggest.length > 0) ? WebSearchSuggest:MobileSearchSuggest;
+
+                if (searchText.length > 3) {
                     timer = window.setTimeout(() => {
-                        let CategoriesSearchBar = $("#CategoriesSearchBar").val();
                         if(CategoriesSearchBar > 0){
                             doTheSuggestion("{{ route('products.suggest') }}?filter[name]=" + searchText + "&filter[has_categories]=" + CategoriesSearchBar + ",");
                         }else{
                             doTheSuggestion("{{ route('products.suggest') }}?filter[name]=" + searchText + "&filter[has_categories]=");
                         }
-                        
                     }, timeoutVal);
+
+                    $("#searchProductBtn, #searchProductBtnMobile").click( function(e) {
+                        doTheMagic("{{ route('products.search') }}?filter[name]=" + searchText + "&filter[has_categories]=" + CategoriesSearchBar + ",");
+                        console.log(searchText);
+                    });
                 }
             });
+
             $("#searchProductInput, #searchProductInputMobile").click( function(e) {
 
-                document.getElementById("u-header__section").style.position = "static";
-                document.getElementById("header").style.position = "static";
-                document.getElementById("SearchBar").style.zIndex = "99999";
-                document.getElementById("SearchBarMoblie").style.zIndex = "99999";
-                document.getElementById("SearchFace").style.cssText = "width:100%;height:1000vh;background:black;position:absolute;z-index:1005;opacity:0.5;";
+                $("#u-header__section").css({"position":"static"});
+                $("#header").css({"position":"static"});
+                $("#SearchBar").css({"z-index":"99999"});
+                $("#SearchBarMoblie").css({"z-index":"99999"});
+                $("#SearchFace").css({"width":"100%","height":"1000vh","background":"black","position":"absolute","z-index":"1005","opacity":"0.5"});
 
             });
             $(document).on('click', '#SearchFace', function(e) {
 
-                document.getElementById("u-header__section").style.position = "relative";
-                document.getElementById("header").style.position = "relative";
-                document.getElementById("SearchBar").style.zIndex = "relative";
-                document.getElementById("SearchBarMoblie").style.zIndex = "relative";
-                document.getElementById("SearchFace").style.cssText = "";
+                $("#u-header__section").css({"position":"relative"});
+                $("#header").css({"position":"relative"});
+                $("#SearchBar").css({"z-index":"relative"});
+                $("#SearchBarMoblie").css({"z-index":"relative"});
+                $("#SearchFace").css({"width":"","height":"","background":"","position":"","z-index":"","opacity":""});
                 searchDiv.addClass('d-none');
             });
 
 
-           //HANDLE SEARCH HERE
-            $(document).on('click', '#searchProductBtnMobile', function(e) {
-                //e.preventDefault();
-                let searchTextMobile = $("#searchProductInputMobile").val();
-                doTheMagic("{{ route('products.search') }}?filter[name]=" + searchTextMobile + "&filter[has_categories]=,");
-
-            });
-
-            $(document).on('click', '#searchProductBtn', function () {
-                let searchText = $("#searchProductInput").val();
-                doTheMagic("{{ route('products.search') }}?filter[name]=" + searchText + "&filter[has_categories]=" + CategoriesSearchBar + ",");
-            });
 
             let input = document.getElementById("searchProductInput");
             input.addEventListener("keypress", function(event) {
