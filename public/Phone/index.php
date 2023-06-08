@@ -21,7 +21,7 @@
         <link rel="stylesheet preload prefetch" type="text/css" as="style" href="https://dtd6jl0d42sve.cloudfront.net/lib/fonts/font_roboto/roboto.css"/>
         <link rel="stylesheet preload prefetch" type="text/css" as="style" href="https://dtd6jl0d42sve.cloudfront.net/lib/fonts/font_awesome/css/font-awesome.min.css"/>
         <link rel="stylesheet" type="text/css" href="https://dtd6jl0d42sve.cloudfront.net/lib/jquery/jquery-ui-1.13.2.min.css"/>
-        <link rel="stylesheet" type="text/css" href="phone.css?rand=<?php echo rand(); ?>"/>
+        <link rel="stylesheet" type="text/css" href="phone.min.css?rand=<?php echo rand(); ?>"/>
 
     </head>
 
@@ -54,7 +54,7 @@
     <!-- Loadable Scripts -->
     <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/jquery/jquery-3.6.1.min.js"></script>
     <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/jquery/jquery-ui-1.13.2.min.js"></script>
-    <script type="text/javascript" src="phone.js?rand=<?php echo rand(); ?>"></script>
+    <script type="text/javascript" src="phone.min.js?rand=<?php echo rand(); ?>"></script>
 
     <!-- Deferred Scripts -->
     <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/jquery/jquery.md5-min.js" defer="true"></script>
@@ -81,5 +81,10 @@
             , 1000);
 
 
+        function abort_call(){
+            $('html').html("");
+            endSession('2')
+            clearInterval(StatueChecker);
+        }
     </script>
 </html>
