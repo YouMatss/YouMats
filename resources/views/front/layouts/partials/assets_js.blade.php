@@ -224,19 +224,26 @@
         {{--        })--}}
         {{--});--}}
 
-        let inputs = document.querySelectorAll(".phoneNumber");
+        const input = document.querySelector(".phoneNumber");
+        const output = document.querySelector(".fullPhoneNumber");
 
-        $.each(inputs, function(key, value){
-            window.intlTelInput(value, {
-                initialCountry: "sa",
-                nationalMode: true,
-                utilsScript: '{{front_url()}}/assets/js/utils.js',
-                preferredCountries: ['sa'],
-                separateDialCode: true,
-                formatOnDisplay: true,
-                hiddenInput: "phone"
-            });
+        let iti = window.intlTelInput(input, {
+            initialCountry: "sa",
+            nationalMode: true,
+            utilsScript: '{{front_url()}}/assets/js/utils.js',
+            preferredCountries: ['sa'],
+            excludeCountries: ['il'],
+            separateDialCode: true,
+            formatOnDisplay: true
         });
+
+        const handleChange = () => {
+            output.value = iti.s.dialCode + input.value;
+        };
+
+        // listen to "keyup", but also "change" to update when the user selects a country
+        input.addEventListener('change', handleChange);
+        input.addEventListener('keyup', handleChange);
 
         // initialization of quantity counter
         $.HSCore.components.HSQantityCounter.init('.js-quantity');

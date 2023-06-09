@@ -115,7 +115,6 @@
                                             </a>
                                             <div id="profileDropdown1" class="dropdown-menu dropdown-unfold" aria-labelledby="profileDropdownInvoker2">
                                                 <a class="dropdown-item" href="{{ route('vendor.product.index') }}">{{__('general.profile')}}</a>
-                                                <a class="dropdown-item" href="{{ route('chat.vendor.conversations', [1]) }}">{{__('general.messages')}}</a>
                                                 <form class="dropdown-item inline-block p-0" style="cursor: pointer" action="{{route('vendor.logout')}}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="dropdown-item">{{__('general.logout')}}</button>
@@ -320,7 +319,6 @@
                                                                 <div id="top-header-nav-vendor" class="collapse" data-parent="#headerSidebarContent">
                                                                     <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
                                                                         <li><a class="dropdown-item" href="{{ route('vendor.product.index') }}">{{__('general.profile')}}</a></li>
-                                                                        <li><a class="dropdown-item" href="{{ route('chat.vendor.conversations', [1]) }}">{{__('general.messages')}}</a></li>
                                                                         <li>
                                                                             <form class="dropdown-item" style="cursor: pointer" action="{{route('vendor.logout')}}" method="POST">
                                                                                 @csrf

@@ -28,7 +28,7 @@ class InquireRequest extends FormRequest
             'company_name' => REQUIRED_STRING_VALIDATION,
             'name' => REQUIRED_STRING_VALIDATION,
             'email' => REQUIRED_EMAIL_VALIDATION,
-            'phone' => ['required', new PhoneNumberRule()],
+            'quotation_phone' => ['required', new PhoneNumberRule()],
             'message' => NULLABLE_TEXT_VALIDATION,
             'file' => NULLABLE_FILE_VALIDATION
         ];

@@ -101,7 +101,9 @@
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="phone" class="form-label">{{ __('auth.phone') }}</label>
-                                                <input type="tel" class="form-control phoneNumber @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required>
+                                                <input type="tel" id="phone" class="form-control phoneNumber @error('phone') is-invalid @enderror"
+                                                       value="{{ old('phone') }}" required>
+                                                <input type="hidden" class="fullPhoneNumber" name="phone">
                                                 @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

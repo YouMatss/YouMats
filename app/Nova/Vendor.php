@@ -57,6 +57,10 @@ class Vendor extends Resource
                 ->creationRules('unique:vendors,email')
                 ->updateRules('unique:vendors,email,{{resourceId}}'),
 
+            Text::make('Main Phone', 'phone')
+                ->hideFromIndex()
+                ->rules(REQUIRED_STRING_VALIDATION),
+
             Text::make('Address')
                 ->rules(NULLABLE_STRING_VALIDATION)
                 ->hideFromIndex(),

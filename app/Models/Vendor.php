@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
@@ -27,7 +26,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     use SoftDeletes, HasFactory, Notifiable, InteractsWithMedia, DefaultImage, HasTranslations, CascadeSoftDeletes, BelongsToThrough, UnicodeJsonColumn;
 
-    protected $fillable = ['name', 'country_id', 'subCategory_id', 'email' , 'contacts', 'address', 'type', 'latitude', 'longitude',
+    protected $fillable = ['name', 'country_id', 'subCategory_id', 'email', 'phone', 'contacts', 'address', 'type', 'latitude', 'longitude',
         'password', 'facebook_url', 'twitter_url' ,'pinterest_url', 'instagram_url', 'youtube_url', 'website_url', 'slug', 'active'];
 
     protected $guard = 'vendor';

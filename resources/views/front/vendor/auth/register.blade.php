@@ -76,19 +76,19 @@
                                                 @enderror
                                             </div>
                                         </div>
-{{--                                        <div class="col-md-6">--}}
-{{--                                            <div class="js-form-message form-group mb-5">--}}
-{{--                                                <label for="phone" class="form-label">{{ __('auth.phone') }} <span class="text-danger">*</span></label>--}}
-{{--                                                <div class="input-group mb-3">--}}
-{{--                                                    <input type="tel" class="form-control phoneNumber @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required dir="ltr">--}}
-{{--                                                </div>--}}
-{{--                                                @error('phone')--}}
-{{--                                                <span class="invalid-feedback" role="alert">--}}
-{{--                                                    <strong>{{ $message }}</strong>--}}
-{{--                                                </span>--}}
-{{--                                                @enderror--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+                                        <div class="col-md-6">
+                                            <div class="js-form-message form-group mb-5">
+                                                <label for="phone" class="form-label">{{ __('auth.phone') }} <span class="text-danger">*</span></label>
+                                                <input type="tel" id="phone" class="form-control phoneNumber @error('phone') is-invalid @enderror"
+                                                       value="{{ old('phone') }}" required>
+                                                <input type="hidden" class="fullPhoneNumber" name="phone">
+                                                @error('phone')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
                                                 <label for="country" class="form-label">{{ __('auth.country') }} <span class="text-danger">*</span></label>
@@ -106,17 +106,6 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="js-form-message form-group mb-5">
-                                                <label for="address" class="form-label">{{ __('auth.address') }} <span class="text-danger">*</span></label>
-                                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" autocomplete="address" required>
-                                                @error('address')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="js-form-message form-group mb-5">
                                                 <label for="type" class="form-label">{{ __('auth.type') }} <span class="text-danger">*</span></label>
                                                 <select class="form-control @error('type') is-invalid @enderror" id="type" name="type" required>
                                                     <option value="factory" @if(old('type') == 'factory') selected @endif>{{__('auth.type_factory')}}</option>
@@ -125,6 +114,17 @@
                                                     <option value="retail" @if(old('type') == 'retail') selected @endif>{{__('auth.type_retail')}}</option>
                                                 </select>
                                                 @error('type')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="js-form-message form-group mb-5">
+                                                <label for="address" class="form-label">{{ __('auth.address') }} <span class="text-danger">*</span></label>
+                                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" autocomplete="address" required>
+                                                @error('address')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
