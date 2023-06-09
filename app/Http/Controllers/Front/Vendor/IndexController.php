@@ -42,7 +42,7 @@ class IndexController extends Controller
         $data['branches'] = $data['vendor']->branches()->paginate(5);
 
         if ($data['vendor']->subscribe && !$data['vendor']->manage_by_admin && $data['vendor']->contacts) {
-            $data['widget_phone'] = Clean_Phone_Number($data['vendor']->call_phone());
+            $data['widget_phone'] = Clean_Phone_Number(get_contact($data['vendor'], 'call_phone'));
             $data['widget_whatsapp'] = $data['vendor']->whatsapp_message();
         }
 
