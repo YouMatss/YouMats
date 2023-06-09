@@ -111,7 +111,6 @@ class RegisterController extends Controller
         if($user)
             try {
                 Mail::to([
-//                    'mohamedmaher055@gmail.com',
                     'info@youmats.com',
                     'sameh@youmats.com',
                     'ereny@youmats.com',

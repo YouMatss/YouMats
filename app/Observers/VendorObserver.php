@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\Vendor;
-use Illuminate\Encryption\Encrypter;
 
 class VendorObserver
 {

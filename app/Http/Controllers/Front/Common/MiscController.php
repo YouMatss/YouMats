@@ -60,6 +60,7 @@ class MiscController extends Controller
         $data = $request->validated();
 
         try {
+            $data['phone'] = $data['quotation_phone'];
             $contact = Inquire::create($data);
             if(isset($request->file)) {
                 $contact->addMedia($request->file)->toMediaCollection(INQUIRE_PATH);

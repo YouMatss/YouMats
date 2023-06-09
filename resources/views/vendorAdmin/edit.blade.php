@@ -47,6 +47,13 @@
                                 </div>
                                 <div class="col-md-12 col-lg-12 col-xl-12 col-12">
                                     <div class="form-group">
+                                        <label for="phone">{{__('vendorAdmin.main_phone')}}</label>
+                                        <input type="text" class="form-control" name="phone"
+                                               id="phone" value="{{$vendor->phone}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12 col-xl-12 col-12">
+                                    <div class="form-group">
                                         <label for="address">{{__('vendorAdmin.address')}}</label>
                                         <input type="text" class="form-control" name="address"
                                                id="address" value="{{$vendor->address}}">
@@ -75,7 +82,7 @@
                                     @foreach($vendor->contacts as $key => $row)
                                         <div class="clone-element clone-element-add-contact">
                                             <div class="row">
-                                                <div class="col-md-4 col-lg-3">
+                                                <div class="col-md-4 col-lg-1">
                                                     <div class="form-group">
                                                         <label for="person_name">{{__('vendorAdmin.person_name')}}</label>
                                                         <input type="text" class="form-control" id="person_name" name="contacts_person_name[]" value="{{$row['person_name']}}" />
@@ -85,6 +92,12 @@
                                                     <div class="form-group">
                                                         <label for="c_email">{{__('vendorAdmin.email')}}</label>
                                                         <input type="email" class="form-control" id="c_email" name="contacts_email[]" value="{{$row['email']}}" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-lg-2">
+                                                    <div class="form-group">
+                                                        <label for="c_phone">{{__('vendorAdmin.call_phone')}}</label>
+                                                        <input type="text" class="form-control" id="c_call_phone" name="contacts_call_phone[]" value="{{$row['call_phone']}}" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 col-lg-2">

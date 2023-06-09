@@ -185,11 +185,12 @@
                             <div class="col-md-6">
                                 <!-- Input -->
                                 <div class="js-form-message mb-6">
-                                    <label class="form-label">
+                                    <label for="phone" class="form-label">
                                         {{__('checkout.phone')}}
                                     </label>
-                                    <input type="tel" class="form-control phoneNumber"
-                                           name="phone_number" data-error-class="u-has-error" data-success-class="u-has-success">
+                                    <input type="tel" id="phone" class="form-control phoneNumber @error('phone') is-invalid @enderror"
+                                           value="{{ old('phone') }}" required data-error-class="u-has-error" data-success-class="u-has-success">
+                                    <input type="hidden" class="fullPhoneNumber" name="phone">
                                     @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

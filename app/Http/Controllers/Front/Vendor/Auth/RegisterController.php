@@ -7,6 +7,7 @@ use App\Mail\NewRegister;
 use App\Models\Country;
 use App\Models\Vendor;
 use App\Providers\RouteServiceProvider;
+use App\Rules\PhoneNumberRule;
 use App\Rules\TopLevelEmailDomainValidator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Guard;
@@ -84,7 +85,7 @@ class RegisterController extends Controller
             'name_en' => ['required', 'string', 'max:191'],
             'name_ar' => ['required', 'string', 'max:191'],
             'email' => ['required', 'string', 'max:191', 'email', 'unique:vendors', new TopLevelEmailDomainValidator()],
-//            'phone' => ['nullable', new PhoneNumberRule()],
+            'phone' => ['required', new PhoneNumberRule()],
             'address' => ['required', 'string', 'max:191'],
             'type' => [...NULLABLE_STRING_VALIDATION, 'In:factory,distributor,wholesales,retail'],
             'latitude' => NULLABLE_STRING_VALIDATION,
@@ -106,7 +107,7 @@ class RegisterController extends Controller
             'country_id' => $data['country_id'],
             'name' => $data['name_en'],
             'email' => $data['email'],
-//            'phone' => $data['phone'],
+            'phone' => $data['phone'],
             'address' => $data['address'],
             'type' => $data['type'],
             'latitude' => $data['latitude'],
@@ -129,7 +130,6 @@ class RegisterController extends Controller
         if($vendor)
             try {
                 Mail::to([
-//                    'mohamedmaher055@gmail.com',
                     'info@youmats.com',
                     'sameh@youmats.com',
                     'ereny@youmats.com',

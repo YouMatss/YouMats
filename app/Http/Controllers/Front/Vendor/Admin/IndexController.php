@@ -91,7 +91,7 @@ class IndexController extends Controller
         if(isset($data['password']))
             $data['password'] = Hash::make($data['password']);
         else
-            unset($data['password']);
+            $data['password'] = $vendor->password;
 
         $vendor->setTranslation('name', 'en', $data['name_en']);
         $vendor->setTranslation('name', 'ar', $data['name_ar']);
@@ -104,6 +104,7 @@ class IndexController extends Controller
                 $data['contacts'][] = [
                     'person_name' => $data['contacts_person_name'][$i],
                     'email' => $data['contacts_email'][$i],
+                    'call_phone' => $data['contacts_call_phone'][$i],
                     'phone' => $data['contacts_phone'][$i],
                     'cities' => $data['contacts_cities'][$i],
                     'with' => $data['contacts_with'][$i],
@@ -117,8 +118,8 @@ class IndexController extends Controller
             || $data['name_en'] != $vendor->getTranslation('name', 'en')
             || $data['name_ar'] != $vendor->getTranslation('name', 'ar')
             || $data['email'] != $vendor->email
-            || $data['address'] != $vendor->address
-            || $data['type'] != $vendor->type) {
+            || $data['phone'] != $vendor->phone
+            || $data['address'] != $vendor->address) {
             $data['active'] = false;
 
             foreach(Admin::all() as $admin)

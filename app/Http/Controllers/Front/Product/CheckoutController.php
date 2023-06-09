@@ -16,19 +16,16 @@ use App\Models\QuoteItem;
 use App\Models\User;
 use App\Notifications\OrderCreated;
 use App\Notifications\QuoteCreated;
-use App\Rules\PhoneNumberRule;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Validation\Rule;
 
 class CheckoutController extends Controller
 {
@@ -65,8 +62,6 @@ class CheckoutController extends Controller
     {
         $data = $request->validated();
 
-        $data['phone_number'] = '+966' . trim($data['phone_number'], '+966');
-
         //Let's create an account for him & login so we complete the order.
         if(!Auth::guard('web')->check()) {
             $rules['email'] = 'required|email|unique:users|max:191';
@@ -81,7 +76,7 @@ class CheckoutController extends Controller
                 'type' => session()->has('userType') ? session()->get('userType') : $data['type'],
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'phone' => $data['phone_number'],
+                'phone' => $data['phone'],
                 'address' => $data['address'],
                 'password' => Hash::make($data['password']),
             ]);
@@ -127,9 +122,6 @@ class CheckoutController extends Controller
             $type = session()->get('userType');
         else
             $type = $data['type'];
-
-        $data['phone'] = $data['phone_number'];
-        unset($data['phone_number']);
 
         //A company is ordering. So let's register all the order as service
         if($type == 'company') {

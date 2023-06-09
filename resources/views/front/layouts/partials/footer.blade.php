@@ -219,7 +219,7 @@
                                                     <span class="fas fa-envelope"></span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control" @if(auth()->check()) value="{{ auth()->user()->email }}" @endif name="email"  placeholder="{{__('general.quotation_email')}}">
+                                            <input type="text" class="form-control" @if(auth()->check()) value="{{ auth()->user()->email }}" @endif name="email" placeholder="{{__('general.quotation_email')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +228,9 @@
                                     <div class="js-form-message js-focus-state">
                                         <label class="sr-only">{{__('general.quotation_phone')}}</label>
                                         <div class="input-group">
-                                            <input type="tel" class="form-control phoneNumber" @if(auth()->check()) value="{{ auth()->user()->phone }}" @endif>
+                                            <input type="tel" class="form-control phoneNumber"
+                                                   @if(auth()->check()) value="{{ auth()->user()->phone }}" @endif>
+                                            <input type="hidden" class="fullPhoneNumber" name="quotation_phone">
                                         </div>
                                     </div>
                                 </div>

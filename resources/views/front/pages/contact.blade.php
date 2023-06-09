@@ -54,7 +54,7 @@
                                         {{ __('contact.name') }}
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" name="name">
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -65,18 +65,20 @@
                                         {{ __('contact.email') }}
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" name="email">
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
                                 </div>
                                 <!-- End Input -->
                             </div>
                             <div class="col-md-6">
                                 <!-- Input -->
                                 <div class="js-form-message mb-4">
-                                    <label class="form-label">
+                                    <label for="phone" class="form-label">
                                         {{ __('contact.phone') }}
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="tel" class="form-control phoneNumber" name="phone">
+                                    <input type="tel" id="phone" class="form-control phoneNumber @error('phone') is-invalid @enderror"
+                                           value="{{ old('phone') }}" required>
+                                    <input type="hidden" class="fullPhoneNumber" name="phone">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -86,7 +88,7 @@
                                         {{ __('contact.message') }}
                                     </label>
                                     <div class="input-group">
-                                        <textarea class="form-control p-5" rows="4" name="message"></textarea>
+                                        <textarea class="form-control p-5 @error('message') is-invalid @enderror" rows="4" name="message"></textarea>
                                     </div>
                                 </div>
                             </div>
