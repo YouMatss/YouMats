@@ -21,10 +21,12 @@ class AdminController
         $data['vendors'] = Vendor::whereActive(true)->get();
         $data['categories'] = Category::all();
 
-        $data['visits'] = $this->methodToGetLogs($request)->where('type', 'visit')->count();
-        $data['calls'] = $this->methodToGetLogs($request)->where('type', 'call')->count();
-        $data['chats'] = $this->methodToGetLogs($request)->where('type', 'chat')->count();
-        $data['emails'] = $this->methodToGetLogs($request)->where('type', 'email')->count();
+        if($request->vendor_id || $request->category_id) {
+            $data['visits'] = $this->methodToGetLogs($request)->where('type', 'visit')->count();
+            $data['calls'] = $this->methodToGetLogs($request)->where('type', 'call')->count();
+            $data['chats'] = $this->methodToGetLogs($request)->where('type', 'chat')->count();
+            $data['emails'] = $this->methodToGetLogs($request)->where('type', 'email')->count();
+        }
         return view('statistics.dashboard')->with($data);
     }
 

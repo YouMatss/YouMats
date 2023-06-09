@@ -7,6 +7,7 @@ use App\Nova\Filters\VendorType;
 use Davidpiesse\NovaToggle\Toggle;
 use Drobee\NovaSluggable\SluggableText;
 use Illuminate\Http\Request;
+use Inspheric\Fields\Url;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\HasMany;
@@ -140,6 +141,14 @@ class Vendor extends Resource
 
             Date::make('Signup Date', 'created_at')
                 ->sortable()->exceptOnForms(),
+
+            Url::make('Link')
+                ->customHtmlUsing(function($value, $resource, $label) {
+                    return view('vendor.nova.partials.custom_link', [
+                        'url'   => route('vendor.show', [$this->slug]),
+                        'label' => 'Link',
+                    ])->render();
+                })->exceptOnForms(),
 
             Password::make('Password')->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')

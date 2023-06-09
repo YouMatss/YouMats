@@ -24,6 +24,7 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
+                @if(isset($visits))
                 <div class="col-md-3">
                     <div class="card card-stats mb-4 mb-xl-0">
                         <div class="card-body bg-primary text-white">
@@ -41,6 +42,8 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                @if(isset($calls))
                 <div class="col-md-3">
                     <div class="card card-stats mb-4 mb-xl-0">
                         <div class="card-body bg-primary text-white">
@@ -58,6 +61,8 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                @if(isset($chats))
                 <div class="col-md-3">
                     <div class="card card-stats mb-4 mb-xl-0">
                         <div class="card-body bg-primary text-white">
@@ -75,6 +80,8 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                @if(isset($emails))
                 <div class="col-md-3">
                     <div class="card card-stats mb-4 mb-xl-0">
                         <div class="card-body bg-primary text-white">
@@ -92,6 +99,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
