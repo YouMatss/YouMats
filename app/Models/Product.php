@@ -205,9 +205,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         $vendor = $this->vendor;
         if(!$vendor->manage_by_admin) {
 
-            if(!nova_get_setting('enable_encryption_mode')) {
-                $integration_number = (get_contact($vendor, 'phone')) ?? nova_get_setting('whatsapp_manage_by_admin');
-            } else {
+            if(nova_get_setting('enable_encryption_mode') || $vendor->enable_encryption_mode) {
                 $integration_number = nova_get_setting('whatsapp_integration');
                 $phone_code = ';;' . get_contact($vendor, 'phone_code') . ';;';
                 $vendor_code = ';;' . vendor_encrypt($vendor) . ';;';
@@ -215,6 +213,8 @@ class Product extends Model implements Sortable, HasMedia, Buyable
                 $message .= '%0A,%0A' . $phone_code;
                 $message .= '%0A,%0A' . $vendor_code;
                 $message .= '%0A,%0A' . $category_name;
+            } else {
+                $integration_number = (get_contact($vendor, 'phone')) ?? nova_get_setting('whatsapp_manage_by_admin');
             }
 
         }

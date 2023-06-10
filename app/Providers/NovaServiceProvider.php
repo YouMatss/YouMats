@@ -355,7 +355,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ->rules(REQUIRED_STRING_VALIDATION),
             Toggle::make('Enable Encryption Mode',  'enable_encryption_mode')
                 ->falseColor('#bacad6'),
-            Toggle::make('Enable 3cx',  'enable_3cx')
+            Toggle::make('Enable 3CX',  'enable_3cx')
                 ->falseColor('#bacad6'),
             Toggle::make('Enable Phone Buttons',  'enable_phone_buttons')
                 ->falseColor('#bacad6'),
