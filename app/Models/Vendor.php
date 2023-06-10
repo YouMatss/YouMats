@@ -209,14 +209,14 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         $message = route('vendor.show', [$this->slug]);
         if(!$this->manage_by_admin) {
 
-            if(!nova_get_setting('enable_encryption_mode')) {
-                $integration_number = (get_contact($this, 'phone')) ?? nova_get_setting('whatsapp_manage_by_admin');
-            } else {
+            if(nova_get_setting('enable_encryption_mode') || $this->enable_encryption_mode) {
                 $integration_number = nova_get_setting('whatsapp_integration');
                 $phone_code = ';;' . get_contact($this, 'phone_code') . ';;';
                 $vendor_code = ';;' . vendor_encrypt($this) . ';;';
                 $message .= '%0A,%0A' . $phone_code;
                 $message .= '%0A,%0A' . $vendor_code;
+            } else {
+                $integration_number = (get_contact($this, 'phone')) ?? nova_get_setting('whatsapp_manage_by_admin');
             }
 
         }

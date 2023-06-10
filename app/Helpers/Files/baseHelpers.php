@@ -155,7 +155,7 @@ if (!function_exists('cartOrChat')) {
             if (is_company()) {
                 $result = $cart;
                 if(get_contact($vendor, 'call_phone') && nova_get_setting('enable_phone_buttons')) {
-                    if(nova_get_setting('enable_3cx')) {
+                    if(nova_get_setting('enable_3cx') || $vendor->enable_3cx) {
                         $result .= $call;
                     } else {
                         $result .= $directCall;
@@ -169,7 +169,7 @@ if (!function_exists('cartOrChat')) {
             } elseif($product->price && $product->price > 0 && $product->delivery && $product->stock && $product->stock >= $product->min_quantity) {
                 $result1 = $cart;
                 if(get_contact($vendor, 'call_phone') && nova_get_setting('enable_phone_buttons')) {
-                    if(nova_get_setting('enable_3cx')) {
+                    if(nova_get_setting('enable_3cx') || $vendor->enable_3cx) {
                         $result1 .= $call;
                     } else {
                         $result1 .= $directCall;
@@ -181,7 +181,7 @@ if (!function_exists('cartOrChat')) {
             } else {
                 $result2 = '';
                 if(get_contact($vendor, 'call_phone') && nova_get_setting('enable_phone_buttons')) {
-                    if(nova_get_setting('enable_3cx')) {
+                    if(nova_get_setting('enable_3cx') || $vendor->enable_3cx) {
                         $result2 .= $call;
                     } else {
                         $result2 .= $directCall;

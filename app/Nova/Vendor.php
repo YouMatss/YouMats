@@ -130,13 +130,19 @@ class Vendor extends Resource
 
             Fields::file(true, VENDOR_PATH, 'Licenses', false),
 
-            Toggle::make('Active')
+            Toggle::make('Active')->sortable()
                 ->falseColor('#bacad6')->editableIndex(),
 
             Toggle::make('Featured', 'isFeatured')->sortable()
                 ->falseColor('#bacad6')->editableIndex(),
 
             Toggle::make('Manage by '.env('APP_NAME'), 'manage_by_admin')->sortable()
+                ->falseColor('#bacad6'),
+
+            Toggle::make('Enable Encryption Mode', 'enable_encryption_mode')->sortable()
+                ->falseColor('#bacad6'),
+
+            Toggle::make('Enable 3CX', 'enable_3cx')->sortable()
                 ->falseColor('#bacad6'),
 
             Date::make('Signup Date', 'created_at')
