@@ -43,13 +43,10 @@
             });
         }
         function doTheMagic(url) {
-
-                url += '&include=tags,tagsCount,category,categoryCount';
-                if(xhr && xhr.readyState != 4) {
-                    xhr.abort();
-                }
-                window.location = url;
-
+            if(xhr && xhr.readyState != 4) {
+                xhr.abort();
+            }
+            window.location = url;
         }
 
         $(document).on('ready', function () {
@@ -58,33 +55,25 @@
 
                 let WebSearchSuggest    = $("#searchProductInput").val();
                 let MobileSearchSuggest = $("#searchProductInputMobile").val();
-                let CategoriesSearchBar = $("#CategoriesSearchBar").val();
                 var searchText = (WebSearchSuggest.length > 0) ? WebSearchSuggest:MobileSearchSuggest;
 
                 if (searchText.length > 3) {
                     timer = window.setTimeout(() => {
-                        if(CategoriesSearchBar > 0){
-                            doTheSuggestion("{{ route('products.suggest') }}?filter[name]=" + searchText + "&filter[has_categories]=" + CategoriesSearchBar + ",");
-                        }else{
-                            doTheSuggestion("{{ route('products.suggest') }}?filter[name]=" + searchText + "&filter[has_categories]=");
-                        }
+                        doTheSuggestion("{{ route('products.suggest') }}?filter[name]=" + searchText);
                     }, timeoutVal);
 
                     $("#searchProductBtn, #searchProductBtnMobile").click( function(e) {
-                        doTheMagic("{{ route('products.search') }}?filter[name]=" + searchText + "&filter[has_categories]=" + CategoriesSearchBar + ",");
-                        console.log(searchText);
+                        doTheMagic("{{ route('products.search') }}?filter[name]=" + searchText);
                     });
                 }
             });
 
             $("#searchProductInput, #searchProductInputMobile").click( function(e) {
-
                 $("#u-header__section").css({"position":"static"});
                 $("#header").css({"position":"static"});
                 $("#SearchBar").css({"z-index":"99999"});
                 $("#SearchBarMoblie").css({"z-index":"99999"});
                 $("#SearchFace").css({"width":"100%","height":"1000vh","background":"black","position":"absolute","z-index":"1005","opacity":"0.5"});
-
             });
             $(document).on('click', '#SearchFace', function(e) {
 

@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers\Front\Product;
 
+use App\Helpers\Classes\AttributeFilter;
+use App\Helpers\Classes\CollectionPaginate;
+use App\Helpers\Classes\DeliveryFilter;
 use App\Helpers\Classes\Log;
+use App\Helpers\Classes\PriceFilter;
+use App\Helpers\Classes\ProductsSortDelivery;
 use App\Helpers\Filters\FiltersJsonField;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Front\Category\CategoryController;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Vendor;
@@ -15,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
 use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
@@ -173,34 +180,54 @@ class ProductController extends Controller
           return view('front.layouts.partials.searchDiv')->with($data)->render();
     }
 
-    /**
-     * @return string
-     */
     public function search() {
-
+        $data['q'] = $_GET['filter']['name'] ?? '';
         $data['selected_tags'] = [];
         $data['selected_categories'] = [];
 
-        $search_products_by_name_only = QueryBuilder::for(Product::class)
-                        ->allowedFilters([AllowedFilter::custom('name', new FiltersJsonField)])
-                        ->where('active', true)->get();
+        $request = Request();
 
-        $data['search_products'] = QueryBuilder::for(Product::class)
-                        ->allowedFilters([
-                            AllowedFilter::custom('name', new FiltersJsonField),
-                            AllowedFilter::scope('price'),
-                            AllowedFilter::callback('has_tags', fn($query, $value) => $query->whereHas('tags', fn($query) => $query->whereIn('tags.id', $value))),
-                            AllowedFilter::callback('has_categories', fn($query, $value) => $query->whereHas('category', fn($query) => $query->whereIn('categories.id', $value)))
-                        ])
-                        ->allowedIncludes(['tags', 'category'])
-                        ->where('active', true)
-                        ->paginate(20);
+        if(isset($request->filter['city'])) {
+            setCity($request->filter['city']);
+        }
 
+        $products = QueryBuilder::for(Product::class)
+            ->where('active', true)
+            ->select('id', 'category_id', 'vendor_id', 'name', 'short_desc',
+                'type', 'price', 'stock', 'min_quantity', 'active', 'shipping_id',
+                'specific_shipping', 'shipping_prices', 'slug', 'sort');
+
+        $products->allowedFilters([
+            AllowedFilter::custom('name', new FiltersJsonField),
+            AllowedFilter::scope('price'),
+            AllowedFilter::custom('is_price', new PriceFilter()),
+            AllowedFilter::custom('is_delivery', new DeliveryFilter())
+        ]);
+
+        $data['minPrice'] = $products->min('price');
+        $data['maxPrice'] = $products->max('price');
+
+        if(isset($request->sort) && is_individual()) {
+            $filter = $products->allowedSorts([
+                'price',
+                AllowedSort::custom('delivery', new ProductsSortDelivery($products), 'delivery')
+            ])
+                ->with('category')
+                ->take(500)->get()->unique();
+        } else {
+            $filter = $products->take(500)->get()
+                ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
+                    return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
+                        return (new CategoryController())->customSort($collection);
+                    })->ungroup();
+                })->ungroup()
+                ->unique();
+        }
+
+        $data['search_products'] = CollectionPaginate::paginate($filter, 20);
         $data['search_products']->withPath(url()->current())->withQueryString();
 
-
-
-        foreach ($search_products_by_name_only as $product) {
+        foreach ($filter as $product) {
             if($product->tags)
                 foreach ($product->tags as $tag) {
                     $data['search_tags'][$tag->id] = $tag;
@@ -209,14 +236,6 @@ class ProductController extends Controller
                 $data['search_categories'][$product->category->id] = $product->category;
         }
 
-        if(isset($_GET['filter']['has_tags']))
-            $data['selected_tags'] = explode(',', $_GET['filter']['has_tags']);
-        if(isset($_GET['filter']['has_categories']))
-            $data['selected_categories'] = explode(',', $_GET['filter']['has_categories']);
-
-        $data['max_price'] = ceil($search_products_by_name_only->max('price'));
-
         return view('front.search.search')->with($data);
-
     }
 }

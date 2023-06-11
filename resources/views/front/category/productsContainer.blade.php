@@ -1,7 +1,9 @@
 <div class="d-block d-md-flex flex-center-between mb-3 rtl">
     <div class="text-left">
         <span class="font-size-25 mb-2 mb-md-0"></span>
+        @if(isset($category))
         <input type="hidden" value="{{$category->id}}" id="categoryIdContainer">
+        @endif
         <p class="font-size-14 text-gray-90 mb-0">{{__('general.showing')}} {{$products->firstItem()}}–{{$products->firstItem() + count($products->items()) -1}} {{__('general.of')}} {{$products->total()}} {{__('general.results')}}</p>
     </div>
     @if(is_individual())

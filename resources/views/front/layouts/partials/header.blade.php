@@ -493,10 +493,12 @@
 
         <div class="box_search_nav d-block d-lg-none">
             <div class="input-group" id="SearchBarMoblie">
-                <input type="search" autocomplete="off" class="fils_search_nav form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill" id="searchProductInputMobile" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
+                <input type="search" autocomplete="off" class="fils_search_nav form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill"
+                       id="searchProductInputMobile" placeholder="{{ __('general.search_placeholder') }}"
+                       aria-label="Search for Products" aria-describedby="searchProduct1" required>
                 <div class="input-group-append">
                     <!-- End Select -->
-                    <button class="btn btn-primary height-40 py-2 px-3 mt-0 rounded-right-pill" type="button" id="searchProductBtnMobile">
+                    <button class="btn btn-primary height-40 py-2 px-3 mt-0 rounded-right-pill" style="box-shadow: none;" type="button" id="searchProductBtnMobile">
                         <span class="ec ec-search font-size-24" id="searchButtonSpan"></span>
                     </button>
                 </div>
@@ -606,17 +608,9 @@
                     <div class="col d-none d-xl-block">
                         <label class="sr-only" for="searchProduct">{{__('general.search')}}</label>
                         <div class="input-group" id="SearchBar" style="margin-top: 4px;">
-                            <select id="CategoriesSearchBar" class="form-select form-select-lg height-40 py-2 px-2" style="border-radius: 0 7.5px 7.5px 0;max-width: 130px;background: #f3f3f3;border: #f3f3f3;">
-                                <option value="0" selected> {{__('general.all_categories')}}</option>
-                                @foreach($categories as $category)
-                                     <option value="{{$category->id}}">
-                                        {{$category->name}}
-                                    </option>
-                                @endforeach
-                              </select>
-                            <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40" style="border-radius: 0;" id="searchProductInput" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
+                            <input type="search" autocomplete="off" class="form-control py-2 pl-5 font-size-15 border-0 height-40" id="searchProductInput" placeholder="{{ __('general.search_placeholder') }}" aria-label="Search for Products" aria-describedby="searchProduct1" required>
                             <div class="input-group-append">
-                                <button class="btn btn-dark height-40 py-2 px-2 rounded-right-pill" style="background-color: #febd69;border-color: #febd69;" type="button" id="searchProductBtn">
+                                <button class="btn btn-dark height-40 py-2 px-2 rounded-right-pill" style="background-color: #febd69;border-color: #febd69;box-shadow: none;" type="button" id="searchProductBtn">
                                     <span class="ec ec-search font-size-24" id="searchButtonSpan" style="color: black;font-weight: bolder;"></span>
                                 </button>
                             </div>
@@ -641,9 +635,9 @@
                 </div>
             </div>
         </div>
-        <!-------- search div -------->
-        <div class="d-none" id="searchDiv">
-            @include('front.layouts.partials.searchDiv')
-        </div>
+
+{{--        <div id="searchDiv">--}}
+{{--            @include('front.layouts.partials.searchDiv')--}}
+{{--        </div>--}}
     </div>
 </header>

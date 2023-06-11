@@ -93,7 +93,7 @@ class CategoryController extends Controller
 
     }
 
-    private function customSort($collection) {
+    public function customSort($collection) {
         $groupCollection = $collection->groupBy('vendor_id');
         $maxCount = count(max($groupCollection->toArray()));
         $groupCollection = $groupCollection->shuffle();
