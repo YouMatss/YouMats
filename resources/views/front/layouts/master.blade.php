@@ -35,6 +35,12 @@
         <!-- Google web master -->
         <meta name="google-site-verification" content="42jgsTk384G-j5A58b0eoyX-aR9ozjFnnLeymC27O2c" />
 
+        @if(!\Illuminate\Support\Facades\Session::get('userType'))
+        @php
+            Session::put('userType', 'individual');
+        @endphp
+        @endif
+
         @include('front.layouts.partials.assets')
     </head>
     <body>
@@ -54,7 +60,7 @@
             @endif
         </main>
         @include('front.layouts.partials.footer')
-        @include('front.layouts.partials.welcome-popup')
+        {{--  @include('front.layouts.partials.welcome-popup')  --}}
         @include('front.layouts.partials.search')
         @include('front.layouts.partials.assets_js')
         @stack('chat')

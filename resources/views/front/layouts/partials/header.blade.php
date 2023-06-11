@@ -420,24 +420,25 @@
                                 </ul>
                             </div>
                             <!-- End Navigation -->
-                        </nav>
-                        <!-- End Nav -->
-                    </div>
-                    @if(is_company())
-                    <div class="d-none d-xl-block col-md-auto">
-                        <div class="d-flex">
-                            <i class="ec ec-support font-size-50 text-primary"></i>
-                            <div class="ml-2">
-                                <div class="phone">
-                                    <strong>{{__('general.support')}}</strong> <a href="tel:{{__('info.phone')}}" class="text-gray-90">{{__('info.phone')}}</a>
-                                </div>
-                                <div class="email">
-                                    {{__('general.quotation_email')}}: <a href="mailto:{{__('info.email')}}" class="text-gray-90">{{__('info.email')}}</a>
+                            <div class="d-none d-xl-block col-md-auto">
+                                <div class="row st_model_new m-0" style="box-shadow: none;">
+                                        <div class="col-md-auto p-1">
+                                            <a class="select_reg typeIntroduceButton" style="margin: 0;padding: 15px 30px;" data-url="{{route('front.introduce', ['individual'])}}">
+                                                {{__('general.continue_as_individual')}}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-auto p-1">
+                                            <a class="select_reg typeIntroduceButton" style="margin: 0;padding: 15px 30px;" data-url="{{route('front.introduce', ['company'])}}">
+                                                {{__('general.continue_as_company')}}
+                                            </a>
+                                        </div>
                                 </div>
                             </div>
-                        </div>
+                        </nav>
+                        <!-- End Nav -->
+
                     </div>
-                    @endif
+
                     <div class="d-xl-none col col-xl-auto text-right text-xl-left pl-0 pl-xl-3 position-static rtl_menu_ar">
                         <div class="d-inline-flex">
                             <ul class="d-flex list-unstyled mb-0 align-items-center">
