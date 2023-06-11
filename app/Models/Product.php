@@ -199,90 +199,28 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         return 0;
     }
 
-    public function phone() {
-        try {
-            if(isset($this->vendor->contacts)) {
-                foreach ($this->vendor->contacts as $contact) {
-                    if(Session::has('city')
-                        && Session::has('userType')
-                        && isset($contact['cities'])
-                        && ($contact['with'] == Session::get('userType') || $contact['with'] == 'both')) {
-                        foreach ($contact['cities'] as $city) {
-                            if($city == Session::get('city')) {
-                                return $contact['phone'];
-                            }
-                        }
-                    }
-                }
-                return null;
-            }
-            return null;
-        } catch (\Exception $e) {
-            return null;
-        }
-    }
-
-    public function phone_code() {
-        try {
-            if(isset($this->vendor->contacts)) {
-                foreach ($this->vendor->contacts as $contact) {
-                    if(Session::has('city')
-                        && Session::has('userType')
-                        && isset($contact['cities'])
-                        && ($contact['with'] == Session::get('userType') || $contact['with'] == 'both')) {
-                        foreach ($contact['cities'] as $city) {
-                            if($city == Session::get('city')) {
-                                return $contact['phone_code'];
-                            }
-                        }
-                    }
-                }
-                return null;
-            }
-            return null;
-        } catch (\Exception $e) {
-            return null;
-        }
-    }
-
-    public function call_phone() {
-        if(!$this->vendor->contacts)
-            return null;
-        $callPhones = $this->vendor->contacts;
-        $city_id = 1;
-        $userType = 'individual';
-        if(is_company())
-            $userType = 'company';
-        if(Session::has('city'))
-            $city_id = Session::get('city');
-
-        foreach ($callPhones as $callPhone) {
-            if(in_array($city_id, $callPhone['cities']) && ($callPhone['with'] == 'both' || $userType == $callPhone['with'])) {
-                return $callPhone['call_phone'] ?? null;
-            }
-        }
-        return null;
-    }
-
     /**
      * @return string
      */
     public function whatsapp_message(): string
     {
         $integration_number = nova_get_setting('whatsapp_manage_by_admin');
-        $message = route('front.product', [generatedNestedSlug($this->category->ancestors->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
-        if(!$this->vendor->manage_by_admin) {
 
-            if(!nova_get_setting('enable_encryption_mode')) {
-                $integration_number = ($this->phone()) ?? nova_get_setting('whatsapp_manage_by_admin');
-            } else {
+        $message = route('front.product', [generatedNestedSlug($this->category->ancestors->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
+        $vendor = $this->vendor;
+        if(!$vendor->manage_by_admin) {
+
+
+            if(nova_get_setting('enable_encryption_mode') || $vendor->enable_encryption_mode) {
                 $integration_number = nova_get_setting('whatsapp_integration');
-                $phone_code = ';;' . $this->phone_code() . ';;';
-                $vendor_code = ';;' . vendor_encrypt($this->vendor) . ';;';
+                $phone_code = ';;' . get_contact($vendor, 'phone_code') . ';;';
+                $vendor_code = ';;' . vendor_encrypt($vendor) . ';;';
                 $category_name = ';;' . $this->category->name . ';;';
                 $message .= '%0A,%0A' . $phone_code;
                 $message .= '%0A,%0A' . $vendor_code;
                 $message .= '%0A,%0A' . $category_name;
+            } else {
+                $integration_number = (get_contact($vendor, 'phone')) ?? nova_get_setting('whatsapp_manage_by_admin');
             }
 
         }

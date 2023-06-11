@@ -204,86 +204,24 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->hasMany(QuoteItem::class)->orderBy('id', 'desc');
     }
 
-    public function call_phone() {
-        if(!$this->contacts)
-            return null;
-        $callPhones = $this->contacts;
-        $city_id = 1;
-        $userType = 'individual';
-        if(is_company())
-            $userType = 'company';
-        if(Session::has('city'))
-            $city_id = Session::get('city');
-
-        foreach ($callPhones as $callPhone) {
-            if(in_array($city_id, $callPhone['cities']) && ($callPhone['with'] == 'both' || $userType == $callPhone['with'])) {
-                return $callPhone['call_phone'] ?? null;
-            }
-        }
-        return null;
-    }
-
     public function whatsapp_message(): string
     {
         $integration_number = nova_get_setting('whatsapp_manage_by_admin');
         $message = route('vendor.show', [$this->slug]);
         if(!$this->manage_by_admin) {
 
-            if(!nova_get_setting('enable_encryption_mode')) {
-                $integration_number = ($this->contacts[0]['phone']) ?? nova_get_setting('whatsapp_manage_by_admin');
-            } else {
+            if(nova_get_setting('enable_encryption_mode') || $this->enable_encryption_mode) {
                 $integration_number = nova_get_setting('whatsapp_integration');
-                $phone_code = ';;' . $this->contacts[0]['phone_code'] . ';;';
+                $phone_code = ';;' . get_contact($this, 'phone_code') . ';;';
                 $vendor_code = ';;' . vendor_encrypt($this) . ';;';
                 $message .= '%0A,%0A' . $phone_code;
                 $message .= '%0A,%0A' . $vendor_code;
+            } else {
+                $integration_number = (get_contact($this, 'phone')) ?? nova_get_setting('whatsapp_manage_by_admin');
             }
 
         }
 
         return 'https://wa.me/'. $integration_number .'?text='. $message;
     }
-
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function users_conversations() {
-        return ($this->belongsToMany(User::class, 'user_messages',
-            'sender_id','receiver_id')->where('sender_type', 'vendor')->get()->collect()->unique())
-            ->merge($this->belongsToMany(User::class, 'user_messages',
-                'receiver_id','sender_id')->where('receiver_type', 'vendor')->get()->collect()->unique())
-            ->unique('id');
-    }
-
-    /**
-     * @param $user_id
-     * @return \Illuminate\Support\Collection
-     */
-    private function messages($user_id) {
-        return ($this->hasMany(UserMessage::class, 'sender_id')
-            ->with('message')->where([
-                'receiver_id' => $user_id, 'receiver_type' => 'user', 'sender_type' => 'vendor'
-            ])->get()->collect())
-            ->merge($this->hasMany(UserMessage::class, 'receiver_id')
-            ->with('message')->where([
-                'sender_id' => $user_id, 'receiver_type' => 'vendor', 'sender_type' => 'user'
-            ])->get()->collect());
-    }
-
-    /**
-     * @param $user_id
-     * @return mixed
-     */
-    public function last_message($user_id) {
-        return $this->messages($user_id)->sortBy('created_at')->last()->message;
-    }
-
-    /**
-     * @param $user_id
-     * @return int
-     */
-    public function count_messages($user_id) {
-        return count($this->messages($user_id));
-    }
-
 }

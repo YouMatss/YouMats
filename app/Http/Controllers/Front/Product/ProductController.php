@@ -97,7 +97,7 @@ class ProductController extends Controller
             ->inRandomOrder()->take(10)->get();
 
         if ($data['product']->subscribe && !$data['product']->vendor->manage_by_admin) {
-            $data['widget_phone'] = Clean_Phone_Number($data['product']->call_phone());
+            $data['widget_phone'] = Clean_Phone_Number(get_contact($data['product']->vendor, 'call_phone'));
             $data['widget_whatsapp'] = $data['product']->whatsapp_message();
         }
 

@@ -62,7 +62,9 @@ if (!function_exists('getCityNameById')) {
 
 if (!function_exists('cartOrChat')) {
     function cartOrChat($product, $view_page = true) {
+        $vendor = $product->vendor;
         $product_route = route('front.product', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug), $product->slug]);
+
         $viewIndex = '<div><a href="'.$product_route.'"
                     class="cart-chat-category btn btn-primary transition-3d-hover">
                         <i class="fa fa-eye"></i> &nbsp;' . __("general.view_product") . '
@@ -78,12 +80,19 @@ if (!function_exists('cartOrChat')) {
                     </a>
                 </div>';
 
-        $call = '<div><button onclick="SetUpCall('. Clean_Phone_Number($product->call_phone()) .')"
+        $call = '<div><button onclick="SetUpCall('. Clean_Phone_Number(get_contact($vendor, 'call_phone')) .')"
                             type="button"
                             class="cart-chat-category btn btn-primary transition-3d-hover log" data-log="call" data-url="'.$product_route.'"
                             style="cursor:pointer;background-color: #5cb85c;border-color: #5cb85c;">
                         <i class="fa fa-phone"></i> &nbsp;' . __("general.call_button") . '
                     </button>
+                </div>';
+
+        $directCall = '<div><a href="tel:'. get_contact($vendor, 'call_phone') .'"
+                            class="cart-chat-category btn btn-primary transition-3d-hover log" data-log="call" data-url="'.$product_route.'"
+                            style="cursor:pointer;background-color: #5cb85c;border-color: #5cb85c;">
+                        <i class="fa fa-phone"></i> &nbsp;' . __("general.call_button") . '
+                    </a>
                 </div>';
 
         $icon = is_company() ? 'fa fa-file-alt' : 'ec ec-add-to-cart';
@@ -146,27 +155,42 @@ if (!function_exists('cartOrChat')) {
         if(!(is_guest() && !\Illuminate\Support\Facades\Session::has('userType'))) {
             if (is_company()) {
                 $result = $cart;
-                if($product->call_phone() && nova_get_setting('enable_phone_buttons'))
-                    $result .= $call;
-                if($product->phone())
+                if(get_contact($vendor, 'call_phone') && nova_get_setting('enable_phone_buttons')) {
+                    if(nova_get_setting('enable_3cx') || $vendor->enable_3cx) {
+                        $result .= $call;
+                    } else {
+                        $result .= $directCall;
+                    }
+                }
+                if(get_contact($vendor, 'phone'))
                     $result .= $chat;
                 return $result;
             } elseif(!$product->subscribe) {
                 return $view;
             } elseif($product->price && $product->price > 0 && $product->delivery && $product->stock && $product->stock >= $product->min_quantity) {
                 $result1 = $cart;
-                if($product->call_phone() && nova_get_setting('enable_phone_buttons'))
-                    $result1 .= $call;
-                if($product->phone())
+                if(get_contact($vendor, 'call_phone') && nova_get_setting('enable_phone_buttons')) {
+                    if(nova_get_setting('enable_3cx') || $vendor->enable_3cx) {
+                        $result1 .= $call;
+                    } else {
+                        $result1 .= $directCall;
+                    }
+                }
+                if(get_contact($vendor, 'phone'))
                     $result1 .= $chat;
                 return $result1;
             } else {
                 $result2 = '';
-                if($product->call_phone() && nova_get_setting('enable_phone_buttons'))
-                    $result2 .= $call;
-                else
+                if(get_contact($vendor, 'call_phone') && nova_get_setting('enable_phone_buttons')) {
+                    if(nova_get_setting('enable_3cx') || $vendor->enable_3cx) {
+                        $result2 .= $call;
+                    } else {
+                        $result2 .= $directCall;
+                    }
+                } else {
                     $result2 .= $view;
-                if($product->phone())
+                }
+                if(get_contact($vendor, 'phone'))
                     $result2 .= $chat;
                 return $result2;
             }
@@ -381,5 +405,28 @@ if(!function_exists('Clean_Phone_Number')) {
         }
 
         return  $filered_number;
+    }
+}
+
+if(!function_exists('get_contact')) {
+    function get_contact($vendor, $type) {
+        try {
+            if(isset($vendor->contacts)) {
+                foreach ($vendor->contacts as $contact) {
+                    if(Session::has('city') && Session::has('userType') && isset($contact['cities'])
+                        && ($contact['with'] == Session::get('userType') || $contact['with'] == 'both')) {
+                        foreach ($contact['cities'] as $city) {
+                            if($city == Session::get('city')) {
+                                return $contact[$type];
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            return null;
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 }
