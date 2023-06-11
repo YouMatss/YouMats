@@ -152,8 +152,12 @@ Route::group([
     Route::get('/team', 'Team\IndexController@index')->name('front.team.index');
     Route::get('/FAQs', 'Common\PageController@faqs')->name('front.faqs.page');
     Route::get('/contact-us', 'Common\PageController@contactUs')->name('front.contact.page');
+
+    // Search Bar
     Route::get('/s', 'Product\ProductController@search')->name('products.search');
     Route::get('/suggest', 'Product\ProductController@suggest')->name('products.suggest');
+    // Search Bar
+
     Route::post('/contact-us', 'Common\PageController@contactUsRequest')->name('front.contact.request');
     Route::post('/subscribe', 'Common\MiscController@subscribeRequest')->name('front.subscribe.request');
     Route::post('/inquire', 'Common\MiscController@inquireRequest')->name('front.inquire.request');
