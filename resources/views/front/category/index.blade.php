@@ -39,6 +39,7 @@
             <!-- End breadcrumb -->
         </div>
     </div>
+
     <div class="mb-6 bg-gray-7 py-6">
         @if($category->getTranslation('title', app()->getLocale(), false))
         <div class="container mb-8">
@@ -52,7 +53,7 @@
                 @foreach($children as $child)
                 <div class="col-md-4 col-lg-3 col-xl-4 col-xl-2gdot4 mb-3 flex-shrink-0 flex-md-shrink-1">
                     <div class="bg-white overflow-hidden shadow-on-hover h-100 d-flex align-items-center">
-                        <a href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2 pr-wd-6">
+                        <a href="{{route('front.category', [generatedNestedSlug([$category->slug, $child->slug])])}}" class="d-block pr-2 pr-wd-6">
                             <div class="media align-items-center">
                                 <div>
                                     <img loading="lazy" class="img-fluid img_category_page" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_100_100')['url']}}" alt="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['alt']}}" title="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH)['title']}}">
@@ -68,6 +69,7 @@
             </div>
         </div>
     </div>
+
     <div class="mb-6 bg-md-transparent py-0">
         <div class="container">
             <div class="row mb-8">
@@ -79,6 +81,7 @@
             </div>
         </div>
     </div>
+
     @if(is_individual())
         @include('front.layouts.partials.change_city')
     @endif

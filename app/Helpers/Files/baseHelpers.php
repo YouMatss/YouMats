@@ -62,7 +62,7 @@ if (!function_exists('getCityNameById')) {
 
 if (!function_exists('cartOrChat')) {
     function cartOrChat($product, $view_page = true) {
-        $product_route = route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug]);
+        $product_route = route('front.product', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug), $product->slug]);
         $viewIndex = '<div><a href="'.$product_route.'"
                     class="cart-chat-category btn btn-primary transition-3d-hover">
                         <i class="fa fa-eye"></i> &nbsp;' . __("general.view_product") . '
@@ -70,7 +70,7 @@ if (!function_exists('cartOrChat')) {
                 </div>';
 
         $viewDetails = '<a class="cart-chat-category btn-primary transition-3d-hover"
-                            href="'.route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)]).'">'. __('product.category_href'). ': ' . $product->category->name .'</a>';
+                            href="'.route('front.category', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug)]).'">'. __('product.category_href'). ': ' . $product->category->name .'</a>';
 
         $chat = '<div><a target="_blank" href="'.$product->whatsapp_message().'"
                     class="cart-chat-category btn btn-primary transition-3d-hover log" data-log="chat" data-url="'.$product_route.'">
@@ -249,7 +249,7 @@ if(!function_exists('generatedNestedSlug')) {
      * @param $slug
      * @return string
      */
-    function generatedNestedSlug($array, $slug): string
+    function generatedNestedSlug($array, $slug = null): string
     {
         if(count($array) == 0) {
             return $slug;

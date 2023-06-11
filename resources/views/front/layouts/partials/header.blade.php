@@ -8,11 +8,13 @@
                 <div class="d-flex align-items-center">
                     <div class="topbar-right ml-auto st_nav_mob">
                         <ul class="list-inline mb-0">
-{{--                            @if(!Auth::guard('vendor')->check())--}}
-{{--                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">--}}
-{{--                                    <a href="@if(Cart::instance('wishlist')->count() > 0) {{ route('wishlist.index') }} @else # @endif" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> {{__('general.wishlist')}} </a>--}}
-{{--                                </li>--}}
-{{--                            @endif--}}
+{{--
+                            @if(!Auth::guard('vendor')->check())
+                                <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                    <a href="@if(Cart::instance('wishlist')->count() > 0) {{ route('wishlist.index') }} @else # @endif" class="u-header-topbar__nav-link"><i class="ec ec-favorites mr-1"></i> {{__('general.wishlist')}} </a>
+                                </li>
+                            @endif
+--}}
                             @if(\Config::get('currencies'))
                                 <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                                     <div class="d-flex align-items-center">
@@ -379,7 +381,7 @@
                                                         <div id="{{$category->slug}}" class="collapse" data-parent="#headerSidebarContent">
                                                             <ul id="headerSidebarHomeMenu" class="u-header-collapse__nav-list">
                                                                 @foreach($category->children as $child)
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}">{{$child->name}}</a></li>
+                                                                <li><a class="u-header-collapse__submenu-nav-link" href="{{route('front.category', [generatedNestedSlug([$category->slug, $child->slug])])}}">{{$child->name}}</a></li>
                                                                 @endforeach
                                                             </ul>
                                                         </div>
@@ -528,7 +530,7 @@
                                                         @foreach($categories->take(17) as $category)
                                                         <li class="nav-item hs-has-mega-menu u-header__nav-item" data-event="hover" data-position="left">
                                                             <a id="{{$category->slug}}" class="nav-link u-header__nav-link u-header__nav-link-toggle"
-                                                               href="{{route('front.category', [generatedNestedSlug($category->ancestors()->pluck('slug')->toArray(), $category->slug)])}}" aria-haspopup="true" aria-expanded="false">{{$category->name}}</a>
+                                                               href="{{route('front.category', [generatedNestedSlug([$category->slug])])}}" aria-haspopup="true" aria-expanded="false">{{$category->name}}</a>
 
                                                             <div class="hs-mega-menu vmm-tfw u-header__sub-menu" aria-labelledby="{{$category->slug}}">
                                                                 <div class="vmm-bg">
@@ -539,11 +541,11 @@
                                                                         <span class="u-header__sub-menu-title">{{$category->name}}</span>
                                                                         <ul class="u-header__sub-menu-nav-group mb-3">
                                                                             @foreach($category->children->take(7) as $child)
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}">{{$child->name}}</a></li>
+                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [generatedNestedSlug([$category->slug, $child->slug])])}}">{{$child->name}}</a></li>
                                                                             @endforeach
                                                                             <li>
                                                                                 <a class="nav-link u-header__sub-menu-nav-link u-nav-divider border-top pt-2 flex-column align-items-start"
-                                                                                   href="{{route('front.category', [generatedNestedSlug($category->ancestors()->pluck('slug')->toArray(), $category->slug)])}}">
+                                                                                   href="{{route('front.category', [generatedNestedSlug([$category->slug])])}}">
                                                                                     <div class="">{{__('general.all_categories')}}</div>
                                                                                     <div class="u-nav-subtext font-size-11 text-gray-30">{{__('general.discover_more_products')}}</div>
                                                                                 </a>
@@ -555,7 +557,7 @@
                                                                         <span class="u-header__sub-menu-title">{{$category->name}}</span>
                                                                         <ul class="u-header__sub-menu-nav-group mb-3">
                                                                             @foreach($category->children->skip(7)->take(7) as $child)
-                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}">{{$child->name}}</a></li>
+                                                                            <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [generatedNestedSlug([$category->slug, $child->slug])])}}">{{$child->name}}</a></li>
                                                                             @endforeach
                                                                         </ul>
                                                                     </div>
@@ -575,7 +577,7 @@
                                                                             <span class="u-header__sub-menu-title">{{__('general.other_categories')}}</span>
                                                                             <ul class="u-header__sub-menu-nav-group mb-3">
                                                                                 @foreach($categories->skip(17)->take(10) as $category)
-                                                                                    <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [generatedNestedSlug($category->ancestors()->pluck('slug')->toArray(), $category->slug)])}}">{{$category->name}}</a></li>
+                                                                                    <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [generatedNestedSlug([$category->slug])])}}">{{$category->name}}</a></li>
                                                                                 @endforeach
                                                                             </ul>
                                                                         </div>
@@ -584,7 +586,7 @@
                                                                             <span class="u-header__sub-menu-title">{{__('general.other_categories')}}</span>
                                                                             <ul class="u-header__sub-menu-nav-group mb-3">
                                                                                 @foreach($categories->skip(27) as $category)
-                                                                                    <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [generatedNestedSlug($category->ancestors()->pluck('slug')->toArray(), $category->slug)])}}">{{$category->name}}</a></li>
+                                                                                    <li><a class="nav-link u-header__sub-menu-nav-link" href="{{route('front.category', [generatedNestedSlug([$category->slug])])}}">{{$category->name}}</a></li>
                                                                                 @endforeach
                                                                             </ul>
                                                                         </div>

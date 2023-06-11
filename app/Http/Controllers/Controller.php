@@ -20,13 +20,11 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function __construct() {
-        $data['categories'] = Category::withDepth()->having('depth', '=', 0)->where('category', '1')->orderBy('sort')->get();
-        $data['featuredVendors'] = Vendor::where('isFeatured', '1')->get();
-        $data['featuredPartners'] = Partner::where('featured', '1')->get();
-        $config['currencies'] = Currency::where('active', '1')->orderBy('sort')->get();
-        $data['pages'] = Page::orderBy('sort')->get();
-        $data['footer_categories'] = Category::where('show_in_footer', '1')->orderBy('created_at', 'desc');
-        $data['FAQs'] = FAQ::orderBy('sort')->get();
+
+        $data['categories'] = Category::SelectBasicData()->with('media','children')->withDepth()->having('depth', '=', 0)->where('category', '1')->orderBy('sort')->get();
+        $data['footer_categories'] = Category::SelectBasicData()->with('ancestors')->where('show_in_footer', '1')->orderBy('created_at', 'desc');
+        $data['pages'] = Page::select('slug', 'title')->orderBy('sort')->get();
+        $config['currencies'] = Currency::with('media')->select('name', 'code', 'symbol')->where('active', '1')->orderBy('sort')->get();
 
         View::share($data);
         Config::set($config);

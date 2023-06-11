@@ -135,7 +135,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     }
 
     public function products() {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class)->with('media','category.ancestors', 'vendor.current_subscribes', 'vendor.cities');
     }
 
     public function subscribes() {
@@ -176,7 +176,8 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
     public function categories(): Builder
     {
         return $this->belongsToMany(Category::class, Product::class)
-            ->distinct()->get()->unique()->toQuery();
+              ->with('media','category.ancestors', 'vendor.current_subscribes', 'vendor.cities')
+              ->distinct()->get()->unique()->toQuery();
     }
 
     /**
@@ -184,7 +185,7 @@ class Vendor extends Authenticatable implements HasMedia, MustVerifyEmail
      */
     public function branches(): HasMany
     {
-        return $this->hasMany(VendorBranch::class)->with('city');
+        return $this->hasMany(VendorBranch::class);
     }
 
     /**

@@ -46,12 +46,6 @@
         @include('front.layouts.partials.header')
         <main id="content" role="main">
             @yield('content')
-            @if(\Request::route()->getName() != 'cart.show' && \Request::route()->getName() != 'home')
-                @include('front.layouts.partials.partners')
-            @endif
-            @if(\Request::route()->getName() != 'cart.show' && \Request::route()->getName() != 'front.faqs.page')
-                @include('front.layouts.partials.faqs')
-            @endif
         </main>
         @include('front.layouts.partials.footer')
         @include('front.layouts.partials.welcome-popup')

@@ -76,6 +76,7 @@
 <!-- End Shop-control-bar -->
 
 <!-- Tab Content -->
+
 <div class="tab-content rtl" id="pills-tabContent">
     <div class="tab-pane fade pt-2 show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab" data-target-group="groups">
         <ul class="row list-unstyled products-group no-gutters" id="categoryProductGrid">
@@ -88,6 +89,7 @@
             @endforelse
         </ul>
     </div>
+
 {{--    <div class="tab-pane fade pt-2" id="list-view" role="tabpanel" aria-labelledby="list-view-tab" data-target-group="groups">--}}
 {{--        <ul class="d-block list-unstyled products-group prodcut-list-view-small" id="categoryProductList">--}}
 {{--            @forelse($products as $product)--}}

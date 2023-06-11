@@ -42,7 +42,7 @@
             <div class="col-md-12">
                 <div id="basicsAccordion" class="mb-12">
                     @foreach($FAQs as $row)
-                    <div class="card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0">
+                    <div class="card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0" style="display: block;">
                         <div class="card-header card-collapse bg-transparent-on-hover border-0" id="qu{{$row->id}}">
                             <h5 class="mb-0">
                                 <button type="button" class="px-0 btn btn-link btn-block d-flex justify-content-between card-btn py-3 font-size-25 border-0" data-toggle="collapse" data-target="#q{{$row->id}}" aria-expanded="true" aria-controls="q{{$row->id}}">

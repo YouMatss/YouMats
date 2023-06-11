@@ -41,6 +41,10 @@ class Product extends Model implements Sortable, HasMedia, Buyable
         'shipping_prices' => 'array'
     ];
 
+    public function scopeSelectProductBasicData() {
+        return $this->select('id', 'slug', 'name','category_id');
+     }
+
     public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('size_height_50')
             ->height(50)
@@ -266,7 +270,7 @@ class Product extends Model implements Sortable, HasMedia, Buyable
     public function whatsapp_message(): string
     {
         $integration_number = nova_get_setting('whatsapp_manage_by_admin');
-        $message = route('front.product', [generatedNestedSlug($this->category->ancestors()->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
+        $message = route('front.product', [generatedNestedSlug($this->category->ancestors->pluck('slug')->toArray(), $this->category->slug), $this->slug]);
         if(!$this->vendor->manage_by_admin) {
 
             if(!nova_get_setting('enable_encryption_mode')) {

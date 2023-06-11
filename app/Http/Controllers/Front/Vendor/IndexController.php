@@ -20,7 +20,7 @@ class IndexController extends Controller
     public function index()
     {
         // Get all vendors
-        $vendors = Vendor::all()->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
+        $vendors = Vendor::with("media", "current_subscribes")->get()->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
             return $collection->sortByDesc('id');
         })->ungroup()->unique();
 
@@ -37,7 +37,7 @@ class IndexController extends Controller
      * @return Application|Factory|View
      */
     public function show($vendor_slug) {
-        $data['vendor'] = Vendor::where('slug', $vendor_slug)->firstorfail();
+        $data['vendor'] = Vendor::with("media", "cities", "current_subscribes")->where('slug', $vendor_slug)->firstorfail();
         $data['products'] = $data['vendor']->products()->paginate(20);
         $data['branches'] = $data['vendor']->branches()->paginate(5);
 

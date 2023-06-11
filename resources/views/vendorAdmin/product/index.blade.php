@@ -41,7 +41,7 @@
                                     <td>
                                         <a href="{{route('vendor.product.edit', [$product->id])}}" class="btn btn-youmats btn-xs">{{__('vendorAdmin.edit_button')}}</a>
                                         @if($product->active)
-                                        <a target="_blank" href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="btn btn-success btn-xs">{{__('vendorAdmin.view_front')}}</a>
+                                        <a target="_blank" href="{{route('front.product', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="btn btn-success btn-xs">{{__('vendorAdmin.view_front')}}</a>
                                         @endif
                                     </td>
                                 </tr>

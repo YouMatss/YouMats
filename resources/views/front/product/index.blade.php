@@ -87,12 +87,12 @@
                         </li>
                         @foreach($product->category->ancestors as $ancestor)
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                            <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors()->pluck('slug')->toArray(), $ancestor->slug)])}}"><span itemprop="name">{{$ancestor->name}}</span></a>
+                            <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors->pluck('slug')->toArray(), $ancestor->slug)])}}"><span itemprop="name">{{$ancestor->name}}</span></a>
                             <meta itemprop="position" content="{{$loop->iteration + 1}}" />
                         </li>
                         @endforeach
                         <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                            <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}"><span itemprop="name">{{$product->category->name}}</span></a>
+                            <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug)])}}"><span itemprop="name">{{$product->category->name}}</span></a>
                             <meta itemprop="position" content="{{count($product->category->ancestors) + 2}}" />
                         </li>
                         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page"><span itemprop="name">{{$product->name}}</span>
@@ -157,7 +157,7 @@
             </div>
             <div class="col-md-6 col-lg-4 col-xl-4 mb-md-6 mb-lg-0">
                 <div class="mb-2">
-                    <a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{$product->category->name}}</a>
+                    <a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{$product->category->name}}</a>
                     <h1 class="font-size-25" style="line-height: 1.6">{{$product->name}}</h1>
                     <div class="mb-2">
                         <a class="d-inline-flex align-items-center small font-size-15 text-lh-1">
@@ -381,12 +381,11 @@
             </div>
         </div>
     @endforeach
-
     <div class="mb-5">
         <div class="bg-img-hero">
             <div class="container p-0">
                 <div class="d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0 mb-3 rtl">
-                    <h2 class="section-title section-title__full mb-0 pb-2 font-size-22"><a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}">{{ __('product.same_category_title') . ' ' . $product->category->name }}</a></h2>
+                    <h2 class="section-title section-title__full mb-0 pb-2 font-size-22"><a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug)])}}">{{ __('product.same_category_title') . ' ' . $product->category->name }}</a></h2>
                 </div>
 
                 <div class="mb-4 position-relative">

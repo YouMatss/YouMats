@@ -40,10 +40,16 @@ class Category extends Model implements Sortable, HasMedia
 
     protected $cascadeDeletes = ['children', 'allProducts', 'products'];
 
+
+
     public function getNameAttribute() {
         if(!isset($this->getTranslations('name')[app()->getLocale()]))
             return;
         return $this->getTranslations('name')[app()->getLocale()];
+    }
+
+    public function scopeSelectBasicData() {
+       return $this->select('id', 'slug', 'name','parent_id','_lft','_rgt');
     }
 
     public function registerMediaConversions(Media $media = null): void {
@@ -149,21 +155,28 @@ class Category extends Model implements Sortable, HasMedia
     /**
      * @return HasMany|HasManyThrough
      */
-    public function products()
+    public function GetProducts(int $SampleSize = null)
     {
         if($this->isRoot()) {
             return $this->hasManyThrough(Product::class, self::class, 'parent_id')
+                ->with('media', 'category.ancestors')
                 ->where('products.active', true)
-                ->orderBy('products.updated_at', 'desc');
+                ->orderBy('products.updated_at', 'desc')
+                ->take($SampleSize);
         }
         if($this->isLeaf()) {
             return $this->hasMany(Product::class)
+                ->with('media', 'category.ancestors')
                 ->where('products.active', true)
-                ->orderBy('products.updated_at', 'desc');
+                ->orderBy('products.updated_at', 'desc')
+                ->take($SampleSize);
         }
-        return Product::whereHas('category', fn($query) =>
-            $query->whereDescendantOrSelf($this)
-        )->where('products.active', true)->orderBy('products.updated_at', 'desc');
+        return Product::SelectProductBasicData()
+                ->whereHas('category', fn($query) => $query->whereDescendantOrSelf($this))
+                ->with('media', 'category.ancestors')
+                ->where('products.active', true)
+                ->orderBy('products.updated_at', 'desc')
+                ->take($SampleSize);
     }
 
     /**
@@ -190,7 +203,7 @@ class Category extends Model implements Sortable, HasMedia
             }
         })->whereDate('expiry_date', '>', now())->distinct()->pluck('vendor_id')->toArray();
 
-        return Vendor::whereActive(true)->whereIn('id', $subscribes)->select('id', 'name', 'slug')->get();
+        return Vendor::with("media")->whereActive(true)->whereIn('id', $subscribes)->select('id', 'name', 'slug')->get();
     }
 
     /**

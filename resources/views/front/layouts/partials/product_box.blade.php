@@ -2,9 +2,9 @@
 <div class="product-item__outer h-100">
     <div class="product-item__inner">
         <div class="product-item__body">
-            <div class="mb-2 px-2"><a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5">{{$product->category->name}}</a></div>
+            <div class="mb-2 px-2"><a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5">{{$product->category->name}}</a></div>
             <h5 class="mb-1 product-item__title px-2">
-                <a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="text-blue font-weight-bold">
+                <a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="text-blue font-weight-bold">
                     {{ Str::limit($product->name, 72) }}
                 </a>
             </h5>
@@ -18,7 +18,7 @@
                                 font-size: 75%;
                             ">{{\Str::limit($product->vendor->name, 20)}}</a>
                 @endif
-                <a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="d-block text-center">
+                <a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="d-block text-center">
                     <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}">
                 </a>
             </div>
@@ -87,15 +87,15 @@
 {{--        <div class="product-item__inner remove-prodcut-hover py-4 row">--}}
 {{--            <div class="product-item__header col-6 col-md-2">--}}
 {{--                <div class="mb-2">--}}
-{{--                    <a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="d-block text-center">--}}
+{{--                    <a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="d-block text-center">--}}
 {{--                        <img loading="lazy" class="img-fluid" src="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_150_150')['url']}}" alt="{{$product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt']}}" title="{{ $product->getFirstMediaUrlOrDefault(PRODUCT_PATH)['title'] }}">--}}
 {{--                    </a>--}}
 {{--                </div>--}}
 {{--            </div>--}}
 {{--            <div class="product-item__body col-6 col-md-7">--}}
 {{--                <div class="pr-lg-10">--}}
-{{--                    <div class="mb-2"><a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5">{{$product->category->name}}</a></div>--}}
-{{--                    <h5 class="mb-2 product-item__title"><a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors()->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a></h5>--}}
+{{--                    <div class="mb-2"><a href="{{route('front.category', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug)])}}" class="font-size-12 text-gray-5">{{$product->category->name}}</a></div>--}}
+{{--                    <h5 class="mb-2 product-item__title"><a href="{{route('front.product', [generatedNestedSlug($product->category->ancestors->pluck('slug')->toArray(), $product->category->slug), $product->slug])}}" class="text-blue font-weight-bold">{{$product->name}}</a></h5>--}}
 {{--                    @if($product->type == 'product' && (!is_company()) && $product->price)--}}
 {{--                        <div class="prodcut-price d-md-none">--}}
 {{--                            <div class="text-gray-100">{{getCurrency('symbol')}} {{$product->formatted_price}}</div>--}}

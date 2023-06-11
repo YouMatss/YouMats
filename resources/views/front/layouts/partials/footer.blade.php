@@ -90,7 +90,7 @@
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
                                 @foreach($footer_categories->take(7)->get() as $category)
                                     <li>
-                                        <a class="list-group-item list-group-item-action" href="{{ route('front.category', [generatedNestedSlug($category->ancestors()->pluck('slug')->toArray(), $category->slug)]) }}">{{ $category->name }}</a>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('front.category', [generatedNestedSlug($category->ancestors->pluck('slug')->toArray(), $category->slug)]) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -102,7 +102,7 @@
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
                                 @foreach($footer_categories->skip(7)->take(7)->get() as $category)
                                     <li>
-                                        <a class="list-group-item list-group-item-action" href="{{ route('front.category', [generatedNestedSlug($category->ancestors()->pluck('slug')->toArray(), $category->slug)]) }}">{{ $category->name }}</a>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('front.category', [generatedNestedSlug($category->ancestors->pluck('slug')->toArray(), $category->slug)]) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>

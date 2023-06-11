@@ -23,7 +23,7 @@ class CategoryController extends Controller
         $parsedSlug = explode('/', $slug);
         $slug = end($parsedSlug);
 
-        $data['category'] = Category::whereSlug($slug)->firstOrFail();
+        $data['category'] = Category::with("ancestors")->whereSlug($slug)->firstOrFail();
 
         if(count($parsedSlug) - count($data['category']->ancestors) != 1) {
             abort(404);
@@ -42,11 +42,11 @@ class CategoryController extends Controller
             ->whereIn('category_id', $children_categories_ids)
             ->where('products.active', true)
             ->select('products.id', 'products.category_id', 'products.vendor_id',
-                'products.name', 'products.short_desc', 'products.type', 'products.price',
-                'products.stock', 'products.min_quantity', 'products.active',
-                'products.shipping_id', 'products.specific_shipping', 'products.shipping_prices',
-                'products.slug', 'products.sort'
-            );
+                     'products.name', 'products.short_desc', 'products.type', 'products.price',
+                     'products.stock', 'products.min_quantity', 'products.active',
+                     'products.shipping_id', 'products.specific_shipping', 'products.shipping_prices',
+                     'products.slug', 'products.sort'
+                    );
 
         $data['minPrice'] = $products->min('price');
         $data['maxPrice'] = $products->max('price');
@@ -63,10 +63,12 @@ class CategoryController extends Controller
                     'price',
                     AllowedSort::custom('delivery', new ProductsSortDelivery($products), 'delivery')
                 ])
-                ->with('category')
-                ->take(500)->get()->unique();
+                ->with("media", "vendor.current_subscribes", "category.ancestors")
+                ->take(240)->get()->unique();
         } else {
-            $filter = $products->take(500)->get()
+            $filter = $products->take(240)
+                ->with("media", "vendor.current_subscribes", "category.ancestors")
+                ->get()
                 ->sortByDesc('subscribe')->groupBy('subscribe')->map(function (Collection $collection) {
                     return $collection->sortByDesc('contacts')->groupBy('contacts')->map(function (Collection $collection) {
                         return $this->customSort($collection);

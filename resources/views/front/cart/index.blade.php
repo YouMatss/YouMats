@@ -59,7 +59,7 @@
                                     </td>
                                     <td class="d-md-table-cell img_cart_view">
                                         @if($item->model)
-                                            <a href="{{route('front.product', [generatedNestedSlug($item->model->category->ancestors()->pluck('slug')->toArray(), $item->model->category->slug), $item->model->slug])}}">
+                                            <a href="{{route('front.product', [generatedNestedSlug($item->model->category->ancestors->pluck('slug')->toArray(), $item->model->category->slug), $item->model->slug])}}">
                                                 <img loading="lazy" class="img-fluid max-width-100 p-1 border border-color-1"
                                                      src="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH, 'size_width_100')['url'] }}"
                                                      alt="{{ $item->model->getFirstMediaUrlOrDefault(PRODUCT_PATH)['alt'] }}"
@@ -73,7 +73,7 @@
 
                                     @if($item->model)
                                         <td data-title="{{ __('cart.product') }}">
-                                            <a href="{{route('front.product', [generatedNestedSlug($item->model->category->ancestors()->pluck('slug')->toArray(), $item->model->category->slug), $item->model->slug])}}" class="text-gray-90">{{ $item->name }}</a>
+                                            <a href="{{route('front.product', [generatedNestedSlug($item->model->category->ancestors->pluck('slug')->toArray(), $item->model->category->slug), $item->model->slug])}}" class="text-gray-90">{{ $item->name }}</a>
                                         </td>
                                     @else
                                         <td data-title="{{ __('cart.product') }}">

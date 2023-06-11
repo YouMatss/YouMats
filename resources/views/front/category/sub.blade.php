@@ -50,7 +50,7 @@
                         </li>
                         @foreach($category->ancestors as $ancestor)
                             <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors()->pluck('slug')->toArray(), $ancestor->slug)])}}"><span itemprop="name">{{$ancestor->name}}</span></a>
+                                <a itemprop="item" href="{{route('front.category', [generatedNestedSlug($ancestor->ancestors->pluck('slug')->toArray(), $ancestor->slug)])}}"><span itemprop="name">{{$ancestor->name}}</span></a>
                                 <meta itemprop="position" content="{{$loop->iteration + 1}}" />
                             </li>
                         @endforeach
@@ -154,6 +154,7 @@
                         </div>
                     </div>
                     @endforeach
+
                     @if(count($category->getSiblings()))
                     <div class="mb-6">
                         <div class="border-bottom border-color-1 mb-5">
@@ -163,7 +164,7 @@
                             @foreach($category->getSiblings() as $sibling)
                             <div class="form-group d-flex align-items-center justify-content-between mb-2 pb-1">
                                 <div class="custom-control custom-checkbox">
-                                    <a @if($sibling->id == $category->id) style="font-weight: bold" @endif href="{{route('front.category', [generatedNestedSlug($sibling->ancestors()->pluck('slug')->toArray(), $sibling->slug)])}}">{{$sibling->name}}
+                                    <a @if($sibling->id == $category->id) style="font-weight: bold" @endif href="{{route('front.category', [generatedNestedSlug($sibling->ancestors->pluck('slug')->toArray(), $sibling->slug)])}}">{{$sibling->name}}
 {{--                                        <span class="text-gray-25 font-size-12 font-weight-norma3"> ({{count($sibling->products)}})</span>--}}
                                     </a>
                                 </div>
@@ -172,6 +173,7 @@
                         </div>
                     </div>
                     @endif
+
                     @if(count($tags))
                     <div class="mb-6">
                         <div class="border-bottom border-color-1 mb-5">
@@ -204,7 +206,7 @@
                                 @foreach($category->children as $child)
                                     <div class="col-md-4 col-lg-3 col-xl-4 col-xl-2gdot4 mb-3 flex-shrink-0 flex-md-shrink-1">
                                         <div class="bg-white overflow-hidden shadow-on-hover d-flex align-items-center" style="height: 100px !important;">
-                                            <a href="{{route('front.category', [generatedNestedSlug($child->ancestors()->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2">
+                                            <a href="{{route('front.category', [generatedNestedSlug($child->ancestors->pluck('slug')->toArray(), $child->slug)])}}" class="d-block pr-2">
                                                 <div class="media align-items-center">
                                                     <div class="pt-2">
                                                         <img loading="lazy" class="img-fluid img_category_page" src="{{$child->getFirstMediaUrlOrDefault(CATEGORY_PATH, 'size_85_85')['url']}}"

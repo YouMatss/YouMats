@@ -50,7 +50,7 @@ class ProductController extends Controller
      * @return Application|Factory|View
      */
     public function index($categories_slug, $slug) {
-        $data['product'] = Product::with('category', 'tags', 'vendor')
+        $data['product'] = Product::with('category.ancestors', 'tags', 'vendor')
             ->where(['slug' => $slug, 'active' => true])->first();
 
         if(!$data['product']) {
@@ -68,7 +68,7 @@ class ProductController extends Controller
         $data['product']->save();
 
         if($data['product']->subscribe) {
-            $data['same_vendor_products'] = Product::with('category')
+            $data['same_vendor_products'] = Product::with('media', 'category.ancestors', 'vendor.current_subscribes')
                 ->where('category_id', $data['product']->category_id)
                 ->where('vendor_id', $data['product']->vendor_id)
                 ->where('id', '!=', $data['product']->id)
@@ -90,7 +90,7 @@ class ProductController extends Controller
             ->select('vendors.*')
             ->inRandomOrder()->distinct()->get();
 
-        $data['same_category_products'] = Product::with('category')
+        $data['same_category_products'] = Product::with('media', 'category.ancestors', 'vendor.current_subscribes')
             ->where('category_id', $data['product']->category_id)
             ->where('id', '!=', $data['product']->id)
             ->where('active', true)
@@ -121,6 +121,7 @@ class ProductController extends Controller
         }
 
         $products = QueryBuilder::for(Product::class)
+            ->with('media', 'category.ancestors', 'vendor.current_subscribes')
             ->where('products.active', true);
 
         if($request->has('search'))
@@ -146,19 +147,10 @@ class ProductController extends Controller
         $data['selected_categories'] = [];
         $data['searched_word']  = $_GET['filter']['name'];
 
-        $data['suggested_products'] = QueryBuilder::for(Product::class)
-                        ->select(
-                            'id',
-                            'category_id',
-                            'vendor_id',
-                            'name',
-                            'rate',
-                            'price',
-                            'slug'
-                          )
+        $data['suggested_products'] = QueryBuilder::for(Product::SelectProductBasicData())
+                        ->with("media","vendor.current_subscribes")
                         ->allowedFilters([
                             AllowedFilter::custom('name', new FiltersJsonField),
-                            AllowedFilter::scope('price'),
                             AllowedFilter::callback('has_categories', fn($query, $value) => $query->whereHas('category', fn($query) => $query->whereIn('categories.id', $value)))
                         ])
                         ->allowedIncludes(['category'])
@@ -182,10 +174,12 @@ class ProductController extends Controller
         $data['selected_categories'] = [];
 
         $search_products_by_name_only = QueryBuilder::for(Product::class)
+                        ->with("media", "vendor.current_subscribes", "category.ancestors", "tags")
                         ->allowedFilters([AllowedFilter::custom('name', new FiltersJsonField)])
                         ->where('active', true)->get();
 
         $data['search_products'] = QueryBuilder::for(Product::class)
+                        ->with("media", "vendor.current_subscribes", "category.ancestors", "tags")
                         ->allowedFilters([
                             AllowedFilter::custom('name', new FiltersJsonField),
                             AllowedFilter::scope('price'),
